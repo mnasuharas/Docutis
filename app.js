@@ -1,0 +1,192 @@
+const diseases = [
+
+  {
+    id: "bcc",
+    name: "Basal Cell Carcinoma",
+    alternative: "BCC",
+    icd: "C44.-",
+    description:
+      "A common keratinocyte carcinoma characterized by locally invasive growth and a very low metastatic potential.",
+
+    clinical:
+      "Typical presentations include pearly or translucent papules, telangiectasia, ulceration, crusting or slowly enlarging plaques depending on the subtype.",
+
+    dermoscopy:
+      "Possible findings include arborizing vessels, blue-gray ovoid nests, leaf-like structures, spoke-wheel areas and ulceration.",
+
+    differential:
+      "Squamous cell carcinoma, actinic keratosis, melanocytic lesions, sebaceous hyperplasia and other benign or malignant tumors.",
+
+    treatment:
+      "Treatment depends on tumor subtype, localization, size and recurrence risk. Surgical excision is frequently used. Other selected approaches include Mohs micrographic surgery and non-surgical modalities in appropriate cases.",
+
+    followup:
+      "Follow-up should be individualized according to recurrence risk, tumor characteristics and the patient's risk of developing additional keratinocyte carcinomas."
+  },
+
+  {
+    id: "ak",
+    name: "Actinic Keratosis",
+    alternative: "AK",
+    icd: "L57.0",
+    description:
+      "A UV-induced keratinocytic lesion occurring predominantly on chronically sun-exposed skin.",
+
+    clinical:
+      "Commonly presents as a rough, scaly or hyperkeratotic macule, papule or plaque on chronically sun-damaged skin.",
+
+    dermoscopy:
+      "Facial lesions may show a strawberry pattern, erythematous pseudonetwork, surface scale and prominent follicular openings.",
+
+    differential:
+      "Squamous cell carcinoma in situ, invasive squamous cell carcinoma, seborrheic keratosis, superficial basal cell carcinoma and inflammatory dermatoses.",
+
+    treatment:
+      "Management may include lesion-directed or field-directed therapy depending on lesion number, localization and clinical context.",
+
+    followup:
+      "Clinical reassessment is appropriate particularly in patients with extensive actinic damage, recurrent lesions or suspicion of progression."
+  },
+
+  {
+    id: "melanoma",
+    name: "Cutaneous Melanoma",
+    alternative: "Melanoma",
+    icd: "C43.-",
+    description:
+      "A malignant melanocytic neoplasm with metastatic potential. Early diagnosis is essential for prognosis.",
+
+    clinical:
+      "Suspicious features may include asymmetry, irregular borders, color variation, change over time and lesions that differ from the patient's other nevi.",
+
+    dermoscopy:
+      "Findings depend on melanoma subtype and may include asymmetry of structures and colors, atypical pigment network, irregular dots or globules, atypical streaks, regression structures and atypical vascular patterns.",
+
+    differential:
+      "Melanocytic nevus, dysplastic nevus, seborrheic keratosis, pigmented basal cell carcinoma and other pigmented lesions.",
+
+    treatment:
+      "Management depends on histopathologic staging and current melanoma guidelines. Surgical excision is the cornerstone of treatment for localized primary melanoma.",
+
+    followup:
+      "Follow-up intensity and investigations depend on tumor stage, recurrence risk and current national or international melanoma guidelines."
+  }
+
+];
+
+
+function createCards(list) {
+
+  const cards = document.getElementById("cards");
+
+  cards.innerHTML = "";
+
+  list.forEach(disease => {
+
+    const card = document.createElement("div");
+
+    card.className = "card";
+
+    card.onclick = () => showDisease(disease.id);
+
+    card.innerHTML = `
+      <h3>${disease.name}</h3>
+      <p>${disease.description}</p>
+      <span class="icd">ICD-10: ${disease.icd}</span>
+    `;
+
+    cards.appendChild(card);
+
+  });
+
+}
+
+
+function filterDiseases() {
+
+  const input =
+    document.getElementById("searchInput")
+      .value
+      .toLowerCase();
+
+  const results = diseases.filter(disease =>
+
+    disease.name.toLowerCase().includes(input) ||
+
+    disease.alternative.toLowerCase().includes(input) ||
+
+    disease.icd.toLowerCase().includes(input)
+
+  );
+
+  createCards(results);
+
+  document.getElementById("noResult").style.display =
+    results.length === 0 ? "block" : "none";
+
+  const details = document.getElementById("details");
+
+  details.style.display = "none";
+  details.innerHTML = "";
+
+}
+
+
+function showDisease(id) {
+
+  const disease =
+    diseases.find(item => item.id === id);
+
+  const details =
+    document.getElementById("details");
+
+  details.innerHTML = `
+
+    <h2>${disease.name}</h2>
+
+    <span class="icd">
+      ICD-10: ${disease.icd}
+    </span>
+
+    <div class="detail-section">
+      <h4>Overview</h4>
+      <p>${disease.description}</p>
+    </div>
+
+    <div class="detail-section">
+      <h4>Clinical Features</h4>
+      <p>${disease.clinical}</p>
+    </div>
+
+    <div class="detail-section">
+      <h4>Dermoscopy</h4>
+      <p>${disease.dermoscopy}</p>
+    </div>
+
+    <div class="detail-section">
+      <h4>Differential Diagnosis</h4>
+      <p>${disease.differential}</p>
+    </div>
+
+    <div class="detail-section">
+      <h4>Treatment Overview</h4>
+      <p>${disease.treatment}</p>
+    </div>
+
+    <div class="detail-section">
+      <h4>Follow-up</h4>
+      <p>${disease.followup}</p>
+    </div>
+
+  `;
+
+  details.style.display = "block";
+
+  details.scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
+
+
+createCards(diseases);
