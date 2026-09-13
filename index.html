@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Docutis | Dermatology Reference Toolkit</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f6f8fa;
+      color: #1f2937;
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 18px 30px;
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .badge {
+      font-size: 13px;
+      background: #eef2f7;
+      padding: 6px 10px;
+      border-radius: 20px;
+      color: #4b5563;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 60px 25px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .hero h1 {
+      font-size: 44px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: #6b7280;
+      font-size: 18px;
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .search-wrapper {
+      max-width: 720px;
+      margin: 35px auto;
+    }
+
+    #searchInput {
+      width: 100%;
+      padding: 17px 20px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      font-size: 17px;
+      outline: none;
+      background: white;
+    }
+
+    #searchInput:focus {
+      border-color: #6b7280;
+    }
+
+    .section-title {
+      margin-top: 55px;
+      margin-bottom: 20px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 22px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 20px rgba(0,0,0,0.06);
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .icd {
+      display: inline-block;
+      background: #f3f4f6;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 13px;
+      margin-top: 7px;
+    }
+
+    #details {
+      display: none;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 28px;
+      margin-top: 30px;
+    }
+
+    #details h2 {
+      margin-top: 0;
+    }
+
+    .detail-section {
+      margin-top: 24px;
+    }
+
+    .detail-section h4 {
+      margin-bottom: 7px;
+    }
+
+    .detail-section p {
+      line-height: 1.65;
+      color: #4b5563;
+    }
+
+    .notice {
+      margin-top: 60px;
+      padding: 20px;
+      background: #fffbea;
+      border: 1px solid #f4df8b;
+      border-radius: 12px;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    .no-result {
+      display: none;
+      text-align: center;
+      color: #6b7280;
+      padding: 30px;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      main {
+        padding-top: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">Docutis</div>
+    <div class="badge">Open Source</div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h1>Dermatology, structured.</h1>
+
+    <p>
+      An open-source dermatology reference and education toolkit
+      designed for physicians, medical trainees and healthcare professionals.
+    </p>
+
+    <div class="search-wrapper">
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Search a dermatologic condition..."
+        oninput="filterDiseases()"
+      >
+    </div>
+  </section>
+
+  <h2 class="section-title">Conditions</h2>
+
+  <div id="cards" class="cards"></div>
+
+  <div id="noResult" class="no-result">
+    No matching condition found.
+  </div>
+
+  <section id="details"></section>
+
+  <div class="notice">
+    <strong>Medical Disclaimer:</strong>
+    Docutis is intended for educational and informational purposes only.
+    It does not replace professional medical judgment, diagnosis, treatment
+    decisions or consultation of current clinical guidelines.
+  </div>
+
+  <footer>
+    Docutis · Open-source dermatology reference toolkit
+  </footer>
+
+</main>
+
+<script>
+
+const diseases = [
+
+  {
+    id: "bcc",
+    name: "Basal Cell Carcinoma",
+    alternative: "BCC",
+    icd: "C44.-",
+    description:
+      "A common keratinocyte carcinoma characterized by locally invasive growth and a very low metastatic potential.",
+
+    clinical:
+      "Typical presentations include pearly or translucent papules, telangiectasia, ulceration, crusting or slowly enlarging plaques depending on the subtype.",
+
+    dermoscopy:
+      "Possible findings include arborizing vessels, blue-gray ovoid nests, leaf-like structures, spoke-wheel areas and ulceration.",
+
+    differential:
+      "Squamous cell carcinoma, actinic keratosis, melanocytic lesions, sebaceous hyperplasia and other benign or malignant tumors.",
+
+    treatment:
+      "Treatment depends on tumor subtype, localization, size and recurrence risk. Surgical excision is frequently used. Other selected approaches include Mohs micrographic surgery and non-surgical modalities in appropriate cases.",
+
+    followup:
+      "Follow-up should be individualized according to recurrence risk, tumor characteristics and the patient's risk of developing additional keratinocyte carcinomas."
+  },
+
+  {
+    id: "ak",
+    name: "Actinic Keratosis",
+    alternative: "AK",
+    icd: "L57.0",
+    description:
+      "A UV-induced keratinocytic lesion occurring predominantly on chronically sun-exposed skin.",
+
+    clinical:
+      "Commonly presents as a rough, scaly or hyperkeratotic macule, papule or plaque on chronically sun-damaged skin.",
+
+    dermoscopy:
+      "Facial lesions may show a strawberry pattern, erythematous pseudonetwork, surface scale and prominent follicular openings.",
+
+    differential:
+      "Squamous cell carcinoma in situ, invasive squamous cell carcinoma, seborrheic keratosis, superficial basal cell carcinoma and inflammatory dermatoses.",
+
+    treatment:
+      "Management may include lesion-directed or field-directed therapy depending on lesion number, localization and clinical context.",
+
+    followup:
+      "Clinical reassessment is appropriate particularly in patients with extensive actinic damage, recurrent lesions or suspicion of progression."
+  },
+
+  {
+    id: "melanoma",
+    name: "Cutaneous Melanoma",
+    alternative: "Melanoma",
+    icd: "C43.-",
+    description:
+      "A malignant melanocytic neoplasm with metastatic potential. Early diagnosis is essential for prognosis.",
+
+    clinical:
+      "Suspicious features may include asymmetry, irregular borders, color variation, change over time and lesions that differ from the patient's other nevi.",
+
+    dermoscopy:
+      "Findings depend on melanoma subtype and may include asymmetry of structures and colors, atypical pigment network, irregular dots or globules, atypical streaks, regression structures and atypical vascular patterns.",
+
+    differential:
+      "Melanocytic nevus, dysplastic nevus, seborrheic keratosis, pigmented basal cell carcinoma and other pigmented lesions.",
+
+    treatment:
+      "Management depends on histopathologic staging and current melanoma guidelines. Surgical excision is the cornerstone of treatment for localized primary melanoma.",
+
+    followup:
+      "Follow-up intensity and investigations depend on tumor stage, recurrence risk and current national or international melanoma guidelines."
+  }
+
+];
+
+
+function createCards(list) {
+
+  const cards = document.getElementById("cards");
+
+  cards.innerHTML = "";
+
+  list.forEach(disease => {
+
+    const card = document.createElement("div");
+
+    card.className = "card";
+
+    card.onclick = () => showDisease(disease.id);
+
+    card.innerHTML = `
+      <h3>${disease.name}</h3>
+      <p>${disease.description}</p>
+      <span class="icd">ICD-10: ${disease.icd}</span>
+    `;
+
+    cards.appendChild(card);
+
+  });
+
+}
+
+
+function filterDiseases() {
+
+  const input =
+    document.getElementById("searchInput")
+      .value
+      .toLowerCase();
+
+  const results = diseases.filter(disease =>
+
+    disease.name.toLowerCase().includes(input) ||
+
+    disease.alternative.toLowerCase().includes(input) ||
+
+    disease.icd.toLowerCase().includes(input)
+
+  );
+
+  createCards(results);
+
+  document.getElementById("noResult").style.display =
+    results.length === 0 ? "block" : "none";
+
+}
+
+
+function showDisease(id) {
+
+  const disease =
+    diseases.find(item => item.id === id);
+
+  const details =
+    document.getElementById("details");
+
+  details.innerHTML = `
+
+    <h2>${disease.name}</h2>
+
+    <span class="icd">
+      ICD-10: ${disease.icd}
+    </span>
+
+    <div class="detail-section">
+      <h4>Overview</h4>
+      <p>${disease.description}</p>
+    </div>
+
+    <div class="detail-section">
+      <h4>Clinical Features</h4>
+      <p>${disease.clinical}</p>
+    </div>
+
+    <div class="detail-section">
+      <h4>Dermoscopy</h4>
+      <p>${disease.dermoscopy}</p>
+    </div>
+
+    <div class="detail-section">
+      <h4>Differential Diagnosis</h4>
+      <p>${disease.differential}</p>
+    </div>
+
+    <div class="detail-section">
+      <h4>Treatment Overview</h4>
+      <p>${disease.treatment}</p>
+    </div>
+
+    <div class="detail-section">
+      <h4>Follow-up</h4>
+      <p>${disease.followup}</p>
+    </div>
+
+  `;
+
+  details.style.display = "block";
+
+  details.scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
+
+
+createCards(diseases);
+
+</script>
+
+</body>
+</html>
