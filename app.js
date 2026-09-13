@@ -309,6 +309,78 @@ const diseaseReferences = {
       title: "EADO — Melanoma treatment guideline, 2024 update",
       url: "https://eado.org/files/2025/01/2024-EADO-CMGuideline-Treatment-EJC.pdf"
     }
+  ],
+    "actinic-cheilitis": [
+    {
+      title: "DermNet — Actinic cheilitis",
+      url: "https://dermnetnz.org/topics/actinic-cheilitis"
+    }
+  ],
+  keratoacanthoma: [
+    {
+      title: "DermNet — Keratoacanthoma",
+      url: "https://dermnetnz.org/topics/keratoacanthoma"
+    }
+  ],
+  "lentigo-maligna-melanoma": [
+    {
+      title: "DermNet — Lentigo maligna and lentigo maligna melanoma",
+      url: "https://dermnetnz.org/topics/lentigo-maligna-and-lentigo-maligna-melanoma"
+    }
+  ],
+  "merkel-cell-carcinoma": [
+    {
+      title: "American Academy of Dermatology — Merkel cell carcinoma",
+      url: "https://www.aad.org/public/diseases/skin-cancer/types/common/merkel-cell"
+    }
+  ],
+  "sebaceous-carcinoma": [
+    {
+      title: "DermNet — Sebaceous carcinoma",
+      url: "https://dermnetnz.org/topics/sebaceous-carcinoma"
+    }
+  ],
+  dfsp: [
+    {
+      title: "DermNet — Dermatofibrosarcoma protuberans",
+      url: "https://dermnetnz.org/topics/dermatofibrosarcoma-protuberans"
+    }
+  ],
+  "atypical-fibroxanthoma": [
+    {
+      title: "DermNet — Atypical fibroxanthoma",
+      url: "https://dermnetnz.org/topics/atypical-fibroxanthoma"
+    }
+  ],
+  "pleomorphic-dermal-sarcoma": [
+    {
+      title: "DermNet — Pleomorphic dermal sarcoma",
+      url: "https://dermnetnz.org/topics/pleomorphic-dermal-sarcoma"
+    }
+  ],
+  "cutaneous-angiosarcoma": [
+    {
+      title: "DermNet — Angiosarcoma",
+      url: "https://dermnetnz.org/topics/angiosarcoma"
+    }
+  ],
+  "kaposi-sarcoma": [
+    {
+      title: "DermNet — Kaposi sarcoma",
+      url: "https://dermnetnz.org/topics/kaposi-sarcoma"
+    }
+  ],
+  "extramammary-paget": [
+    {
+      title: "DermNet — Extramammary Paget disease",
+      url: "https://dermnetnz.org/topics/extramammary-paget-disease"
+    }
+  ],
+  "microcystic-adnexal-carcinoma": [
+    {
+      title: "DermNet — Microcystic adnexal carcinoma",
+      url: "https://dermnetnz.org/topics/microcystic-adnexal-carcinoma"
+    }
   ]
 };
 
