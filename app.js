@@ -70,6 +70,60 @@ const diseases = [
 
     followup:
       "Follow-up intensity and investigations depend on tumor stage, recurrence risk and current national or international melanoma guidelines."
+  },
+
+    {
+    id: "bowen",
+    name: "Bowen Disease",
+    alternative: "SCC in situ",
+    icd: "D04.-",
+    description: "An intraepidermal squamous cell carcinoma confined to the epidermis.",
+
+    clinical: "Typically presents as a persistent, well-demarcated erythematous and scaly patch or plaque. Pigmented variants may occur.",
+
+    dermoscopy: "Possible findings include grouped glomerular or coiled vessels, scale and, in pigmented lesions, brown or gray dots and globules.",
+
+    differential: "Actinic keratosis, superficial basal cell carcinoma, psoriasis, eczema, pigmented lesions and invasive cutaneous squamous cell carcinoma.",
+
+    treatment: "Management is individualized according to lesion site, size, patient factors and diagnostic certainty. Options may include surgical and selected nonsurgical approaches.",
+
+    followup: "Clinical follow-up should consider recurrence, ongoing actinic damage and the risk of additional keratinocyte carcinomas."
+  },
+
+  {
+    id: "cscc",
+    name: "Cutaneous Squamous Cell Carcinoma",
+    alternative: "cSCC",
+    icd: "C44.-",
+    description: "A malignant keratinocytic neoplasm with variable local recurrence and metastatic risk.",
+
+    clinical: "May present as a persistent hyperkeratotic papule, plaque or nodule, sometimes with crusting, ulceration, tenderness or rapid growth.",
+
+    dermoscopy: "Findings may include keratin, white structureless areas, scale, ulceration and vascular patterns. Appearance varies with differentiation and location.",
+
+    differential: "Actinic keratosis, Bowen disease, keratoacanthoma, verruca, basal cell carcinoma and inflammatory or benign keratotic lesions.",
+
+    treatment: "Management depends on tumor risk assessment, anatomic site, histopathology and current guidelines. Surgery is commonly used for appropriate primary tumors.",
+
+    followup: "Follow-up should be risk-adapted and include assessment for local recurrence, regional disease when indicated and additional skin cancers."
+  },
+
+  {
+    id: "lentigo-maligna",
+    name: "Lentigo Maligna",
+    alternative: "Melanoma in situ",
+    icd: "D03.-",
+    description: "A melanoma in situ that usually develops on chronically sun-damaged skin, most often on the head and neck.",
+
+    clinical: "Typically appears as a slowly enlarging, irregularly pigmented macule or patch with variation in color and border.",
+
+    dermoscopy: "Possible findings include asymmetric pigmented follicular openings, annular-granular pattern, gray dots or globules and rhomboidal structures.",
+
+    differential: "Solar lentigo, seborrheic keratosis, pigmented actinic keratosis, lichen planus-like keratosis and other pigmented lesions.",
+
+    treatment: "Management requires complete removal with histologic assessment; the approach depends on lesion size, location and current melanoma guidelines.",
+
+    followup: "Follow-up should be individualized and include surveillance for recurrence and additional melanocytic or keratinocytic tumors."
   }
 
 ];
