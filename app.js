@@ -128,6 +128,45 @@ const diseases = [
 
 ];
 
+const diseaseReferences = {
+  bcc: [
+    {
+      title: "American Academy of Dermatology — Basal cell carcinoma clinical guideline",
+      url: "https://www.aad.org/member/clinical-quality/guidelines/bcc"
+    }
+  ],
+  ak: [
+    {
+      title: "American Academy of Dermatology — Actinic keratosis guideline",
+      url: "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"
+    }
+  ],
+  melanoma: [
+    {
+      title: "EADO — European melanoma guidelines",
+      url: "https://eado.org/european-guidelines/"
+    }
+  ],
+  bowen: [
+    {
+      title: "DermNet — Intraepidermal squamous cell carcinoma",
+      url: "https://dermnetnz.org/topics/intraepidermal-squamous-cell-carcinoma"
+    }
+  ],
+  cscc: [
+    {
+      title: "American Academy of Dermatology — Non-melanoma skin cancer guidelines",
+      url: "https://www.aad.org/guidelines/nmsc"
+    }
+  ],
+  "lentigo-maligna": [
+    {
+      title: "EADO — Melanoma treatment guideline, 2024 update",
+      url: "https://eado.org/files/2025/01/2024-EADO-CMGuideline-Treatment-EJC.pdf"
+    }
+  ]
+};
+
 
 function createCards(list) {
 
@@ -181,6 +220,13 @@ function filterDiseases() {
   const details = document.getElementById("details");
 
   details.style.display = "none";
+
+  const referenceItems = (diseaseReferences[disease.id] || [])
+    .map(reference =>
+      `<li><a href="${reference.url}" target="_blank" rel="noopener noreferrer">${reference.title}</a></li>`
+    )
+    .join("");
+  
   details.innerHTML = "";
 
 }
@@ -231,7 +277,12 @@ function showDisease(id) {
       <h4>Follow-up</h4>
       <p>${disease.followup}</p>
     </div>
-
+    <div class="detail-section">
+      <h4>References</h4>
+      <ul>
+        ${referenceItems}
+      </ul>
+    </div>
   `;
 
   details.style.display = "block";
