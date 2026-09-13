@@ -124,6 +124,151 @@ const diseases = [
     treatment: "Management requires complete removal with histologic assessment; the approach depends on lesion size, location and current melanoma guidelines.",
 
     followup: "Follow-up should be individualized and include surveillance for recurrence and additional melanocytic or keratinocytic tumors."
+  },
+
+    {
+    id: "actinic-cheilitis",
+    name: "Actinic Cheilitis",
+    alternative: "Solar cheilitis",
+    icd: "L56.8",
+    description: "A chronic UV-induced precancerous lesion of the lip, usually affecting the lower vermilion.",
+    clinical: "Persistent dryness, scale, atrophy, erythema, fissuring or loss of the vermilion border may occur.",
+    dermoscopy: "Scale, white structureless areas, erythema and vascular changes may be seen.",
+    differential: "Inflammatory cheilitis, contact cheilitis, SCC in situ and invasive SCC of the lip.",
+    treatment: "Management depends on extent and diagnostic concern; suspicious focal ulceration or nodularity requires specialist assessment.",
+    followup: "Sun protection and clinical review are important because of SCC risk."
+  },
+  {
+    id: "keratoacanthoma",
+    name: "Keratoacanthoma",
+    alternative: "KA",
+    icd: "L85.8",
+    description: "A rapidly growing crateriform keratinocytic tumor with overlap with well-differentiated cutaneous SCC.",
+    clinical: "Usually a dome-shaped nodule with a central keratin-filled crater on sun-exposed skin.",
+    dermoscopy: "A central keratin plug, white circles and variable vascular patterns may be present.",
+    differential: "Well-differentiated SCC, verruca, nodular BCC and amelanotic melanoma.",
+    treatment: "Specialist assessment is needed because reliable distinction from SCC can be difficult.",
+    followup: "Follow-up depends on histopathology, treatment and keratinocyte-cancer risk."
+  },
+  {
+    id: "lentigo-maligna-melanoma",
+    name: "Lentigo Maligna Melanoma",
+    alternative: "LMM",
+    icd: "C43.-",
+    description: "An invasive melanoma arising in association with lentigo maligna, usually on chronically sun-damaged head and neck skin.",
+    clinical: "An enlarging irregular pigmented patch may develop thickening, nodularity or new color variation.",
+    dermoscopy: "Findings can overlap with lentigo maligna and may suggest invasion.",
+    differential: "Lentigo maligna, solar lentigo, pigmented actinic keratosis and seborrheic keratosis.",
+    treatment: "Complete excision and histopathologic staging are required; management follows melanoma guidelines.",
+    followup: "Follow-up depends on stage and recurrence risk."
+  },
+  {
+    id: "merkel-cell-carcinoma",
+    name: "Merkel Cell Carcinoma",
+    alternative: "MCC",
+    icd: "C4A.-",
+    description: "A rare aggressive neuroendocrine skin carcinoma with substantial metastatic potential.",
+    clinical: "Often presents as a rapidly growing painless red, violaceous or skin-colored nodule.",
+    dermoscopy: "No single diagnostic dermoscopic pattern is established.",
+    differential: "BCC, SCC, amelanotic melanoma, lymphoma and epidermal cyst.",
+    treatment: "Management requires multidisciplinary specialist assessment, staging and guideline-based therapy.",
+    followup: "Close surveillance is required because recurrence and metastasis can occur."
+  },
+  {
+    id: "sebaceous-carcinoma",
+    name: "Sebaceous Carcinoma",
+    alternative: "SC",
+    icd: "C44.-",
+    description: "A rare aggressive adnexal carcinoma with frequent periocular presentation.",
+    clinical: "May present as a painless firm eyelid nodule or persistent chalazion-like lesion.",
+    dermoscopy: "Dermoscopy is not diagnostic and histopathology is required.",
+    differential: "Chalazion, BCC, SCC and other eyelid tumors.",
+    treatment: "Management requires complete excision with histopathologic assessment and specialist care.",
+    followup: "Follow-up is individualized because local recurrence and spread may occur."
+  },
+  {
+    id: "dfsp",
+    name: "Dermatofibrosarcoma Protuberans",
+    alternative: "DFSP",
+    icd: "C44.99",
+    description: "A slow-growing dermal sarcoma with a tendency for local recurrence and usually low metastatic risk.",
+    clinical: "Typically a slowly enlarging firm plaque or nodule, often on the trunk.",
+    dermoscopy: "Dermoscopy is nonspecific and cannot establish the diagnosis.",
+    differential: "Dermatofibroma, scar, keloid, cyst and other soft-tissue tumors.",
+    treatment: "Complete excision with margin control is central to management.",
+    followup: "Long-term follow-up is appropriate because local recurrence can occur."
+  },
+  {
+    id: "atypical-fibroxanthoma",
+    name: "Atypical Fibroxanthoma",
+    alternative: "AFX",
+    icd: "C49.0",
+    description: "A dermal spindle-cell tumor usually occurring on sun-damaged head and neck skin in older adults.",
+    clinical: "Often a rapidly growing red or flesh-colored dome-shaped nodule that may ulcerate or bleed.",
+    dermoscopy: "Findings may resemble BCC or SCC and are not diagnostic.",
+    differential: "SCC, amelanotic melanoma, PDS and pyogenic granuloma.",
+    treatment: "Complete surgical excision is standard; pathology confirmation is required.",
+    followup: "Follow-up depends on tumor features and excision status."
+  },
+  {
+    id: "pleomorphic-dermal-sarcoma",
+    name: "Pleomorphic Dermal Sarcoma",
+    alternative: "PDS",
+    icd: "C49.0",
+    description: "A rare malignant dermal tumor related to AFX but with more aggressive histologic features.",
+    clinical: "Usually a growing non-pigmented nodule or plaque on sun-damaged head and neck skin.",
+    dermoscopy: "Dermoscopy is nonspecific.",
+    differential: "AFX, SCC, BCC, amelanotic melanoma and Merkel cell carcinoma.",
+    treatment: "Management requires complete excision and specialist pathology review.",
+    followup: "Clinical and sometimes radiologic surveillance is needed because recurrence and metastasis may occur."
+  },
+  {
+    id: "cutaneous-angiosarcoma",
+    name: "Cutaneous Angiosarcoma",
+    alternative: "Angiosarcoma",
+    icd: "C49.0",
+    description: "A rare aggressive vascular sarcoma, often involving the scalp or face of older adults.",
+    clinical: "May appear as a bruise-like, violaceous patch, plaque or nodule with progressive enlargement.",
+    dermoscopy: "Dermoscopy is not diagnostic.",
+    differential: "Hematoma, rosacea, Kaposi sarcoma and other vascular lesions.",
+    treatment: "Management requires urgent multidisciplinary specialist assessment.",
+    followup: "Close follow-up is required because recurrence and metastasis are possible."
+  },
+  {
+    id: "kaposi-sarcoma",
+    name: "Kaposi Sarcoma",
+    alternative: "KS",
+    icd: "C46.-",
+    description: "A vascular neoplasm associated with human herpesvirus 8 and variable immune status.",
+    clinical: "May present as violaceous macules, plaques or nodules, often on the lower limbs.",
+    dermoscopy: "A multicolored rainbow pattern may occur but is not specific.",
+    differential: "Purpura, angioma, bacillary angiomatosis and other vascular tumors.",
+    treatment: "Management depends on subtype, extent, immune status and specialist evaluation.",
+    followup: "Follow-up is individualized according to disease extent and underlying context."
+  },
+  {
+    id: "extramammary-paget",
+    name: "Extramammary Paget Disease",
+    alternative: "EMPD",
+    icd: "C44.-",
+    description: "A rare intraepidermal adenocarcinoma usually affecting apocrine-rich anogenital skin.",
+    clinical: "Often a persistent pruritic erythematous eczematous plaque in the genital or perianal region.",
+    dermoscopy: "Dermoscopy is supportive but not diagnostic.",
+    differential: "Eczema, psoriasis, fungal infection, Bowen disease and melanoma.",
+    treatment: "Diagnosis and management require biopsy confirmation and specialist assessment.",
+    followup: "Long-term follow-up is appropriate because recurrence can occur."
+  },
+  {
+    id: "microcystic-adnexal-carcinoma",
+    name: "Microcystic Adnexal Carcinoma",
+    alternative: "MAC",
+    icd: "C44.-",
+    description: "A rare locally aggressive adnexal carcinoma, usually arising on the central face.",
+    clinical: "Often presents as a slowly enlarging firm indurated plaque or nodule.",
+    dermoscopy: "Dermoscopy is not diagnostic.",
+    differential: "Morpheaform BCC, scar, desmoplastic trichoepithelioma and other adnexal tumors.",
+    treatment: "Complete margin-controlled excision and specialist pathology review are generally required.",
+    followup: "Long-term follow-up is important because local recurrence and perineural spread may occur."
   }
 
 ];
