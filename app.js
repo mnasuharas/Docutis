@@ -221,11 +221,7 @@ function filterDiseases() {
 
   details.style.display = "none";
 
-  const referenceItems = (diseaseReferences[disease.id] || [])
-    .map(reference =>
-      `<li><a href="${reference.url}" target="_blank" rel="noopener noreferrer">${reference.title}</a></li>`
-    )
-    .join("");
+
   
   details.innerHTML = "";
 
@@ -239,6 +235,12 @@ function showDisease(id) {
 
   const details =
     document.getElementById("details");
+  
+    const referenceItems = (diseaseReferences[disease.id] || [])
+    .map(reference =>
+      `<li><a href="${reference.url}" target="_blank" rel="noopener noreferrer">${reference.title}</a></li>`
+    )
+    .join("");
 
   details.innerHTML = `
 
