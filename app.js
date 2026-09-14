@@ -408,7 +408,7 @@ const diseaseCategories = {
 };
 
 const categoryOrder = [
-  { id: "precancerous", title: "Precanserous Lesions" },
+  { id: "precancerous", title: "Precancerous Lesions" },
   { id: "keratinocyte", title: "Keratinocyte Tumors" },
   { id: "melanocytic", title: "Melanocytic Tumors" },
   { id: "rare", title: "Rare Cutaneous Malignancies" }
