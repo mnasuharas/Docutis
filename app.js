@@ -383,32 +383,78 @@ const diseaseReferences = {
     }
   ]
 };
+const diseaseCategories = {
+  ak: "precancerous",
+  "actinic-cheilitis": "precancerous",
+
+  bcc: "keratinocyte",
+  bowen: "keratinocyte",
+  cscc: "keratinocyte",
+  keratoacanthoma: "keratinocyte",
+  "microcystic-adnexal-carcinoma": "keratinocyte",
+
+  melanoma: "melanocytic",
+  "lentigo-maligna": "melanocytic",
+  "lentigo-maligna-melanoma": "melanocytic",
+
+  "merkel-cell-carcinoma": "rare",
+  "sebaceous-carcinoma": "rare",
+  dfsp: "rare",
+  "atypical-fibroxanthoma": "rare",
+  "pleomorphic-dermal-sarcoma": "rare",
+  "cutaneous-angiosarcoma": "rare",
+  "kaposi-sarcoma": "rare",
+  "extramammary-paget": "rare"
+};
+
+const categoryOrder = [
+  { id: "precancerous", title: "Precanserous Lesions" },
+  { id: "keratinocyte", title: "Keratinocyte Tumors" },
+  { id: "melanocytic", title: "Melanocytic Tumors" },
+  { id: "rare", title: "Rare Cutaneous Malignancies" }
+];
 
 
 function createCards(list) {
-
   const cards = document.getElementById("cards");
 
   cards.innerHTML = "";
 
-  list.forEach(disease => {
+  categoryOrder.forEach(category => {
+    const diseasesInCategory = list.filter(
+      disease => diseaseCategories[disease.id] === category.id
+    );
 
-    const card = document.createElement("div");
+    if (diseasesInCategory.length === 0) return;
 
-    card.className = "card";
+    const section = document.createElement("section");
+    section.className = "category-section";
 
-    card.onclick = () => showDisease(disease.id);
-
-    card.innerHTML = `
-      <h3>${disease.name}</h3>
-      <p>${disease.description}</p>
-      <span class="icd">ICD-10: ${disease.icd}</span>
+    section.innerHTML = `
+      <h3 class="category-title">${category.title}</h3>
+      <div class="category-grid"></div>
     `;
 
-    cards.appendChild(card);
+    const grid = section.querySelector(".category-grid");
 
+    diseasesInCategory.forEach(disease => {
+      const card = document.createElement("div");
+
+      card.className = "card";
+
+      card.onclick = () => showDisease(disease.id);
+
+      card.innerHTML = `
+        <h3>${disease.name}</h3>
+        <p>${disease.description}</p>
+        <span class="icd">ICD-10: ${disease.icd}</span>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    cards.appendChild(section);
   });
-
 }
 
 
