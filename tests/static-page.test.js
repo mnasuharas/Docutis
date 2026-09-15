@@ -9,6 +9,7 @@ const css = fs.readFileSync(path.join(root, "style.css"), "utf8");
 const readme = fs.readFileSync(path.join(root, "README.md"), "utf8");
 const contributing = fs.readFileSync(path.join(root, "CONTRIBUTING.md"), "utf8");
 const roadmap = fs.readFileSync(path.join(root, "ROADMAP.md"), "utf8");
+const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "validate.yml"), "utf8");
 
 function cssProperty(selector, property) {
   const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -46,8 +47,36 @@ test("documentation distinguishes source metadata checks from clinical review", 
   assert.match(readme, /not a publication date, clinical review date/i);
   assert.match(contributing, /Allowed source types/);
   assert.match(contributing, /never change a shared default/i);
-  assert.match(roadmap, /Future data-schema proposal \(not implemented\)/);
-  assert.match(roadmap, /Future category architecture \(not implemented\)/);
+  assert.match(roadmap, /Data-schema evolution/);
+  assert.match(roadmap, /Category architecture/);
+});
+
+test("CI validates pull requests, main pushes and manual runs with read-only permissions", () => {
+  assert.match(workflow, /pull_request:\s*\n\s+branches:\s*\[main\]/);
+  assert.match(workflow, /push:\s*\n\s+branches:\s*\[main\]/);
+  assert.match(workflow, /workflow_dispatch:/);
+  assert.match(workflow, /permissions:\s*\n\s+contents:\s*read/);
+  assert.doesNotMatch(workflow, /\bwrite\b/);
+  assert.doesNotMatch(workflow, /secrets\./);
+  assert.match(workflow, /timeout-minutes:\s*10/);
+  assert.match(workflow, /actions\/checkout@v7/);
+  assert.match(workflow, /persist-credentials:\s*false/);
+  assert.match(workflow, /actions\/setup-node@v7/);
+  assert.match(workflow, /node-version:\s*"24"/);
+  assert.match(workflow, /package-manager-cache:\s*false/);
+  for (const command of ["node --check data.js", "node --check app.js", "node --test tests/*.test.js", "git diff --check"]) {
+    assert.ok(workflow.includes(command), `workflow is missing ${command}`);
+  }
+});
+
+test("documentation reports CI, 34 records and the unfinished 50-record target", () => {
+  assert.match(readme, /34 condition records/i);
+  assert.match(readme, /GitHub Actions/i);
+  assert.match(readme, /50\+[^.]*not yet/i);
+  assert.match(contributing, /icdoApplicability` to `not applicable`/i);
+  assert.match(contributing, /CI workflow[^.]*pull request/i);
+  assert.match(roadmap, /first universal dermatology content package/i);
+  assert.match(roadmap, /infectious dermatology/i);
 });
 
 test("responsive and keyboard focus rules remain present", () => {

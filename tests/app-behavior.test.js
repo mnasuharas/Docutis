@@ -66,14 +66,14 @@ function searchFor(elements, query) {
   return elements.cards.querySelectorAll(".card");
 }
 
-test("initial rendering creates all cards and four category sections", () => {
+test("initial rendering creates all cards and seven category sections", () => {
   const { elements } = createHarness();
-  assert.equal(elements.cards.querySelectorAll(".card").length, 26);
+  assert.equal(elements.cards.querySelectorAll(".card").length, 34);
   assert.ok(elements.cards.querySelectorAll(".card").every(card => card.tagName === "BUTTON" && card.type === "button"));
-  assert.equal(elements.cards.querySelectorAll(".category-section").length, 4);
-  assert.equal(elements.categoryFilters.querySelectorAll("button").length, 5);
+  assert.equal(elements.cards.querySelectorAll(".category-section").length, 7);
+  assert.equal(elements.categoryFilters.querySelectorAll("button").length, 8);
   assert.ok(elements.categoryFilters.querySelectorAll("button").every(button => button.type === "button"));
-  assert.match(elements.resultStatus.textContent, /26 conditions shown/);
+  assert.match(elements.resultStatus.textContent, /34 conditions shown/);
 });
 
 test("search covers names, aliases, categories, subcategories and both coding systems", () => {
@@ -85,17 +85,49 @@ test("search covers names, aliases, categories, subcategories and both coding sy
   assert.equal(searchFor(elements, "cutaneous lymphoma").length, 3);
   assert.equal(searchFor(elements, "C84.1").length, 1);
   assert.equal(searchFor(elements, "8247/3").length, 1);
+  assert.equal(searchFor(elements, "Atopic eczema").length, 1);
+  assert.equal(searchFor(elements, "allergic contact dermatitis").length, 1);
+  assert.equal(searchFor(elements, "dandruff").length, 1);
+  assert.equal(searchFor(elements, "psoriasis vulgaris").length, 1);
+  assert.equal(searchFor(elements, "common acne").length, 1);
+  assert.equal(searchFor(elements, "chronic spontaneous urticaria").length, 1);
+  assert.equal(searchFor(elements, "leukoderma").length, 1);
+  assert.equal(searchFor(elements, "Inflammatory and Eczematous Disorders").length, 5);
+  assert.equal(searchFor(elements, "Acneiform and Sebaceous Disorders").length, 2);
+  assert.equal(searchFor(elements, "Depigmenting disorder").length, 1);
+  assert.equal(searchFor(elements, "L70.0").length, 1);
 });
 
 test("category filters preserve every broad grouping", () => {
   const { elements } = createHarness();
-  const expectedCounts = { premalignant: 3, keratinocytic: 4, melanocytic: 6, other: 13 };
+  const expectedCounts = {
+    premalignant: 3,
+    keratinocytic: 4,
+    melanocytic: 6,
+    other: 13,
+    "inflammatory-eczematous": 5,
+    "acneiform-sebaceous": 2,
+    pigmentary: 1
+  };
   for (const [category, expected] of Object.entries(expectedCounts)) {
     const button = elements.categoryFilters.querySelectorAll("button").find(item => item.dataset.category === category);
     button.dispatch("click");
     assert.equal(elements.cards.querySelectorAll(".card").length, expected);
     assert.equal(button.getAttribute("aria-pressed"), "true");
   }
+});
+
+test("new non-neoplastic details explain ICD-O applicability and expose guideline metadata", () => {
+  const { elements } = createHarness();
+  const card = elements.cards.querySelectorAll(".card").find(item => textOf(item).includes("Vitiligo"));
+  card.dispatch("click");
+  const details = textOf(elements.details);
+  assert.match(details, /ICD-10 WHO 2019: L80/);
+  assert.match(details, /ICD-O 3.2 \(oncology registry coding\)/);
+  assert.match(details, /Not applicable — this non-neoplastic condition is outside ICD-O oncology registry coding/);
+  assert.match(details, /International Vitiligo Task Force/);
+  assert.match(details, /DOI: 10.1111\/jdv.19451/);
+  assert.match(details, /Source metadata checked: 2026-09-16/);
 });
 
 test("card details distinguish coding fields, expose sources and restore focus", () => {

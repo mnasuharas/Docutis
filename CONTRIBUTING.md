@@ -36,11 +36,13 @@ Please include references when proposing substantial medical content changes.
 Condition records are stored in `data.js`, separately from UI behavior. Keep every record complete and use the existing fields: stable `id`, `name`, `alternative`, `category`, `subcategory`, `coding`, `description`, `clinical`, `dermoscopy`, `differential`, `treatment`, `followup`, `references`, and `reviewStatus`.
 
 - Use only a category and subcategory defined in the file; do not create a parallel taxonomy map.
+- Before adding a record, confirm that its canonical name and aliases do not duplicate an existing clinical entity. Keep the record concise and complete across description, clinical features, dermoscopy, differential diagnosis, treatment overview, follow-up, coding and references.
 - Prefer current clinical guidelines, professional organizations, government health sources, and established dermatology references.
 - Use an HTTPS link directly to the supporting source. Do not cite search-result pages.
 - Store source title, organization, type, publication year, version, URL, DOI when available, and an independent `metadataCheckedAt` date for the source.
 - Preserve uncertainty. If a classification mapping, recommendation, interval, or diagnostic feature cannot be verified, add an explicit verification note and document the gap in `ROADMAP.md` instead of guessing.
 - Set every new or substantially changed record to `clinician review required`.
+- Do not turn treatment overviews into patient-specific prescriptions. Avoid doses, fixed durations or jurisdiction-specific approval claims unless the scoped contribution and cited guideline require them.
 
 ### Source hierarchy
 
@@ -62,6 +64,8 @@ Allowed source types are `official classification`, `guideline`, `consensus`, `s
 - Never use an unlabelled `icd10` string. Each diagnosis code must identify its system and version, such as `ICD-10 WHO` 2019.
 - Do not present ICD-10-CM, ICD-10-GM, or another national modification as international ICD-10. Add national codes only from the relevant official release and label the jurisdiction explicitly.
 - ICD-O is oncology registry coding, not a substitute for a diagnosis code. Store its topography independently from morphology and behavior.
+- For a non-neoplastic condition, set `coding.icdo` to `null` and `coding.icdoApplicability` to `not applicable`. The UI will explain that the condition is outside ICD-O oncology registry coding. Never add a synthetic topography, morphology, empty string or placeholder code.
+- Use `not established` when an ICD-O mapping is unresolved for the record rather than clinically inapplicable. Existing oncology data must use `applicable` and retain separate topography and morphology.
 - Use site placeholders only when the classification genuinely requires the documented primary site; do not fabricate a fourth character.
 - When no reliable mapping is verified, leave the code collection empty and explain what must be verified. Do not infer a code from a similar disease name.
 - Coding content remains subject to clinician and coding-specialist review and must not be used as billing advice.
@@ -84,8 +88,10 @@ Before submitting a change:
 2. Test the disease search.
 3. Check that condition details display correctly.
 4. Make sure existing functionality has not been unintentionally broken.
-5. Run `node --test tests/*.test.js` for any content, data-structure, or interface change.
+5. Run `node --check data.js`, `node --check app.js`, `node --test tests/*.test.js`, and `git diff --check` for any content, data-structure, or interface change.
 6. Test category filters and keyboard-only card/detail interaction at desktop and mobile widths.
+
+The read-only GitHub Actions CI workflow repeats these checks on every pull request targeting `main` and on every push to `main`. CI does not use repository secrets, does not deploy, and does not replace medical or coding review.
 
 ## Issues
 
