@@ -20,7 +20,7 @@ Docutis is currently in active early development. Its content, structure and tec
 - Clinical features
 - Dermoscopic findings
 - Differential diagnoses
-- ICD-10 information
+- Explicitly labelled ICD-10 WHO diagnosis classification and ICD-O oncology coding, where verified
 - Treatment overviews
 - Follow-up considerations
 - Links to external clinical references
@@ -48,7 +48,7 @@ Docutis aims to make medical information:
 - Transparent about uncertainty and limitations
 - Suitable for independent professional review
 
-Medical content contributions should include appropriate references. Substantial changes should be reviewed carefully before being considered reliable for educational use.
+Medical content contributions should include appropriate references. All current medical records are marked `clinician review required`. New or substantially changed medical content must remain in that state until a qualified clinician documents review.
 
 ## Project Status
 
@@ -65,6 +65,8 @@ Current development priorities include:
 - Preparing multilingual support
 - Developing educational visual content with appropriate licensing
 
+See [ROADMAP.md](ROADMAP.md) for completed foundations, known gaps, the medical review workflow and release direction.
+
 ## Technology
 
 The current application uses:
@@ -74,6 +76,12 @@ The current application uses:
 - JavaScript
 - GitHub Pages
 
+Medical records live in `data.js`; `app.js` contains filtering, rendering and interaction behavior. Records include a broad category, a structured subcategory, coding-system metadata, source metadata, and review status. This separation keeps content review focused and preserves the dependency-free static architecture.
+
+Each reference has its own `metadataCheckedAt` date. This date means only that the reference's bibliographic metadata and link were checked on that date; it is not a publication date, clinical review date, or endorsement of the adjacent medical content.
+
+Coding data is educational metadata, not billing guidance. ICD-10 WHO is kept distinct from national modifications, and ICD-O topography is kept distinct from morphology and behavior. Site-specific or jurisdiction-specific coding must be confirmed from the applicable official release.
+
 The project intentionally begins with a lightweight architecture so that it remains easy to inspect, maintain and contribute to.
 
 ## Running Locally
@@ -82,6 +90,12 @@ No build process is currently required.
 
 1. Download or clone the repository.
 2. Open `index.html` in a modern web browser.
+
+To run the dependency-free data, interaction, and static-page checks with a current Node.js installation:
+
+```shell
+node --test tests/*.test.js
+```
 
 ## Contributing
 
