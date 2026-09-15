@@ -7,7 +7,10 @@
     { id: "premalignant", title: "Premalignant Lesions" },
     { id: "keratinocytic", title: "Keratinocytic Malignancies" },
     { id: "melanocytic", title: "Melanocytic Malignancies" },
-    { id: "other", title: "Other Cutaneous Malignancies" }
+    { id: "other", title: "Other Cutaneous Malignancies" },
+    { id: "inflammatory-eczematous", title: "Inflammatory and Eczematous Disorders" },
+    { id: "acneiform-sebaceous", title: "Acneiform and Sebaceous Disorders" },
+    { id: "pigmentary", title: "Pigmentary Disorders" }
   ];
   const subcategories = [
     { id: "premalignant-keratinocytic", title: "Premalignant keratinocytic lesion" },
@@ -23,7 +26,14 @@
     { id: "fibrohistiocytic-tumor", title: "Fibrohistiocytic tumor" },
     { id: "vascular-neoplasm", title: "Vascular neoplasm" },
     { id: "paget-disease", title: "Extramammary Paget disease" },
-    { id: "cutaneous-lymphoma", title: "Cutaneous lymphoma" }
+    { id: "cutaneous-lymphoma", title: "Cutaneous lymphoma" },
+    { id: "eczematous-dermatitis", title: "Eczematous dermatitis" },
+    { id: "seborrheic-disorder", title: "Seborrheic disorder" },
+    { id: "papulosquamous-disorder", title: "Papulosquamous disorder" },
+    { id: "urticarial-disorder", title: "Urticarial disorder" },
+    { id: "acneiform-disorder", title: "Acneiform disorder" },
+    { id: "rosacea", title: "Rosacea" },
+    { id: "depigmenting-disorder", title: "Depigmenting disorder" }
   ];
   const sourceTypes = new Set([
     "official classification", "guideline", "consensus", "systematic review",
@@ -71,7 +81,18 @@
     eortcMfSs: source({ title: "EORTC consensus recommendations for the treatment of mycosis fungoides/Sézary syndrome — Update 2023", organization: "EORTC Cutaneous Lymphoma Tumour Group", type: "consensus", year: 2023, url: "https://doi.org/10.1016/j.ejca.2023.113343", doi: "10.1016/j.ejca.2023.113343", metadataCheckedAt: "2026-09-15" }),
     whoHaem5: source({ title: "The 5th edition of the World Health Organization Classification of Haematolymphoid Tumours: Lymphoid Neoplasms", organization: "Leukemia / WHO Classification of Tumours Editorial Board", type: "peer-reviewed review", year: 2022, version: "WHO-HAEM5 overview", url: "https://www.nature.com/articles/s41375-022-01620-2", doi: "10.1038/s41375-022-01620-2", metadataCheckedAt: "2026-09-15" }),
     cd30Consensus: source({ title: "EORTC, ISCL, and USCLC consensus recommendations for the treatment of primary cutaneous CD30-positive lymphoproliferative disorders: lymphomatoid papulosis and primary cutaneous anaplastic large-cell lymphoma", organization: "EORTC / ISCL / USCLC", type: "consensus", year: 2011, url: "https://pubmed.ncbi.nlm.nih.gov/21841159/", doi: "10.1182/blood-2011-05-351346", metadataCheckedAt: "2026-09-15" }),
-    pcAlclReview: source({ title: "Primary Cutaneous Anaplastic Large Cell Lymphoma—A Review of Clinical, Morphological, Immunohistochemical, and Molecular Features", organization: "Cancers", type: "peer-reviewed review", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/37627126/", doi: "10.3390/cancers15164098", metadataCheckedAt: "2026-09-15" })
+    pcAlclReview: source({ title: "Primary Cutaneous Anaplastic Large Cell Lymphoma—A Review of Clinical, Morphological, Immunohistochemical, and Molecular Features", organization: "Cancers", type: "peer-reviewed review", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/37627126/", doi: "10.3390/cancers15164098", metadataCheckedAt: "2026-09-15" }),
+    aadAtopicTopical: source({ title: "Guidelines of care for the management of atopic dermatitis in adults with topical therapies", organization: "American Academy of Dermatology", type: "guideline", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/36641009/", doi: "10.1016/j.jaad.2022.12.029", metadataCheckedAt: "2026-09-16" }),
+    aadAtopicSystemic: source({ title: "Guidelines of care for the management of atopic dermatitis in adults with phototherapy and systemic therapies", organization: "American Academy of Dermatology", type: "guideline", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/37943240/", doi: "10.1016/j.jaad.2023.08.102", metadataCheckedAt: "2026-09-16" }),
+    badContactDermatitis: source({ title: "British Association of Dermatologists' guidelines for the management of contact dermatitis 2017", organization: "British Association of Dermatologists", type: "guideline", year: 2017, url: "https://pubmed.ncbi.nlm.nih.gov/28244094/", doi: "10.1111/bjd.15239", metadataCheckedAt: "2026-09-16" }),
+    sebDermConsensus: source({ title: "A comprehensive literature review and an international expert consensus on the management of scalp seborrheic dermatitis in adults", organization: "European Journal of Dermatology / international expert panel", type: "consensus", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/38919137/", doi: "10.1684/ejd.2024.4703", metadataCheckedAt: "2026-09-16" }),
+    euroGuidermPsoriasis: source({ title: "Living EuroGuiDerm Guideline for the systemic treatment of psoriasis vulgaris", organization: "European Dermatology Forum / EuroGuiDerm", type: "guideline", version: "September 2023; partial update February 2025", url: "https://www.guidelines.edf.one/guidelines/psoriasis-guideline", metadataCheckedAt: "2026-09-16" }),
+    aadPsoriasis: source({ title: "Psoriasis clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/psoriasis", metadataCheckedAt: "2026-09-16" }),
+    aadAcne: source({ title: "Guidelines of care for the management of acne vulgaris", organization: "American Academy of Dermatology", type: "guideline", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/38300170/", doi: "10.1016/j.jaad.2023.12.017", metadataCheckedAt: "2026-09-16" }),
+    rosaceaGuideline: source({ title: "S2k guideline: Rosacea", organization: "German Dermatological Society guideline group", type: "guideline", year: 2022, url: "https://pubmed.ncbi.nlm.nih.gov/35929658/", doi: "10.1111/ddg.14849", metadataCheckedAt: "2026-09-16" }),
+    urticariaGuideline: source({ title: "The International Guideline for the Definition, Classification, Diagnosis and Management of Urticaria", organization: "GA²LEN / UCARE / ACARE international guideline group", type: "guideline", year: 2026, url: "https://pubmed.ncbi.nlm.nih.gov/41649409/", doi: "10.1111/all.70210", metadataCheckedAt: "2026-09-16" }),
+    vitiligoConsensusPart1: source({ title: "Worldwide expert recommendations for the diagnosis and management of vitiligo: Position statement from the International Vitiligo Task Force Part 1: towards a new management algorithm", organization: "International Vitiligo Task Force", type: "consensus", year: 2023, version: "Part 1", url: "https://pubmed.ncbi.nlm.nih.gov/37746876/", doi: "10.1111/jdv.19451", metadataCheckedAt: "2026-09-16" }),
+    vitiligoConsensusPart2: source({ title: "Worldwide expert recommendations for the diagnosis and management of vitiligo: Position statement from the International Vitiligo Task Force—Part 2: Specific treatment recommendations", organization: "International Vitiligo Task Force", type: "consensus", year: 2023, version: "Part 2", url: "https://pubmed.ncbi.nlm.nih.gov/37715487/", doi: "10.1111/jdv.19450", metadataCheckedAt: "2026-09-16" })
   };
   function dermNet(title, slug, metadataCheckedAt) {
     return source({ title, organization: "DermNet", type: "clinical reference", url: `https://dermnetnz.org/topics/${slug}`, metadataCheckedAt });
@@ -84,8 +105,11 @@
       system: "ICD-O", version: "3.2", topography: Object.freeze(topography), morphologies: Object.freeze(morphologies)
     });
   }
-  function coding({ diagnoses = [], oncology = null, verificationNote = null }) {
-    return Object.freeze({ diagnoses: Object.freeze(diagnoses), icdo: oncology, verificationNote });
+  function coding({ diagnoses = [], oncology = null, icdoApplicability = oncology ? "applicable" : "not established", verificationNote = null }) {
+    const allowedApplicability = new Set(["applicable", "not applicable", "not established"]);
+    if (!allowedApplicability.has(icdoApplicability)) throw new TypeError(`Unsupported ICD-O applicability: ${icdoApplicability}`);
+    if (oncology && icdoApplicability !== "applicable") throw new TypeError("ICD-O data requires applicable status");
+    return Object.freeze({ diagnoses: Object.freeze(diagnoses), icdo: oncology, icdoApplicability, verificationNote });
   }
   function skinTopography(note = "Assign the fourth character from the documented primary anatomic site.") {
     return { code: "C44._", label: "Skin", note };
@@ -383,6 +407,94 @@
       treatment: "Management depends on number, distribution and extracutaneous assessment; localized and multifocal disease require different specialist approaches.",
       followup: "Long-term follow-up is appropriate to identify cutaneous recurrence or extracutaneous disease.",
       references: [refs.cd30Consensus, refs.pcAlclReview, refs.whoHaem5, refs.icdo32, dermNet("Primary cutaneous anaplastic large-cell lymphoma", "primary-cutaneous-anaplastic-large-cell-lymphoma", "2026-09-15")]
+    }),
+    record({
+      id: "atopic-dermatitis", name: "Atopic Dermatitis", alternative: "Atopic eczema; eczema", category: "inflammatory-eczematous", subcategory: "eczematous-dermatitis",
+      coding: coding({ diagnoses: [icd10Who("L20", "Atopic dermatitis")], icdoApplicability: "not applicable", verificationNote: "ICD-10 WHO provides more specific fourth-character categories; select one only when the documented phenotype supports it and keep national modifications separate." }),
+      description: "A chronic, relapsing, pruritic inflammatory skin disease with epidermal barrier dysfunction and age-dependent patterns of involvement.",
+      clinical: "Pruritus and xerosis are prominent. Erythematous or skin-colored eczematous lesions may become excoriated, lichenified or secondarily infected; distribution and appearance vary with age and skin tone.",
+      dermoscopy: "Dermoscopy is not routinely required for diagnosis; any vascular or scaling findings are nonspecific and must be interpreted with the clinical pattern.",
+      differential: "Allergic or irritant contact dermatitis, seborrheic dermatitis, psoriasis, scabies, cutaneous infection and, in persistent atypical adult disease, cutaneous T-cell lymphoma.",
+      treatment: "Management combines regular moisturization, avoidance of confirmed aggravating exposures and appropriately selected topical anti-inflammatory therapy. Phototherapy or systemic treatment may be considered for inadequately controlled moderate-to-severe disease after age, comorbidities, contraindications and monitoring needs are assessed.",
+      followup: "Reassess disease control, sleep and quality-of-life impact, treatment burden, adherence and signs of infection. Persistent, severe or diagnostically atypical disease warrants specialist review.",
+      references: [refs.aadAtopicTopical, refs.aadAtopicSystemic, refs.whoIcd10, dermNet("Atopic dermatitis", "atopic-dermatitis", "2026-09-16")]
+    }),
+    record({
+      id: "contact-dermatitis", name: "Contact Dermatitis", alternative: "Contact eczema; allergic contact dermatitis; irritant contact dermatitis", category: "inflammatory-eczematous", subcategory: "eczematous-dermatitis",
+      coding: coding({ diagnoses: [icd10Who("L23", "Allergic contact dermatitis"), icd10Who("L24", "Irritant contact dermatitis")], icdoApplicability: "not applicable", verificationNote: "Allergic and irritant contact dermatitis have separate ICD-10 WHO categories; the appropriate fourth character depends on the documented allergen or irritant. Do not infer mechanism from morphology alone." }),
+      description: "An inflammatory dermatitis caused either by direct irritant injury or by delayed hypersensitivity to a contact allergen; the two mechanisms can coexist.",
+      clinical: "Pruritus, burning, erythema, scale, vesiculation or fissuring usually relate to exposure distribution. Irritant dermatitis can follow acute or cumulative injury, whereas allergic dermatitis requires sensitization and may extend beyond the primary contact area; clinical overlap is common.",
+      dermoscopy: "Dermoscopy is not routinely diagnostic and shows nonspecific eczematous inflammation; exposure history, distribution and appropriate testing are more important.",
+      differential: "Atopic dermatitis, dyshidrotic eczema, psoriasis, dermatophyte infection, scabies and other occupational or exposure-related dermatoses.",
+      treatment: "Identify and reduce the relevant exposure, support the skin barrier and use site- and severity-appropriate anti-inflammatory treatment. Patch testing is central when allergic contact dermatitis is suspected, especially in persistent, recurrent or occupational disease.",
+      followup: "Review exposure avoidance, protective measures and response to treatment. Ongoing or occupational disease may require dermatology, patch-testing and workplace-health input.",
+      references: [refs.badContactDermatitis, refs.whoIcd10, dermNet("Contact dermatitis", "contact-dermatitis", "2026-09-16")]
+    }),
+    record({
+      id: "seborrheic-dermatitis", name: "Seborrheic Dermatitis", alternative: "Seborrhoeic dermatitis; seborrheic eczema; dandruff", category: "inflammatory-eczematous", subcategory: "seborrheic-disorder",
+      coding: coding({ diagnoses: [icd10Who("L21", "Seborrheic dermatitis")], icdoApplicability: "not applicable", verificationNote: "ICD-10 WHO subdivides seborrheic dermatitis by presentation; use a more specific fourth character only when documented." }),
+      description: "A common, chronic or relapsing inflammatory disorder affecting sebum-rich areas, with dandruff representing a mild scalp-predominant presentation.",
+      clinical: "Poorly demarcated erythema with white or yellowish scale commonly involves the scalp, eyebrows, glabella, nasolabial folds, ears or presternal skin. Pruritus varies and recurrence is common.",
+      dermoscopy: "Dermoscopy is not routinely required; scale and vascular findings may support assessment but are not specific enough to establish the diagnosis.",
+      differential: "Scalp or facial psoriasis, atopic dermatitis, contact dermatitis, dermatophyte infection, rosacea and, for atypical facial disease, cutaneous lupus erythematosus.",
+      treatment: "Topical antifungal therapy and appropriate scalp preparations are common first approaches. Short, carefully selected anti-inflammatory treatment may be used for flares; site, age, extent and relapse pattern should guide selection.",
+      followup: "Intermittent maintenance may be needed for recurrent disease. Severe, extensive, treatment-resistant or atypical presentations should prompt reassessment of the diagnosis and contributing factors.",
+      references: [refs.sebDermConsensus, refs.whoIcd10, dermNet("Seborrheic dermatitis", "seborrhoeic-dermatitis", "2026-09-16")]
+    }),
+    record({
+      id: "plaque-psoriasis", name: "Plaque Psoriasis", alternative: "Psoriasis vulgaris; chronic plaque psoriasis", category: "inflammatory-eczematous", subcategory: "papulosquamous-disorder",
+      coding: coding({ diagnoses: [icd10Who("L40.0", "Psoriasis vulgaris")], icdoApplicability: "not applicable", verificationNote: "This record is limited to plaque psoriasis; other psoriasis phenotypes have distinct clinical and sometimes coding considerations." }),
+      description: "The common chronic plaque form of psoriasis, characterized by persistent, well-demarcated inflammatory plaques with scale.",
+      clinical: "Symmetric plaques commonly involve extensor surfaces, scalp and lumbosacral skin, but flexural, genital, palmoplantar and nail involvement may alter appearance and impact. Joint symptoms require assessment for psoriatic arthritis.",
+      dermoscopy: "Regularly distributed dotted vessels on a light red background with diffuse white scale can support the diagnosis, but clinicopathologic correlation is needed when features are atypical.",
+      differential: "Nummular or chronic eczema, seborrheic dermatitis, dermatophyte infection, pityriasis rubra pilaris and cutaneous T-cell lymphoma.",
+      treatment: "Limited plaque disease is often managed with topical therapy selected for site and patient factors. Phototherapy or systemic treatment may be appropriate for extensive, high-impact or inadequately controlled disease; severity, quality of life, comorbidities and psoriatic arthritis influence planning.",
+      followup: "Monitor skin and nail activity, treatment safety and quality-of-life impact, and reassess for inflammatory joint symptoms and relevant comorbidities.",
+      references: [refs.euroGuidermPsoriasis, refs.aadPsoriasis, refs.whoIcd10, dermNet("Psoriasis", "psoriasis", "2026-09-16")]
+    }),
+    record({
+      id: "acne-vulgaris", name: "Acne Vulgaris", alternative: "Common acne; acne", category: "acneiform-sebaceous", subcategory: "acneiform-disorder",
+      coding: coding({ diagnoses: [icd10Who("L70.0", "Acne vulgaris")], icdoApplicability: "not applicable", verificationNote: "Do not generalize this code to medication-induced, occupational or other acneiform eruptions." }),
+      description: "A chronic inflammatory disorder of the pilosebaceous unit producing comedones and inflammatory lesions, most often on the face, chest and back.",
+      clinical: "Open and closed comedones may occur with papules, pustules or deeper nodules. Scarring, post-inflammatory pigment alteration and psychosocial burden are important severity considerations.",
+      dermoscopy: "Dermoscopy is not routinely required; comedonal openings and follicular inflammatory changes may be visible but diagnosis is primarily clinical.",
+      differential: "Rosacea, bacterial or Malassezia folliculitis, periorificial dermatitis, hidradenitis suppurativa and medication-related acneiform eruptions.",
+      treatment: "Treatment is severity- and phenotype-based and commonly combines topical agents with different mechanisms. Antibiotic exposure should be limited and combined appropriately; systemic, hormonal or isotretinoin therapy requires indication-specific assessment, contraindication review and monitoring.",
+      followup: "Reassess response, tolerability, adherence, scarring risk, pigmentary sequelae and psychosocial impact. Escalate when disease is severe, scarring or insufficiently controlled.",
+      references: [refs.aadAcne, refs.whoIcd10, dermNet("Acne vulgaris", "acne-vulgaris", "2026-09-16")]
+    }),
+    record({
+      id: "rosacea", name: "Rosacea", alternative: "Facial rosacea; acne rosacea (historical term)", category: "acneiform-sebaceous", subcategory: "rosacea",
+      coding: coding({ diagnoses: [icd10Who("L71", "Rosacea")], icdoApplicability: "not applicable", verificationNote: "Document the dominant cutaneous and ocular phenotypes; do not code rosacea as acne vulgaris." }),
+      description: "A chronic inflammatory facial disorder assessed by phenotype, which may include persistent centrofacial erythema, flushing, telangiectasia, papules, pustules, phymatous change or ocular involvement.",
+      clinical: "Central facial erythema and episodic flushing may occur alone or with inflammatory papules and pustules; comedones are not a typical feature. Ocular symptoms and phymatous change require separate assessment.",
+      dermoscopy: "Dermoscopy may help demonstrate telangiectatic vascular patterns and follicular changes, but it is supportive rather than diagnostic.",
+      differential: "Acne vulgaris, seborrheic dermatitis, periorificial dermatitis, contact dermatitis, cutaneous lupus erythematosus and other causes of facial erythema or flushing.",
+      treatment: "Use gentle skin care, photoprotection and management of individually confirmed triggers. Treatment should target the dominant phenotype and may include topical, oral or vascular-device approaches; ocular disease may require ophthalmic assessment.",
+      followup: "Reassess phenotype-specific response, ocular symptoms, treatment tolerance and quality-of-life impact. Atypical, unilateral or treatment-resistant disease should prompt diagnostic review.",
+      references: [refs.rosaceaGuideline, refs.whoIcd10, dermNet("Rosacea", "rosacea", "2026-09-16")]
+    }),
+    record({
+      id: "chronic-urticaria", name: "Chronic Urticaria", alternative: "Chronic spontaneous urticaria; CSU; chronic inducible urticaria", category: "inflammatory-eczematous", subcategory: "urticarial-disorder",
+      coding: coding({ diagnoses: [icd10Who("L50", "Urticaria")], icdoApplicability: "not applicable", verificationNote: "ICD-10 WHO does not fully represent the modern chronic spontaneous versus chronic inducible classification in one disease-specific code; document subtype and verify any national extension separately." }),
+      description: "Recurrent wheals, angioedema or both for more than six weeks, classified as chronic spontaneous urticaria or chronic inducible urticaria according to whether specific triggers reproducibly provoke symptoms.",
+      clinical: "Individual wheals are transient and usually resolve within 24 hours without residual bruising, while angioedema can last longer. Chronic inducible forms are linked to reproducible physical or environmental stimuli; acute urticaria is a separate time-limited presentation.",
+      dermoscopy: "Dermoscopy is not routinely useful. Persistent, painful or bruising lesions require reassessment for urticarial vasculitis or another mimic rather than dermoscopic confirmation.",
+      differential: "Urticarial vasculitis, mast-cell disorders, autoinflammatory syndromes, bradykinin-mediated angioedema and other causes of transient erythema or swelling.",
+      treatment: "Confirm the chronic urticaria subtype and avoid only demonstrated aggravating factors. A second-generation H1 antihistamine is the usual first-line treatment, with guideline-directed stepwise specialist escalation when control is inadequate; broad testing is not routine without clinical clues.",
+      followup: "Track disease control, angioedema, inducible triggers, treatment response and adverse effects. Airway, breathing or circulatory symptoms require urgent assessment outside the routine chronic-urticaria pathway.",
+      references: [refs.urticariaGuideline, refs.whoIcd10, dermNet("Chronic urticaria", "chronic-urticaria", "2026-09-16")]
+    }),
+    record({
+      id: "vitiligo", name: "Vitiligo", alternative: "Acquired depigmentation; leukoderma", category: "pigmentary", subcategory: "depigmenting-disorder",
+      coding: coding({ diagnoses: [icd10Who("L80", "Vitiligo")], icdoApplicability: "not applicable", verificationNote: "Vitiligo subtype and activity are clinically important but are not represented by separate ICD-10 WHO codes in this record." }),
+      description: "An acquired disorder of melanocyte loss causing depigmented macules and patches, most often classified as nonsegmental or segmental vitiligo.",
+      clinical: "Well-demarcated depigmented macules or patches may enlarge or appear at sites of friction or injury; hair within affected skin can depigment. Distribution, activity, extent and psychosocial impact should be documented.",
+      dermoscopy: "Dermoscopy may show perifollicular pigment, marginal changes and features of activity or stability. Wood-lamp examination is often more useful for defining subtle extent, especially in lighter skin.",
+      differential: "Post-inflammatory hypopigmentation, pityriasis alba, tinea versicolor, chemical leukoderma, nevus depigmentosus and hypopigmented mycosis fungoides.",
+      treatment: "Management is individualized through shared decision-making and may include camouflage, photoprotection, topical anti-inflammatory treatment, phototherapy or other targeted therapy according to activity, extent, site, age and patient goals. Surgical approaches are reserved for selected stable disease.",
+      followup: "Document activity, extent, repigmentation, treatment safety and psychosocial impact. Investigate associated autoimmune disease according to history, examination and guideline context rather than using an indiscriminate panel.",
+      references: [refs.vitiligoConsensusPart1, refs.vitiligoConsensusPart2, refs.whoIcd10, dermNet("Vitiligo", "vitiligo", "2026-09-16")]
     })
   ];
 

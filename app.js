@@ -35,7 +35,7 @@
       ? [coding.icdo.system, coding.icdo.version, coding.icdo.topography.code, coding.icdo.topography.label,
         coding.icdo.topography.note, ...coding.icdo.morphologies.flatMap(item => [item.code, item.label, item.note])]
       : [];
-    return [...diagnoses, ...oncology, coding.verificationNote].filter(Boolean);
+    return [...diagnoses, ...oncology, coding.icdoApplicability, coding.verificationNote].filter(Boolean);
   }
 
   function compactCodingLabel(disease) {
@@ -141,6 +141,12 @@
         oncologyList.appendChild(item);
       });
       section.appendChild(oncologyList);
+    } else {
+      appendTextElement(section, "h4", "ICD-O 3.2 (oncology registry coding)");
+      const applicabilityText = disease.coding.icdoApplicability === "not applicable"
+        ? "Not applicable — this non-neoplastic condition is outside ICD-O oncology registry coding."
+        : "Not established for this record — no ICD-O mapping is asserted.";
+      appendTextElement(section, "p", applicabilityText, "coding-note");
     }
 
     if (disease.coding.verificationNote) {

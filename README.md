@@ -4,11 +4,13 @@
 
 [View the live application](https://mnasuharas.github.io/Docutis/)
 
+[![Validate](https://github.com/mnasuharas/Docutis/actions/workflows/validate.yml/badge.svg)](https://github.com/mnasuharas/Docutis/actions/workflows/validate.yml)
+
 ## About
 
 Docutis is an open-source project that presents dermatology information in a clear, searchable and structured format.
 
-The current version focuses primarily on malignant and precancerous cutaneous conditions. It is intended for physicians, medical trainees and other healthcare professionals seeking a concise educational reference.
+The current version contains 34 condition records. It retains the original malignant and precancerous collection and begins broader coverage with common inflammatory, eczematous, papulosquamous, acneiform, sebaceous, urticarial and pigmentary disorders. It is intended for physicians, medical trainees and other healthcare professionals seeking a concise educational reference.
 
 Docutis is currently in active early development. Its content, structure and technical foundations are being expanded progressively.
 
@@ -25,18 +27,23 @@ Docutis is currently in active early development. Its content, structure and tec
 - Follow-up considerations
 - Links to external clinical references
 - Responsive browser-based interface
+- Dependency-free automated validation on pull requests and `main` pushes
 - No installation or account required
 
 ## Current Clinical Focus
 
-The initial collection focuses on skin cancer and precancerous lesions, including:
+The collection includes:
 
 - Keratinocyte carcinomas and precursor lesions
 - Melanocytic malignancies and melanoma in situ
 - Rare cutaneous malignancies
 - Selected adnexal and soft-tissue tumors
+- Atopic, contact and seborrheic dermatitis
+- Plaque psoriasis and chronic urticaria
+- Acne vulgaris and rosacea
+- Vitiligo
 
-The project will later expand into additional areas of dermatology while preserving a consistent structure and sourcing standard.
+This is the first universal dermatology content package, not comprehensive coverage. Infectious, autoimmune, immunobullous, hair, nail and many other dermatology domains remain future work.
 
 ## Content Principles
 
@@ -54,12 +61,14 @@ Medical content contributions should include appropriate references. All current
 
 Docutis is an early-stage public prototype and should not yet be considered a comprehensive dermatology database.
 
+The project currently has 34 records. Its 50+ record target is not yet complete, and every medical record still requires documented clinician review.
+
 Current development priorities include:
 
 - Separating medical data from application logic
 - Introducing a consistent disease-data structure
 - Improving reference quality and review tracking
-- Adding automated data and link validation
+- Extending automated validation while keeping network-dependent link checks outside routine CI
 - Improving accessibility and filtering
 - Establishing a transparent medical content review process
 - Preparing multilingual support
@@ -80,7 +89,7 @@ Medical records live in `data.js`; `app.js` contains filtering, rendering and in
 
 Each reference has its own `metadataCheckedAt` date. This date means only that the reference's bibliographic metadata and link were checked on that date; it is not a publication date, clinical review date, or endorsement of the adjacent medical content.
 
-Coding data is educational metadata, not billing guidance. ICD-10 WHO is kept distinct from national modifications, and ICD-O topography is kept distinct from morphology and behavior. Site-specific or jurisdiction-specific coding must be confirmed from the applicable official release.
+Coding data is educational metadata, not billing guidance. ICD-10 WHO is kept distinct from national modifications, and ICD-O topography is kept distinct from morphology and behavior. Non-neoplastic records explicitly mark ICD-O as `not applicable`; unresolved oncology mappings use `not established` rather than fabricated codes. Site-specific or jurisdiction-specific coding must be confirmed from the applicable official release.
 
 The project intentionally begins with a lightweight architecture so that it remains easy to inspect, maintain and contribute to.
 
@@ -91,11 +100,16 @@ No build process is currently required.
 1. Download or clone the repository.
 2. Open `index.html` in a modern web browser.
 
-To run the dependency-free data, interaction, and static-page checks with a current Node.js installation:
+To run the same dependency-free syntax and test checks used by GitHub Actions with a current Node.js installation:
 
 ```shell
+node --check data.js
+node --check app.js
 node --test tests/*.test.js
+git diff --check
 ```
+
+The `.github/workflows/validate.yml` workflow runs these checks for pull requests targeting `main`, pushes to `main`, and manual dispatches. It uses a read-only token and does not deploy the site or make network requests to medical sources.
 
 ## Contributing
 

@@ -17,6 +17,20 @@ const allowedSourceTypes = new Set([
   "official classification", "guideline", "consensus", "systematic review",
   "peer-reviewed review", "clinical reference"
 ]);
+const baselineIds = [
+  "actinic-keratosis", "actinic-cheilitis", "porokeratosis", "basal-cell-carcinoma",
+  "cutaneous-squamous-cell-carcinoma", "squamous-cell-carcinoma-in-situ", "keratoacanthoma",
+  "cutaneous-melanoma", "lentigo-maligna", "lentigo-maligna-melanoma", "acral-melanoma",
+  "nodular-melanoma", "desmoplastic-melanoma", "merkel-cell-carcinoma", "sebaceous-carcinoma",
+  "dermatofibrosarcoma-protuberans", "atypical-fibroxanthoma", "pleomorphic-dermal-sarcoma",
+  "cutaneous-angiosarcoma", "kaposi-sarcoma", "extramammary-paget-disease",
+  "microcystic-adnexal-carcinoma", "eccrine-porocarcinoma", "mycosis-fungoides",
+  "sezary-syndrome", "primary-cutaneous-anaplastic-large-cell-lymphoma"
+];
+const newIds = [
+  "atopic-dermatitis", "contact-dermatitis", "seborrheic-dermatitis", "plaque-psoriasis",
+  "acne-vulgaris", "rosacea", "chronic-urticaria", "vitiligo"
+];
 
 function condition(id) {
   const disease = diseases.find(item => item.id === id);
@@ -33,13 +47,16 @@ function diagnosisCodes(disease) {
 }
 
 test("dataset has the intended categories and structured subcategories", () => {
-  assert.deepEqual(Array.from(categories, category => category.id), ["premalignant", "keratinocytic", "melanocytic", "other"]);
-  assert.ok(subcategories.length >= 4);
+  assert.deepEqual(Array.from(categories, category => category.id), [
+    "premalignant", "keratinocytic", "melanocytic", "other",
+    "inflammatory-eczematous", "acneiform-sebaceous", "pigmentary"
+  ]);
+  assert.ok(subcategories.length >= 21);
   assert.equal(new Set(subcategories.map(item => item.id)).size, subcategories.length);
 });
 
-test("all 26 conditions have complete, consistent review records", () => {
-  assert.equal(diseases.length, 26);
+test("all 34 conditions have complete, consistent review records", () => {
+  assert.equal(diseases.length, 34);
   const categoryIds = new Set(categories.map(category => category.id));
   const subcategoryIds = new Set(subcategories.map(subcategory => subcategory.id));
   for (const disease of diseases) {
@@ -55,6 +72,13 @@ test("all 26 conditions have complete, consistent review records", () => {
   }
 });
 
+test("the original 26 records remain and all eight planned records are present", () => {
+  const ids = new Set(diseases.map(disease => disease.id));
+  for (const id of baselineIds) assert.ok(ids.has(id), `baseline record ${id} was removed`);
+  for (const id of newIds) assert.ok(ids.has(id), `planned record ${id} is missing`);
+  assert.equal(baselineIds.length + newIds.length, diseases.length);
+});
+
 test("condition identifiers are unique", () => {
   const ids = diseases.map(disease => disease.id);
   assert.equal(new Set(ids).size, ids.length);
@@ -66,7 +90,9 @@ test("canonical condition names are unique regardless of case", () => {
 });
 
 test("coding systems are explicit and ICD-O topography is separate from morphology", () => {
+  const applicabilityValues = new Set(["applicable", "not applicable", "not established"]);
   for (const disease of diseases) {
+    assert.ok(applicabilityValues.has(disease.coding.icdoApplicability), `${disease.id} has invalid ICD-O applicability`);
     assert.ok(Array.isArray(disease.coding.diagnoses), `${disease.id} diagnoses must be an array`);
     for (const diagnosis of disease.coding.diagnoses) {
       assert.equal(diagnosis.system, "ICD-10 WHO", `${disease.id} has an unlabelled or unsupported diagnosis system`);
@@ -76,6 +102,7 @@ test("coding systems are explicit and ICD-O topography is separate from morpholo
     }
     if (disease.coding.icdo) {
       const oncology = disease.coding.icdo;
+      assert.equal(disease.coding.icdoApplicability, "applicable");
       assert.equal(oncology.system, "ICD-O");
       assert.equal(oncology.version, "3.2");
       assert.ok(oncology.topography && typeof oncology.topography === "object");
@@ -90,6 +117,16 @@ test("coding systems are explicit and ICD-O topography is separate from morpholo
     assert.ok(disease.coding.diagnoses.length || disease.coding.icdo || disease.coding.verificationNote,
       `${disease.id} needs a code or an explicit verification note`);
   }
+});
+
+test("non-neoplastic additions explicitly exclude ICD-O without synthetic codes", () => {
+  for (const id of newIds) {
+    const disease = condition(id);
+    assert.equal(disease.coding.icdo, null, `${id} must not contain ICD-O topography or morphology`);
+    assert.equal(disease.coding.icdoApplicability, "not applicable");
+    assert.ok(disease.coding.diagnoses.length > 0, `${id} needs an ICD-10 WHO classification`);
+  }
+  assert.equal(diseases.filter(disease => disease.coding.icdo).length, 22, "existing oncology mappings changed unexpectedly");
 });
 
 test("high-risk mappings do not regress to ambiguous legacy codes", () => {
@@ -156,4 +193,23 @@ test("priority source corrections retain verified bibliographic identities", () 
   const pcAlcl = condition("primary-cutaneous-anaplastic-large-cell-lymphoma").references;
   assert.ok(pcAlcl.some(reference => reference.doi === "10.1182/blood-2011-05-351346" && reference.type === "consensus"));
   assert.ok(pcAlcl.some(reference => reference.doi === "10.3390/cancers15164098" && reference.type === "peer-reviewed review"));
+});
+
+test("new records retain their disease-specific guideline or consensus sources", () => {
+  const expectedDois = {
+    "atopic-dermatitis": ["10.1016/j.jaad.2022.12.029", "10.1016/j.jaad.2023.08.102"],
+    "contact-dermatitis": ["10.1111/bjd.15239"],
+    "seborrheic-dermatitis": ["10.1684/ejd.2024.4703"],
+    "acne-vulgaris": ["10.1016/j.jaad.2023.12.017"],
+    rosacea: ["10.1111/ddg.14849"],
+    "chronic-urticaria": ["10.1111/all.70210"],
+    vitiligo: ["10.1111/jdv.19451", "10.1111/jdv.19450"]
+  };
+  for (const [id, dois] of Object.entries(expectedDois)) {
+    const references = condition(id).references;
+    for (const doi of dois) assert.ok(references.some(reference => reference.doi === doi), `${id} is missing ${doi}`);
+  }
+  const psoriasis = condition("plaque-psoriasis").references;
+  assert.ok(psoriasis.some(reference => reference.url === "https://www.guidelines.edf.one/guidelines/psoriasis-guideline" && reference.type === "guideline"));
+  for (const id of newIds) assert.equal(condition(id).reviewStatus, "clinician review required");
 });
