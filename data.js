@@ -1,0 +1,394 @@
+/* Medical records are separate from UI behavior for independent review. */
+(function () {
+  "use strict";
+
+  const reviewRequired = "clinician review required";
+  const categories = [
+    { id: "premalignant", title: "Premalignant Lesions" },
+    { id: "keratinocytic", title: "Keratinocytic Malignancies" },
+    { id: "melanocytic", title: "Melanocytic Malignancies" },
+    { id: "other", title: "Other Cutaneous Malignancies" }
+  ];
+  const subcategories = [
+    { id: "premalignant-keratinocytic", title: "Premalignant keratinocytic lesion" },
+    { id: "keratinization-disorder", title: "Keratinization disorder with variable malignant potential" },
+    { id: "keratinocytic-carcinoma", title: "Keratinocytic carcinoma" },
+    { id: "keratinocytic-tumor-uncertain", title: "Keratinocytic tumor with classification uncertainty" },
+    { id: "melanoma", title: "Cutaneous melanoma" },
+    { id: "melanoma-in-situ", title: "Melanoma in situ" },
+    { id: "melanoma-subtype", title: "Melanoma subtype" },
+    { id: "neuroendocrine-carcinoma", title: "Neuroendocrine carcinoma" },
+    { id: "adnexal-carcinoma", title: "Adnexal carcinoma" },
+    { id: "cutaneous-sarcoma", title: "Cutaneous sarcoma" },
+    { id: "fibrohistiocytic-tumor", title: "Fibrohistiocytic tumor" },
+    { id: "vascular-neoplasm", title: "Vascular neoplasm" },
+    { id: "paget-disease", title: "Extramammary Paget disease" },
+    { id: "cutaneous-lymphoma", title: "Cutaneous lymphoma" }
+  ];
+  const sourceTypes = new Set([
+    "official classification", "guideline", "consensus", "systematic review",
+    "peer-reviewed review", "clinical reference"
+  ]);
+  function isIsoDate(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+    const parsed = new Date(`${value}T00:00:00Z`);
+    return !Number.isNaN(parsed.valueOf()) && parsed.toISOString().slice(0, 10) === value;
+  }
+  function source({ title, organization, type, year = null, version = null, url, doi = null, metadataCheckedAt }) {
+    if (!title?.trim() || !organization?.trim()) throw new TypeError("Source title and organization are required");
+    if (!sourceTypes.has(type)) throw new TypeError(`Unsupported source type: ${type}`);
+    if (!isIsoDate(metadataCheckedAt)) {
+      throw new TypeError(`Invalid source metadata check date for ${title}`);
+    }
+    if (!/^https:\/\//.test(url)) throw new TypeError(`Source URL must use HTTPS for ${title}`);
+    if (doi && !/^10\.\d{4,9}\/.+/.test(doi)) throw new TypeError(`Invalid DOI for ${title}`);
+    return Object.freeze({ title, organization, type, year, version, url, doi, metadataCheckedAt });
+  }
+  const refs = {
+    whoIcd10: source({ title: "ICD-10 Version: 2019", organization: "World Health Organization", type: "official classification", version: "2019", url: "https://icd.who.int/browse10/2019/en", metadataCheckedAt: "2026-09-15" }),
+    icdo32: source({ title: "International Classification of Diseases for Oncology, Third Edition, Second Revision", organization: "World Health Organization / International Agency for Research on Cancer", type: "official classification", year: 2019, version: "ICD-O-3.2", url: "https://www.who.int/standards/classifications/other-classifications/international-classification-of-diseases-for-oncology", metadataCheckedAt: "2026-09-15" }),
+    whoSkin: source({ title: "WHO Classification of Skin Tumours, fifth edition", organization: "WHO Classification of Tumours Editorial Board / IARC", type: "official classification", year: 2025, version: "5th edition", url: "https://whobluebooks.iarc.who.int/structures/skintumours/", metadataCheckedAt: "2026-09-15" }),
+    aadAk: source({ title: "Actinic keratosis clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis", metadataCheckedAt: "2026-09-15" }),
+    aadBcc: source({ title: "Basal cell carcinoma clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/bcc", metadataCheckedAt: "2026-09-15" }),
+    aadScc: source({ title: "Cutaneous squamous cell carcinoma clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/scc", metadataCheckedAt: "2026-09-15" }),
+    eadoMelanomaDiagnostics: source({ title: "European consensus-based interdisciplinary guideline for melanoma. Part 1: Diagnostics — Update 2024", organization: "EADO / EDF / EORTC", type: "guideline", year: 2025, version: "2024 update; part 1", url: "https://pubmed.ncbi.nlm.nih.gov/39700658/", doi: "10.1016/j.ejca.2024.115152", metadataCheckedAt: "2026-09-15" }),
+    eadoMelanomaTreatment: source({ title: "European consensus-based interdisciplinary guideline for melanoma. Part 2: Treatment — Update 2024", organization: "EADO / EDF / EORTC", type: "guideline", year: 2025, version: "2024 update; part 2", url: "https://pubmed.ncbi.nlm.nih.gov/39709737/", doi: "10.1016/j.ejca.2024.115153", metadataCheckedAt: "2026-09-15" }),
+    nciMelanoma: source({ title: "Melanoma Treatment (PDQ®) — Health Professional Version", organization: "National Cancer Institute", type: "clinical reference", url: "https://www.cancer.gov/types/skin/hp/melanoma-treatment-pdq", metadataCheckedAt: "2026-09-15" }),
+    nciMcc: source({ title: "Merkel Cell Carcinoma Treatment (PDQ®) — Health Professional Version", organization: "National Cancer Institute", type: "clinical reference", url: "https://www.cancer.gov/types/skin/hp/merkel-cell-treatment-pdq", metadataCheckedAt: "2026-09-15" }),
+    nciCtcl: source({ title: "Mycosis Fungoides and Other Cutaneous T-Cell Lymphomas Treatment (PDQ®)", organization: "National Cancer Institute", type: "clinical reference", url: "https://www.cancer.gov/types/lymphoma/hp/mycosis-fungoides-treatment-pdq", metadataCheckedAt: "2026-09-15" }),
+    nciKaposi: source({ title: "Kaposi Sarcoma Treatment (PDQ®) — Health Professional Version", organization: "National Cancer Institute", type: "clinical reference", url: "https://www.cancer.gov/types/soft-tissue-sarcoma/hp/kaposi-treatment-pdq", metadataCheckedAt: "2026-09-15" }),
+    esmoMcc: source({ title: "Merkel-cell carcinoma: ESMO–EURACAN Clinical Practice Guideline for diagnosis, treatment and follow-up", organization: "ESMO / EURACAN", type: "guideline", year: 2024, url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11145756/", doi: "10.1016/j.esmoop.2024.102977", metadataCheckedAt: "2026-09-15" }),
+    afxPds: source({ title: "S1-guideline atypical fibroxanthoma (AFX) and pleomorphic dermal sarcoma (PDS)", organization: "German Dermatological Society guideline group", type: "guideline", year: 2022, url: "https://pubmed.ncbi.nlm.nih.gov/35099104/", doi: "10.1111/ddg.14700", metadataCheckedAt: "2026-09-15" }),
+    empd: source({ title: "Evidence-Based Clinical Practice Guidelines for Extramammary Paget Disease", organization: "International multidisciplinary expert panel", type: "guideline", year: 2022, url: "https://pubmed.ncbi.nlm.nih.gov/35050310/", doi: "10.1001/jamaoncol.2021.7148", metadataCheckedAt: "2026-09-15" }),
+    sebaceous: source({ title: "S1-Guideline Sebaceous Carcinoma", organization: "German Dermatological Society / ADO", type: "guideline", year: 2024, url: "https://onlinelibrary.wiley.com/doi/full/10.1111/ddg.15405", doi: "10.1111/ddg.15405", metadataCheckedAt: "2026-09-15" }),
+    dfsp: source({ title: "Diagnosis and treatment of dermatofibrosarcoma protuberans: European interdisciplinary guideline — update 2024", organization: "EADO / EDF / EADV / UEMS", type: "guideline", year: 2025, version: "2024 update", url: "https://pubmed.ncbi.nlm.nih.gov/39904126/", doi: "10.1016/j.ejca.2025.115265", metadataCheckedAt: "2026-09-15" }),
+    mac: source({ title: "Evidence-Based Clinical Practice Guidelines for Microcystic Adnexal Carcinoma: Informed by a Systematic Review", organization: "International multidisciplinary expert committee", type: "guideline", year: 2019, url: "https://pubmed.ncbi.nlm.nih.gov/31268498/", doi: "10.1001/jamadermatol.2019.1251", metadataCheckedAt: "2026-09-15" }),
+    porocarcinoma: source({ title: "Porocarcinoma: Clinical and Histological Features, Immunohistochemistry and Outcomes: A Systematic Review", organization: "Bienstman, Güvenç and Garmyn", type: "systematic review", year: 2024, url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11172007/", doi: "10.3390/ijms25115760", metadataCheckedAt: "2026-09-15" }),
+    angiosarcoma: source({ title: "Clinical recommendations for treatment of localized angiosarcoma: A consensus paper by the Italian Sarcoma Group", organization: "Italian Sarcoma Group", type: "consensus", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/38604052/", doi: "10.1016/j.ctrv.2024.102722", metadataCheckedAt: "2026-09-15" }),
+    actinicCheilitis: source({ title: "S3 guideline: actinic keratosis and cutaneous squamous cell carcinoma — update 2023, part 1: treatment of actinic keratosis, actinic cheilitis, Bowen disease, occupational disease and structures of care", organization: "German guideline group", type: "guideline", year: 2023, url: "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231", doi: "10.1111/ddg.15231", metadataCheckedAt: "2026-09-15" }),
+    keratoacanthoma: source({ title: "Keratoacanthoma: Update on the Debate", organization: "American Journal of Dermatopathology", type: "peer-reviewed review", year: 2021, url: "https://pubmed.ncbi.nlm.nih.gov/33395044/", doi: "10.1097/DAD.0000000000001872", metadataCheckedAt: "2026-09-15" }),
+    porokeratosisReview: source({ title: "Porokeratoses: an update on pathogenesis and treatment", organization: "International Journal of Dermatology", type: "peer-reviewed review", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/39129190/", doi: "10.1111/ijd.17411", metadataCheckedAt: "2026-09-15" }),
+    eortcMfSs: source({ title: "EORTC consensus recommendations for the treatment of mycosis fungoides/Sézary syndrome — Update 2023", organization: "EORTC Cutaneous Lymphoma Tumour Group", type: "consensus", year: 2023, url: "https://doi.org/10.1016/j.ejca.2023.113343", doi: "10.1016/j.ejca.2023.113343", metadataCheckedAt: "2026-09-15" }),
+    whoHaem5: source({ title: "The 5th edition of the World Health Organization Classification of Haematolymphoid Tumours: Lymphoid Neoplasms", organization: "Leukemia / WHO Classification of Tumours Editorial Board", type: "peer-reviewed review", year: 2022, version: "WHO-HAEM5 overview", url: "https://www.nature.com/articles/s41375-022-01620-2", doi: "10.1038/s41375-022-01620-2", metadataCheckedAt: "2026-09-15" }),
+    cd30Consensus: source({ title: "EORTC, ISCL, and USCLC consensus recommendations for the treatment of primary cutaneous CD30-positive lymphoproliferative disorders: lymphomatoid papulosis and primary cutaneous anaplastic large-cell lymphoma", organization: "EORTC / ISCL / USCLC", type: "consensus", year: 2011, url: "https://pubmed.ncbi.nlm.nih.gov/21841159/", doi: "10.1182/blood-2011-05-351346", metadataCheckedAt: "2026-09-15" }),
+    pcAlclReview: source({ title: "Primary Cutaneous Anaplastic Large Cell Lymphoma—A Review of Clinical, Morphological, Immunohistochemical, and Molecular Features", organization: "Cancers", type: "peer-reviewed review", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/37627126/", doi: "10.3390/cancers15164098", metadataCheckedAt: "2026-09-15" })
+  };
+  function dermNet(title, slug, metadataCheckedAt) {
+    return source({ title, organization: "DermNet", type: "clinical reference", url: `https://dermnetnz.org/topics/${slug}`, metadataCheckedAt });
+  }
+  function icd10Who(code, label, note = null) {
+    return Object.freeze({ system: "ICD-10 WHO", version: "2019", code, label, note });
+  }
+  function icdo(topography, morphologies) {
+    return Object.freeze({
+      system: "ICD-O", version: "3.2", topography: Object.freeze(topography), morphologies: Object.freeze(morphologies)
+    });
+  }
+  function coding({ diagnoses = [], oncology = null, verificationNote = null }) {
+    return Object.freeze({ diagnoses: Object.freeze(diagnoses), icdo: oncology, verificationNote });
+  }
+  function skinTopography(note = "Assign the fourth character from the documented primary anatomic site.") {
+    return { code: "C44._", label: "Skin", note };
+  }
+  function melanomaTopography() {
+    return { code: "C44._", label: "Skin", note: "ICD-O records melanoma histology separately; assign topography from the documented primary skin site." };
+  }
+  function record(value) {
+    return Object.freeze({ ...value, reviewStatus: reviewRequired });
+  }
+
+  const diseases = [
+    record({
+      id: "actinic-keratosis", name: "Actinic Keratosis", alternative: "AK; solar keratosis", category: "premalignant", subcategory: "premalignant-keratinocytic",
+      coding: coding({ diagnoses: [icd10Who("L57.0", "Actinic keratosis")], verificationNote: "Confirm national modification and site-specific documentation requirements before clinical or billing use." }),
+      description: "A UV-induced keratinocytic lesion on chronically sun-exposed skin with potential to progress to cutaneous squamous cell carcinoma.",
+      clinical: "Usually a rough, scaly or hyperkeratotic macule, papule or plaque on chronically sun-damaged skin; lesions may be easier to feel than see.",
+      dermoscopy: "Facial lesions may show an erythematous pseudonetwork or strawberry pattern, prominent follicular openings and surface scale.",
+      differential: "Squamous cell carcinoma in situ, invasive cutaneous squamous cell carcinoma, seborrhoeic keratosis, superficial basal cell carcinoma and inflammatory dermatoses.",
+      treatment: "Management may be lesion-directed or field-directed. Selection depends on lesion burden, site, patient factors and current guidance; diagnostic uncertainty or concern for invasion warrants biopsy or specialist assessment.",
+      followup: "Reassess persistent, recurrent, thickened, tender or rapidly changing lesions and account for the patient's overall actinic damage and skin-cancer risk.",
+      references: [refs.aadAk, refs.whoIcd10, refs.whoSkin, dermNet("Actinic keratosis", "actinic-keratosis", "2026-09-15")]
+    }),
+    record({
+      id: "actinic-cheilitis", name: "Actinic Cheilitis", alternative: "Solar cheilitis", category: "premalignant", subcategory: "premalignant-keratinocytic",
+      coding: coding({ verificationNote: "No disease-specific ICD-10 WHO code was verified for this release; do not infer L56.8. Record site and diagnosis, then verify the applicable national coding system." }),
+      description: "Chronic UV-related damage of the lip, usually the lower vermilion, with risk of progression to squamous cell carcinoma.",
+      clinical: "Persistent dryness, scale, atrophy, erythema, fissuring, indistinct vermilion border or focal ulceration may occur.",
+      dermoscopy: "Reported findings include scale, white structureless areas, erythema and vascular changes; dermoscopy does not replace biopsy when malignancy is suspected.",
+      differential: "Inflammatory or contact cheilitis, squamous cell carcinoma in situ, invasive squamous cell carcinoma of the lip and other causes of persistent cheilitis.",
+      treatment: "Management depends on extent and diagnostic concern and can include lesion- or field-directed approaches. Persistent ulceration, induration or nodularity requires prompt specialist assessment.",
+      followup: "Ongoing sun protection and clinical review are appropriate; new focal change should trigger reassessment for squamous malignancy.",
+      references: [refs.actinicCheilitis, refs.whoIcd10, dermNet("Actinic cheilitis", "actinic-cheilitis", "2026-09-15")]
+    }),
+    record({
+      id: "porokeratosis", name: "Porokeratosis", alternative: "Disorder of keratinisation with a cornoid lamella", category: "premalignant", subcategory: "keratinization-disorder",
+      coding: coding({ diagnoses: [icd10Who("Q82.8", "Other specified congenital malformations of skin", "A broad parent category rather than a porokeratosis-specific code; national classification may differ.")], verificationNote: "Subtype-specific coding and whether an acquired presentation belongs under this congenital-malformation category require local coding review." }),
+      description: "A heterogeneous group of keratinisation disorders characterized by lesions with a ridge-like peripheral border. Reported malignant transformation risk is not uniform and varies across subtypes and individual lesions.",
+      clinical: "Morphology and distribution vary by subtype, but lesions typically have a sharply defined keratotic ridge with a central furrow and relatively atrophic center.",
+      dermoscopy: "A peripheral keratotic ridge or white track corresponding to the cornoid lamella may be visible; patterns vary by subtype.",
+      differential: "Actinic keratosis, annular inflammatory dermatoses, superficial fungal infection, seborrhoeic keratosis and squamous cell carcinoma.",
+      treatment: "No universally effective treatment exists. Management is individualized by subtype, symptoms and extent; suspicious change requires biopsy rather than empiric treatment.",
+      followup: "Follow-up should be individualized by subtype, lesion burden and patient risk. Biopsy enlarging, tender, ulcerated or otherwise changing areas and reinforce sun protection where relevant.",
+      references: [refs.porokeratosisReview, refs.whoIcd10, refs.whoSkin, dermNet("Porokeratosis", "porokeratosis", "2026-09-15")]
+    }),
+    record({
+      id: "basal-cell-carcinoma", name: "Basal Cell Carcinoma", alternative: "BCC", category: "keratinocytic", subcategory: "keratinocytic-carcinoma",
+      coding: coding({ diagnoses: [icd10Who("C44", "Other malignant neoplasms of skin", "Assign the fourth character from the documented anatomic site.")], oncology: icdo(skinTopography(), [{ code: "8090/3", label: "Basal cell carcinoma, NOS", note: "Use the morphology that matches the final pathology." }]) }),
+      description: "A common keratinocyte carcinoma characterized by locally invasive growth and very low metastatic potential.",
+      clinical: "Presentation varies by subtype and may include a pearly or translucent papule, telangiectasia, ulceration, crusting, or a slowly enlarging plaque.",
+      dermoscopy: "Possible findings include arborising vessels, blue-grey ovoid nests, leaf-like structures, spoke-wheel areas and ulceration.",
+      differential: "Cutaneous squamous cell carcinoma, actinic keratosis, melanocytic lesions, sebaceous hyperplasia and other benign or malignant tumors.",
+      treatment: "Risk stratification incorporates site, size, borders, histologic subtype and recurrence status. Surgery is the mainstay; selected low-risk tumors or patients unable to undergo surgery may be considered for other modalities under current guidance.",
+      followup: "Follow-up is risk-adapted and includes surveillance for recurrence and additional primary skin cancers.",
+      references: [refs.aadBcc, refs.whoIcd10, refs.icdo32, refs.whoSkin]
+    }),
+    record({
+      id: "cutaneous-squamous-cell-carcinoma", name: "Cutaneous Squamous Cell Carcinoma", alternative: "cSCC", category: "keratinocytic", subcategory: "keratinocytic-carcinoma",
+      coding: coding({ diagnoses: [icd10Who("C44", "Other malignant neoplasms of skin", "Assign the fourth character from the documented anatomic site.")], oncology: icdo(skinTopography(), [{ code: "8070/3", label: "Squamous cell carcinoma, NOS", note: "Use the morphology that matches the final pathology." }]) }),
+      description: "A malignant keratinocytic neoplasm with variable risks of local recurrence, nodal involvement and metastasis.",
+      clinical: "May present as a persistent hyperkeratotic papule, plaque or nodule, sometimes with crusting, ulceration, tenderness or rapid growth.",
+      dermoscopy: "Findings may include keratin, white circles or structureless areas, scale, ulceration and variable vascular patterns.",
+      differential: "Actinic keratosis, squamous cell carcinoma in situ, keratoacanthoma, verruca, basal cell carcinoma and benign keratotic lesions.",
+      treatment: "Management is based on clinical and histopathologic risk assessment. Surgery is commonly used for localized disease; high-risk, regional or advanced disease requires guideline-based multidisciplinary care.",
+      followup: "Surveillance should be risk-adapted and assess the primary site, regional nodes when indicated and the development of additional skin cancers.",
+      references: [refs.aadScc, refs.whoIcd10, refs.icdo32, refs.whoSkin]
+    }),
+    record({
+      id: "squamous-cell-carcinoma-in-situ", name: "Squamous Cell Carcinoma in Situ", alternative: "Bowen disease", category: "keratinocytic", subcategory: "keratinocytic-carcinoma",
+      coding: coding({ diagnoses: [icd10Who("D04", "Carcinoma in situ of skin", "Assign the fourth character from the documented anatomic site.")], oncology: icdo(skinTopography(), [{ code: "8081/2", label: "Bowen disease", note: "In situ behavior is encoded separately from invasive squamous cell carcinoma." }]) }),
+      description: "An intraepidermal squamous cell carcinoma confined to the epidermis.",
+      clinical: "Typically a persistent, well-demarcated erythematous scaly patch or plaque; pigmented variants can occur.",
+      dermoscopy: "Possible findings include grouped glomerular or coiled vessels and scale; pigmented lesions may show brown or grey dots and globules.",
+      differential: "Actinic keratosis, superficial basal cell carcinoma, psoriasis, eczema, melanoma and invasive cutaneous squamous cell carcinoma.",
+      treatment: "Choice among surgical and selected nonsurgical approaches depends on lesion site, size, patient factors and diagnostic certainty. Suspected invasion requires histologic assessment.",
+      followup: "Review for persistence or recurrence and account for ongoing actinic damage and risk of additional keratinocyte cancers.",
+      references: [refs.aadScc, refs.whoIcd10, refs.icdo32, refs.whoSkin, dermNet("Intraepidermal squamous cell carcinoma", "intraepidermal-squamous-cell-carcinoma", "2026-09-15")]
+    }),
+    record({
+      id: "keratoacanthoma", name: "Keratoacanthoma", alternative: "KA; keratoacanthoma-type squamous proliferation", category: "keratinocytic", subcategory: "keratinocytic-tumor-uncertain",
+      coding: coding({ verificationNote: "Keratoacanthoma classification remains debated and no single disease-specific ICD-10 WHO or ICD-O code was verified for this release; do not infer L85.8." }),
+      description: "A rapidly growing crateriform keratinocytic tumor whose relationship to well-differentiated cutaneous squamous cell carcinoma remains debated; clinical and histologic overlap is substantial.",
+      clinical: "Usually a rapidly developing dome-shaped nodule with a central keratin-filled crater, often on sun-exposed skin.",
+      dermoscopy: "A central keratin mass, white circles and variable hairpin or other vascular patterns may be seen, but findings do not reliably exclude squamous cell carcinoma.",
+      differential: "Well-differentiated cutaneous squamous cell carcinoma, verruca, nodular basal cell carcinoma and amelanotic melanoma.",
+      treatment: "Specialist assessment and histopathologic evaluation are generally required because reliable distinction from cutaneous squamous cell carcinoma can be difficult.",
+      followup: "Follow-up depends on the final pathology, treatment and the patient's wider keratinocyte-cancer risk.",
+      references: [refs.keratoacanthoma, refs.whoSkin, dermNet("Keratoacanthoma", "keratoacanthoma", "2026-09-15")]
+    }),
+    record({
+      id: "cutaneous-melanoma", name: "Cutaneous Melanoma", alternative: "Malignant melanoma of skin", category: "melanocytic", subcategory: "melanoma",
+      coding: coding({ diagnoses: [icd10Who("C43", "Malignant melanoma of skin", "Assign the fourth character from the documented anatomic site.")], oncology: icdo(melanomaTopography(), [{ code: "8720/3", label: "Malignant melanoma, NOS", note: "Use only when a more specific pathologic subtype is not assigned." }]) }),
+      description: "A malignant melanocytic neoplasm with metastatic potential; prognosis is strongly related to stage at diagnosis.",
+      clinical: "Suspicious features may include asymmetry, border irregularity, color variation, evolution over time or a lesion unlike the patient's other nevi; some melanomas are amelanotic.",
+      dermoscopy: "Patterns vary by subtype and may include asymmetry of structures and colors, atypical network, irregular dots or globules, atypical streaks, regression structures and atypical vessels.",
+      differential: "Melanocytic nevus, seborrhoeic keratosis, pigmented basal cell carcinoma and other pigmented or amelanotic lesions.",
+      treatment: "Excision and histopathologic staging underpin management of localized primary melanoma. Further surgery, nodal assessment and systemic therapy decisions depend on stage and current specialist guidance.",
+      followup: "Surveillance intensity is stage- and risk-dependent and should follow current national or international melanoma guidance.",
+      references: [refs.eadoMelanomaDiagnostics, refs.eadoMelanomaTreatment, refs.nciMelanoma, refs.whoIcd10, refs.icdo32, refs.whoSkin]
+    }),
+    record({
+      id: "lentigo-maligna", name: "Lentigo Maligna", alternative: "Melanoma in situ on chronically sun-damaged skin; LM", category: "melanocytic", subcategory: "melanoma-in-situ",
+      coding: coding({ diagnoses: [icd10Who("D03", "Melanoma in situ", "Assign the fourth character from the documented anatomic site.")], oncology: icdo(melanomaTopography(), [{ code: "8742/2", label: "Lentigo maligna", note: "In situ behavior; do not use for invasive lentigo maligna melanoma." }]) }),
+      description: "A melanoma in situ arising on chronically sun-damaged skin, most often on the head and neck.",
+      clinical: "Typically a slowly enlarging, irregularly pigmented macule or patch with variation in color and border.",
+      dermoscopy: "Possible findings include asymmetric pigmented follicular openings, an annular-granular pattern, grey dots or globules and rhomboidal structures.",
+      differential: "Solar lentigo, seborrhoeic keratosis, pigmented actinic keratosis, lichenoid keratosis and other melanocytic lesions.",
+      treatment: "Complete treatment with histologic assessment is preferred when feasible; the approach depends on lesion size, location, patient factors and current melanoma guidance.",
+      followup: "Surveillance should address local recurrence and additional melanocytic and keratinocytic tumors.",
+      references: [refs.eadoMelanomaDiagnostics, refs.eadoMelanomaTreatment, refs.whoIcd10, refs.icdo32, refs.whoSkin, dermNet("Lentigo maligna and lentigo maligna melanoma", "lentigo-maligna-and-lentigo-maligna-melanoma", "2026-09-15")]
+    }),
+    record({
+      id: "lentigo-maligna-melanoma", name: "Lentigo Maligna Melanoma", alternative: "Invasive melanoma arising in lentigo maligna; LMM", category: "melanocytic", subcategory: "melanoma-subtype",
+      coding: coding({ diagnoses: [icd10Who("C43", "Malignant melanoma of skin", "Assign the fourth character from the documented anatomic site.")], oncology: icdo(melanomaTopography(), [{ code: "8742/3", label: "Lentigo maligna melanoma", note: "Invasive behavior; distinct from lentigo maligna (8742/2)." }]) }),
+      description: "An invasive melanoma arising in association with lentigo maligna, usually on chronically sun-damaged head and neck skin.",
+      clinical: "An enlarging irregularly pigmented patch may develop thickening, nodularity, ulceration or new color variation suggesting invasion.",
+      dermoscopy: "Findings overlap with lentigo maligna; increased colors, structureless areas and other changes may raise concern but cannot determine invasion reliably.",
+      differential: "Lentigo maligna, solar lentigo, pigmented actinic keratosis, seborrhoeic keratosis and other melanoma subtypes.",
+      treatment: "Complete excision and histopathologic staging are required; subsequent management follows stage-appropriate melanoma guidance.",
+      followup: "Follow-up is individualized by stage, treatment and recurrence risk.",
+      references: [refs.eadoMelanomaDiagnostics, refs.eadoMelanomaTreatment, refs.whoIcd10, refs.icdo32, refs.whoSkin, dermNet("Lentigo maligna and lentigo maligna melanoma", "lentigo-maligna-and-lentigo-maligna-melanoma", "2026-09-15")]
+    }),
+    record({
+      id: "acral-melanoma", name: "Acral Melanoma", alternative: "Acral lentiginous melanoma; ALM", category: "melanocytic", subcategory: "melanoma-subtype",
+      coding: coding({ diagnoses: [icd10Who("C43", "Malignant melanoma of skin", "Assign the fourth character from the documented anatomic site.")], oncology: icdo(melanomaTopography(), [{ code: "8744/3", label: "Acral lentiginous melanoma", note: "Pathologic subtype; topography must still reflect the documented primary site." }]) }),
+      description: "A melanoma arising on acral skin, including palms, soles or the nail unit, and not defined by cumulative sun damage.",
+      clinical: "May present as a new or changing irregularly pigmented macule or patch on a palm or sole, or as longitudinal nail pigmentation with concerning change; some lesions are hypomelanotic.",
+      dermoscopy: "On volar skin, a parallel-ridge pattern, irregular diffuse pigmentation or multicomponent pattern can be concerning. Nail findings require site-specific assessment.",
+      differential: "Acral nevus, subcorneal hemorrhage, wart, callus, tinea nigra and benign or traumatic nail pigmentation.",
+      treatment: "Suspicious lesions require biopsy planned to permit accurate diagnosis and staging. Confirmed disease is managed according to melanoma stage and site-specific surgical considerations.",
+      followup: "Stage-based melanoma surveillance and examination of the remaining skin and relevant nodal basins are considered according to current guidance.",
+      references: [refs.eadoMelanomaDiagnostics, refs.eadoMelanomaTreatment, refs.whoIcd10, refs.icdo32, refs.whoSkin, dermNet("Acral lentiginous melanoma", "acral-lentiginous-melanoma", "2026-09-15")]
+    }),
+    record({
+      id: "nodular-melanoma", name: "Nodular Melanoma", alternative: "NM", category: "melanocytic", subcategory: "melanoma-subtype",
+      coding: coding({ diagnoses: [icd10Who("C43", "Malignant melanoma of skin", "Assign the fourth character from the documented anatomic site.")], oncology: icdo(melanomaTopography(), [{ code: "8721/3", label: "Nodular melanoma", note: "Pathologic subtype; topography must be assigned independently." }]) }),
+      description: "An invasive melanoma growth pattern characterized clinically by a predominantly raised lesion and potentially rapid vertical growth.",
+      clinical: "Often a new, enlarging firm papule or nodule that may be darkly pigmented, pink or red and can ulcerate or bleed.",
+      dermoscopy: "May show asymmetric pigmentation, blue-black or structureless areas, atypical vessels, ulceration or a multicomponent pattern; amelanotic lesions can be difficult to recognize.",
+      differential: "Pigmented basal cell carcinoma, angioma, pyogenic granuloma, dermatofibroma, blue nevus and other melanoma subtypes.",
+      treatment: "Prompt biopsy and histopathologic staging are essential. Confirmed disease is treated using stage-appropriate melanoma guidance.",
+      followup: "Surveillance is individualized by stage, treatment and recurrence risk.",
+      references: [refs.eadoMelanomaDiagnostics, refs.eadoMelanomaTreatment, refs.whoIcd10, refs.icdo32, refs.whoSkin, dermNet("Nodular melanoma", "nodular-melanoma", "2026-09-15")]
+    }),
+    record({
+      id: "desmoplastic-melanoma", name: "Desmoplastic Melanoma", alternative: "Pure or mixed desmoplastic melanoma; neurotropism may occur", category: "melanocytic", subcategory: "melanoma-subtype",
+      coding: coding({ diagnoses: [icd10Who("C43", "Malignant melanoma of skin", "Assign the fourth character from the documented anatomic site.")], oncology: icdo(melanomaTopography(), [{ code: "8745/3", label: "Desmoplastic melanoma", note: "Pathology should document pure versus mixed morphology and neurotropism when assessed." }]) }),
+      description: "A rare invasive melanoma variant with spindle-cell proliferation and desmoplasia, often arising on chronically sun-damaged head and neck skin. Pure and mixed forms have clinically relevant pathologic distinctions, and neurotropism may be present.",
+      clinical: "May be a firm, slowly enlarging skin-colored or pink papule, plaque or nodule with a scar-like appearance; pigmentation can be absent.",
+      dermoscopy: "No single diagnostic pattern is established; melanoma-associated structures or atypical vessels may be present, while amelanotic lesions can appear nonspecific.",
+      differential: "Scar, dermatofibroma, spindle-cell squamous cell carcinoma, atypical fibroxanthoma and other amelanotic tumors.",
+      treatment: "Diagnosis requires histopathology, often with specialist dermatopathology input. Treatment and staging follow current melanoma guidance; pure versus mixed morphology, margins and neurotropism can affect multidisciplinary risk assessment.",
+      followup: "Stage- and risk-based surveillance should include careful assessment of the primary site and neurologic symptoms where relevant.",
+      references: [refs.eadoMelanomaDiagnostics, refs.eadoMelanomaTreatment, refs.whoIcd10, refs.icdo32, refs.whoSkin, dermNet("Desmoplastic melanoma", "desmoplastic-melanoma", "2026-09-15")]
+    }),
+    record({
+      id: "merkel-cell-carcinoma", name: "Merkel Cell Carcinoma", alternative: "MCC; primary cutaneous neuroendocrine carcinoma", category: "other", subcategory: "neuroendocrine-carcinoma",
+      coding: coding({ diagnoses: [icd10Who("C44", "Other malignant neoplasms of skin", "ICD-10 WHO 2019 uses site-based skin coding; assign the fourth character from the documented site.")], oncology: icdo(skinTopography(), [{ code: "8247/3", label: "Merkel cell carcinoma", note: "Morphology is recorded separately from skin topography." }]), verificationNote: "C4A is an ICD-10-CM category and is intentionally not presented as ICD-10 WHO." }),
+      description: "A rare aggressive neuroendocrine skin carcinoma with substantial risks of regional and distant spread.",
+      clinical: "Often a rapidly growing, painless red, violaceous or skin-colored firm papule or nodule, commonly on sun-exposed skin.",
+      dermoscopy: "No single diagnostic pattern is established; reported findings are nonspecific and histopathology is required.",
+      differential: "Basal cell carcinoma, cutaneous squamous cell carcinoma, amelanotic melanoma, lymphoma and benign nodules or cysts.",
+      treatment: "Management requires prompt specialist staging and multidisciplinary planning; surgery, radiation and systemic immunotherapy may have roles depending on stage and patient factors.",
+      followup: "Close, risk-adapted surveillance is required because recurrence and metastasis can occur.",
+      references: [refs.esmoMcc, refs.nciMcc, refs.whoIcd10, refs.icdo32, refs.whoSkin]
+    }),
+    record({
+      id: "sebaceous-carcinoma", name: "Sebaceous Carcinoma", alternative: "Sebaceous gland carcinoma", category: "other", subcategory: "adnexal-carcinoma",
+      coding: coding({ oncology: icdo(skinTopography("Use the documented primary site; periocular and extraocular primaries require precise site documentation."), [{ code: "8410/3", label: "Sebaceous carcinoma", note: "Verify morphology against the final pathology." }]), verificationNote: "No single disease-specific ICD-10 WHO diagnosis code is asserted; apply the relevant site-based code only after coding review." }),
+      description: "A rare adnexal carcinoma that may arise in periocular or extraocular skin. The site distinction matters for assessment and management.",
+      clinical: "May present as a firm eyelid nodule, persistent chalazion-like lesion or an extraocular cutaneous nodule or plaque.",
+      dermoscopy: "Dermoscopy is not diagnostic; reported patterns are nonspecific and tissue diagnosis is required.",
+      differential: "Chalazion, basal cell carcinoma, cutaneous squamous cell carcinoma and other eyelid or adnexal tumors.",
+      treatment: "Complete excision with histopathologic margin assessment and specialist management is generally required; staging considerations depend on tumor features and site. Assessment for Muir–Torre/Lynch syndrome should be risk-based rather than automatic and may require genetics input.",
+      followup: "Surveillance is individualized because local recurrence and regional or distant spread can occur; periocular and extraocular disease may follow different clinical pathways.",
+      references: [refs.sebaceous, refs.icdo32, refs.whoSkin, dermNet("Sebaceous carcinoma", "sebaceous-carcinoma", "2026-09-15")]
+    }),
+    record({
+      id: "dermatofibrosarcoma-protuberans", name: "Dermatofibrosarcoma Protuberans", alternative: "DFSP", category: "other", subcategory: "cutaneous-sarcoma",
+      coding: coding({ oncology: icdo(skinTopography(), [{ code: "8832/1", label: "Dermatofibrosarcoma protuberans, NOS", note: "ICD-O-3.2 assigns borderline behavior to DFSP, NOS." }, { code: "8832/3", label: "Fibrosarcomatous dermatofibrosarcoma protuberans", note: "Malignant behavior applies to the fibrosarcomatous variant." }]), verificationNote: "Do not collapse DFSP, NOS and fibrosarcomatous DFSP into one behavior code; confirm against final pathology and registry rules." }),
+      description: "A slow-growing dermal sarcoma with infiltrative local behavior, a high propensity for local recurrence if incompletely removed and usually low metastatic risk.",
+      clinical: "Typically a slowly enlarging firm plaque that may develop protuberant nodules, commonly on the trunk or proximal limbs.",
+      dermoscopy: "Findings are nonspecific and cannot establish the diagnosis.",
+      differential: "Dermatofibroma, scar, keloid, morphea, cyst and other soft-tissue tumors.",
+      treatment: "Complete excision with margin control is central; complex, recurrent or advanced disease requires specialist multidisciplinary input.",
+      followup: "Long-term clinical follow-up of the treated site is appropriate because local recurrence can occur.",
+      references: [refs.dfsp, refs.icdo32, refs.whoSkin, dermNet("Dermatofibrosarcoma protuberans", "dermatofibrosarcoma-protuberans", "2026-09-15")]
+    }),
+    record({
+      id: "atypical-fibroxanthoma", name: "Atypical Fibroxanthoma", alternative: "AFX", category: "other", subcategory: "fibrohistiocytic-tumor",
+      coding: coding({ oncology: icdo(skinTopography(), [{ code: "8830/1", label: "Atypical fibroxanthoma", note: "Borderline behavior in ICD-O; distinction from PDS requires adequate sampling." }]), verificationNote: "No single disease-specific ICD-10 WHO diagnosis code is asserted." }),
+      description: "A superficial pleomorphic spindle-cell tumor usually arising on chronically sun-damaged head and neck skin of older adults. Adequate sampling is needed to exclude features that support pleomorphic dermal sarcoma.",
+      clinical: "Often a rapidly growing red or flesh-colored dome-shaped papule or nodule that may ulcerate or bleed.",
+      dermoscopy: "Reported findings are nonspecific and may overlap with basal cell or squamous cell carcinoma.",
+      differential: "Cutaneous squamous cell carcinoma, amelanotic melanoma, pleomorphic dermal sarcoma and pyogenic granuloma.",
+      treatment: "Complete excision and expert histopathologic evaluation are required; diagnosis is one of exclusion from lineage-specific mimics and from deeper or higher-risk pleomorphic dermal sarcoma.",
+      followup: "Surveillance depends on pathologic features, margin status and clinical context.",
+      references: [refs.afxPds, refs.icdo32, refs.whoSkin, dermNet("Atypical fibroxanthoma", "atypical-fibroxanthoma", "2026-09-15")]
+    }),
+    record({
+      id: "pleomorphic-dermal-sarcoma", name: "Pleomorphic Dermal Sarcoma", alternative: "PDS", category: "other", subcategory: "cutaneous-sarcoma",
+      coding: coding({ oncology: icdo(skinTopography(), [{ code: "8802/3", label: "Pleomorphic dermal sarcoma", note: "Guideline-reported morphology; confirm registry implementation and final pathology." }]), verificationNote: "No single disease-specific ICD-10 WHO diagnosis code is asserted." }),
+      description: "A rare malignant dermal spindle-cell tumor related to atypical fibroxanthoma but distinguished by adverse features such as subcutaneous invasion, tumor necrosis or lymphovascular/perineural invasion.",
+      clinical: "Usually a growing nonpigmented nodule or plaque on chronically sun-damaged head and neck skin, sometimes with ulceration.",
+      dermoscopy: "Dermoscopy is nonspecific and cannot distinguish this tumor from its clinical mimics.",
+      differential: "Atypical fibroxanthoma, cutaneous squamous cell carcinoma, basal cell carcinoma, amelanotic melanoma and Merkel cell carcinoma.",
+      treatment: "Complete excision, specialist dermatopathology review and multidisciplinary assessment are generally required.",
+      followup: "Clinical and, when indicated, imaging surveillance is individualized because local recurrence and metastasis can occur.",
+      references: [refs.afxPds, refs.icdo32, refs.whoSkin, dermNet("Pleomorphic dermal sarcoma", "pleomorphic-dermal-sarcoma", "2026-09-15")]
+    }),
+    record({
+      id: "cutaneous-angiosarcoma", name: "Cutaneous Angiosarcoma", alternative: "Angiosarcoma of skin", category: "other", subcategory: "vascular-neoplasm",
+      coding: coding({ oncology: icdo(skinTopography("Use C44._ only for a documented primary cutaneous tumor; record radiation-associated or lymphoedema-associated context separately."), [{ code: "9120/3", label: "Hemangiosarcoma", note: "ICD-O morphology terminology; confirm the final pathologic classification." }]), verificationNote: "Do not infer the ICD-10 WHO soft-tissue category C49 from the tumor name alone; diagnosis coding is site- and system-dependent." }),
+      description: "A rare aggressive malignant vascular tumor that may arise spontaneously, after radiation or with chronic lymphoedema.",
+      clinical: "May appear as an enlarging bruise-like or violaceous patch, plaque or nodule; spontaneous tumors often involve the scalp or face of older adults.",
+      dermoscopy: "No diagnostic dermoscopic pattern is established.",
+      differential: "Bruising, cellulitis, rosacea, Kaposi sarcoma and benign or malignant vascular lesions.",
+      treatment: "Urgent biopsy, staging and multidisciplinary sarcoma or oncology management are required.",
+      followup: "Close surveillance is needed because local recurrence and metastatic spread are possible.",
+      references: [refs.angiosarcoma, refs.icdo32, refs.whoSkin, dermNet("Angiosarcoma", "angiosarcoma", "2026-09-15")]
+    }),
+    record({
+      id: "kaposi-sarcoma", name: "Kaposi Sarcoma", alternative: "KS", category: "other", subcategory: "vascular-neoplasm",
+      coding: coding({ diagnoses: [icd10Who("C46", "Kaposi sarcoma", "Assign the fourth character from the documented site or distribution.")], oncology: icdo({ code: null, label: "Documented primary anatomic site", note: "Kaposi sarcoma may involve skin and extracutaneous sites; do not assume C44._ without documentation." }, [{ code: "9140/3", label: "Kaposi sarcoma", note: "Morphology is independent of anatomic site." }]) }),
+      description: "A human herpesvirus 8–associated vascular neoplasm with several epidemiologic forms and variable relationship to immune status.",
+      clinical: "May present as violaceous, red-brown or dark macules, plaques or nodules; distribution and systemic involvement vary by subtype.",
+      dermoscopy: "A multicolored or rainbow appearance has been described but is not specific and does not replace biopsy.",
+      differential: "Purpura, angioma, bacillary angiomatosis and other vascular or spindle-cell tumors.",
+      treatment: "Management depends on subtype, extent, symptoms and immune status and may include optimization of the underlying condition, local therapy or systemic treatment.",
+      followup: "Follow-up is individualized according to disease extent, treatment and underlying clinical context.",
+      references: [refs.nciKaposi, refs.whoIcd10, refs.icdo32, refs.whoSkin, dermNet("Kaposi sarcoma", "kaposi-sarcoma", "2026-09-15")]
+    }),
+    record({
+      id: "extramammary-paget-disease", name: "Extramammary Paget Disease", alternative: "EMPD; primary or secondary EMPD", category: "other", subcategory: "paget-disease",
+      coding: coding({ oncology: icdo({ code: null, label: "Documented primary anatomic site", note: "Primary cutaneous and secondary epidermotropic disease must be distinguished before assigning topography." }, [{ code: "8542/3", label: "Paget disease, extramammary", note: "Confirm primary versus secondary disease and final pathology." }]), verificationNote: "No single disease-specific ICD-10 WHO diagnosis code is asserted; site and primary-versus-secondary status affect coding." }),
+      description: "A rare intraepidermal adenocarcinoma usually affecting apocrine-rich anogenital or axillary skin. Primary cutaneous EMPD must be distinguished from secondary epidermotropic involvement by an underlying or adjacent malignancy.",
+      clinical: "Often a persistent pruritic, erythematous, scaly or eczematous plaque in the genital or perianal region.",
+      dermoscopy: "Reported features are supportive but nonspecific; biopsy is required for diagnosis.",
+      differential: "Eczema, psoriasis, fungal infection, squamous cell carcinoma in situ and melanoma.",
+      treatment: "Biopsy confirmation and specialist assessment are required. Treatment planning must consider disease extent, margins and primary versus secondary disease. Evaluation for associated internal malignancy should be individualized to anatomic site, age, sex, symptoms and pathology rather than applied as one universal panel.",
+      followup: "Long-term surveillance is appropriate because local recurrence can occur; follow-up and any internal-malignancy assessment should reflect site, disease classification and patient-specific findings.",
+      references: [refs.empd, refs.icdo32, refs.whoSkin, dermNet("Extramammary Paget disease", "extramammary-paget-disease", "2026-09-15")]
+    }),
+    record({
+      id: "microcystic-adnexal-carcinoma", name: "Microcystic Adnexal Carcinoma", alternative: "MAC; sclerosing sweat duct carcinoma", category: "other", subcategory: "adnexal-carcinoma",
+      coding: coding({ oncology: icdo(skinTopography(), [{ code: "8407/3", label: "Sclerosing sweat duct carcinoma", note: "ICD-O synonym used for microcystic adnexal carcinoma; confirm final pathology." }]), verificationNote: "No single disease-specific ICD-10 WHO diagnosis code is asserted." }),
+      description: "A rare, deeply infiltrative adnexal carcinoma that is usually locally aggressive and commonly arises on the central face.",
+      clinical: "Often a slowly enlarging firm, indurated skin-colored plaque or nodule; symptoms can occur with perineural involvement.",
+      dermoscopy: "No diagnostic dermoscopic pattern is established.",
+      differential: "Morpheaform basal cell carcinoma, scar, desmoplastic trichoepithelioma and other adnexal tumors.",
+      treatment: "Complete margin-controlled excision and specialist pathology review are generally required; extent and perineural disease influence planning.",
+      followup: "Long-term surveillance is appropriate because delayed local recurrence can occur.",
+      references: [refs.mac, refs.icdo32, refs.whoSkin, dermNet("Microcystic adnexal carcinoma", "microcystic-adnexal-carcinoma", "2026-09-15")]
+    }),
+    record({
+      id: "eccrine-porocarcinoma", name: "Eccrine Porocarcinoma", alternative: "Porocarcinoma; malignant eccrine poroma", category: "other", subcategory: "adnexal-carcinoma",
+      coding: coding({ oncology: icdo(skinTopography(), [{ code: "8409/3", label: "Eccrine porocarcinoma", note: "Malignant morphology; verify final pathology." }]), verificationNote: "No disease-specific ICD-10 WHO code was verified; D44.90 is intentionally not used because it is not a supported international mapping here." }),
+      description: "A rare malignant adnexal tumor showing sweat-duct differentiation.",
+      clinical: "Typically a slowly growing papule, plaque or nodule that may ulcerate or bleed; it can arise within a longstanding poroma or de novo.",
+      dermoscopy: "Reported vascular and structureless patterns are nonspecific; histopathology establishes the diagnosis.",
+      differential: "Poroma, seborrhoeic keratosis, pyogenic granuloma, verruca and cutaneous squamous cell carcinoma.",
+      treatment: "Complete surgical removal and histopathologic assessment are central; high-risk or advanced disease requires multidisciplinary evaluation.",
+      followup: "Surveillance should be individualized for local recurrence and regional or distant spread.",
+      references: [refs.porocarcinoma, refs.icdo32, refs.whoSkin, dermNet("Eccrine porocarcinoma", "eccrine-porocarcinoma", "2026-09-15")]
+    }),
+    record({
+      id: "mycosis-fungoides", name: "Mycosis Fungoides", alternative: "MF; cutaneous T-cell lymphoma", category: "other", subcategory: "cutaneous-lymphoma",
+      coding: coding({ diagnoses: [icd10Who("C84.0", "Mycosis fungoides", "National modifications may add site or stage detail.")], oncology: icdo({ code: "C44._", label: "Skin", note: "For a primary cutaneous presentation, assign the documented skin site according to registry rules." }, [{ code: "9700/3", label: "Mycosis fungoides", note: "Morphology is separate from clinical stage." }]) }),
+      description: "The most common primary cutaneous T-cell lymphoma, usually characterized by a chronic evolution from patches to plaques and, in some patients, tumors.",
+      clinical: "Persistent variably scaly patches or plaques often occur on sun-protected sites and may mimic inflammatory dermatoses; morphology and extent change with stage.",
+      dermoscopy: "Dermoscopy may show fine short linear vessels, orange-yellow areas or scale, but findings are not diagnostic.",
+      differential: "Eczema, psoriasis, parapsoriasis, drug eruption and other cutaneous lymphomas.",
+      treatment: "Diagnosis requires clinicopathologic correlation and may require repeated biopsies. Therapy is stage-adapted and can include skin-directed or systemic approaches under specialist guidance.",
+      followup: "Long-term specialist follow-up is required, with assessment of skin burden, nodes, symptoms and extracutaneous disease as indicated by stage.",
+      references: [refs.eortcMfSs, refs.whoHaem5, refs.nciCtcl, refs.whoIcd10, refs.icdo32, dermNet("Mycosis fungoides", "mycosis-fungoides", "2026-09-15")]
+    }),
+    record({
+      id: "sezary-syndrome", name: "Sézary Syndrome", alternative: "SS; leukemic cutaneous T-cell lymphoma", category: "other", subcategory: "cutaneous-lymphoma",
+      coding: coding({ diagnoses: [icd10Who("C84.1", "Sézary disease")], oncology: icdo({ code: null, label: "Documented site(s)", note: "This leukemic cutaneous lymphoma is not represented by skin topography alone; follow registry rules." }, [{ code: "9701/3", label: "Sézary disease", note: "Record morphology separately from sites of involvement." }]) }),
+      description: "An aggressive leukemic form of cutaneous T-cell lymphoma characterized by erythroderma, blood involvement and clonal malignant T cells.",
+      clinical: "Generalized erythroderma with intense pruritus is typical; lymphadenopathy, palmoplantar keratoderma and other systemic features may occur.",
+      dermoscopy: "Dermoscopy is not diagnostic and should not delay systemic and hematologic evaluation.",
+      differential: "Atopic dermatitis, psoriasis, drug-related erythroderma, pityriasis rubra pilaris and erythrodermic mycosis fungoides.",
+      treatment: "Diagnosis and staging require specialist clinicopathologic, blood and systemic assessment. Treatment is individualized and primarily systemic, sometimes combined with skin-directed therapy.",
+      followup: "Close multidisciplinary follow-up is required to assess skin, blood, nodes, treatment toxicity and disease progression.",
+      references: [refs.eortcMfSs, refs.whoHaem5, refs.nciCtcl, refs.whoIcd10, refs.icdo32, dermNet("Sézary syndrome", "sezary-syndrome", "2026-09-15")]
+    }),
+    record({
+      id: "primary-cutaneous-anaplastic-large-cell-lymphoma", name: "Primary Cutaneous Anaplastic Large-Cell Lymphoma", alternative: "pcALCL; primary cutaneous CD30-positive lymphoproliferative disorder", category: "other", subcategory: "cutaneous-lymphoma",
+      coding: coding({ oncology: icdo({ code: "C44._", label: "Skin", note: "Use the documented primary skin site; systemic ALCL with secondary skin involvement is a different entity." }, [{ code: "9718/3", label: "Primary cutaneous CD30-positive T-cell lymphoproliferative disorder", note: "Confirm entity-level registry terminology and exclude systemic disease." }]), verificationNote: "No disease-specific ICD-10 WHO diagnosis code is asserted; C86.6 belongs to some national modifications and must not be presented as universal." }),
+      description: "A primary cutaneous CD30-positive T-cell lymphoproliferative disorder that usually has an indolent clinical course but requires exclusion of systemic lymphoma.",
+      clinical: "Typically one or several rapidly developing red to violaceous papules, nodules or tumors that may ulcerate.",
+      dermoscopy: "Reported vascular and structureless findings are nonspecific; diagnosis requires histopathology and immunophenotyping.",
+      differential: "Lymphomatoid papulosis, systemic anaplastic large-cell lymphoma with skin involvement, cutaneous squamous cell carcinoma and infections.",
+      treatment: "Management depends on number, distribution and extracutaneous assessment; localized and multifocal disease require different specialist approaches.",
+      followup: "Long-term follow-up is appropriate to identify cutaneous recurrence or extracutaneous disease.",
+      references: [refs.cd30Consensus, refs.pcAlclReview, refs.whoHaem5, refs.icdo32, dermNet("Primary cutaneous anaplastic large-cell lymphoma", "primary-cutaneous-anaplastic-large-cell-lymphoma", "2026-09-15")]
+    })
+  ];
+
+  window.DOCUTIS_DATA = Object.freeze({
+    categories: Object.freeze(categories),
+    subcategories: Object.freeze(subcategories),
+    diseases: Object.freeze(diseases)
+  });
+}());

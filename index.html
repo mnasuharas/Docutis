@@ -12,6 +12,8 @@
 
 <body>
 
+<a class="skip-link" href="#mainContent">Skip to main content</a>
+
 <header>
   <div class="nav">
     <div class="logo">Docutis</div>
@@ -19,7 +21,7 @@
   </div>
 </header>
 
-<main>
+<main id="mainContent" tabindex="-1">
 
   <section class="hero">
     <h1>Dermatology, structured.</h1>
@@ -30,13 +32,18 @@
     </p>
 
     <div class="search-wrapper">
+      <label class="visually-hidden" for="searchInput">Search conditions</label>
       <input
         id="searchInput"
-        type="text"
+        type="search"
         placeholder="Search a dermatologic condition..."
-        oninput="filterDiseases()"
+        autocomplete="off"
+        aria-controls="cards"
       >
     </div>
+
+    <div id="categoryFilters" class="category-filters" aria-label="Filter conditions by category"></div>
+    <p id="resultStatus" class="result-status" role="status" aria-live="polite"></p>
   </section>
 
   <h2 class="section-title">Conditions</h2>
@@ -47,7 +54,7 @@
     No matching condition found.
   </div>
 
-  <section id="details"></section>
+  <section id="details" tabindex="-1" role="region" aria-labelledby="diseaseDetailsTitle" hidden></section>
 
   <div class="notice">
     <strong>Medical Disclaimer:</strong>
@@ -62,6 +69,7 @@
 
 </main>
 
+<script src="data.js"></script>
 <script src="app.js"></script>
 
 </body>
