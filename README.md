@@ -10,7 +10,7 @@
 
 Docutis is an open-source project that presents dermatology information in a clear, searchable and structured format.
 
-The current version contains 34 condition records. It retains the original malignant and precancerous collection and begins broader coverage with common inflammatory, eczematous, papulosquamous, acneiform, sebaceous, urticarial and pigmentary disorders. It is intended for physicians, medical trainees and other healthcare professionals seeking a concise educational reference.
+The current version contains 50 condition records. It retains the malignant and precancerous collection, the first common-dermatology package, and a new infectious-dermatology package spanning bacterial, dermatophyte, other fungal, parasitic and viral disease. It is intended for physicians, medical trainees and other healthcare professionals seeking a concise educational reference.
 
 Docutis is currently in active early development. Its content, structure and technical foundations are being expanded progressively.
 
@@ -42,8 +42,13 @@ The collection includes:
 - Plaque psoriasis and chronic urticaria
 - Acne vulgaris and rosacea
 - Vitiligo
+- Common bacterial infections including impetigo, folliculitis, erysipelas and erythrasma
+- Dermatophyte infections of skin, scalp, feet, groin and nails
+- Cutaneous candidiasis and pityriasis versicolor
+- Scabies
+- Herpes simplex, herpes zoster, molluscum contagiosum and cutaneous warts
 
-This is the first universal dermatology content package, not comprehensive coverage. Infectious, autoimmune, immunobullous, hair, nail and many other dermatology domains remain future work.
+The infectious package completes the initial 50-record milestone, but does not make the collection comprehensive. Autoimmune, immunobullous, connective-tissue, hair, nail and many other dermatology domains remain future work.
 
 ## Content Principles
 
@@ -61,7 +66,7 @@ Medical content contributions should include appropriate references. All current
 
 Docutis is an early-stage public prototype and should not yet be considered a comprehensive dermatology database.
 
-The project currently has 34 records. Its 50+ record target is not yet complete, and every medical record still requires documented clinician review.
+The project currently has 50 records. The initial numeric milestone is complete, but broader dermatology coverage and documented clinician review of every record are not yet complete.
 
 Current development priorities include:
 

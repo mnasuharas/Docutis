@@ -17,7 +17,7 @@ const allowedSourceTypes = new Set([
   "official classification", "guideline", "consensus", "systematic review",
   "peer-reviewed review", "clinical reference"
 ]);
-const baselineIds = [
+const oncologyIds = [
   "actinic-keratosis", "actinic-cheilitis", "porokeratosis", "basal-cell-carcinoma",
   "cutaneous-squamous-cell-carcinoma", "squamous-cell-carcinoma-in-situ", "keratoacanthoma",
   "cutaneous-melanoma", "lentigo-maligna", "lentigo-maligna-melanoma", "acral-melanoma",
@@ -27,10 +27,17 @@ const baselineIds = [
   "microcystic-adnexal-carcinoma", "eccrine-porocarcinoma", "mycosis-fungoides",
   "sezary-syndrome", "primary-cutaneous-anaplastic-large-cell-lymphoma"
 ];
-const newIds = [
+const goalTwoIds = [
   "atopic-dermatitis", "contact-dermatitis", "seborrheic-dermatitis", "plaque-psoriasis",
   "acne-vulgaris", "rosacea", "chronic-urticaria", "vitiligo"
 ];
+const infectiousIds = [
+  "impetigo", "bacterial-folliculitis", "erysipelas", "erythrasma", "tinea-corporis",
+  "tinea-cruris", "tinea-pedis", "tinea-capitis", "onychomycosis", "cutaneous-candidiasis",
+  "pityriasis-versicolor", "scabies", "herpes-simplex", "herpes-zoster",
+  "molluscum-contagiosum", "cutaneous-warts"
+];
+const protectedIds = [...oncologyIds, ...goalTwoIds];
 
 function condition(id) {
   const disease = diseases.find(item => item.id === id);
@@ -49,14 +56,17 @@ function diagnosisCodes(disease) {
 test("dataset has the intended categories and structured subcategories", () => {
   assert.deepEqual(Array.from(categories, category => category.id), [
     "premalignant", "keratinocytic", "melanocytic", "other",
-    "inflammatory-eczematous", "acneiform-sebaceous", "pigmentary"
+    "inflammatory-eczematous", "acneiform-sebaceous", "pigmentary", "infectious-infestation"
   ]);
-  assert.ok(subcategories.length >= 21);
+  assert.ok(subcategories.length >= 26);
   assert.equal(new Set(subcategories.map(item => item.id)).size, subcategories.length);
+  for (const id of ["bacterial-infection", "dermatophyte-infection", "other-fungal-infection", "parasitic-infestation", "viral-infection"]) {
+    assert.ok(subcategories.some(item => item.id === id), `missing infectious subcategory ${id}`);
+  }
 });
 
-test("all 34 conditions have complete, consistent review records", () => {
-  assert.equal(diseases.length, 34);
+test("all 50 conditions have complete, consistent review records", () => {
+  assert.equal(diseases.length, 50);
   const categoryIds = new Set(categories.map(category => category.id));
   const subcategoryIds = new Set(subcategories.map(subcategory => subcategory.id));
   for (const disease of diseases) {
@@ -72,11 +82,11 @@ test("all 34 conditions have complete, consistent review records", () => {
   }
 });
 
-test("the original 26 records remain and all eight planned records are present", () => {
+test("the existing 34 records remain and all 16 infectious records are present", () => {
   const ids = new Set(diseases.map(disease => disease.id));
-  for (const id of baselineIds) assert.ok(ids.has(id), `baseline record ${id} was removed`);
-  for (const id of newIds) assert.ok(ids.has(id), `planned record ${id} is missing`);
-  assert.equal(baselineIds.length + newIds.length, diseases.length);
+  for (const id of protectedIds) assert.ok(ids.has(id), `existing record ${id} was removed`);
+  for (const id of infectiousIds) assert.ok(ids.has(id), `planned infectious record ${id} is missing`);
+  assert.equal(protectedIds.length + infectiousIds.length, diseases.length);
 });
 
 test("condition identifiers are unique", () => {
@@ -120,7 +130,7 @@ test("coding systems are explicit and ICD-O topography is separate from morpholo
 });
 
 test("non-neoplastic additions explicitly exclude ICD-O without synthetic codes", () => {
-  for (const id of newIds) {
+  for (const id of [...goalTwoIds, ...infectiousIds]) {
     const disease = condition(id);
     assert.equal(disease.coding.icdo, null, `${id} must not contain ICD-O topography or morphology`);
     assert.equal(disease.coding.icdoApplicability, "not applicable");
@@ -211,5 +221,36 @@ test("new records retain their disease-specific guideline or consensus sources",
   }
   const psoriasis = condition("plaque-psoriasis").references;
   assert.ok(psoriasis.some(reference => reference.url === "https://www.guidelines.edf.one/guidelines/psoriasis-guideline" && reference.type === "guideline"));
-  for (const id of newIds) assert.equal(condition(id).reviewStatus, "clinician review required");
+  for (const id of goalTwoIds) assert.equal(condition(id).reviewStatus, "clinician review required");
+});
+
+test("infectious records retain primary sources, coding and the review gate", () => {
+  const expectedDois = {
+    "bacterial-folliculitis": "10.1002/14651858.CD013099.pub2",
+    erythrasma: "10.1093/ced/llaf307",
+    "tinea-capitis": "10.1111/ddg.70395x",
+    onychomycosis: "10.1111/ddg.14988",
+    "cutaneous-candidiasis": "10.1111/jdv.15782",
+    scabies: "10.1111/ijd.17327",
+    "cutaneous-warts": "10.1111/jebm.12494"
+  };
+  for (const id of infectiousIds) {
+    const disease = condition(id);
+    assert.equal(disease.category, "infectious-infestation");
+    assert.equal(disease.reviewStatus, "clinician review required");
+    assert.equal(disease.coding.icdo, null);
+    assert.equal(disease.coding.icdoApplicability, "not applicable");
+    assert.ok(disease.coding.diagnoses.length > 0);
+    assert.ok(disease.references.some(reference => reference.organization !== "DermNet"));
+  }
+  for (const [id, doi] of Object.entries(expectedDois)) {
+    assert.ok(condition(id).references.some(reference => reference.doi === doi), `${id} is missing ${doi}`);
+  }
+  assert.ok(condition("impetigo").references.some(reference => reference.version === "NG153"));
+  assert.ok(condition("erysipelas").references.some(reference => reference.version === "NG141"));
+  for (const id of ["tinea-corporis", "tinea-cruris", "tinea-pedis", "onychomycosis"]) {
+    assert.ok(condition(id).references.some(reference => reference.url === "https://www.cdc.gov/ringworm/hcp/clinical-overview/"));
+  }
+  assert.ok(condition("herpes-zoster").references.some(reference => reference.url.includes("/shingles/hcp/clinical-overview/")));
+  assert.ok(condition("molluscum-contagiosum").references.some(reference => reference.url.includes("/molluscum-contagiosum/hcp/clinical-overview/")));
 });
