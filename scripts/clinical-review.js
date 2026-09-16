@@ -28,7 +28,7 @@ function fingerprint(record) {
   return `sha256-v1:${createHash("sha256").update(serialized, "utf8").digest("hex")}`;
 }
 
-function validateReview(record) {
+function validateReviewState(record, currentFingerprint) {
   const fail = message => { throw new Error(`${record.id}: ${message}`); };
   if (!statuses.includes(record.reviewStatus)) fail("Unknown clinical review status");
   if (record.reviewStatus === statuses[0]) {
@@ -46,7 +46,39 @@ function validateReview(record) {
   if (review.reviewerRole !== "physician") fail("Reviewer role must be physician");
   if (typeof review.reviewerSpecialty !== "string" || !review.reviewerSpecialty.trim()) fail("Reviewer specialty is required");
   if (typeof review.reviewedContentHash !== "string" || !/^sha256-v1:[0-9a-f]{64}$/.test(review.reviewedContentHash)) fail("Invalid review fingerprint");
-  if (review.reviewedContentHash !== fingerprint(record)) fail("Stale clinical review: obtain physician re-review or reset to clinician review required with clinicalReview: null");
+  if (review.reviewedContentHash !== currentFingerprint) fail("Stale clinical review: obtain physician re-review or reset to clinician review required with clinicalReview: null");
+}
+
+function validateReview(record) {
+  validateReviewState(record, fingerprint(record));
+}
+
+function sortBy(items, key) {
+  return [...items].sort((left, right) => String(left[key]).localeCompare(String(right[key]), "en"));
+}
+
+function followUpClinicalContent(protocol) {
+  const { reviewStatus, clinicalReview, diseaseLabel, jurisdictionLabel, ...content } = protocol;
+  content.guideline = Object.fromEntries(Object.entries(protocol.guideline).filter(([key]) => key !== "sourceMetadataCheckedAt"));
+  content.groups = sortBy(protocol.groups, "id").map(group => ({
+    ...group,
+    periods: sortBy(group.periods, "id").map(period => ({
+      ...period,
+      recommendations: sortBy(period.recommendations, "modality"),
+      notes: [...period.notes].sort((left, right) => left.localeCompare(right, "de"))
+    }))
+  }));
+  content.notes = [...protocol.notes].sort((left, right) => left.localeCompare(right, "de"));
+  return content;
+}
+
+function followUpFingerprint(protocol) {
+  const serialized = JSON.stringify(canonicalize(followUpClinicalContent(protocol)));
+  return `sha256-v1:${createHash("sha256").update(serialized, "utf8").digest("hex")}`;
+}
+
+function validateFollowUpReview(protocol) {
+  validateReviewState(protocol, followUpFingerprint(protocol));
 }
 
 function loadData() {
@@ -55,11 +87,29 @@ function loadData() {
   return context.window.DOCUTIS_DATA;
 }
 
+function loadFollowUpData() {
+  const context = { window: {} };
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "followup-data.js"), "utf8"), context);
+  return context.window.DOCUTIS_FOLLOW_UP_DATA;
+}
+
 function main(args) {
   const data = loadData();
   if (args.length === 1 && args[0] === "--validate") {
     data.diseases.forEach(validateReview);
-    console.log(`Clinical review metadata and fingerprints valid for ${data.diseases.length} records. This is not physician review.`);
+    const followUpData = loadFollowUpData();
+    followUpData.protocols.forEach(validateFollowUpReview);
+    console.log(`Clinical review metadata and fingerprints valid for ${data.diseases.length} records and ${followUpData.protocols.length} follow-up protocols. This is not physician review.`);
+    return;
+  }
+  if (args.length === 2 && args[0] === "--follow-up") {
+    const query = args[1].toLowerCase();
+    const matches = loadFollowUpData().protocols.filter(protocol => protocol.id.toLowerCase() === query || protocol.diseaseId.toLowerCase() === query);
+    if (matches.length !== 1) throw new Error("Expected one exact follow-up protocol ID or disease ID");
+    const protocol = matches[0];
+    validateFollowUpReview(protocol);
+    console.log(JSON.stringify({ id: protocol.id, diseaseId: protocol.diseaseId, reviewStatus: protocol.reviewStatus, currentContentHash: followUpFingerprint(protocol) }, null, 2));
+    console.log("Read-only fingerprint calculation. Only a human physician can perform clinical review; this command changes no files or review metadata. See CLINICAL_REVIEW.md.");
     return;
   }
   if (args.length !== 1) throw new Error('Usage: node scripts/clinical-review.js "Acne Vulgaris" (or a record ID), or --validate');
@@ -72,7 +122,10 @@ function main(args) {
   console.log("Read-only fingerprint calculation. Only a human physician can perform clinical review; this command changes no files or review metadata. See CLINICAL_REVIEW.md.");
 }
 
-module.exports = { statuses, canonicalize, clinicalContent, fingerprint, validateReview, loadData, main };
+module.exports = {
+  statuses, canonicalize, clinicalContent, fingerprint, validateReview, loadData,
+  followUpClinicalContent, followUpFingerprint, validateFollowUpReview, loadFollowUpData, main
+};
 if (require.main === module) {
   try { main(process.argv.slice(2)); }
   catch (error) { console.error(error.message); process.exitCode = 1; }

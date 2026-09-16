@@ -29,6 +29,7 @@ Docutis is currently in active early development. Its content, structure and tec
 - Responsive browser-based interface
 - Dependency-free automated validation on pull requests and `main` pushes
 - No installation or account required
+- Structured German guideline-based dermato-oncology follow-up for melanoma, BCC and cSCC
 
 ## Current Clinical Focus
 
@@ -68,6 +69,12 @@ Clinical review governance distinguishes automated source/schema validation from
 
 `clinicalReview` is null until a physician review is documented. A reviewed record stores the date, physician role, specialty and a deterministic content fingerprint. Local validation and CI reject stale fingerprints after clinical changes; contributors must obtain re-review or reset the record to review-required. A matching hash does not establish reviewer credentials or guarantee correctness. See [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md) for the human procedure and the read-only `node scripts/clinical-review.js "Acne Vulgaris"` utility.
 
+## German dermato-oncology follow-up
+
+The Nachsorge module adds structured German follow-up protocols for cutaneous melanoma, basal cell carcinoma and cutaneous squamous cell carcinoma. Clinicians can select the disease, guideline-defined stage/risk group and follow-up period to view modality-specific intervals and conditions. Guideline identity, version, official source, metadata-check date and clinical-review state are available in the provenance disclosure.
+
+Protocols live in `followup-data.js`, separate from disease records and rendering. The schema supports multiple jurisdictions for a disease, but this release displays Germany only; it does not expose an unsupported jurisdiction switch. All three protocols remain `clinician review required`. See [FOLLOW_UP_PROTOCOLS.md](FOLLOW_UP_PROTOCOLS.md) for the implementation matrix, authoritative sources, schema, update policy and extension procedure; [GOAL5_CLINICAL_REVIEW.md](GOAL5_CLINICAL_REVIEW.md) is the uncompleted dermatologist review worksheet.
+
 ## Project Status
 
 Docutis is an early-stage public prototype and should not yet be considered a comprehensive dermatology database.
@@ -98,6 +105,8 @@ The current application uses:
 
 Medical records live in `data.js`; `app.js` contains filtering, rendering and interaction behavior. Records include a broad category, a structured subcategory, coding-system metadata, source metadata, and review status. This separation keeps content review focused and preserves the dependency-free static architecture.
 
+Follow-up protocols live in `followup-data.js`; `followup-app.js` renders the selectors, recommendations and provenance. `scripts/follow-up.js` performs offline integrity validation, while the existing clinical-review utility fingerprints both disease records and follow-up protocols.
+
 Each reference has its own `metadataCheckedAt` date. This date means only that the reference's bibliographic metadata and link were checked on that date; it is not a publication date, clinical review date, or endorsement of the adjacent medical content.
 
 Coding data is educational metadata, not billing guidance. ICD-10 WHO is kept distinct from national modifications, and ICD-O topography is kept distinct from morphology and behavior. Non-neoplastic records explicitly mark ICD-O as `not applicable`; unresolved oncology mappings use `not established` rather than fabricated codes. Site-specific or jurisdiction-specific coding must be confirmed from the applicable official release.
@@ -116,6 +125,10 @@ To run the same dependency-free syntax and test checks used by GitHub Actions wi
 ```shell
 node --check data.js
 node --check app.js
+node --check followup-data.js
+node --check followup-app.js
+node scripts/follow-up.js
+node scripts/clinical-review.js --validate
 node --test tests/*.test.js
 git diff --check
 ```

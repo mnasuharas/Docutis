@@ -32,3 +32,11 @@ Exactly two statuses are allowed: `clinician review required` and `clinician rev
 The hash binds the review to content; it is not a signature, identity check, guarantee of correctness or protection against a maintainer deliberately falsifying data. PR accountability supplies the human evidence. The static UI displays the reviewed metadata after repository validation; it does not verify credentials or recompute Node hashes in the browser. CI must pass before publication. No authentication, personal reviewer database or runtime network service is involved.
 
 Physician review does not replace individual professional judgment or current clinical guidelines. Reassess records when supporting guidance changes even if the stored source URL and fingerprint have not changed. A reviewed release and physician review of the database remain future work.
+
+## Follow-up protocol review
+
+The same controlled states and physician metadata apply to the structured protocols in `followup-data.js`. Review the disease/jurisdiction scope, guideline version and source, every risk/stage definition, period boundary, modality, interval or frequency, conditional note, duration and recommendation wording. Compare the rendered result with the structured data and official source.
+
+Generate a read-only protocol fingerprint with `node scripts/clinical-review.js --follow-up cutaneous-melanoma`. A protocol fingerprint excludes `sourceMetadataCheckedAt`, review metadata, presentation-only disease/jurisdiction labels and non-clinical array ordering; it includes all clinically meaningful protocol and guideline fields. After a genuine physician attestation, record the matching hash in that protocol only. A new guideline version or a clinical edit requires reassessment and either a new attestation/hash or a reset to review-required. `node scripts/follow-up.js` validates structure but never performs clinical review.
+
+For Goal 5, use the empty checkboxes and row-level matrices in `GOAL5_CLINICAL_REVIEW.md`. That worksheet does not attest review by itself; repository review evidence and matching protocol metadata are still required.

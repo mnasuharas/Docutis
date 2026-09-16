@@ -9,6 +9,8 @@ const css = fs.readFileSync(path.join(root, "style.css"), "utf8");
 const readme = fs.readFileSync(path.join(root, "README.md"), "utf8");
 const contributing = fs.readFileSync(path.join(root, "CONTRIBUTING.md"), "utf8");
 const roadmap = fs.readFileSync(path.join(root, "ROADMAP.md"), "utf8");
+const followUpDocs = fs.readFileSync(path.join(root, "FOLLOW_UP_PROTOCOLS.md"), "utf8");
+const goal5Review = fs.readFileSync(path.join(root, "GOAL5_CLINICAL_REVIEW.md"), "utf8");
 const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "validate.yml"), "utf8");
 
 function cssProperty(selector, property) {
@@ -33,6 +35,11 @@ function contrastRatio(foreground, background) {
 
 test("static page keeps load order, disclaimer and accessible controls", () => {
   assert.ok(html.indexOf('src="data.js"') < html.indexOf('src="app.js"'));
+  assert.ok(html.indexOf('src="followup-data.js"') < html.indexOf('src="followup-app.js"'));
+  assert.match(html, /id="followUpDisease"/);
+  assert.match(html, /id="followUpGroup"/);
+  assert.match(html, /id="followUpPeriod"/);
+  assert.match(html, /id="followUpStatus"[^>]+aria-live="polite"/);
   assert.match(html, /<label[^>]+for="searchInput"/);
   assert.match(html, /aria-live="polite"/);
   assert.match(html, /class="skip-link"[^>]+href="#mainContent"/);
@@ -49,6 +56,12 @@ test("documentation distinguishes source metadata checks from clinical review", 
   assert.match(contributing, /never change a shared default/i);
   assert.match(roadmap, /Data-schema evolution/);
   assert.match(roadmap, /Category architecture/);
+  assert.match(followUpDocs, /Implementation matrix/);
+  assert.match(followUpDocs, /source metadata check date[^.]*physician review[^.]*separate facts/i);
+  assert.match(followUpDocs, /add a jurisdiction/i);
+  assert.match(goal5Review, /\| Disease \| Risk\/stage \| Period \| Clinical exam \| LN ultrasound \| Laboratory \| Imaging \| Source \|/);
+  assert.match(goal5Review, /- \[ \] Physician sign-off/);
+  assert.match(goal5Review, /all three protocols remain `clinician review required`/i);
 });
 
 test("CI validates pull requests, main pushes and manual runs with read-only permissions", () => {
@@ -65,6 +78,9 @@ test("CI validates pull requests, main pushes and manual runs with read-only per
   assert.match(workflow, /node-version:\s*"24"/);
   assert.match(workflow, /package-manager-cache:\s*false/);
   for (const command of ["node --check data.js", "node --check app.js", "node --test tests/*.test.js", "git diff --check"]) {
+    assert.ok(workflow.includes(command), `workflow is missing ${command}`);
+  }
+  for (const command of ["node --check followup-data.js", "node --check followup-app.js", "node scripts/clinical-review.js --validate", "node scripts/follow-up.js"]) {
     assert.ok(workflow.includes(command), `workflow is missing ${command}`);
   }
 });
@@ -84,6 +100,8 @@ test("responsive and keyboard focus rules remain present", () => {
   assert.match(css, /@media\s*\(max-width:\s*600px\)/);
   assert.match(css, /@media[\s\S]*?\.category-grid\s*{[\s\S]*?grid-template-columns:\s*1fr/);
   assert.match(css, /@media[\s\S]*?\.detail-header\s*{[\s\S]*?flex-direction:\s*column-reverse/);
+  assert.match(css, /\.follow-up-controls select:focus-visible/);
+  assert.match(css, /@media[\s\S]*?\.follow-up-controls,[\s\S]*?\.follow-up-results-grid\s*{[\s\S]*?grid-template-columns:\s*1fr/);
 });
 
 test("result status and footer meet WCAG AA normal-text contrast", () => {

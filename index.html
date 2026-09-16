@@ -46,6 +46,30 @@
     <p id="resultStatus" class="result-status" role="status" aria-live="polite"></p>
   </section>
 
+  <section id="followUpModule" class="follow-up-module" aria-labelledby="followUpTitle">
+    <div class="follow-up-heading">
+      <div>
+        <p class="eyebrow">Deutschland · leitlinienbasiert</p>
+        <h2 id="followUpTitle">Dermato-onkologische Nachsorge</h2>
+      </div>
+      <span class="module-badge">Clinical review required</span>
+    </div>
+    <p class="follow-up-intro">Strukturierte Nachsorgeintervalle für Melanom, Basalzellkarzinom und kutanes Plattenepithelkarzinom. Die Auswahl ersetzt weder individuelle Risikobewertung noch aktuelle Leitlinien oder ärztliches Urteil.</p>
+    <div class="follow-up-controls">
+      <label for="followUpDisease">Erkrankung
+        <select id="followUpDisease"></select>
+      </label>
+      <label for="followUpGroup">Stadium / Risikogruppe
+        <select id="followUpGroup"></select>
+      </label>
+      <label for="followUpPeriod">Zeitraum
+        <select id="followUpPeriod"></select>
+      </label>
+    </div>
+    <p id="followUpStatus" class="visually-hidden" role="status" aria-live="polite"></p>
+    <div id="followUpResult" class="follow-up-result" role="region" aria-labelledby="followUpResultHeading"></div>
+  </section>
+
   <h2 class="section-title">Conditions</h2>
 
   <div id="cards" class="cards"></div>
@@ -70,7 +94,9 @@
 </main>
 
 <script src="data.js"></script>
+<script src="followup-data.js"></script>
 <script src="app.js"></script>
+<script src="followup-app.js"></script>
 
 </body>
 </html>
