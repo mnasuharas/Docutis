@@ -6,6 +6,7 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Implemented
 
+- German guideline-based dermato-oncology follow-up infrastructure for melanoma, BCC and cSCC: structured disease/jurisdiction protocols, stage/risk and time-period selectors, modality-specific schedules, provenance, offline validation and stale-review fingerprints. All three protocols still require physician review.
 - Clinical review governance infrastructure: controlled statuses, structured `clinicalReview` metadata, deterministic content fingerprints, stale-review validation, maintainer utility and documented human review procedure. All 50 records still require physician review; 0 are clinician reviewed.
 - Static GitHub Pages-compatible application using HTML, CSS, and vanilla JavaScript
 - Search across condition name, alternative name, summary, category, subcategory, and explicitly labelled classification/coding metadata
@@ -26,6 +27,8 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Known engineering and usability gaps
 
+- Obtain physician review of all three German follow-up protocols and reconcile any interpretive questions in the cSCC modality table before the first reviewed Nachsorge release.
+- Add a second jurisdiction only after its source matrix is independently researched and reviewed; do not expose an empty jurisdiction selector.
 - Add automated browser tests for search, category filters, card/detail behavior, Escape/Close focus restoration, and external links.
 - Test with representative screen readers and document results.
 - Consider a persistent link from details back to results.

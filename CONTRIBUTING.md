@@ -80,6 +80,14 @@ If a clinically reviewed record is medically modified, obtain physician re-revie
 
 The Goal 3 content snapshot in the tests protects the existing 50 records during the governance migration. Future intentional clinical-content PRs must explicitly review changes to that snapshot; never update it to conceal unintended edits. Keep stale-review and generic review-state validation tests intact when the first genuine physician review changes the current 50/0 release guard.
 
+### Follow-up protocols
+
+Follow [FOLLOW_UP_PROTOCOLS.md](FOLLOW_UP_PROTOCOLS.md) when changing `followup-data.js`. Use the official guideline-publishing body as the primary source; do not infer intervals, combine jurisdictions or convert ambiguous wording into false precision. Keep guideline version/publication, source metadata check and physician review as separate facts.
+
+Every group needs a stable ID, explicit risk/stage description, structured time ranges and structured modality frequencies. Use a conditional recommendation with its source condition when a modality depends on risk factors. If the guideline does not address a modality, omit it so the UI displays “not specified”; do not encode omission as “not recommended.”
+
+Any clinically meaningful protocol change requires re-review or reset to `clinician review required` with `clinicalReview: null`. Run `node scripts/follow-up.js` and `node scripts/clinical-review.js --follow-up <disease-id>` in addition to the standard checks. Adding a jurisdiction requires a separate sourced protocol and tests; do not create an empty or simulated selector.
+
 ## Development
 
 Docutis currently uses simple:
@@ -97,6 +105,7 @@ Before submitting a change:
 3. Check that condition details display correctly.
 4. Make sure existing functionality has not been unintentionally broken.
 5. Run `node --check data.js`, `node --check app.js`, `node --test tests/*.test.js`, and `git diff --check` for any content, data-structure, or interface change.
+   For follow-up changes also run `node --check followup-data.js`, `node --check followup-app.js`, `node scripts/follow-up.js`, and `node scripts/clinical-review.js --validate`.
 6. Test category filters and keyboard-only card/detail interaction at desktop and mobile widths.
 
 The read-only GitHub Actions CI workflow repeats these checks on every pull request targeting `main` and on every push to `main`. CI does not use repository secrets, does not deploy, and does not replace medical or coding review.

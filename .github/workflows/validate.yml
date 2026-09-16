@@ -35,6 +35,18 @@ jobs:
       - name: Check application syntax
         run: node --check app.js
 
+      - name: Check follow-up module syntax
+        run: |
+          node --check followup-data.js
+          node --check followup-app.js
+          node --check scripts/clinical-review.js
+          node --check scripts/follow-up.js
+
+      - name: Validate clinical governance and follow-up data
+        run: |
+          node scripts/clinical-review.js --validate
+          node scripts/follow-up.js
+
       - name: Run dependency-free tests
         run: node --test tests/*.test.js
 
