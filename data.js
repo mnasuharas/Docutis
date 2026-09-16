@@ -10,7 +10,8 @@
     { id: "other", title: "Other Cutaneous Malignancies" },
     { id: "inflammatory-eczematous", title: "Inflammatory and Eczematous Disorders" },
     { id: "acneiform-sebaceous", title: "Acneiform and Sebaceous Disorders" },
-    { id: "pigmentary", title: "Pigmentary Disorders" }
+    { id: "pigmentary", title: "Pigmentary Disorders" },
+    { id: "infectious-infestation", title: "Infectious and Infestation Disorders" }
   ];
   const subcategories = [
     { id: "premalignant-keratinocytic", title: "Premalignant keratinocytic lesion" },
@@ -33,7 +34,12 @@
     { id: "urticarial-disorder", title: "Urticarial disorder" },
     { id: "acneiform-disorder", title: "Acneiform disorder" },
     { id: "rosacea", title: "Rosacea" },
-    { id: "depigmenting-disorder", title: "Depigmenting disorder" }
+    { id: "depigmenting-disorder", title: "Depigmenting disorder" },
+    { id: "bacterial-infection", title: "Bacterial infection" },
+    { id: "dermatophyte-infection", title: "Dermatophyte infection" },
+    { id: "other-fungal-infection", title: "Other fungal infection" },
+    { id: "parasitic-infestation", title: "Parasitic infestation" },
+    { id: "viral-infection", title: "Viral infection" }
   ];
   const sourceTypes = new Set([
     "official classification", "guideline", "consensus", "systematic review",
@@ -92,7 +98,22 @@
     rosaceaGuideline: source({ title: "S2k guideline: Rosacea", organization: "German Dermatological Society guideline group", type: "guideline", year: 2022, url: "https://pubmed.ncbi.nlm.nih.gov/35929658/", doi: "10.1111/ddg.14849", metadataCheckedAt: "2026-09-16" }),
     urticariaGuideline: source({ title: "The International Guideline for the Definition, Classification, Diagnosis and Management of Urticaria", organization: "GA²LEN / UCARE / ACARE international guideline group", type: "guideline", year: 2026, url: "https://pubmed.ncbi.nlm.nih.gov/41649409/", doi: "10.1111/all.70210", metadataCheckedAt: "2026-09-16" }),
     vitiligoConsensusPart1: source({ title: "Worldwide expert recommendations for the diagnosis and management of vitiligo: Position statement from the International Vitiligo Task Force Part 1: towards a new management algorithm", organization: "International Vitiligo Task Force", type: "consensus", year: 2023, version: "Part 1", url: "https://pubmed.ncbi.nlm.nih.gov/37746876/", doi: "10.1111/jdv.19451", metadataCheckedAt: "2026-09-16" }),
-    vitiligoConsensusPart2: source({ title: "Worldwide expert recommendations for the diagnosis and management of vitiligo: Position statement from the International Vitiligo Task Force—Part 2: Specific treatment recommendations", organization: "International Vitiligo Task Force", type: "consensus", year: 2023, version: "Part 2", url: "https://pubmed.ncbi.nlm.nih.gov/37715487/", doi: "10.1111/jdv.19450", metadataCheckedAt: "2026-09-16" })
+    vitiligoConsensusPart2: source({ title: "Worldwide expert recommendations for the diagnosis and management of vitiligo: Position statement from the International Vitiligo Task Force—Part 2: Specific treatment recommendations", organization: "International Vitiligo Task Force", type: "consensus", year: 2023, version: "Part 2", url: "https://pubmed.ncbi.nlm.nih.gov/37715487/", doi: "10.1111/jdv.19450", metadataCheckedAt: "2026-09-16" }),
+    niceImpetigo: source({ title: "Impetigo: antimicrobial prescribing", organization: "National Institute for Health and Care Excellence", type: "guideline", year: 2020, version: "NG153", url: "https://www.nice.org.uk/guidance/ng153/chapter/Recommendations", metadataCheckedAt: "2026-09-16" }),
+    folliculitisCochrane: source({ title: "Interventions for bacterial folliculitis and boils (furuncles and carbuncles)", organization: "Cochrane Database of Systematic Reviews", type: "systematic review", year: 2021, url: "https://pubmed.ncbi.nlm.nih.gov/33634465/", doi: "10.1002/14651858.CD013099.pub2", metadataCheckedAt: "2026-09-16" }),
+    niceCellulitisErysipelas: source({ title: "Cellulitis and erysipelas: antimicrobial prescribing", organization: "National Institute for Health and Care Excellence", type: "guideline", year: 2019, version: "NG141", url: "https://www.nice.org.uk/guidance/ng141/chapter/Recommendations", metadataCheckedAt: "2026-09-16" }),
+    erythrasmaReview: source({ title: "Erythrasma: a systematic review of interventions", organization: "Clinical and Experimental Dermatology", type: "systematic review", year: 2025, url: "https://pubmed.ncbi.nlm.nih.gov/40635638/", doi: "10.1093/ced/llaf307", metadataCheckedAt: "2026-09-16" }),
+    cdcRingworm: source({ title: "Clinical Overview of Ringworm", organization: "Centers for Disease Control and Prevention", type: "clinical reference", year: 2024, url: "https://www.cdc.gov/ringworm/hcp/clinical-overview/", metadataCheckedAt: "2026-09-16" }),
+    tineaCapitisGuideline: source({ title: "Consensus-based Guideline on tinea capitis", organization: "German Dermatological Society guideline group", type: "guideline", year: 2026, version: "S1 guideline; version 4.0", url: "https://onlinelibrary.wiley.com/doi/full/10.1111/ddg.70395x", doi: "10.1111/ddg.70395x", metadataCheckedAt: "2026-09-16" }),
+    onychomycosisGuideline: source({ title: "S1 Guideline onychomycosis", organization: "German Dermatological Society guideline group", type: "guideline", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/37212291/", doi: "10.1111/ddg.14988", metadataCheckedAt: "2026-09-16" }),
+    dermatomycosisGuideline: source({ title: "Guidelines for the management of dermatomycosis (2019)", organization: "Japanese Dermatological Association", type: "guideline", year: 2020, version: "2019 guideline", url: "https://pubmed.ncbi.nlm.nih.gov/32978814/", doi: "10.1111/1346-8138.15618", metadataCheckedAt: "2026-09-16" }),
+    candidiasisReview: source({ title: "Cutaneous candidiasis - an evidence-based review of topical and systemic treatments to inform clinical practice", organization: "Journal of the European Academy of Dermatology and Venereology", type: "peer-reviewed review", year: 2019, url: "https://pubmed.ncbi.nlm.nih.gov/31287594/", doi: "10.1111/jdv.15782", metadataCheckedAt: "2026-09-16" }),
+    scabiesGuideline: source({ title: "Clinical practice guidelines for the diagnosis and treatment of scabies", organization: "International Journal of Dermatology", type: "guideline", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/38922701/", doi: "10.1111/ijd.17327", metadataCheckedAt: "2026-09-16" }),
+    cdcScabiesTreatment: source({ title: "Treatment of Scabies", organization: "Centers for Disease Control and Prevention", type: "clinical reference", year: 2024, url: "https://www.cdc.gov/scabies/treatment/index.html", metadataCheckedAt: "2026-09-16" }),
+    cdcHerpes: source({ title: "Herpes - STI Treatment Guidelines", organization: "Centers for Disease Control and Prevention", type: "guideline", year: 2021, version: "2021 STI Treatment Guidelines", url: "https://www.cdc.gov/std/treatment-guidelines/herpes.htm", metadataCheckedAt: "2026-09-16" }),
+    cdcZoster: source({ title: "Clinical Overview of Shingles (Herpes Zoster)", organization: "Centers for Disease Control and Prevention", type: "clinical reference", year: 2024, url: "https://www.cdc.gov/shingles/hcp/clinical-overview/index.html", metadataCheckedAt: "2026-09-16" }),
+    cdcMolluscum: source({ title: "Clinical Overview of Molluscum Contagiosum", organization: "Centers for Disease Control and Prevention", type: "clinical reference", year: 2025, url: "https://www.cdc.gov/molluscum-contagiosum/hcp/clinical-overview/index.html", metadataCheckedAt: "2026-09-16" }),
+    cutaneousWartsGuideline: source({ title: "Clinical guideline for the diagnosis and treatment of cutaneous warts (2022)", organization: "Journal of Evidence-Based Medicine guideline group", type: "guideline", year: 2022, url: "https://pubmed.ncbi.nlm.nih.gov/36117295/", doi: "10.1111/jebm.12494", metadataCheckedAt: "2026-09-16" })
   };
   function dermNet(title, slug, metadataCheckedAt) {
     return source({ title, organization: "DermNet", type: "clinical reference", url: `https://dermnetnz.org/topics/${slug}`, metadataCheckedAt });
@@ -495,6 +516,182 @@
       treatment: "Management is individualized through shared decision-making and may include camouflage, photoprotection, topical anti-inflammatory treatment, phototherapy or other targeted therapy according to activity, extent, site, age and patient goals. Surgical approaches are reserved for selected stable disease.",
       followup: "Document activity, extent, repigmentation, treatment safety and psychosocial impact. Investigate associated autoimmune disease according to history, examination and guideline context rather than using an indiscriminate panel.",
       references: [refs.vitiligoConsensusPart1, refs.vitiligoConsensusPart2, refs.whoIcd10, dermNet("Vitiligo", "vitiligo", "2026-09-16")]
+    }),
+    record({
+      id: "impetigo", name: "Impetigo", alternative: "Non-bullous impetigo; bullous impetigo", category: "infectious-infestation", subcategory: "bacterial-infection",
+      coding: coding({ diagnoses: [icd10Who("L01.0", "Impetigo [any organism] [any site]")], icdoApplicability: "not applicable", verificationNote: "Document bullous versus non-bullous presentation and verify any national coding extension separately." }),
+      description: "A contagious superficial bacterial skin infection with non-bullous and bullous presentations.",
+      clinical: "Non-bullous disease commonly evolves from vesicles or pustules into honey-colored crusted erosions; bullous disease produces flaccid fluid-filled blisters. Extent, systemic features, recurrence and outbreak context affect assessment.",
+      dermoscopy: "Dermoscopy is not routinely needed; crust, erosion and nonspecific vascular findings do not replace clinical assessment or microbiologic testing when indicated.",
+      differential: "Herpes simplex, ecthyma, contact dermatitis, insect-bite reaction, scabies with secondary infection and autoimmune blistering disease.",
+      treatment: "Use hygiene measures and guideline-directed topical or oral antimicrobial treatment according to whether disease is localized or widespread, bullous, recurrent, or associated with systemic illness or higher complication risk. Reassess rather than repeatedly treating unexplained non-response.",
+      followup: "Review if lesions spread, systemic illness develops, treatment fails, or episodes recur. Consider microbiologic sampling and specialist advice when recommended by the applicable guideline.",
+      references: [refs.niceImpetigo, refs.whoIcd10, dermNet("Impetigo", "impetigo", "2026-09-16")]
+    }),
+    record({
+      id: "bacterial-folliculitis", name: "Bacterial Folliculitis", alternative: "Staphylococcal folliculitis; superficial bacterial folliculitis", category: "infectious-infestation", subcategory: "bacterial-infection",
+      coding: coding({ diagnoses: [icd10Who("L73.9", "Follicular disorder, unspecified")], icdoApplicability: "not applicable", verificationNote: "ICD-10 WHO does not provide a single organism-specific bacterial-folliculitis code in this compact record; verify the documented depth, organism and any national modification." }),
+      description: "A superficial bacterial infection or inflammation centered on hair follicles, commonly but not exclusively associated with staphylococci.",
+      clinical: "Follicle-centered erythematous papules or pustules may be tender or itchy. Deep, fluctuant, spreading, recurrent or systemic presentations require assessment for a furuncle, abscess or another process.",
+      dermoscopy: "Dermoscopy is not routinely diagnostic; a folliculocentric pustule or perifollicular erythema is nonspecific.",
+      differential: "Malassezia folliculitis, acne vulgaris, pseudofolliculitis, gram-negative folliculitis, insect bites and early hidradenitis suppurativa.",
+      treatment: "Address occlusion, friction and other contributing factors. Limited disease may need local measures; extensive, recurrent or complicated disease may require culture-guided or systemic management. Evidence comparing interventions is limited, so treatment should follow local antimicrobial guidance.",
+      followup: "Reassess persistent, recurrent or spreading disease and investigate predisposing factors when clinically indicated. Urgent assessment is appropriate for systemic illness or rapidly progressive infection.",
+      references: [refs.folliculitisCochrane, refs.whoIcd10, dermNet("Bacterial folliculitis", "bacterial-folliculitis", "2026-09-16")]
+    }),
+    record({
+      id: "erysipelas", name: "Erysipelas", alternative: "Superficial bacterial cellulitis; streptococcal erysipelas", category: "infectious-infestation", subcategory: "bacterial-infection",
+      coding: coding({ diagnoses: [icd10Who("A46", "Erysipelas")], icdoApplicability: "not applicable", verificationNote: "Clinical terminology overlaps with cellulitis in some settings; retain the documented diagnosis and verify national coding rules." }),
+      description: "An acute bacterial infection of the superficial dermis and lymphatics, usually producing a more sharply demarcated inflammatory plaque than cellulitis.",
+      clinical: "A painful, warm, erythematous and often raised plaque may be accompanied by fever or malaise. The face and lower limbs are common sites; rapidly progressive disease or severe systemic features require urgent evaluation.",
+      dermoscopy: "Dermoscopy has no established routine diagnostic role and must not delay assessment of severity or alternative diagnoses.",
+      differential: "Cellulitis, contact dermatitis, stasis dermatitis, superficial thrombophlebitis, deep-vein thrombosis and inflammatory or vascular mimics.",
+      treatment: "Prompt guideline-directed systemic antibiotic treatment is required, with route and care setting determined by severity, comorbidity, infection site, complication risk and local resistance guidance. Marking the inflammatory margin can help monitor progression.",
+      followup: "Reassess if symptoms worsen rapidly, systemic illness develops, pain is disproportionate, or improvement does not begin as expected. Address portals of entry and recurrence risks after the acute episode.",
+      references: [refs.niceCellulitisErysipelas, refs.whoIcd10, dermNet("Erysipelas", "erysipelas", "2026-09-16")]
+    }),
+    record({
+      id: "erythrasma", name: "Erythrasma", alternative: "Corynebacterial intertrigo", category: "infectious-infestation", subcategory: "bacterial-infection",
+      coding: coding({ diagnoses: [icd10Who("L08.1", "Erythrasma")], icdoApplicability: "not applicable", verificationNote: "Confirm the diagnosis clinically and distinguish colonization or mixed intertrigo when interpreting tests." }),
+      description: "A superficial Corynebacterium-associated infection of intertriginous skin.",
+      clinical: "Well-demarcated pink, red-brown or brown patches with fine scale occur most often in toe webs, groin or axillae and may be asymptomatic or mildly pruritic.",
+      dermoscopy: "Wood-lamp examination may show coral-red fluorescence from bacterial porphyrins, although washing or prior treatment can reduce fluorescence. Dermoscopy is supplementary and nonspecific.",
+      differential: "Dermatophyte infection, candidal intertrigo, inverse psoriasis, seborrheic dermatitis and irritant intertrigo.",
+      treatment: "Reduce moisture and friction and use an appropriate topical or systemic antibacterial approach according to extent and recurrence. Published comparative evidence is limited and no single regimen is universally established.",
+      followup: "Reassess persistent or recurrent disease, confirm the diagnosis when uncertain and address predisposing occlusion, moisture or metabolic factors where relevant.",
+      references: [refs.erythrasmaReview, refs.whoIcd10, dermNet("Erythrasma", "erythrasma", "2026-09-16")]
+    }),
+    record({
+      id: "tinea-corporis", name: "Tinea Corporis", alternative: "Ringworm; body ringworm; dermatophytosis of the body", category: "infectious-infestation", subcategory: "dermatophyte-infection",
+      coding: coding({ diagnoses: [icd10Who("B35.4", "Tinea corporis")], icdoApplicability: "not applicable", verificationNote: "This record covers glabrous-skin dermatophytosis; document special sites or extensive disease separately." }),
+      description: "A dermatophyte infection of glabrous skin of the trunk or limbs.",
+      clinical: "An enlarging annular or polycyclic scaly plaque often has a more active border and relative central clearing, but prior corticosteroid use can obscure the pattern.",
+      dermoscopy: "Peripheral scale and erythema may support the diagnosis but are not specific; microscopy, culture or another validated test is appropriate when the appearance is atypical or treatment fails.",
+      differential: "Nummular dermatitis, psoriasis, pityriasis rosea, granuloma annulare, subacute cutaneous lupus and erythema migrans.",
+      treatment: "Localized disease is generally managed with an appropriate topical antifungal; extensive, refractory, follicular or immunocompromised presentations may need systemic treatment after diagnostic confirmation and safety review. Avoid corticosteroid monotherapy.",
+      followup: "Reassess non-response for adherence, reinfection, an alternative diagnosis, resistant dermatophytes or an untreated animal or household source.",
+      references: [refs.cdcRingworm, refs.whoIcd10, dermNet("Tinea corporis", "tinea-corporis", "2026-09-16")]
+    }),
+    record({
+      id: "tinea-cruris", name: "Tinea Cruris", alternative: "Jock itch; groin ringworm", category: "infectious-infestation", subcategory: "dermatophyte-infection",
+      coding: coding({ diagnoses: [icd10Who("B35.6", "Tinea cruris")], icdoApplicability: "not applicable", verificationNote: "Confirm the affected site and distinguish dermatophyte infection from candidal or bacterial intertrigo." }),
+      description: "A dermatophyte infection of the groin and adjacent upper thigh.",
+      clinical: "Pruritic, sharply bordered erythematous or hyperpigmented plaques with peripheral scale commonly extend from the inguinal fold; morphology and scrotal involvement can help distinguish mimics but are not definitive.",
+      dermoscopy: "Peripheral scale and background erythema may be visible but are nonspecific; mycologic confirmation is useful for atypical or refractory disease.",
+      differential: "Candidal intertrigo, erythrasma, inverse psoriasis, seborrheic dermatitis, contact dermatitis and irritant intertrigo.",
+      treatment: "Keep the area dry, address concurrent foot or nail dermatophytosis and use an appropriate antifungal according to extent and patient factors. Avoid corticosteroid monotherapy because it can mask or worsen dermatophyte infection.",
+      followup: "Reassess persistent or recurrent disease for diagnostic confirmation, adherence, reinfection and coexisting tinea pedis or onychomycosis.",
+      references: [refs.cdcRingworm, refs.whoIcd10, dermNet("Tinea cruris", "tinea-cruris", "2026-09-16")]
+    }),
+    record({
+      id: "tinea-pedis", name: "Tinea Pedis", alternative: "Athlete's foot; foot ringworm", category: "infectious-infestation", subcategory: "dermatophyte-infection",
+      coding: coding({ diagnoses: [icd10Who("B35.3", "Tinea pedis")], icdoApplicability: "not applicable", verificationNote: "Document the interdigital, moccasin, vesiculobullous or other clinical pattern and verify national extensions separately." }),
+      description: "A dermatophyte infection of the feet with interdigital, diffuse plantar or vesicular presentations.",
+      clinical: "Scaling, fissuring, maceration, pruritus or vesicles may involve toe webs, soles or lateral feet. Barrier breakdown can increase the risk of secondary bacterial infection.",
+      dermoscopy: "Dermoscopy is not routinely required; scale that follows skin furrows may support tinea but is not diagnostic.",
+      differential: "Foot eczema, contact dermatitis, palmoplantar psoriasis, pitted keratolysis, candidiasis and juvenile plantar dermatosis.",
+      treatment: "Drying measures and an appropriate topical antifungal are usual for limited disease. Extensive, chronic, refractory or nail-associated disease may require confirmation and systemic treatment after contraindications and interactions are assessed.",
+      followup: "Check for resolution of fissuring and recurrence, and evaluate footwear, communal exposure, tinea cruris and fungal nail disease when clinically relevant.",
+      references: [refs.cdcRingworm, refs.whoIcd10, dermNet("Tinea pedis", "tinea-pedis", "2026-09-16")]
+    }),
+    record({
+      id: "tinea-capitis", name: "Tinea Capitis", alternative: "Scalp ringworm; scalp dermatophytosis", category: "infectious-infestation", subcategory: "dermatophyte-infection",
+      coding: coding({ diagnoses: [icd10Who("B35.0", "Tinea barbae and tinea capitis")], icdoApplicability: "not applicable", verificationNote: "ICD-10 WHO B35.0 combines scalp and beard dermatophytosis; this record is limited to tinea capitis." }),
+      description: "A dermatophyte infection of scalp hair and surrounding skin, seen most often in children but possible at any age.",
+      clinical: "Patchy scale with broken hairs or alopecia, diffuse scale, black dots or an inflammatory kerion may occur. Cervical lymphadenopathy can accompany inflammatory disease; scarring is a risk in severe inflammation.",
+      dermoscopy: "Trichoscopy may show comma, corkscrew, zigzag or broken hairs and black dots, but fungal testing is needed when the diagnosis or organism is uncertain.",
+      differential: "Alopecia areata, seborrheic dermatitis, scalp psoriasis, bacterial folliculitis, trichotillomania and dissecting cellulitis.",
+      treatment: "Because infection involves the hair shaft, systemic antifungal treatment is required; topical therapy alone is inadequate but may reduce transmission as an adjunct. Organism, age, contraindications, interactions and local guidance inform drug selection.",
+      followup: "Confirm clinical and mycologic response as appropriate, assess close contacts or outbreak settings, and arrange prompt specialist assessment for kerion, diagnostic uncertainty or possible scarring.",
+      references: [refs.tineaCapitisGuideline, refs.whoIcd10, dermNet("Tinea capitis", "tinea-capitis", "2026-09-16")]
+    }),
+    record({
+      id: "onychomycosis", name: "Onychomycosis", alternative: "Fungal nail infection; tinea unguium", category: "infectious-infestation", subcategory: "dermatophyte-infection",
+      coding: coding({ diagnoses: [icd10Who("B35.1", "Tinea unguium")], icdoApplicability: "not applicable", verificationNote: "B35.1 specifically represents dermatophyte nail infection; onychomycosis may also be caused by yeasts or non-dermatophyte moulds, so organism and applicable classification require confirmation." }),
+      description: "A fungal infection of one or more nail units caused by dermatophytes, yeasts or non-dermatophyte moulds.",
+      clinical: "Nails may become thickened, discolored, brittle, crumbly or separated from the nail bed. Clinical appearance alone is unreliable because many nail disorders mimic fungal infection.",
+      dermoscopy: "Jagged proximal borders, longitudinal striae or subungual debris can support distal disease but do not identify the organism or replace mycologic confirmation.",
+      differential: "Nail psoriasis, traumatic onycholysis, lichen planus, chronic paronychia, bacterial nail infection and nail-unit tumor.",
+      treatment: "Confirm fungal infection before prolonged systemic therapy. Choice of topical or systemic treatment depends on organism, pattern, extent, nail growth, comorbidity, interactions and monitoring needs.",
+      followup: "Assess healthy nail outgrowth rather than expecting immediate normalization. Reconsider the diagnosis or organism when there is no progressive clearing and address concurrent tinea pedis and recurrence risks.",
+      references: [refs.onychomycosisGuideline, refs.cdcRingworm, refs.whoIcd10, dermNet("Fungal nail infections", "fungal-nail-infections", "2026-09-16")]
+    }),
+    record({
+      id: "cutaneous-candidiasis", name: "Cutaneous Candidiasis", alternative: "Candidal intertrigo; skin candidiasis; cutaneous candidosis", category: "infectious-infestation", subcategory: "other-fungal-infection",
+      coding: coding({ diagnoses: [icd10Who("B37.2", "Candidiasis of skin and nail")], icdoApplicability: "not applicable", verificationNote: "This record emphasizes skin-fold candidiasis; mucosal, nail, chronic mucocutaneous and invasive candidiasis require separate assessment." }),
+      description: "A superficial Candida infection of skin, commonly affecting moist or occluded folds.",
+      clinical: "Moist erythematous plaques with peripheral scale and satellite papules or pustules often occur in intertriginous sites. Candida can also colonize or secondarily affect another dermatosis, so test results require clinical correlation.",
+      dermoscopy: "Dermoscopy is not routinely diagnostic; vascular and scaling findings are nonspecific. Microscopy or culture can support uncertain or refractory cases.",
+      differential: "Irritant intertrigo, dermatophyte infection, erythrasma, inverse psoriasis, seborrheic dermatitis and bacterial intertrigo.",
+      treatment: "Reduce moisture, friction and occlusion, address relevant predisposing factors and use an appropriate topical antifungal for limited disease. Extensive, recurrent or immunocompromised presentations may require systemic assessment and treatment.",
+      followup: "Reassess persistent or recurrent disease for diagnostic confirmation, mixed infection and modifiable predisposing factors; investigate immune or metabolic contributors only when clinically indicated.",
+      references: [refs.candidiasisReview, refs.dermatomycosisGuideline, refs.whoIcd10, dermNet("Candida", "candida", "2026-09-16")]
+    }),
+    record({
+      id: "pityriasis-versicolor", name: "Pityriasis Versicolor", alternative: "Tinea versicolor; versicolor", category: "infectious-infestation", subcategory: "other-fungal-infection",
+      coding: coding({ diagnoses: [icd10Who("B36.0", "Pityriasis versicolor")], icdoApplicability: "not applicable", verificationNote: "The term tinea versicolor is conventional, but the condition is caused by Malassezia yeast rather than a dermatophyte." }),
+      description: "A superficial Malassezia-associated disorder producing variably pigmented, finely scaling patches, usually on the trunk, neck or proximal limbs.",
+      clinical: "Hypopigmented, hyperpigmented or erythematous macules and patches coalesce with fine scale; symptoms are absent or mildly itchy. Pigment change may persist after organism clearance.",
+      dermoscopy: "Fine scale, especially in skin lines or at lesion margins, and altered pigment networks may support the diagnosis; microscopy can confirm uncertain cases.",
+      differential: "Vitiligo, post-inflammatory pigment change, pityriasis alba, seborrheic dermatitis, confluent and reticulated papillomatosis and hypopigmented mycosis fungoides.",
+      treatment: "Topical antifungal therapy is usual for limited disease; extensive or frequently recurrent disease may require an appropriately selected systemic approach. Recurrence is common, and pigment recovery can lag behind mycologic cure.",
+      followup: "Judge response by disappearance of scale and lack of new lesions rather than immediate pigment normalization. Reassess atypical or persistent lesions and discuss recurrence prevention when appropriate.",
+      references: [refs.dermatomycosisGuideline, refs.whoIcd10, dermNet("Pityriasis versicolor", "pityriasis-versicolor", "2026-09-16")]
+    }),
+    record({
+      id: "scabies", name: "Scabies", alternative: "Sarcoptes scabiei infestation; itch mite infestation", category: "infectious-infestation", subcategory: "parasitic-infestation",
+      coding: coding({ diagnoses: [icd10Who("B86", "Scabies")], icdoApplicability: "not applicable", verificationNote: "Document classic versus crusted scabies and any secondary infection because management and transmission risk differ." }),
+      description: "A contagious skin infestation caused by the human itch mite Sarcoptes scabiei var. hominis.",
+      clinical: "Intense itch, often worse at night, accompanies papules, excoriations or burrows at characteristic sites. Infants, older adults and immunocompromised people may have atypical distribution; crusted scabies has a far greater mite burden.",
+      dermoscopy: "A triangular mite body at the end of a serpiginous burrow can support diagnosis, but microscopy or another validated method may be needed and a negative test does not always exclude infestation.",
+      differential: "Atopic dermatitis, contact dermatitis, papular urticaria, body lice, dermatitis herpetiformis, folliculitis and delusional infestation.",
+      treatment: "Treat the affected person and close contacts at the same time with an appropriate scabicide, following age, pregnancy, crusted-disease and local guidance. Manage clothing and bedding without excessive environmental decontamination; crusted scabies requires specialist and infection-control measures.",
+      followup: "Itch can persist for several weeks after effective therapy. Reassess new burrows, ongoing transmission, incorrect application, untreated contacts or crusted disease rather than assuming immediate treatment failure.",
+      references: [refs.scabiesGuideline, refs.cdcScabiesTreatment, refs.whoIcd10, dermNet("Scabies", "scabies", "2026-09-16")]
+    }),
+    record({
+      id: "herpes-simplex", name: "Herpes Simplex", alternative: "HSV infection; herpes simplex infection; cold sores", category: "infectious-infestation", subcategory: "viral-infection",
+      coding: coding({ diagnoses: [icd10Who("B00.1", "Herpesviral vesicular dermatitis")], icdoApplicability: "not applicable", verificationNote: "B00.1 covers herpesviral vesicular dermatitis; genital, ocular, neonatal, disseminated and organ-specific HSV presentations have distinct clinical and coding pathways." }),
+      description: "A mucocutaneous infection caused by herpes simplex virus type 1 or type 2 that can establish latency and recur.",
+      clinical: "Grouped painful vesicles or erosions may follow tingling, burning or pain and can recur near the same site. Appearance varies by anatomic site and immune status; ocular, neonatal, disseminated or neurologic disease requires urgent specialist care.",
+      dermoscopy: "Dermoscopy is not routinely diagnostic. Vesicle fluid or lesion-base nucleic-acid testing is more useful when confirmation or viral typing is clinically important.",
+      differential: "Herpes zoster, impetigo, aphthous ulceration, contact dermatitis, fixed drug eruption and other causes of genital or oral ulceration.",
+      treatment: "Antiviral treatment may be episodic, initial-episode or suppressive depending on site, severity, recurrence pattern, immune status and transmission context. Counseling and testing should follow the relevant oral, genital, ocular or immunocompromised-care pathway.",
+      followup: "Reassess frequent, severe, atypical or treatment-resistant recurrences and any eye, neurologic, pregnancy or neonatal concern. Genital disease requires site-specific sexual-health counseling and follow-up.",
+      references: [refs.cdcHerpes, refs.whoIcd10, dermNet("Herpes simplex", "herpes-simplex", "2026-09-16")]
+    }),
+    record({
+      id: "herpes-zoster", name: "Herpes Zoster", alternative: "Shingles; zoster", category: "infectious-infestation", subcategory: "viral-infection",
+      coding: coding({ diagnoses: [icd10Who("B02", "Zoster [herpes zoster]")], icdoApplicability: "not applicable", verificationNote: "Complicated zoster has more specific ICD-10 WHO subcategories; document ophthalmic, neurologic, disseminated or other complications rather than using an unspecified code automatically." }),
+      description: "Reactivation of latent varicella-zoster virus causing a usually painful, unilateral dermatomal eruption.",
+      clinical: "Pain, tingling or itch can precede grouped vesicles on an erythematous base in one or adjacent dermatomes, usually without crossing the midline. Ophthalmic, otic, neurologic, disseminated or immunocompromised presentations need urgent assessment.",
+      dermoscopy: "Dermoscopy is not routinely required. PCR from an appropriate lesion sample is the most useful confirmatory test when the presentation is atypical.",
+      differential: "Herpes simplex, contact dermatitis, impetigo, insect-bite reaction and other vesicular or neuropathic disorders.",
+      treatment: "Start appropriate antiviral treatment promptly when indicated, with urgency and route guided by timing, site, severity, complications and immune status. Provide pain management and infection-prevention counseling; vaccination is preventive and not treatment of an active episode.",
+      followup: "Monitor for ocular, neurologic, auditory or disseminated complications and for persistent pain. Escalate urgently for high-risk sites, systemic illness or immunocompromise.",
+      references: [refs.cdcZoster, refs.whoIcd10, dermNet("Herpes zoster", "herpes-zoster", "2026-09-16")]
+    }),
+    record({
+      id: "molluscum-contagiosum", name: "Molluscum Contagiosum", alternative: "Molluscum; water warts", category: "infectious-infestation", subcategory: "viral-infection",
+      coding: coding({ diagnoses: [icd10Who("B08.1", "Molluscum contagiosum")], icdoApplicability: "not applicable", verificationNote: "Genital lesions in adults and extensive or atypical disease require context-specific assessment rather than assuming routine childhood molluscum." }),
+      description: "A usually self-limited superficial poxvirus infection producing characteristic umbilicated papules.",
+      clinical: "Small, firm, pearly or skin-colored papules usually have a central depression. Lesions can inflame during resolution; numerous, large or atypically distributed lesions may occur with immunosuppression.",
+      dermoscopy: "A central pore or umbilication with polylobular white-to-yellow structures and peripheral vessels may support the diagnosis but is not required in typical cases.",
+      differential: "Viral warts, folliculitis, milia, syringoma, cryptococcosis and other papular eruptions in immunocompromised patients.",
+      treatment: "Observation is appropriate for many immunocompetent patients because spontaneous resolution is common. Treatment may be considered for symptoms, eczema, transmission concerns, genital location or persistent disease; destructive methods can cause pain, irritation or scarring.",
+      followup: "Reassess atypical, extensive, genital or persistent disease and consider underlying immunosuppression only when the clinical context supports it. Avoid unnecessary exclusion from school or daycare.",
+      references: [refs.cdcMolluscum, refs.whoIcd10, dermNet("Molluscum contagiosum", "molluscum-contagiosum", "2026-09-16")]
+    }),
+    record({
+      id: "cutaneous-warts", name: "Cutaneous Warts", alternative: "Viral warts; common warts; verruca vulgaris", category: "infectious-infestation", subcategory: "viral-infection",
+      coding: coding({ diagnoses: [icd10Who("B07", "Viral warts")], icdoApplicability: "not applicable", verificationNote: "This record covers non-genital cutaneous warts; anogenital lesions, epidermodysplasia verruciformis and dysplastic or malignant mimics require separate pathways." }),
+      description: "Benign epidermal proliferations caused by human papillomavirus, including common, plantar and flat cutaneous warts.",
+      clinical: "Hyperkeratotic papules or plaques may interrupt skin lines and show thrombosed capillary dots; morphology varies by site and wart subtype. Immunosuppression can increase burden and persistence.",
+      dermoscopy: "Papillomatous surface, interrupted dermatoglyphics and red or black dots can support a wart diagnosis, but pigmented, ulcerated or atypical lesions may require biopsy.",
+      differential: "Callus or corn, seborrheic keratosis, molluscum contagiosum, lichen planus, squamous cell carcinoma and other nail-unit or acral tumors.",
+      treatment: "Many warts regress spontaneously. Treatment selection depends on site, symptoms, burden, age and immune status and may use keratolytic, destructive or other clinician-directed approaches; repeated treatment is often needed.",
+      followup: "Reconsider the diagnosis for rapid growth, ulceration, persistent bleeding or treatment resistance, especially in immunocompromised people or at high-risk sites. Anogenital disease requires separate assessment.",
+      references: [refs.cutaneousWartsGuideline, refs.whoIcd10, dermNet("Viral wart", "viral-wart", "2026-09-16")]
     })
   ];
 

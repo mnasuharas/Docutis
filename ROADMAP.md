@@ -8,7 +8,7 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 - Static GitHub Pages-compatible application using HTML, CSS, and vanilla JavaScript
 - Search across condition name, alternative name, summary, category, subcategory, and explicitly labelled classification/coding metadata
-- Seven populated clinical groups: four cutaneous-oncology groups plus inflammatory and eczematous disorders, acneiform and sebaceous disorders, and pigmentary disorders
+- Eight populated clinical groups: four cutaneous-oncology groups plus inflammatory and eczematous disorders, acneiform and sebaceous disorders, pigmentary disorders, and infectious and infestation disorders
 - Keyboard-operable category filters and condition cards
 - Structured condition details, external references with provenance metadata, visible medical-review status, and a persistent medical disclaimer
 - Medical records separated from rendering logic in `data.js`
@@ -20,6 +20,7 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 - WCAG 2.2 AA contrast corrections for result-status and footer text, plus a keyboard-visible skip link
 - A read-only GitHub Actions workflow that runs dependency-free syntax, test, and whitespace checks for pull requests to `main`, pushes to `main`, and manual dispatches
 - The first universal dermatology content package: atopic dermatitis, contact dermatitis, seborrheic dermatitis, plaque psoriasis, acne vulgaris, rosacea, chronic urticaria, and vitiligo
+- A 16-record infectious dermatology package spanning bacterial, dermatophyte, other fungal, parasitic and viral presentations
 - Machine-readable ICD-O applicability that distinguishes existing oncology coding from non-neoplastic records where ICD-O is not applicable
 
 ### Known engineering and usability gaps
@@ -35,14 +36,13 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Current focus
 
-The collection now contains 34 records: the original 26 cutaneous malignancy and premalignant records plus eight common inflammatory, eczematous, papulosquamous, acneiform, sebaceous, urticarial and pigmentary records. All remain `clinician review required`.
+The collection now contains 50 records: the original 26 cutaneous malignancy and premalignant records, eight common inflammatory and pigmentary records, and 16 infectious and infestation records. All remain `clinician review required`.
 
 ### Next content packages
 
-1. Infectious dermatology: a clinician-prioritized group spanning common fungal, bacterial, viral and parasitic presentations without collapsing distinct diagnoses.
-2. Autoimmune, connective-tissue and immunobullous disease: begin only after optional diagnosis, investigation, pathology and red-flag fields are agreed.
-3. Hair and nail disease: define whether these remain one navigation group or separate populated categories.
-4. Continue toward 50+ records without treating the count as evidence of clinical completeness.
+1. Autoimmune, connective-tissue and immunobullous disease: begin only after optional diagnosis, investigation, pathology and red-flag fields are agreed.
+2. Hair and nail disease: define whether these remain one navigation group or separate populated categories.
+3. Review gaps within infectious dermatology without multiplying near-duplicate records or treating the 50-record milestone as evidence of clinical completeness.
 
 Additional oncology records should still fill meaningful gaps rather than multiply near-duplicate entries.
 
@@ -68,6 +68,9 @@ Potential next records, only after adequate sourcing and clinician prioritizatio
 - The 2011 EORTC/ISCL/USCLC pcALCL consensus remains the EORTC-listed treatment consensus as of the 2026-09-15 audit. A 2023 disease-specific review supplements diagnosis and classification, but a newer equivalent multidisciplinary treatment consensus was not identified.
 - Pediatric disease, pregnancy, immunosuppression-specific management, skin-of-color presentation, pathology, staging, prognosis, and patient-facing red-flag guidance require separate scoped review.
 - The eight common-disease records in the first universal dermatology content package require clinician review of every statement and coding-specialist confirmation of ICD-10 WHO granularity.
+- The 16 infectious and infestation records require clinician review of every clinical statement and coding-specialist confirmation of ICD-10 WHO granularity. In particular, bacterial folliculitis uses the nonspecific L73.9 category, B35.0 combines tinea capitis and barbae, B35.1 represents tinea unguium rather than every cause of onychomycosis, and complicated HSV or zoster presentations need more specific pathways.
+- Antimicrobial and antifungal selection, duration, resistance patterns, pregnancy, pediatric care and immunocompromised-host management remain intentionally nonspecific pending jurisdictional clinician review.
+- Dermoscopy is described conservatively for infectious disorders; organism testing and clinicopathologic correlation take priority when the clinical pattern is atypical or treatment fails.
 - The 2017 contact-dermatitis guideline remains the strongest disease-specific guideline identified for the compact record, but its age should be reconsidered during clinician review.
 - The 2024 seborrheic-dermatitis consensus is scalp- and adult-focused; facial, truncal, pediatric and immunocompromised presentations need separately scoped review before expansion.
 
@@ -93,13 +96,12 @@ For a later maintainer-approved migration, the smallest useful extension is:
 - `unresolvedQuestions`: structured medical and coding questions kept separate from published content
 - `review`: an object containing status, priority, reviewer role, review date, and source-version context
 
-Epidemiology, etiology/pathogenesis, distribution, complications, and prognosis should become separate optional fields only when a content pilot shows that placing them in the overview or clinical section causes ambiguity. No unused fields should be added to all 34 records before that pilot. Maintainers must decide whether optional fields are omitted or explicitly `null`, whether review priority is a controlled scale, and whether unresolved medical and coding questions use separate arrays.
+Epidemiology, etiology/pathogenesis, distribution, complications, and prognosis should become separate optional fields only when a content pilot shows that placing them in the overview or clinical section causes ambiguity. No unused fields should be added to all 50 records before that pilot. Maintainers must decide whether optional fields are omitted or explicitly `null`, whether review priority is a controlled scale, and whether unresolved medical and coding questions use separate arrays.
 
 ## Category architecture
 
-The interface now exposes seven populated first-level filters: the original four cutaneous-oncology groups plus inflammatory and eczematous disorders, acneiform and sebaceous disorders, and pigmentary disorders. Main categories and subcategories remain controlled values. Future expansion should add a first-level group only when records exist for it, avoiding empty navigation. Likely later groups include:
+The interface now exposes eight populated first-level filters: the original four cutaneous-oncology groups plus inflammatory and eczematous disorders, acneiform and sebaceous disorders, pigmentary disorders, and infectious and infestation disorders. Main categories and subcategories remain controlled values. Future expansion should add a first-level group only when records exist for it, avoiding empty navigation. Likely later groups include:
 
-- infectious diseases
 - autoimmune, connective-tissue, and immunobullous diseases
 - hair and nail disorders
 - benign tumors, cysts, and vascular disorders
@@ -155,8 +157,8 @@ No patient photographs or third-party clinical images should be added without do
 
 ### Version 0.3 — carefully broadened dermatology scope
 
-- Add the infectious, autoimmune/immunobullous, and hair/nail packages one clinical domain at a time using the same schema and review gate
-- Progress toward 50+ records without treating record count as clinical completeness
+- Maintain the completed infectious package and add autoimmune/immunobullous and hair/nail packages one clinical domain at a time using the same schema and review gate
+- Build beyond the initial 50-record milestone without treating record count as clinical completeness
 - Evaluate multilingual support only after a source-language and translation-review policy exists
 - Evaluate licensed educational visuals under the provenance policy above
 

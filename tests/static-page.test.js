@@ -69,14 +69,14 @@ test("CI validates pull requests, main pushes and manual runs with read-only per
   }
 });
 
-test("documentation reports CI, 34 records and the unfinished 50-record target", () => {
-  assert.match(readme, /34 condition records/i);
+test("documentation reports CI, 50 records and the unfinished broader-coverage target", () => {
+  assert.match(readme, /50 condition records/i);
   assert.match(readme, /GitHub Actions/i);
-  assert.match(readme, /50\+[^.]*not yet/i);
+  assert.match(readme, /broader dermatology coverage[^.]*not yet complete/i);
   assert.match(contributing, /icdoApplicability` to `not applicable`/i);
   assert.match(contributing, /CI workflow[^.]*pull request/i);
-  assert.match(roadmap, /first universal dermatology content package/i);
-  assert.match(roadmap, /infectious dermatology/i);
+  assert.match(roadmap, /infectious dermatology package/i);
+  assert.match(roadmap, /16 infectious and infestation records/i);
 });
 
 test("responsive and keyboard focus rules remain present", () => {
