@@ -38,7 +38,7 @@ class Element {
   }
 }
 
-function createHarness() {
+function createHarness(transformData) {
   const document = {
     activeElement: null,
     elements: {},
@@ -52,6 +52,7 @@ function createHarness() {
   document.elements.details.hidden = true;
   const context = { window: {}, document };
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "data.js"), "utf8"), context);
+  if (transformData) context.window.DOCUTIS_DATA = transformData(context.window.DOCUTIS_DATA);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "app.js"), "utf8"), context);
   return { document, elements: document.elements };
 }
@@ -189,4 +190,29 @@ test("no-result state is announced", () => {
   assert.equal(elements.cards.querySelectorAll(".card").length, 0);
   assert.equal(elements.noResult.style.display, "block");
   assert.match(elements.resultStatus.textContent, /0 conditions shown/);
+});
+
+test("unreviewed details explain human review without fabricated dates or fingerprints", () => {
+  const { elements } = createHarness();
+  elements.cards.querySelectorAll(".card")[0].dispatch("click");
+  assert.match(textOf(elements.details), /Clinical review: Required/);
+  assert.match(textOf(elements.details), /Automated tests and source metadata checks do not constitute clinical review/);
+  assert.doesNotMatch(textOf(elements.details), /Reviewed:|sha256-v1:/);
+});
+
+test("synthetic reviewed details show physician specialty and date and preserve focus", () => {
+  const { fingerprint } = require("../scripts/clinical-review");
+  const { document, elements } = createHarness(data => {
+    const record = JSON.parse(JSON.stringify(data.diseases[0]));
+    record.id = "synthetic"; record.name = "Synthetic reviewed record";
+    record.reviewStatus = "clinician reviewed";
+    record.clinicalReview = { reviewedAt: "2026-01-15", reviewerRole: "physician", reviewerSpecialty: "dermatology", reviewedContentHash: fingerprint(record) };
+    return { ...data, diseases: [record] };
+  });
+  const card = elements.cards.querySelectorAll(".card")[0]; card.dispatch("click");
+  assert.match(textOf(elements.details), /Reviewed by a physician in dermatology/);
+  assert.match(textOf(elements.details), /Reviewed: 2026-01-15/);
+  assert.doesNotMatch(textOf(elements.details), /sha256-v1:/);
+  elements.details.dispatch("keydown", { key: "Escape" });
+  assert.equal(document.activeElement, card);
 });

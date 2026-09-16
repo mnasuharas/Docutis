@@ -139,7 +139,7 @@
     return { code: "C44._", label: "Skin", note: "ICD-O records melanoma histology separately; assign topography from the documented primary skin site." };
   }
   function record(value) {
-    return Object.freeze({ ...value, reviewStatus: reviewRequired });
+    return Object.freeze({ reviewStatus: reviewRequired, clinicalReview: null, ...value });
   }
 
   const diseases = [
