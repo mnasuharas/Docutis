@@ -62,6 +62,12 @@ Docutis aims to make medical information:
 
 Medical content contributions should include appropriate references. All current medical records are marked `clinician review required`. New or substantially changed medical content must remain in that state until a qualified clinician documents review.
 
+## Clinical governance
+
+Clinical review governance distinguishes automated source/schema validation from a physician's personal review of a specific content version. The two statuses are `clinician review required` and `clinician reviewed`; all 50 records currently require review and 0 are clinician reviewed.
+
+`clinicalReview` is null until a physician review is documented. A reviewed record stores the date, physician role, specialty and a deterministic content fingerprint. Local validation and CI reject stale fingerprints after clinical changes; contributors must obtain re-review or reset the record to review-required. A matching hash does not establish reviewer credentials or guarantee correctness. See [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md) for the human procedure and the read-only `node scripts/clinical-review.js "Acne Vulgaris"` utility.
+
 ## Project Status
 
 Docutis is an early-stage public prototype and should not yet be considered a comprehensive dermatology database.

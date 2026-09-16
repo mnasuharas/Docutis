@@ -6,6 +6,7 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Implemented
 
+- Clinical review governance infrastructure: controlled statuses, structured `clinicalReview` metadata, deterministic content fingerprints, stale-review validation, maintainer utility and documented human review procedure. All 50 records still require physician review; 0 are clinician reviewed.
 - Static GitHub Pages-compatible application using HTML, CSS, and vanilla JavaScript
 - Search across condition name, alternative name, summary, category, subcategory, and explicitly labelled classification/coding metadata
 - Eight populated clinical groups: four cutaneous-oncology groups plus inflammatory and eczematous disorders, acneiform and sebaceous disorders, pigmentary disorders, and infectious and infestation disorders
@@ -80,7 +81,7 @@ Potential next records, only after adequate sourcing and clinician prioritizatio
 2. Automated validation confirms the complete schema, unique identifiers, valid category/subcategory mapping, separated ICD-O fields, structured HTTPS references, and the required review state.
 3. A qualified clinician checks every clinical claim against the cited source and records the guideline version/date, jurisdiction, and review date in the pull request.
 4. A second reviewer checks language, uncertainty, duplication, category placement, link behavior, and preservation of the medical disclaimer.
-5. Only a maintainer may change a record from `clinician review required` after documented review. The current dataset must remain in that state until such a workflow is implemented and completed.
+5. Follow [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md): a maintainer may record `clinician reviewed` only after a physician attests to the specific version, with date, role, specialty and matching fingerprint. Infrastructure is implemented; actual physician review of priority records and the first reviewed release remain future work.
 6. Records are re-reviewed when a source is replaced, a recommendation changes, or the agreed review interval expires.
 
 ## Data-schema evolution
@@ -94,7 +95,7 @@ For a later maintainer-approved migration, the smallest useful extension is:
 - `histopathology`: optional pathology summary, not required for every condition
 - `redFlags`: short array of findings needing urgent assessment
 - `unresolvedQuestions`: structured medical and coding questions kept separate from published content
-- `review`: an object containing status, priority, reviewer role, review date, and source-version context
+- Review priority and richer source-version context, if needed later; `clinicalReview` already stores date, role, specialty and content fingerprint alongside `reviewStatus`
 
 Epidemiology, etiology/pathogenesis, distribution, complications, and prognosis should become separate optional fields only when a content pilot shows that placing them in the overview or clinical section causes ambiguity. No unused fields should be added to all 50 records before that pilot. Maintainers must decide whether optional fields are omitted or explicitly `null`, whether review priority is a controlled scale, and whether unresolved medical and coding questions use separate arrays.
 

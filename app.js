@@ -169,13 +169,24 @@
     meta.className = "detail-meta";
     appendTextElement(meta, "span", categoryTitle(disease.category), "icd");
     appendTextElement(meta, "span", subcategoryTitle(disease.subcategory), "subcategory-label");
-    appendTextElement(meta, "span", disease.reviewStatus, "review-status");
+    const review = disease.clinicalReview;
+    const reviewed = disease.reviewStatus === "clinician reviewed" && review &&
+      review.reviewerRole === "physician" && typeof review.reviewerSpecialty === "string" &&
+      review.reviewerSpecialty.trim() && /^\d{4}-\d{2}-\d{2}$/.test(review.reviewedAt) &&
+      /^sha256-v1:[0-9a-f]{64}$/.test(review.reviewedContentHash);
+    appendTextElement(meta, "span", reviewed
+      ? `Clinical review: Reviewed by a physician in ${review.reviewerSpecialty}`
+      : "Clinical review: Required", "review-status");
+    if (reviewed) appendTextElement(meta, "span", `Reviewed: ${review.reviewedAt}`);
     headingGroup.appendChild(meta);
     header.appendChild(headingGroup);
     const closeButton = appendTextElement(header, "button", "Close", "close-button");
     closeButton.type = "button";
     closeButton.addEventListener("click", () => hideDetails({ restoreFocus: true }));
     detailsElement.appendChild(header);
+    appendTextElement(detailsElement, "p", reviewed
+      ? "Physician review applies to this content version. It does not guarantee correctness or replace professional medical judgment."
+      : "This record has not completed human physician review. Automated tests and source metadata checks do not constitute clinical review.", "review-explanation");
     addDetailSection("Overview", disease.description);
     addDetailSection("Clinical Features", disease.clinical);
     addDetailSection("Dermoscopy", disease.dermoscopy);

@@ -72,6 +72,14 @@ Allowed source types are `official classification`, `guideline`, `consensus`, `s
 
 Clinical review should be documented in the pull request with reviewer role, review date, source version or access date, and any jurisdictional limits. The medical-review label must not be changed merely because automated tests pass.
 
+### Clinical review governance
+
+Follow [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md). Keep `reviewStatus` at `clinician review required` and `clinicalReview: null` until a human physician attests to reviewing the specific content version. Completed metadata requires `reviewedAt`, `reviewerRole: "physician"`, `reviewerSpecialty` and `reviewedContentHash` alongside `reviewStatus: "clinician reviewed"`.
+
+If a clinically reviewed record is medically modified, obtain physician re-review and record the new metadata/fingerprint, or reset it to `clinician review required` with `clinicalReview: null`. Never refresh a stored hash merely to pass CI. Use `node scripts/clinical-review.js "Acne Vulgaris"` to calculate a fingerprint and `node scripts/clinical-review.js --validate` to validate all review states. These commands do not perform human review.
+
+The Goal 3 content snapshot in the tests protects the existing 50 records during the governance migration. Future intentional clinical-content PRs must explicitly review changes to that snapshot; never update it to conceal unintended edits. Keep stale-review and generic review-state validation tests intact when the first genuine physician review changes the current 50/0 release guard.
+
 ## Development
 
 Docutis currently uses simple:
