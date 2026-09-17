@@ -2,11 +2,14 @@
   "use strict";
 
   const data = window.DOCUTIS_DATA;
+  const mediaData = window.DOCUTIS_MEDIA || { items: [] };
   const cardsElement = document.getElementById("cards");
   const detailsElement = document.getElementById("details");
   const filtersElement = document.getElementById("categoryFilters");
+  const libraryStatsElement = document.getElementById("libraryStats");
   const noResultElement = document.getElementById("noResult");
   const resultStatusElement = document.getElementById("resultStatus");
+  const searchClear = document.getElementById("searchClear");
   const searchInput = document.getElementById("searchInput");
   let activeCategory = "all";
   let lastOpenedCard = null;
@@ -97,20 +100,24 @@
     });
     noResultElement.style.display = matches.length ? "none" : "block";
     resultStatusElement.textContent = `${matches.length} condition${matches.length === 1 ? "" : "s"} shown.`;
+    if (searchClear) searchClear.hidden = !searchInput.value;
     hideDetails();
   }
 
-  function addDetailSection(title, content) {
-    const section = document.createElement("div");
-    section.className = "detail-section";
+  function addDetailSection(parent, title, content, id, modifier = "") {
+    const section = document.createElement("section");
+    section.className = `detail-section${modifier ? ` ${modifier}` : ""}`;
+    section.id = id;
     appendTextElement(section, "h3", title);
     appendTextElement(section, "p", content);
-    detailsElement.appendChild(section);
+    parent.appendChild(section);
+    return section;
   }
 
-  function addCodingSection(disease) {
-    const section = document.createElement("div");
+  function addCodingSection(parent, disease) {
+    const section = document.createElement("section");
     section.className = "detail-section coding-section";
+    section.id = "detail-coding";
     appendTextElement(section, "h3", "Classification and coding");
 
     if (disease.coding.diagnoses.length) {
@@ -152,52 +159,80 @@
     if (disease.coding.verificationNote) {
       appendTextElement(section, "p", `Verification note: ${disease.coding.verificationNote}`, "coding-warning");
     }
-    detailsElement.appendChild(section);
+    parent.appendChild(section);
   }
 
-  function showDisease(id) {
-    const disease = data.diseases.find(item => item.id === id);
-    if (!disease) return;
-    detailsElement.replaceChildren();
-    const header = document.createElement("div");
-    header.className = "detail-header";
-    const headingGroup = document.createElement("div");
-    const detailsHeading = appendTextElement(headingGroup, "h2", disease.name);
-    detailsHeading.id = "diseaseDetailsTitle";
-    appendTextElement(headingGroup, "p", `Alternative name: ${disease.alternative}`);
-    const meta = document.createElement("div");
-    meta.className = "detail-meta";
-    appendTextElement(meta, "span", categoryTitle(disease.category), "icd");
-    appendTextElement(meta, "span", subcategoryTitle(disease.subcategory), "subcategory-label");
-    const review = disease.clinicalReview;
-    const reviewed = disease.reviewStatus === "clinician reviewed" && review &&
-      review.reviewerRole === "physician" && typeof review.reviewerSpecialty === "string" &&
-      review.reviewerSpecialty.trim() && /^\d{4}-\d{2}-\d{2}$/.test(review.reviewedAt) &&
-      /^sha256-v1:[0-9a-f]{64}$/.test(review.reviewedContentHash);
-    appendTextElement(meta, "span", reviewed
-      ? `Clinical review: Reviewed by a physician in ${review.reviewerSpecialty}`
-      : "Clinical review: Required", "review-status");
-    if (reviewed) appendTextElement(meta, "span", `Reviewed: ${review.reviewedAt}`);
-    headingGroup.appendChild(meta);
-    header.appendChild(headingGroup);
-    const closeButton = appendTextElement(header, "button", "Close", "close-button");
-    closeButton.type = "button";
-    closeButton.addEventListener("click", () => hideDetails({ restoreFocus: true }));
-    detailsElement.appendChild(header);
-    appendTextElement(detailsElement, "p", reviewed
-      ? "Physician review applies to this content version. It does not guarantee correctness or replace professional medical judgment."
-      : "This record has not completed human physician review. Automated tests and source metadata checks do not constitute clinical review.", "review-explanation");
-    addDetailSection("Overview", disease.description);
-    addDetailSection("Clinical Features", disease.clinical);
-    addDetailSection("Dermoscopy", disease.dermoscopy);
-    addDetailSection("Differential Diagnosis", disease.differential);
-    addDetailSection("Treatment Overview", disease.treatment);
-    addDetailSection("Follow-up", disease.followup);
-    addCodingSection(disease);
-    const referencesSection = document.createElement("div");
-    referencesSection.className = "detail-section";
-    appendTextElement(referencesSection, "h3", "References");
-    const list = document.createElement("ul");
+  function mediaReviewText(item) {
+    const review = item.clinicalReview;
+    const reviewed = item.reviewStatus === "clinician reviewed" && review &&
+      review.reviewerRole === "physician" && review.reviewerSpecialty && review.reviewedAt;
+    return reviewed
+      ? `Media review: Reviewed by a physician in ${review.reviewerSpecialty} on ${review.reviewedAt}`
+      : "Media review: Clinician review required";
+  }
+
+  function addMediaSection(parent, disease) {
+    const items = (mediaData.items || []).filter(item => item.diseaseId === disease.id);
+    if (!items.length) return false;
+    const section = document.createElement("section");
+    section.className = "detail-section media-section";
+    section.id = "detail-media";
+    appendTextElement(section, "h3", "Educational media");
+    appendTextElement(section, "p", "Media supports visual learning and does not replace clinical examination or histopathologic assessment.", "media-intro");
+    const gallery = document.createElement("div");
+    gallery.className = "media-gallery";
+    items.forEach(item => {
+      const figure = document.createElement("figure");
+      figure.className = "media-item";
+      const image = document.createElement("img");
+      image.src = item.src;
+      image.alt = item.alt;
+      image.loading = "lazy";
+      image.decoding = "async";
+      image.width = item.dimensions.width;
+      image.height = item.dimensions.height;
+      const fallback = appendTextElement(figure, "p", "Educational image unavailable. Source details remain below.", "media-unavailable");
+      fallback.hidden = true;
+      image.addEventListener("error", () => {
+        image.hidden = true;
+        fallback.hidden = false;
+      });
+      figure.appendChild(image);
+      const caption = document.createElement("figcaption");
+      caption.className = "media-caption";
+      appendTextElement(caption, "strong", item.caption);
+      appendTextElement(caption, "span", item.educationalDescription);
+      const metadata = document.createElement("div");
+      metadata.className = "media-metadata";
+      appendTextElement(metadata, "div", `${item.type} · Diagnosis: ${item.diagnosis}`);
+      if (item.anatomicalSite) appendTextElement(metadata, "div", `Anatomical site: ${item.anatomicalSite}`);
+      appendTextElement(metadata, "div", `License: ${item.license} · Attribution: ${item.attribution}`);
+      appendTextElement(metadata, "div", `Patient-identifiable content: No · Consent basis: ${item.consentBasis}`);
+      const sourceLink = appendTextElement(metadata, "a", `${item.source} (opens in a new tab)`);
+      sourceLink.href = item.sourceUrl;
+      sourceLink.target = "_blank";
+      sourceLink.rel = "noopener noreferrer";
+      appendTextElement(metadata, "div", `Source metadata checked: ${item.metadataCheckedAt}`);
+      appendTextElement(metadata, "div", mediaReviewText(item));
+      caption.appendChild(metadata);
+      figure.appendChild(caption);
+      gallery.appendChild(figure);
+    });
+    section.appendChild(gallery);
+    parent.appendChild(section);
+    return true;
+  }
+
+  function addReferencesSection(parent, disease) {
+    const section = document.createElement("section");
+    section.className = "detail-section references-section";
+    section.id = "detail-sources";
+    appendTextElement(section, "h3", "Sources");
+    const disclosure = document.createElement("details");
+    disclosure.className = "source-disclosure";
+    appendTextElement(disclosure, "summary", `View ${disease.references.length} traceable source${disease.references.length === 1 ? "" : "s"}`);
+    const list = document.createElement("ol");
+    list.className = "source-list";
     disease.references.forEach(reference => {
       const item = document.createElement("li");
       const link = document.createElement("a");
@@ -227,8 +262,81 @@
       item.appendChild(metadata);
       list.appendChild(item);
     });
-    referencesSection.appendChild(list);
-    detailsElement.appendChild(referencesSection);
+    disclosure.appendChild(list);
+    section.appendChild(disclosure);
+    parent.appendChild(section);
+  }
+
+  function addDetailNavigation(hasMedia) {
+    const navigation = document.createElement("nav");
+    navigation.className = "detail-jump-nav";
+    navigation.setAttribute("aria-label", "Condition detail sections");
+    const links = [
+      ["detail-overview", "Overview"],
+      ["detail-clinical", "Clinical features"],
+      ["detail-dermoscopy", "Dermoscopy"],
+      ["detail-differential", "Differential"],
+      ["detail-treatment", "Treatment"],
+      ["detail-follow-up", "Follow-up"],
+      ["detail-coding", "Coding"]
+    ];
+    if (hasMedia) links.push(["detail-media", "Media"]);
+    links.push(["detail-sources", "Sources"]);
+    links.forEach(([id, label]) => {
+      const link = appendTextElement(navigation, "a", label);
+      link.href = `#${id}`;
+    });
+    detailsElement.appendChild(navigation);
+  }
+
+  function showDisease(id) {
+    const disease = data.diseases.find(item => item.id === id);
+    if (!disease) return;
+    detailsElement.replaceChildren();
+    const header = document.createElement("div");
+    header.className = "detail-header";
+    const headingGroup = document.createElement("div");
+    const detailsHeading = appendTextElement(headingGroup, "h2", disease.name);
+    detailsHeading.id = "diseaseDetailsTitle";
+    appendTextElement(headingGroup, "p", `Alternative name: ${disease.alternative}`, "detail-alternative");
+    const meta = document.createElement("div");
+    meta.className = "detail-meta";
+    appendTextElement(meta, "span", categoryTitle(disease.category), "icd");
+    appendTextElement(meta, "span", subcategoryTitle(disease.subcategory), "subcategory-label");
+    const review = disease.clinicalReview;
+    const reviewed = disease.reviewStatus === "clinician reviewed" && review &&
+      review.reviewerRole === "physician" && typeof review.reviewerSpecialty === "string" &&
+      review.reviewerSpecialty.trim() && /^\d{4}-\d{2}-\d{2}$/.test(review.reviewedAt) &&
+      /^sha256-v1:[0-9a-f]{64}$/.test(review.reviewedContentHash);
+    appendTextElement(meta, "span", reviewed
+      ? `Clinical review: Reviewed by a physician in ${review.reviewerSpecialty}`
+      : "Clinical review: Required", "review-status");
+    if (reviewed) appendTextElement(meta, "span", `Reviewed: ${review.reviewedAt}`);
+    headingGroup.appendChild(meta);
+    header.appendChild(headingGroup);
+    const closeButton = appendTextElement(header, "button", "Close", "close-button");
+    closeButton.type = "button";
+    closeButton.setAttribute("aria-label", `Close details for ${disease.name}`);
+    closeButton.addEventListener("click", () => hideDetails({ restoreFocus: true }));
+    detailsElement.appendChild(header);
+    appendTextElement(detailsElement, "p", reviewed
+      ? "Physician review applies to this content version. It does not guarantee correctness or replace professional medical judgment."
+      : "This record has not completed human physician review. Automated tests and source metadata checks do not constitute clinical review.", "review-explanation");
+
+    const hasMedia = (mediaData.items || []).some(item => item.diseaseId === disease.id);
+    addDetailNavigation(hasMedia);
+    const content = document.createElement("div");
+    content.className = "detail-content";
+    addDetailSection(content, "Overview", disease.description, "detail-overview", "detail-section--wide");
+    addDetailSection(content, "Clinical features", disease.clinical, "detail-clinical");
+    addDetailSection(content, "Dermoscopy", disease.dermoscopy, "detail-dermoscopy");
+    addDetailSection(content, "Differential diagnosis", disease.differential, "detail-differential");
+    addDetailSection(content, "Treatment overview", disease.treatment, "detail-treatment", "detail-section--treatment");
+    addDetailSection(content, "Follow-up", disease.followup, "detail-follow-up", "detail-section--follow-up");
+    addCodingSection(content, disease);
+    addMediaSection(content, disease);
+    addReferencesSection(content, disease);
+    detailsElement.appendChild(content);
     detailsElement.hidden = false;
     detailsElement.focus({ preventScroll: true });
     detailsElement.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -244,18 +352,67 @@
 
   function renderFilters() {
     [{ id: "all", title: "All conditions" }, ...data.categories].forEach(category => {
-      const button = appendTextElement(filtersElement, "button", category.title, "filter-button");
+      const button = document.createElement("button");
+      button.className = "filter-button";
       button.type = "button";
       button.dataset.category = category.id;
       button.setAttribute("aria-pressed", String(category.id === activeCategory));
+      const count = category.id === "all"
+        ? data.diseases.length
+        : data.diseases.filter(disease => disease.category === category.id).length;
+      appendTextElement(button, "span", category.title, "filter-label");
+      appendTextElement(button, "span", String(count), "filter-count");
+      button.setAttribute("aria-label", `${category.title}, ${count} condition${count === 1 ? "" : "s"}`);
       button.addEventListener("click", () => setActiveCategory(category.id));
+      filtersElement.appendChild(button);
     });
   }
 
+  function renderLibraryStats() {
+    if (!libraryStatsElement) return;
+    const followUpCount = window.DOCUTIS_FOLLOW_UP_DATA?.protocols?.length || 0;
+    const stats = [
+      [`${data.diseases.length}`, "condition records"],
+      [`${data.categories.length}`, "clinical categories"],
+      [`${followUpCount}`, "oncology follow-up protocols"]
+    ];
+    stats.forEach(([value, label]) => {
+      const item = document.createElement("span");
+      item.className = "stat-item";
+      appendTextElement(item, "strong", value);
+      appendTextElement(item, "span", ` ${label}`);
+      libraryStatsElement.appendChild(item);
+    });
+  }
+
+  function clearSearch() {
+    searchInput.value = "";
+    renderCards();
+    searchInput.focus();
+  }
+
   searchInput.addEventListener("input", renderCards);
+  searchInput.addEventListener("keydown", event => {
+    if (event.key === "Escape" && searchInput.value) {
+      if (event.preventDefault) event.preventDefault();
+      clearSearch();
+    }
+  });
+  if (searchClear) searchClear.addEventListener("click", clearSearch);
+  if (document.addEventListener) {
+    document.addEventListener("keydown", event => {
+      const target = event.target;
+      const typing = target && ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName);
+      if (event.key === "/" && !typing && !event.ctrlKey && !event.metaKey && !event.altKey) {
+        if (event.preventDefault) event.preventDefault();
+        searchInput.focus();
+      }
+    });
+  }
   detailsElement.addEventListener("keydown", event => {
     if (event.key === "Escape") hideDetails({ restoreFocus: true });
   });
+  renderLibraryStats();
   renderFilters();
   renderCards();
 }());

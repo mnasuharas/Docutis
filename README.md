@@ -17,8 +17,9 @@ Docutis is currently in active early development. Its content, structure and tec
 ## Current Features
 
 - Searchable dermatologic condition library
+- Compact clinical-reference landing surface with visible coverage counts and keyboard-focused search
 - Organization by clinical category
-- Structured condition detail pages
+- Structured condition detail pages with persistent section navigation and progressive source disclosure
 - Clinical features
 - Dermoscopic findings
 - Differential diagnoses
@@ -27,6 +28,7 @@ Docutis is currently in active early development. Its content, structure and tec
 - Follow-up considerations
 - Links to external clinical references
 - Responsive browser-based interface
+- Optional governed educational-media architecture with license, attribution, accessibility and independent review metadata
 - Dependency-free automated validation on pull requests and `main` pushes
 - No installation or account required
 - English-language dermato-oncology follow-up UI based on German guidelines for melanoma, BCC and cSCC
@@ -107,6 +109,8 @@ The current application uses:
 
 Medical records live in `data.js`; `app.js` contains filtering, rendering and interaction behavior. Records include a broad category, a structured subcategory, coding-system metadata, source metadata, and review status. This separation keeps content review focused and preserves the dependency-free static architecture.
 
+Optional educational media lives separately in `media-data.js`. Goal 6 intentionally ships with no pilot images because no candidate set was accepted without additional license and clinical review. The schema nevertheless requires a controlled media type, intrinsic dimensions, caption, alt text, diagnosis, educational description, source, reusable-rights license, attribution, HTTPS provenance, metadata-check date and independent media review state. See [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md).
+
 Follow-up protocols live in `followup-data.js`; `followup-app.js` renders the selectors, recommendations and provenance. `scripts/follow-up.js` performs offline integrity validation, while the existing clinical-review utility fingerprints both disease records and follow-up protocols.
 
 Each reference has its own `metadataCheckedAt` date. This date means only that the reference's bibliographic metadata and link were checked on that date; it is not a publication date, clinical review date, or endorsement of the adjacent medical content.
@@ -127,9 +131,12 @@ To run the same dependency-free syntax and test checks used by GitHub Actions wi
 ```shell
 node --check data.js
 node --check app.js
+node --check media-data.js
 node --check followup-data.js
 node --check followup-app.js
+node --check scripts/media.js
 node scripts/follow-up.js
+node scripts/media.js
 node scripts/clinical-review.js --validate
 node --test tests/*.test.js
 git diff --check

@@ -92,6 +92,17 @@ A source-supported non-interval state may use `timingStatus: "not_specified"` wi
 
 Any clinically meaningful protocol change requires re-review or reset to `clinician review required` with `clinicalReview: null`. Run `node scripts/follow-up.js` and `node scripts/clinical-review.js --follow-up <disease-id>` in addition to the standard checks. Adding a jurisdiction requires a separate sourced protocol and tests; do not create an empty or simulated selector.
 
+### Educational media
+
+Follow [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md) before adding any clinical photograph, dermoscopy image, histopathology image, diagram, illustration or procedural image. Media is optional and lives in `media-data.js`, separately from disease text.
+
+- Do not scrape image-search results or infer reuse permission from public visibility.
+- Record an allowed reusable-rights license, source, attribution, HTTPS source URL and metadata-check date for every item.
+- Provide meaningful alt text, a concise caption, an educational description, an existing disease ID and intrinsic image dimensions.
+- Confirm consent and de-identification requirements for any patient-derived image outside the automated validator.
+- Keep new media at `clinician review required` with `clinicalReview: null` until a physician reviews that exact media metadata version.
+- Run `node scripts/media.js`; a passing result validates structure, not license ownership, consent or clinical interpretation.
+
 ## Development
 
 Docutis currently uses simple:
@@ -108,7 +119,7 @@ Before submitting a change:
 2. Test the disease search.
 3. Check that condition details display correctly.
 4. Make sure existing functionality has not been unintentionally broken.
-5. Run `node --check data.js`, `node --check app.js`, `node --test tests/*.test.js`, and `git diff --check` for any content, data-structure, or interface change.
+5. Run `node --check data.js`, `node --check app.js`, `node --check media-data.js`, `node --check scripts/media.js`, `node scripts/media.js`, `node --test tests/*.test.js`, and `git diff --check` for any content, data-structure, media, or interface change.
    For follow-up changes also run `node --check followup-data.js`, `node --check followup-app.js`, `node scripts/follow-up.js`, and `node scripts/clinical-review.js --validate`.
 6. Test category filters and keyboard-only card/detail interaction at desktop and mobile widths.
 
