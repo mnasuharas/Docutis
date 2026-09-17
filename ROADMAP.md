@@ -6,6 +6,8 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Implemented
 
+- Goal 6 clinical UX and visual foundation: normalized semantic color and spacing tokens, compact professional navigation, visible library coverage, improved search and filter affordances, denser cards, scannable two-column condition details, sticky section navigation, progressive source disclosure, four responsive breakpoints and reduced-motion support.
+- Optional educational-media framework separated into `media-data.js`, with controlled media types and licenses, mandatory source/attribution/alt-text/dimensions metadata, independent clinician-review fingerprints, lazy rendering and image-failure fallback. No pilot images are included until reuse rights and clinical value are independently verified.
 - English-language dermato-oncology follow-up UI with German guideline jurisdiction for melanoma, BCC and cSCC: structured disease/jurisdiction protocols, stage/risk and time-period or non-interval guidance selectors, modality-specific states, provenance, offline validation and stale-review fingerprints. Melanoma in situ separates the absence of a German S3 Stage 0 interval from sourced German expert-practice and international surveillance context. All three protocols still require physician review.
 - Clinical review governance infrastructure: controlled statuses, structured `clinicalReview` metadata, deterministic content fingerprints, stale-review validation, maintainer utility and documented human review procedure. All 50 records still require physician review; 0 are clinician reviewed.
 - Static GitHub Pages-compatible application using HTML, CSS, and vanilla JavaScript
@@ -36,6 +38,7 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 - Decide whether URL-addressable condition details are desirable without compromising the no-build static architecture.
 - Add a lightweight broken-link check with respectful rate limiting and clear handling of redirects or bot-blocked sites.
 - Add cross-browser checks for current Chrome, Firefox, Safari, and Edge.
+- Source and clinically review a first 3–5 item media pilot; prefer original diagrams or clearly reusable open-license material and do not relax the Goal 6 validator to force inclusion.
 
 ## Content expansion plan
 
@@ -137,12 +140,12 @@ The exact boundary between inflammatory, eczematous, and papulosquamous disease�
 
 ## Visual-content policy and future needs
 
-No patient photographs or third-party clinical images should be added without documented permission, provenance, consent where applicable, and a license compatible with the repository. Future work may evaluate:
+The optional media data model, independent review fingerprint, renderer, load-failure fallback and automated validator are implemented. See [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md). No patient photographs or third-party clinical images should be added without documented permission, provenance, consent where applicable, and a license compatible with the repository. Future work may evaluate:
 
 - Original schematic lesion morphology and anatomy illustrations
 - Consent- and license-tracked clinical photography
 - Accessible alt-text standards and nonvisual equivalents
-- A per-asset provenance file recording creator, license, consent basis, modifications, and review status
+- A first 3–5 item pilot after source, license, attribution, accessibility and clinical review are documented
 
 ## Release direction
 

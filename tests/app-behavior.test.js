@@ -38,21 +38,28 @@ class Element {
   }
 }
 
-function createHarness(transformData) {
+function createHarness(transformData, transformMedia) {
   const document = {
     activeElement: null,
     elements: {},
+    listeners: {},
     createElement(tagName) { return new Element(tagName, document); },
     getElementById(id) { return document.elements[id]; },
-    contains(element) { return Boolean(element); }
+    contains(element) { return Boolean(element); },
+    addEventListener(type, listener) { (document.listeners[type] ||= []).push(listener); },
+    dispatch(type, extra = {}) { for (const listener of document.listeners[type] || []) listener({ type, target: extra.target, key: extra.key, ctrlKey: false, metaKey: false, altKey: false, preventDefault() {} }); }
   };
-  for (const id of ["cards", "details", "categoryFilters", "noResult", "resultStatus", "searchInput"]) {
-    document.elements[id] = new Element(id === "searchInput" ? "input" : "div", document);
+  for (const id of ["cards", "details", "categoryFilters", "libraryStats", "noResult", "resultStatus", "searchClear", "searchInput"]) {
+    const tagName = id === "searchInput" ? "input" : id === "searchClear" ? "button" : "div";
+    document.elements[id] = new Element(tagName, document);
   }
   document.elements.details.hidden = true;
   const context = { window: {}, document };
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "data.js"), "utf8"), context);
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "media-data.js"), "utf8"), context);
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "followup-data.js"), "utf8"), context);
   if (transformData) context.window.DOCUTIS_DATA = transformData(context.window.DOCUTIS_DATA);
+  if (transformMedia) context.window.DOCUTIS_MEDIA = transformMedia(context.window.DOCUTIS_MEDIA);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "app.js"), "utf8"), context);
   return { document, elements: document.elements };
 }
@@ -75,6 +82,7 @@ test("initial rendering creates all cards and eight category sections", () => {
   assert.equal(elements.categoryFilters.querySelectorAll("button").length, 9);
   assert.ok(elements.categoryFilters.querySelectorAll("button").every(button => button.type === "button"));
   assert.match(elements.resultStatus.textContent, /50 conditions shown/);
+  assert.match(textOf(elements.libraryStats), /3\s+oncology follow-up protocols/);
 });
 
 test("search covers names, aliases, categories, subcategories and both coding systems", () => {
@@ -161,7 +169,11 @@ test("card details distinguish coding fields, expose sources and restore focus",
   assert.match(textOf(elements.details), /Source metadata checked: 2026-09-15/);
   const links = elements.details.querySelectorAll("a");
   assert.ok(links.length > 0);
-  for (const link of links) {
+  const externalLinks = links.filter(link => /^https:\/\//.test(link.href));
+  const internalLinks = links.filter(link => /^#detail-/.test(link.href));
+  assert.ok(externalLinks.length > 0);
+  assert.ok(internalLinks.length >= 8);
+  for (const link of externalLinks) {
     assert.equal(link.target, "_blank");
     assert.equal(link.rel, "noopener noreferrer");
     assert.match(link.href, /^https:\/\//);
@@ -190,6 +202,65 @@ test("no-result state is announced", () => {
   assert.equal(elements.cards.querySelectorAll(".card").length, 0);
   assert.equal(elements.noResult.style.display, "block");
   assert.match(elements.resultStatus.textContent, /0 conditions shown/);
+});
+
+test("search clear control and slash shortcut preserve keyboard usability", () => {
+  const { document, elements } = createHarness();
+  elements.searchInput.value = "melanoma";
+  elements.searchInput.dispatch("input");
+  assert.equal(elements.searchClear.hidden, false);
+  elements.searchClear.dispatch("click");
+  assert.equal(elements.searchInput.value, "");
+  assert.equal(elements.searchClear.hidden, true);
+  assert.equal(document.activeElement, elements.searchInput);
+  document.activeElement = null;
+  document.dispatch("keydown", { key: "/", target: elements.cards });
+  assert.equal(document.activeElement, elements.searchInput);
+});
+
+test("condition details expose scannable section navigation and omit empty media", () => {
+  const { elements } = createHarness();
+  elements.cards.querySelectorAll(".card")[0].dispatch("click");
+  assert.equal(elements.details.querySelectorAll(".detail-jump-nav").length, 1);
+  assert.equal(elements.details.querySelectorAll(".detail-section").length, 8);
+  assert.equal(elements.details.querySelectorAll(".media-section").length, 0);
+  assert.match(textOf(elements.details), /Overview Clinical features Dermoscopy Differential Treatment Follow-up Coding Sources/);
+  assert.match(textOf(elements.details), /View \d+ traceable sources/);
+});
+
+test("optional educational media renders provenance and recovers from image failure", () => {
+  const { elements } = createHarness(null, media => ({
+    ...media,
+    items: [{
+      id: "synthetic-media", diseaseId: "actinic-keratosis", type: "diagram",
+      src: "assets/media/synthetic.svg", dimensions: { width: 1200, height: 900 },
+      caption: "Synthetic media fixture", alt: "Synthetic educational diagram",
+      anatomicalSite: null, diagnosis: "Actinic Keratosis",
+      educationalDescription: "Used to validate optional media rendering.",
+      patientIdentifiable: false,
+      consentBasis: "Not applicable — project-owned non-patient educational diagram",
+      source: "Docutis test fixture", license: "Project-owned", attribution: "Docutis contributors",
+      sourceUrl: "https://example.org/media", metadataCheckedAt: "2026-09-17",
+      reviewStatus: "clinician review required", clinicalReview: null
+    }]
+  }));
+  elements.cards.querySelectorAll(".card")[0].dispatch("click");
+  assert.equal(elements.details.querySelectorAll(".media-section").length, 1);
+  const image = elements.details.querySelectorAll("img")[0];
+  assert.equal(image.alt, "Synthetic educational diagram");
+  assert.equal(image.loading, "lazy");
+  assert.equal(image.width, 1200);
+  const fallback = elements.details.querySelectorAll(".media-unavailable")[0];
+  assert.equal(fallback.hidden, true);
+  image.dispatch("error");
+  assert.equal(image.hidden, true);
+  assert.equal(fallback.hidden, false);
+  const source = elements.details.querySelectorAll("a").find(link => link.href === "https://example.org/media");
+  assert.equal(source.target, "_blank");
+  assert.equal(source.rel, "noopener noreferrer");
+  assert.match(textOf(elements.details), /License: Project-owned/);
+  assert.match(textOf(elements.details), /Patient-identifiable content: No/);
+  assert.match(textOf(elements.details), /Media review: Clinician review required/);
 });
 
 test("unreviewed details explain human review without fabricated dates or fingerprints", () => {

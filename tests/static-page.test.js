@@ -11,6 +11,8 @@ const contributing = fs.readFileSync(path.join(root, "CONTRIBUTING.md"), "utf8")
 const roadmap = fs.readFileSync(path.join(root, "ROADMAP.md"), "utf8");
 const followUpDocs = fs.readFileSync(path.join(root, "FOLLOW_UP_PROTOCOLS.md"), "utf8");
 const goal5Review = fs.readFileSync(path.join(root, "GOAL5_CLINICAL_REVIEW.md"), "utf8");
+const mediaGovernance = fs.readFileSync(path.join(root, "MEDIA_GOVERNANCE.md"), "utf8");
+const mediaData = fs.readFileSync(path.join(root, "media-data.js"), "utf8");
 const followUpApp = fs.readFileSync(path.join(root, "followup-app.js"), "utf8");
 const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "validate.yml"), "utf8");
 
@@ -36,6 +38,7 @@ function contrastRatio(foreground, background) {
 
 test("static page keeps load order, disclaimer and accessible controls", () => {
   assert.ok(html.indexOf('src="data.js"') < html.indexOf('src="app.js"'));
+  assert.ok(html.indexOf('src="media-data.js"') < html.indexOf('src="app.js"'));
   assert.ok(html.indexOf('src="followup-data.js"') < html.indexOf('src="followup-app.js"'));
   assert.match(html, /id="followUpDisease"/);
   assert.match(html, /id="followUpGroup"/);
@@ -50,6 +53,9 @@ test("static page keeps load order, disclaimer and accessible controls", () => {
   assert.match(html, /<label[^>]+for="searchInput"/);
   assert.match(html, /aria-live="polite"/);
   assert.match(html, /class="skip-link"[^>]+href="#mainContent"/);
+  assert.match(html, /<nav class="nav" aria-label="Primary navigation">/);
+  assert.match(html, /id="searchClear"[^>]+type="button"[^>]+hidden/);
+  assert.match(html, /id="libraryStats"[^>]+aria-label="Current reference coverage"/);
   assert.match(html, /<main id="mainContent" tabindex="-1">/);
   assert.match(html, /id="details"[^>]+tabindex="-1"[^>]+role="region"[^>]+aria-labelledby="diseaseDetailsTitle"/);
   assert.doesNotMatch(html, /id="details"[^>]+aria-live/);
@@ -90,7 +96,7 @@ test("CI validates pull requests, main pushes and manual runs with read-only per
   assert.match(workflow, /actions\/setup-node@v7/);
   assert.match(workflow, /node-version:\s*"24"/);
   assert.match(workflow, /package-manager-cache:\s*false/);
-  for (const command of ["node --check data.js", "node --check app.js", "node --test tests/*.test.js", "git diff --check"]) {
+  for (const command of ["node --check data.js", "node --check app.js", "node --check media-data.js", "node --check scripts/media.js", "node scripts/media.js", "node --test tests/*.test.js", "git diff --check"]) {
     assert.ok(workflow.includes(command), `workflow is missing ${command}`);
   }
   for (const command of ["node --check followup-data.js", "node --check followup-app.js", "node scripts/clinical-review.js --validate", "node scripts/follow-up.js"]) {
@@ -116,6 +122,24 @@ test("responsive and keyboard focus rules remain present", () => {
   assert.match(css, /\.follow-up-controls select:focus-visible/);
   assert.match(css, /\.follow-up-context\s*{/);
   assert.match(css, /@media[\s\S]*?\.follow-up-controls,[\s\S]*?\.follow-up-results-grid\s*{[\s\S]*?grid-template-columns:\s*1fr/);
+  assert.match(css, /@media\s*\(max-width:\s*900px\)/);
+  assert.match(css, /@media\s*\(min-width:\s*1400px\)/);
+  assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)/);
+  assert.match(css, /\.detail-jump-nav\s*{/);
+  assert.match(css, /\.media-gallery\s*{/);
+});
+
+test("design tokens and governed optional media framework are present", () => {
+  for (const token of ["--color-canvas", "--color-surface", "--color-text", "--color-border", "--color-accent", "--color-success", "--color-warning", "--color-danger", "--space-4", "--space-8"]) {
+    assert.ok(css.includes(token), `missing design token ${token}`);
+  }
+  assert.match(mediaData, /schemaVersion:\s*1/);
+  assert.match(mediaData, /items:\s*Object\.freeze\(\[\]\)/);
+  assert.match(mediaGovernance, /clinical-photo.*dermoscopy.*histopathology.*diagram.*illustration.*procedure/s);
+  assert.match(mediaGovernance, /CC BY 4\.0/);
+  assert.match(mediaGovernance, /patient-identifiable information/i);
+  assert.match(mediaGovernance, /does not silently invalidate the clinical-text fingerprint/i);
+  assert.match(mediaGovernance, /failed image load/i);
 });
 
 test("result status and footer meet WCAG AA normal-text contrast", () => {

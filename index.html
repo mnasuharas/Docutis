@@ -14,34 +14,50 @@
 
 <a class="skip-link" href="#mainContent">Skip to main content</a>
 
-<header>
-  <div class="nav">
-    <div class="logo">Docutis</div>
-    <div class="badge">Open Source</div>
-  </div>
+<header class="site-header">
+  <nav class="nav" aria-label="Primary navigation">
+    <a class="brand" href="#mainContent" aria-label="Docutis home">
+      <span class="brand-mark" aria-hidden="true">D</span>
+      <span class="logo">Docutis</span>
+    </a>
+    <div class="primary-links">
+      <a href="#searchPanel">Search</a>
+      <a href="#followUpModule">Follow-up</a>
+      <a href="#conditionsTitle">Conditions</a>
+    </div>
+    <div class="badge">Open source</div>
+  </nav>
 </header>
 
 <main id="mainContent" tabindex="-1">
 
-  <section class="hero">
-    <h1>Dermatology, structured.</h1>
+  <section class="hero" aria-labelledby="pageTitle">
+    <p class="eyebrow">Clinical dermatology reference</p>
+    <h1 id="pageTitle">Dermatology, structured for fast reference.</h1>
 
     <p>
       An open-source dermatology reference and education toolkit
       designed for physicians, medical trainees and healthcare professionals.
     </p>
 
-    <div class="search-wrapper">
-      <label class="visually-hidden" for="searchInput">Search conditions</label>
-      <input
-        id="searchInput"
-        type="search"
-        placeholder="Search a dermatologic condition..."
-        autocomplete="off"
-        aria-controls="cards"
-      >
-    </div>
+    <div id="libraryStats" class="library-stats" aria-label="Current reference coverage"></div>
+  </section>
 
+  <section id="searchPanel" class="search-panel" aria-labelledby="searchTitle">
+    <div class="section-heading compact-heading">
+      <div>
+        <p class="eyebrow">Reference library</p>
+        <h2 id="searchTitle">Find a condition</h2>
+      </div>
+      <p class="keyboard-hint"><kbd>/</kbd> to focus search</p>
+    </div>
+    <div class="search-wrapper">
+      <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"/></svg>
+      <label class="visually-hidden" for="searchInput">Search conditions</label>
+      <input id="searchInput" type="search" placeholder="Search by condition, alias, category or code" autocomplete="off" aria-controls="cards" aria-describedby="searchHelp">
+      <button id="searchClear" class="search-clear" type="button" hidden>Clear</button>
+    </div>
+    <p id="searchHelp" class="search-help">Examples: melanoma, shingles, eczema, C43</p>
     <div id="categoryFilters" class="category-filters" aria-label="Filter conditions by category"></div>
     <p id="resultStatus" class="result-status" role="status" aria-live="polite"></p>
   </section>
@@ -70,13 +86,20 @@
     <div id="followUpResult" class="follow-up-result" role="region" aria-labelledby="followUpResultHeading"></div>
   </section>
 
-  <h2 class="section-title">Conditions</h2>
-
-  <div id="cards" class="cards"></div>
-
-  <div id="noResult" class="no-result">
-    No matching condition found.
-  </div>
+  <section class="reference-library" aria-labelledby="conditionsTitle">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Browse by category</p>
+        <h2 id="conditionsTitle" class="section-title">Conditions</h2>
+      </div>
+      <p>Open any record for clinical features, dermoscopy, differential diagnosis, treatment, follow-up, coding and sources.</p>
+    </div>
+    <div id="cards" class="cards"></div>
+    <div id="noResult" class="no-result">
+      <strong>No matching condition found.</strong>
+      <span>Try another name, alias, category or classification code.</span>
+    </div>
+  </section>
 
   <section id="details" tabindex="-1" role="region" aria-labelledby="diseaseDetailsTitle" hidden></section>
 
@@ -94,6 +117,7 @@
 </main>
 
 <script src="data.js"></script>
+<script src="media-data.js"></script>
 <script src="followup-data.js"></script>
 <script src="app.js"></script>
 <script src="followup-app.js"></script>
