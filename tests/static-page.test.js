@@ -11,6 +11,7 @@ const contributing = fs.readFileSync(path.join(root, "CONTRIBUTING.md"), "utf8")
 const roadmap = fs.readFileSync(path.join(root, "ROADMAP.md"), "utf8");
 const followUpDocs = fs.readFileSync(path.join(root, "FOLLOW_UP_PROTOCOLS.md"), "utf8");
 const goal5Review = fs.readFileSync(path.join(root, "GOAL5_CLINICAL_REVIEW.md"), "utf8");
+const followUpApp = fs.readFileSync(path.join(root, "followup-app.js"), "utf8");
 const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "validate.yml"), "utf8");
 
 function cssProperty(selector, property) {
@@ -39,6 +40,12 @@ test("static page keeps load order, disclaimer and accessible controls", () => {
   assert.match(html, /id="followUpDisease"/);
   assert.match(html, /id="followUpGroup"/);
   assert.match(html, /id="followUpPeriod"/);
+  assert.match(html, /<h2 id="followUpTitle">Dermato-oncology follow-up<\/h2>/);
+  assert.match(html, /<label for="followUpDisease">Disease/);
+  assert.match(html, /<label for="followUpGroup">Stage \/ risk group/);
+  assert.match(html, /<label for="followUpPeriod">Follow-up period or guidance/);
+  assert.doesNotMatch(html, /Dermato-onkologische Nachsorge|Erkrankung|Stadium \/ Risikogruppe|Zeitraum|Deutschland · leitlinienbasiert/);
+  assert.doesNotMatch(followUpApp, /Einmalig|Alle |pro Jahr|Nicht spezifiziert|Leitlinienbasis|Leitlinienkontext|Fundstelle|angezeigt/);
   assert.match(html, /id="followUpStatus"[^>]+aria-live="polite"/);
   assert.match(html, /<label[^>]+for="searchInput"/);
   assert.match(html, /aria-live="polite"/);
@@ -62,6 +69,11 @@ test("documentation distinguishes source metadata checks from clinical review", 
   assert.match(goal5Review, /\| Disease \| Risk\/stage \| Period \| Clinical exam \| LN ultrasound \| Laboratory \| Imaging \| Source \|/);
   assert.match(goal5Review, /- \[ \] Physician sign-off/);
   assert.match(goal5Review, /all three protocols remain `clinician review required`/i);
+  assert.match(followUpDocs, /Melanoma in situ \/ Stage 0/);
+  assert.match(followUpDocs, /does not define a specific structured follow-up schedule/i);
+  assert.match(followUpDocs, /not specified[^.]*does not supply a recommendation/i);
+  assert.match(goal5Review, /Physician sign-off: melanoma in situ \/ Stage 0/);
+  assert.match(goal5Review, /Melanoma \| Melanoma in situ \/ Stage 0 \| No structured interval specified/);
 });
 
 test("CI validates pull requests, main pushes and manual runs with read-only permissions", () => {

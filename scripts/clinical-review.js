@@ -60,15 +60,16 @@ function sortBy(items, key) {
 function followUpClinicalContent(protocol) {
   const { reviewStatus, clinicalReview, diseaseLabel, jurisdictionLabel, ...content } = protocol;
   content.guideline = Object.fromEntries(Object.entries(protocol.guideline).filter(([key]) => key !== "sourceMetadataCheckedAt"));
-  content.groups = sortBy(protocol.groups, "id").map(group => ({
+  content.groups = sortBy(protocol.groups, "id").map(({ label: groupLabel, ...group }) => ({
     ...group,
-    periods: sortBy(group.periods, "id").map(period => ({
+    notes: [...group.notes].sort((left, right) => left.localeCompare(right, "en")),
+    periods: sortBy(group.periods, "id").map(({ label: periodLabel, ...period }) => ({
       ...period,
       recommendations: sortBy(period.recommendations, "modality"),
-      notes: [...period.notes].sort((left, right) => left.localeCompare(right, "de"))
+      notes: [...period.notes].sort((left, right) => left.localeCompare(right, "en"))
     }))
   }));
-  content.notes = [...protocol.notes].sort((left, right) => left.localeCompare(right, "de"));
+  content.notes = [...protocol.notes].sort((left, right) => left.localeCompare(right, "en"));
   return content;
 }
 

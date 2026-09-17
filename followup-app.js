@@ -7,6 +7,17 @@
   const periodSelect = document.getElementById("followUpPeriod");
   const result = document.getElementById("followUpResult");
   const status = document.getElementById("followUpStatus");
+  const recommendationCharacters = Object.freeze({
+    soll: "strong recommendation",
+    sollte: "recommendation",
+    "sollte (EK)": "expert consensus recommendation",
+    "Schema 9.2": "schedule 9.2"
+  });
+  const consensusStrengths = Object.freeze({
+    Konsens: "consensus",
+    "Starker Konsens": "strong consensus",
+    "Konsensstärke 100 %": "100% consensus"
+  });
 
   function append(parent, tag, text, className) {
     const element = document.createElement(tag);
@@ -40,22 +51,28 @@
 
   function frequencyText(frequency) {
     if (!frequency) return null;
-    if (frequency.kind === "single_timepoint_month") return `Einmalig nach ${frequency.month} Monaten`;
+    if (frequency.kind === "single_timepoint_month") return `Once at ${frequency.month} months`;
     if (frequency.kind === "interval_months") {
-      if (frequency.min === frequency.max) return frequency.min === 12 ? "Einmal jährlich" : `Alle ${frequency.min} Monate`;
-      return `Alle ${frequency.min}–${frequency.max} Monate`;
+      if (frequency.min === frequency.max) return frequency.min === 12 ? "Annually" : `Every ${frequency.min} months`;
+      return `Every ${frequency.min}–${frequency.max} months`;
     }
     if (frequency.kind === "occurrences_per_year") {
-      if (frequency.min === frequency.max) return `${frequency.min}× pro Jahr`;
-      return `${frequency.min}–${frequency.max}× pro Jahr`;
+      if (frequency.min === frequency.max) return `${frequency.min}× per year`;
+      return `${frequency.min}–${frequency.max}× per year`;
     }
-    return "Nicht spezifiziert";
+    return "Not specified";
   }
 
   function recommendationText(recommendation) {
-    if (!recommendation) return "Im ausgewählten Leitlinienabschnitt nicht spezifiziert";
-    if (recommendation.status === "not_routinely_scheduled") return "Kein routinemäßiges Intervall im Schema";
-    return frequencyText(recommendation.frequency) || "Risikoadaptiert";
+    if (!recommendation || recommendation.status === "not_specified") return "Not specified in the guideline";
+    if (recommendation.status === "not_routinely_scheduled") return "Not routinely scheduled";
+    return frequencyText(recommendation.frequency) || "Risk-adapted";
+  }
+
+  function recommendationBasisText(recommendationBasis) {
+    const character = recommendationCharacters[recommendationBasis.character] || recommendationBasis.character;
+    const consensus = consensusStrengths[recommendationBasis.consensus] || recommendationBasis.consensus;
+    return `${character} · ${consensus}`;
   }
 
   function renderReview(protocol, parent) {
@@ -69,8 +86,8 @@
       : "Clinical review: Required", "review-status");
     if (reviewed) append(parent, "span", `Reviewed: ${review.reviewedAt}`, "follow-up-reviewed-date");
     append(parent, "p", reviewed
-      ? "Die ärztliche Prüfung gilt für diese Protokollversion und ersetzt keine individuelle klinische Beurteilung."
-      : "Dieses Nachsorgeprotokoll wurde noch nicht durch eine Ärztin oder einen Arzt geprüft. Quellen- und Schema-Prüfungen sind keine klinische Prüfung.", "review-explanation");
+      ? "The physician review applies to this protocol version and does not replace individual clinical judgment."
+      : "This follow-up protocol has not yet completed physician review. Source and schema checks are not clinical review.", "review-explanation");
   }
 
   function renderResult(announce = true) {
@@ -92,25 +109,27 @@
       append(card, "p", recommendationText(recommendation), recommendation ? `recommendation-${recommendation.status}` : "recommendation-unspecified");
       if (recommendation?.note) append(card, "p", recommendation.note, "follow-up-note");
       if (recommendation?.recommendationBasis) {
-        append(card, "p", `${recommendation.recommendationBasis.character} · ${recommendation.recommendationBasis.consensus}`, "recommendation-strength");
+        append(card, "p", recommendationBasisText(recommendation.recommendationBasis), "recommendation-strength");
       }
     });
 
-    [...period.notes, ...protocol.notes].forEach(note => append(result, "p", note, "follow-up-note"));
+    [...period.notes, ...(group.notes || []), ...protocol.notes].forEach(note => append(result, "p", note, "follow-up-note"));
 
     const provenance = append(result, "details", null, "follow-up-provenance");
-    append(provenance, "summary", "Leitlinienbasis und klinische Governance");
-    append(provenance, "p", protocol.guideline.title);
-    append(provenance, "p", `Leitlinienkontext: ${protocol.jurisdictionLabel} · ${protocol.guideline.guidelineSystem} · Version ${protocol.guideline.version} · ${protocol.guideline.publishedAt}`);
-    append(provenance, "p", `Fundstelle: ${protocol.guideline.recommendationLocation}`);
-    const sourceLink = append(provenance, "a", "Offizielle Leitlinie öffnen (neuer Tab)");
+    append(provenance, "summary", "Guideline basis and clinical governance");
+    append(provenance, "p", `Official guideline title: ${protocol.guideline.title}`);
+    append(provenance, "p", `Guideline jurisdiction: ${protocol.jurisdictionLabel} · ${protocol.guideline.guidelineSystem}`);
+    append(provenance, "p", `Version: ${protocol.guideline.version} · ${protocol.guideline.publishedAt}`);
+    append(provenance, "p", `AWMF register: ${protocol.guideline.registerNumber}`);
+    append(provenance, "p", `Recommendation location: ${protocol.guideline.recommendationLocation}`);
+    const sourceLink = append(provenance, "a", "Open the official guideline (new tab)");
     sourceLink.href = protocol.guideline.sourceUrl;
     sourceLink.target = "_blank";
     sourceLink.rel = "noopener noreferrer";
     append(provenance, "p", `Source metadata checked: ${protocol.guideline.sourceMetadataCheckedAt}`, "reference-metadata");
     renderReview(protocol, provenance);
 
-    if (announce) status.textContent = `${protocol.diseaseLabel}, ${group.label}, ${period.label} angezeigt.`;
+    if (announce) status.textContent = `Showing ${protocol.diseaseLabel}, ${group.label}, ${period.label}.`;
   }
 
   function renderPeriods(announce = true) {

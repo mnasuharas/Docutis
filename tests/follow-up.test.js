@@ -55,15 +55,35 @@ test("authoritative German schedule matrix retains its key intervals", () => {
   assert.match(cscc.guideline.sourceUrl, /Langversion_2\.0\.pdf$/);
 });
 
+test("melanoma in situ is explicit non-interval guidance without an invented schedule", () => {
+  const melanoma = protocol("cutaneous-melanoma-de");
+  const stageZero = melanoma.groups.find(group => group.id === "melanoma-in-situ");
+  assert.equal(stageZero.label, "Melanoma in situ (Stage 0)");
+  assert.match(stageZero.description, /does not define a specific structured follow-up schedule/i);
+  assert.equal(stageZero.periods.length, 1);
+  const guidance = stageZero.periods[0];
+  assert.equal(guidance.id, "not-specified");
+  assert.equal(guidance.timingStatus, "not_specified");
+  assert.equal(guidance.range, null);
+  assert.equal(guidance.recommendations.length, 4);
+  assert.ok(guidance.recommendations.every(item => item.status === "not_specified" && item.frequency === null && item.recommendationBasis === null));
+  assert.equal(melanoma.reviewStatus, "clinician review required");
+  assert.equal(melanoma.clinicalReview, null);
+});
+
 test("invalid ranges, intervals, modalities and conflicting recommendations fail", () => {
   const cases = [];
-  const badRange = clone(loadFollowUpData()); badRange.protocols[0].groups[0].periods[0].range = { fromYear: 3, toYear: 1 }; cases.push(badRange);
-  const badInterval = clone(loadFollowUpData()); badInterval.protocols[0].groups[0].periods[0].recommendations[0].frequency.min = 0; cases.push(badInterval);
-  const badModality = clone(loadFollowUpData()); badModality.protocols[0].groups[0].periods[0].recommendations[0].modality = "unsupported"; cases.push(badModality);
-  const duplicate = clone(loadFollowUpData()); duplicate.protocols[0].groups[0].periods[0].recommendations.push(clone(duplicate.protocols[0].groups[0].periods[0].recommendations[0])); cases.push(duplicate);
+  const badRange = clone(loadFollowUpData()); badRange.protocols[0].groups[1].periods[0].range = { fromYear: 3, toYear: 1 }; cases.push(badRange);
+  const badInterval = clone(loadFollowUpData()); badInterval.protocols[0].groups[1].periods[0].recommendations[0].frequency.min = 0; cases.push(badInterval);
+  const badModality = clone(loadFollowUpData()); badModality.protocols[0].groups[1].periods[0].recommendations[0].modality = "unsupported"; cases.push(badModality);
+  const duplicate = clone(loadFollowUpData()); duplicate.protocols[0].groups[1].periods[0].recommendations.push(clone(duplicate.protocols[0].groups[1].periods[0].recommendations[0])); cases.push(duplicate);
   const missingSource = clone(loadFollowUpData()); missingSource.protocols[0].guideline.sourceUrl = ""; cases.push(missingSource);
-  const missingBasis = clone(loadFollowUpData()); missingBasis.protocols[0].groups[0].periods[0].recommendations[0].recommendationBasis = null; cases.push(missingBasis);
-  const badCharacter = clone(loadFollowUpData()); badCharacter.protocols[0].groups[0].periods[0].recommendations[0].recommendationBasis.character = "recommended"; cases.push(badCharacter);
+  const missingBasis = clone(loadFollowUpData()); missingBasis.protocols[0].groups[1].periods[0].recommendations[0].recommendationBasis = null; cases.push(missingBasis);
+  const badCharacter = clone(loadFollowUpData()); badCharacter.protocols[0].groups[1].periods[0].recommendations[0].recommendationBasis.character = "recommended"; cases.push(badCharacter);
+  const fakeMisRange = clone(loadFollowUpData()); fakeMisRange.protocols[0].groups[0].periods[0].range = { fromYear: 1, toYear: 3 }; cases.push(fakeMisRange);
+  const fakeMisFrequency = clone(loadFollowUpData()); fakeMisFrequency.protocols[0].groups[0].periods[0].recommendations[0].frequency = { kind: "interval_months", min: 6, max: 6 }; cases.push(fakeMisFrequency);
+  const fakeMisBasis = clone(loadFollowUpData()); fakeMisBasis.protocols[0].groups[0].periods[0].recommendations[0].recommendationBasis = { character: "sollte", consensus: "Konsens" }; cases.push(fakeMisBasis);
+  const incompleteMis = clone(loadFollowUpData()); incompleteMis.protocols[0].groups[0].periods[0].recommendations.pop(); cases.push(incompleteMis);
   for (const fixture of cases) assert.throws(() => validateFollowUpData(fixture, loadData()));
 });
 
@@ -95,6 +115,10 @@ test("follow-up fingerprints are deterministic and ignore ordering and metadata 
   reordered.guideline.sourceMetadataCheckedAt = "2030-01-01";
   reordered.diseaseLabel = "Presentation-only disease label";
   reordered.jurisdictionLabel = "Presentation-only jurisdiction label";
+  reordered.groups.forEach(group => {
+    group.label = `Presentation-only ${group.id}`;
+    group.periods.forEach(period => { period.label = `Presentation-only ${period.id}`; });
+  });
   assert.equal(followUpFingerprint(original), followUpFingerprint(reordered));
 });
 
@@ -105,14 +129,16 @@ test("every clinically meaningful follow-up change invalidates an old review", (
   const changes = [
     item => { item.diseaseId = "different-disease"; },
     item => { item.jurisdiction = "AT"; },
-    item => { item.groups[0].label += " geändert"; },
-    item => { item.groups[0].periods[0].range.toYear = 2; },
+    item => { item.groups[0].id = "different-stage"; },
+    item => { item.groups[0].description += " Clinically meaningful change."; },
+    item => { item.groups[0].periods[0].id = "different-guidance-period"; },
+    item => { item.groups[1].periods[0].range.toYear = 2; },
     item => { item.groups[0].periods[0].recommendations[0].modality = "s100b"; },
-    item => { item.groups[0].periods[0].recommendations[0].status = "conditional"; },
-    item => { item.groups[0].periods[0].recommendations[0].frequency.min = 4; },
+    item => { item.groups[1].periods[0].recommendations[0].status = "conditional"; },
+    item => { item.groups[1].periods[0].recommendations[0].frequency.min = 4; },
     item => { item.groups[0].periods[0].recommendations[0].note = "Neue klinische Bedingung"; },
-    item => { item.groups[0].periods[0].recommendations[0].recommendationBasis.character = "soll"; },
-    item => { item.groups[0].periods[0].recommendations[0].recommendationBasis.consensus = "Konsens"; },
+    item => { item.groups[1].periods[0].recommendations[0].recommendationBasis.character = "soll"; },
+    item => { item.groups[1].periods[0].recommendations[0].recommendationBasis.consensus = "Konsens"; },
     item => { item.guideline.version = "4.0"; },
     item => { item.guideline.sourceUrl = "https://example.org/replacement-guideline"; },
     item => { item.notes.push("Neue klinisch relevante Anmerkung"); }
@@ -122,6 +148,18 @@ test("every clinically meaningful follow-up change invalidates an old review", (
     assert.notEqual(followUpFingerprint(stale), base.clinicalReview.reviewedContentHash);
     assert.throws(() => validateFollowUpReview(stale), /Stale clinical review/);
   }
+});
+
+test("melanoma in situ clinical guidance participates in the deterministic fingerprint", () => {
+  const original = clone(protocol("cutaneous-melanoma-de"));
+  const originalHash = followUpFingerprint(original);
+  const changedStatus = clone(original);
+  changedStatus.groups[0].periods[0].recommendations[0].status = "not_routinely_scheduled";
+  assert.notEqual(followUpFingerprint(changedStatus), originalHash);
+  const changedStatement = clone(original);
+  changedStatement.groups[0].description = "Different clinical statement.";
+  assert.notEqual(followUpFingerprint(changedStatement), originalHash);
+  assert.equal(followUpFingerprint(original), originalHash);
 });
 
 test("resetting a changed protocol to review-required is valid without refreshing its hash", () => {
@@ -168,25 +206,53 @@ function textOf(element) { return [element.textContent, ...element.children.map(
 
 test("follow-up UI updates disease, group and period with safe provenance links", () => {
   const elements = uiHarness();
-  assert.match(textOf(elements.followUpResult), /Malignes Melanom: Stadium IA/);
-  assert.match(textOf(elements.followUpResult), /Alle 6 Monate/);
+  assert.match(textOf(elements.followUpResult), /Cutaneous melanoma: Melanoma in situ \(Stage 0\)/);
+  assert.match(textOf(elements.followUpResult), /No structured interval specified/);
+  assert.match(textOf(elements.followUpResult), /Not specified in the guideline/);
+  assert.doesNotMatch(textOf(elements.followUpResult), /Every \d+ months|Annually/);
+  elements.followUpGroup.value = "stage-ia"; elements.followUpGroup.dispatch("change");
+  assert.match(textOf(elements.followUpResult), /Cutaneous melanoma: Stage IA/);
+  assert.match(textOf(elements.followUpResult), /Every 6 months/);
   elements.followUpDisease.value = "basal-cell-carcinoma-de"; elements.followUpDisease.dispatch("change");
-  assert.match(textOf(elements.followUpResult), /Basalzellkarzinom/);
+  assert.match(textOf(elements.followUpResult), /Basal cell carcinoma/);
   assert.equal(elements.followUpGroup.children.length, 2);
   elements.followUpGroup.value = "intensive-risk-group"; elements.followUpGroup.dispatch("change");
   elements.followUpPeriod.value = "after-year-2-event-free"; elements.followUpPeriod.dispatch("change");
-  assert.match(textOf(elements.followUpResult), /Einmal jährlich/);
-  assert.match(textOf(elements.followUpResult), /Nur wenn mehr als 2 Jahre kein neues BZK/);
+  assert.match(textOf(elements.followUpResult), /Annually/);
+  assert.match(textOf(elements.followUpResult), /Only if no new BCC or recurrence has occurred for more than 2 years/);
   for (const link of elements.followUpResult.querySelectorAll("a")) { assert.equal(link.target, "_blank"); assert.equal(link.rel, "noopener noreferrer"); }
 });
 
 test("follow-up UI safely distinguishes absent recommendations and review-required state", () => {
   const elements = uiHarness();
   elements.followUpDisease.value = "basal-cell-carcinoma-de"; elements.followUpDisease.dispatch("change");
-  assert.match(textOf(elements.followUpResult), /Im ausgewählten Leitlinienabschnitt nicht spezifiziert/);
+  assert.match(textOf(elements.followUpResult), /Not specified in the guideline/);
   assert.match(textOf(elements.followUpResult), /Clinical review: Required/);
-  assert.match(textOf(elements.followUpResult), /Quellen- und Schema-Prüfungen sind keine klinische Prüfung/);
+  assert.match(textOf(elements.followUpResult), /Source and schema checks are not clinical review/);
   assert.doesNotMatch(textOf(elements.followUpResult), /sha256-v1:|Reviewed:/);
+});
+
+test("follow-up UI terminology is English while official German guideline titles remain intact", () => {
+  const elements = uiHarness();
+  const rendered = [];
+  for (const disease of elements.followUpDisease.children) {
+    elements.followUpDisease.value = disease.value; elements.followUpDisease.dispatch("change");
+    for (const group of elements.followUpGroup.children) {
+      elements.followUpGroup.value = group.value; elements.followUpGroup.dispatch("change");
+      for (const period of elements.followUpPeriod.children) {
+        elements.followUpPeriod.value = period.value; elements.followUpPeriod.dispatch("change");
+        rendered.push(textOf(elements.followUpResult));
+      }
+    }
+  }
+  const text = rendered.join(" ");
+  assert.match(text, /Clinical examination/);
+  assert.match(text, /Lymph node ultrasound/);
+  assert.match(text, /Cross-sectional imaging/);
+  assert.match(text, /Not routinely scheduled/);
+  assert.match(text, /Not specified in the guideline/);
+  assert.match(text, /Official guideline title: S3-Leitlinie/);
+  assert.doesNotMatch(text, /Klinische Untersuchung|Lymphknoten-Sonographie|Schnittbildgebung|Alle \d|Jahr \d|Im ausgewählten|Kein routinemäßiges|angezeigt/);
 });
 
 test("follow-up UI supports a synthetic reviewed state without exposing its hash", () => {
