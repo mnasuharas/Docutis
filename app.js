@@ -49,12 +49,28 @@
     return "Coding: verification required";
   }
 
+  function clinicalProfileSearchText(profile) {
+    if (!profile) return [];
+    const values = [];
+    function visit(value) {
+      if (value === null || value === undefined) return;
+      if (typeof value === "string") values.push(value, value.replaceAll("-", " "));
+      else if (Array.isArray(value)) value.forEach(visit);
+      else if (typeof value === "object") Object.values(value).forEach(visit);
+    }
+    visit(profile.aliases);
+    visit(profile.epidemiology);
+    visit(profile.etiology);
+    visit(profile.presentation);
+    return values;
+  }
+
   function filteredDiseases() {
     const query = searchInput.value.trim().toLocaleLowerCase();
     return data.diseases.filter(disease => {
       const categoryMatches = activeCategory === "all" || disease.category === activeCategory;
       const searchable = [disease.name, disease.alternative, disease.description, categoryTitle(disease.category),
-        subcategoryTitle(disease.subcategory), ...codingSearchText(disease.coding)];
+        subcategoryTitle(disease.subcategory), ...codingSearchText(disease.coding), ...clinicalProfileSearchText(disease.clinicalProfile)];
       return categoryMatches && (!query || searchable.some(value => value.toLocaleLowerCase().includes(query)));
     });
   }
@@ -110,6 +126,192 @@
     section.id = id;
     appendTextElement(section, "h3", title);
     appendTextElement(section, "p", content);
+    parent.appendChild(section);
+    return section;
+  }
+
+  function humanize(value) {
+    return value.replaceAll("-", " ").replace(/\b\w/g, character => character.toUpperCase());
+  }
+
+  function addStructuredList(parent, values, className = "structured-list") {
+    const list = document.createElement("ul");
+    list.className = className;
+    values.forEach(value => appendTextElement(list, "li", value));
+    parent.appendChild(list);
+    return list;
+  }
+
+  function addStructuredField(parent, label, values) {
+    if (!values || (Array.isArray(values) && !values.length)) return;
+    const row = document.createElement("div");
+    row.className = "structured-field";
+    appendTextElement(row, "h4", label);
+    if (Array.isArray(values)) {
+      const tags = document.createElement("div");
+      tags.className = "clinical-tags";
+      values.forEach(value => appendTextElement(tags, "span", humanize(value), "clinical-tag"));
+      row.appendChild(tags);
+    } else appendTextElement(row, "p", values);
+    parent.appendChild(row);
+  }
+
+  function addClinicalPresentationSection(parent, disease) {
+    const profile = disease.clinicalProfile;
+    if (!profile) return addDetailSection(parent, "Clinical features", disease.clinical, "detail-clinical");
+    const section = document.createElement("section");
+    section.className = "detail-section structured-section";
+    section.id = "detail-clinical";
+    appendTextElement(section, "h3", "Clinical presentation");
+    appendTextElement(section, "p", disease.clinical, "structured-summary");
+    const morphology = profile.presentation.morphology;
+    const morphologyTerms = [
+      ...(morphology.primaryLesions || []), ...(morphology.otherPrimaryLesions || []),
+      ...(morphology.secondaryChanges || []), ...(morphology.colors || []),
+      ...(morphology.surface || []), ...(morphology.border || []), ...(morphology.configuration || [])
+    ];
+    addStructuredField(section, "Morphology", morphologyTerms);
+    if (morphology.typicalSize) addStructuredField(section, "Typical size", morphology.typicalSize);
+    if (morphology.text) appendTextElement(section, "p", morphology.text, "structured-note");
+    const localization = profile.presentation.localization;
+    if (localization) {
+      addStructuredField(section, "Typical localization", [...(localization.sites || []), ...(localization.distribution || [])]);
+      if (localization.text) appendTextElement(section, "p", localization.text, "structured-note");
+    }
+    if (profile.presentation.symptoms) {
+      addStructuredField(section, "Symptoms", profile.presentation.symptoms.values);
+      if (profile.presentation.symptoms.text) appendTextElement(section, "p", profile.presentation.symptoms.text, "structured-note");
+    }
+    if (profile.presentation.course) addStructuredField(section, "Course", profile.presentation.course.values);
+    if (profile.etiology) addStructuredField(section, "Etiology / pathogenesis", profile.etiology.text || profile.etiology.mechanisms);
+    if (profile.epidemiology) {
+      addStructuredField(section, "Typical age groups", profile.epidemiology.ageGroups);
+      if (profile.epidemiology.sexDistribution) addStructuredField(section, "Sex distribution", profile.epidemiology.sexDistribution);
+      addStructuredField(section, "Risk groups", profile.epidemiology.riskGroups);
+      if (profile.epidemiology.prevalence) addStructuredField(section, "Prevalence / rarity", profile.epidemiology.prevalence);
+      addStructuredField(section, "Seasonal / environmental associations", profile.epidemiology.associations);
+    }
+    parent.appendChild(section);
+    return section;
+  }
+
+  function addDiagnosisSection(parent, disease) {
+    const profile = disease.clinicalProfile;
+    if (!profile) return addDetailSection(parent, "Dermoscopy", disease.dermoscopy, "detail-dermoscopy");
+    const section = document.createElement("section");
+    section.className = "detail-section structured-section";
+    section.id = "detail-dermoscopy";
+    appendTextElement(section, "h3", "Diagnosis and dermoscopy");
+    if (profile.diagnostics) {
+      appendTextElement(section, "h4", "Diagnostic approach");
+      const list = document.createElement("ul");
+      list.className = "structured-list diagnostic-list";
+      profile.diagnostics.forEach(item => {
+        const row = document.createElement("li");
+        appendTextElement(row, "strong", `${humanize(item.method)} · ${humanize(item.role)}`);
+        appendTextElement(row, "span", item.indication);
+        if (item.findings) appendTextElement(row, "span", item.findings, "structured-note");
+        list.appendChild(row);
+      });
+      section.appendChild(list);
+    }
+    appendTextElement(section, "h4", "Dermoscopy");
+    appendTextElement(section, "p", disease.dermoscopy);
+    if (profile.dermoscopy) {
+      const dermoscopyTerms = [
+        ...(profile.dermoscopy.patterns || []), ...(profile.dermoscopy.vascularStructures || []),
+        ...(profile.dermoscopy.pigmentStructures || []), ...(profile.dermoscopy.scaleKeratinClues || []),
+        ...(profile.dermoscopy.highRiskClues || [])
+      ];
+      addStructuredField(section, "Structured findings", dermoscopyTerms);
+      if (profile.dermoscopy.text) appendTextElement(section, "p", profile.dermoscopy.text, "structured-note");
+    }
+    if (profile.histopathology) {
+      appendTextElement(section, "h4", "High-yield histopathology");
+      appendTextElement(section, "p", profile.histopathology);
+    }
+    parent.appendChild(section);
+    return section;
+  }
+
+  function addDifferentialSection(parent, disease) {
+    const profile = disease.clinicalProfile;
+    if (!profile?.differentials) return addDetailSection(parent, "Differential diagnosis", disease.differential, "detail-differential");
+    const section = document.createElement("section");
+    section.className = "detail-section structured-section";
+    section.id = "detail-differential";
+    appendTextElement(section, "h3", "Differential diagnosis");
+    const list = document.createElement("ul");
+    list.className = "structured-list differential-list";
+    profile.differentials.forEach(item => {
+      const row = document.createElement("li");
+      appendTextElement(row, "strong", item.diagnosis);
+      if (item.distinguishingClue) appendTextElement(row, "span", item.distinguishingClue);
+      list.appendChild(row);
+    });
+    section.appendChild(list);
+    parent.appendChild(section);
+    return section;
+  }
+
+  function addTreatmentSection(parent, disease) {
+    const profile = disease.clinicalProfile;
+    if (!profile?.treatment) return addDetailSection(parent, "Treatment overview", disease.treatment, "detail-treatment", "detail-section--treatment");
+    const section = document.createElement("section");
+    section.className = "detail-section detail-section--treatment structured-section";
+    section.id = "detail-treatment";
+    appendTextElement(section, "h3", "Treatment overview");
+    appendTextElement(section, "p", disease.treatment, "structured-summary");
+    profile.treatment.steps.forEach(step => {
+      const tier = document.createElement("div");
+      tier.className = "treatment-tier";
+      appendTextElement(tier, "h4", humanize(step.level));
+      const list = document.createElement("ul");
+      list.className = "structured-list";
+      step.interventions.forEach(item => {
+        const row = document.createElement("li");
+        appendTextElement(row, "strong", item.intervention);
+        if (item.details) appendTextElement(row, "span", item.details);
+        (item.medications || []).forEach(medication => {
+          const details = [medication.formulation, medication.dose, medication.frequency, medication.duration].filter(Boolean).join(" · ");
+          appendTextElement(row, "span", `${medication.name}${details ? ` — ${details}` : ""}`, "medication-detail");
+          const safeguards = [medication.contraindications, medication.precautions, medication.monitoring, medication.pregnancy].filter(Boolean);
+          if (safeguards.length) appendTextElement(row, "span", safeguards.join(" · "), "structured-note");
+        });
+        list.appendChild(row);
+      });
+      tier.appendChild(list);
+      section.appendChild(tier);
+    });
+    if (profile.treatment.nonPharmacological) {
+      appendTextElement(section, "h4", "Non-pharmacological care");
+      addStructuredList(section, profile.treatment.nonPharmacological);
+    }
+    parent.appendChild(section);
+    return section;
+  }
+
+  function addFollowUpSection(parent, disease) {
+    const profile = disease.clinicalProfile;
+    if (!profile?.followUp) return addDetailSection(parent, "Follow-up", disease.followup, "detail-follow-up", "detail-section--follow-up");
+    const section = document.createElement("section");
+    section.className = "detail-section detail-section--follow-up structured-section";
+    section.id = "detail-follow-up";
+    appendTextElement(section, "h3", "Follow-up and escalation");
+    appendTextElement(section, "span", humanize(profile.followUp.strategy), "strategy-label");
+    appendTextElement(section, "p", profile.followUp.text);
+    if (profile.redFlags) {
+      appendTextElement(section, "h4", "Red flags");
+      addStructuredList(section, profile.redFlags, "structured-list red-flag-list");
+    }
+    if (profile.referral) {
+      appendTextElement(section, "h4", "Referral / escalation");
+      addStructuredList(section, profile.referral.map(item => `${humanize(item.type)} — ${item.indication}`));
+    }
+    if (profile.patientCounseling) {
+      appendTextElement(section, "h4", "Patient counseling");
+      addStructuredList(section, profile.patientCounseling);
+    }
     parent.appendChild(section);
     return section;
   }
@@ -328,11 +530,11 @@
     const content = document.createElement("div");
     content.className = "detail-content";
     addDetailSection(content, "Overview", disease.description, "detail-overview", "detail-section--wide");
-    addDetailSection(content, "Clinical features", disease.clinical, "detail-clinical");
-    addDetailSection(content, "Dermoscopy", disease.dermoscopy, "detail-dermoscopy");
-    addDetailSection(content, "Differential diagnosis", disease.differential, "detail-differential");
-    addDetailSection(content, "Treatment overview", disease.treatment, "detail-treatment", "detail-section--treatment");
-    addDetailSection(content, "Follow-up", disease.followup, "detail-follow-up", "detail-section--follow-up");
+    addClinicalPresentationSection(content, disease);
+    addDiagnosisSection(content, disease);
+    addDifferentialSection(content, disease);
+    addTreatmentSection(content, disease);
+    addFollowUpSection(content, disease);
     addCodingSection(content, disease);
     addMediaSection(content, disease);
     addReferencesSection(content, disease);

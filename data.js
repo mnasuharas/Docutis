@@ -64,11 +64,11 @@
     whoIcd10: source({ title: "ICD-10 Version: 2019", organization: "World Health Organization", type: "official classification", version: "2019", url: "https://icd.who.int/browse10/2019/en", metadataCheckedAt: "2026-09-15" }),
     icdo32: source({ title: "International Classification of Diseases for Oncology, Third Edition, Second Revision", organization: "World Health Organization / International Agency for Research on Cancer", type: "official classification", year: 2019, version: "ICD-O-3.2", url: "https://www.who.int/standards/classifications/other-classifications/international-classification-of-diseases-for-oncology", metadataCheckedAt: "2026-09-15" }),
     whoSkin: source({ title: "WHO Classification of Skin Tumours, fifth edition", organization: "WHO Classification of Tumours Editorial Board / IARC", type: "official classification", year: 2025, version: "5th edition", url: "https://whobluebooks.iarc.who.int/structures/skintumours/", metadataCheckedAt: "2026-09-15" }),
-    aadAk: source({ title: "Actinic keratosis clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis", metadataCheckedAt: "2026-09-15" }),
-    aadBcc: source({ title: "Basal cell carcinoma clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/bcc", metadataCheckedAt: "2026-09-15" }),
+    aadAk: source({ title: "Actinic keratosis clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis", metadataCheckedAt: "2026-09-17" }),
+    aadBcc: source({ title: "Basal cell carcinoma clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/bcc", metadataCheckedAt: "2026-09-17" }),
     aadScc: source({ title: "Cutaneous squamous cell carcinoma clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/scc", metadataCheckedAt: "2026-09-15" }),
-    eadoMelanomaDiagnostics: source({ title: "European consensus-based interdisciplinary guideline for melanoma. Part 1: Diagnostics — Update 2024", organization: "EADO / EDF / EORTC", type: "guideline", year: 2025, version: "2024 update; part 1", url: "https://pubmed.ncbi.nlm.nih.gov/39700658/", doi: "10.1016/j.ejca.2024.115152", metadataCheckedAt: "2026-09-15" }),
-    eadoMelanomaTreatment: source({ title: "European consensus-based interdisciplinary guideline for melanoma. Part 2: Treatment — Update 2024", organization: "EADO / EDF / EORTC", type: "guideline", year: 2025, version: "2024 update; part 2", url: "https://pubmed.ncbi.nlm.nih.gov/39709737/", doi: "10.1016/j.ejca.2024.115153", metadataCheckedAt: "2026-09-15" }),
+    eadoMelanomaDiagnostics: source({ title: "European consensus-based interdisciplinary guideline for melanoma. Part 1: Diagnostics — Update 2024", organization: "EADO / EDF / EORTC", type: "guideline", year: 2025, version: "2024 update; part 1", url: "https://pubmed.ncbi.nlm.nih.gov/39700658/", doi: "10.1016/j.ejca.2024.115152", metadataCheckedAt: "2026-09-17" }),
+    eadoMelanomaTreatment: source({ title: "European consensus-based interdisciplinary guideline for melanoma. Part 2: Treatment — Update 2024", organization: "EADO / EDF / EORTC", type: "guideline", year: 2025, version: "2024 update; part 2", url: "https://pubmed.ncbi.nlm.nih.gov/39709737/", doi: "10.1016/j.ejca.2024.115153", metadataCheckedAt: "2026-09-17" }),
     nciMelanoma: source({ title: "Melanoma Treatment (PDQ®) — Health Professional Version", organization: "National Cancer Institute", type: "clinical reference", url: "https://www.cancer.gov/types/skin/hp/melanoma-treatment-pdq", metadataCheckedAt: "2026-09-15" }),
     nciMcc: source({ title: "Merkel Cell Carcinoma Treatment (PDQ®) — Health Professional Version", organization: "National Cancer Institute", type: "clinical reference", url: "https://www.cancer.gov/types/skin/hp/merkel-cell-treatment-pdq", metadataCheckedAt: "2026-09-15" }),
     nciCtcl: source({ title: "Mycosis Fungoides and Other Cutaneous T-Cell Lymphomas Treatment (PDQ®)", organization: "National Cancer Institute", type: "clinical reference", url: "https://www.cancer.gov/types/lymphoma/hp/mycosis-fungoides-treatment-pdq", metadataCheckedAt: "2026-09-15" }),
@@ -88,14 +88,14 @@
     whoHaem5: source({ title: "The 5th edition of the World Health Organization Classification of Haematolymphoid Tumours: Lymphoid Neoplasms", organization: "Leukemia / WHO Classification of Tumours Editorial Board", type: "peer-reviewed review", year: 2022, version: "WHO-HAEM5 overview", url: "https://www.nature.com/articles/s41375-022-01620-2", doi: "10.1038/s41375-022-01620-2", metadataCheckedAt: "2026-09-15" }),
     cd30Consensus: source({ title: "EORTC, ISCL, and USCLC consensus recommendations for the treatment of primary cutaneous CD30-positive lymphoproliferative disorders: lymphomatoid papulosis and primary cutaneous anaplastic large-cell lymphoma", organization: "EORTC / ISCL / USCLC", type: "consensus", year: 2011, url: "https://pubmed.ncbi.nlm.nih.gov/21841159/", doi: "10.1182/blood-2011-05-351346", metadataCheckedAt: "2026-09-15" }),
     pcAlclReview: source({ title: "Primary Cutaneous Anaplastic Large Cell Lymphoma—A Review of Clinical, Morphological, Immunohistochemical, and Molecular Features", organization: "Cancers", type: "peer-reviewed review", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/37627126/", doi: "10.3390/cancers15164098", metadataCheckedAt: "2026-09-15" }),
-    aadAtopicTopical: source({ title: "Guidelines of care for the management of atopic dermatitis in adults with topical therapies", organization: "American Academy of Dermatology", type: "guideline", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/36641009/", doi: "10.1016/j.jaad.2022.12.029", metadataCheckedAt: "2026-09-16" }),
-    aadAtopicSystemic: source({ title: "Guidelines of care for the management of atopic dermatitis in adults with phototherapy and systemic therapies", organization: "American Academy of Dermatology", type: "guideline", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/37943240/", doi: "10.1016/j.jaad.2023.08.102", metadataCheckedAt: "2026-09-16" }),
+    aadAtopicTopical: source({ title: "Guidelines of care for the management of atopic dermatitis in adults with topical therapies", organization: "American Academy of Dermatology", type: "guideline", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/36641009/", doi: "10.1016/j.jaad.2022.12.029", metadataCheckedAt: "2026-09-17" }),
+    aadAtopicSystemic: source({ title: "Guidelines of care for the management of atopic dermatitis in adults with phototherapy and systemic therapies", organization: "American Academy of Dermatology", type: "guideline", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/37943240/", doi: "10.1016/j.jaad.2023.08.102", metadataCheckedAt: "2026-09-17" }),
     badContactDermatitis: source({ title: "British Association of Dermatologists' guidelines for the management of contact dermatitis 2017", organization: "British Association of Dermatologists", type: "guideline", year: 2017, url: "https://pubmed.ncbi.nlm.nih.gov/28244094/", doi: "10.1111/bjd.15239", metadataCheckedAt: "2026-09-16" }),
     sebDermConsensus: source({ title: "A comprehensive literature review and an international expert consensus on the management of scalp seborrheic dermatitis in adults", organization: "European Journal of Dermatology / international expert panel", type: "consensus", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/38919137/", doi: "10.1684/ejd.2024.4703", metadataCheckedAt: "2026-09-16" }),
-    euroGuidermPsoriasis: source({ title: "Living EuroGuiDerm Guideline for the systemic treatment of psoriasis vulgaris", organization: "European Dermatology Forum / EuroGuiDerm", type: "guideline", version: "September 2023; partial update February 2025", url: "https://www.guidelines.edf.one/guidelines/psoriasis-guideline", metadataCheckedAt: "2026-09-16" }),
-    aadPsoriasis: source({ title: "Psoriasis clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/psoriasis", metadataCheckedAt: "2026-09-16" }),
-    aadAcne: source({ title: "Guidelines of care for the management of acne vulgaris", organization: "American Academy of Dermatology", type: "guideline", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/38300170/", doi: "10.1016/j.jaad.2023.12.017", metadataCheckedAt: "2026-09-16" }),
-    rosaceaGuideline: source({ title: "S2k guideline: Rosacea", organization: "German Dermatological Society guideline group", type: "guideline", year: 2022, url: "https://pubmed.ncbi.nlm.nih.gov/35929658/", doi: "10.1111/ddg.14849", metadataCheckedAt: "2026-09-16" }),
+    euroGuidermPsoriasis: source({ title: "Living EuroGuiDerm Guideline for the systemic treatment of psoriasis vulgaris", organization: "European Dermatology Forum / EuroGuiDerm", type: "guideline", version: "September 2023; partial update February 2025", url: "https://www.guidelines.edf.one/guidelines/psoriasis-guideline", metadataCheckedAt: "2026-09-17" }),
+    aadPsoriasis: source({ title: "Psoriasis clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/psoriasis", metadataCheckedAt: "2026-09-17" }),
+    aadAcne: source({ title: "Guidelines of care for the management of acne vulgaris", organization: "American Academy of Dermatology", type: "guideline", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/38300170/", doi: "10.1016/j.jaad.2023.12.017", metadataCheckedAt: "2026-09-17" }),
+    rosaceaGuideline: source({ title: "S2k guideline: Rosacea", organization: "German Dermatological Society guideline group", type: "guideline", year: 2022, url: "https://pubmed.ncbi.nlm.nih.gov/35929658/", doi: "10.1111/ddg.14849", metadataCheckedAt: "2026-09-17" }),
     urticariaGuideline: source({ title: "The International Guideline for the Definition, Classification, Diagnosis and Management of Urticaria", organization: "GA²LEN / UCARE / ACARE international guideline group", type: "guideline", year: 2026, url: "https://pubmed.ncbi.nlm.nih.gov/41649409/", doi: "10.1111/all.70210", metadataCheckedAt: "2026-09-16" }),
     vitiligoConsensusPart1: source({ title: "Worldwide expert recommendations for the diagnosis and management of vitiligo: Position statement from the International Vitiligo Task Force Part 1: towards a new management algorithm", organization: "International Vitiligo Task Force", type: "consensus", year: 2023, version: "Part 1", url: "https://pubmed.ncbi.nlm.nih.gov/37746876/", doi: "10.1111/jdv.19451", metadataCheckedAt: "2026-09-16" }),
     vitiligoConsensusPart2: source({ title: "Worldwide expert recommendations for the diagnosis and management of vitiligo: Position statement from the International Vitiligo Task Force—Part 2: Specific treatment recommendations", organization: "International Vitiligo Task Force", type: "consensus", year: 2023, version: "Part 2", url: "https://pubmed.ncbi.nlm.nih.gov/37715487/", doi: "10.1111/jdv.19450", metadataCheckedAt: "2026-09-16" }),
@@ -103,7 +103,7 @@
     folliculitisCochrane: source({ title: "Interventions for bacterial folliculitis and boils (furuncles and carbuncles)", organization: "Cochrane Database of Systematic Reviews", type: "systematic review", year: 2021, url: "https://pubmed.ncbi.nlm.nih.gov/33634465/", doi: "10.1002/14651858.CD013099.pub2", metadataCheckedAt: "2026-09-16" }),
     niceCellulitisErysipelas: source({ title: "Cellulitis and erysipelas: antimicrobial prescribing", organization: "National Institute for Health and Care Excellence", type: "guideline", year: 2019, version: "NG141", url: "https://www.nice.org.uk/guidance/ng141/chapter/Recommendations", metadataCheckedAt: "2026-09-16" }),
     erythrasmaReview: source({ title: "Erythrasma: a systematic review of interventions", organization: "Clinical and Experimental Dermatology", type: "systematic review", year: 2025, url: "https://pubmed.ncbi.nlm.nih.gov/40635638/", doi: "10.1093/ced/llaf307", metadataCheckedAt: "2026-09-16" }),
-    cdcRingworm: source({ title: "Clinical Overview of Ringworm", organization: "Centers for Disease Control and Prevention", type: "clinical reference", year: 2024, url: "https://www.cdc.gov/ringworm/hcp/clinical-overview/", metadataCheckedAt: "2026-09-16" }),
+    cdcRingworm: source({ title: "Clinical Overview of Ringworm", organization: "Centers for Disease Control and Prevention", type: "clinical reference", year: 2024, url: "https://www.cdc.gov/ringworm/hcp/clinical-overview/", metadataCheckedAt: "2026-09-17" }),
     tineaCapitisGuideline: source({ title: "Consensus-based Guideline on tinea capitis", organization: "German Dermatological Society guideline group", type: "guideline", year: 2026, version: "S1 guideline; version 4.0", url: "https://onlinelibrary.wiley.com/doi/full/10.1111/ddg.70395x", doi: "10.1111/ddg.70395x", metadataCheckedAt: "2026-09-16" }),
     onychomycosisGuideline: source({ title: "S1 Guideline onychomycosis", organization: "German Dermatological Society guideline group", type: "guideline", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/37212291/", doi: "10.1111/ddg.14988", metadataCheckedAt: "2026-09-16" }),
     dermatomycosisGuideline: source({ title: "Guidelines for the management of dermatomycosis (2019)", organization: "Japanese Dermatological Association", type: "guideline", year: 2020, version: "2019 guideline", url: "https://pubmed.ncbi.nlm.nih.gov/32978814/", doi: "10.1111/1346-8138.15618", metadataCheckedAt: "2026-09-16" }),
@@ -141,6 +141,14 @@
   function record(value) {
     return Object.freeze({ reviewStatus: reviewRequired, clinicalReview: null, ...value });
   }
+  function deepFreeze(value) {
+    if (!value || typeof value !== "object" || Object.isFrozen(value)) return value;
+    Object.values(value).forEach(deepFreeze);
+    return Object.freeze(value);
+  }
+  function clinicalProfile(value) {
+    return deepFreeze({ schemaVersion: 1, ...value });
+  }
 
   const diseases = [
     record({
@@ -152,6 +160,40 @@
       differential: "Squamous cell carcinoma in situ, invasive cutaneous squamous cell carcinoma, seborrhoeic keratosis, superficial basal cell carcinoma and inflammatory dermatoses.",
       treatment: "Management may be lesion-directed or field-directed. Selection depends on lesion burden, site, patient factors and current guidance; diagnostic uncertainty or concern for invasion warrants biopsy or specialist assessment.",
       followup: "Reassess persistent, recurrent, thickened, tender or rapidly changing lesions and account for the patient's overall actinic damage and skin-cancer risk.",
+      clinicalProfile: clinicalProfile({
+        aliases: ["AK", "solar keratosis"],
+        etiology: { mechanisms: ["uv-associated"], text: "UV-associated keratinocytic lesion on chronically sun-damaged skin." },
+        presentation: {
+          morphology: { primaryLesions: ["macule", "papule", "plaque"], secondaryChanges: ["scale", "hyperkeratosis"], surface: ["rough"], text: "Lesions may be easier to feel than see." },
+          localization: { sites: ["sun-exposed-skin"], distribution: ["photo-distributed"], text: "Chronically sun-exposed skin." },
+          course: { values: ["chronic"], text: "May persist, recur or change over time." }
+        },
+        dermoscopy: { patterns: ["facial erythematous pseudonetwork", "strawberry pattern"], scaleKeratinClues: ["prominent follicular openings", "surface scale"] },
+        diagnostics: [
+          { method: "clinical-examination", role: "routine", indication: "Assess morphology, lesion burden and surrounding actinic damage." },
+          { method: "biopsy", role: "unclear-cases", indication: "Diagnostic uncertainty or concern for invasive cutaneous squamous cell carcinoma.", sourceUrls: ["https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"] }
+        ],
+        differentials: [
+          { diagnosis: "Squamous cell carcinoma in situ" },
+          { diagnosis: "Invasive cutaneous squamous cell carcinoma", distinguishingClue: "Consider biopsy for a persistent, thickened, tender or rapidly changing lesion." },
+          { diagnosis: "Seborrhoeic keratosis" },
+          { diagnosis: "Superficial basal cell carcinoma" },
+          { diagnosis: "Inflammatory dermatosis" }
+        ],
+        treatment: {
+          steps: [
+            { level: "first-line", interventions: [{ intervention: "Select lesion-directed or field-directed therapy according to lesion burden, site, patient factors and current guidance.", sourceUrls: ["https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"] }] },
+            { level: "procedural", interventions: [{ intervention: "Biopsy or specialist assessment when diagnosis is uncertain or invasion is a concern." }] },
+            { level: "supportive-care", interventions: [{ intervention: "UV protection and management of field cancerization risk.", sourceUrls: ["https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"] }] }
+          ],
+          nonPharmacological: ["UV protection"]
+        },
+        followUp: { strategy: "risk-adapted", text: "Reassess persistent, recurrent, thickened, tender or rapidly changing lesions and consider overall actinic damage and skin-cancer risk." },
+        redFlags: ["Persistent thickening", "Tenderness", "Rapid change", "Concern for invasion"],
+        referral: [{ type: "biopsy-assessment", indication: "Uncertain diagnosis or suspected invasive disease." }],
+        patientCounseling: ["Use consistent sun protection and report persistent or changing lesions."],
+        sourceUrls: ["https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis", "https://dermnetnz.org/topics/actinic-keratosis"]
+      }),
       references: [refs.aadAk, refs.whoIcd10, refs.whoSkin, dermNet("Actinic keratosis", "actinic-keratosis", "2026-09-15")]
     }),
     record({
@@ -185,6 +227,45 @@
       differential: "Cutaneous squamous cell carcinoma, actinic keratosis, melanocytic lesions, sebaceous hyperplasia and other benign or malignant tumors.",
       treatment: "Risk stratification incorporates site, size, borders, histologic subtype and recurrence status. Surgery is the mainstay; selected low-risk tumors or patients unable to undergo surgery may be considered for other modalities under current guidance.",
       followup: "Follow-up is risk-adapted and includes surveillance for recurrence and additional primary skin cancers.",
+      clinicalProfile: clinicalProfile({
+        aliases: ["BCC"],
+        etiology: { mechanisms: ["neoplastic"], text: "Locally invasive keratinocyte carcinoma with very low metastatic potential." },
+        presentation: {
+          morphology: { primaryLesions: ["papule", "plaque"], secondaryChanges: ["ulcer", "crust"], colors: ["pearly", "translucent"], surface: ["telangiectatic"], text: "Morphology varies by subtype." },
+          course: { values: ["chronic", "progressive"], text: "Typically slowly enlarging." }
+        },
+        dermoscopy: { vascularStructures: ["arborising vessels"], pigmentStructures: ["blue-grey ovoid nests", "leaf-like structures", "spoke-wheel areas"], highRiskClues: ["ulceration"] },
+        diagnostics: [
+          { method: "clinical-examination", role: "routine", indication: "Assess anatomic site, size, borders, recurrence status and clinical subtype." },
+          { method: "biopsy", role: "confirmatory", indication: "Obtain tissue adequate for diagnosis and management planning.", sourceUrls: ["https://www.aad.org/member/clinical-quality/guidelines/bcc"] },
+          { method: "histopathology", role: "confirmatory", indication: "Establish histologic subtype and other risk-relevant pathologic features." }
+        ],
+        histopathology: "Histologic subtype is a component of risk stratification and should be documented from the pathology report.",
+        differentials: [
+          { diagnosis: "Cutaneous squamous cell carcinoma" },
+          { diagnosis: "Actinic keratosis" },
+          { diagnosis: "Melanocytic lesion" },
+          { diagnosis: "Sebaceous hyperplasia" },
+          { diagnosis: "Other benign or malignant tumor" }
+        ],
+        treatment: {
+          steps: [
+            { level: "first-line", interventions: [{ intervention: "Surgical treatment selected according to tumor and patient risk.", sourceUrls: ["https://www.aad.org/member/clinical-quality/guidelines/bcc"] }] },
+            { level: "second-line-or-alternative", interventions: [{ intervention: "Consider nonsurgical modalities only for selected low-risk tumors or when surgery is contraindicated; cure rates are lower than with surgery.", sourceUrls: ["https://www.aad.org/member/clinical-quality/guidelines/bcc"] }] }
+          ]
+        },
+        followUp: { strategy: "cancer-surveillance", text: "Risk-adapted surveillance for recurrence and additional primary skin cancers." },
+        referral: [
+          { type: "biopsy-assessment", indication: "Suspected BCC requiring tissue diagnosis and risk characterization." },
+          { type: "surgery", indication: "Definitive treatment planning, particularly for higher-risk tumors." }
+        ],
+        oncology: {
+          riskClassification: "Incorporate site, size, borders, histologic subtype and recurrence status.",
+          histologicSubtype: "Document the final pathology subtype.",
+          recurrenceMetastasis: "Follow-up includes recurrence surveillance; metastatic potential is very low but locally invasive growth can be destructive."
+        },
+        sourceUrls: ["https://www.aad.org/member/clinical-quality/guidelines/bcc"]
+      }),
       references: [refs.aadBcc, refs.whoIcd10, refs.icdo32, refs.whoSkin]
     }),
     record({
@@ -229,6 +310,52 @@
       differential: "Melanocytic nevus, seborrhoeic keratosis, pigmented basal cell carcinoma and other pigmented or amelanotic lesions.",
       treatment: "Excision and histopathologic staging underpin management of localized primary melanoma. Further surgery, nodal assessment and systemic therapy decisions depend on stage and current specialist guidance.",
       followup: "Surveillance intensity is stage- and risk-dependent and should follow current national or international melanoma guidance.",
+      clinicalProfile: clinicalProfile({
+        aliases: ["malignant melanoma of skin"],
+        etiology: { mechanisms: ["neoplastic"], text: "Malignant melanocytic neoplasm with metastatic potential." },
+        presentation: {
+          morphology: { colors: ["variable pigmentation", "amelanotic presentation possible"], border: ["irregular"], configuration: ["asymmetric"], text: "Evolution or a lesion unlike the patient's other nevi is concerning." },
+          course: { values: ["progressive"], text: "Evolution over time is a suspicious clinical feature." }
+        },
+        dermoscopy: {
+          patterns: ["asymmetry of structures and colors", "multicomponent pattern"],
+          vascularStructures: ["atypical vessels"],
+          pigmentStructures: ["atypical network", "irregular dots or globules", "atypical streaks", "regression structures"],
+          highRiskClues: ["asymmetry", "atypical vessels"]
+        },
+        diagnostics: [
+          { method: "clinical-examination", role: "routine", indication: "Assess asymmetry, border, color, evolution and outlier appearance." },
+          { method: "dermoscopy", role: "routine", indication: "Evaluate a clinically suspicious melanocytic or amelanotic lesion.", sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/39700658/"] },
+          { method: "biopsy", role: "confirmatory", indication: "Suspected melanoma requires tissue sampling planned for accurate histopathologic diagnosis and staging.", sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/39700658/"] },
+          { method: "histopathology", role: "staging", indication: "Confirm melanoma and establish pathologic features needed for stage-based management." }
+        ],
+        histopathology: "Histopathologic confirmation and staging are required before stage-directed management.",
+        differentials: [
+          { diagnosis: "Melanocytic nevus" },
+          { diagnosis: "Seborrhoeic keratosis" },
+          { diagnosis: "Pigmented basal cell carcinoma" },
+          { diagnosis: "Other pigmented or amelanotic lesion" }
+        ],
+        treatment: {
+          steps: [
+            { level: "procedural", interventions: [{ intervention: "Complete excision and histopathologic staging for localized primary melanoma.", sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/39709737/"] }] },
+            { level: "refractory-or-severe", interventions: [{ intervention: "Further surgery, nodal assessment and systemic therapy decisions are stage-dependent and require specialist guidance.", sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/39709737/"] }] }
+          ]
+        },
+        followUp: { strategy: "guideline-defined", text: "Use the existing dedicated stage- and risk-based melanoma follow-up protocol; this profile does not duplicate or replace its intervals." },
+        redFlags: ["Evolution", "Marked asymmetry", "Irregular border", "Color variation", "A lesion unlike the patient's other nevi", "Amelanotic suspicious lesion"],
+        referral: [
+          { type: "biopsy-assessment", indication: "Clinically or dermoscopically suspicious lesion." },
+          { type: "oncology", indication: "Stage-directed nodal, adjuvant or systemic treatment assessment when indicated." }
+        ],
+        oncology: {
+          staging: "Histopathologic stage directs subsequent management.",
+          sentinelNode: "Nodal assessment depends on tumor stage and current specialist guidance.",
+          systemicTherapyReferral: "Systemic treatment decisions are stage-dependent and multidisciplinary.",
+          recurrenceMetastasis: "Surveillance intensity is stage- and risk-dependent."
+        },
+        sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/39700658/", "https://pubmed.ncbi.nlm.nih.gov/39709737/", "https://www.cancer.gov/types/skin/hp/melanoma-treatment-pdq"]
+      }),
       references: [refs.eadoMelanomaDiagnostics, refs.eadoMelanomaTreatment, refs.nciMelanoma, refs.whoIcd10, refs.icdo32, refs.whoSkin]
     }),
     record({
@@ -438,6 +565,44 @@
       differential: "Allergic or irritant contact dermatitis, seborrheic dermatitis, psoriasis, scabies, cutaneous infection and, in persistent atypical adult disease, cutaneous T-cell lymphoma.",
       treatment: "Management combines regular moisturization, avoidance of confirmed aggravating exposures and appropriately selected topical anti-inflammatory therapy. Phototherapy or systemic treatment may be considered for inadequately controlled moderate-to-severe disease after age, comorbidities, contraindications and monitoring needs are assessed.",
       followup: "Reassess disease control, sleep and quality-of-life impact, treatment burden, adherence and signs of infection. Persistent, severe or diagnostically atypical disease warrants specialist review.",
+      clinicalProfile: clinicalProfile({
+        aliases: ["atopic eczema", "eczema"],
+        etiology: { mechanisms: ["inflammatory", "barrier-dysfunction"], text: "Chronic inflammatory disease with epidermal barrier dysfunction." },
+        presentation: {
+          morphology: { secondaryChanges: ["excoriation", "lichenification"], colors: ["erythematous or skin-colored"], text: "Eczematous lesions may become excoriated, lichenified or secondarily infected; appearance varies with skin tone." },
+          symptoms: { values: ["pruritic"], text: "Pruritus and xerosis are prominent." },
+          course: { values: ["chronic", "recurrent"], text: "Chronic relapsing course." }
+        },
+        dermoscopy: { text: "Dermoscopy is not routinely required; vascular or scaling findings are nonspecific and must be interpreted with the clinical pattern." },
+        diagnostics: [
+          { method: "clinical-examination", role: "routine", indication: "Assess morphology, age-dependent distribution, pruritus, xerosis, infection and disease burden." },
+          { method: "other", role: "severe-or-atypical", indication: "Persistent, severe or diagnostically atypical disease requires specialist diagnostic review." }
+        ],
+        differentials: [
+          { diagnosis: "Allergic or irritant contact dermatitis" },
+          { diagnosis: "Seborrheic dermatitis" },
+          { diagnosis: "Psoriasis" },
+          { diagnosis: "Scabies" },
+          { diagnosis: "Cutaneous infection" },
+          { diagnosis: "Cutaneous T-cell lymphoma", distinguishingClue: "Consider in persistent atypical adult disease." }
+        ],
+        treatment: {
+          steps: [
+            { level: "first-line", interventions: [{ intervention: "Regular moisturization and appropriately selected topical anti-inflammatory therapy.", sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/36641009/"] }] },
+            { level: "refractory-or-severe", interventions: [{ intervention: "Consider phototherapy or systemic treatment for inadequately controlled moderate-to-severe disease after age, comorbidities, contraindications and monitoring needs are assessed.", sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/37943240/"] }] },
+            { level: "supportive-care", interventions: [{ intervention: "Avoid confirmed aggravating exposures and support epidermal barrier care." }] }
+          ],
+          nonPharmacological: ["Regular moisturization", "Avoidance of confirmed aggravating exposures"]
+        },
+        followUp: { strategy: "reassessment-after-treatment", text: "Reassess control, sleep and quality-of-life impact, treatment burden, adherence and signs of infection." },
+        redFlags: ["Secondary infection", "Persistent atypical adult disease", "Severe or inadequately controlled disease"],
+        referral: [
+          { type: "dermatology", indication: "Persistent, severe or diagnostically atypical disease." },
+          { type: "systemic-therapy-assessment", indication: "Inadequately controlled moderate-to-severe disease." }
+        ],
+        patientCounseling: ["Use moisturizers regularly and avoid confirmed aggravating exposures."],
+        sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/36641009/", "https://pubmed.ncbi.nlm.nih.gov/37943240/", "https://dermnetnz.org/topics/atopic-dermatitis"]
+      }),
       references: [refs.aadAtopicTopical, refs.aadAtopicSystemic, refs.whoIcd10, dermNet("Atopic dermatitis", "atopic-dermatitis", "2026-09-16")]
     }),
     record({
@@ -471,6 +636,38 @@
       differential: "Nummular or chronic eczema, seborrheic dermatitis, dermatophyte infection, pityriasis rubra pilaris and cutaneous T-cell lymphoma.",
       treatment: "Limited plaque disease is often managed with topical therapy selected for site and patient factors. Phototherapy or systemic treatment may be appropriate for extensive, high-impact or inadequately controlled disease; severity, quality of life, comorbidities and psoriatic arthritis influence planning.",
       followup: "Monitor skin and nail activity, treatment safety and quality-of-life impact, and reassess for inflammatory joint symptoms and relevant comorbidities.",
+      clinicalProfile: clinicalProfile({
+        aliases: ["psoriasis vulgaris", "chronic plaque psoriasis"],
+        etiology: { mechanisms: ["inflammatory"], text: "Chronic inflammatory papulosquamous disease." },
+        presentation: {
+          morphology: { primaryLesions: ["plaque"], secondaryChanges: ["scale"], border: ["well-demarcated"], text: "Persistent inflammatory plaques with scale." },
+          localization: { sites: ["scalp", "extensor-surfaces", "flexures", "anogenital", "palms", "soles", "nails"], distribution: ["symmetric", "extensor"], text: "Commonly affects extensor surfaces, scalp and lumbosacral skin; flexural, genital, palmoplantar and nail involvement may alter appearance." },
+          course: { values: ["chronic"], text: "Persistent chronic plaque disease." }
+        },
+        dermoscopy: { vascularStructures: ["regularly distributed dotted vessels"], scaleKeratinClues: ["diffuse white scale"], patterns: ["light red background"] },
+        diagnostics: [
+          { method: "clinical-examination", role: "routine", indication: "Assess plaque morphology, distribution, nail disease, severity, quality-of-life impact and inflammatory joint symptoms." },
+          { method: "dermoscopy", role: "optional", indication: "Support the diagnosis when regular dotted vessels and diffuse white scale are present." },
+          { method: "histopathology", role: "unclear-cases", indication: "Use clinicopathologic correlation when features are atypical." }
+        ],
+        differentials: [
+          { diagnosis: "Nummular or chronic eczema" },
+          { diagnosis: "Seborrheic dermatitis" },
+          { diagnosis: "Dermatophyte infection" },
+          { diagnosis: "Pityriasis rubra pilaris" },
+          { diagnosis: "Cutaneous T-cell lymphoma" }
+        ],
+        treatment: {
+          steps: [
+            { level: "first-line", interventions: [{ intervention: "Topical therapy for limited plaque disease, selected for anatomic site and patient factors." }] },
+            { level: "refractory-or-severe", interventions: [{ intervention: "Consider phototherapy or systemic treatment for extensive, high-impact or inadequately controlled disease; integrate severity, quality of life, comorbidities and psoriatic arthritis.", sourceUrls: ["https://www.guidelines.edf.one/guidelines/psoriasis-guideline"] }] }
+          ]
+        },
+        followUp: { strategy: "risk-adapted", text: "Monitor skin and nail activity, treatment safety, quality-of-life impact, inflammatory joint symptoms and relevant comorbidities." },
+        redFlags: ["Inflammatory joint symptoms", "High-impact or extensive disease", "Atypical or treatment-resistant plaques"],
+        referral: [{ type: "systemic-therapy-assessment", indication: "Extensive, high-impact or inadequately controlled disease." }],
+        sourceUrls: ["https://www.guidelines.edf.one/guidelines/psoriasis-guideline", "https://www.aad.org/member/clinical-quality/guidelines/psoriasis", "https://dermnetnz.org/topics/psoriasis"]
+      }),
       references: [refs.euroGuidermPsoriasis, refs.aadPsoriasis, refs.whoIcd10, dermNet("Psoriasis", "psoriasis", "2026-09-16")]
     }),
     record({
@@ -482,6 +679,39 @@
       differential: "Rosacea, bacterial or Malassezia folliculitis, periorificial dermatitis, hidradenitis suppurativa and medication-related acneiform eruptions.",
       treatment: "Treatment is severity- and phenotype-based and commonly combines topical agents with different mechanisms. Antibiotic exposure should be limited and combined appropriately; systemic, hormonal or isotretinoin therapy requires indication-specific assessment, contraindication review and monitoring.",
       followup: "Reassess response, tolerability, adherence, scarring risk, pigmentary sequelae and psychosocial impact. Escalate when disease is severe, scarring or insufficiently controlled.",
+      clinicalProfile: clinicalProfile({
+        aliases: ["common acne", "acne"],
+        etiology: { mechanisms: ["inflammatory"], text: "Chronic inflammatory disorder of the pilosebaceous unit." },
+        presentation: {
+          morphology: { primaryLesions: ["papule", "pustule", "nodule"], otherPrimaryLesions: ["open comedone", "closed comedone"], secondaryChanges: ["scar"], text: "Comedonal and inflammatory lesions may coexist; deeper nodules increase severity and scarring concern." },
+          localization: { sites: ["face", "trunk"], distribution: ["seborrheic"], text: "Most often affects the face, chest and back." },
+          course: { values: ["chronic"], text: "Chronic disease with variable inflammatory activity." }
+        },
+        dermoscopy: { text: "Not routinely required; diagnosis is primarily clinical." },
+        diagnostics: [
+          { method: "clinical-examination", role: "routine", indication: "Assess comedones, inflammatory lesions, nodules, scarring, pigmentary sequelae and psychosocial burden." },
+          { method: "laboratory-testing", role: "optional", indication: "Use only when the clinical context suggests a specific endocrine or medication-related contributor." }
+        ],
+        differentials: [
+          { diagnosis: "Rosacea", distinguishingClue: "Comedones support acne and are not a typical rosacea feature." },
+          { diagnosis: "Bacterial folliculitis" },
+          { diagnosis: "Malassezia folliculitis" },
+          { diagnosis: "Periorificial dermatitis" },
+          { diagnosis: "Hidradenitis suppurativa" },
+          { diagnosis: "Medication-related acneiform eruption" }
+        ],
+        treatment: {
+          steps: [
+            { level: "first-line", interventions: [{ intervention: "Combine topical agents with complementary mechanisms according to acne phenotype and severity.", sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/38300170/"] }] },
+            { level: "second-line-or-alternative", interventions: [{ intervention: "Limit antibiotic exposure and combine antibiotic therapy appropriately with topical treatment.", sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/38300170/"] }] },
+            { level: "refractory-or-severe", interventions: [{ intervention: "Systemic, hormonal or isotretinoin therapy requires indication-specific assessment, contraindication review and monitoring.", sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/38300170/"] }] }
+          ]
+        },
+        followUp: { strategy: "reassessment-after-treatment", text: "Reassess response, tolerability, adherence, scarring risk, pigmentary sequelae and psychosocial impact." },
+        redFlags: ["Scarring", "Severe nodular disease", "Substantial psychosocial burden", "Failure of standard topical or oral therapy"],
+        referral: [{ type: "systemic-therapy-assessment", indication: "Severe, scarring or insufficiently controlled acne." }],
+        sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/38300170/", "https://dermnetnz.org/topics/acne-vulgaris"]
+      }),
       references: [refs.aadAcne, refs.whoIcd10, dermNet("Acne vulgaris", "acne-vulgaris", "2026-09-16")]
     }),
     record({
@@ -493,6 +723,44 @@
       differential: "Acne vulgaris, seborrheic dermatitis, periorificial dermatitis, contact dermatitis, cutaneous lupus erythematosus and other causes of facial erythema or flushing.",
       treatment: "Use gentle skin care, photoprotection and management of individually confirmed triggers. Treatment should target the dominant phenotype and may include topical, oral or vascular-device approaches; ocular disease may require ophthalmic assessment.",
       followup: "Reassess phenotype-specific response, ocular symptoms, treatment tolerance and quality-of-life impact. Atypical, unilateral or treatment-resistant disease should prompt diagnostic review.",
+      clinicalProfile: clinicalProfile({
+        aliases: ["facial rosacea", "acne rosacea (historical term)"],
+        etiology: { mechanisms: ["inflammatory"], text: "Chronic inflammatory facial disorder assessed by phenotype." },
+        presentation: {
+          morphology: { primaryLesions: ["papule", "pustule"], colors: ["persistent centrofacial erythema"], surface: ["telangiectasia", "phymatous change"], text: "Comedones are not a typical feature." },
+          localization: { sites: ["face"], distribution: ["localized"], text: "Usually centrofacial; atypical unilateral disease requires diagnostic review." },
+          course: { values: ["chronic", "recurrent"], text: "Chronic disease with episodic flushing and variable inflammatory activity." }
+        },
+        dermoscopy: { vascularStructures: ["telangiectatic vascular patterns"], patterns: ["follicular changes"], text: "Supportive rather than diagnostic." },
+        diagnostics: [
+          { method: "clinical-examination", role: "routine", indication: "Document dominant cutaneous and ocular phenotypes and exclude typical acne comedones." },
+          { method: "dermoscopy", role: "optional", indication: "Support assessment of telangiectatic vascular and follicular patterns." },
+          { method: "other", role: "severe-or-atypical", indication: "Diagnostic review for atypical, unilateral or treatment-resistant disease." }
+        ],
+        differentials: [
+          { diagnosis: "Acne vulgaris", distinguishingClue: "Comedones support acne vulgaris and are not typical of rosacea." },
+          { diagnosis: "Seborrheic dermatitis" },
+          { diagnosis: "Periorificial dermatitis" },
+          { diagnosis: "Contact dermatitis" },
+          { diagnosis: "Cutaneous lupus erythematosus" },
+          { diagnosis: "Other cause of facial erythema or flushing" }
+        ],
+        treatment: {
+          steps: [
+            { level: "first-line", interventions: [{ intervention: "Select topical, oral or vascular-device treatment according to the dominant phenotype.", sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/35929658/"] }] },
+            { level: "supportive-care", interventions: [{ intervention: "Gentle skin care, photoprotection and management of individually confirmed triggers." }] }
+          ],
+          nonPharmacological: ["Gentle skin care", "Photoprotection", "Management of individually confirmed triggers"]
+        },
+        followUp: { strategy: "reassessment-after-treatment", text: "Reassess phenotype-specific response, ocular symptoms, treatment tolerance and quality-of-life impact." },
+        redFlags: ["Ocular symptoms", "Atypical unilateral disease", "Treatment resistance"],
+        referral: [
+          { type: "ophthalmology", indication: "Ocular disease requiring ophthalmic assessment." },
+          { type: "dermatology", indication: "Atypical, unilateral or treatment-resistant disease." }
+        ],
+        patientCounseling: ["Use gentle skin care and photoprotection; manage only individually confirmed triggers."],
+        sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/35929658/", "https://dermnetnz.org/topics/rosacea"]
+      }),
       references: [refs.rosaceaGuideline, refs.whoIcd10, dermNet("Rosacea", "rosacea", "2026-09-16")]
     }),
     record({
@@ -570,6 +838,42 @@
       differential: "Nummular dermatitis, psoriasis, pityriasis rosea, granuloma annulare, subacute cutaneous lupus and erythema migrans.",
       treatment: "Localized disease is generally managed with an appropriate topical antifungal; extensive, refractory, follicular or immunocompromised presentations may need systemic treatment after diagnostic confirmation and safety review. Avoid corticosteroid monotherapy.",
       followup: "Reassess non-response for adherence, reinfection, an alternative diagnosis, resistant dermatophytes or an untreated animal or household source.",
+      clinicalProfile: clinicalProfile({
+        aliases: ["ringworm", "body ringworm", "dermatophytosis of the body"],
+        etiology: { mechanisms: ["infectious"], text: "Dermatophyte infection of glabrous skin." },
+        presentation: {
+          morphology: { primaryLesions: ["plaque"], secondaryChanges: ["scale"], border: ["active"], configuration: ["annular", "polycyclic", "relative central clearing"], text: "Prior corticosteroid use can obscure the typical pattern." },
+          localization: { sites: ["trunk", "upper-extremities", "lower-extremities"], distribution: ["localized"], text: "Glabrous skin of the trunk or limbs." },
+          course: { values: ["progressive"], text: "Plaques can enlarge peripherally." }
+        },
+        dermoscopy: { scaleKeratinClues: ["peripheral scale"], patterns: ["peripheral erythema"], text: "Supportive but not specific." },
+        diagnostics: [
+          { method: "clinical-examination", role: "routine", indication: "Assess annular or polycyclic morphology, active border, scale and central clearing." },
+          { method: "microscopy", role: "confirmatory", indication: "Confirm suspected dermatophyte infection, particularly when morphology is atypical or treatment fails.", sourceUrls: ["https://www.cdc.gov/ringworm/hcp/clinical-overview/"] },
+          { method: "culture", role: "unclear-cases", indication: "Use when the presentation is atypical, treatment fails or organism identification may change management.", sourceUrls: ["https://www.cdc.gov/ringworm/hcp/clinical-overview/"] }
+        ],
+        differentials: [
+          { diagnosis: "Nummular dermatitis", distinguishingClue: "Use fungal testing when morphology is unclear." },
+          { diagnosis: "Psoriasis", distinguishingClue: "Use fungal testing when morphology is unclear." },
+          { diagnosis: "Pityriasis rosea" },
+          { diagnosis: "Granuloma annulare" },
+          { diagnosis: "Subacute cutaneous lupus" },
+          { diagnosis: "Erythema migrans" }
+        ],
+        treatment: {
+          steps: [
+            { level: "first-line", interventions: [{ intervention: "Appropriate topical antifungal for localized disease after diagnostic assessment." }] },
+            { level: "refractory-or-severe", interventions: [{ intervention: "Consider systemic treatment for extensive, refractory, follicular or immunocompromised presentations after diagnostic confirmation and safety review." }] },
+            { level: "supportive-care", interventions: [{ intervention: "Avoid corticosteroid monotherapy and address potential untreated animal or household sources.", sourceUrls: ["https://www.cdc.gov/ringworm/hcp/clinical-overview/"] }] }
+          ],
+          nonPharmacological: ["Avoid sharing personal items", "Address potential animal or household sources", "Keep affected skin clean and dry"]
+        },
+        followUp: { strategy: "reassessment-after-treatment", text: "For non-response, reassess adherence, reinfection, diagnosis, antifungal resistance and untreated animal or household sources." },
+        redFlags: ["Extensive disease", "Immunosuppression", "Follicular involvement", "Treatment failure", "Possible antifungal resistance"],
+        referral: [{ type: "dermatology", indication: "Extensive, refractory, diagnostically uncertain or suspected resistant infection." }],
+        patientCounseling: ["Avoid corticosteroid monotherapy.", "Reduce transmission through hygiene and management of potential contacts or sources."],
+        sourceUrls: ["https://www.cdc.gov/ringworm/hcp/clinical-overview/", "https://dermnetnz.org/topics/tinea-corporis"]
+      }),
       references: [refs.cdcRingworm, refs.whoIcd10, dermNet("Tinea corporis", "tinea-corporis", "2026-09-16")]
     }),
     record({
@@ -696,6 +1000,7 @@
   ];
 
   window.DOCUTIS_DATA = Object.freeze({
+    schemaVersion: 2,
     categories: Object.freeze(categories),
     subcategories: Object.freeze(subcategories),
     diseases: Object.freeze(diseases)

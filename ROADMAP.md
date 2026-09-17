@@ -6,6 +6,8 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Implemented
 
+- Goal 7 clinical content architecture: optional versioned profiles, bounded controlled vocabularies, structured presentation/diagnostics/differentials/treatment/follow-up, medication-regimen support, source-reference validation, legacy-compatible rendering and an eight-record pilot spanning oncology, inflammatory, acneiform and infectious disease. Production dosing remains intentionally empty until explicit regimen evidence is reviewed.
+- Goal 7 data-quality audit and validator: quantitative coverage for all 50 records, malformed-value tests, source attachment checks and fingerprint coverage for structured clinical changes.
 - Goal 6 clinical UX and visual foundation: normalized semantic color and spacing tokens, compact professional navigation, visible library coverage, improved search and filter affordances, denser cards, scannable two-column condition details, sticky section navigation, progressive source disclosure, four responsive breakpoints and reduced-motion support.
 - Optional educational-media framework separated into `media-data.js`, with controlled media types and licenses, mandatory source/attribution/alt-text/dimensions metadata, independent clinician-review fingerprints, lazy rendering and image-failure fallback. No pilot images are included until reuse rights and clinical value are independently verified.
 - English-language dermato-oncology follow-up UI with German guideline jurisdiction for melanoma, BCC and cSCC: structured disease/jurisdiction protocols, stage/risk and time-period or non-interval guidance selectors, modality-specific states, provenance, offline validation and stale-review fingerprints. Melanoma in situ separates the absence of a German S3 Stage 0 interval from sourced German expert-practice and international surveillance context. All three protocols still require physician review.
@@ -39,6 +41,8 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 - Add a lightweight broken-link check with respectful rate limiting and clear handling of redirects or bot-blocked sites.
 - Add cross-browser checks for current Chrome, Firefox, Safari, and Edge.
 - Source and clinically review a first 3–5 item media pilot; prefer original diagrams or clearly reusable open-license material and do not relax the Goal 6 validator to force inclusion.
+- Continue evidence-led `clinicalProfile` migration, prioritizing cSCC/SCC in situ/keratoacanthoma, remaining melanoma subtypes and conditions where diagnostics or escalation materially affect safety. Do not bulk-fill optional fields.
+- Add the first production medication regimen only after formulation, frequency, duration, major precautions and source scope can be verified together.
 
 ## Content expansion plan
 
