@@ -3,7 +3,7 @@
 const { loadData, loadFollowUpData, validateFollowUpReview } = require("./clinical-review");
 
 const allowedModalities = new Set(["clinical_examination", "lymph_node_ultrasound", "s100b", "cross_sectional_imaging"]);
-const allowedRecommendationStatuses = new Set(["scheduled", "conditional", "not_routinely_scheduled"]);
+const allowedRecommendationStatuses = new Set(["scheduled", "conditional", "not_routinely_scheduled", "not_specified"]);
 const allowedRecommendationCharacters = new Set(["soll", "sollte", "sollte (EK)", "Schema 9.2"]);
 const allowedConsensusStrengths = new Set(["Konsens", "Starker Konsens", "Konsensstärke 100 %"]);
 
@@ -18,6 +18,12 @@ function validIsoDate(value) {
 }
 
 function validateRange(protocolId, groupId, period) {
+  if (period.timingStatus === "not_specified") {
+    if (period.range !== null) throw new Error(`${protocolId}/${groupId}/${period.id}: non-interval guidance must have range: null`);
+    return;
+  }
+  if (period.timingStatus !== undefined) throw new Error(`${protocolId}/${groupId}/${period.id}: unsupported timing status`);
+  if (!period.range || typeof period.range !== "object" || Array.isArray(period.range)) throw new Error(`${protocolId}/${groupId}/${period.id}: scheduled period needs a structured range`);
   const keys = Object.keys(period.range);
   const yearRange = keys.includes("fromYear") || keys.includes("toYear");
   const monthRange = keys.includes("fromMonth") || keys.includes("toMonth");
@@ -30,8 +36,8 @@ function validateRange(protocolId, groupId, period) {
 
 function validateFrequency(context, recommendation) {
   const frequency = recommendation.frequency;
-  if (recommendation.status === "not_routinely_scheduled") {
-    if (frequency !== null) throw new Error(`${context}: non-routine recommendation cannot have a frequency`);
+  if (new Set(["not_routinely_scheduled", "not_specified"]).has(recommendation.status)) {
+    if (frequency !== null) throw new Error(`${context}: non-scheduled recommendation cannot have a frequency`);
     return;
   }
   if (!frequency || typeof frequency !== "object") throw new Error(`${context}: scheduled/conditional recommendation needs structured frequency`);
@@ -71,14 +77,16 @@ function validateFollowUpData(followUpData = loadFollowUpData(), diseaseData = l
     if (!validPartialDate(guideline.publishedAt)) throw new Error(`${protocol.id}: invalid guideline publication date`);
     if (!validIsoDate(guideline.sourceMetadataCheckedAt)) throw new Error(`${protocol.id}: invalid source metadata check date`);
     if (!/^https:\/\//.test(guideline.sourceUrl)) throw new Error(`${protocol.id}: guideline source must use HTTPS`);
-    if (protocol.jurisdiction !== "DE" || protocol.jurisdictionLabel !== "Deutschland") throw new Error(`${protocol.id}: first release must be German guidance`);
+    if (protocol.jurisdiction !== "DE" || protocol.jurisdictionLabel !== "Germany") throw new Error(`${protocol.id}: first release must be German guidance`);
     if (!Array.isArray(protocol.groups) || !protocol.groups.length) throw new Error(`${protocol.id}: at least one risk/stage group is required`);
+    if (!Array.isArray(protocol.notes) || protocol.notes.some(note => typeof note !== "string" || !note.trim())) throw new Error(`${protocol.id}: protocol notes must be non-empty strings`);
 
     const groupIds = new Set();
     for (const group of protocol.groups) {
       if (!group.id?.trim() || groupIds.has(group.id)) throw new Error(`${protocol.id}: missing or duplicate group ID`);
       groupIds.add(group.id);
       if (!group.label?.trim() || !group.description?.trim()) throw new Error(`${protocol.id}/${group.id}: group label and description are required`);
+      if (!Array.isArray(group.notes) || group.notes.some(note => typeof note !== "string" || !note.trim())) throw new Error(`${protocol.id}/${group.id}: group notes must be non-empty strings`);
       if (!Array.isArray(group.periods) || !group.periods.length) throw new Error(`${protocol.id}/${group.id}: at least one period is required`);
       const periodIds = new Set();
       for (const period of group.periods) {
@@ -86,6 +94,7 @@ function validateFollowUpData(followUpData = loadFollowUpData(), diseaseData = l
         periodIds.add(period.id);
         if (!period.label?.trim()) throw new Error(`${protocol.id}/${group.id}/${period.id}: period label is required`);
         validateRange(protocol.id, group.id, period);
+        if (!Array.isArray(period.notes) || period.notes.some(note => typeof note !== "string" || !note.trim())) throw new Error(`${protocol.id}/${group.id}/${period.id}: period notes must be non-empty strings`);
         if (!Array.isArray(period.recommendations) || !period.recommendations.length) throw new Error(`${protocol.id}/${group.id}/${period.id}: recommendations are required`);
         const seenModalities = new Set();
         for (const recommendation of period.recommendations) {
@@ -94,13 +103,20 @@ function validateFollowUpData(followUpData = loadFollowUpData(), diseaseData = l
           if (seenModalities.has(recommendation.modality)) throw new Error(`${context}: duplicate conflicting recommendation`);
           seenModalities.add(recommendation.modality);
           if (!allowedRecommendationStatuses.has(recommendation.status)) throw new Error(`${context}: unsupported recommendation status`);
-          if (!recommendation.recommendationBasis || typeof recommendation.recommendationBasis !== "object") throw new Error(`${context}: recommendation character and consensus are required`);
-          for (const field of ["character", "consensus"]) {
-            if (typeof recommendation.recommendationBasis[field] !== "string" || !recommendation.recommendationBasis[field].trim()) throw new Error(`${context}: recommendation basis ${field} is required`);
+          if (recommendation.status === "not_specified") {
+            if (recommendation.recommendationBasis !== null) throw new Error(`${context}: not-specified guidance cannot claim a recommendation basis`);
+          } else {
+            if (!recommendation.recommendationBasis || typeof recommendation.recommendationBasis !== "object") throw new Error(`${context}: recommendation character and consensus are required`);
+            for (const field of ["character", "consensus"]) {
+              if (typeof recommendation.recommendationBasis[field] !== "string" || !recommendation.recommendationBasis[field].trim()) throw new Error(`${context}: recommendation basis ${field} is required`);
+            }
+            if (!allowedRecommendationCharacters.has(recommendation.recommendationBasis.character)) throw new Error(`${context}: unsupported recommendation character`);
+            if (!allowedConsensusStrengths.has(recommendation.recommendationBasis.consensus)) throw new Error(`${context}: unsupported consensus strength`);
           }
-          if (!allowedRecommendationCharacters.has(recommendation.recommendationBasis.character)) throw new Error(`${context}: unsupported recommendation character`);
-          if (!allowedConsensusStrengths.has(recommendation.recommendationBasis.consensus)) throw new Error(`${context}: unsupported consensus strength`);
           validateFrequency(context, recommendation);
+        }
+        if (period.timingStatus === "not_specified" && (seenModalities.size !== allowedModalities.size || period.recommendations.some(item => item.status !== "not_specified"))) {
+          throw new Error(`${protocol.id}/${group.id}/${period.id}: non-interval guidance must explicitly mark every modality not specified`);
         }
       }
     }

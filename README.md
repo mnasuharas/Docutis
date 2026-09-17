@@ -29,7 +29,7 @@ Docutis is currently in active early development. Its content, structure and tec
 - Responsive browser-based interface
 - Dependency-free automated validation on pull requests and `main` pushes
 - No installation or account required
-- Structured German guideline-based dermato-oncology follow-up for melanoma, BCC and cSCC
+- English-language dermato-oncology follow-up UI based on German guidelines for melanoma, BCC and cSCC
 
 ## Current Clinical Focus
 
@@ -69,9 +69,11 @@ Clinical review governance distinguishes automated source/schema validation from
 
 `clinicalReview` is null until a physician review is documented. A reviewed record stores the date, physician role, specialty and a deterministic content fingerprint. Local validation and CI reject stale fingerprints after clinical changes; contributors must obtain re-review or reset the record to review-required. A matching hash does not establish reviewer credentials or guarantee correctness. See [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md) for the human procedure and the read-only `node scripts/clinical-review.js "Acne Vulgaris"` utility.
 
-## German dermato-oncology follow-up
+## German guideline-based dermato-oncology follow-up
 
-The Nachsorge module adds structured German follow-up protocols for cutaneous melanoma, basal cell carcinoma and cutaneous squamous cell carcinoma. Clinicians can select the disease, guideline-defined stage/risk group and follow-up period to view modality-specific intervals and conditions. Guideline identity, version, official source, metadata-check date and clinical-review state are available in the provenance disclosure.
+The follow-up module uses English clinical UI terminology while its current guideline jurisdiction remains Germany. Official German guideline titles are retained in provenance so the cited documents remain unambiguous. Clinicians can select the disease, guideline-defined stage/risk group and follow-up period or guidance state to view modality-specific intervals and conditions. Guideline identity, AWMF register number, version, official source, metadata-check date and clinical-review state are available in the provenance disclosure.
+
+Melanoma in situ (Stage 0) is represented as structured non-interval guidance. The current German S3 melanoma guideline does not define a specific structured follow-up schedule for melanoma in situ, so Docutis does not extrapolate the stage IA schedule or invent clinical examination, ultrasound, S100B or imaging intervals. Each modality is displayed as `not specified`. This means that the selected guideline does not supply a recommendation; it does not mean that an intervention is recommended against.
 
 Protocols live in `followup-data.js`, separate from disease records and rendering. The schema supports multiple jurisdictions for a disease, but this release displays Germany only; it does not expose an unsupported jurisdiction switch. All three protocols remain `clinician review required`. See [FOLLOW_UP_PROTOCOLS.md](FOLLOW_UP_PROTOCOLS.md) for the implementation matrix, authoritative sources, schema, update policy and extension procedure; [GOAL5_CLINICAL_REVIEW.md](GOAL5_CLINICAL_REVIEW.md) is the uncompleted dermatologist review worksheet.
 

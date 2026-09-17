@@ -1,6 +1,6 @@
-# German dermato-oncology follow-up protocols
+# German guideline-based dermato-oncology follow-up protocols
 
-The Nachsorge module is a structured clinical reference for physicians. Its first jurisdiction is Germany (`DE`). It does not calculate stage, replace the source guideline or provide patient-specific advice. Every protocol is currently `clinician review required`.
+The follow-up module is a structured clinical reference for physicians. Its interface language is English and its first guideline jurisdiction is Germany (`DE`); those are independent concerns. Official German guideline titles remain in their original language for accurate provenance. The module does not calculate stage, replace the source guideline or provide patient-specific advice. Every protocol is currently `clinician review required`.
 
 ## Implementation matrix
 
@@ -8,6 +8,7 @@ The following matrix was transcribed conservatively from the cited official Germ
 
 | Disease / group | Period | Clinical examination | Lymph-node ultrasound | Laboratory | Imaging | Guideline |
 | --- | --- | --- | --- | --- | --- | --- |
+| Melanoma in situ / Stage 0 | No structured interval specified | Not specified | Not specified | S100B: not specified | Not specified | German S3 v3.3; the schedule for invasive melanoma begins at IA |
 | Melanoma IA | Years 1–3 / 4–5 / 6–10 | 6 / 12 / 12 months | — | — | — | German S3 v3.3, sections 8.3 and 8.4.8 |
 | Melanoma IB–IIB | Years 1–3 / 4–5 / 6–10 | 3 / 6 / 6–12 months | 6 months in years 1–3 only, after correct sentinel-node staging; otherwise follow IIC | S100B 3 months in years 1–3 | — | German S3 v3.3 |
 | Melanoma IIC–IV, R0 resected | Years 1–3 / 4–5 / 6–10 | 3 / 3 / 6 months | 3 / 6 months / — | S100B 3 / 6 months / — | 6 months in years 1–3 | German S3 v3.3 |
@@ -21,18 +22,21 @@ The following matrix was transcribed conservatively from the cited official Germ
 Authoritative sources:
 
 - [S3-Leitlinie Melanom, version 3.3, July 2020](https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Melanom/Melanom_Version_3/LL_Melanom_Langversion_3.3.pdf), AWMF register 032/024OL.
+- [German melanoma patient guideline: follow-up and early detection](https://register.awmf.org/assets/guidelines/032-024OLp_S3_Melanom-Diagnostik-Therapie-Nachsorge_2020-08_1.pdf), which explicitly states that the physician guideline does not address follow-up for melanoma in situ.
 - [S2k-Leitlinie Basalzellkarzinom, version 9.0, 2023 update; AWMF metadata records revision January 2024](https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf), AWMF register 032-021.
 - [S3-Leitlinie Aktinische Keratose und Plattenepithelkarzinom der Haut, version 2.0, December 2022](https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Aktinische_Keratosen_und_PEK/Version_2/LL_Aktinische_Keratose_und_PEK_Langversion_2.0.pdf), AWMF register 032/022OL.
 
-Source metadata was checked on 2026-09-16. That check confirms the recorded title, version and link only; it is not clinical review and does not establish that a recommendation remains current.
+The melanoma sources and scope were rechecked on 2026-09-17; BCC and cSCC source metadata was checked on 2026-09-16. These checks confirm recorded identity, scope and links only; they are not clinical review and do not establish that a recommendation remains current.
 
 The pre-release source audit corrected the cSCC identity from an evidence-document-style `2.01 / May 2022` reference to the official main long guideline `2.0 / December 2022`, including its canonical URL and pages. It also aligned the locally advanced/metastatic cSCC clinical schedule with statement 9.2, retained the perineural-growth condition on table-based imaging intervals, and encoded explicit dashes as no routine interval rather than as an unspecified modality. The BCC revision date follows AWMF metadata (`01/2024`); the source's combined intensive-risk recommendation remains one selectable group.
 
 ## Data architecture
 
-`followup-data.js` publishes `DOCUTIS_FOLLOW_UP_DATA` independently from disease records and UI code. Each protocol has a stable disease ID, jurisdiction, official guideline metadata, stage/risk groups, time periods and modality recommendations. Frequencies use controlled structured forms: exact/ranged month intervals, occurrences per year or a single time point. Conditional language and recommendation strength remain attached to the relevant recommendation. Guideline publication, source metadata check date and physician review remain separate facts.
+`followup-data.js` publishes `DOCUTIS_FOLLOW_UP_DATA` independently from disease records and UI code. Each protocol has a stable disease ID, jurisdiction, official guideline metadata, stage/risk groups, time periods or an explicit non-interval guidance state, and modality recommendations. Frequencies use controlled structured forms: exact/ranged month intervals, occurrences per year or a single time point. Conditional language and recommendation strength remain attached to the relevant recommendation. Guideline publication, source metadata check date and physician review remain separate facts.
 
-The modality registry currently contains clinical examination, lymph-node ultrasound, S100B and cross-sectional imaging. Missing modalities are not converted into a negative recommendation. The UI explicitly distinguishes “not specified” from “no routine interval in the source schedule.”
+The modality registry currently contains clinical examination, lymph-node ultrasound, S100B and cross-sectional imaging. Missing modalities are not converted into a negative recommendation. The UI explicitly distinguishes `not specified` from `not routinely scheduled`: the former means the selected guideline does not supply a recommendation, while the latter represents an explicit source-schedule state. Neither should be inferred from the other.
+
+The current German S3 melanoma guideline does not define a specific structured follow-up schedule for melanoma in situ. It therefore uses one `timingStatus: "not_specified"` guidance period with `range: null`; all four modalities are explicitly `not_specified`, have no frequency and claim no recommendation character or consensus. Validation rejects fabricated ranges, frequencies, recommendation strength or incomplete modality coverage for this state. The stage IA schedule is not reused. EADO context is intentionally omitted from Goal 5.1 to keep the German recommendation and any future European context clearly separate.
 
 To add a disease, add one protocol with a stable ID and an existing disease ID, cite an authoritative guideline, add all source-defined groups and periods, then extend the integrity and UI tests. To add a jurisdiction, add another protocol with the same disease ID and a different jurisdiction code; do not add a selector until validated data exists for more than one jurisdiction.
 
@@ -49,7 +53,7 @@ The first command validates schema, sources, ranges, frequencies, duplicate/conf
 
 ## Governance and update policy
 
-The Goal 4 review states and metadata apply unchanged. A protocol fingerprint includes disease and jurisdiction identity, guideline title/version/date/source and recommendation location, every group and period, ranges, modalities, frequencies, recommendation status, clinical conditions, recommendation character, consensus and notes. It excludes review metadata, the source metadata check date, presentation-only disease/jurisdiction labels and array ordering used purely for display.
+The Goal 4 review states and metadata apply unchanged. A protocol fingerprint includes disease and jurisdiction identity, guideline title/version/date/source and recommendation location, every group and period identity, descriptions, timing status, ranges, modalities, frequencies, recommendation status, clinical conditions, recommendation character, consensus and notes. It excludes review metadata, the source metadata check date, presentation-only disease/jurisdiction/group/period labels and array ordering used purely for display.
 
 Changing a clinical recommendation or replacing a guideline makes an existing physician review stale. A new guideline publication must trigger manual clinical reassessment; a working URL or automated metadata check cannot preserve review automatically.
 

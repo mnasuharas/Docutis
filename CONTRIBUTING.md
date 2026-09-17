@@ -84,7 +84,11 @@ The Goal 3 content snapshot in the tests protects the existing 50 records during
 
 Follow [FOLLOW_UP_PROTOCOLS.md](FOLLOW_UP_PROTOCOLS.md) when changing `followup-data.js`. Use the official guideline-publishing body as the primary source; do not infer intervals, combine jurisdictions or convert ambiguous wording into false precision. Keep guideline version/publication, source metadata check and physician review as separate facts.
 
+The follow-up interface language is English even when the guideline jurisdiction is Germany. Preserve official German guideline titles in provenance. Treat group and period labels as presentation-only, but keep clinical descriptions, conditions, notes and recommendation semantics inside the reviewed clinical content.
+
 Every group needs a stable ID, explicit risk/stage description, structured time ranges and structured modality frequencies. Use a conditional recommendation with its source condition when a modality depends on risk factors. If the guideline does not address a modality, omit it so the UI displays “not specified”; do not encode omission as “not recommended.”
+
+A source-supported non-interval state may use `timingStatus: "not_specified"` with `range: null`, but it must explicitly mark every registered modality `not_specified`, provide no fabricated frequency or recommendation strength, and pass the stricter validator. `not specified` means the guideline does not supply a recommendation; it is distinct from `not routinely scheduled` and must not be interpreted as a recommendation against an intervention.
 
 Any clinically meaningful protocol change requires re-review or reset to `clinician review required` with `clinicalReview: null`. Run `node scripts/follow-up.js` and `node scripts/clinical-review.js --follow-up <disease-id>` in addition to the standard checks. Adding a jurisdiction requires a separate sourced protocol and tests; do not create an empty or simulated selector.
 

@@ -14,12 +14,14 @@ Legend: **NR** = the source schedule explicitly has no routine interval; **NS** 
 
 ## Melanoma
 
+- [ ] Physician sign-off: melanoma in situ / Stage 0 non-interval guidance and `not specified` semantics
 - [ ] Physician sign-off: stage IA rows and source conditions
 - [ ] Physician sign-off: stage IB–IIB rows, including the sentinel-node-staging condition
 - [ ] Physician sign-off: stage IIC–IV R0 rows
 
 | Disease | Risk/stage | Period | Clinical exam | LN ultrasound | Laboratory | Imaging | Source |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| Melanoma | Melanoma in situ / Stage 0 | No structured interval specified | NS | NS | S100B: NS | NS | German S3 v3.3; invasive follow-up schedule begins at IA |
 | Melanoma | IA | Years 1–3 | Every 6 months | NR | S100B: NR | NR | Recommendation 8.11, p. 182 |
 | Melanoma | IA | Years 4–5 | Every 12 months | NR | S100B: NR | NR | Recommendation 8.11, p. 182 |
 | Melanoma | IA | Years 6–10 | Every 12 months | NR | S100B: NR | NR | Recommendation 8.11, p. 182 |
@@ -31,6 +33,8 @@ Legend: **NR** = the source schedule explicitly has no routine interval; **NS** 
 | Melanoma | IIC–IV, R0 resected | Years 6–10 | Every 6 months | NR | S100B: NR | NR | Recommendation 8.11, p. 182 |
 
 Recommendation character in the implementation: `sollte (EK)`; consensus strength 100%.
+
+For melanoma in situ, the German S3 guideline does not define a specific structured follow-up schedule comparable to the schedules for invasive melanoma. The Stage 0 row therefore has no interval, recommendation character or consensus value. `NS` must not be interpreted as a recommendation against clinical assessment or as permission to reuse the stage IA schedule.
 
 ## Basal cell carcinoma
 
