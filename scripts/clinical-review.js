@@ -60,15 +60,30 @@ function sortBy(items, key) {
 function followUpClinicalContent(protocol) {
   const { reviewStatus, clinicalReview, diseaseLabel, jurisdictionLabel, ...content } = protocol;
   content.guideline = Object.fromEntries(Object.entries(protocol.guideline).filter(([key]) => key !== "sourceMetadataCheckedAt"));
-  content.groups = sortBy(protocol.groups, "id").map(({ label: groupLabel, ...group }) => ({
-    ...group,
-    notes: [...group.notes].sort((left, right) => left.localeCompare(right, "en")),
-    periods: sortBy(group.periods, "id").map(({ label: periodLabel, ...period }) => ({
-      ...period,
-      recommendations: sortBy(period.recommendations, "modality"),
-      notes: [...period.notes].sort((left, right) => left.localeCompare(right, "en"))
-    }))
-  }));
+  if (protocol.supplementalSources) {
+    content.supplementalSources = sortBy(protocol.supplementalSources, "id").map(({ sourceMetadataCheckedAt, ...source }) => source);
+  }
+  content.groups = sortBy(protocol.groups, "id").map(({ label: groupLabel, ...group }) => {
+    const normalizedGroup = {
+      ...group,
+      notes: [...group.notes].sort((left, right) => left.localeCompare(right, "en")),
+      periods: sortBy(group.periods, "id").map(({ label: periodLabel, ...period }) => ({
+        ...period,
+        recommendations: sortBy(period.recommendations, "modality").map(recommendation => ({
+          ...recommendation,
+          ...(recommendation.sourceIds ? { sourceIds: [...recommendation.sourceIds].sort((left, right) => left.localeCompare(right, "en")) } : {})
+        })),
+        notes: [...period.notes].sort((left, right) => left.localeCompare(right, "en"))
+      }))
+    };
+    if (group.contextSections) {
+      normalizedGroup.contextSections = sortBy(group.contextSections, "id").map(section => ({
+        ...section,
+        sourceIds: [...section.sourceIds].sort((left, right) => left.localeCompare(right, "en"))
+      }));
+    }
+    return normalizedGroup;
+  });
   content.notes = [...protocol.notes].sort((left, right) => left.localeCompare(right, "en"));
   return content;
 }

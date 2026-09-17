@@ -18,6 +18,11 @@
     "Starker Konsens": "strong consensus",
     "Konsensstärke 100 %": "100% consensus"
   });
+  const evidenceScopes = Object.freeze({
+    german_expert_context: "German expert-practice context",
+    german_clinical_context: "German stage-based clinical context",
+    international_context: "International context"
+  });
 
   function append(parent, tag, text, className) {
     const element = document.createElement(tag);
@@ -59,6 +64,9 @@
     if (frequency.kind === "occurrences_per_year") {
       if (frequency.min === frequency.max) return `${frequency.min}× per year`;
       return `${frequency.min}–${frequency.max}× per year`;
+    }
+    if (frequency.kind === "minimum_occurrences_per_year") {
+      return frequency.min === 1 ? "At least annually" : `At least ${frequency.min}× per year`;
     }
     return "Not specified";
   }
@@ -107,6 +115,7 @@
       const card = append(grid, "section", null, "follow-up-result-card");
       append(card, "h4", modality.label);
       append(card, "p", recommendationText(recommendation), recommendation ? `recommendation-${recommendation.status}` : "recommendation-unspecified");
+      if (recommendation?.evidenceScope) append(card, "p", evidenceScopes[recommendation.evidenceScope] || recommendation.evidenceScope, "recommendation-scope");
       if (recommendation?.note) append(card, "p", recommendation.note, "follow-up-note");
       if (recommendation?.recommendationBasis) {
         append(card, "p", recommendationBasisText(recommendation.recommendationBasis), "recommendation-strength");
@@ -114,6 +123,15 @@
     });
 
     [...period.notes, ...(group.notes || []), ...protocol.notes].forEach(note => append(result, "p", note, "follow-up-note"));
+
+    if (group.contextSections?.length) {
+      const context = append(result, "aside", null, "follow-up-context");
+      group.contextSections.forEach(section => {
+        const item = append(context, "section", null, "follow-up-context-section");
+        append(item, "h4", section.title);
+        append(item, "p", section.text);
+      });
+    }
 
     const provenance = append(result, "details", null, "follow-up-provenance");
     append(provenance, "summary", "Guideline basis and clinical governance");
@@ -127,6 +145,24 @@
     sourceLink.target = "_blank";
     sourceLink.rel = "noopener noreferrer";
     append(provenance, "p", `Source metadata checked: ${protocol.guideline.sourceMetadataCheckedAt}`, "reference-metadata");
+    const sourceIds = new Set([
+      ...period.recommendations.flatMap(item => item.sourceIds || []),
+      ...(group.contextSections || []).flatMap(section => section.sourceIds || [])
+    ]);
+    const supportingSources = (protocol.supplementalSources || []).filter(source => sourceIds.has(source.id));
+    if (supportingSources.length) {
+      append(provenance, "h4", "Supporting context sources");
+      const sourceList = append(provenance, "ul", null, "follow-up-source-list");
+      supportingSources.forEach(source => {
+        const item = append(sourceList, "li");
+        const link = append(item, "a", `${source.title} (new tab)`);
+        link.href = source.sourceUrl;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        append(item, "span", `${source.organization} · ${source.sourceType}`, "reference-metadata");
+        append(item, "span", `Source metadata checked: ${source.sourceMetadataCheckedAt}`, "reference-metadata");
+      });
+    }
     renderReview(protocol, provenance);
 
     if (announce) status.textContent = `Showing ${protocol.diseaseLabel}, ${group.label}, ${period.label}.`;

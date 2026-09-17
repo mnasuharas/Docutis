@@ -70,10 +70,11 @@ test("documentation distinguishes source metadata checks from clinical review", 
   assert.match(goal5Review, /- \[ \] Physician sign-off/);
   assert.match(goal5Review, /all three protocols remain `clinician review required`/i);
   assert.match(followUpDocs, /Melanoma in situ \/ Stage 0/);
-  assert.match(followUpDocs, /does not define a specific structured follow-up schedule/i);
-  assert.match(followUpDocs, /not specified[^.]*does not supply a recommendation/i);
+  assert.match(followUpDocs, /does not define a dedicated structured follow-up schedule/i);
+  assert.match(followUpDocs, /at least annual clinical examination/i);
+  assert.match(followUpDocs, /International AAD context is rendered separately/i);
   assert.match(goal5Review, /Physician sign-off: melanoma in situ \/ Stage 0/);
-  assert.match(goal5Review, /Melanoma \| Melanoma in situ \/ Stage 0 \| No structured interval specified/);
+  assert.match(goal5Review, /Melanoma \| Melanoma in situ \/ Stage 0 \| No Stage 0-specific S3 interval/);
 });
 
 test("CI validates pull requests, main pushes and manual runs with read-only permissions", () => {
@@ -113,6 +114,7 @@ test("responsive and keyboard focus rules remain present", () => {
   assert.match(css, /@media[\s\S]*?\.category-grid\s*{[\s\S]*?grid-template-columns:\s*1fr/);
   assert.match(css, /@media[\s\S]*?\.detail-header\s*{[\s\S]*?flex-direction:\s*column-reverse/);
   assert.match(css, /\.follow-up-controls select:focus-visible/);
+  assert.match(css, /\.follow-up-context\s*{/);
   assert.match(css, /@media[\s\S]*?\.follow-up-controls,[\s\S]*?\.follow-up-results-grid\s*{[\s\S]*?grid-template-columns:\s*1fr/);
 });
 

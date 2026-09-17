@@ -59,14 +59,27 @@ test("melanoma in situ is explicit non-interval guidance without an invented sch
   const melanoma = protocol("cutaneous-melanoma-de");
   const stageZero = melanoma.groups.find(group => group.id === "melanoma-in-situ");
   assert.equal(stageZero.label, "Melanoma in situ (Stage 0)");
-  assert.match(stageZero.description, /does not define a specific structured follow-up schedule/i);
+  assert.match(stageZero.description, /No Stage 0-specific structured follow-up interval is defined/i);
   assert.equal(stageZero.periods.length, 1);
   const guidance = stageZero.periods[0];
-  assert.equal(guidance.id, "not-specified");
-  assert.equal(guidance.timingStatus, "not_specified");
+  assert.equal(guidance.id, "stage-0-guidance");
+  assert.equal(guidance.timingStatus, "guidance_only");
   assert.equal(guidance.range, null);
   assert.equal(guidance.recommendations.length, 4);
-  assert.ok(guidance.recommendations.every(item => item.status === "not_specified" && item.frequency === null && item.recommendationBasis === null));
+  const recommendations = Object.fromEntries(guidance.recommendations.map(item => [item.modality, item]));
+  assert.equal(recommendations.clinical_examination.status, "scheduled");
+  assert.deepEqual(clone(recommendations.clinical_examination.frequency), { kind: "minimum_occurrences_per_year", min: 1 });
+  assert.equal(recommendations.clinical_examination.evidenceScope, "german_expert_context");
+  for (const modality of ["lymph_node_ultrasound", "s100b", "cross_sectional_imaging"]) {
+    assert.equal(recommendations[modality].status, "not_routinely_scheduled");
+    assert.equal(recommendations[modality].frequency, null);
+    assert.equal(recommendations[modality].recommendationBasis, null);
+    assert.equal(recommendations[modality].evidenceScope, "german_clinical_context");
+  }
+  assert.match(recommendations.cross_sectional_imaging.note, /asymptomatic Stage 0/i);
+  assert.deepEqual(Array.from(stageZero.contextSections, item => item.id), ["german-clinical-practice", "self-examination", "international-context"]);
+  assert.match(stageZero.contextSections.find(item => item.id === "self-examination").text, /Monthly skin self-examination/i);
+  assert.deepEqual(Array.from(melanoma.supplementalSources, item => item.id), ["german-melanoma-patient-guideline", "infoportal-melanoma-in-situ", "aad-melanoma-follow-up"]);
   assert.equal(melanoma.reviewStatus, "clinician review required");
   assert.equal(melanoma.clinicalReview, null);
 });
@@ -81,9 +94,12 @@ test("invalid ranges, intervals, modalities and conflicting recommendations fail
   const missingBasis = clone(loadFollowUpData()); missingBasis.protocols[0].groups[1].periods[0].recommendations[0].recommendationBasis = null; cases.push(missingBasis);
   const badCharacter = clone(loadFollowUpData()); badCharacter.protocols[0].groups[1].periods[0].recommendations[0].recommendationBasis.character = "recommended"; cases.push(badCharacter);
   const fakeMisRange = clone(loadFollowUpData()); fakeMisRange.protocols[0].groups[0].periods[0].range = { fromYear: 1, toYear: 3 }; cases.push(fakeMisRange);
-  const fakeMisFrequency = clone(loadFollowUpData()); fakeMisFrequency.protocols[0].groups[0].periods[0].recommendations[0].frequency = { kind: "interval_months", min: 6, max: 6 }; cases.push(fakeMisFrequency);
+  const badMisFrequency = clone(loadFollowUpData()); badMisFrequency.protocols[0].groups[0].periods[0].recommendations[0].frequency.min = 0; cases.push(badMisFrequency);
   const fakeMisBasis = clone(loadFollowUpData()); fakeMisBasis.protocols[0].groups[0].periods[0].recommendations[0].recommendationBasis = { character: "sollte", consensus: "Konsens" }; cases.push(fakeMisBasis);
   const incompleteMis = clone(loadFollowUpData()); incompleteMis.protocols[0].groups[0].periods[0].recommendations.pop(); cases.push(incompleteMis);
+  const primaryMis = clone(loadFollowUpData()); delete primaryMis.protocols[0].groups[0].periods[0].recommendations[0].evidenceScope; cases.push(primaryMis);
+  const unresolvedMisSource = clone(loadFollowUpData()); unresolvedMisSource.protocols[0].groups[0].periods[0].recommendations[0].sourceIds = ["missing-source"]; cases.push(unresolvedMisSource);
+  const missingContextSource = clone(loadFollowUpData()); missingContextSource.protocols[0].groups[0].contextSections[0].sourceIds = []; cases.push(missingContextSource);
   for (const fixture of cases) assert.throws(() => validateFollowUpData(fixture, loadData()));
 });
 
@@ -154,11 +170,20 @@ test("melanoma in situ clinical guidance participates in the deterministic finge
   const original = clone(protocol("cutaneous-melanoma-de"));
   const originalHash = followUpFingerprint(original);
   const changedStatus = clone(original);
-  changedStatus.groups[0].periods[0].recommendations[0].status = "not_routinely_scheduled";
+  changedStatus.groups[0].periods[0].recommendations[0].status = "not_specified";
   assert.notEqual(followUpFingerprint(changedStatus), originalHash);
   const changedStatement = clone(original);
   changedStatement.groups[0].description = "Different clinical statement.";
   assert.notEqual(followUpFingerprint(changedStatement), originalHash);
+  const changedContext = clone(original);
+  changedContext.groups[0].contextSections[0].text = "Different contextual statement.";
+  assert.notEqual(followUpFingerprint(changedContext), originalHash);
+  const changedSource = clone(original);
+  changedSource.supplementalSources[0].sourceUrl = "https://example.org/different-source";
+  assert.notEqual(followUpFingerprint(changedSource), originalHash);
+  const metadataOnly = clone(original);
+  metadataOnly.supplementalSources[0].sourceMetadataCheckedAt = "2030-01-01";
+  assert.equal(followUpFingerprint(metadataOnly), originalHash);
   assert.equal(followUpFingerprint(original), originalHash);
 });
 
@@ -207,9 +232,12 @@ function textOf(element) { return [element.textContent, ...element.children.map(
 test("follow-up UI updates disease, group and period with safe provenance links", () => {
   const elements = uiHarness();
   assert.match(textOf(elements.followUpResult), /Cutaneous melanoma: Melanoma in situ \(Stage 0\)/);
-  assert.match(textOf(elements.followUpResult), /No structured interval specified/);
-  assert.match(textOf(elements.followUpResult), /Not specified in the guideline/);
-  assert.doesNotMatch(textOf(elements.followUpResult), /Every \d+ months|Annually/);
+  assert.match(textOf(elements.followUpResult), /Guidance without a Stage 0-specific S3 interval/);
+  assert.match(textOf(elements.followUpResult), /At least annually/);
+  assert.match(textOf(elements.followUpResult), /Not routinely recommended for Stage 0/);
+  assert.match(textOf(elements.followUpResult), /Monthly skin self-examination/);
+  assert.match(textOf(elements.followUpResult), /International context/);
+  assert.doesNotMatch(textOf(elements.followUpResult), /Every \d+ months|10 years of follow-up for melanoma in situ/);
   elements.followUpGroup.value = "stage-ia"; elements.followUpGroup.dispatch("change");
   assert.match(textOf(elements.followUpResult), /Cutaneous melanoma: Stage IA/);
   assert.match(textOf(elements.followUpResult), /Every 6 months/);
@@ -251,6 +279,8 @@ test("follow-up UI terminology is English while official German guideline titles
   assert.match(text, /Cross-sectional imaging/);
   assert.match(text, /Not routinely scheduled/);
   assert.match(text, /Not specified in the guideline/);
+  assert.match(text, /German expert-practice context/);
+  assert.match(text, /International context/);
   assert.match(text, /Official guideline title: S3-Leitlinie/);
   assert.doesNotMatch(text, /Klinische Untersuchung|Lymphknoten-Sonographie|Schnittbildgebung|Alle \d|Jahr \d|Im ausgewählten|Kein routinemäßiges|angezeigt/);
 });

@@ -265,10 +265,36 @@ main {
 
 .follow-up-note,
 .recommendation-strength,
+.recommendation-scope,
 .follow-up-reviewed-date {
   color: #596579;
   font-size: 13px;
   line-height: 1.5;
+}
+
+.recommendation-scope {
+  font-weight: 700;
+}
+
+.follow-up-context {
+  background: #f8fafc;
+  border-left: 4px solid #8ba7a3;
+  border-radius: 8px;
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 16px 18px;
+}
+
+.follow-up-context-section h4,
+.follow-up-context-section p {
+  margin: 0;
+}
+
+.follow-up-context-section p {
+  color: #4b5563;
+  line-height: 1.55;
+  margin-top: 5px;
 }
 
 .follow-up-provenance {
@@ -285,6 +311,16 @@ main {
 
 .follow-up-provenance .review-status {
   margin-top: 8px;
+}
+
+.follow-up-source-list {
+  display: grid;
+  gap: 10px;
+  padding-left: 20px;
+}
+
+.follow-up-source-list span {
+  display: block;
 }
 
 .section-title {
