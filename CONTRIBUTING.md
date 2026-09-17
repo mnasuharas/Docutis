@@ -55,6 +55,17 @@ Use sources in this order when they are applicable and current:
 
 A reference link does not by itself validate every statement in a record. Keep claims within the scope of the cited source, avoid copying source text, and flag conflicts or unresolved questions for clinical review.
 
+### Structured clinical profiles
+
+Read [CLINICAL_SCHEMA.md](CLINICAL_SCHEMA.md) before adding or changing `clinicalProfile`. The profile is optional during migration; do not add empty domains or copy a generic template into every disease.
+
+- Use values from `clinical-schema.js` for morphology, symptoms, distribution, course, diagnostic roles, treatment levels and follow-up strategies.
+- Keep the legacy clinical fields populated until migration is complete so older records and consumers remain compatible.
+- Every profile must list attached record references in `sourceUrls`; intervention- or diagnostic-level source links must also resolve to that record's references.
+- Add medication formulation, dose, frequency or duration only when the attached authoritative source explicitly supports it. Do not infer a regimen.
+- Any `clinicalProfile` edit changes the disease clinical fingerprint and requires physician re-review or continued `clinician review required` state.
+- Run `node scripts/clinical-schema.js` and update `CONTENT_QUALITY_AUDIT.md` when coverage changes.
+
 Allowed source types are `official classification`, `guideline`, `consensus`, `systematic review`, `peer-reviewed review`, and `clinical reference`. Choose the type from the publication itself; do not describe an ordinary review as a consensus or an institutional landing page as a peer-reviewed guideline.
 
 `metadataCheckedAt` must be an ISO `YYYY-MM-DD` date and belongs to one source object. It records only when that source's title, organization or journal, type, year/version, DOI, and link were checked. It is not the source publication year, guideline version, access date for every record, or a clinician review date. Update it only after rechecking that individual source; never change a shared default to make unrelated sources appear newly checked.
@@ -119,7 +130,7 @@ Before submitting a change:
 2. Test the disease search.
 3. Check that condition details display correctly.
 4. Make sure existing functionality has not been unintentionally broken.
-5. Run `node --check data.js`, `node --check app.js`, `node --check media-data.js`, `node --check scripts/media.js`, `node scripts/media.js`, `node --test tests/*.test.js`, and `git diff --check` for any content, data-structure, media, or interface change.
+5. Run `node --check data.js`, `node --check clinical-schema.js`, `node --check app.js`, `node --check media-data.js`, `node --check scripts/media.js`, `node --check scripts/clinical-schema.js`, `node scripts/media.js`, `node scripts/clinical-schema.js`, `node --test tests/*.test.js`, and `git diff --check` for any content, data-structure, media, or interface change.
    For follow-up changes also run `node --check followup-data.js`, `node --check followup-app.js`, `node scripts/follow-up.js`, and `node scripts/clinical-review.js --validate`.
 6. Test category filters and keyboard-only card/detail interaction at desktop and mobile widths.
 

@@ -21,14 +21,17 @@ function reviewedFixture() {
   return record;
 }
 
-test("Goal 4 preserves every baseline record, alias, clinical field, code, source and taxonomy", () => {
+test("Goal 7 preserves every legacy record, alias, clinical field, code, source and taxonomy", () => {
   assert.equal(data.diseases.length, 50);
   assert.equal(data.categories.length, 8);
   assert.equal(data.subcategories.length, 26);
-  const content = { ...data, diseases: data.diseases.map(({ reviewStatus, clinicalReview, ...record }) => record) };
-  // Snapshot of Goal 3 dc050c3, excluding only review state. Intentional future content changes need an explicit snapshot review.
+  const { schemaVersion, ...legacyTopLevel } = data;
+  const content = { ...legacyTopLevel, diseases: data.diseases.map(({ reviewStatus, clinicalReview, clinicalProfile, ...record }) => ({
+    ...record, references: record.references.map(({ metadataCheckedAt, ...reference }) => reference)
+  })) };
+  // Legacy clinical snapshot, excluding review state, Goal 7 profiles and bibliographic recheck dates.
   assert.equal(createHash("sha256").update(JSON.stringify(canonicalize(content))).digest("hex"),
-    "40a8c8ed63b0262567a66db8b9fd875cef9cc670f1ba63388c2d85fad50046fe");
+    "4f3e41022b2c2f5c7dfd6a449b3191b7eaf2219fe361ba81da45760e75179624");
 });
 
 test("all 50 production records remain unreviewed with null metadata", () => {
@@ -98,7 +101,8 @@ test("every clinical field and meaningful source change invalidates review", () 
     record => { record.references[0].version = "changed"; },
     record => { record.references[0].url = "https://example.org/changed"; },
     record => { record.references.pop(); },
-    record => { record.redFlags = ["New clinical field"]; }
+    record => { record.redFlags = ["New clinical field"]; },
+    record => { record.clinicalProfile.presentation.morphology.text += " changed"; }
   ]) {
     const record = clone(original); edit(record);
     assert.notEqual(fingerprint(record), fingerprint(original));

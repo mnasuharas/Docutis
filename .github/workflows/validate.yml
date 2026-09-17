@@ -30,7 +30,10 @@ jobs:
           package-manager-cache: false
 
       - name: Check data syntax
-        run: node --check data.js
+        run: |
+          node --check data.js
+          node --check clinical-schema.js
+          node --check scripts/clinical-schema.js
 
       - name: Check application syntax
         run: |
@@ -48,6 +51,7 @@ jobs:
       - name: Validate clinical governance and follow-up data
         run: |
           node scripts/clinical-review.js --validate
+          node scripts/clinical-schema.js
           node scripts/follow-up.js
           node scripts/media.js
 

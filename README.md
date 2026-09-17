@@ -109,6 +109,8 @@ The current application uses:
 
 Medical records live in `data.js`; `app.js` contains filtering, rendering and interaction behavior. Records include a broad category, a structured subcategory, coding-system metadata, source metadata, and review status. This separation keeps content review focused and preserves the dependency-free static architecture.
 
+Goal 7 adds an optional versioned `clinicalProfile` for structured morphology, localization, symptoms, diagnostic workflow, concise differential clues, treatment hierarchy, medication-regimen metadata, follow-up strategy, red flags, referral and oncology context. Eight representative records use the profile; the remaining 42 continue through the legacy-compatible renderer. See [CLINICAL_SCHEMA.md](CLINICAL_SCHEMA.md) and [CONTENT_QUALITY_AUDIT.md](CONTENT_QUALITY_AUDIT.md). Structured clinical fields are still drafts requiring physician review.
+
 Optional educational media lives separately in `media-data.js`. Goal 6 intentionally ships with no pilot images because no candidate set was accepted without additional license and clinical review. The schema nevertheless requires a controlled media type, intrinsic dimensions, caption, alt text, diagnosis, educational description, source, reusable-rights license, attribution, HTTPS provenance, metadata-check date and independent media review state. See [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md).
 
 Follow-up protocols live in `followup-data.js`; `followup-app.js` renders the selectors, recommendations and provenance. `scripts/follow-up.js` performs offline integrity validation, while the existing clinical-review utility fingerprints both disease records and follow-up protocols.
@@ -130,13 +132,16 @@ To run the same dependency-free syntax and test checks used by GitHub Actions wi
 
 ```shell
 node --check data.js
+node --check clinical-schema.js
 node --check app.js
 node --check media-data.js
 node --check followup-data.js
 node --check followup-app.js
 node --check scripts/media.js
+node --check scripts/clinical-schema.js
 node scripts/follow-up.js
 node scripts/media.js
+node scripts/clinical-schema.js
 node scripts/clinical-review.js --validate
 node --test tests/*.test.js
 git diff --check

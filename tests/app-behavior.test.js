@@ -55,6 +55,7 @@ function createHarness(transformData, transformMedia) {
   }
   document.elements.details.hidden = true;
   const context = { window: {}, document };
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "clinical-schema.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "data.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "media-data.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "followup-data.js"), "utf8"), context);
@@ -101,6 +102,8 @@ test("search covers names, aliases, categories, subcategories and both coding sy
   assert.equal(searchFor(elements, "common acne").length, 1);
   assert.equal(searchFor(elements, "chronic spontaneous urticaria").length, 1);
   assert.equal(searchFor(elements, "leukoderma").length, 1);
+  assert.equal(searchFor(elements, "annular").length, 1);
+  assert.equal(searchFor(elements, "photo distributed").length, 1);
   assert.equal(searchFor(elements, "Inflammatory and Eczematous Disorders").length, 5);
   assert.equal(searchFor(elements, "Acneiform and Sebaceous Disorders").length, 2);
   assert.equal(searchFor(elements, "Depigmenting disorder").length, 1);
@@ -226,6 +229,34 @@ test("condition details expose scannable section navigation and omit empty media
   assert.equal(elements.details.querySelectorAll(".media-section").length, 0);
   assert.match(textOf(elements.details), /Overview Clinical features Dermoscopy Differential Treatment Follow-up Coding Sources/);
   assert.match(textOf(elements.details), /View \d+ traceable sources/);
+});
+
+test("structured pilot details render clinical presentation, diagnostics, hierarchy and red flags", () => {
+  const { elements } = createHarness();
+  const card = elements.cards.querySelectorAll(".card").find(item => textOf(item).includes("Actinic Keratosis"));
+  card.dispatch("click");
+  const details = textOf(elements.details);
+  assert.match(details, /Clinical presentation/);
+  assert.match(details, /Morphology/);
+  assert.match(details, /Typical localization/);
+  assert.match(details, /Diagnostic approach/);
+  assert.match(details, /Clinical Examination · Routine/);
+  assert.match(details, /Differential diagnosis/);
+  assert.match(details, /First Line/);
+  assert.match(details, /Procedural/);
+  assert.match(details, /Red flags/);
+  assert.match(details, /Biopsy Assessment/);
+});
+
+test("legacy-compatible details retain the Goal 6 rendering path", () => {
+  const { elements } = createHarness();
+  const card = elements.cards.querySelectorAll(".card").find(item => textOf(item).includes("Contact Dermatitis"));
+  card.dispatch("click");
+  const details = textOf(elements.details);
+  assert.match(details, /Clinical features/);
+  assert.match(details, /Dermoscopy/);
+  assert.match(details, /Treatment overview/);
+  assert.doesNotMatch(details, /Diagnostic approach/);
 });
 
 test("optional educational media renders provenance and recovers from image failure", () => {

@@ -25,6 +25,8 @@ The fingerprint includes every record field except `reviewStatus` and `clinicalR
 
 A `clinician reviewed` record must have a valid date, role `physician`, non-empty specialty and a matching fingerprint. A stale fingerprint fails local tests and CI. Validation never updates it automatically. A clinical change requires either physician re-review and new metadata for that version, or resetting both fields to `reviewStatus: "clinician review required"` and `clinicalReview: null`.
 
+The optional Goal 7 `clinicalProfile` is clinical content and participates fully in the disease fingerprint. Structural values such as morphology, localization, diagnostics, differential clues, treatment hierarchy, medication metadata, follow-up, red flags and referral all invalidate an earlier reviewed hash when changed. `node scripts/clinical-schema.js` validates the shape and controlled values but cannot perform or replace physician review.
+
 ## Scope and accountability
 
 Exactly two statuses are allowed: `clinician review required` and `clinician reviewed`. Missing status/metadata on existing source entries defaults to required/null in the record factory, preserving compatibility. Explicit invalid values fail validation. The current 50-record review-required assertion is a release guard; a future genuine review PR must update that assertion and documented counts alongside the physician's attestation. Keep generic metadata and stale-hash tests in place.

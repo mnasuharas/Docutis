@@ -13,6 +13,9 @@ const followUpDocs = fs.readFileSync(path.join(root, "FOLLOW_UP_PROTOCOLS.md"), 
 const goal5Review = fs.readFileSync(path.join(root, "GOAL5_CLINICAL_REVIEW.md"), "utf8");
 const mediaGovernance = fs.readFileSync(path.join(root, "MEDIA_GOVERNANCE.md"), "utf8");
 const mediaData = fs.readFileSync(path.join(root, "media-data.js"), "utf8");
+const clinicalSchema = fs.readFileSync(path.join(root, "clinical-schema.js"), "utf8");
+const clinicalSchemaDocs = fs.readFileSync(path.join(root, "CLINICAL_SCHEMA.md"), "utf8");
+const qualityAudit = fs.readFileSync(path.join(root, "CONTENT_QUALITY_AUDIT.md"), "utf8");
 const followUpApp = fs.readFileSync(path.join(root, "followup-app.js"), "utf8");
 const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "validate.yml"), "utf8");
 
@@ -37,6 +40,7 @@ function contrastRatio(foreground, background) {
 }
 
 test("static page keeps load order, disclaimer and accessible controls", () => {
+  assert.ok(html.indexOf('src="clinical-schema.js"') < html.indexOf('src="data.js"'));
   assert.ok(html.indexOf('src="data.js"') < html.indexOf('src="app.js"'));
   assert.ok(html.indexOf('src="media-data.js"') < html.indexOf('src="app.js"'));
   assert.ok(html.indexOf('src="followup-data.js"') < html.indexOf('src="followup-app.js"'));
@@ -81,6 +85,12 @@ test("documentation distinguishes source metadata checks from clinical review", 
   assert.match(followUpDocs, /International AAD context is rendered separately/i);
   assert.match(goal5Review, /Physician sign-off: melanoma in situ \/ Stage 0/);
   assert.match(goal5Review, /Melanoma \| Melanoma in situ \/ Stage 0 \| No Stage 0-specific S3 interval/);
+  assert.match(clinicalSchemaDocs, /clinicalProfile/);
+  assert.match(clinicalSchemaDocs, /formulation, dose, frequency, duration/i);
+  assert.match(clinicalSchemaDocs, /part of the deterministic clinical fingerprint/i);
+  assert.match(qualityAudit, /structured medication details: 0\/50/i);
+  assert.match(qualityAudit, /legacy-compatible records: 42\/50/i);
+  assert.match(qualityAudit, /EADO\/EDF\/EORTC/);
 });
 
 test("CI validates pull requests, main pushes and manual runs with read-only permissions", () => {
@@ -96,7 +106,7 @@ test("CI validates pull requests, main pushes and manual runs with read-only per
   assert.match(workflow, /actions\/setup-node@v7/);
   assert.match(workflow, /node-version:\s*"24"/);
   assert.match(workflow, /package-manager-cache:\s*false/);
-  for (const command of ["node --check data.js", "node --check app.js", "node --check media-data.js", "node --check scripts/media.js", "node scripts/media.js", "node --test tests/*.test.js", "git diff --check"]) {
+  for (const command of ["node --check data.js", "node --check clinical-schema.js", "node --check scripts/clinical-schema.js", "node scripts/clinical-schema.js", "node --check app.js", "node --check media-data.js", "node --check scripts/media.js", "node scripts/media.js", "node --test tests/*.test.js", "git diff --check"]) {
     assert.ok(workflow.includes(command), `workflow is missing ${command}`);
   }
   for (const command of ["node --check followup-data.js", "node --check followup-app.js", "node scripts/clinical-review.js --validate", "node scripts/follow-up.js"]) {
@@ -140,6 +150,16 @@ test("design tokens and governed optional media framework are present", () => {
   assert.match(mediaGovernance, /patient-identifiable information/i);
   assert.match(mediaGovernance, /does not silently invalidate the clinical-text fingerprint/i);
   assert.match(mediaGovernance, /failed image load/i);
+});
+
+test("Goal 7 structured clinical architecture remains dependency-free and visibly supported", () => {
+  for (const vocabulary of ["primaryLesions", "secondaryChanges", "symptoms", "distribution", "course", "ageGroups", "diagnosticMethods", "treatmentLevels", "followUpStrategies"]) {
+    assert.ok(clinicalSchema.includes(vocabulary), `missing ${vocabulary}`);
+  }
+  assert.match(css, /\.clinical-tags\s*{/);
+  assert.match(css, /\.treatment-tier\s*\+/);
+  assert.match(css, /\.red-flag-list\s*{/);
+  assert.match(readme, /Eight representative records use the profile/);
 });
 
 test("result status and footer meet WCAG AA normal-text contrast", () => {
