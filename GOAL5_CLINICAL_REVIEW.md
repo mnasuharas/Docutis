@@ -10,18 +10,19 @@ This worksheet presents the values encoded in `followup-data.js` without requiri
 | BCC | S2k-Leitlinie Basalzellkarzinom der Haut (Aktualisierung 2023) | 9.0, AWMF revision January 2024 | 032-021 | [Official long guideline](https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf) |
 | cSCC | S3-Leitlinie Aktinische Keratose und Plattenepithelkarzinom der Haut | 2.0, December 2022 | 032/022OL | [Official long guideline](https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Aktinische_Keratosen_und_PEK/Version_2/LL_Aktinische_Keratose_und_PEK_Langversion_2.0.pdf) |
 
-Legend: **NR** = the source schedule explicitly has no routine interval; **NS** = the selected guideline section does not specify that modality; **conditional** = apply only under the stated source condition. `×/year` preserves the source table's frequency rather than converting it to false precision.
+Legend: **NR** = no routine interval in the stated evidence context; **NS** = the selected guideline section does not specify that modality; **conditional** = apply only under the stated source condition. `×/year` preserves the source table's frequency rather than converting it to false precision. Contextual Stage 0 statements are not assigned German S3 recommendation character or consensus.
 
 ## Melanoma
 
-- [ ] Physician sign-off: melanoma in situ / Stage 0 non-interval guidance and `not specified` semantics
+- [ ] Physician sign-off: melanoma in situ / Stage 0 separation of German S3 scope, German expert-practice context and international context
+- [ ] Physician sign-off: Stage 0 annual full-skin examination, risk-factor qualifier, monthly self-examination and non-routine ultrasound/S100B/imaging wording
 - [ ] Physician sign-off: stage IA rows and source conditions
 - [ ] Physician sign-off: stage IB–IIB rows, including the sentinel-node-staging condition
 - [ ] Physician sign-off: stage IIC–IV R0 rows
 
 | Disease | Risk/stage | Period | Clinical exam | LN ultrasound | Laboratory | Imaging | Source |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Melanoma | Melanoma in situ / Stage 0 | No structured interval specified | NS | NS | S100B: NS | NS | German S3 v3.3; invasive follow-up schedule begins at IA |
+| Melanoma | Melanoma in situ / Stage 0 | No Stage 0-specific S3 interval | At least annually; shorter with additional risk factors (German expert context) | NR | S100B: NR | NR when asymptomatic | S3 table begins at IA; Infoportal Hautkrebs and AAD context separately identified |
 | Melanoma | IA | Years 1–3 | Every 6 months | NR | S100B: NR | NR | Recommendation 8.11, p. 182 |
 | Melanoma | IA | Years 4–5 | Every 12 months | NR | S100B: NR | NR | Recommendation 8.11, p. 182 |
 | Melanoma | IA | Years 6–10 | Every 12 months | NR | S100B: NR | NR | Recommendation 8.11, p. 182 |
@@ -34,7 +35,7 @@ Legend: **NR** = the source schedule explicitly has no routine interval; **NS** 
 
 Recommendation character in the implementation: `sollte (EK)`; consensus strength 100%.
 
-For melanoma in situ, the German S3 guideline does not define a specific structured follow-up schedule comparable to the schedules for invasive melanoma. The Stage 0 row therefore has no interval, recommendation character or consensus value. `NS` must not be interpreted as a recommendation against clinical assessment or as permission to reuse the stage IA schedule.
+For melanoma in situ, the German S3 guideline does not define a specific structured follow-up schedule comparable to the schedules for invasive melanoma. The Stage 0 row therefore does not receive a German S3 interval, recommendation character or consensus value, and the Stage IA schedule is not reused. German expert information separately supports at least annual full-skin examination, risk-adapted shorter intervals and monthly self-examination. The reviewer must confirm that the non-routine ultrasound, S100B and asymptomatic-imaging statements are clinically accurate and that the AAD context remains visibly subordinate.
 
 ## Basal cell carcinoma
 

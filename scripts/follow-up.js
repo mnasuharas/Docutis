@@ -6,6 +6,7 @@ const allowedModalities = new Set(["clinical_examination", "lymph_node_ultrasoun
 const allowedRecommendationStatuses = new Set(["scheduled", "conditional", "not_routinely_scheduled", "not_specified"]);
 const allowedRecommendationCharacters = new Set(["soll", "sollte", "sollte (EK)", "Schema 9.2"]);
 const allowedConsensusStrengths = new Set(["Konsens", "Starker Konsens", "Konsensstärke 100 %"]);
+const allowedEvidenceScopes = new Set(["primary_guideline", "german_expert_context", "german_clinical_context", "international_context"]);
 
 function validPartialDate(value) {
   return typeof value === "string" && /^\d{4}-(?:0[1-9]|1[0-2])$/.test(value);
@@ -18,7 +19,7 @@ function validIsoDate(value) {
 }
 
 function validateRange(protocolId, groupId, period) {
-  if (period.timingStatus === "not_specified") {
+  if (new Set(["not_specified", "guidance_only"]).has(period.timingStatus)) {
     if (period.range !== null) throw new Error(`${protocolId}/${groupId}/${period.id}: non-interval guidance must have range: null`);
     return;
   }
@@ -43,6 +44,10 @@ function validateFrequency(context, recommendation) {
   if (!frequency || typeof frequency !== "object") throw new Error(`${context}: scheduled/conditional recommendation needs structured frequency`);
   if (frequency.kind === "single_timepoint_month") {
     if (!Number.isInteger(frequency.month) || frequency.month <= 0) throw new Error(`${context}: single timepoint month must be greater than zero`);
+    return;
+  }
+  if (frequency.kind === "minimum_occurrences_per_year") {
+    if (!Number.isInteger(frequency.min) || frequency.min <= 0) throw new Error(`${context}: minimum annual frequency must be greater than zero`);
     return;
   }
   if (!new Set(["interval_months", "occurrences_per_year"]).has(frequency.kind)) throw new Error(`${context}: unsupported frequency kind`);
@@ -77,6 +82,20 @@ function validateFollowUpData(followUpData = loadFollowUpData(), diseaseData = l
     if (!validPartialDate(guideline.publishedAt)) throw new Error(`${protocol.id}: invalid guideline publication date`);
     if (!validIsoDate(guideline.sourceMetadataCheckedAt)) throw new Error(`${protocol.id}: invalid source metadata check date`);
     if (!/^https:\/\//.test(guideline.sourceUrl)) throw new Error(`${protocol.id}: guideline source must use HTTPS`);
+    const supplementalSources = protocol.supplementalSources || [];
+    if (!Array.isArray(supplementalSources)) throw new Error(`${protocol.id}: supplemental sources must be an array`);
+    const supplementalSourceIds = new Set();
+    for (const source of supplementalSources) {
+      if (!source.id?.trim() || supplementalSourceIds.has(source.id)) throw new Error(`${protocol.id}: missing or duplicate supplemental source ID`);
+      supplementalSourceIds.add(source.id);
+      for (const field of ["title", "organization", "sourceType", "sourceUrl"]) {
+        if (typeof source[field] !== "string" || !source[field].trim()) throw new Error(`${protocol.id}/${source.id}: source ${field} is required`);
+      }
+      if (!/^https:\/\//.test(source.sourceUrl)) throw new Error(`${protocol.id}/${source.id}: source URL must use HTTPS`);
+      if (!validIsoDate(source.sourceMetadataCheckedAt)) throw new Error(`${protocol.id}/${source.id}: invalid source metadata check date`);
+      if (source.publishedAt !== undefined && !validIsoDate(source.publishedAt) && !validPartialDate(source.publishedAt)) throw new Error(`${protocol.id}/${source.id}: invalid source publication date`);
+    }
+    const knownSourceIds = new Set(["primary-guideline", ...supplementalSourceIds]);
     if (protocol.jurisdiction !== "DE" || protocol.jurisdictionLabel !== "Germany") throw new Error(`${protocol.id}: first release must be German guidance`);
     if (!Array.isArray(protocol.groups) || !protocol.groups.length) throw new Error(`${protocol.id}: at least one risk/stage group is required`);
     if (!Array.isArray(protocol.notes) || protocol.notes.some(note => typeof note !== "string" || !note.trim())) throw new Error(`${protocol.id}: protocol notes must be non-empty strings`);
@@ -87,6 +106,16 @@ function validateFollowUpData(followUpData = loadFollowUpData(), diseaseData = l
       groupIds.add(group.id);
       if (!group.label?.trim() || !group.description?.trim()) throw new Error(`${protocol.id}/${group.id}: group label and description are required`);
       if (!Array.isArray(group.notes) || group.notes.some(note => typeof note !== "string" || !note.trim())) throw new Error(`${protocol.id}/${group.id}: group notes must be non-empty strings`);
+      const contextSections = group.contextSections || [];
+      if (!Array.isArray(contextSections)) throw new Error(`${protocol.id}/${group.id}: context sections must be an array`);
+      const contextIds = new Set();
+      for (const section of contextSections) {
+        if (!section.id?.trim() || contextIds.has(section.id)) throw new Error(`${protocol.id}/${group.id}: missing or duplicate context section ID`);
+        contextIds.add(section.id);
+        if (!section.title?.trim() || !section.text?.trim()) throw new Error(`${protocol.id}/${group.id}/${section.id}: context title and text are required`);
+        if (!allowedEvidenceScopes.has(section.evidenceScope) || section.evidenceScope === "primary_guideline") throw new Error(`${protocol.id}/${group.id}/${section.id}: invalid context evidence scope`);
+        if (!Array.isArray(section.sourceIds) || !section.sourceIds.length || section.sourceIds.some(id => !knownSourceIds.has(id))) throw new Error(`${protocol.id}/${group.id}/${section.id}: context sources are required and must resolve`);
+      }
       if (!Array.isArray(group.periods) || !group.periods.length) throw new Error(`${protocol.id}/${group.id}: at least one period is required`);
       const periodIds = new Set();
       for (const period of group.periods) {
@@ -103,8 +132,15 @@ function validateFollowUpData(followUpData = loadFollowUpData(), diseaseData = l
           if (seenModalities.has(recommendation.modality)) throw new Error(`${context}: duplicate conflicting recommendation`);
           seenModalities.add(recommendation.modality);
           if (!allowedRecommendationStatuses.has(recommendation.status)) throw new Error(`${context}: unsupported recommendation status`);
+          const evidenceScope = recommendation.evidenceScope || "primary_guideline";
+          if (!allowedEvidenceScopes.has(evidenceScope)) throw new Error(`${context}: unsupported evidence scope`);
+          const sourceIds = recommendation.sourceIds || [];
+          if (!Array.isArray(sourceIds) || sourceIds.some(id => !knownSourceIds.has(id))) throw new Error(`${context}: recommendation sources must resolve`);
+          if (evidenceScope !== "primary_guideline" && !sourceIds.length) throw new Error(`${context}: contextual recommendation needs supporting sources`);
           if (recommendation.status === "not_specified") {
             if (recommendation.recommendationBasis !== null) throw new Error(`${context}: not-specified guidance cannot claim a recommendation basis`);
+          } else if (evidenceScope !== "primary_guideline") {
+            if (recommendation.recommendationBasis !== null) throw new Error(`${context}: contextual guidance cannot claim primary-guideline recommendation strength`);
           } else {
             if (!recommendation.recommendationBasis || typeof recommendation.recommendationBasis !== "object") throw new Error(`${context}: recommendation character and consensus are required`);
             for (const field of ["character", "consensus"]) {
@@ -117,6 +153,9 @@ function validateFollowUpData(followUpData = loadFollowUpData(), diseaseData = l
         }
         if (period.timingStatus === "not_specified" && (seenModalities.size !== allowedModalities.size || period.recommendations.some(item => item.status !== "not_specified"))) {
           throw new Error(`${protocol.id}/${group.id}/${period.id}: non-interval guidance must explicitly mark every modality not specified`);
+        }
+        if (period.timingStatus === "guidance_only" && (seenModalities.size !== allowedModalities.size || period.recommendations.some(item => (item.evidenceScope || "primary_guideline") === "primary_guideline" || item.recommendationBasis !== null))) {
+          throw new Error(`${protocol.id}/${group.id}/${period.id}: contextual guidance must cover every modality without claiming primary-guideline recommendation strength`);
         }
       }
     }
@@ -140,4 +179,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { allowedModalities, allowedRecommendationStatuses, allowedRecommendationCharacters, allowedConsensusStrengths, validateFollowUpData, validateRange, validateFrequency };
+module.exports = { allowedModalities, allowedRecommendationStatuses, allowedRecommendationCharacters, allowedConsensusStrengths, allowedEvidenceScopes, validateFollowUpData, validateRange, validateFrequency };
