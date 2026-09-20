@@ -89,7 +89,7 @@
       image.loading = "lazy";
       figure.appendChild(image);
       const visualReview = reviewUi?.asset("visual", illustration.id);
-      figure.appendChild(element("figcaption", `${illustration.title} · Schematic · ${visualReview ? reviewUi.statusLabel(visualReview.status) : "Clinician review required"}`));
+      figure.appendChild(element("figcaption", `${illustration.title} · Schematic · ${visualReview ? reviewUi.statusLabel(visualReview.status) : "Clinical review pending"}`));
       root.appendChild(figure);
     }
 
@@ -139,7 +139,7 @@
       feedback.appendChild(element("h4", "Supporting sources"));
       sourceLinks(feedback, question);
       const quizReview = reviewUi?.asset("quiz", question.id);
-      feedback.appendChild(element("p", `${quizReview ? reviewUi.statusLabel(quizReview.status) : "Clinical review required"} · Source attachment and automated validation do not constitute physician endorsement.`, "quiz-review-state"));
+      feedback.appendChild(element("p", `${quizReview ? reviewUi.statusLabel(quizReview.status) : "Clinical review pending"} · Source attachment and automated validation do not constitute physician endorsement.`, "quiz-review-state"));
       check.remove();
       const next = element("button", index === quiz.questions.length - 1 ? "View score" : "Next question", "quiz-button");
       next.type = "button";

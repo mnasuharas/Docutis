@@ -216,7 +216,7 @@ test("card details distinguish coding fields, expose sources and restore focus",
     assert.equal(link.rel, "noopener noreferrer");
     assert.match(link.href, /^https:\/\//);
   }
-  assert.ok(elements.details.querySelectorAll("button").some(button => button.textContent === "Close"));
+  assert.ok(elements.details.querySelectorAll("button").some(button => button.textContent === "Close details"));
 
   elements.details.dispatch("keydown", { key: "Escape" });
   assert.equal(elements.details.hidden, true);
@@ -227,7 +227,7 @@ test("Close button hides details and restores focus", () => {
   const { document, elements } = createHarness();
   const card = elements.cards.querySelectorAll(".card")[0];
   card.dispatch("click");
-  const close = elements.details.querySelectorAll("button").find(button => button.textContent === "Close");
+  const close = elements.details.querySelectorAll("button").find(button => button.textContent === "Close details");
   close.dispatch("click");
   assert.equal(elements.details.hidden, true);
   assert.equal(document.activeElement, card);
@@ -366,19 +366,27 @@ test("optional educational media renders provenance and recovers from image fail
   assert.equal(source.rel, "noopener noreferrer");
   assert.match(textOf(elements.details), /License: Project-owned/);
   assert.match(textOf(elements.details), /Patient-identifiable content: No/);
-  assert.match(textOf(elements.details), /Media review: Clinician review required/);
+  assert.match(textOf(elements.details), /Media review: Clinical review pending/);
 });
 
-test("unreviewed details explain human review without fabricated dates or fingerprints", () => {
+test("unreviewed details use a compact pending badge and collapsed review disclosure", () => {
   const { elements } = createHarness();
   elements.cards.querySelectorAll(".card")[0].dispatch("click");
-  assert.match(textOf(elements.details), /Clinical review: Clinician review required/);
-  assert.match(textOf(elements.details), /Automated tests and source metadata checks do not constitute clinical review/);
+  assert.match(textOf(elements.details), /Clinical review pending/);
+  assert.match(textOf(elements.details), /This article has not yet completed human physician review/);
   assert.doesNotMatch(textOf(elements.details), /Reviewed:/);
+  const disclosures = elements.details.querySelectorAll(".public-review-panel");
+  assert.equal(disclosures.length, 1);
+  assert.equal(disclosures[0].getAttribute("open"), undefined);
+  assert.match(textOf(disclosures[0]), /Review details/);
   assert.match(textOf(elements.details), /Article review status/);
   assert.match(textOf(elements.details), /No valid human approval is bound to this exact content version/);
-  assert.match(textOf(elements.details), /Public review history \(0\)/);
-  assert.match(textOf(elements.details), /Content version sha256-v1:[0-9a-f]+/);
+  assert.match(textOf(elements.details), /No physician review has been recorded yet/);
+  assert.doesNotMatch(textOf(elements.details), /Public review history \(0\)/);
+  assert.match(textOf(elements.details), /Content integrity ID\s+sha256-v1:[0-9a-f]+…[0-9a-f]{8}/);
+  assert.match(textOf(elements.details), /Used to ensure that physician approval applies to this exact content version/);
+  assert.match(textOf(elements.details), /View technical review data \(JSON\)/);
+  assert.doesNotMatch(textOf(elements.details), /Awaiting review/);
 });
 
 test("synthetic reviewed details show physician specialty and date and preserve focus", () => {
