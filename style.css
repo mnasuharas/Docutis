@@ -1111,6 +1111,88 @@ a:focus-visible {
   line-height: 1.55;
 }
 
+.review-machine-link {
+  margin: var(--space-4) 0 0;
+}
+
+.review-machine-link a,
+.public-review-panel a {
+  color: var(--color-accent-strong);
+  text-decoration-thickness: 0.1em;
+  text-underline-offset: 0.16em;
+}
+
+.public-review-panel {
+  margin: var(--space-4) var(--space-8);
+  padding: var(--space-4);
+  background: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-left: 5px solid var(--color-accent);
+  border-radius: var(--radius-md);
+}
+
+.quiz-app > .public-review-panel,
+.follow-up-provenance .public-review-panel {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.public-review-panel h3 {
+  margin: 0 0 var(--space-2);
+  font-size: 1rem;
+}
+
+.public-review-status {
+  display: inline-block;
+  margin-bottom: var(--space-2);
+  padding: 4px 8px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+}
+
+.review-state-changes-requested,
+.review-state-review-invalidated {
+  border-left-color: #9a5a00;
+}
+
+.public-review-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: var(--space-3) 0;
+}
+
+.public-review-facts div {
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.public-review-facts dt {
+  font-weight: 750;
+}
+
+.public-review-facts dd {
+  margin: var(--space-1) 0 0;
+  overflow-wrap: anywhere;
+}
+
+.public-review-history {
+  margin: var(--space-3) 0;
+}
+
+.public-review-history-item {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.public-review-history-item h4,
+.public-review-history-item p {
+  margin: var(--space-1) 0;
+}
+
 .review-workflow {
   display: flex;
   flex-wrap: wrap;
@@ -1463,13 +1545,21 @@ footer {
   }
 
   .review-dashboard-counts,
-  .review-meaning dl {
+  .review-meaning dl,
+  .public-review-facts {
     grid-template-columns: 1fr;
   }
 
-  .review-workflow {
+  .review-workflow,
+  .public-review-panel {
     margin-right: var(--space-5);
     margin-left: var(--space-5);
+  }
+
+  .quiz-app > .public-review-panel,
+  .follow-up-provenance .public-review-panel {
+    margin-right: 0;
+    margin-left: 0;
   }
 }
 

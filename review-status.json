@@ -1,0 +1,1252 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "review-data.js",
+  "attestationVersion": "docutis-human-clinical-review-v1",
+  "latestValidHumanReviewDate": null,
+  "reviewers": [],
+  "decisions": [],
+  "assets": [
+    {
+      "id": "actinic-keratosis",
+      "assetType": "disease",
+      "title": "Actinic Keratosis",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:7d1cfae0f3511337e27e43e9872efc75d515a88f83ce1a17edcee839b63c93d5",
+      "sections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "red-flags",
+        "referral",
+        "patient-safety"
+      ],
+      "evidenceSources": [
+        "https://dermnetnz.org/topics/actinic-keratosis",
+        "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Actinic keratosis",
+          "organization": "DermNet",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://dermnetnz.org/topics/actinic-keratosis",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Actinic keratosis clinical guideline",
+          "organization": "American Academy of Dermatology",
+          "type": "guideline",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "red-flags",
+        "referral",
+        "patient-safety"
+      ]
+    },
+    {
+      "id": "basal-cell-carcinoma",
+      "assetType": "disease",
+      "title": "Basal Cell Carcinoma",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:976b1e3e91f8eeb8c76032b3986edebcf4d2d1fac7c30ff6d1b722d2b5221ca9",
+      "sections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "histopathology",
+        "referral",
+        "oncology"
+      ],
+      "evidenceSources": [
+        "https://dermnetnz.org/topics/basal-cell-carcinoma",
+        "https://www.aad.org/member/clinical-quality/guidelines/bcc"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Basal cell carcinoma",
+          "organization": "DermNet",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://dermnetnz.org/topics/basal-cell-carcinoma",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Basal cell carcinoma clinical guideline",
+          "organization": "American Academy of Dermatology",
+          "type": "guideline",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://www.aad.org/member/clinical-quality/guidelines/bcc",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "histopathology",
+        "referral",
+        "oncology"
+      ]
+    },
+    {
+      "id": "cutaneous-melanoma",
+      "assetType": "disease",
+      "title": "Cutaneous Melanoma",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:80d9ddc08809c1c99513adc9972d5bf625331f7b97ff53339303e50c614facbe",
+      "sections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "histopathology",
+        "red-flags",
+        "referral",
+        "oncology"
+      ],
+      "evidenceSources": [
+        "https://pubmed.ncbi.nlm.nih.gov/39700658/",
+        "https://pubmed.ncbi.nlm.nih.gov/39709737/",
+        "https://www.cancer.gov/types/skin/hp/melanoma-treatment-pdq"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "European consensus-based interdisciplinary guideline for melanoma. Part 1: Diagnostics — Update 2024",
+          "organization": "EADO / EDF / EORTC",
+          "type": "guideline",
+          "year": 2025,
+          "version": "2024 update; part 1",
+          "doi": "10.1016/j.ejca.2024.115152",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39700658/",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "European consensus-based interdisciplinary guideline for melanoma. Part 2: Treatment — Update 2024",
+          "organization": "EADO / EDF / EORTC",
+          "type": "guideline",
+          "year": 2025,
+          "version": "2024 update; part 2",
+          "doi": "10.1016/j.ejca.2024.115153",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39709737/",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Melanoma Treatment (PDQ®) — Health Professional Version",
+          "organization": "National Cancer Institute",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://www.cancer.gov/types/skin/hp/melanoma-treatment-pdq",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "histopathology",
+        "red-flags",
+        "referral",
+        "oncology"
+      ]
+    },
+    {
+      "id": "atopic-dermatitis",
+      "assetType": "disease",
+      "title": "Atopic Dermatitis",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:f4c9fe56147923b8e0fd25d36dd06851b672707e72721bad398b31c7e48d5f35",
+      "sections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "red-flags",
+        "referral",
+        "patient-safety"
+      ],
+      "evidenceSources": [
+        "https://dermnetnz.org/topics/atopic-dermatitis",
+        "https://pubmed.ncbi.nlm.nih.gov/36641009/",
+        "https://pubmed.ncbi.nlm.nih.gov/37943240/"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Atopic dermatitis",
+          "organization": "DermNet",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://dermnetnz.org/topics/atopic-dermatitis",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Guidelines of care for the management of atopic dermatitis in adults with topical therapies",
+          "organization": "American Academy of Dermatology",
+          "type": "guideline",
+          "year": 2023,
+          "version": null,
+          "doi": "10.1016/j.jaad.2022.12.029",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36641009/",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Guidelines of care for the management of atopic dermatitis in adults with phototherapy and systemic therapies",
+          "organization": "American Academy of Dermatology",
+          "type": "guideline",
+          "year": 2024,
+          "version": null,
+          "doi": "10.1016/j.jaad.2023.08.102",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37943240/",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "red-flags",
+        "referral",
+        "patient-safety"
+      ]
+    },
+    {
+      "id": "plaque-psoriasis",
+      "assetType": "disease",
+      "title": "Plaque Psoriasis",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:02f24e6fbe331ca09cc4fde5c1357c5163690195636a33d157f03927fcf31339",
+      "sections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "red-flags",
+        "referral"
+      ],
+      "evidenceSources": [
+        "https://dermnetnz.org/topics/psoriasis",
+        "https://www.aad.org/member/clinical-quality/guidelines/psoriasis",
+        "https://www.guidelines.edf.one/guidelines/psoriasis-guideline"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Psoriasis",
+          "organization": "DermNet",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://dermnetnz.org/topics/psoriasis",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Psoriasis clinical guideline",
+          "organization": "American Academy of Dermatology",
+          "type": "guideline",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://www.aad.org/member/clinical-quality/guidelines/psoriasis",
+          "metadataCheckedAt": "2026-09-17"
+        },
+        {
+          "title": "Living EuroGuiDerm Guideline for the systemic treatment of psoriasis vulgaris",
+          "organization": "European Dermatology Forum / EuroGuiDerm",
+          "type": "guideline",
+          "year": null,
+          "version": "September 2023; partial update February 2025",
+          "doi": null,
+          "url": "https://www.guidelines.edf.one/guidelines/psoriasis-guideline",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "red-flags",
+        "referral"
+      ]
+    },
+    {
+      "id": "acne-vulgaris",
+      "assetType": "disease",
+      "title": "Acne Vulgaris",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:bfd1ea796e0fb171d632d7f88d916691703ef8883595cf7350dd8a0984c39a30",
+      "sections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "red-flags",
+        "referral"
+      ],
+      "evidenceSources": [
+        "https://dermnetnz.org/topics/acne-vulgaris",
+        "https://pubmed.ncbi.nlm.nih.gov/38300170/"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Acne vulgaris",
+          "organization": "DermNet",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://dermnetnz.org/topics/acne-vulgaris",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Guidelines of care for the management of acne vulgaris",
+          "organization": "American Academy of Dermatology",
+          "type": "guideline",
+          "year": 2024,
+          "version": null,
+          "doi": "10.1016/j.jaad.2023.12.017",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38300170/",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "red-flags",
+        "referral"
+      ]
+    },
+    {
+      "id": "rosacea",
+      "assetType": "disease",
+      "title": "Rosacea",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:f3dc5cd051aa95294ebe867e10182d2fad6e3ab438f78a61279a597187ba5612",
+      "sections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "red-flags",
+        "referral",
+        "patient-safety"
+      ],
+      "evidenceSources": [
+        "https://dermnetnz.org/topics/rosacea",
+        "https://pubmed.ncbi.nlm.nih.gov/35929658/"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Rosacea",
+          "organization": "DermNet",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://dermnetnz.org/topics/rosacea",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "S2k guideline: Rosacea",
+          "organization": "German Dermatological Society guideline group",
+          "type": "guideline",
+          "year": 2022,
+          "version": null,
+          "doi": "10.1111/ddg.14849",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35929658/",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "red-flags",
+        "referral",
+        "patient-safety"
+      ]
+    },
+    {
+      "id": "tinea-corporis",
+      "assetType": "disease",
+      "title": "Tinea Corporis",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:f20cdb28e4bf87cef7eb15e51afdbf6a4767cd283c6764db75ff7d0618fe72e2",
+      "sections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "red-flags",
+        "referral",
+        "patient-safety"
+      ],
+      "evidenceSources": [
+        "https://dermnetnz.org/topics/tinea-corporis",
+        "https://www.cdc.gov/ringworm/hcp/clinical-overview/"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Tinea corporis",
+          "organization": "DermNet",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://dermnetnz.org/topics/tinea-corporis",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Clinical Overview of Ringworm",
+          "organization": "Centers for Disease Control and Prevention",
+          "type": "clinical reference",
+          "year": 2024,
+          "version": null,
+          "doi": null,
+          "url": "https://www.cdc.gov/ringworm/hcp/clinical-overview/",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "red-flags",
+        "referral",
+        "patient-safety"
+      ]
+    },
+    {
+      "id": "melanoma-evolution",
+      "assetType": "quiz",
+      "title": "Which ABCDE feature explicitly describes change over time?",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:90116bee492bf05294115bb3d557bbf6546b27193f7a27c71d96784fe02c4212",
+      "sections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSources": [
+        "https://pubmed.ncbi.nlm.nih.gov/39700658/"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "European consensus-based interdisciplinary guideline for melanoma. Part 1: Diagnostics — Update 2024",
+          "organization": "EADO / EDF / EORTC",
+          "type": "guideline",
+          "year": 2025,
+          "version": "2024 update; part 1",
+          "doi": "10.1016/j.ejca.2024.115152",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39700658/",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ]
+    },
+    {
+      "id": "bcc-dermoscopy",
+      "assetType": "quiz",
+      "title": "Which schematic vascular clue is classically associated with basal cell carcinoma?",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:088c6b43b3713d63d8d92ab1b5c9cc1fedd438057e0f5648013e8b098254f3f0",
+      "sections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSources": [
+        "https://dermnetnz.org/topics/basal-cell-carcinoma"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Basal cell carcinoma",
+          "organization": "DermNet",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://dermnetnz.org/topics/basal-cell-carcinoma",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ]
+    },
+    {
+      "id": "psoriasis-distribution",
+      "assetType": "quiz",
+      "title": "Which distribution best fits the common plaque psoriasis pattern shown in the schematic?",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:c14b5fd12435cf55496cf03dac6dd9fa86ef8096f2293545abdf228f211d607e",
+      "sections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSources": [
+        "https://dermnetnz.org/topics/psoriasis"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Psoriasis",
+          "organization": "DermNet",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://dermnetnz.org/topics/psoriasis",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ]
+    },
+    {
+      "id": "acne-comedones",
+      "assetType": "quiz",
+      "title": "Which finding most strongly supports acne vulgaris over rosacea in this learning set?",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:2c319607ba93366f090b14f983f558eeb1e8fb4256cf31290b55e6ff9eea8761",
+      "sections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSources": [
+        "https://pubmed.ncbi.nlm.nih.gov/38300170/",
+        "https://dermnetnz.org/topics/acne-vulgaris"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Guidelines of care for the management of acne vulgaris",
+          "organization": "American Academy of Dermatology",
+          "type": "guideline",
+          "year": 2024,
+          "version": null,
+          "doi": "10.1016/j.jaad.2023.12.017",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38300170/",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Acne vulgaris",
+          "organization": "DermNet",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://dermnetnz.org/topics/acne-vulgaris",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ]
+    },
+    {
+      "id": "ak-biopsy",
+      "assetType": "quiz",
+      "title": "What is the appropriate next diagnostic step when an actinic keratosis is persistently thickened, tender or concerning for invasion?",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:d65667de0184ce6d83281df08132a5c7692d9ec33131011de0488f2c16be1fbf",
+      "sections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSources": [
+        "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Actinic keratosis clinical guideline",
+          "organization": "American Academy of Dermatology",
+          "type": "guideline",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ]
+    },
+    {
+      "id": "atopic-first-line",
+      "assetType": "quiz",
+      "title": "Which option belongs in the first-line treatment hierarchy for atopic dermatitis?",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:cccedc4756dcca10d65c396241c9e0aacf6a7b068545a80e7a9379b588b87c4c",
+      "sections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSources": [
+        "https://pubmed.ncbi.nlm.nih.gov/36641009/"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Guidelines of care for the management of atopic dermatitis in adults with topical therapies",
+          "organization": "American Academy of Dermatology",
+          "type": "guideline",
+          "year": 2023,
+          "version": null,
+          "doi": "10.1016/j.jaad.2022.12.029",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36641009/",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ]
+    },
+    {
+      "id": "rosacea-ocular",
+      "assetType": "quiz",
+      "title": "Which finding should prompt consideration of ophthalmic assessment in rosacea?",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:bf0caec2aad56ec341a0e5b257ca45c49630f89b69c176df8227604abc1ccba5",
+      "sections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSources": [
+        "https://pubmed.ncbi.nlm.nih.gov/35929658/"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "S2k guideline: Rosacea",
+          "organization": "German Dermatological Society guideline group",
+          "type": "guideline",
+          "year": 2022,
+          "version": null,
+          "doi": "10.1111/ddg.14849",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35929658/",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ]
+    },
+    {
+      "id": "tinea-confirmation",
+      "assetType": "quiz",
+      "title": "When tinea corporis morphology is atypical or treatment fails, which step supports confirmation?",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:d6de482b2d5a79a9ef2a87663522c94468c44ac7ba0805beab4d8455b3fb1b9c",
+      "sections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSources": [
+        "https://www.cdc.gov/ringworm/hcp/clinical-overview/"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Clinical Overview of Ringworm",
+          "organization": "Centers for Disease Control and Prevention",
+          "type": "clinical reference",
+          "year": 2024,
+          "version": null,
+          "doi": null,
+          "url": "https://www.cdc.gov/ringworm/hcp/clinical-overview/",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ]
+    },
+    {
+      "id": "melanoma-abcde-schematic",
+      "assetType": "visual",
+      "title": "Melanoma ABCDE warning-feature concept",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:d998a1ed1f2f9c5e7379887a8d2e29abd5066f8c3b1f7c28a5b1d8d2967b7845",
+      "sections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://github.com/mnasuharas/Docutis/blob/main/assets/media/melanoma-abcde-schematic.svg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Docutis original schematic",
+          "organization": "Docutis project",
+          "type": "illustration",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://github.com/mnasuharas/Docutis/blob/main/assets/media/melanoma-abcde-schematic.svg",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "bcc-clues-schematic",
+      "assetType": "visual",
+      "title": "Basal cell carcinoma morphology and dermoscopic clues",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:f8732526c38d0364684d2eabf10e8e3fffd762f0725b9c806bf8976423afb3ea",
+      "sections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://github.com/mnasuharas/Docutis/blob/main/assets/media/bcc-clues-schematic.svg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Docutis original schematic",
+          "organization": "Docutis project",
+          "type": "illustration",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://github.com/mnasuharas/Docutis/blob/main/assets/media/bcc-clues-schematic.svg",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "psoriasis-distribution-schematic",
+      "assetType": "visual",
+      "title": "Plaque psoriasis morphology and typical distribution",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:bf730b84197200be4fab44f420cf3f93a6f003b88f2fea372e13f77e361b0768",
+      "sections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://github.com/mnasuharas/Docutis/blob/main/assets/media/psoriasis-distribution-schematic.svg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Docutis original schematic",
+          "organization": "Docutis project",
+          "type": "illustration",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://github.com/mnasuharas/Docutis/blob/main/assets/media/psoriasis-distribution-schematic.svg",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "acne-lesions-schematic",
+      "assetType": "visual",
+      "title": "Acne lesion types and inflammatory depth",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:ecb148b53599f518b7f8a993955af85e6e863ae7a841e7fa1423ea1842a6d69a",
+      "sections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://github.com/mnasuharas/Docutis/blob/main/assets/media/acne-lesions-schematic.svg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Docutis original schematic",
+          "organization": "Docutis project",
+          "type": "illustration",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://github.com/mnasuharas/Docutis/blob/main/assets/media/acne-lesions-schematic.svg",
+          "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "cutaneous-melanoma-de",
+      "assetType": "follow_up",
+      "title": "Cutaneous melanoma — Germany",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:7abe145b718e6c0d3c61eaf3277646370a1a58813f1b7e239092f652ad1d9387",
+      "sections": [
+        "scope",
+        "risk-groups",
+        "periods",
+        "clinical-examination",
+        "lymph-node-ultrasound",
+        "s100b",
+        "cross-sectional-imaging",
+        "context",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSources": [
+        "https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Melanom/Melanom_Version_3/LL_Melanom_Langversion_3.3.pdf",
+        "https://register.awmf.org/assets/guidelines/032-024OLp_S3_Melanom-Diagnostik-Therapie-Nachsorge_2020-08_1.pdf",
+        "https://infoportal-hautkrebs.de/hautkrebsarten/malignes-melanom/diagnostik/stadieneinteilung-des-melanoms/in-situ-melanom",
+        "https://www.aad.org/public/diseases/skin-cancer/types/common/melanoma/after-diagnosed"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "S3-Leitlinie zur Diagnostik, Therapie und Nachsorge des Melanoms",
+          "organization": "Leitlinienprogramm Onkologie (AWMF, Deutsche Krebsgesellschaft, Deutsche Krebshilfe)",
+          "type": "DE_S3",
+          "year": "2020-07",
+          "version": "3.3",
+          "doi": null,
+          "url": "https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Melanom/Melanom_Version_3/LL_Melanom_Langversion_3.3.pdf",
+          "metadataCheckedAt": "2026-09-17"
+        },
+        {
+          "title": "Patient guideline: Melanoma follow-up and early detection",
+          "organization": "Leitlinienprogramm Onkologie",
+          "type": "official patient guideline",
+          "year": "2020-08",
+          "version": null,
+          "doi": null,
+          "url": "https://register.awmf.org/assets/guidelines/032-024OLp_S3_Melanom-Diagnostik-Therapie-Nachsorge_2020-08_1.pdf",
+          "metadataCheckedAt": "2026-09-17"
+        },
+        {
+          "title": "In-situ Melanom",
+          "organization": "Infoportal Hautkrebs",
+          "type": "German expert information",
+          "year": "2025-06-23",
+          "version": null,
+          "doi": null,
+          "url": "https://infoportal-hautkrebs.de/hautkrebsarten/malignes-melanom/diagnostik/stadieneinteilung-des-melanoms/in-situ-melanom",
+          "metadataCheckedAt": "2026-09-17"
+        },
+        {
+          "title": "I've been diagnosed with melanoma. Now what?",
+          "organization": "American Academy of Dermatology",
+          "type": "professional society patient guidance",
+          "year": "2021-10-27",
+          "version": null,
+          "doi": null,
+          "url": "https://www.aad.org/public/diseases/skin-cancer/types/common/melanoma/after-diagnosed",
+          "metadataCheckedAt": "2026-09-17"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "scope",
+        "risk-groups",
+        "periods",
+        "clinical-examination",
+        "lymph-node-ultrasound",
+        "s100b",
+        "cross-sectional-imaging",
+        "context",
+        "safety-notice",
+        "references"
+      ]
+    },
+    {
+      "id": "basal-cell-carcinoma-de",
+      "assetType": "follow_up",
+      "title": "Basal cell carcinoma — Germany",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:7100e89eed023219b5610e3973cf5f8d441daf8bad70a63deb329c83d275a7c1",
+      "sections": [
+        "scope",
+        "risk-groups",
+        "periods",
+        "clinical-examination",
+        "lymph-node-ultrasound",
+        "s100b",
+        "cross-sectional-imaging",
+        "context",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSources": [
+        "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "S2k-Leitlinie Basalzellkarzinom der Haut (Aktualisierung 2023)",
+          "organization": "AWMF / Deutsche Krebsgesellschaft / Deutsche Dermatologische Gesellschaft / ADO",
+          "type": "DE_S2K",
+          "year": "2024-01",
+          "version": "9.0",
+          "doi": null,
+          "url": "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
+          "metadataCheckedAt": "2026-09-16"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "scope",
+        "risk-groups",
+        "periods",
+        "clinical-examination",
+        "lymph-node-ultrasound",
+        "s100b",
+        "cross-sectional-imaging",
+        "context",
+        "safety-notice",
+        "references"
+      ]
+    },
+    {
+      "id": "cutaneous-squamous-cell-carcinoma-de",
+      "assetType": "follow_up",
+      "title": "Cutaneous squamous cell carcinoma — Germany",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:d53155d28c31fea31c5b0b4e6b9ec57514002a2fa158a00fd8ecbdbdd5a984c7",
+      "sections": [
+        "scope",
+        "risk-groups",
+        "periods",
+        "clinical-examination",
+        "lymph-node-ultrasound",
+        "s100b",
+        "cross-sectional-imaging",
+        "context",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSources": [
+        "https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Aktinische_Keratosen_und_PEK/Version_2/LL_Aktinische_Keratose_und_PEK_Langversion_2.0.pdf"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "S3-Leitlinie Aktinische Keratose und Plattenepithelkarzinom der Haut",
+          "organization": "Leitlinienprogramm Onkologie (AWMF, Deutsche Krebsgesellschaft, Deutsche Krebshilfe)",
+          "type": "DE_S3",
+          "year": "2022-12",
+          "version": "2.0",
+          "doi": null,
+          "url": "https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Aktinische_Keratosen_und_PEK/Version_2/LL_Aktinische_Keratose_und_PEK_Langversion_2.0.pdf",
+          "metadataCheckedAt": "2026-09-16"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "scope",
+        "risk-groups",
+        "periods",
+        "clinical-examination",
+        "lymph-node-ultrasound",
+        "s100b",
+        "cross-sectional-imaging",
+        "context",
+        "safety-notice",
+        "references"
+      ]
+    }
+  ]
+}

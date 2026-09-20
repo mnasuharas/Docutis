@@ -6,6 +6,7 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Implemented
 
+- Goal 9 review infrastructure: public decision schema, exact fingerprints for 23 independent pilot assets, invalidation and supersession logic, public audit UI, machine-readable status, source audit and a consolidated human-review packet. Genuine reviewer identity consent, attestation and explicit decisions remain pending; no item is marked clinician reviewed.
 - Goal 8 clinical review readiness and visual learning pilot: public evidence-status counts, eight section-level evidence maps, four original governed SVG schematics, an eight-question accessible quiz, URL-addressable condition details, a physician review batch and repository community-health files. All clinical and visual content remains review-required.
 - Goal 7 clinical content architecture: optional versioned profiles, bounded controlled vocabularies, structured presentation/diagnostics/differentials/treatment/follow-up, medication-regimen support, source-reference validation, legacy-compatible rendering and an eight-record pilot spanning oncology, inflammatory, acneiform and infectious disease. Production dosing remains intentionally empty until explicit regimen evidence is reviewed.
 - Goal 7 data-quality audit and validator: quantitative coverage for all 50 records, malformed-value tests, source attachment checks and fingerprint coverage for structured clinical changes.

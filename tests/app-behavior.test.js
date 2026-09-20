@@ -87,6 +87,8 @@ function createHarness(transformData, transformMedia, initialHref = "https://exa
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "data.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "media-data.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "followup-data.js"), "utf8"), context);
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "review-status.js"), "utf8"), context);
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "review-ui.js"), "utf8"), context);
   if (transformData) context.window.DOCUTIS_DATA = transformData(context.window.DOCUTIS_DATA);
   if (transformMedia) context.window.DOCUTIS_MEDIA = transformMedia(context.window.DOCUTIS_MEDIA);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "app.js"), "utf8"), context);
@@ -112,8 +114,11 @@ test("initial rendering creates all cards and eight category sections", () => {
   assert.ok(elements.categoryFilters.querySelectorAll("button").every(button => button.type === "button"));
   assert.match(elements.resultStatus.textContent, /50 conditions shown/);
   assert.match(textOf(elements.libraryStats), /3\s+oncology follow-up protocols/);
-  assert.match(textOf(elements.reviewDashboardCounts), /0\/50\s+Clinician-reviewed records/);
-  assert.match(textOf(elements.reviewDashboardCounts), /4\s+Governed visual-learning items/);
+  assert.match(textOf(elements.reviewDashboardCounts), /0\s+Clinician-reviewed records/);
+  assert.match(textOf(elements.reviewDashboardCounts), /0\s+Partially reviewed records/);
+  assert.match(textOf(elements.reviewDashboardCounts), /50\s+Records requiring clinician review/);
+  assert.match(textOf(elements.reviewDashboardCounts), /0\/4\s+Reviewed visual items/);
+  assert.match(textOf(elements.reviewDashboardCounts), /None\s+Most recent valid human review/);
 });
 
 test("search covers names, aliases, categories, subcategories and both coding systems", () => {
@@ -367,9 +372,13 @@ test("optional educational media renders provenance and recovers from image fail
 test("unreviewed details explain human review without fabricated dates or fingerprints", () => {
   const { elements } = createHarness();
   elements.cards.querySelectorAll(".card")[0].dispatch("click");
-  assert.match(textOf(elements.details), /Clinical review: Required/);
+  assert.match(textOf(elements.details), /Clinical review: Clinician review required/);
   assert.match(textOf(elements.details), /Automated tests and source metadata checks do not constitute clinical review/);
-  assert.doesNotMatch(textOf(elements.details), /Reviewed:|sha256-v1:/);
+  assert.doesNotMatch(textOf(elements.details), /Reviewed:/);
+  assert.match(textOf(elements.details), /Article review status/);
+  assert.match(textOf(elements.details), /No valid human approval is bound to this exact content version/);
+  assert.match(textOf(elements.details), /Public review history \(0\)/);
+  assert.match(textOf(elements.details), /Content version sha256-v1:[0-9a-f]+/);
 });
 
 test("synthetic reviewed details show physician specialty and date and preserve focus", () => {

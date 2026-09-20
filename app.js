@@ -12,6 +12,7 @@
   const searchClear = document.getElementById("searchClear");
   const searchInput = document.getElementById("searchInput");
   const reviewDashboardCounts = document.getElementById("reviewDashboardCounts");
+  const reviewUi = window.DOCUTIS_REVIEW_UI || null;
   let activeCategory = "all";
   let lastOpenedCard = null;
 
@@ -432,6 +433,8 @@
   }
 
   function mediaReviewText(item) {
+    const publicReview = reviewUi?.asset("visual", item.id);
+    if (publicReview) return `Media review: ${reviewUi.statusLabel(publicReview.status)}`;
     const review = item.clinicalReview;
     const reviewed = item.reviewStatus === "clinician reviewed" && review &&
       review.reviewerRole === "physician" && review.reviewerSpecialty && review.reviewedAt;
@@ -575,15 +578,16 @@
     meta.className = "detail-meta";
     appendTextElement(meta, "span", categoryTitle(disease.category), "icd");
     appendTextElement(meta, "span", subcategoryTitle(disease.subcategory), "subcategory-label");
+    const publicReview = reviewUi?.asset("disease", disease.id);
     const review = disease.clinicalReview;
-    const reviewed = disease.reviewStatus === "clinician reviewed" && review &&
+    const reviewed = publicReview ? publicReview.status === "clinician reviewed" : disease.reviewStatus === "clinician reviewed" && review &&
       review.reviewerRole === "physician" && typeof review.reviewerSpecialty === "string" &&
       review.reviewerSpecialty.trim() && /^\d{4}-\d{2}-\d{2}$/.test(review.reviewedAt) &&
       /^sha256-v1:[0-9a-f]{64}$/.test(review.reviewedContentHash);
-    appendTextElement(meta, "span", reviewed
-      ? `Clinical review: Reviewed by a physician in ${review.reviewerSpecialty}`
-      : "Clinical review: Required", "review-status");
-    if (reviewed) appendTextElement(meta, "span", `Reviewed: ${review.reviewedAt}`);
+    appendTextElement(meta, "span", publicReview
+      ? `Clinical review: ${reviewUi.statusLabel(publicReview.status)}`
+      : reviewed ? `Clinical review: Reviewed by a physician in ${review.reviewerSpecialty}` : "Clinical review: Required", "review-status");
+    if (reviewed && review) appendTextElement(meta, "span", `Reviewed: ${review.reviewedAt}`);
     headingGroup.appendChild(meta);
     header.appendChild(headingGroup);
     const closeButton = appendTextElement(header, "button", "Close", "close-button");
@@ -594,6 +598,7 @@
     appendTextElement(detailsElement, "p", reviewed
       ? "Physician review applies to this content version. It does not guarantee correctness or replace professional medical judgment."
       : "This record has not completed human physician review. Automated tests and source metadata checks do not constitute clinical review.", "review-explanation");
+    if (reviewUi && publicReview) reviewUi.appendReviewPanel(detailsElement, "disease", disease.id, "Article review status");
 
     if (disease.clinicalProfile) {
       const workflow = document.createElement("div");
@@ -682,16 +687,28 @@
     if (!reviewDashboardCounts) return;
     const followUps = window.DOCUTIS_FOLLOW_UP_DATA?.protocols || [];
     const mediaItems = mediaData.items || [];
-    const reviewedRecords = data.diseases.filter(item => item.reviewStatus === "clinician reviewed").length;
+    const publicAssets = reviewUi?.registry.assets || [];
+    const diseaseAssets = publicAssets.filter(item => item.assetType === "disease");
+    const statusCount = (type, status) => publicAssets.filter(item => item.assetType === type && item.status === status).length;
+    const legacyReviewed = data.diseases.filter(item => !item.clinicalProfile && item.reviewStatus === "clinician reviewed").length;
+    const reviewedRecords = statusCount("disease", "clinician reviewed") + legacyReviewed;
+    const partialRecords = statusCount("disease", "partially reviewed");
+    const changeRequestedRecords = statusCount("disease", "changes requested");
+    const invalidatedRecords = statusCount("disease", "review invalidated");
+    const legacyRequired = data.diseases.filter(item => !item.clinicalProfile && item.reviewStatus !== "clinician reviewed").length;
+    const requiredRecords = legacyRequired + statusCount("disease", "review required");
     const stats = [
       [data.diseases.length, "Total conditions"],
       [data.diseases.filter(item => item.clinicalProfile).length, "Structured clinical profiles"],
-      [data.diseases.filter(item => !item.clinicalProfile).length, "Legacy-compatible records"],
-      [`${reviewedRecords}/${data.diseases.length}`, "Clinician-reviewed records"],
-      [data.diseases.length - reviewedRecords, "Records requiring clinician review"],
-      [mediaItems.length, "Governed visual-learning items"],
-      [`${mediaItems.filter(item => item.reviewStatus === "clinician reviewed").length}/${mediaItems.length}`, "Reviewed visual items"],
-      [`${followUps.length} · ${followUps.filter(item => item.reviewStatus === "clinician reviewed").length} reviewed`, "Follow-up protocols"]
+      [reviewedRecords, "Clinician-reviewed records"],
+      [partialRecords, "Partially reviewed records"],
+      [requiredRecords, "Records requiring clinician review"],
+      [changeRequestedRecords, "Records with changes requested"],
+      [invalidatedRecords, "Invalidated or outdated reviews"],
+      [`${statusCount("quiz", "clinician reviewed")}/${publicAssets.filter(item => item.assetType === "quiz").length || 0}`, "Reviewed quiz items"],
+      [`${statusCount("visual", "clinician reviewed")}/${mediaItems.length}`, "Reviewed visual items"],
+      [`${statusCount("follow_up", "clinician reviewed")}/${followUps.length}`, "Reviewed follow-up protocols"],
+      [reviewUi?.registry.latestValidHumanReviewDate || "None", "Most recent valid human review"]
     ];
     stats.forEach(([value, label]) => {
       const item = document.createElement("div");

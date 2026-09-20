@@ -212,6 +212,7 @@ class Element {
   constructor(tagName, ownerDocument) { this.tagName = tagName.toUpperCase(); this.ownerDocument = ownerDocument; this.children = []; this.listeners = {}; this.attributes = {}; this.value = ""; this.textContent = ""; this.className = ""; }
   appendChild(child) { this.children.push(child); child.parentElement = this; if (this.tagName === "SELECT" && this.children.length === 1) this.value = child.value; return child; }
   replaceChildren(...children) { this.children = []; children.forEach(child => this.appendChild(child)); if (!children.length) this.value = ""; }
+  setAttribute(name, value) { this.attributes[name] = String(value); }
   addEventListener(type, listener) { (this.listeners[type] ||= []).push(listener); }
   dispatch(type) { for (const listener of this.listeners[type] || []) listener({ type, target: this }); }
   querySelectorAll(selector) { const found = []; const visit = node => { if (selector.startsWith(".") && node.className.split(" ").includes(selector.slice(1))) found.push(node); if (/^[a-z]+$/.test(selector) && node.tagName === selector.toUpperCase()) found.push(node); node.children.forEach(visit); }; this.children.forEach(visit); return found; }
@@ -222,6 +223,8 @@ function uiHarness(transform) {
   for (const id of ["followUpDisease", "followUpGroup", "followUpPeriod", "followUpResult", "followUpStatus"]) document.elements[id] = new Element(id.includes("followUp") && !id.match(/Result|Status/) ? "select" : "div", document);
   const context = { window: {}, document };
   vm.runInNewContext(fs.readFileSync(path.join(root, "followup-data.js"), "utf8"), context);
+  vm.runInNewContext(fs.readFileSync(path.join(root, "review-status.js"), "utf8"), context);
+  vm.runInNewContext(fs.readFileSync(path.join(root, "review-ui.js"), "utf8"), context);
   if (transform) context.window.DOCUTIS_FOLLOW_UP_DATA = transform(clone(context.window.DOCUTIS_FOLLOW_UP_DATA));
   vm.runInNewContext(fs.readFileSync(path.join(root, "followup-app.js"), "utf8"), context);
   return document.elements;
@@ -248,16 +251,20 @@ test("follow-up UI updates disease, group and period with safe provenance links"
   elements.followUpPeriod.value = "after-year-2-event-free"; elements.followUpPeriod.dispatch("change");
   assert.match(textOf(elements.followUpResult), /Annually/);
   assert.match(textOf(elements.followUpResult), /Only if no new BCC or recurrence has occurred for more than 2 years/);
-  for (const link of elements.followUpResult.querySelectorAll("a")) { assert.equal(link.target, "_blank"); assert.equal(link.rel, "noopener noreferrer"); }
+  for (const link of elements.followUpResult.querySelectorAll("a").filter(link => /^https:/.test(link.href))) {
+    assert.equal(link.target, "_blank");
+    assert.equal(link.rel, "noopener noreferrer");
+  }
 });
 
 test("follow-up UI safely distinguishes absent recommendations and review-required state", () => {
   const elements = uiHarness();
   elements.followUpDisease.value = "basal-cell-carcinoma-de"; elements.followUpDisease.dispatch("change");
   assert.match(textOf(elements.followUpResult), /Not specified in the guideline/);
-  assert.match(textOf(elements.followUpResult), /Clinical review: Required/);
-  assert.match(textOf(elements.followUpResult), /Source and schema checks are not clinical review/);
-  assert.doesNotMatch(textOf(elements.followUpResult), /sha256-v1:|Reviewed:/);
+  assert.match(textOf(elements.followUpResult), /Follow-up protocol review status Clinician review required/);
+  assert.match(textOf(elements.followUpResult), /Automated tests and source checks are not clinical review/);
+  assert.match(textOf(elements.followUpResult), /sha256-v1:[0-9a-f]+/);
+  assert.doesNotMatch(textOf(elements.followUpResult), /Reviewed:/);
 });
 
 test("follow-up UI terminology is English while official German guideline titles remain intact", () => {
@@ -285,13 +292,12 @@ test("follow-up UI terminology is English while official German guideline titles
   assert.doesNotMatch(text, /Klinische Untersuchung|Lymphknoten-Sonographie|Schnittbildgebung|Alle \d|Jahr \d|Im ausgewählten|Kein routinemäßiges|angezeigt/);
 });
 
-test("follow-up UI supports a synthetic reviewed state without exposing its hash", () => {
+test("follow-up UI does not let legacy inline metadata bypass the public decision registry", () => {
   const elements = uiHarness(data => {
     const item = data.protocols[0]; item.reviewStatus = "clinician reviewed";
     item.clinicalReview = { reviewedAt: "2026-09-16", reviewerRole: "physician", reviewerSpecialty: "dermatology", reviewedContentHash: followUpFingerprint(item) };
     return data;
   });
-  assert.match(textOf(elements.followUpResult), /Reviewed by a physician in dermatology/);
-  assert.match(textOf(elements.followUpResult), /Reviewed: 2026-09-16/);
-  assert.doesNotMatch(textOf(elements.followUpResult), /sha256-v1:/);
+  assert.match(textOf(elements.followUpResult), /Follow-up protocol review status Clinician review required/);
+  assert.doesNotMatch(textOf(elements.followUpResult), /Reviewed by a physician in dermatology|Reviewed: 2026-09-16/);
 });
