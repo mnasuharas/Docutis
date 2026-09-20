@@ -1,0 +1,26 @@
+name: Feature request
+description: Suggest a focused improvement that preserves the lightweight static architecture.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: User need
+      description: What problem would this solve, and for whom?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: safety
+    attributes:
+      label: Clinical, privacy and accessibility considerations
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Lower-complexity alternatives considered

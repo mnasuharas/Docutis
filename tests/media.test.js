@@ -16,6 +16,7 @@ function validItem() {
     type: "diagram",
     src: "assets/media/synthetic-example.svg",
     dimensions: { width: 1200, height: 900 },
+    title: "Synthetic actinic keratosis diagram",
     caption: "Synthetic educational diagram",
     alt: "Diagram showing a synthetic example for media-rendering tests",
     anatomicalSite: null,
@@ -33,13 +34,26 @@ function validItem() {
   };
 }
 
-test("production media registry is valid and intentionally empty", () => {
+test("production media registry contains four governed original schematics", () => {
   const media = loadMediaData();
   assert.equal(media.schemaVersion, 1);
-  assert.deepEqual(Array.from(media.items), []);
+  assert.equal(media.items.length, 4);
+  assert.ok(media.items.every(item => item.src.endsWith(".svg") && item.license === "Project-owned"));
+  assert.ok(media.items.every(item => item.patientIdentifiable === false && item.reviewStatus === "clinician review required" && item.clinicalReview === null));
   assert.doesNotThrow(() => validateMediaData(media, loadDiseaseData()));
   assert.deepEqual([...allowedTypes].sort(), ["clinical-photo", "dermoscopy", "diagram", "histopathology", "illustration", "procedure"].sort());
   assert.deepEqual([...allowedLicenses].sort(), ["CC BY 4.0", "CC BY-SA 4.0", "CC0 1.0", "Project-owned", "Public domain"].sort());
+});
+
+test("production SVGs contain native accessible titles, descriptions and schematic labels", () => {
+  for (const item of loadMediaData().items) {
+    const svg = fs.readFileSync(path.join(root, item.src), "utf8");
+    assert.match(svg, /role="img"/);
+    assert.match(svg, /aria-labelledby="title desc"/);
+    assert.match(svg, /<title id="title">[^<]+<\/title>/);
+    assert.match(svg, /<desc id="desc">[^<]+<\/desc>/);
+    assert.match(svg, /schematic/i);
+  }
 });
 
 test("valid governed media passes with mandatory provenance and accessibility metadata", () => {

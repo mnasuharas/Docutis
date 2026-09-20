@@ -36,6 +36,10 @@ Current structured coverage:
 - follow-up strategy: 8/50;
 - red flags: 7/50;
 - legacy-compatible records: 42/50.
+- section-level evidence maps: 8/8 structured profiles;
+- governed original visual items: 4, all clinician review required;
+- validated quiz questions: 8, all clinician review required;
+- clinician-reviewed disease records: 0/50.
 
 “Legacy” in the table means the domain remains available as prose but has not yet been migrated to the new structured representation.
 
@@ -44,7 +48,7 @@ Current structured coverage:
 | Actinic Keratosis | Yes | Yes | Yes | Yes | Yes | Yes | Yes | 4 |
 | Actinic Cheilitis | Yes | Legacy | Legacy | Legacy | Legacy | Legacy | Legacy | 3 |
 | Porokeratosis | Yes | Legacy | Legacy | Legacy | Legacy | Legacy | Legacy | 4 |
-| Basal Cell Carcinoma | Yes | Yes | Legacy | Yes | Yes | Yes | Yes | 4 |
+| Basal Cell Carcinoma | Yes | Yes | Legacy | Yes | Yes | Yes | Yes | 5 |
 | Cutaneous Squamous Cell Carcinoma | Yes | Legacy | Legacy | Legacy | Legacy | Legacy | Legacy | 4 |
 | Squamous Cell Carcinoma in Situ | Yes | Legacy | Legacy | Legacy | Legacy | Legacy | Legacy | 5 |
 | Keratoacanthoma | Yes | Legacy | Legacy | Legacy | Legacy | Legacy | Legacy | 3 |
@@ -103,3 +107,9 @@ Pilot migration relied on already attached authoritative references whose identi
 3. Add verified medication regimens only from sources that explicitly support formulation, frequency and duration; production coverage is intentionally 0/50 today.
 4. Add high-yield localization and symptom data to the 42 legacy records only when their disease-specific sources support it.
 5. Prioritize diagnostics and escalation for immunosuppressed, ocular, mucosal and rapidly progressive presentations.
+
+## Goal 8 review-readiness audit
+
+The eight pilot profiles now map presentation, dermoscopy, diagnostics, differentials, treatment, follow-up, red flags and oncology context where applicable to sources already attached to their records. Validation rejects unknown URLs and unsupported evidence-map domains. The maps intentionally assert section-level relevance only; they do not claim that every sentence was verified or that a physician endorsed the section.
+
+Four original SVG schematics and eight quiz questions were added as educational drafts. No patient photographs, third-party atlas images, medication doses or patient-specific management scenarios were introduced. `GOAL8_CLINICAL_REVIEW_BATCH.md` records the exact human-review questions that remain before any pilot record or learning item can be marked reviewed.

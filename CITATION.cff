@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use Docutis, cite the repository and the exact commit or release you consulted."
+title: "Docutis: open-source dermatology reference and education toolkit"
+type: software
+authors:
+  - name: "Docutis contributors"
+repository-code: "https://github.com/mnasuharas/Docutis"
+url: "https://mnasuharas.github.io/Docutis/"
+license: MIT
+abstract: "A static, structured dermatology reference and education toolkit with explicit clinical-review governance."
+keywords:
+  - dermatology
+  - medical education
+  - clinical reference
+  - open source

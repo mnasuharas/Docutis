@@ -71,7 +71,7 @@ function validateMediaData(mediaData = loadMediaData(), diseaseData = loadDiseas
     if (!diseaseIds.has(item.diseaseId)) throw new Error(`${item.id}: diseaseId must resolve to an existing condition`);
     if (!allowedTypes.has(item.type)) throw new Error(`${item.id}: unsupported media type`);
     if (item.patientIdentifiable !== false) throw new Error(`${item.id}: patientIdentifiable must be explicitly false`);
-    for (const field of ["src", "caption", "alt", "diagnosis", "educationalDescription", "source", "license", "attribution", "sourceUrl", "metadataCheckedAt"]) {
+    for (const field of ["src", "title", "caption", "alt", "diagnosis", "educationalDescription", "source", "license", "attribution", "sourceUrl", "metadataCheckedAt"]) {
       if (typeof item[field] !== "string" || !item[field].trim()) throw new Error(`${item.id}: ${field} is required`);
     }
     if (typeof item.consentBasis !== "string" || !item.consentBasis.trim()) throw new Error(`${item.id}: consentBasis is required`);

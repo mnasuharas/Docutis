@@ -18,6 +18,7 @@ Docutis is currently in active early development. Its content, structure and tec
 
 - Searchable dermatologic condition library
 - Compact clinical-reference landing surface with visible coverage counts and keyboard-focused search
+- Public evidence-status dashboard with live review, profile, media and follow-up counts
 - Organization by clinical category
 - Structured condition detail pages with persistent section navigation and progressive source disclosure
 - Clinical features
@@ -29,6 +30,9 @@ Docutis is currently in active early development. Its content, structure and tec
 - Links to external clinical references
 - Responsive browser-based interface
 - Optional governed educational-media architecture with license, attribution, accessibility and independent review metadata
+- Four original governed SVG learning schematics and an eight-question clinical-pattern quiz
+- Section-level evidence maps for the eight structured pilot records
+- URL-addressable condition details such as `?condition=acne-vulgaris`, including browser Back/Forward support
 - Dependency-free automated validation on pull requests and `main` pushes
 - No installation or account required
 - English-language dermato-oncology follow-up UI based on German guidelines for melanoma, BCC and cSCC
@@ -71,6 +75,8 @@ Clinical review governance distinguishes automated source/schema validation from
 
 `clinicalReview` is null until a physician review is documented. A reviewed record stores the date, physician role, specialty and a deterministic content fingerprint. Local validation and CI reject stale fingerprints after clinical changes; contributors must obtain re-review or reset the record to review-required. A matching hash does not establish reviewer credentials or guarantee correctness. See [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md) for the human procedure and the read-only `node scripts/clinical-review.js "Acne Vulgaris"` utility.
 
+The public Evidence Status dashboard reports these states directly from the published data. `GOAL8_CLINICAL_REVIEW_BATCH.md` prepares the eight structured pilot records for real physician review but contains no completed attestation.
+
 ## German guideline-based dermato-oncology follow-up
 
 The follow-up module uses English clinical UI terminology while its current guideline jurisdiction remains Germany. Official German guideline titles are retained in provenance so the cited documents remain unambiguous. Clinicians can select the disease, guideline-defined stage/risk group and follow-up period or guidance state to view modality-specific intervals and conditions. Guideline identity, AWMF register number, version, official source, metadata-check date and clinical-review state are available in the provenance disclosure.
@@ -111,7 +117,9 @@ Medical records live in `data.js`; `app.js` contains filtering, rendering and in
 
 Goal 7 adds an optional versioned `clinicalProfile` for structured morphology, localization, symptoms, diagnostic workflow, concise differential clues, treatment hierarchy, medication-regimen metadata, follow-up strategy, red flags, referral and oncology context. Eight representative records use the profile; the remaining 42 continue through the legacy-compatible renderer. See [CLINICAL_SCHEMA.md](CLINICAL_SCHEMA.md) and [CONTENT_QUALITY_AUDIT.md](CONTENT_QUALITY_AUDIT.md). Structured clinical fields are still drafts requiring physician review.
 
-Optional educational media lives separately in `media-data.js`. Goal 6 intentionally ships with no pilot images because no candidate set was accepted without additional license and clinical review. The schema nevertheless requires a controlled media type, intrinsic dimensions, caption, alt text, diagnosis, educational description, source, reusable-rights license, attribution, HTTPS provenance, metadata-check date and independent media review state. See [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md).
+Optional educational media lives separately in `media-data.js`. Goal 8 includes four project-authored SVG schematics for melanoma, basal cell carcinoma, plaque psoriasis and acne vulgaris. They contain no patient imagery, are registered as `Project-owned`, include accessible titles/descriptions and remain `clinician review required`. See [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md).
+
+Quiz content lives in `quiz-data.js`, separate from `quiz-app.js`. Eight one-best-answer questions link to the structured pilot records and their attached sources. The quiz stores no account, score or analytics data and is explicitly educational rather than clinical decision support.
 
 Follow-up protocols live in `followup-data.js`; `followup-app.js` renders the selectors, recommendations and provenance. `scripts/follow-up.js` performs offline integrity validation, while the existing clinical-review utility fingerprints both disease records and follow-up protocols.
 
@@ -137,11 +145,14 @@ node --check app.js
 node --check media-data.js
 node --check followup-data.js
 node --check followup-app.js
+node --check quiz-data.js
+node --check quiz-app.js
 node --check scripts/media.js
 node --check scripts/clinical-schema.js
 node scripts/follow-up.js
 node scripts/media.js
 node scripts/clinical-schema.js
+node scripts/quiz.js
 node scripts/clinical-review.js --validate
 node --test tests/*.test.js
 git diff --check

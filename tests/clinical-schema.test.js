@@ -80,11 +80,26 @@ test("treatment hierarchy, differentials and source references are structurally 
     record => { record.clinicalProfile.differentials[0] = { diagnosis: "" }; },
     record => { record.clinicalProfile.differentials.push({ diagnosis: record.clinicalProfile.differentials[0].diagnosis.toUpperCase() }); },
     record => { record.clinicalProfile.sourceUrls = ["https://example.org/not-attached"]; },
-    record => { record.clinicalProfile.diagnostics[0].sourceUrls = ["https://example.org/not-attached"]; }
+    record => { record.clinicalProfile.diagnostics[0].sourceUrls = ["https://example.org/not-attached"]; },
+    record => { record.clinicalProfile.evidenceMap.treatment = ["https://example.org/not-attached"]; },
+    record => { record.clinicalProfile.evidenceMap.unknown = [record.references[0].url]; },
+    record => { record.clinicalProfile.evidenceMap = {}; }
   ];
   for (const mutate of mutations) {
     const record = pilot(); mutate(record);
     assert.throws(() => validateProfile(record));
+  }
+});
+
+test("all eight pilot records map section evidence only to attached sources", () => {
+  for (const id of pilots) {
+    const record = data.diseases.find(item => item.id === id);
+    assert.ok(Object.keys(record.clinicalProfile.evidenceMap).length >= 6, `${id} lacks useful section mapping`);
+    const attached = new Set(record.references.map(reference => reference.url));
+    for (const urls of Object.values(record.clinicalProfile.evidenceMap)) {
+      assert.ok(urls.length > 0);
+      urls.forEach(url => assert.ok(attached.has(url), `${id} maps unknown source ${url}`));
+    }
   }
 });
 

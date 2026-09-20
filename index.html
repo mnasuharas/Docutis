@@ -22,7 +22,9 @@
     </a>
     <div class="primary-links">
       <a href="#searchPanel">Search</a>
+      <a href="#evidenceStatus">Clinical review</a>
       <a href="#followUpModule">Follow-up</a>
+      <a href="#quizModule">Quiz</a>
       <a href="#conditionsTitle">Conditions</a>
     </div>
     <div class="badge">Open source</div>
@@ -43,6 +45,27 @@
     <div id="libraryStats" class="library-stats" aria-label="Current reference coverage"></div>
   </section>
 
+  <section id="evidenceStatus" class="evidence-dashboard" aria-labelledby="evidenceStatusTitle">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Clinical transparency</p>
+        <h2 id="evidenceStatusTitle">Evidence status</h2>
+      </div>
+      <p>Live coverage counts are calculated from the published records, follow-up protocols and governed media registry.</p>
+    </div>
+    <div id="reviewDashboardCounts" class="review-dashboard-counts" aria-label="Clinical review coverage"></div>
+    <details class="review-meaning">
+      <summary>What these states mean</summary>
+      <dl>
+        <div><dt>Source metadata checked</dt><dd>The source identity and link metadata were rechecked; this does not verify every clinical statement.</dd></div>
+        <div><dt>Schema validated</dt><dd>Automated checks found the expected data shape, controlled values and source relationships. Automated tests are not clinical review.</dd></div>
+        <div><dt>Clinician review required</dt><dd>The content remains educational draft material and has no current physician attestation.</dd></div>
+        <div><dt>Clinician reviewed</dt><dd>A physician attestation is bound by a content fingerprint to one exact content version. Later clinical changes invalidate that attestation.</dd></div>
+      </dl>
+      <p>Docutis does not replace professional clinical judgment, diagnosis, treatment decisions or current guidelines.</p>
+    </details>
+  </section>
+
   <section id="searchPanel" class="search-panel" aria-labelledby="searchTitle">
     <div class="section-heading compact-heading">
       <div>
@@ -60,6 +83,18 @@
     <p id="searchHelp" class="search-help">Examples: melanoma, shingles, eczema, C43</p>
     <div id="categoryFilters" class="category-filters" aria-label="Filter conditions by category"></div>
     <p id="resultStatus" class="result-status" role="status" aria-live="polite"></p>
+  </section>
+
+  <section id="quizModule" class="quiz-module" aria-labelledby="quizTitle">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Visual learning pilot</p>
+        <h2 id="quizTitle">Clinical Pattern Quiz</h2>
+      </div>
+      <p>Eight educational questions use only the structured pilot records and original Docutis schematics.</p>
+    </div>
+    <p class="quiz-disclaimer">Educational pattern recognition only. This quiz is not clinical decision support and does not replace professional judgment. All quiz content requires clinician review.</p>
+    <div id="quizApp" class="quiz-app" tabindex="-1"></div>
   </section>
 
   <section id="followUpModule" class="follow-up-module" aria-labelledby="followUpTitle">
@@ -120,8 +155,10 @@
 <script src="data.js"></script>
 <script src="media-data.js"></script>
 <script src="followup-data.js"></script>
+<script src="quiz-data.js"></script>
 <script src="app.js"></script>
 <script src="followup-app.js"></script>
+<script src="quiz-app.js"></script>
 
 </body>
 </html>

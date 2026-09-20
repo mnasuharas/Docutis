@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">Schematic basal cell carcinoma morphology and dermoscopic clues</title>
+  <desc id="desc">A labelled schematic shows a pearly raised border, central ulceration, arborising vessels and blue-grey ovoid structures.</desc>
+  <rect width="800" height="500" fill="#f6faf8"/><text x="40" y="52" font-family="system-ui" font-size="28" font-weight="700" fill="#18352d">Basal cell carcinoma clues · schematic</text>
+  <ellipse cx="300" cy="245" rx="210" ry="145" fill="#f1c9b5" stroke="#18352d" stroke-width="5"/><ellipse cx="300" cy="245" rx="155" ry="95" fill="#e8aa98" stroke="#ffffff" stroke-width="15"/><ellipse cx="300" cy="245" rx="68" ry="42" fill="#75423b" stroke="#18352d" stroke-width="4"/>
+  <g fill="none" stroke="#9e2f36" stroke-width="6" stroke-linecap="round"><path d="M155 190Q210 195 245 226M190 197l-14-30M208 204l12-34M445 194Q392 200 358 226M412 203l17-35M395 209l-8-34"/><path d="M185 300Q235 290 258 267M415 298Q368 289 343 266"/></g>
+  <g fill="#526b89" stroke="#18352d" stroke-width="3"><ellipse cx="175" cy="255" rx="22" ry="14"/><ellipse cx="425" cy="254" rx="25" ry="16"/></g>
+  <g font-family="system-ui" fill="#18352d" font-size="20"><path d="M445 112L530 92" stroke="#18352d" stroke-width="3"/><text x="545" y="98" font-weight="700">Pearly raised border</text><path d="M348 245L530 190" stroke="#18352d" stroke-width="3"/><text x="545" y="196" font-weight="700">Central ulceration</text><path d="M410 205L530 282" stroke="#18352d" stroke-width="3"/><text x="545" y="288" font-weight="700">Arborising vessels</text><path d="M425 254L530 365" stroke="#18352d" stroke-width="3"/><text x="545" y="371" font-weight="700">Blue-grey ovoid clues</text></g>
+  <text x="40" y="460" font-family="system-ui" font-size="18" fill="#29443c">Features vary by subtype. Educational schematic · clinician review required · not a diagnostic substitute</text>
+</svg>

@@ -38,7 +38,7 @@ class Element {
   }
 }
 
-function createHarness(transformData, transformMedia) {
+function createHarness(transformData, transformMedia, initialHref = "https://example.test/Docutis/") {
   const document = {
     activeElement: null,
     elements: {},
@@ -49,12 +49,40 @@ function createHarness(transformData, transformMedia) {
     addEventListener(type, listener) { (document.listeners[type] ||= []).push(listener); },
     dispatch(type, extra = {}) { for (const listener of document.listeners[type] || []) listener({ type, target: extra.target, key: extra.key, ctrlKey: false, metaKey: false, altKey: false, preventDefault() {} }); }
   };
-  for (const id of ["cards", "details", "categoryFilters", "libraryStats", "noResult", "resultStatus", "searchClear", "searchInput"]) {
+  for (const id of ["cards", "details", "categoryFilters", "libraryStats", "reviewDashboardCounts", "noResult", "resultStatus", "searchClear", "searchInput"]) {
     const tagName = id === "searchInput" ? "input" : id === "searchClear" ? "button" : "div";
     document.elements[id] = new Element(tagName, document);
   }
   document.elements.details.hidden = true;
-  const context = { window: {}, document };
+  const entries = [{ href: initialHref, state: null }];
+  let historyIndex = 0;
+  const window = {
+    location: { href: initialHref }, listeners: {},
+    addEventListener(type, listener) { (this.listeners[type] ||= []).push(listener); },
+    dispatch(type) { for (const listener of this.listeners[type] || []) listener({ type }); }
+  };
+  window.history = {
+    state: null,
+    get length() { return entries.length; },
+    pushState(state, _title, url) {
+      entries.splice(historyIndex + 1);
+      const href = new URL(url, window.location.href).href;
+      entries.push({ href, state }); historyIndex += 1; this.state = state; window.location.href = href;
+    },
+    replaceState(state, _title, url) {
+      const href = new URL(url, window.location.href).href;
+      entries[historyIndex] = { href, state }; this.state = state; window.location.href = href;
+    },
+    back() {
+      if (historyIndex === 0) return;
+      historyIndex -= 1; const entry = entries[historyIndex]; this.state = entry.state; window.location.href = entry.href; window.dispatch("popstate");
+    },
+    forward() {
+      if (historyIndex >= entries.length - 1) return;
+      historyIndex += 1; const entry = entries[historyIndex]; this.state = entry.state; window.location.href = entry.href; window.dispatch("popstate");
+    }
+  };
+  const context = { window, document, URL };
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "clinical-schema.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "data.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "media-data.js"), "utf8"), context);
@@ -62,7 +90,7 @@ function createHarness(transformData, transformMedia) {
   if (transformData) context.window.DOCUTIS_DATA = transformData(context.window.DOCUTIS_DATA);
   if (transformMedia) context.window.DOCUTIS_MEDIA = transformMedia(context.window.DOCUTIS_MEDIA);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "app.js"), "utf8"), context);
-  return { document, elements: document.elements };
+  return { document, elements: document.elements, window, history: window.history };
 }
 
 function textOf(element) {
@@ -84,6 +112,8 @@ test("initial rendering creates all cards and eight category sections", () => {
   assert.ok(elements.categoryFilters.querySelectorAll("button").every(button => button.type === "button"));
   assert.match(elements.resultStatus.textContent, /50 conditions shown/);
   assert.match(textOf(elements.libraryStats), /3\s+oncology follow-up protocols/);
+  assert.match(textOf(elements.reviewDashboardCounts), /0\/50\s+Clinician-reviewed records/);
+  assert.match(textOf(elements.reviewDashboardCounts), /4\s+Governed visual-learning items/);
 });
 
 test("search covers names, aliases, categories, subcategories and both coding systems", () => {
@@ -257,6 +287,46 @@ test("legacy-compatible details retain the Goal 6 rendering path", () => {
   assert.match(details, /Dermoscopy/);
   assert.match(details, /Treatment overview/);
   assert.doesNotMatch(details, /Diagnostic approach/);
+});
+
+test("pilot details render section-level evidence maps with secure descriptive links", () => {
+  const { elements } = createHarness();
+  const card = elements.cards.querySelectorAll(".card").find(item => textOf(item).includes("Cutaneous Melanoma"));
+  card.dispatch("click");
+  const evidence = elements.details.querySelectorAll(".evidence-disclosure");
+  assert.ok(evidence.length >= 8);
+  assert.match(textOf(elements.details), /Evidence for clinical presentation/);
+  assert.match(textOf(elements.details), /Source supporting treatment hierarchy/);
+  for (const link of evidence.flatMap(item => item.querySelectorAll("a"))) {
+    assert.equal(link.target, "_blank");
+    assert.equal(link.rel, "noopener noreferrer");
+    assert.match(link.textContent, /Source supporting/);
+  }
+});
+
+test("valid condition deep links open safely and invalid IDs preserve the library", () => {
+  const valid = createHarness(null, null, "https://example.test/Docutis/?condition=acne-vulgaris");
+  assert.equal(valid.elements.details.hidden, false);
+  assert.match(textOf(valid.elements.details), /Acne Vulgaris/);
+  const invalid = createHarness(null, null, "https://example.test/Docutis/?condition=not-a-condition");
+  assert.equal(invalid.elements.details.hidden, true);
+  assert.equal(invalid.elements.cards.querySelectorAll(".card").length, 50);
+});
+
+test("card URLs support Back and Forward while Escape restores card focus", () => {
+  const { document, elements, window, history } = createHarness();
+  const card = elements.cards.querySelectorAll(".card").find(item => textOf(item).includes("Acne Vulgaris"));
+  card.dispatch("click");
+  assert.match(window.location.href, /condition=acne-vulgaris/);
+  assert.equal(elements.details.hidden, false);
+  history.back();
+  assert.equal(elements.details.hidden, true);
+  assert.equal(document.activeElement, card);
+  history.forward();
+  assert.equal(elements.details.hidden, false);
+  elements.details.dispatch("keydown", { key: "Escape" });
+  assert.equal(elements.details.hidden, true);
+  assert.equal(document.activeElement, card);
 });
 
 test("optional educational media renders provenance and recovers from image failure", () => {

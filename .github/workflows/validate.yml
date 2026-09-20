@@ -40,6 +40,9 @@ jobs:
           node --check app.js
           node --check media-data.js
           node --check scripts/media.js
+          node --check quiz-data.js
+          node --check quiz-app.js
+          node --check scripts/quiz.js
 
       - name: Check follow-up module syntax
         run: |
@@ -54,6 +57,7 @@ jobs:
           node scripts/clinical-schema.js
           node scripts/follow-up.js
           node scripts/media.js
+          node scripts/quiz.js
 
       - name: Run dependency-free tests
         run: node --test tests/*.test.js

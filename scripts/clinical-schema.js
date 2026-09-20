@@ -6,7 +6,8 @@ const vm = require("node:vm");
 const schema = require("../clinical-schema");
 
 const root = path.join(__dirname, "..");
-const profileKeys = new Set(["schemaVersion", "aliases", "epidemiology", "etiology", "presentation", "dermoscopy", "diagnostics", "histopathology", "differentials", "treatment", "followUp", "redFlags", "referral", "patientCounseling", "specialPopulations", "oncology", "sourceUrls"]);
+const profileKeys = new Set(["schemaVersion", "aliases", "epidemiology", "etiology", "presentation", "dermoscopy", "diagnostics", "histopathology", "differentials", "treatment", "followUp", "redFlags", "referral", "patientCounseling", "specialPopulations", "oncology", "evidenceMap", "sourceUrls"]);
+const evidenceDomains = new Set(["presentation", "dermoscopy", "diagnostics", "differentials", "treatment", "followUp", "redFlags", "oncology"]);
 const medicationKeys = new Set(["name", "route", "formulation", "dose", "frequency", "duration", "maximumDuration", "taper", "contraindications", "precautions", "monitoring", "pregnancy", "sourceUrls"]);
 
 function loadData() {
@@ -188,6 +189,12 @@ function validateProfile(record) {
     if (Object.keys(profile.oncology).some(key => !keys.includes(key))) fail(record, "oncology has an unsupported field");
     for (const value of Object.values(profile.oncology)) if (!nonEmptyString(value)) fail(record, "oncology fields must be non-empty");
   }
+  if (!profile.evidenceMap || typeof profile.evidenceMap !== "object" || Array.isArray(profile.evidenceMap)) fail(record, "evidenceMap is required for a structured profile");
+  if (!Object.keys(profile.evidenceMap).length) fail(record, "evidenceMap cannot be empty");
+  for (const [domain, urls] of Object.entries(profile.evidenceMap)) {
+    if (!evidenceDomains.has(domain)) fail(record, `evidenceMap contains unsupported domain ${domain}`);
+    validateSourceUrls(record, urls, `evidenceMap.${domain}`);
+  }
   validateSourceUrls(record, profile.sourceUrls, "clinicalProfile.sourceUrls");
 }
 
@@ -240,7 +247,7 @@ function main() {
   console.log("This validates structure and controlled values, not clinical accuracy or physician review.");
 }
 
-module.exports = { schema, loadData, validateData, validateProfile, coverage, main };
+module.exports = { schema, evidenceDomains, loadData, validateData, validateProfile, coverage, main };
 
 if (require.main === module) {
   try { main(); }

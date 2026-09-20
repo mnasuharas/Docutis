@@ -62,9 +62,18 @@ Read [CLINICAL_SCHEMA.md](CLINICAL_SCHEMA.md) before adding or changing `clinica
 - Use values from `clinical-schema.js` for morphology, symptoms, distribution, course, diagnostic roles, treatment levels and follow-up strategies.
 - Keep the legacy clinical fields populated until migration is complete so older records and consumers remain compatible.
 - Every profile must list attached record references in `sourceUrls`; intervention- or diagnostic-level source links must also resolve to that record's references.
+- Keep `evidenceMap` section-level rather than claiming sentence-level provenance. Every mapped URL must resolve to an attached record reference, and omitted or inapplicable domains should stay omitted.
 - Add medication formulation, dose, frequency or duration only when the attached authoritative source explicitly supports it. Do not infer a regimen.
 - Any `clinicalProfile` edit changes the disease clinical fingerprint and requires physician re-review or continued `clinician review required` state.
 - Run `node scripts/clinical-schema.js` and update `CONTENT_QUALITY_AUDIT.md` when coverage changes.
+
+### Visual learning and quiz contributions
+
+- Follow [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md). Prefer original repository-native SVG diagrams; do not add patient photographs or third-party images without documented rights and consent where applicable.
+- Every visual needs a stable ID, disease association, dimensions, title, caption, meaningful alt text, adjacent educational description, provenance, license, attribution, metadata-check date and independent review state.
+- Quiz questions belong in `quiz-data.js`, not rendering code. Use one best answer, three or four distinct options, a concise explanation, a linked structured condition and one or more sources already attached to that condition.
+- Quiz and visual content must remain `clinician review required` until genuine physician metadata exists. Run `node scripts/media.js` and `node scripts/quiz.js` before proposing changes.
+- Do not add patient-specific scenarios, scores persisted to a browser, analytics or unsupported medication doses.
 
 Allowed source types are `official classification`, `guideline`, `consensus`, `systematic review`, `peer-reviewed review`, and `clinical reference`. Choose the type from the publication itself; do not describe an ordinary review as a consensus or an institutional landing page as a peer-reviewed guideline.
 

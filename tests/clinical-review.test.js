@@ -21,7 +21,7 @@ function reviewedFixture() {
   return record;
 }
 
-test("Goal 7 preserves every legacy record, alias, clinical field, code, source and taxonomy", () => {
+test("Goal 8 preserves every legacy record, alias, clinical field, code, verified source and taxonomy", () => {
   assert.equal(data.diseases.length, 50);
   assert.equal(data.categories.length, 8);
   assert.equal(data.subcategories.length, 26);
@@ -31,7 +31,7 @@ test("Goal 7 preserves every legacy record, alias, clinical field, code, source 
   })) };
   // Legacy clinical snapshot, excluding review state, Goal 7 profiles and bibliographic recheck dates.
   assert.equal(createHash("sha256").update(JSON.stringify(canonicalize(content))).digest("hex"),
-    "4f3e41022b2c2f5c7dfd6a449b3191b7eaf2219fe361ba81da45760e75179624");
+    "fcc4e4f2a0cc03d0e3b4669ff68179fddd8ac7bb4eeed8fc235810f56b897070");
 });
 
 test("all 50 production records remain unreviewed with null metadata", () => {

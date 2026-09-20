@@ -34,13 +34,14 @@ Goal 7 introduces an optional `clinicalProfile` schema alongside the existing di
 | `patientCounseling` | Optional | No | Brief high-yield advice. |
 | `specialPopulations` | Optional | Population is controlled | Used only when management materially differs. |
 | `oncology` | Optional | Field names are controlled | Risk, subtype, margins, staging, sentinel-node, re-excision, imaging, systemic referral and recurrence/metastasis context. |
+| `evidenceMap` | Required in a structured profile | Domain names are controlled; values must match attached reference URLs | Makes section-level provenance visible without claiming sentence-level verification or physician endorsement. |
 | `sourceUrls` | Required in a profile | Must exactly match attached record references | Prevents structured content from citing unattached evidence. |
 
 Controlled vocabularies are defined once in `clinical-schema.js`. `scripts/clinical-schema.js` validates profiles, treatment objects, source links and coverage without making clinical claims about their accuracy.
 
 ## Clinical review and fingerprints
 
-`clinicalProfile` is part of the disease record and therefore part of the deterministic clinical fingerprint. Adding or changing any structured clinical value invalidates an existing reviewed hash. All eight pilot records remain `clinician review required` with `clinicalReview: null`; automated schema validation is not physician review.
+`clinicalProfile`, including its evidence map, is part of the disease record and therefore part of the deterministic clinical fingerprint. Adding or changing any structured clinical value invalidates an existing reviewed hash. All eight pilot records remain `clinician review required` with `clinicalReview: null`; automated schema validation is not physician review.
 
 Source `metadataCheckedAt` dates remain excluded from disease fingerprints because a bibliographic link recheck does not change clinical meaning. Existing melanoma follow-up protocols and their independent fingerprints are unchanged.
 

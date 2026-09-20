@@ -1,6 +1,8 @@
 # Educational media governance
 
-Docutis supports optional educational media without making imagery a prerequisite for a complete condition record. The Goal 6 production registry is intentionally empty: no external clinical photograph, dermoscopy image or histopathology image was added because a small, high-value set with independently verified reuse rights was not established within this release.
+Docutis supports optional educational media without making imagery a prerequisite for a complete condition record. Goal 8 contains four original repository-native SVG schematics: melanoma ABCDE warning features, basal cell carcinoma clues, plaque psoriasis distribution and acne lesion types. No external clinical photograph, dermoscopy image, histopathology image or patient content is included.
+
+The four assets are registered as `Project-owned`, attributed to the Docutis project and remain `clinician review required`. Each SVG has an internal title and description, a meaningful HTML alt text and adjacent educational explanation. Project ownership and automated structural validation do not establish clinical correctness or make a schematic a diagnostic substitute.
 
 ## Data model
 
@@ -10,7 +12,7 @@ Media lives in `media-data.js`, independently from clinical content in `data.js`
 - a controlled `type`: `clinical-photo`, `dermoscopy`, `histopathology`, `diagram`, `illustration` or `procedure`;
 - an HTTPS URL or safe local `assets/media/` path in `src`;
 - intrinsic pixel `dimensions` to reduce layout shift;
-- `caption`, `alt`, `diagnosis`, `educationalDescription` and optional `anatomicalSite`;
+- `title`, `caption`, `alt`, `diagnosis`, `educationalDescription` and optional `anatomicalSite`;
 - explicit `patientIdentifiable: false` and a documented `consentBasis`, including a clear not-applicable basis for non-patient diagrams;
 - `source`, controlled `license`, `attribution`, HTTPS `sourceUrl` and independent `metadataCheckedAt` date;
 - `reviewStatus` and `clinicalReview` metadata governed independently from the condition record.
