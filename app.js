@@ -11,6 +11,7 @@
   const resultStatusElement = document.getElementById("resultStatus");
   const searchClear = document.getElementById("searchClear");
   const searchInput = document.getElementById("searchInput");
+  const reviewDashboardCounts = document.getElementById("reviewDashboardCounts");
   let activeCategory = "all";
   let lastOpenedCard = null;
 
@@ -75,10 +76,35 @@
     });
   }
 
+  function conditionUrl(id) {
+    if (!window.location) return "";
+    const url = new URL(window.location.href);
+    if (id) url.searchParams.set("condition", id);
+    else url.searchParams.delete("condition");
+    return `${url.pathname}${url.search}${url.hash}`;
+  }
+
+  function updateConditionUrl(id, mode = "push", state = {}) {
+    if (!window.history?.[`${mode}State`] || !window.location) return;
+    window.history[`${mode}State`]({ ...state, docutisCondition: id || null }, "", conditionUrl(id));
+  }
+
   function hideDetails(options = {}) {
     detailsElement.hidden = true;
     detailsElement.replaceChildren();
+    if (options.clearUrl) updateConditionUrl(null, "replace");
     if (options.restoreFocus && lastOpenedCard && document.contains(lastOpenedCard)) lastOpenedCard.focus();
+  }
+
+  function closeDiseaseDetails() {
+    if (window.location && new URL(window.location.href).searchParams.has("condition")) {
+      if (window.history?.state?.docutisCondition && !window.history.state.directEntry && window.history.length > 1) {
+        window.history.back();
+        return;
+      }
+      updateConditionUrl(null, "replace");
+    }
+    hideDetails({ restoreFocus: true });
   }
 
   function createCard(disease) {
@@ -92,12 +118,12 @@
     appendTextElement(card, "span", compactCodingLabel(disease), "icd");
     card.addEventListener("click", () => {
       lastOpenedCard = card;
-      showDisease(disease.id);
+      showDisease(disease.id, { updateUrl: true });
     });
     return card;
   }
 
-  function renderCards() {
+  function renderCards(options = {}) {
     const matches = filteredDiseases();
     cardsElement.replaceChildren();
     data.categories.forEach(category => {
@@ -117,7 +143,7 @@
     noResultElement.style.display = matches.length ? "none" : "block";
     resultStatusElement.textContent = `${matches.length} condition${matches.length === 1 ? "" : "s"} shown.`;
     if (searchClear) searchClear.hidden = !searchInput.value;
-    hideDetails();
+    hideDetails({ clearUrl: !options.preserveUrl && !detailsElement.hidden });
   }
 
   function addDetailSection(parent, title, content, id, modifier = "") {
@@ -156,6 +182,27 @@
     parent.appendChild(row);
   }
 
+  function addEvidenceDisclosure(parent, disease, domain, label) {
+    const urls = disease.clinicalProfile?.evidenceMap?.[domain];
+    if (!urls?.length) return;
+    const disclosure = document.createElement("details");
+    disclosure.className = "evidence-disclosure";
+    appendTextElement(disclosure, "summary", `Evidence for ${label || humanize(domain)} (${urls.length})`);
+    appendTextElement(disclosure, "p", "Mapped sources support this section at section level; source attachment is not physician endorsement.", "evidence-note");
+    const list = document.createElement("ul");
+    urls.forEach(url => {
+      const reference = disease.references.find(item => item.url === url);
+      const item = document.createElement("li");
+      const link = appendTextElement(item, "a", `Source supporting ${label || humanize(domain)}: ${reference.title} (opens in a new tab)`);
+      link.href = reference.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      list.appendChild(item);
+    });
+    disclosure.appendChild(list);
+    parent.appendChild(disclosure);
+  }
+
   function addClinicalPresentationSection(parent, disease) {
     const profile = disease.clinicalProfile;
     if (!profile) return addDetailSection(parent, "Clinical features", disease.clinical, "detail-clinical");
@@ -191,6 +238,7 @@
       if (profile.epidemiology.prevalence) addStructuredField(section, "Prevalence / rarity", profile.epidemiology.prevalence);
       addStructuredField(section, "Seasonal / environmental associations", profile.epidemiology.associations);
     }
+    addEvidenceDisclosure(section, disease, "presentation", "clinical presentation");
     parent.appendChild(section);
     return section;
   }
@@ -230,6 +278,8 @@
       appendTextElement(section, "h4", "High-yield histopathology");
       appendTextElement(section, "p", profile.histopathology);
     }
+    addEvidenceDisclosure(section, disease, "diagnostics", "diagnostic workflow");
+    addEvidenceDisclosure(section, disease, "dermoscopy", "dermoscopy");
     parent.appendChild(section);
     return section;
   }
@@ -250,6 +300,7 @@
       list.appendChild(row);
     });
     section.appendChild(list);
+    addEvidenceDisclosure(section, disease, "differentials", "differential diagnosis");
     parent.appendChild(section);
     return section;
   }
@@ -287,6 +338,7 @@
       appendTextElement(section, "h4", "Non-pharmacological care");
       addStructuredList(section, profile.treatment.nonPharmacological);
     }
+    addEvidenceDisclosure(section, disease, "treatment", "treatment hierarchy");
     parent.appendChild(section);
     return section;
   }
@@ -312,8 +364,23 @@
       appendTextElement(section, "h4", "Patient counseling");
       addStructuredList(section, profile.patientCounseling);
     }
+    addEvidenceDisclosure(section, disease, "followUp", "follow-up");
+    addEvidenceDisclosure(section, disease, "redFlags", "red flags");
     parent.appendChild(section);
     return section;
+  }
+
+  function addOncologySection(parent, disease) {
+    const oncology = disease.clinicalProfile?.oncology;
+    if (!oncology) return false;
+    const section = document.createElement("section");
+    section.className = "detail-section structured-section oncology-section";
+    section.id = "detail-oncology";
+    appendTextElement(section, "h3", "Oncology context");
+    Object.entries(oncology).forEach(([key, value]) => addStructuredField(section, humanize(key), value));
+    addEvidenceDisclosure(section, disease, "oncology", "oncology context");
+    parent.appendChild(section);
+    return true;
   }
 
   function addCodingSection(parent, disease) {
@@ -402,7 +469,8 @@
       figure.appendChild(image);
       const caption = document.createElement("figcaption");
       caption.className = "media-caption";
-      appendTextElement(caption, "strong", item.caption);
+      appendTextElement(caption, "strong", item.title || item.caption);
+      if (item.title) appendTextElement(caption, "span", item.caption);
       appendTextElement(caption, "span", item.educationalDescription);
       const metadata = document.createElement("div");
       metadata.className = "media-metadata";
@@ -469,7 +537,7 @@
     parent.appendChild(section);
   }
 
-  function addDetailNavigation(hasMedia) {
+  function addDetailNavigation(hasMedia, hasOncology) {
     const navigation = document.createElement("nav");
     navigation.className = "detail-jump-nav";
     navigation.setAttribute("aria-label", "Condition detail sections");
@@ -483,6 +551,7 @@
       ["detail-coding", "Coding"]
     ];
     if (hasMedia) links.push(["detail-media", "Media"]);
+    if (hasOncology) links.push(["detail-oncology", "Oncology"]);
     links.push(["detail-sources", "Sources"]);
     links.forEach(([id, label]) => {
       const link = appendTextElement(navigation, "a", label);
@@ -491,9 +560,10 @@
     detailsElement.appendChild(navigation);
   }
 
-  function showDisease(id) {
+  function showDisease(id, options = {}) {
     const disease = data.diseases.find(item => item.id === id);
-    if (!disease) return;
+    if (!disease) return false;
+    if (options.updateUrl) updateConditionUrl(id, "push");
     detailsElement.replaceChildren();
     const header = document.createElement("div");
     header.className = "detail-header";
@@ -519,14 +589,24 @@
     const closeButton = appendTextElement(header, "button", "Close", "close-button");
     closeButton.type = "button";
     closeButton.setAttribute("aria-label", `Close details for ${disease.name}`);
-    closeButton.addEventListener("click", () => hideDetails({ restoreFocus: true }));
+    closeButton.addEventListener("click", closeDiseaseDetails);
     detailsElement.appendChild(header);
     appendTextElement(detailsElement, "p", reviewed
       ? "Physician review applies to this content version. It does not guarantee correctness or replace professional medical judgment."
       : "This record has not completed human physician review. Automated tests and source metadata checks do not constitute clinical review.", "review-explanation");
 
+    if (disease.clinicalProfile) {
+      const workflow = document.createElement("div");
+      workflow.className = "review-workflow";
+      workflow.setAttribute("aria-label", "Clinical content workflow status");
+      ["Structured content available", `${disease.references.length} sources attached`, "Automated schema validation included", reviewed ? "Clinician reviewed" : "Clinician review required"]
+        .forEach(value => appendTextElement(workflow, "span", value));
+      detailsElement.appendChild(workflow);
+    }
+
     const hasMedia = (mediaData.items || []).some(item => item.diseaseId === disease.id);
-    addDetailNavigation(hasMedia);
+    const hasOncology = Boolean(disease.clinicalProfile?.oncology);
+    addDetailNavigation(hasMedia, hasOncology);
     const content = document.createElement("div");
     content.className = "detail-content";
     addDetailSection(content, "Overview", disease.description, "detail-overview", "detail-section--wide");
@@ -537,11 +617,22 @@
     addFollowUpSection(content, disease);
     addCodingSection(content, disease);
     addMediaSection(content, disease);
+    addOncologySection(content, disease);
     addReferencesSection(content, disease);
     detailsElement.appendChild(content);
     detailsElement.hidden = false;
     detailsElement.focus({ preventScroll: true });
     detailsElement.scrollIntoView({ behavior: "smooth", block: "start" });
+    return true;
+  }
+
+  function syncConditionFromUrl(options = {}) {
+    if (!window.location) return;
+    const id = new URL(window.location.href).searchParams.get("condition");
+    if (!id) { hideDetails({ restoreFocus: !options.initial }); return; }
+    const opened = showDisease(id);
+    if (opened && options.initial) updateConditionUrl(id, "replace", { directEntry: true });
+    if (!opened) hideDetails();
   }
 
   function setActiveCategory(categoryId) {
@@ -587,6 +678,30 @@
     });
   }
 
+  function renderReviewDashboard() {
+    if (!reviewDashboardCounts) return;
+    const followUps = window.DOCUTIS_FOLLOW_UP_DATA?.protocols || [];
+    const mediaItems = mediaData.items || [];
+    const reviewedRecords = data.diseases.filter(item => item.reviewStatus === "clinician reviewed").length;
+    const stats = [
+      [data.diseases.length, "Total conditions"],
+      [data.diseases.filter(item => item.clinicalProfile).length, "Structured clinical profiles"],
+      [data.diseases.filter(item => !item.clinicalProfile).length, "Legacy-compatible records"],
+      [`${reviewedRecords}/${data.diseases.length}`, "Clinician-reviewed records"],
+      [data.diseases.length - reviewedRecords, "Records requiring clinician review"],
+      [mediaItems.length, "Governed visual-learning items"],
+      [`${mediaItems.filter(item => item.reviewStatus === "clinician reviewed").length}/${mediaItems.length}`, "Reviewed visual items"],
+      [`${followUps.length} · ${followUps.filter(item => item.reviewStatus === "clinician reviewed").length} reviewed`, "Follow-up protocols"]
+    ];
+    stats.forEach(([value, label]) => {
+      const item = document.createElement("div");
+      item.className = "review-stat";
+      appendTextElement(item, "strong", String(value));
+      appendTextElement(item, "span", label);
+      reviewDashboardCounts.appendChild(item);
+    });
+  }
+
   function clearSearch() {
     searchInput.value = "";
     renderCards();
@@ -612,9 +727,12 @@
     });
   }
   detailsElement.addEventListener("keydown", event => {
-    if (event.key === "Escape") hideDetails({ restoreFocus: true });
+    if (event.key === "Escape") closeDiseaseDetails();
   });
+  if (window.addEventListener) window.addEventListener("popstate", () => syncConditionFromUrl());
   renderLibraryStats();
+  renderReviewDashboard();
   renderFilters();
-  renderCards();
+  renderCards({ preserveUrl: true });
+  syncConditionFromUrl({ initial: true });
 }());

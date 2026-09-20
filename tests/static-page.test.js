@@ -6,6 +6,7 @@ const test = require("node:test");
 const root = path.join(__dirname, "..");
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const css = fs.readFileSync(path.join(root, "style.css"), "utf8");
+const app = fs.readFileSync(path.join(root, "app.js"), "utf8");
 const readme = fs.readFileSync(path.join(root, "README.md"), "utf8");
 const contributing = fs.readFileSync(path.join(root, "CONTRIBUTING.md"), "utf8");
 const roadmap = fs.readFileSync(path.join(root, "ROADMAP.md"), "utf8");
@@ -13,11 +14,14 @@ const followUpDocs = fs.readFileSync(path.join(root, "FOLLOW_UP_PROTOCOLS.md"), 
 const goal5Review = fs.readFileSync(path.join(root, "GOAL5_CLINICAL_REVIEW.md"), "utf8");
 const mediaGovernance = fs.readFileSync(path.join(root, "MEDIA_GOVERNANCE.md"), "utf8");
 const mediaData = fs.readFileSync(path.join(root, "media-data.js"), "utf8");
+const quizData = fs.readFileSync(path.join(root, "quiz-data.js"), "utf8");
+const quizApp = fs.readFileSync(path.join(root, "quiz-app.js"), "utf8");
 const clinicalSchema = fs.readFileSync(path.join(root, "clinical-schema.js"), "utf8");
 const clinicalSchemaDocs = fs.readFileSync(path.join(root, "CLINICAL_SCHEMA.md"), "utf8");
 const qualityAudit = fs.readFileSync(path.join(root, "CONTENT_QUALITY_AUDIT.md"), "utf8");
 const followUpApp = fs.readFileSync(path.join(root, "followup-app.js"), "utf8");
 const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "validate.yml"), "utf8");
+const goal8Review = fs.readFileSync(path.join(root, "GOAL8_CLINICAL_REVIEW_BATCH.md"), "utf8");
 
 function cssProperty(selector, property) {
   const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -44,6 +48,7 @@ test("static page keeps load order, disclaimer and accessible controls", () => {
   assert.ok(html.indexOf('src="data.js"') < html.indexOf('src="app.js"'));
   assert.ok(html.indexOf('src="media-data.js"') < html.indexOf('src="app.js"'));
   assert.ok(html.indexOf('src="followup-data.js"') < html.indexOf('src="followup-app.js"'));
+  assert.ok(html.indexOf('src="quiz-data.js"') < html.indexOf('src="quiz-app.js"'));
   assert.match(html, /id="followUpDisease"/);
   assert.match(html, /id="followUpGroup"/);
   assert.match(html, /id="followUpPeriod"/);
@@ -106,7 +111,7 @@ test("CI validates pull requests, main pushes and manual runs with read-only per
   assert.match(workflow, /actions\/setup-node@v7/);
   assert.match(workflow, /node-version:\s*"24"/);
   assert.match(workflow, /package-manager-cache:\s*false/);
-  for (const command of ["node --check data.js", "node --check clinical-schema.js", "node --check scripts/clinical-schema.js", "node scripts/clinical-schema.js", "node --check app.js", "node --check media-data.js", "node --check scripts/media.js", "node scripts/media.js", "node --test tests/*.test.js", "git diff --check"]) {
+  for (const command of ["node --check data.js", "node --check clinical-schema.js", "node --check scripts/clinical-schema.js", "node scripts/clinical-schema.js", "node --check app.js", "node --check media-data.js", "node --check scripts/media.js", "node scripts/media.js", "node --check quiz-data.js", "node --check quiz-app.js", "node --check scripts/quiz.js", "node scripts/quiz.js", "node --test tests/*.test.js", "git diff --check"]) {
     assert.ok(workflow.includes(command), `workflow is missing ${command}`);
   }
   for (const command of ["node --check followup-data.js", "node --check followup-app.js", "node scripts/clinical-review.js --validate", "node scripts/follow-up.js"]) {
@@ -144,7 +149,8 @@ test("design tokens and governed optional media framework are present", () => {
     assert.ok(css.includes(token), `missing design token ${token}`);
   }
   assert.match(mediaData, /schemaVersion:\s*1/);
-  assert.match(mediaData, /items:\s*Object\.freeze\(\[\]\)/);
+  assert.match(mediaData, /melanoma-abcde-schematic/);
+  assert.match(mediaData, /license:\s*"Project-owned"/);
   assert.match(mediaGovernance, /clinical-photo.*dermoscopy.*histopathology.*diagram.*illustration.*procedure/s);
   assert.match(mediaGovernance, /CC BY 4\.0/);
   assert.match(mediaGovernance, /patient-identifiable information/i);
@@ -160,6 +166,31 @@ test("Goal 7 structured clinical architecture remains dependency-free and visibl
   assert.match(css, /\.treatment-tier\s*\+/);
   assert.match(css, /\.red-flag-list\s*{/);
   assert.match(readme, /Eight representative records use the profile/);
+});
+
+test("Goal 8 exposes review transparency, quiz and deep-link architecture", () => {
+  assert.match(html, /id="evidenceStatus"/);
+  assert.match(html, /id="quizModule"/);
+  assert.match(html, /Source metadata checked/);
+  assert.match(html, /content fingerprint/);
+  assert.match(quizData, /questions:\s*Object\.freeze/);
+  assert.match(quizApp, /role", "progressbar"/);
+  assert.match(app, /searchParams\.set\("condition"/);
+  assert.match(css, /\.review-dashboard-counts\s*{/);
+  assert.match(css, /\.quiz-option:focus-within\s*{/);
+  for (const id of ["actinic-keratosis", "basal-cell-carcinoma", "cutaneous-melanoma", "atopic-dermatitis", "plaque-psoriasis", "acne-vulgaris", "rosacea", "tinea-corporis"]) {
+    assert.ok(goal8Review.includes(`node scripts/clinical-review.js ${id}`), `missing review command for ${id}`);
+  }
+  assert.equal((goal8Review.match(/- \[ \] Physician reviewed/g) || []).length, 8);
+});
+
+test("repository health files and contribution templates are present without invented identities", () => {
+  for (const file of ["CHANGELOG.md", "SECURITY.md", "CODE_OF_CONDUCT.md", "CITATION.cff", ".github/ISSUE_TEMPLATE/bug_report.yml", ".github/ISSUE_TEMPLATE/clinical_content.yml", ".github/ISSUE_TEMPLATE/feature_request.yml", ".github/pull_request_template.md"]) {
+    assert.ok(fs.existsSync(path.join(root, file)), `missing ${file}`);
+  }
+  const citation = fs.readFileSync(path.join(root, "CITATION.cff"), "utf8");
+  assert.match(citation, /Docutis contributors/);
+  assert.doesNotMatch(citation, /orcid|affiliation|doi:/i);
 });
 
 test("result status and footer meet WCAG AA normal-text contrast", () => {

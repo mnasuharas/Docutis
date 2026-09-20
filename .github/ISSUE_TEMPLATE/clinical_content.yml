@@ -1,0 +1,47 @@
+name: Clinical content correction
+description: Propose a sourced correction or clarification to medical content.
+title: "[Clinical content]: "
+labels: [clinical-content]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not include patient-specific advice or identifiable health information. A source link or automated check is not physician attestation."
+  - type: input
+    id: record
+    attributes:
+      label: Condition name and record ID
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current wording
+      description: Quote only the short Docutis passage that needs attention.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed correction and rationale
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Authoritative supporting sources
+      description: Prefer current guidelines, professional societies, government sources or primary classifications.
+    validations:
+      required: true
+  - type: dropdown
+    id: reviewer
+    attributes:
+      label: Are you offering a formal physician review?
+      options:
+        - "No"
+        - "Yes — details will be documented through the review workflow"
+    validations:
+      required: true
+  - type: textarea
+    id: limits
+    attributes:
+      label: Jurisdiction or uncertainty

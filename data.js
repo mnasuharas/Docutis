@@ -64,12 +64,12 @@
     whoIcd10: source({ title: "ICD-10 Version: 2019", organization: "World Health Organization", type: "official classification", version: "2019", url: "https://icd.who.int/browse10/2019/en", metadataCheckedAt: "2026-09-15" }),
     icdo32: source({ title: "International Classification of Diseases for Oncology, Third Edition, Second Revision", organization: "World Health Organization / International Agency for Research on Cancer", type: "official classification", year: 2019, version: "ICD-O-3.2", url: "https://www.who.int/standards/classifications/other-classifications/international-classification-of-diseases-for-oncology", metadataCheckedAt: "2026-09-15" }),
     whoSkin: source({ title: "WHO Classification of Skin Tumours, fifth edition", organization: "WHO Classification of Tumours Editorial Board / IARC", type: "official classification", year: 2025, version: "5th edition", url: "https://whobluebooks.iarc.who.int/structures/skintumours/", metadataCheckedAt: "2026-09-15" }),
-    aadAk: source({ title: "Actinic keratosis clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis", metadataCheckedAt: "2026-09-17" }),
-    aadBcc: source({ title: "Basal cell carcinoma clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/bcc", metadataCheckedAt: "2026-09-17" }),
+    aadAk: source({ title: "Actinic keratosis clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis", metadataCheckedAt: "2026-09-20" }),
+    aadBcc: source({ title: "Basal cell carcinoma clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/bcc", metadataCheckedAt: "2026-09-20" }),
     aadScc: source({ title: "Cutaneous squamous cell carcinoma clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/scc", metadataCheckedAt: "2026-09-15" }),
-    eadoMelanomaDiagnostics: source({ title: "European consensus-based interdisciplinary guideline for melanoma. Part 1: Diagnostics — Update 2024", organization: "EADO / EDF / EORTC", type: "guideline", year: 2025, version: "2024 update; part 1", url: "https://pubmed.ncbi.nlm.nih.gov/39700658/", doi: "10.1016/j.ejca.2024.115152", metadataCheckedAt: "2026-09-17" }),
-    eadoMelanomaTreatment: source({ title: "European consensus-based interdisciplinary guideline for melanoma. Part 2: Treatment — Update 2024", organization: "EADO / EDF / EORTC", type: "guideline", year: 2025, version: "2024 update; part 2", url: "https://pubmed.ncbi.nlm.nih.gov/39709737/", doi: "10.1016/j.ejca.2024.115153", metadataCheckedAt: "2026-09-17" }),
-    nciMelanoma: source({ title: "Melanoma Treatment (PDQ®) — Health Professional Version", organization: "National Cancer Institute", type: "clinical reference", url: "https://www.cancer.gov/types/skin/hp/melanoma-treatment-pdq", metadataCheckedAt: "2026-09-15" }),
+    eadoMelanomaDiagnostics: source({ title: "European consensus-based interdisciplinary guideline for melanoma. Part 1: Diagnostics — Update 2024", organization: "EADO / EDF / EORTC", type: "guideline", year: 2025, version: "2024 update; part 1", url: "https://pubmed.ncbi.nlm.nih.gov/39700658/", doi: "10.1016/j.ejca.2024.115152", metadataCheckedAt: "2026-09-20" }),
+    eadoMelanomaTreatment: source({ title: "European consensus-based interdisciplinary guideline for melanoma. Part 2: Treatment — Update 2024", organization: "EADO / EDF / EORTC", type: "guideline", year: 2025, version: "2024 update; part 2", url: "https://pubmed.ncbi.nlm.nih.gov/39709737/", doi: "10.1016/j.ejca.2024.115153", metadataCheckedAt: "2026-09-20" }),
+    nciMelanoma: source({ title: "Melanoma Treatment (PDQ®) — Health Professional Version", organization: "National Cancer Institute", type: "clinical reference", url: "https://www.cancer.gov/types/skin/hp/melanoma-treatment-pdq", metadataCheckedAt: "2026-09-20" }),
     nciMcc: source({ title: "Merkel Cell Carcinoma Treatment (PDQ®) — Health Professional Version", organization: "National Cancer Institute", type: "clinical reference", url: "https://www.cancer.gov/types/skin/hp/merkel-cell-treatment-pdq", metadataCheckedAt: "2026-09-15" }),
     nciCtcl: source({ title: "Mycosis Fungoides and Other Cutaneous T-Cell Lymphomas Treatment (PDQ®)", organization: "National Cancer Institute", type: "clinical reference", url: "https://www.cancer.gov/types/lymphoma/hp/mycosis-fungoides-treatment-pdq", metadataCheckedAt: "2026-09-15" }),
     nciKaposi: source({ title: "Kaposi Sarcoma Treatment (PDQ®) — Health Professional Version", organization: "National Cancer Institute", type: "clinical reference", url: "https://www.cancer.gov/types/soft-tissue-sarcoma/hp/kaposi-treatment-pdq", metadataCheckedAt: "2026-09-15" }),
@@ -88,14 +88,14 @@
     whoHaem5: source({ title: "The 5th edition of the World Health Organization Classification of Haematolymphoid Tumours: Lymphoid Neoplasms", organization: "Leukemia / WHO Classification of Tumours Editorial Board", type: "peer-reviewed review", year: 2022, version: "WHO-HAEM5 overview", url: "https://www.nature.com/articles/s41375-022-01620-2", doi: "10.1038/s41375-022-01620-2", metadataCheckedAt: "2026-09-15" }),
     cd30Consensus: source({ title: "EORTC, ISCL, and USCLC consensus recommendations for the treatment of primary cutaneous CD30-positive lymphoproliferative disorders: lymphomatoid papulosis and primary cutaneous anaplastic large-cell lymphoma", organization: "EORTC / ISCL / USCLC", type: "consensus", year: 2011, url: "https://pubmed.ncbi.nlm.nih.gov/21841159/", doi: "10.1182/blood-2011-05-351346", metadataCheckedAt: "2026-09-15" }),
     pcAlclReview: source({ title: "Primary Cutaneous Anaplastic Large Cell Lymphoma—A Review of Clinical, Morphological, Immunohistochemical, and Molecular Features", organization: "Cancers", type: "peer-reviewed review", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/37627126/", doi: "10.3390/cancers15164098", metadataCheckedAt: "2026-09-15" }),
-    aadAtopicTopical: source({ title: "Guidelines of care for the management of atopic dermatitis in adults with topical therapies", organization: "American Academy of Dermatology", type: "guideline", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/36641009/", doi: "10.1016/j.jaad.2022.12.029", metadataCheckedAt: "2026-09-17" }),
-    aadAtopicSystemic: source({ title: "Guidelines of care for the management of atopic dermatitis in adults with phototherapy and systemic therapies", organization: "American Academy of Dermatology", type: "guideline", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/37943240/", doi: "10.1016/j.jaad.2023.08.102", metadataCheckedAt: "2026-09-17" }),
+    aadAtopicTopical: source({ title: "Guidelines of care for the management of atopic dermatitis in adults with topical therapies", organization: "American Academy of Dermatology", type: "guideline", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/36641009/", doi: "10.1016/j.jaad.2022.12.029", metadataCheckedAt: "2026-09-20" }),
+    aadAtopicSystemic: source({ title: "Guidelines of care for the management of atopic dermatitis in adults with phototherapy and systemic therapies", organization: "American Academy of Dermatology", type: "guideline", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/37943240/", doi: "10.1016/j.jaad.2023.08.102", metadataCheckedAt: "2026-09-20" }),
     badContactDermatitis: source({ title: "British Association of Dermatologists' guidelines for the management of contact dermatitis 2017", organization: "British Association of Dermatologists", type: "guideline", year: 2017, url: "https://pubmed.ncbi.nlm.nih.gov/28244094/", doi: "10.1111/bjd.15239", metadataCheckedAt: "2026-09-16" }),
     sebDermConsensus: source({ title: "A comprehensive literature review and an international expert consensus on the management of scalp seborrheic dermatitis in adults", organization: "European Journal of Dermatology / international expert panel", type: "consensus", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/38919137/", doi: "10.1684/ejd.2024.4703", metadataCheckedAt: "2026-09-16" }),
-    euroGuidermPsoriasis: source({ title: "Living EuroGuiDerm Guideline for the systemic treatment of psoriasis vulgaris", organization: "European Dermatology Forum / EuroGuiDerm", type: "guideline", version: "September 2023; partial update February 2025", url: "https://www.guidelines.edf.one/guidelines/psoriasis-guideline", metadataCheckedAt: "2026-09-17" }),
+    euroGuidermPsoriasis: source({ title: "Living EuroGuiDerm Guideline for the systemic treatment of psoriasis vulgaris", organization: "European Dermatology Forum / EuroGuiDerm", type: "guideline", version: "September 2023; partial update February 2025", url: "https://www.guidelines.edf.one/guidelines/psoriasis-guideline", metadataCheckedAt: "2026-09-20" }),
     aadPsoriasis: source({ title: "Psoriasis clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/psoriasis", metadataCheckedAt: "2026-09-17" }),
-    aadAcne: source({ title: "Guidelines of care for the management of acne vulgaris", organization: "American Academy of Dermatology", type: "guideline", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/38300170/", doi: "10.1016/j.jaad.2023.12.017", metadataCheckedAt: "2026-09-17" }),
-    rosaceaGuideline: source({ title: "S2k guideline: Rosacea", organization: "German Dermatological Society guideline group", type: "guideline", year: 2022, url: "https://pubmed.ncbi.nlm.nih.gov/35929658/", doi: "10.1111/ddg.14849", metadataCheckedAt: "2026-09-17" }),
+    aadAcne: source({ title: "Guidelines of care for the management of acne vulgaris", organization: "American Academy of Dermatology", type: "guideline", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/38300170/", doi: "10.1016/j.jaad.2023.12.017", metadataCheckedAt: "2026-09-20" }),
+    rosaceaGuideline: source({ title: "S2k guideline: Rosacea", organization: "German Dermatological Society guideline group", type: "guideline", year: 2022, url: "https://pubmed.ncbi.nlm.nih.gov/35929658/", doi: "10.1111/ddg.14849", metadataCheckedAt: "2026-09-20" }),
     urticariaGuideline: source({ title: "The International Guideline for the Definition, Classification, Diagnosis and Management of Urticaria", organization: "GA²LEN / UCARE / ACARE international guideline group", type: "guideline", year: 2026, url: "https://pubmed.ncbi.nlm.nih.gov/41649409/", doi: "10.1111/all.70210", metadataCheckedAt: "2026-09-16" }),
     vitiligoConsensusPart1: source({ title: "Worldwide expert recommendations for the diagnosis and management of vitiligo: Position statement from the International Vitiligo Task Force Part 1: towards a new management algorithm", organization: "International Vitiligo Task Force", type: "consensus", year: 2023, version: "Part 1", url: "https://pubmed.ncbi.nlm.nih.gov/37746876/", doi: "10.1111/jdv.19451", metadataCheckedAt: "2026-09-16" }),
     vitiligoConsensusPart2: source({ title: "Worldwide expert recommendations for the diagnosis and management of vitiligo: Position statement from the International Vitiligo Task Force—Part 2: Specific treatment recommendations", organization: "International Vitiligo Task Force", type: "consensus", year: 2023, version: "Part 2", url: "https://pubmed.ncbi.nlm.nih.gov/37715487/", doi: "10.1111/jdv.19450", metadataCheckedAt: "2026-09-16" }),
@@ -103,7 +103,7 @@
     folliculitisCochrane: source({ title: "Interventions for bacterial folliculitis and boils (furuncles and carbuncles)", organization: "Cochrane Database of Systematic Reviews", type: "systematic review", year: 2021, url: "https://pubmed.ncbi.nlm.nih.gov/33634465/", doi: "10.1002/14651858.CD013099.pub2", metadataCheckedAt: "2026-09-16" }),
     niceCellulitisErysipelas: source({ title: "Cellulitis and erysipelas: antimicrobial prescribing", organization: "National Institute for Health and Care Excellence", type: "guideline", year: 2019, version: "NG141", url: "https://www.nice.org.uk/guidance/ng141/chapter/Recommendations", metadataCheckedAt: "2026-09-16" }),
     erythrasmaReview: source({ title: "Erythrasma: a systematic review of interventions", organization: "Clinical and Experimental Dermatology", type: "systematic review", year: 2025, url: "https://pubmed.ncbi.nlm.nih.gov/40635638/", doi: "10.1093/ced/llaf307", metadataCheckedAt: "2026-09-16" }),
-    cdcRingworm: source({ title: "Clinical Overview of Ringworm", organization: "Centers for Disease Control and Prevention", type: "clinical reference", year: 2024, url: "https://www.cdc.gov/ringworm/hcp/clinical-overview/", metadataCheckedAt: "2026-09-17" }),
+    cdcRingworm: source({ title: "Clinical Overview of Ringworm", organization: "Centers for Disease Control and Prevention", type: "clinical reference", year: 2024, url: "https://www.cdc.gov/ringworm/hcp/clinical-overview/", metadataCheckedAt: "2026-09-20" }),
     tineaCapitisGuideline: source({ title: "Consensus-based Guideline on tinea capitis", organization: "German Dermatological Society guideline group", type: "guideline", year: 2026, version: "S1 guideline; version 4.0", url: "https://onlinelibrary.wiley.com/doi/full/10.1111/ddg.70395x", doi: "10.1111/ddg.70395x", metadataCheckedAt: "2026-09-16" }),
     onychomycosisGuideline: source({ title: "S1 Guideline onychomycosis", organization: "German Dermatological Society guideline group", type: "guideline", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/37212291/", doi: "10.1111/ddg.14988", metadataCheckedAt: "2026-09-16" }),
     dermatomycosisGuideline: source({ title: "Guidelines for the management of dermatomycosis (2019)", organization: "Japanese Dermatological Association", type: "guideline", year: 2020, version: "2019 guideline", url: "https://pubmed.ncbi.nlm.nih.gov/32978814/", doi: "10.1111/1346-8138.15618", metadataCheckedAt: "2026-09-16" }),
@@ -192,9 +192,18 @@
         redFlags: ["Persistent thickening", "Tenderness", "Rapid change", "Concern for invasion"],
         referral: [{ type: "biopsy-assessment", indication: "Uncertain diagnosis or suspected invasive disease." }],
         patientCounseling: ["Use consistent sun protection and report persistent or changing lesions."],
+        evidenceMap: {
+          presentation: ["https://dermnetnz.org/topics/actinic-keratosis"],
+          dermoscopy: ["https://dermnetnz.org/topics/actinic-keratosis"],
+          diagnostics: ["https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"],
+          differentials: ["https://dermnetnz.org/topics/actinic-keratosis"],
+          treatment: ["https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"],
+          followUp: ["https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"],
+          redFlags: ["https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"]
+        },
         sourceUrls: ["https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis", "https://dermnetnz.org/topics/actinic-keratosis"]
       }),
-      references: [refs.aadAk, refs.whoIcd10, refs.whoSkin, dermNet("Actinic keratosis", "actinic-keratosis", "2026-09-15")]
+      references: [refs.aadAk, refs.whoIcd10, refs.whoSkin, dermNet("Actinic keratosis", "actinic-keratosis", "2026-09-20")]
     }),
     record({
       id: "actinic-cheilitis", name: "Actinic Cheilitis", alternative: "Solar cheilitis", category: "premalignant", subcategory: "premalignant-keratinocytic",
@@ -264,9 +273,18 @@
           histologicSubtype: "Document the final pathology subtype.",
           recurrenceMetastasis: "Follow-up includes recurrence surveillance; metastatic potential is very low but locally invasive growth can be destructive."
         },
-        sourceUrls: ["https://www.aad.org/member/clinical-quality/guidelines/bcc"]
+        evidenceMap: {
+          presentation: ["https://dermnetnz.org/topics/basal-cell-carcinoma"],
+          dermoscopy: ["https://dermnetnz.org/topics/basal-cell-carcinoma"],
+          diagnostics: ["https://www.aad.org/member/clinical-quality/guidelines/bcc"],
+          differentials: ["https://dermnetnz.org/topics/basal-cell-carcinoma"],
+          treatment: ["https://www.aad.org/member/clinical-quality/guidelines/bcc"],
+          followUp: ["https://www.aad.org/member/clinical-quality/guidelines/bcc"],
+          oncology: ["https://www.aad.org/member/clinical-quality/guidelines/bcc"]
+        },
+        sourceUrls: ["https://www.aad.org/member/clinical-quality/guidelines/bcc", "https://dermnetnz.org/topics/basal-cell-carcinoma"]
       }),
-      references: [refs.aadBcc, refs.whoIcd10, refs.icdo32, refs.whoSkin]
+      references: [refs.aadBcc, refs.whoIcd10, refs.icdo32, refs.whoSkin, dermNet("Basal cell carcinoma", "basal-cell-carcinoma", "2026-09-20")]
     }),
     record({
       id: "cutaneous-squamous-cell-carcinoma", name: "Cutaneous Squamous Cell Carcinoma", alternative: "cSCC", category: "keratinocytic", subcategory: "keratinocytic-carcinoma",
@@ -353,6 +371,16 @@
           sentinelNode: "Nodal assessment depends on tumor stage and current specialist guidance.",
           systemicTherapyReferral: "Systemic treatment decisions are stage-dependent and multidisciplinary.",
           recurrenceMetastasis: "Surveillance intensity is stage- and risk-dependent."
+        },
+        evidenceMap: {
+          presentation: ["https://pubmed.ncbi.nlm.nih.gov/39700658/"],
+          dermoscopy: ["https://pubmed.ncbi.nlm.nih.gov/39700658/"],
+          diagnostics: ["https://pubmed.ncbi.nlm.nih.gov/39700658/"],
+          differentials: ["https://pubmed.ncbi.nlm.nih.gov/39700658/"],
+          treatment: ["https://pubmed.ncbi.nlm.nih.gov/39709737/"],
+          followUp: ["https://pubmed.ncbi.nlm.nih.gov/39709737/", "https://www.cancer.gov/types/skin/hp/melanoma-treatment-pdq"],
+          redFlags: ["https://pubmed.ncbi.nlm.nih.gov/39700658/"],
+          oncology: ["https://pubmed.ncbi.nlm.nih.gov/39709737/", "https://www.cancer.gov/types/skin/hp/melanoma-treatment-pdq"]
         },
         sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/39700658/", "https://pubmed.ncbi.nlm.nih.gov/39709737/", "https://www.cancer.gov/types/skin/hp/melanoma-treatment-pdq"]
       }),
@@ -601,9 +629,18 @@
           { type: "systemic-therapy-assessment", indication: "Inadequately controlled moderate-to-severe disease." }
         ],
         patientCounseling: ["Use moisturizers regularly and avoid confirmed aggravating exposures."],
+        evidenceMap: {
+          presentation: ["https://dermnetnz.org/topics/atopic-dermatitis"],
+          dermoscopy: ["https://dermnetnz.org/topics/atopic-dermatitis"],
+          diagnostics: ["https://dermnetnz.org/topics/atopic-dermatitis"],
+          differentials: ["https://dermnetnz.org/topics/atopic-dermatitis"],
+          treatment: ["https://pubmed.ncbi.nlm.nih.gov/36641009/", "https://pubmed.ncbi.nlm.nih.gov/37943240/"],
+          followUp: ["https://pubmed.ncbi.nlm.nih.gov/36641009/", "https://pubmed.ncbi.nlm.nih.gov/37943240/"],
+          redFlags: ["https://dermnetnz.org/topics/atopic-dermatitis"]
+        },
         sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/36641009/", "https://pubmed.ncbi.nlm.nih.gov/37943240/", "https://dermnetnz.org/topics/atopic-dermatitis"]
       }),
-      references: [refs.aadAtopicTopical, refs.aadAtopicSystemic, refs.whoIcd10, dermNet("Atopic dermatitis", "atopic-dermatitis", "2026-09-16")]
+      references: [refs.aadAtopicTopical, refs.aadAtopicSystemic, refs.whoIcd10, dermNet("Atopic dermatitis", "atopic-dermatitis", "2026-09-20")]
     }),
     record({
       id: "contact-dermatitis", name: "Contact Dermatitis", alternative: "Contact eczema; allergic contact dermatitis; irritant contact dermatitis", category: "inflammatory-eczematous", subcategory: "eczematous-dermatitis",
@@ -666,9 +703,18 @@
         followUp: { strategy: "risk-adapted", text: "Monitor skin and nail activity, treatment safety, quality-of-life impact, inflammatory joint symptoms and relevant comorbidities." },
         redFlags: ["Inflammatory joint symptoms", "High-impact or extensive disease", "Atypical or treatment-resistant plaques"],
         referral: [{ type: "systemic-therapy-assessment", indication: "Extensive, high-impact or inadequately controlled disease." }],
+        evidenceMap: {
+          presentation: ["https://dermnetnz.org/topics/psoriasis"],
+          dermoscopy: ["https://dermnetnz.org/topics/psoriasis"],
+          diagnostics: ["https://www.aad.org/member/clinical-quality/guidelines/psoriasis"],
+          differentials: ["https://dermnetnz.org/topics/psoriasis"],
+          treatment: ["https://www.guidelines.edf.one/guidelines/psoriasis-guideline", "https://www.aad.org/member/clinical-quality/guidelines/psoriasis"],
+          followUp: ["https://www.guidelines.edf.one/guidelines/psoriasis-guideline"],
+          redFlags: ["https://www.guidelines.edf.one/guidelines/psoriasis-guideline"]
+        },
         sourceUrls: ["https://www.guidelines.edf.one/guidelines/psoriasis-guideline", "https://www.aad.org/member/clinical-quality/guidelines/psoriasis", "https://dermnetnz.org/topics/psoriasis"]
       }),
-      references: [refs.euroGuidermPsoriasis, refs.aadPsoriasis, refs.whoIcd10, dermNet("Psoriasis", "psoriasis", "2026-09-16")]
+      references: [refs.euroGuidermPsoriasis, refs.aadPsoriasis, refs.whoIcd10, dermNet("Psoriasis", "psoriasis", "2026-09-20")]
     }),
     record({
       id: "acne-vulgaris", name: "Acne Vulgaris", alternative: "Common acne; acne", category: "acneiform-sebaceous", subcategory: "acneiform-disorder",
@@ -710,9 +756,18 @@
         followUp: { strategy: "reassessment-after-treatment", text: "Reassess response, tolerability, adherence, scarring risk, pigmentary sequelae and psychosocial impact." },
         redFlags: ["Scarring", "Severe nodular disease", "Substantial psychosocial burden", "Failure of standard topical or oral therapy"],
         referral: [{ type: "systemic-therapy-assessment", indication: "Severe, scarring or insufficiently controlled acne." }],
+        evidenceMap: {
+          presentation: ["https://dermnetnz.org/topics/acne-vulgaris"],
+          dermoscopy: ["https://dermnetnz.org/topics/acne-vulgaris"],
+          diagnostics: ["https://pubmed.ncbi.nlm.nih.gov/38300170/"],
+          differentials: ["https://dermnetnz.org/topics/acne-vulgaris"],
+          treatment: ["https://pubmed.ncbi.nlm.nih.gov/38300170/"],
+          followUp: ["https://pubmed.ncbi.nlm.nih.gov/38300170/"],
+          redFlags: ["https://pubmed.ncbi.nlm.nih.gov/38300170/"]
+        },
         sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/38300170/", "https://dermnetnz.org/topics/acne-vulgaris"]
       }),
-      references: [refs.aadAcne, refs.whoIcd10, dermNet("Acne vulgaris", "acne-vulgaris", "2026-09-16")]
+      references: [refs.aadAcne, refs.whoIcd10, dermNet("Acne vulgaris", "acne-vulgaris", "2026-09-20")]
     }),
     record({
       id: "rosacea", name: "Rosacea", alternative: "Facial rosacea; acne rosacea (historical term)", category: "acneiform-sebaceous", subcategory: "rosacea",
@@ -759,9 +814,18 @@
           { type: "dermatology", indication: "Atypical, unilateral or treatment-resistant disease." }
         ],
         patientCounseling: ["Use gentle skin care and photoprotection; manage only individually confirmed triggers."],
+        evidenceMap: {
+          presentation: ["https://pubmed.ncbi.nlm.nih.gov/35929658/", "https://dermnetnz.org/topics/rosacea"],
+          dermoscopy: ["https://dermnetnz.org/topics/rosacea"],
+          diagnostics: ["https://pubmed.ncbi.nlm.nih.gov/35929658/"],
+          differentials: ["https://dermnetnz.org/topics/rosacea"],
+          treatment: ["https://pubmed.ncbi.nlm.nih.gov/35929658/"],
+          followUp: ["https://pubmed.ncbi.nlm.nih.gov/35929658/"],
+          redFlags: ["https://pubmed.ncbi.nlm.nih.gov/35929658/"]
+        },
         sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/35929658/", "https://dermnetnz.org/topics/rosacea"]
       }),
-      references: [refs.rosaceaGuideline, refs.whoIcd10, dermNet("Rosacea", "rosacea", "2026-09-16")]
+      references: [refs.rosaceaGuideline, refs.whoIcd10, dermNet("Rosacea", "rosacea", "2026-09-20")]
     }),
     record({
       id: "chronic-urticaria", name: "Chronic Urticaria", alternative: "Chronic spontaneous urticaria; CSU; chronic inducible urticaria", category: "inflammatory-eczematous", subcategory: "urticarial-disorder",
@@ -872,9 +936,18 @@
         redFlags: ["Extensive disease", "Immunosuppression", "Follicular involvement", "Treatment failure", "Possible antifungal resistance"],
         referral: [{ type: "dermatology", indication: "Extensive, refractory, diagnostically uncertain or suspected resistant infection." }],
         patientCounseling: ["Avoid corticosteroid monotherapy.", "Reduce transmission through hygiene and management of potential contacts or sources."],
+        evidenceMap: {
+          presentation: ["https://dermnetnz.org/topics/tinea-corporis"],
+          dermoscopy: ["https://dermnetnz.org/topics/tinea-corporis"],
+          diagnostics: ["https://www.cdc.gov/ringworm/hcp/clinical-overview/"],
+          differentials: ["https://dermnetnz.org/topics/tinea-corporis"],
+          treatment: ["https://www.cdc.gov/ringworm/hcp/clinical-overview/"],
+          followUp: ["https://www.cdc.gov/ringworm/hcp/clinical-overview/"],
+          redFlags: ["https://www.cdc.gov/ringworm/hcp/clinical-overview/"]
+        },
         sourceUrls: ["https://www.cdc.gov/ringworm/hcp/clinical-overview/", "https://dermnetnz.org/topics/tinea-corporis"]
       }),
-      references: [refs.cdcRingworm, refs.whoIcd10, dermNet("Tinea corporis", "tinea-corporis", "2026-09-16")]
+      references: [refs.cdcRingworm, refs.whoIcd10, dermNet("Tinea corporis", "tinea-corporis", "2026-09-20")]
     }),
     record({
       id: "tinea-cruris", name: "Tinea Cruris", alternative: "Jock itch; groin ringworm", category: "infectious-infestation", subcategory: "dermatophyte-infection",

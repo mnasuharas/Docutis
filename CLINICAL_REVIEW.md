@@ -42,3 +42,9 @@ The same controlled states and physician metadata apply to the structured protoc
 Generate a read-only protocol fingerprint with `node scripts/clinical-review.js --follow-up cutaneous-melanoma`. A protocol fingerprint excludes `sourceMetadataCheckedAt`, review metadata, presentation-only disease, jurisdiction, group and period labels, and non-clinical array ordering; it includes group/period identities, clinical descriptions, timing status and all other clinically meaningful protocol and guideline fields. After a genuine physician attestation, record the matching hash in that protocol only. A new guideline version or a clinical edit requires reassessment and either a new attestation/hash or a reset to review-required. `node scripts/follow-up.js` validates structure but never performs clinical review.
 
 For Goal 5, use the empty checkboxes and row-level matrices in `GOAL5_CLINICAL_REVIEW.md`. That worksheet does not attest review by itself; repository review evidence and matching protocol metadata are still required.
+
+## Goal 8 structured pilot review
+
+Use `GOAL8_CLINICAL_REVIEW_BATCH.md` for the first eight structured records. Review the legacy prose, every structured domain, section-level evidence map, linked schematic and quiz question together. Confirm that evidence mapping is not broader than the attached source, that the visual is clinically conservative and accessible, and that the quiz has one defensible best answer.
+
+The worksheet is deliberately unsigned and every checkbox starts empty. Completing automated tests, generating a fingerprint, reviewing a source URL or approving a pull request does not complete physician attestation. Visual and quiz items retain their own `clinician review required` states even if the associated disease record is later reviewed.

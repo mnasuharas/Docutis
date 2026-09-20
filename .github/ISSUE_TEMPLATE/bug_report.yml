@@ -1,0 +1,35 @@
+name: Bug report
+description: Report a reproducible technical problem in Docutis.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not include patient data, credentials or other sensitive information."
+  - type: textarea
+    id: description
+    attributes:
+      label: Problem
+      description: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      placeholder: "1. Open…\n2. Select…\n3. Observe…"
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Page or condition URL
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and device
+  - type: textarea
+    id: accessibility
+    attributes:
+      label: Accessibility impact
+      description: Include keyboard or assistive-technology details when relevant.

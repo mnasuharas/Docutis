@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">Schematic plaque psoriasis morphology and typical distribution</title>
+  <desc id="desc">A labelled body outline marks scalp, elbows, knees and lumbosacral skin, alongside a close-up of a well-demarcated scaly plaque.</desc>
+  <rect width="800" height="500" fill="#f6faf8"/><text x="40" y="52" font-family="system-ui" font-size="28" font-weight="700" fill="#18352d">Plaque psoriasis · schematic</text>
+  <g transform="translate(70 80)" stroke="#18352d" stroke-width="5" fill="#f0d3c5"><circle cx="155" cy="55" r="38"/><path d="M115 103Q155 85 195 103L215 235L188 380H122L95 235Z"/><path d="M103 125L55 255L85 270L130 175M207 125L255 255L225 270L180 175"/><path d="M135 375L120 460M175 375L190 460"/></g>
+  <g fill="#9e4550" stroke="#18352d" stroke-width="3"><ellipse cx="225" cy="105" rx="35" ry="13"/><ellipse cx="153" cy="268" rx="24" ry="14"/><ellipse cx="297" cy="268" rx="24" ry="14"/><ellipse cx="195" cy="390" rx="23" ry="14"/><ellipse cx="255" cy="390" rx="23" ry="14"/><rect x="196" y="300" width="58" height="24" rx="10"/></g>
+  <g font-family="system-ui" fill="#18352d" font-size="18"><text x="325" y="112" font-weight="700">Typical sites</text><text x="325" y="143">Scalp · extensor elbows · knees · lumbosacral skin</text><text x="325" y="175">Nails, flexures, palms, soles and genital skin may differ.</text></g>
+  <g transform="translate(410 225)"><rect width="330" height="170" rx="18" fill="#f0d3c5" stroke="#18352d" stroke-width="4"/><path d="M45 100Q58 35 140 48T280 72Q272 132 190 127T45 100Z" fill="#a84f59" stroke="#18352d" stroke-width="5"/><g stroke="#fff" stroke-width="5"><path d="M70 77l35-10M100 105l45-17M146 72l52 10M180 110l50-15M225 72l28 9"/></g><text x="165" y="155" font-family="system-ui" font-size="18" text-anchor="middle" fill="#18352d">Well-demarcated plaque + surface scale</text></g>
+  <text x="40" y="475" font-family="system-ui" font-size="18" fill="#29443c">Educational schematic · clinician review required · not a diagnostic substitute</text>
+</svg>

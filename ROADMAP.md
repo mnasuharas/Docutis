@@ -6,6 +6,7 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Implemented
 
+- Goal 8 clinical review readiness and visual learning pilot: public evidence-status counts, eight section-level evidence maps, four original governed SVG schematics, an eight-question accessible quiz, URL-addressable condition details, a physician review batch and repository community-health files. All clinical and visual content remains review-required.
 - Goal 7 clinical content architecture: optional versioned profiles, bounded controlled vocabularies, structured presentation/diagnostics/differentials/treatment/follow-up, medication-regimen support, source-reference validation, legacy-compatible rendering and an eight-record pilot spanning oncology, inflammatory, acneiform and infectious disease. Production dosing remains intentionally empty until explicit regimen evidence is reviewed.
 - Goal 7 data-quality audit and validator: quantitative coverage for all 50 records, malformed-value tests, source attachment checks and fingerprint coverage for structured clinical changes.
 - Goal 6 clinical UX and visual foundation: normalized semantic color and spacing tokens, compact professional navigation, visible library coverage, improved search and filter affordances, denser cards, scannable two-column condition details, sticky section navigation, progressive source disclosure, four responsive breakpoints and reduced-motion support.
@@ -36,11 +37,10 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 - Add a second jurisdiction only after its source matrix is independently researched and reviewed; do not expose an empty jurisdiction selector.
 - Add automated browser tests for search, category filters, card/detail behavior, Escape/Close focus restoration, and external links.
 - Test with representative screen readers and document results.
-- Consider a persistent link from details back to results.
-- Decide whether URL-addressable condition details are desirable without compromising the no-build static architecture.
+- Evaluate a persistent visual link from details back to results beyond the current Close/Escape and browser-history behavior.
 - Add a lightweight broken-link check with respectful rate limiting and clear handling of redirects or bot-blocked sites.
 - Add cross-browser checks for current Chrome, Firefox, Safari, and Edge.
-- Source and clinically review a first 3–5 item media pilot; prefer original diagrams or clearly reusable open-license material and do not relax the Goal 6 validator to force inclusion.
+- Obtain physician review of the four-item original schematic pilot and eight quiz questions; do not infer visual review from a reviewed disease record.
 - Continue evidence-led `clinicalProfile` migration, prioritizing cSCC/SCC in situ/keratoacanthoma, remaining melanoma subtypes and conditions where diagnostics or escalation materially affect safety. Do not bulk-fill optional fields.
 - Add the first production medication regimen only after formulation, frequency, duration, major precautions and source scope can be verified together.
 
@@ -144,12 +144,12 @@ The exact boundary between inflammatory, eczematous, and papulosquamous disease�
 
 ## Visual-content policy and future needs
 
-The optional media data model, independent review fingerprint, renderer, load-failure fallback and automated validator are implemented. See [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md). No patient photographs or third-party clinical images should be added without documented permission, provenance, consent where applicable, and a license compatible with the repository. Future work may evaluate:
+The optional media data model, independent review fingerprint, renderer, load-failure fallback and automated validator are implemented. Goal 8 adds four original SVG learning schematics; no patient photographs or third-party clinical images are included. See [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md). Future work may evaluate:
 
-- Original schematic lesion morphology and anatomy illustrations
+- Clinician-reviewed revisions or additional original schematic lesion morphology and anatomy illustrations
 - Consent- and license-tracked clinical photography
 - Accessible alt-text standards and nonvisual equivalents
-- A first 3–5 item pilot after source, license, attribution, accessibility and clinical review are documented
+- Whether any future clinical-photography pilot is justified after source, license, attribution, consent, accessibility and clinical review are documented
 
 ## Release direction
 
