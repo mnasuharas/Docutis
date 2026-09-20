@@ -440,7 +440,7 @@
       review.reviewerRole === "physician" && review.reviewerSpecialty && review.reviewedAt;
     return reviewed
       ? `Media review: Reviewed by a physician in ${review.reviewerSpecialty} on ${review.reviewedAt}`
-      : "Media review: Clinician review required";
+      : "Media review: Clinical review pending";
   }
 
   function addMediaSection(parent, disease) {
@@ -576,35 +576,37 @@
     appendTextElement(headingGroup, "p", `Alternative name: ${disease.alternative}`, "detail-alternative");
     const meta = document.createElement("div");
     meta.className = "detail-meta";
-    appendTextElement(meta, "span", categoryTitle(disease.category), "icd");
-    appendTextElement(meta, "span", subcategoryTitle(disease.subcategory), "subcategory-label");
+    appendTextElement(meta, "span", categoryTitle(disease.category), "detail-meta-item detail-category");
+    appendTextElement(meta, "span", subcategoryTitle(disease.subcategory), "detail-meta-item detail-content-type");
     const publicReview = reviewUi?.asset("disease", disease.id);
     const review = disease.clinicalReview;
     const reviewed = publicReview ? publicReview.status === "clinician reviewed" : disease.reviewStatus === "clinician reviewed" && review &&
       review.reviewerRole === "physician" && typeof review.reviewerSpecialty === "string" &&
       review.reviewerSpecialty.trim() && /^\d{4}-\d{2}-\d{2}$/.test(review.reviewedAt) &&
       /^sha256-v1:[0-9a-f]{64}$/.test(review.reviewedContentHash);
-    appendTextElement(meta, "span", publicReview
-      ? `Clinical review: ${reviewUi.statusLabel(publicReview.status)}`
-      : reviewed ? `Clinical review: Reviewed by a physician in ${review.reviewerSpecialty}` : "Clinical review: Required", "review-status");
-    if (reviewed && review) appendTextElement(meta, "span", `Reviewed: ${review.reviewedAt}`);
+    const statusText = publicReview
+      ? reviewUi.statusLabel(publicReview.status)
+      : reviewed ? `Reviewed by a physician in ${review.reviewerSpecialty}` : "Clinical review pending";
+    const statusBadge = appendTextElement(meta, "span", statusText, "detail-meta-item review-status");
+    statusBadge.setAttribute("aria-label", `Clinical review status: ${statusText}`);
+    if (reviewed && review) appendTextElement(meta, "span", `Reviewed: ${review.reviewedAt}`, "detail-meta-item review-date");
     headingGroup.appendChild(meta);
     header.appendChild(headingGroup);
-    const closeButton = appendTextElement(header, "button", "Close", "close-button");
+    const closeButton = appendTextElement(header, "button", "Close details", "close-button");
     closeButton.type = "button";
     closeButton.setAttribute("aria-label", `Close details for ${disease.name}`);
     closeButton.addEventListener("click", closeDiseaseDetails);
     detailsElement.appendChild(header);
     appendTextElement(detailsElement, "p", reviewed
       ? "Physician review applies to this content version. It does not guarantee correctness or replace professional medical judgment."
-      : "This record has not completed human physician review. Automated tests and source metadata checks do not constitute clinical review.", "review-explanation");
+      : "This article has not yet completed human physician review.", "review-explanation");
     if (reviewUi && publicReview) reviewUi.appendReviewPanel(detailsElement, "disease", disease.id, "Article review status");
 
     if (disease.clinicalProfile) {
       const workflow = document.createElement("div");
       workflow.className = "review-workflow";
       workflow.setAttribute("aria-label", "Clinical content workflow status");
-      ["Structured content available", `${disease.references.length} sources attached`, "Automated schema validation included", reviewed ? "Clinician reviewed" : "Clinician review required"]
+      ["Structured content available", `${disease.references.length} sources attached`, "Automated schema validation included"]
         .forEach(value => appendTextElement(workflow, "span", value));
       detailsElement.appendChild(workflow);
     }

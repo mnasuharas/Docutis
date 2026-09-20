@@ -195,12 +195,19 @@ test("Goal 9 exposes independent public review status without fabricated approva
   assert.ok(reviewStatus.assets.every(item => item.status === "review required"));
   assert.equal(reviewStatus.latestValidHumanReviewDate, null);
   assert.match(reviewUi, /No valid human approval is bound to this exact content version/);
-  assert.match(reviewUi, /Public review history/);
+  assert.match(reviewUi, /Review details/);
+  assert.match(reviewUi, /append\(parent, "details"/);
+  assert.match(reviewUi, /append\(panel, "summary", "Review details"/);
+  assert.match(reviewUi, /Content integrity ID/);
+  assert.match(reviewUi, /View technical review data \(JSON\)/);
+  assert.match(reviewUi, /No physician review has been recorded yet/);
+  assert.doesNotMatch(reviewUi, /Awaiting review/);
   assert.match(app, /Partially reviewed records/);
   assert.match(app, /Invalidated or outdated reviews/);
   assert.match(goal9Review, /Required attestation/);
   assert.match(goal9Review, /No clinical wording change has been applied/);
   assert.match(css, /\.public-review-panel\s*{/);
+  assert.match(css, /\.public-review-summary:focus-visible\s*{/);
 });
 
 test("repository health files and contribution templates are present without invented identities", () => {

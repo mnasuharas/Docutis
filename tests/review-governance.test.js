@@ -36,6 +36,7 @@ test("public manifest covers 23 independent Goal 9 review units with no implied 
   assert.equal(status.assets.length, 23);
   assert.deepEqual(Object.fromEntries(["disease", "quiz", "visual", "follow_up"].map(type => [type, status.assets.filter(item => item.assetType === type).length])), { disease: 8, quiz: 8, visual: 4, follow_up: 3 });
   assert.ok(status.assets.every(item => item.status === "review required" && item.history.length === 0));
+  assert.ok(status.assets.every(item => /^sha256-v1:[0-9a-f]{64}$/.test(item.currentFingerprint)), "machine-readable data preserves every full fingerprint");
   assert.equal(status.latestValidHumanReviewDate, null);
   assert.deepEqual(status.reviewers, []);
   assert.deepEqual(status.decisions, []);

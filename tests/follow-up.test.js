@@ -261,7 +261,7 @@ test("follow-up UI safely distinguishes absent recommendations and review-requir
   const elements = uiHarness();
   elements.followUpDisease.value = "basal-cell-carcinoma-de"; elements.followUpDisease.dispatch("change");
   assert.match(textOf(elements.followUpResult), /Not specified in the guideline/);
-  assert.match(textOf(elements.followUpResult), /Follow-up protocol review status Clinician review required/);
+  assert.match(textOf(elements.followUpResult), /Follow-up protocol review status[\s\S]*Clinical review pending/);
   assert.match(textOf(elements.followUpResult), /Automated tests and source checks are not clinical review/);
   assert.match(textOf(elements.followUpResult), /sha256-v1:[0-9a-f]+/);
   assert.doesNotMatch(textOf(elements.followUpResult), /Reviewed:/);
@@ -298,6 +298,6 @@ test("follow-up UI does not let legacy inline metadata bypass the public decisio
     item.clinicalReview = { reviewedAt: "2026-09-16", reviewerRole: "physician", reviewerSpecialty: "dermatology", reviewedContentHash: followUpFingerprint(item) };
     return data;
   });
-  assert.match(textOf(elements.followUpResult), /Follow-up protocol review status Clinician review required/);
+  assert.match(textOf(elements.followUpResult), /Follow-up protocol review status[\s\S]*Clinical review pending/);
   assert.doesNotMatch(textOf(elements.followUpResult), /Reviewed by a physician in dermatology|Reviewed: 2026-09-16/);
 });
