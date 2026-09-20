@@ -7,6 +7,7 @@
   const periodSelect = document.getElementById("followUpPeriod");
   const result = document.getElementById("followUpResult");
   const status = document.getElementById("followUpStatus");
+  const reviewUi = window.DOCUTIS_REVIEW_UI || null;
   const recommendationCharacters = Object.freeze({
     soll: "strong recommendation",
     sollte: "recommendation",
@@ -84,6 +85,11 @@
   }
 
   function renderReview(protocol, parent) {
+    const publicReview = reviewUi?.asset("follow_up", protocol.id);
+    if (publicReview) {
+      reviewUi.appendReviewPanel(parent, "follow_up", protocol.id, "Follow-up protocol review status");
+      return;
+    }
     const review = protocol.clinicalReview;
     const reviewed = protocol.reviewStatus === "clinician reviewed" && review &&
       review.reviewerRole === "physician" && typeof review.reviewerSpecialty === "string" &&

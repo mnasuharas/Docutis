@@ -22,6 +22,9 @@ const qualityAudit = fs.readFileSync(path.join(root, "CONTENT_QUALITY_AUDIT.md")
 const followUpApp = fs.readFileSync(path.join(root, "followup-app.js"), "utf8");
 const workflow = fs.readFileSync(path.join(root, ".github", "workflows", "validate.yml"), "utf8");
 const goal8Review = fs.readFileSync(path.join(root, "GOAL8_CLINICAL_REVIEW_BATCH.md"), "utf8");
+const goal9Review = fs.readFileSync(path.join(root, "GOAL9_HUMAN_REVIEW_GATE.md"), "utf8");
+const reviewUi = fs.readFileSync(path.join(root, "review-ui.js"), "utf8");
+const reviewStatus = JSON.parse(fs.readFileSync(path.join(root, "review-status.json"), "utf8"));
 
 function cssProperty(selector, property) {
   const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -49,6 +52,9 @@ test("static page keeps load order, disclaimer and accessible controls", () => {
   assert.ok(html.indexOf('src="media-data.js"') < html.indexOf('src="app.js"'));
   assert.ok(html.indexOf('src="followup-data.js"') < html.indexOf('src="followup-app.js"'));
   assert.ok(html.indexOf('src="quiz-data.js"') < html.indexOf('src="quiz-app.js"'));
+  assert.ok(html.indexOf('src="review-status.js"') < html.indexOf('src="review-ui.js"'));
+  assert.ok(html.indexOf('src="review-ui.js"') < html.indexOf('src="app.js"'));
+  assert.match(html, /href="review-status\.json"/);
   assert.match(html, /id="followUpDisease"/);
   assert.match(html, /id="followUpGroup"/);
   assert.match(html, /id="followUpPeriod"/);
@@ -103,7 +109,7 @@ test("CI validates pull requests, main pushes and manual runs with read-only per
   assert.match(workflow, /push:\s*\n\s+branches:\s*\[main\]/);
   assert.match(workflow, /workflow_dispatch:/);
   assert.match(workflow, /permissions:\s*\n\s+contents:\s*read/);
-  assert.doesNotMatch(workflow, /\bwrite\b/);
+  assert.doesNotMatch(workflow, /(?:contents|pull-requests|issues|actions):\s*write/);
   assert.doesNotMatch(workflow, /secrets\./);
   assert.match(workflow, /timeout-minutes:\s*10/);
   assert.match(workflow, /actions\/checkout@v7/);
@@ -111,7 +117,7 @@ test("CI validates pull requests, main pushes and manual runs with read-only per
   assert.match(workflow, /actions\/setup-node@v7/);
   assert.match(workflow, /node-version:\s*"24"/);
   assert.match(workflow, /package-manager-cache:\s*false/);
-  for (const command of ["node --check data.js", "node --check clinical-schema.js", "node --check scripts/clinical-schema.js", "node scripts/clinical-schema.js", "node --check app.js", "node --check media-data.js", "node --check scripts/media.js", "node scripts/media.js", "node --check quiz-data.js", "node --check quiz-app.js", "node --check scripts/quiz.js", "node scripts/quiz.js", "node --test tests/*.test.js", "git diff --check"]) {
+  for (const command of ["node --check data.js", "node --check clinical-schema.js", "node --check scripts/clinical-schema.js", "node scripts/clinical-schema.js", "node --check app.js", "node --check media-data.js", "node --check scripts/media.js", "node scripts/media.js", "node --check quiz-data.js", "node --check quiz-app.js", "node --check scripts/quiz.js", "node scripts/quiz.js", "node --check review-data.js", "node --check review-status.js", "node --check review-ui.js", "node --check scripts/review-governance.js", "node scripts/review-governance.js", "node --test tests/*.test.js", "git diff --check"]) {
     assert.ok(workflow.includes(command), `workflow is missing ${command}`);
   }
   for (const command of ["node --check followup-data.js", "node --check followup-app.js", "node scripts/clinical-review.js --validate", "node scripts/follow-up.js"]) {
@@ -182,6 +188,19 @@ test("Goal 8 exposes review transparency, quiz and deep-link architecture", () =
     assert.ok(goal8Review.includes(`node scripts/clinical-review.js ${id}`), `missing review command for ${id}`);
   }
   assert.equal((goal8Review.match(/- \[ \] Physician reviewed/g) || []).length, 8);
+});
+
+test("Goal 9 exposes independent public review status without fabricated approval", () => {
+  assert.equal(reviewStatus.assets.length, 23);
+  assert.ok(reviewStatus.assets.every(item => item.status === "review required"));
+  assert.equal(reviewStatus.latestValidHumanReviewDate, null);
+  assert.match(reviewUi, /No valid human approval is bound to this exact content version/);
+  assert.match(reviewUi, /Public review history/);
+  assert.match(app, /Partially reviewed records/);
+  assert.match(app, /Invalidated or outdated reviews/);
+  assert.match(goal9Review, /Required attestation/);
+  assert.match(goal9Review, /No clinical wording change has been applied/);
+  assert.match(css, /\.public-review-panel\s*{/);
 });
 
 test("repository health files and contribution templates are present without invented identities", () => {

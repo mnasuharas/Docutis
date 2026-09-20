@@ -19,6 +19,8 @@ You can contribute by:
 
 ## Medical Content
 
+Human clinical-review contributions use the consolidated workflow in `REVIEW_SCHEMA.md` and `GOAL9_HUMAN_REVIEW_GATE.md`. Do not mark content reviewed in an ordinary content PR. Reviewer identity, public-display consent, exact role, decisions, attestation and final fingerprints must be supplied by the human reviewer. AI assistance must be disclosed and is limited to preparation, evidence checking, fingerprinting and implementing exact human-approved decisions.
+
 Because Docutis contains medical information, accuracy and appropriate sourcing are especially important.
 
 Medical contributions should:
@@ -139,7 +141,7 @@ Before submitting a change:
 2. Test the disease search.
 3. Check that condition details display correctly.
 4. Make sure existing functionality has not been unintentionally broken.
-5. Run `node --check data.js`, `node --check clinical-schema.js`, `node --check app.js`, `node --check media-data.js`, `node --check scripts/media.js`, `node --check scripts/clinical-schema.js`, `node scripts/media.js`, `node scripts/clinical-schema.js`, `node --test tests/*.test.js`, and `git diff --check` for any content, data-structure, media, or interface change.
+5. Run `node --check data.js`, `node --check clinical-schema.js`, `node --check app.js`, `node --check media-data.js`, `node --check scripts/media.js`, `node --check scripts/clinical-schema.js`, `node scripts/media.js`, `node scripts/clinical-schema.js`, `node --test tests/*.test.js`, and `git diff --check` for any content, data-structure, media, or interface change. Goal 9 review work must also run `node --check review-data.js`, `node --check review-status.js`, `node --check review-ui.js`, `node --check scripts/review-governance.js`, `node scripts/review-governance.js --write`, and `node scripts/review-batch.js --write`, then inspect the generated diff.
    For follow-up changes also run `node --check followup-data.js`, `node --check followup-app.js`, `node scripts/follow-up.js`, and `node scripts/clinical-review.js --validate`.
 6. Test category filters and keyboard-only card/detail interaction at desktop and mobile widths.
 

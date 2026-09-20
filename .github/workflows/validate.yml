@@ -43,6 +43,11 @@ jobs:
           node --check quiz-data.js
           node --check quiz-app.js
           node --check scripts/quiz.js
+          node --check review-data.js
+          node --check review-status.js
+          node --check review-ui.js
+          node --check scripts/review-governance.js
+          node --check scripts/review-batch.js
 
       - name: Check follow-up module syntax
         run: |
@@ -58,6 +63,14 @@ jobs:
           node scripts/follow-up.js
           node scripts/media.js
           node scripts/quiz.js
+          node scripts/review-governance.js
+
+      - name: Verify generated public review artifacts
+        shell: bash
+        run: |
+          node scripts/review-governance.js --write
+          node scripts/review-batch.js --write
+          git diff --exit-code -- review-status.json review-status.js GOAL9_HUMAN_REVIEW_GATE.md goal9-review-decisions.template.json
 
       - name: Run dependency-free tests
         run: node --test tests/*.test.js

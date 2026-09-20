@@ -1,5 +1,7 @@
 # Clinical review procedure
 
+Goal 9 uses the append-only public decision model documented in `REVIEW_SCHEMA.md`. The older inline `reviewStatus` and `clinicalReview` fields remain compatibility safeguards for fully reviewed record versions; partial review, changes requested, invalidation, asset-level independence and public history are represented by `review-data.js` and the generated `review-status.json`. No Goal 9 human decisions have been supplied yet.
+
 Automated schema, source metadata, DOI, coding and CI checks are distinct from human clinical review. Only a human physician can personally review a specific record version. Current state: 50 records require clinician review; 0 records are clinician reviewed.
 
 ## Review a record
@@ -48,3 +50,9 @@ For Goal 5, use the empty checkboxes and row-level matrices in `GOAL5_CLINICAL_R
 Use `GOAL8_CLINICAL_REVIEW_BATCH.md` for the first eight structured records. Review the legacy prose, every structured domain, section-level evidence map, linked schematic and quiz question together. Confirm that evidence mapping is not broader than the attached source, that the visual is clinically conservative and accessible, and that the quiz has one defensible best answer.
 
 The worksheet is deliberately unsigned and every checkbox starts empty. Completing automated tests, generating a fingerprint, reviewing a source URL or approving a pull request does not complete physician attestation. Visual and quiz items retain their own `clinician review required` states even if the associated disease record is later reviewed.
+
+## Goal 9 consolidated gate
+
+Run `node scripts/review-governance.js --write` and `node scripts/review-batch.js --write`, then use `GOAL9_HUMAN_REVIEW_GATE.md` with `goal9-review-decisions.template.json`. The packet contains 23 independent units: eight structured disease records, eight quiz questions, four original visuals and three follow-up protocols. A reviewer must decide each unit separately. The generated files contain fingerprints and current content but do not constitute attestation.
+
+After a human returns the completed package, apply only supplied or explicitly approved corrections, regenerate fingerprints, and obtain confirmation of every final corrected fingerprint. Copy only consented public identity metadata and completed decisions into `review-data.js`; never copy private contact or credential evidence. Review history is append-only. See `REVIEW_SCHEMA.md` for controlled verdicts, supersession and invalidation.

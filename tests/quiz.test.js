@@ -67,7 +67,7 @@ function quizHarness() {
   const document = { activeElement: null, createElement(tag) { return new Element(tag, document); }, getElementById(id) { return id === "quizApp" ? this.root : null; } };
   document.root = new Element("div", document);
   const context = { window: {}, document };
-  for (const file of ["data.js", "media-data.js", "quiz-data.js", "quiz-app.js"]) vm.runInNewContext(fs.readFileSync(path.join(root, file), "utf8"), context);
+  for (const file of ["data.js", "media-data.js", "quiz-data.js", "review-status.js", "review-ui.js", "quiz-app.js"]) vm.runInNewContext(fs.readFileSync(path.join(root, file), "utf8"), context);
   return { document, root: document.root, quiz: context.window.DOCUTIS_QUIZ };
 }
 
@@ -75,12 +75,13 @@ test("quiz UI announces feedback, exposes secure evidence links, scores and rest
   const harness = quizHarness();
   for (let index = 0; index < harness.quiz.questions.length; index += 1) {
     assert.match(textOf(harness.root), new RegExp(`Question ${index + 1} of 8`));
+    assert.match(textOf(harness.root), /Quiz-item review status Clinician review required/);
     const form = harness.root.querySelector("form");
     const inputs = form.querySelectorAll("input");
     inputs[harness.quiz.questions[index].correctIndex].checked = true;
     form.dispatch("submit");
     assert.match(textOf(harness.root), /Correct\./);
-    assert.match(textOf(harness.root), /Clinical review required/);
+    assert.match(textOf(harness.root), /Clinician review required/);
     const links = harness.root.querySelectorAll("a");
     assert.ok(links.some(link => /^\?condition=/.test(link.href)));
     for (const link of links.filter(link => /^https:/.test(link.href))) {

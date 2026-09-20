@@ -10,6 +10,8 @@
 
 Docutis is an open-source project that presents dermatology information in a clear, searchable and structured format.
 
+Clinical review is version-bound and independently tracked for disease records, quiz items, visual assets and follow-up protocols. The public dashboard and `review-status.json` distinguish human review from automated validation. The Goal 9 pilot infrastructure is prepared, but no human clinical-review decision has been published.
+
 The current version contains 50 condition records. It retains the malignant and precancerous collection, the first common-dermatology package, and a new infectious-dermatology package spanning bacterial, dermatophyte, other fungal, parasitic and viral disease. It is intended for physicians, medical trainees and other healthcare professionals seeking a concise educational reference.
 
 Docutis is currently in active early development. Its content, structure and technical foundations are being expanded progressively.
@@ -147,13 +149,20 @@ node --check followup-data.js
 node --check followup-app.js
 node --check quiz-data.js
 node --check quiz-app.js
+node --check review-data.js
+node --check review-status.js
+node --check review-ui.js
 node --check scripts/media.js
 node --check scripts/clinical-schema.js
+node --check scripts/review-governance.js
+node --check scripts/review-batch.js
 node scripts/follow-up.js
 node scripts/media.js
 node scripts/clinical-schema.js
 node scripts/quiz.js
 node scripts/clinical-review.js --validate
+node scripts/review-governance.js --write
+node scripts/review-batch.js --write
 node --test tests/*.test.js
 git diff --check
 ```

@@ -5,6 +5,7 @@
   const data = window.DOCUTIS_DATA;
   const media = window.DOCUTIS_MEDIA || { items: [] };
   const root = document.getElementById("quizApp");
+  const reviewUi = window.DOCUTIS_REVIEW_UI || null;
   if (!quiz || !data || !root) return;
 
   let index = 0;
@@ -65,6 +66,7 @@
     answered = false;
     const progress = element("p", `Question ${index + 1} of ${quiz.questions.length}`, "quiz-progress");
     root.appendChild(progress);
+    if (reviewUi) reviewUi.appendReviewPanel(root, "quiz", question.id, "Quiz-item review status");
     const bar = element("div", undefined, "quiz-progress-track");
     bar.setAttribute("role", "progressbar");
     bar.setAttribute("aria-valuemin", "1");
@@ -86,7 +88,8 @@
       image.height = illustration.dimensions.height;
       image.loading = "lazy";
       figure.appendChild(image);
-      figure.appendChild(element("figcaption", `${illustration.title} · Schematic · Clinician review required`));
+      const visualReview = reviewUi?.asset("visual", illustration.id);
+      figure.appendChild(element("figcaption", `${illustration.title} · Schematic · ${visualReview ? reviewUi.statusLabel(visualReview.status) : "Clinician review required"}`));
       root.appendChild(figure);
     }
 
@@ -135,7 +138,8 @@
       feedback.appendChild(conditionLink);
       feedback.appendChild(element("h4", "Supporting sources"));
       sourceLinks(feedback, question);
-      feedback.appendChild(element("p", "Clinical review required · Source attachment and automated validation do not constitute physician endorsement.", "quiz-review-state"));
+      const quizReview = reviewUi?.asset("quiz", question.id);
+      feedback.appendChild(element("p", `${quizReview ? reviewUi.statusLabel(quizReview.status) : "Clinical review required"} · Source attachment and automated validation do not constitute physician endorsement.`, "quiz-review-state"));
       check.remove();
       const next = element("button", index === quiz.questions.length - 1 ? "View score" : "Next question", "quiz-button");
       next.type = "button";

@@ -4,6 +4,13 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## Unreleased
 
+### Goal 9 — Human Clinical Review Pilot infrastructure
+
+- Add a public human-review decision schema and generated machine-readable status.
+- Add section-level review scope, independent asset states, invalidation and superseded history.
+- Add a consolidated 23-unit human-review gate and evidence-source audit.
+- Add public review panels and expanded dashboard counts without claiming any completed clinician review.
+
 ### Goal 8 — Clinical Review Readiness & Visual Learning Pilot
 
 - Add a public evidence-status dashboard with data-derived review counts.
