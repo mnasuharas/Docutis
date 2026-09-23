@@ -23,16 +23,18 @@ Major inconsistencies found:
 
 Eight representative records were migrated: Actinic Keratosis, Basal Cell Carcinoma, Cutaneous Melanoma, Atopic Dermatitis, Plaque Psoriasis, Acne Vulgaris, Rosacea and Tinea Corporis. They cover premalignant, keratinocytic, melanocytic, inflammatory, acneiform and infectious use cases. The other 42 records intentionally remain legacy-compatible until their disease-specific evidence can be reviewed safely.
 
+At pilot start, structured medication details: 0/50.
+
 Current structured coverage:
 
 - clinical profiles: 8/50;
 - morphology: 8/50;
 - localization: 5/50;
-- symptoms: 1/50;
+- symptoms: 2/50;
 - diagnostic workflow: 8/50;
 - differential objects: 8/50;
 - treatment hierarchy: 8/50;
-- structured medication details: 0/50;
+- structured medication details: 1/50;
 - follow-up strategy: 8/50;
 - red flags: 7/50;
 - legacy-compatible records: 42/50.
@@ -45,7 +47,7 @@ Current structured coverage:
 
 | Record | Definition | Morphology | Localization | Diagnostics | Differentials | Treatment | Follow-up | Sources |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Actinic Keratosis | Yes | Yes | Yes | Yes | Yes | Yes | Yes | 4 |
+| Actinic Keratosis | Yes | Yes | Yes | Yes | Yes | Yes | Yes | 14 |
 | Actinic Cheilitis | Yes | Legacy | Legacy | Legacy | Legacy | Legacy | Legacy | 3 |
 | Porokeratosis | Yes | Legacy | Legacy | Legacy | Legacy | Legacy | Legacy | 4 |
 | Basal Cell Carcinoma | Yes | Yes | Legacy | Yes | Yes | Yes | Yes | 5 |
@@ -104,7 +106,7 @@ Pilot migration relied on already attached authoritative references whose identi
 
 1. Migrate cSCC, SCC in situ and keratoacanthoma together so biopsy, risk and surgical concepts stay consistent.
 2. Structure the remaining melanoma subtypes without duplicating the dedicated follow-up protocol.
-3. Add verified medication regimens only from sources that explicitly support formulation, frequency and duration; production coverage is intentionally 0/50 today.
+3. Add verified medication regimens only from sources that explicitly support formulation, frequency and duration; production coverage is now 1/50 after the actinic keratosis topical regimens; other records remain without structured medication objects.
 4. Add high-yield localization and symptom data to the 42 legacy records only when their disease-specific sources support it.
 5. Prioritize diagnostics and escalation for immunosuppressed, ocular, mucosal and rapidly progressive presentations.
 
