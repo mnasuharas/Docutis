@@ -6,6 +6,8 @@ Docutis is an open-source dermatology reference and education toolkit. Contribut
 
 ## Ways to Contribute
 
+From the live site, use **Suggest a correction** or **Report outdated evidence** to open the `clinical_content.yml` issue form with a helpful title. Include the affected record or page, the claim, a verifiable source and a proposed correction. Never include patient-identifiable information.
+
 You can contribute by:
 
 - Reporting bugs

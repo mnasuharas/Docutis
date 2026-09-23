@@ -4,6 +4,13 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## Unreleased
 
+### Goal 10 — Public OSS surface
+
+- Add discoverable GitHub, Contributing, Roadmap, Changelog and Releases links in navigation/footer.
+- Add an About / project-status section stating public preview, pending clinical review, and non-CDS limitations.
+- Add “Suggest a correction” and “Report outdated evidence” CTAs on condition details and the clinical review area, deep-linking to the clinical content issue form.
+- Keep review-status panels collapsed by default; do not fabricate clinician review.
+
 ### Goal 9 — Human Clinical Review Pilot infrastructure
 
 - Add a public human-review decision schema and generated machine-readable status.

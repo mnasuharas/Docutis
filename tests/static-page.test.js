@@ -52,7 +52,8 @@ test("static page keeps load order, disclaimer and accessible controls", () => {
   assert.ok(html.indexOf('src="media-data.js"') < html.indexOf('src="app.js"'));
   assert.ok(html.indexOf('src="followup-data.js"') < html.indexOf('src="followup-app.js"'));
   assert.ok(html.indexOf('src="quiz-data.js"') < html.indexOf('src="quiz-app.js"'));
-  assert.ok(html.indexOf('src="review-status.js"') < html.indexOf('src="review-ui.js"'));
+  assert.ok(html.indexOf('src="review-status.js"') < html.indexOf('src="oss-feedback.js"'));
+  assert.ok(html.indexOf('src="oss-feedback.js"') < html.indexOf('src="review-ui.js"'));
   assert.ok(html.indexOf('src="review-ui.js"') < html.indexOf('src="app.js"'));
   assert.match(html, /href="review-status\.json"/);
   assert.match(html, /id="followUpDisease"/);
@@ -117,7 +118,7 @@ test("CI validates pull requests, main pushes and manual runs with read-only per
   assert.match(workflow, /actions\/setup-node@v7/);
   assert.match(workflow, /node-version:\s*"24"/);
   assert.match(workflow, /package-manager-cache:\s*false/);
-  for (const command of ["node --check data.js", "node --check clinical-schema.js", "node --check scripts/clinical-schema.js", "node scripts/clinical-schema.js", "node --check app.js", "node --check media-data.js", "node --check scripts/media.js", "node scripts/media.js", "node --check quiz-data.js", "node --check quiz-app.js", "node --check scripts/quiz.js", "node scripts/quiz.js", "node --check review-data.js", "node --check review-status.js", "node --check review-ui.js", "node --check scripts/review-governance.js", "node scripts/review-governance.js", "node --test tests/*.test.js", "git diff --check"]) {
+  for (const command of ["node --check data.js", "node --check clinical-schema.js", "node --check scripts/clinical-schema.js", "node scripts/clinical-schema.js", "node --check app.js", "node --check media-data.js", "node --check scripts/media.js", "node scripts/media.js", "node --check quiz-data.js", "node --check quiz-app.js", "node --check scripts/quiz.js", "node scripts/quiz.js", "node --check review-data.js", "node --check review-status.js", "node --check oss-feedback.js", "node --check review-ui.js", "node --check scripts/review-governance.js", "node scripts/review-governance.js", "node --test tests/*.test.js", "git diff --check"]) {
     assert.ok(workflow.includes(command), `workflow is missing ${command}`);
   }
   for (const command of ["node --check followup-data.js", "node --check followup-app.js", "node scripts/clinical-review.js --validate", "node scripts/follow-up.js"]) {

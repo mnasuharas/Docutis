@@ -88,6 +88,7 @@ function createHarness(transformData, transformMedia, initialHref = "https://exa
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "media-data.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "followup-data.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "review-status.js"), "utf8"), context);
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "oss-feedback.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "review-ui.js"), "utf8"), context);
   if (transformData) context.window.DOCUTIS_DATA = transformData(context.window.DOCUTIS_DATA);
   if (transformMedia) context.window.DOCUTIS_MEDIA = transformMedia(context.window.DOCUTIS_MEDIA);

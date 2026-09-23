@@ -601,6 +601,9 @@
       ? "Physician review applies to this content version. It does not guarantee correctness or replace professional medical judgment."
       : "This article has not yet completed human physician review.", "review-explanation");
     if (reviewUi && publicReview) reviewUi.appendReviewPanel(detailsElement, "disease", disease.id, "Article review status");
+    if (reviewUi && reviewUi.appendFeedbackActions) {
+      reviewUi.appendFeedbackActions(detailsElement, { id: disease.id, title: disease.name, assetType: "disease" });
+    }
 
     if (disease.clinicalProfile) {
       const workflow = document.createElement("div");
