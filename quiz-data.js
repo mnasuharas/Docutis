@@ -23,8 +23,8 @@
         id: "bcc-dermoscopy", diseaseId: "basal-cell-carcinoma", mediaId: "bcc-clues-schematic",
         domain: "dermoscopy", prompt: "Which schematic vascular clue is classically associated with basal cell carcinoma?",
         options: ["Arborising vessels", "Regular dotted vessels", "Comma vessels", "Glomerular vessels"], correctIndex: 0,
-        explanation: "Arborising vessels are a high-yield dermoscopic clue for basal cell carcinoma, although diagnosis and subtype assessment still require the full clinical-pathologic context.",
-        sourceUrls: ["https://dermnetnz.org/topics/basal-cell-carcinoma"], reviewStatus: "clinician review required", clinicalReview: null
+        explanation: "Arborising vessels are a classically associated high-yield schematic dermoscopic clue for basal cell carcinoma, although diagnosis and subtype assessment still require the full clinical-pathologic context.",
+        sourceUrls: ["https://dermnetnz.org/topics/basal-cell-carcinoma", "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"], reviewStatus: "clinician review required", clinicalReview: null
       }),
       freezeQuestion({
         id: "psoriasis-distribution", diseaseId: "plaque-psoriasis", mediaId: "psoriasis-distribution-schematic",

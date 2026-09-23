@@ -21,7 +21,7 @@
         id: "bcc-clues-schematic", diseaseId: "basal-cell-carcinoma", type: "illustration",
         src: "assets/media/bcc-clues-schematic.svg", dimensions: Object.freeze({ width: 800, height: 500 }),
         title: "Basal cell carcinoma morphology and dermoscopic clues", caption: "Basal cell carcinoma clues — schematic",
-        alt: "Labelled schematic lesion showing a pearly raised border, central ulceration, branching vessels and blue-grey ovoid clues.",
+        alt: "Labelled schematic lesion showing a pearly raised border, central ulceration, branching vessels and blue-grey ovoid nests.",
         diagnosis: "Basal Cell Carcinoma", anatomicalSite: null,
         educationalDescription: "A conservative visual summary of commonly described surface and dermoscopic clues; appearances vary by subtype and require clinical-pathologic assessment.",
         source: "Docutis original schematic", sourceUrl: "https://github.com/mnasuharas/Docutis/blob/main/assets/media/bcc-clues-schematic.svg",

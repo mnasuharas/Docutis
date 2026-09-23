@@ -44,10 +44,10 @@ For melanoma in situ, the German S3 guideline does not define a specific structu
 
 | Disease | Risk/stage | Period | Clinical exam | LN ultrasound | Laboratory | Imaging | Source |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| BCC | Isolated surgically treated and low recurrence risk | 6 months after treatment | One examination at 6 months to exclude local recurrence | NS | NS | NS | Chapter 12, pp. 60–61 |
-| BCC | Isolated surgically treated and low recurrence risk | Thereafter | Annually | NS | NS | NS | Chapter 12, pp. 60–61 |
-| BCC | Multiple / high recurrence risk / locally advanced / metastatic / syndromic | Years 1–2 | Every 3 months; individually closer follow-up is possible | NS | NS | NS | Chapter 12, pp. 60–61 |
-| BCC | Same combined group | After more than 2 event-free years | Annually only if no new BCC and no recurrence occurred for more than 2 years | NS | NS | NS | Chapter 12, pp. 60–61 |
+| BCC | Isolated surgically treated and low recurrence risk | 6 months after treatment | One examination at 6 months to exclude local recurrence | NS | NS | NS | Chapter 12, pp. 59–61 |
+| BCC | Isolated surgically treated and low recurrence risk | Thereafter | Annually | NS | NS | NS | Chapter 12, pp. 59–61 |
+| BCC | Multiple / high recurrence risk / locally advanced / metastatic / syndromic | Every 3 months until >2 years without new BCC or recurrence | Every 3 months; individually closer follow-up is possible; no automatic calendar transition at month 24 | NS | NS | NS | Chapter 12, pp. 59–61 |
+| BCC | Same combined group | After more than 2 event-free years | Annually only if no new BCC and no recurrence occurred for more than 2 years | NS | NS | NS | Chapter 12, pp. 59–61 |
 
 The source gives the intensive indications as one combined recommendation; the implementation therefore does not create separate clinical schedules for each indication. Recommendation character: `soll`; consensus: `Konsens`.
 

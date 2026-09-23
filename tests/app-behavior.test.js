@@ -118,7 +118,9 @@ test("initial rendering creates all cards and eight category sections", () => {
   assert.match(textOf(elements.reviewDashboardCounts), /2\s+Clinician-reviewed records/);
   assert.match(textOf(elements.reviewDashboardCounts), /0\s+Partially reviewed records/);
   assert.match(textOf(elements.reviewDashboardCounts), /48\s+Records requiring clinician review/);
-  assert.match(textOf(elements.reviewDashboardCounts), /0\/4\s+Reviewed visual items/);
+  assert.match(textOf(elements.reviewDashboardCounts), /1\/8\s+Reviewed quiz items/);
+  assert.match(textOf(elements.reviewDashboardCounts), /1\/4\s+Reviewed visual items/);
+  assert.match(textOf(elements.reviewDashboardCounts), /1\/3\s+Reviewed follow-up protocols/);
   assert.match(textOf(elements.reviewDashboardCounts), /2026-09-23\s+Most recent valid human review/);
 });
 

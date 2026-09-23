@@ -74,14 +74,25 @@ function quizHarness() {
 test("quiz UI announces feedback, exposes secure evidence links, scores and restarts", () => {
   const harness = quizHarness();
   for (let index = 0; index < harness.quiz.questions.length; index += 1) {
+    const question = harness.quiz.questions[index];
+    const reviewed = question.id === "bcc-dermoscopy";
     assert.match(textOf(harness.root), new RegExp(`Question ${index + 1} of 8`));
-    assert.match(textOf(harness.root), /Quiz-item review status[\s\S]*Clinical review pending/);
+    if (reviewed) {
+      assert.match(textOf(harness.root), /Quiz-item review status[\s\S]*Clinician reviewed/);
+      assert.doesNotMatch(textOf(harness.root), /Quiz-item review status[\s\S]*Clinical review pending/);
+    } else {
+      assert.match(textOf(harness.root), /Quiz-item review status[\s\S]*Clinical review pending/);
+    }
     const form = harness.root.querySelector("form");
     const inputs = form.querySelectorAll("input");
-    inputs[harness.quiz.questions[index].correctIndex].checked = true;
+    inputs[question.correctIndex].checked = true;
     form.dispatch("submit");
     assert.match(textOf(harness.root), /Correct\./);
-    assert.match(textOf(harness.root), /Clinical review pending/);
+    if (reviewed) {
+      assert.match(textOf(harness.root), /Clinician reviewed · Source attachment and automated validation do not constitute physician endorsement/);
+    } else {
+      assert.match(textOf(harness.root), /Clinical review pending/);
+    }
     const links = harness.root.querySelectorAll("a");
     assert.ok(links.some(link => /^\?condition=/.test(link.href)));
     for (const link of links.filter(link => /^https:/.test(link.href))) {

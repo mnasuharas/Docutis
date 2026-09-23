@@ -22,17 +22,28 @@ test("BCC is clinician reviewed with matching fingerprint and training-role revi
   );
   assert.doesNotMatch(JSON.stringify(status.decisions.find(item => item.id === "decision-bcc-2026-09-23-001")), /Facharzt|board-certified|specialist dermatologist|consultant|attending/i);
 
-  const independent = ["basal-cell-carcinoma-de", "bcc-dermoscopy", "bcc-clues-schematic"];
-  for (const id of independent) {
+  const independent = {
+    "basal-cell-carcinoma-de": "decision-bcc-de-2026-09-23-001",
+    "bcc-dermoscopy": "decision-bcc-quiz-2026-09-23-001",
+    "bcc-clues-schematic": "decision-bcc-visual-2026-09-23-001"
+  };
+  for (const [id, decisionId] of Object.entries(independent)) {
     const asset = status.assets.find(item => item.id === id);
     assert.ok(asset, `missing independent asset ${id}`);
-    assert.equal(asset.status, "review required");
+    assert.equal(asset.status, "clinician reviewed");
+    assert.equal(asset.activeDecisionId, decisionId);
   }
 
   const ak = status.assets.find(item => item.id === "actinic-keratosis");
   assert.equal(ak.status, "clinician reviewed");
   assert.equal(ak.activeDecisionId, "decision-ak-2026-09-23-001");
 
-  const reviewedIds = new Set(["actinic-keratosis", "basal-cell-carcinoma"]);
+  const reviewedIds = new Set([
+    "actinic-keratosis",
+    "basal-cell-carcinoma",
+    "basal-cell-carcinoma-de",
+    "bcc-dermoscopy",
+    "bcc-clues-schematic"
+  ]);
   assert.ok(status.assets.filter(item => !reviewedIds.has(item.id)).every(item => item.status === "review required"));
 });
