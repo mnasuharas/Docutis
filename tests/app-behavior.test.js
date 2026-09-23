@@ -115,9 +115,9 @@ test("initial rendering creates all cards and eight category sections", () => {
   assert.ok(elements.categoryFilters.querySelectorAll("button").every(button => button.type === "button"));
   assert.match(elements.resultStatus.textContent, /50 conditions shown/);
   assert.match(textOf(elements.libraryStats), /3\s+oncology follow-up protocols/);
-  assert.match(textOf(elements.reviewDashboardCounts), /1\s+Clinician-reviewed records/);
+  assert.match(textOf(elements.reviewDashboardCounts), /2\s+Clinician-reviewed records/);
   assert.match(textOf(elements.reviewDashboardCounts), /0\s+Partially reviewed records/);
-  assert.match(textOf(elements.reviewDashboardCounts), /49\s+Records requiring clinician review/);
+  assert.match(textOf(elements.reviewDashboardCounts), /48\s+Records requiring clinician review/);
   assert.match(textOf(elements.reviewDashboardCounts), /0\/4\s+Reviewed visual items/);
   assert.match(textOf(elements.reviewDashboardCounts), /2026-09-23\s+Most recent valid human review/);
 });
@@ -372,7 +372,7 @@ test("optional educational media renders provenance and recovers from image fail
 
 test("unreviewed details use a compact pending badge and collapsed review disclosure", () => {
   const { elements } = createHarness();
-  const pendingCard = [...elements.cards.querySelectorAll(".card")].find(card => /Basal Cell Carcinoma/.test(textOf(card)));
+  const pendingCard = [...elements.cards.querySelectorAll(".card")].find(card => /Cutaneous Melanoma/.test(textOf(card)));
   pendingCard.dispatch("click");
   assert.match(textOf(elements.details), /Clinical review pending/);
   assert.match(textOf(elements.details), /This article has not yet completed human physician review/);

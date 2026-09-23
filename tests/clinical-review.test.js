@@ -31,7 +31,7 @@ test("Goal 8 preserves every legacy record, alias, clinical field, code, verifie
   })) };
   // Legacy clinical snapshot, excluding review state, Goal 7 profiles and bibliographic recheck dates.
   assert.equal(createHash("sha256").update(JSON.stringify(canonicalize(content))).digest("hex"),
-    "71e0ec601b26e1001042d5d7e13101bfa189627d767e2354faca91ed08ce99da");
+    "2339b285e9d788721816e541a67fa14f963ea37e51cf169213e43645aa45ba4b");
 });
 
 test("all 50 production records remain unreviewed with null metadata", () => {

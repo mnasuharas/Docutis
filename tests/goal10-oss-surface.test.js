@@ -83,17 +83,17 @@ test("Goal 10 wires feedback actions into review UI and condition details", () =
   assert.match(app, /assetType:\s*"disease"/);
 });
 
-test("Goal 10 docs agree on public preview status and keep 23 review units pending", () => {
+test("Goal 10 docs agree on public preview status and keep remaining review units pending", () => {
   assert.match(readme, /Goal 10/);
   assert.match(contributing, /Suggest a correction/);
   assert.match(roadmap, /Goal 10/);
   assert.match(changelog, /Goal 10/);
   assert.equal(reviewStatus.assets.length, 23);
-  assert.equal(reviewStatus.assets.filter(item => item.status === "clinician reviewed").length, 1);
-  assert.equal(reviewStatus.assets.filter(item => item.status === "review required").length, 22);
+  assert.equal(reviewStatus.assets.filter(item => item.status === "clinician reviewed").length, 2);
+  assert.equal(reviewStatus.assets.filter(item => item.status === "review required").length, 21);
   assert.equal(reviewStatus.latestValidHumanReviewDate, "2026-09-23");
   assert.equal((reviewStatus.reviewers || []).length, 1);
-  assert.equal((reviewStatus.decisions || []).length, 1);
+  assert.equal((reviewStatus.decisions || []).length, 2);
 });
 
 test("Goal 10 nav remains keyboard-discoverable in markup", () => {

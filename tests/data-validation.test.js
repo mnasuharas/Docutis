@@ -108,7 +108,7 @@ test("coding systems are explicit and ICD-O topography is separate from morpholo
       assert.ok(["ICD-10 WHO", "ICD-10-GM"].includes(diagnosis.system), `${disease.id} has an unlabelled or unsupported diagnosis system`);
       if (diagnosis.system === "ICD-10 WHO") assert.equal(diagnosis.version, "2019");
       if (diagnosis.system === "ICD-10-GM") assert.equal(diagnosis.version, "2026");
-      assert.match(diagnosis.code, /^[A-Z][0-9]{2}(?:\.[0-9])?$/);
+      assert.match(diagnosis.code, /^[A-Z][0-9]{2}(?:\.[0-9]{1,2})?$/);
       assert.ok(diagnosis.label.trim());
     }
     if (disease.coding.icdo) {

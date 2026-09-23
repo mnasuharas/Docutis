@@ -27,14 +27,14 @@ test("exactly eight representative records use the structured pilot schema", () 
     totalRecords: 50,
     structuredProfiles: 8,
     structuredMorphology: 8,
-    structuredLocalization: 5,
-    structuredSymptoms: 2,
+    structuredLocalization: 6,
+    structuredSymptoms: 3,
     structuredDiagnostics: 8,
     structuredDifferentials: 8,
     structuredTreatment: 8,
-    structuredMedicationDetails: 1,
+    structuredMedicationDetails: 2,
     structuredFollowUp: 8,
-    structuredRedFlags: 7,
+    structuredRedFlags: 8,
     legacyCompatible: 42
   });
 });

@@ -674,16 +674,27 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## disease: Basal Cell Carcinoma (`basal-cell-carcinoma`)
 
-- **Exact fingerprint:** `sha256-v1:976b1e3e91f8eeb8c76032b3986edebcf4d2d1fac7c30ff6d1b722d2b5221ca9`
+- **Exact fingerprint:** `sha256-v1:fbc2b272331822060c656dd0680da07e9131ecd3f59f071a71273748f14ad65f`
 - **Schema version:** 1
-- **Reviewable sections:** `overview`, `clinical-presentation`, `diagnostics`, `dermoscopy`, `differential-diagnosis`, `treatment`, `follow-up`, `coding`, `references`, `histopathology`, `referral`, `oncology`
+- **Reviewable sections:** `overview`, `clinical-presentation`, `diagnostics`, `dermoscopy`, `differential-diagnosis`, `treatment`, `follow-up`, `coding`, `references`, `histopathology`, `red-flags`, `referral`, `patient-safety`, `oncology`
 - **Mapped evidence sources:**
   - https://dermnetnz.org/topics/basal-cell-carcinoma
+  - https://icd.who.int/browse10/2019/en
+  - https://klassifikationen.bfarm.de/icd-10-gm/kode-suche/htmlgm2026/block-c43-c44.htm
+  - https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf
+  - https://whobluebooks.iarc.who.int/structures/skintumours/
   - https://www.aad.org/member/clinical-quality/guidelines/bcc
+  - https://www.dguv.de/bk-info/icd-10-kapitel/kapitel_12/bk5103/index.jsp
+  - https://www.ema.europa.eu/en/medicines/human/EPAR/ameluz
+  - https://www.ema.europa.eu/en/medicines/human/EPAR/erivedge
+  - https://www.ema.europa.eu/en/medicines/human/EPAR/libtayo
+  - https://www.ema.europa.eu/en/medicines/human/EPAR/odomzo
+  - https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme
+  - https://www.fachinfo.de/fi/detail/007185/metvix-r-160-mg-g-creme
+  - https://www.fachinfo.de/fi/pdf/003976
+  - https://www.who.int/standards/classifications/other-classifications/international-classification-of-diseases-for-oncology
 - **Automated warnings:**
   - No structured medication regimen or dose is encoded; confirm that the scope is sufficiently explicit.
-  - No structured localization object is present; assess whether the prose is sufficient.
-  - No separate structured red-flag list is present.
   - Automated source attachment and schema validation are not evidence of clinical approval.
 - **AI-generated proposal:** No clinical wording change has been applied. Review the current text below and either approve it unchanged, approve exact replacement wording, request changes, reject an unsupported claim, or defer.
 
@@ -706,7 +717,84 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
         "version": "2019",
         "code": "C44",
         "label": "Other malignant neoplasms of skin",
-        "note": "Assign the fourth character from the documented anatomic site."
+        "note": "Assign the anatomic fourth character only when the primary skin site is adequately documented. WHO ICD-10 does not replace ICD-10-GM for German clinical documentation."
+      },
+      {
+        "system": "ICD-10-GM",
+        "version": "2026",
+        "code": "C44.0",
+        "label": "Lippenhaut",
+        "note": "Do not auto-map every “lip” mention to C44.0; distinguish Lippenhaut from vermilion / C00.-. Prefer coding uncertainty over fabricated specificity."
+      },
+      {
+        "system": "ICD-10-GM",
+        "version": "2026",
+        "code": "C44.1",
+        "label": "Haut des Augenlides, einschließlich Kanthus",
+        "note": null
+      },
+      {
+        "system": "ICD-10-GM",
+        "version": "2026",
+        "code": "C44.2",
+        "label": "Haut des Ohres und des äußeren Gehörganges",
+        "note": null
+      },
+      {
+        "system": "ICD-10-GM",
+        "version": "2026",
+        "code": "C44.3",
+        "label": "Haut sonstiger und nicht näher bezeichneter Teile des Gesichtes",
+        "note": null
+      },
+      {
+        "system": "ICD-10-GM",
+        "version": "2026",
+        "code": "C44.4",
+        "label": "Behaarte Kopfhaut und Haut des Halses",
+        "note": null
+      },
+      {
+        "system": "ICD-10-GM",
+        "version": "2026",
+        "code": "C44.50",
+        "label": "Perianalhaut",
+        "note": "Trunk fifth character is mandatory. Never emit incomplete C44.5."
+      },
+      {
+        "system": "ICD-10-GM",
+        "version": "2026",
+        "code": "C44.59",
+        "label": "Haut sonstiger und nicht näher bezeichneter Teile des Rumpfes",
+        "note": "Use for other/unspecified trunk skin when documented; never emit incomplete C44.5."
+      },
+      {
+        "system": "ICD-10-GM",
+        "version": "2026",
+        "code": "C44.6",
+        "label": "Haut der oberen Extremität, einschließlich Schulter",
+        "note": null
+      },
+      {
+        "system": "ICD-10-GM",
+        "version": "2026",
+        "code": "C44.7",
+        "label": "Haut der unteren Extremität, einschließlich Hüfte",
+        "note": null
+      },
+      {
+        "system": "ICD-10-GM",
+        "version": "2026",
+        "code": "C44.8",
+        "label": "Haut, mehrere Teilbereiche überlappend",
+        "note": "Only for genuine overlapping skin regions as defined by ICD-10-GM."
+      },
+      {
+        "system": "ICD-10-GM",
+        "version": "2026",
+        "code": "C44.9",
+        "label": "Bösartige Neubildung der Haut, nicht näher bezeichnet",
+        "note": "Use only when site documentation supports an unspecified code; do not invent specificity."
       }
     ],
     "icdo": {
@@ -721,19 +809,19 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
         {
           "code": "8090/3",
           "label": "Basal cell carcinoma, NOS",
-          "note": "Use the morphology that matches the final pathology."
+          "note": "Use only when BCC NOS is documented on final pathology; do not auto-assign subtype morphology from clinical appearance or dermoscopy."
         }
       ]
     },
     "icdoApplicability": "applicable",
-    "verificationNote": null
+    "verificationNote": "Fail-closed anatomical mapping: prefer uncertainty over fabricated site specificity. Never emit incomplete C44.5 — use C44.50 or C44.59. Distinguish Lippenhaut (C44.0) from vermilion/lip mucosa coded under C00.- when applicable; ambiguous lip documentation should flag coding uncertainty. Genital skin may belong outside C44 when ICD-10-GM assigns genital-organ categories. Keep WHO ICD-10, ICD-10-GM and ICD-O separate. Basal cell carcinoma is not included in the current BK 5103 disease definition. BK 5103 covers cutaneous squamous cell carcinoma and multiple actinic keratoses caused by occupational exposure to natural UV radiation. Do not classify an ordinary BCC as BK 5103. Occupational UV may be clinically relevant to BCC risk but does not make ordinary BCC a BK 5103 diagnosis."
   },
-  "description": "A common keratinocyte carcinoma characterized by locally invasive growth and very low metastatic potential.",
-  "clinical": "Presentation varies by subtype and may include a pearly or translucent papule, telangiectasia, ulceration, crusting, or a slowly enlarging plaque.",
-  "dermoscopy": "Possible findings include arborising vessels, blue-grey ovoid nests, leaf-like structures, spoke-wheel areas and ulceration.",
-  "differential": "Cutaneous squamous cell carcinoma, actinic keratosis, melanocytic lesions, sebaceous hyperplasia and other benign or malignant tumors.",
-  "treatment": "Risk stratification incorporates site, size, borders, histologic subtype and recurrence status. Surgery is the mainstay; selected low-risk tumors or patients unable to undergo surgery may be considered for other modalities under current guidance.",
-  "followup": "Follow-up is risk-adapted and includes surveillance for recurrence and additional primary skin cancers.",
+  "description": "Basal cell carcinoma (BCC) is a malignant epithelial skin tumour with locally infiltrative and destructive growth; metastasis is very rare.",
+  "clinical": "Clinical morphology is variable. Nodular BCC typically presents as a skin-coloured to erythematous pearly papule or nodule with telangiectasia and may ulcerate centrally. Superficial BCC usually presents as an erythematous macule or thin plaque, sometimes with erosion or bleeding. Morphoeic/sclerodermiform BCC may appear as a whitish, atrophic or scar-like, poorly defined plaque; pigmented variants also occur. Clinical appearance alone does not reliably predict histologic subtype.",
+  "dermoscopy": "Dermoscopy can increase diagnostic confidence but does not replace histopathology or margin assessment. Supportive findings include arborising vessels and/or short fine telangiectasias, blue-grey ovoid nests, multiple blue-grey globules or dots, maple leaf–like areas, spoke-wheel/concentric structures, ulceration or erosions, shiny white-red structureless areas and white streaks (chrysalis). Absence of a pigment network is supportive but not absolute. Patterns differ by subtype (nodular, superficial, pigmented, morphoeic). Dermoscopic or clinical ulceration alone is not an S2k Table 2 high recurrence-risk criterion.",
+  "differential": "Cutaneous squamous cell carcinoma, keratoacanthoma, squamous cell carcinoma in situ/Bowen disease, actinic keratosis, sebaceous hyperplasia, intradermal nevus, seborrhoeic keratosis, melanoma (especially pigmented BCC), dermatofibroma/scar (morphoeic BCC), and inflammatory dermatoses (superficial BCC).",
+  "treatment": "German S2k recurrence-risk stratification informs modality selection and must remain separate from incomplete (R1) excision, locally advanced BCC (laBCC/lfBZK) and metastatic BCC (mBCC). Complete surgical removal with histologic margin assessment is first-line for most BCC: low recurrence-risk tumours use conventional excision with a 3–5 mm peripheral safety margin; high recurrence-risk and recurrent BCC prefer microscopically controlled surgery (MCS) when available, otherwise conventional margins >5 mm. Selected nonsurgical modalities (imiquimod, 5-fluorouracil, ALA/MAL PDT, radiotherapy, limited destructive options) apply only under product-specific labeling and guideline place-in-therapy constraints and are not interchangeable with complete surgical excision. Locally advanced or metastatic disease requires multidisciplinary assessment with product-specific systemic options.",
+  "followup": "Follow-up is risk-adapted according to the German S2k guideline and includes surveillance for local recurrence and additional primary skin cancers. German interval details are provided by the dedicated jurisdiction-specific BCC follow-up protocol. Patients should be counselled on regular skin self-examination and UV protection, with particular emphasis on patients with BCC syndromes or chronic immunosuppression. New, recurrent, non-healing, enlarging, bleeding or otherwise suspicious lesions should prompt clinical reassessment.",
   "clinicalProfile": {
     "schemaVersion": 1,
     "aliases": [
@@ -741,86 +829,186 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
     ],
     "etiology": {
       "mechanisms": [
-        "neoplastic"
+        "neoplastic",
+        "uv-associated"
       ],
-      "text": "Locally invasive keratinocyte carcinoma with very low metastatic potential."
+      "text": "Malignant epithelial skin tumour with locally infiltrative and destructive growth; metastasis is very rare. Chronic UV exposure is the dominant clinical context; syndromic and immunosuppressed settings increase additional primary tumour burden."
     },
     "presentation": {
       "morphology": {
         "primaryLesions": [
+          "macule",
           "papule",
-          "plaque"
+          "plaque",
+          "nodule"
         ],
         "secondaryChanges": [
+          "erosion",
           "ulcer",
-          "crust"
+          "crust",
+          "atrophy",
+          "scar"
         ],
         "colors": [
+          "skin-coloured",
+          "erythematous",
           "pearly",
-          "translucent"
+          "whitish",
+          "pigmented variant possible"
         ],
         "surface": [
-          "telangiectatic"
+          "telangiectatic",
+          "atrophic",
+          "scar-like"
         ],
-        "text": "Morphology varies by subtype."
+        "border": [
+          "well-defined or poorly defined depending on subtype"
+        ],
+        "text": "Nodular: pearly papule/nodule with telangiectasia, possible central ulceration. Superficial: erythematous macule/thin plaque with possible erosion or bleeding. Morphoeic/sclerodermiform: whitish, atrophic or scar-like poorly defined plaque. Pigmented variants occur. Clinical appearance alone does not reliably predict histologic subtype."
+      },
+      "localization": {
+        "sites": [
+          "face",
+          "scalp",
+          "trunk",
+          "upper-extremities",
+          "lower-extremities",
+          "sun-exposed-skin",
+          "anogenital"
+        ],
+        "distribution": [
+          "localized"
+        ],
+        "text": "Most often on chronically UV-exposed skin including the face and other sun-exposed sites; can occur elsewhere. Genitalia, hands and feet are H-zone anatomic contexts in S2k Table 2."
+      },
+      "symptoms": {
+        "values": [
+          "asymptomatic",
+          "bleeding",
+          "tender"
+        ],
+        "text": "Often asymptomatic; bleeding, erosion or tenderness may occur with ulcerated or traumatised lesions."
       },
       "course": {
         "values": [
           "chronic",
           "progressive"
         ],
-        "text": "Typically slowly enlarging."
+        "text": "Typically slowly enlarging with locally destructive potential; metastasis is very rare."
       }
     },
     "dermoscopy": {
+      "patterns": [
+        "nodular BCC pattern",
+        "superficial BCC pattern",
+        "pigmented BCC pattern",
+        "morphoeic BCC pattern"
+      ],
       "vascularStructures": [
-        "arborising vessels"
+        "arborising vessels",
+        "short fine telangiectasias"
       ],
       "pigmentStructures": [
         "blue-grey ovoid nests",
-        "leaf-like structures",
-        "spoke-wheel areas"
+        "multiple blue-grey globules or dots",
+        "maple leaf–like areas",
+        "spoke-wheel/concentric structures"
+      ],
+      "scaleKeratinClues": [
+        "ulceration or erosions (dermoscopic finding)",
+        "shiny white-red structureless areas",
+        "white streaks / chrysalis"
       ],
       "highRiskClues": [
-        "ulceration"
-      ]
+        "features suggesting melanoma in pigmented lesions require clinicopathologic correlation",
+        "dermoscopic or clinical ulceration is a supportive dermoscopic finding only and is NOT an S2k Table 2 high recurrence-risk criterion by itself"
+      ],
+      "text": "Dermoscopy increases diagnostic confidence but does not replace histopathology or margin assessment. Absence of a pigment network is supportive but not absolute."
     },
     "diagnostics": [
       {
         "method": "clinical-examination",
         "role": "routine",
-        "indication": "Assess anatomic site, size, borders, recurrence status and clinical subtype."
+        "indication": "Establish clinical suspicion together with dermoscopy; assess site, size, borders, recurrence status and operability.",
+        "sourceUrls": [
+          "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+        ]
+      },
+      {
+        "method": "dermoscopy",
+        "role": "routine",
+        "indication": "Support clinical suspicion; does not replace histopathology or margin assessment.",
+        "sourceUrls": [
+          "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
+          "https://dermnetnz.org/topics/basal-cell-carcinoma"
+        ]
       },
       {
         "method": "biopsy",
-        "role": "confirmatory",
-        "indication": "Obtain tissue adequate for diagnosis and management planning.",
+        "role": "unclear-cases",
+        "indication": "A separate pre-treatment biopsy is not required in every clinically typical, readily excisable BCC when definitive excision will provide adequate tissue for diagnosis and margin assessment. Pre-treatment biopsy is particularly appropriate when the diagnosis is uncertain, before nonsurgical treatment when histologic subtype or other tumour characteristics may influence treatment selection, and in large, recurrent, poorly defined or otherwise high-risk tumours where treatment planning depends on histologic information.",
         "sourceUrls": [
-          "https://www.aad.org/member/clinical-quality/guidelines/bcc"
+          "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
         ]
       },
       {
         "method": "histopathology",
         "role": "confirmatory",
-        "indication": "Establish histologic subtype and other risk-relevant pathologic features."
+        "indication": "Histopathologic confirmation should be obtained according to tumour size, clinical context and intended treatment, using biopsy and/or the definitive excision specimen. The pathology report should document histologic subtype and other treatment- or risk-relevant findings when assessable.",
+        "sourceUrls": [
+          "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+        ]
+      },
+      {
+        "method": "imaging",
+        "role": "staging",
+        "indication": "Cross-sectional imaging is not routine for uncomplicated BCC. Consider imaging when locally advanced disease, deep soft-tissue extension, clinically relevant perineural spread, orbital involvement, bone involvement or metastatic disease is suspected.",
+        "sourceUrls": [
+          "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+        ]
       }
     ],
-    "histopathology": "Histologic subtype is a component of risk stratification and should be documented from the pathology report.",
+    "histopathology": "The pathology report should document the histologic subtype and other treatment- or risk-relevant findings when assessable. Partial biopsy specimens may under-represent heterogeneous or aggressive tumour components and may fail to demonstrate the full extent of infiltration or perineural involvement. Clinicopathologic discordance should prompt reassessment and, when clinically appropriate, additional sampling or definitive excision. Do not auto-assign ICD-O subtype morphology from clinical appearance or dermoscopy.",
     "differentials": [
       {
-        "diagnosis": "Cutaneous squamous cell carcinoma"
+        "diagnosis": "Cutaneous squamous cell carcinoma",
+        "distinguishingClue": "Often more hyperkeratotic, tender or rapidly growing; biopsy when uncertain."
       },
       {
-        "diagnosis": "Actinic keratosis"
+        "diagnosis": "Keratoacanthoma",
+        "distinguishingClue": "Rapid crateriform growth; histologic distinction from cSCC/BCC as needed."
       },
       {
-        "diagnosis": "Melanocytic lesion"
+        "diagnosis": "Squamous cell carcinoma in situ / Bowen disease",
+        "distinguishingClue": "Persistent scaly plaque; may mimic superficial BCC."
       },
       {
-        "diagnosis": "Sebaceous hyperplasia"
+        "diagnosis": "Actinic keratosis",
+        "distinguishingClue": "Rough gritty scale on sun-damaged skin; usually without pearly telangiectatic nodule."
       },
       {
-        "diagnosis": "Other benign or malignant tumor"
+        "diagnosis": "Sebaceous hyperplasia",
+        "distinguishingClue": "Umbilicated yellowish papules with crown vessels; lacks blue-grey ovoid nests of BCC."
+      },
+      {
+        "diagnosis": "Intradermal nevus",
+        "distinguishingClue": "Soft skin-coloured papule without arborising BCC vessels; history of stability."
+      },
+      {
+        "diagnosis": "Seborrhoeic keratosis",
+        "distinguishingClue": "Stuck-on waxy plaque; comedolike openings/milia-like cysts on dermoscopy."
+      },
+      {
+        "diagnosis": "Melanoma",
+        "distinguishingClue": "Critical differential for pigmented BCC; asymmetric pigment network or melanoma-specific structures — biopsy rather than assume BCC."
+      },
+      {
+        "diagnosis": "Dermatofibroma / scar",
+        "distinguishingClue": "Especially versus morphoeic BCC; poorly defined scar-like plaque may need histology."
+      },
+      {
+        "diagnosis": "Inflammatory dermatosis",
+        "distinguishingClue": "May mimic superficial BCC; lack of dermoscopic BCC structures and treatment response help, but biopsy if persistent."
       }
     ],
     "treatment": {
@@ -829,9 +1017,10 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
           "level": "first-line",
           "interventions": [
             {
-              "intervention": "Surgical treatment selected according to tumor and patient risk.",
+              "intervention": "Complete surgical excision with histologic margin assessment (German S2k)",
+              "details": "First-line for most BCC. Low recurrence-risk: conventional excision with peripheral clinical safety margin 3–5 mm and conventional histologic margin assessment. High recurrence-risk and recurrent BCC: microscopically controlled surgery (mikroskopisch kontrollierte Chirurgie, MCS) with complete/lückenlose margin assessment when available; if MCS unavailable, conventional safety margin >5 mm. Do not automatically equate German MCS / lückenlose Randschnittkontrolle with a single “Mohs” technique — Mohs may be mentioned as an international procedural term but must not replace or narrow the S2k MCS concept. Histologically incomplete (R1) excision should generally be followed by re-excision; prefer MCS for high-risk, critical sites, recurrent disease or clinically relevant deep residual disease when feasible. Selected low-risk R1 cases may consider nonsurgical treatment or close surveillance per S2k context when re-excision is not preferred — these are not equivalent to complete surgical excision. Horizontal/shave excision may be considered for selected small superficial BCC on trunk or extremities when conventional surgery is unsuitable or multiple superficial lesions are present; it does not provide the same complete histologic margin control, recurrence risk is less favourable in inappropriate sites, and it should not be generalized to high-risk BCC or head-and-neck tumours. Specialist caveat only (NOT core recommendation; NOT for automated recommendation; routineFirstLine=false): very small, sharply demarcated nodular or pigmented BCC may in selected specialised circumstances be excised with narrower 2–3 mm margins — this must not override the formal 3–5 mm low-risk recommendation.",
               "sourceUrls": [
-                "https://www.aad.org/member/clinical-quality/guidelines/bcc"
+                "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
               ]
             }
           ]
@@ -840,63 +1029,332 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
           "level": "second-line-or-alternative",
           "interventions": [
             {
-              "intervention": "Consider nonsurgical modalities only for selected low-risk tumors or when surgery is contraindicated; cure rates are lower than with surgery.",
+              "intervention": "Nonsurgical topical therapy and photodynamic therapy for selected BCC (product-specific labeling)",
+              "details": "Nonsurgical modalities are not universally interchangeable with complete surgical excision. For each product distinguish S2k place-in-therapy from authorised indication and regulatory posology. Do not copy actinic-keratosis dosing into BCC. AKSUNIM and other AK-only imiquimod products are not Aldara-equivalent for BCC.",
+              "medications": [
+                {
+                  "name": "Imiquimod 5% cream (Aldara)",
+                  "route": "topical",
+                  "formulation": "5% cream sachets",
+                  "dose": "Apply enough cream to cover the treatment area including about 1 cm of surrounding skin",
+                  "frequency": "5 nights per week (e.g. Monday–Friday) with about 8 hours on-skin time",
+                  "duration": "6 weeks; assess response about 12 weeks after end of therapy",
+                  "contraindications": "Hypersensitivity to imiquimod or excipients.",
+                  "precautions": "Authorised for small superficial BCC in adults. S2k place-in-therapy: sBCC especially when surgery contraindicated/unsuitable. Do not use the AK 3×/week Aldara regimen for BCC. AKSUNIM and other AK-only imiquimod creams ≠ BCC indication — do not auto-substitute. Not evaluated for BCC within 1 cm of eyelids, nose, lips or hairline; large tumours >7.25 cm² have reduced response probability (sourced warning, not an unsupported automated exclusion). Recurrent/previously treated BCC and immunocompromised patients: limited/no clinical experience per labeling. Keep size/anatomy as labelled regulatory context.",
+                  "monitoring": "Local inflammatory reactions; clinical clearance assessment about 12 weeks after treatment completion; incomplete clearance requires alternative therapy.",
+                  "pregnancy": "No adequate clinical data; use only after product-specific risk assessment per current Fachinformation/SmPC.",
+                  "sourceUrls": [
+                    "https://www.fachinfo.de/fi/pdf/003976",
+                    "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+                  ]
+                },
+                {
+                  "name": "Fluorouracil 5% cream (Efudix)",
+                  "route": "topical",
+                  "formulation": "5% cream",
+                  "dose": "Apply twice daily in sufficient amount to cover the lesions; total treated area must not exceed 500 cm² at one time — treat larger areas sequentially; occlusive dressing recommended for BCC per Fachinformation",
+                  "frequency": "Twice daily",
+                  "duration": "ACTIONABLE (German Fachinformation): for non-operable/non-irradiable superficial BCC treat at least 3–6 weeks until ulceration; may require 10–12 weeks; treat basal cell tumours until ulceration. sourceDiscrepancy=true: S2k guideline regimen-context cites about 4 weeks BID for sBCC, which is NOT an automatic stop rule and must not silently replace Fachinformation ulceration-directed posology. placeInTherapySource=S2k; regulatoryPosologySource=current DE FI.",
+                  "contraindications": "Hypersensitivity to fluorouracil/excipients; pregnancy and lactation; mucous membranes and mucocutaneous junctions as labelled; concomitant or recent (within 4 weeks) brivudine, sorivudine or analogues.",
+                  "precautions": "S2k place-in-therapy: sBCC preferably when surgery contraindicated/not applicable. Histologic confirmation before treatment; tumour may persist under a healed surface — follow up. DPD deficiency increases systemic toxicity risk if absorbed. No other 5-FU product/concentration substitution for this BCC indication. ACTIONABLE dose display follows Fachinformation (ulceration endpoint), not a fixed 4-week stop.",
+                  "monitoring": "Local reaction through to ulceration endpoint for BCC; watch for systemic fluoropyrimidine toxicity if barrier impaired or area extensive; clinical/histologic follow-up for persistence.",
+                  "pregnancy": "Contraindicated in pregnancy and lactation. Contraception: women during treatment + 6 months after; men during + 3 months after per product information.",
+                  "sourceUrls": [
+                    "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
+                    "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+                  ]
+                },
+                {
+                  "name": "5-Aminolevulinic acid 78 mg/g nanoemulsion gel (Ameluz) PDT",
+                  "route": "topical",
+                  "formulation": "78 mg/g nanoemulsion gel",
+                  "dose": "About 1 mm film on lesion plus about 5 mm surround; incubate about 3 hours under light-tight dressing, then illuminate with authorised red-light lamp per SmPC",
+                  "frequency": "Two red-light PDT sessions about 1 week apart",
+                  "duration": "One treatment cycle = two sessions; evaluate about 3 months after last treatment; retreat incomplete responders per SmPC",
+                  "contraindications": "Hypersensitivity to ALA, porphyrins, soya or peanuts, or excipients; porphyria; known photodermatoses as labelled.",
+                  "precautions": "EMA-authorised for superficial and/or nodular BCC unsuitable for surgery due to treatment-related morbidity and/or poor cosmetic outcome in adults. Daylight PDT is for AK only — do not transfer AK daylight protocols to BCC. Pivotal evidence population included thickness <2 mm — treat as study/population context, not an invented hard SmPC thickness cutoff unless the current label states one. Keep Ameluz separate from Metvix/MAL.",
+                  "monitoring": "Pain during illumination; local phototoxicity; clinical (and histologic when needed) response at about 3 months; long-term clinical monitoring.",
+                  "pregnancy": "Preferable to avoid during pregnancy; interrupt breastfeeding for 12 hours after treatment per SmPC.",
+                  "sourceUrls": [
+                    "https://www.ema.europa.eu/en/medicines/human/EPAR/ameluz",
+                    "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+                  ]
+                },
+                {
+                  "name": "Methyl aminolevulinate 160 mg/g cream (Metvix) PDT",
+                  "route": "topical",
+                  "formulation": "160 mg/g cream",
+                  "dose": "About 1 mm cream to lesion plus 5–10 mm surround; occlude about 3 hours; then illuminate with CE-marked red light per Fachinformation",
+                  "frequency": "Two red-light PDT sessions one week apart",
+                  "duration": "One treatment cycle = two sessions; assess at about 3 months; incomplete responders may be retreated; histologic confirmation of response recommended for BCC",
+                  "contraindications": "Hypersensitivity to methyl aminolevulinate, peanut or soya, or excipients; morpheaform (sklerodermiformes) BCC; porphyria.",
+                  "precautions": "Separate product from Ameluz/5-ALA. Authorised for superficial and/or nodular BCC when other therapies unsuitable. Daylight protocols are for AK, not BCC. No invented millimetre upper thickness limit in the DE label. No experience with pigmented, highly infiltrating or genital lesions per warnings.",
+                  "monitoring": "Illumination pain/blood pressure as labelled; local phototoxicity; response at 3 months; long-term follow-up.",
+                  "pregnancy": "Not recommended in pregnancy per product information; verify current Fachinformation.",
+                  "sourceUrls": [
+                    "https://www.fachinfo.de/fi/detail/007185/metvix-r-160-mg-g-creme",
+                    "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+                  ]
+                }
+              ],
               "sourceUrls": [
-                "https://www.aad.org/member/clinical-quality/guidelines/bcc"
+                "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
+                "https://www.fachinfo.de/fi/pdf/003976",
+                "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
+                "https://www.ema.europa.eu/en/medicines/human/EPAR/ameluz",
+                "https://www.fachinfo.de/fi/detail/007185/metvix-r-160-mg-g-creme"
+              ]
+            }
+          ]
+        },
+        {
+          "level": "procedural",
+          "interventions": [
+            {
+              "intervention": "Radiotherapy — specialist/interdisciplinary only",
+              "details": "No patient self-dose or DIY fractionation in the disease record. Definitive radiotherapy when surgery is contraindicated, unsuitable or declined; multidisciplinary discussion in locally advanced BCC; selected postoperative residual disease; clinically relevant perineural invasion per S2k. High caution/contraindication contexts include BCC syndromes, xeroderma pigmentosum and radiosensitivity disorders.",
+              "sourceUrls": [
+                "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+              ]
+            },
+            {
+              "intervention": "Cryosurgery, laser and curettage — limited options without complete histologic margin control",
+              "details": "Cryosurgery: optional for small superficial BCC on trunk/extremities when excision or topical therapy unsuitable; no complete histologic margin control; not equivalent to surgery for all BCC; not for high-risk generalisation. Laser: selected low-risk BCC when standard approaches unsuitable; no complete margin control; close follow-up; not for high-risk generalisation. Curettage: do not elevate to formal S2k Empfelung level; limited option with incomplete histology; not a default automated recommendation.",
+              "sourceUrls": [
+                "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "level": "refractory-or-severe",
+          "interventions": [
+            {
+              "intervention": "Locally advanced / metastatic BCC — multidisciplinary pathway",
+              "details": "Locally advanced BCC (lfBZK/laBCC) is distinct from merely having a high S2k Table 2 recurrence-risk feature: tumour extent and destructive/deep growth make reliable complete R0 resection uncertain or require complex organ-specific management. Assess in interdisciplinary tumour board. Case-by-case options may include surgery, radiotherapy, systemic therapy, selected specialist procedures such as electrochemotherapy (specialistOnly=true; coreFirstLine=false; no generic ECT regimen in this record), and clinical-trial options. Do not collapse into a single automatic treatment sequence. After clinically meaningful systemic response, reassess resectability / local definitive treatment in MDT. Neoadjuvant Hedgehog pathway inhibition may be considered in selected patients within an interdisciplinary, individualised treatment concept when tumour reduction could facilitate a less morbid or potentially curative local treatment. This is not a routine first-line recommendation for all locally advanced BCC (role=selected/individualized; routineFirstLine=false; automaticRecommendation=false).",
+              "medications": [
+                {
+                  "name": "Vismodegib (Erivedge)",
+                  "route": "oral",
+                  "formulation": "hard capsules",
+                  "dose": "150 mg orally once daily",
+                  "frequency": "Once daily",
+                  "duration": "Continue per authorised product information until disease progression or unacceptable toxicity",
+                  "contraindications": "Pregnancy; women of childbearing potential and male patients who do not comply with the pregnancy-prevention programme as labelled; breastfeeding restrictions per SmPC.",
+                  "precautions": "EMA-authorised for adults with symptomatic metastatic BCC, or locally advanced BCC inappropriate for surgery or radiotherapy (authorisedLaBCC=true; authorisedMetastaticBCC=true for symptomatic mBCC). Embryo-fetal toxicity; mandatory pregnancy-prevention programme; male-patient semen precautions. Do not generalise indication or safety programme from one Hedgehog inhibitor to another.",
+                  "monitoring": "Specialist oncology/dermatology monitoring for class and product-specific adverse effects (including muscle spasms, alopecia, dysgeusia, fatigue, weight loss) and pregnancy-prevention compliance.",
+                  "pregnancy": "Contraindicated in pregnancy; pregnancy-prevention programme mandatory per SmPC.",
+                  "sourceUrls": [
+                    "https://www.ema.europa.eu/en/medicines/human/EPAR/erivedge",
+                    "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+                  ]
+                },
+                {
+                  "name": "Sonidegib (Odomzo)",
+                  "route": "oral",
+                  "formulation": "200 mg hard capsules",
+                  "dose": "200 mg orally once daily; swallow whole; take at least two hours after a meal and at least one hour before the following meal",
+                  "frequency": "Once daily",
+                  "duration": "Continue while clinical benefit persists and toxicity remains acceptable per authorised product information",
+                  "contraindications": "Pregnancy; non-compliance with Odomzo Pregnancy Prevention Programme; breastfeeding restrictions per SmPC.",
+                  "precautions": "EMA-authorised for adults with locally advanced BCC not amenable to curative surgery or radiation therapy. authorisedLaBCC=true; authorisedMetastaticBCC=false — sonidegib is NOT an authorised metastatic-BCC treatment in the verified EMA indication; do not infer mBCC indication from vismodegib, HHI class membership, or study discussion. Muscle toxicity and CK elevation: symptom-triggered and regulatory CK monitoring; renal/CK assessment; interruption/dose-modification per SmPC. Do not copy CK logic into vismodegib.",
+                  "monitoring": "CK and muscle symptoms; pregnancy-prevention compliance; specialist monitoring for class adverse effects.",
+                  "pregnancy": "Contraindicated in pregnancy; Odomzo Pregnancy Prevention Programme mandatory per SmPC.",
+                  "sourceUrls": [
+                    "https://www.ema.europa.eu/en/medicines/human/EPAR/odomzo",
+                    "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+                  ]
+                },
+                {
+                  "name": "Cemiplimab (Libtayo)",
+                  "route": "intravenous",
+                  "formulation": "concentrate for solution for infusion",
+                  "dose": "350 mg IV",
+                  "frequency": "Every 3 weeks",
+                  "duration": "Continue until progression or unacceptable toxicity per regulatory source",
+                  "contraindications": "Product-specific contraindications per current SmPC (including hypersensitivity as labelled).",
+                  "precautions": "EMA-authorised BCC indication: adults with locally advanced or metastatic BCC who have progressed on or are intolerant to a Hedgehog pathway inhibitor. requiresPriorHHIProgressionOrIntolerance=true — do not present as unrestricted parallel first-line systemic option. Multi-indication product: use BCC-specific authorised indication only. Immune-mediated adverse reactions require specialist oncology monitoring; do not improvise detailed immune-toxicity management in generic BCC prose.",
+                  "monitoring": "Specialist monitoring for immune-mediated adverse reactions and treatment response.",
+                  "pregnancy": "Verify current SmPC; anti–PD-1 agents have embryo-fetal risk warnings — specialist assessment required.",
+                  "sourceUrls": [
+                    "https://www.ema.europa.eu/en/medicines/human/EPAR/libtayo",
+                    "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+                  ]
+                }
+              ],
+              "sourceUrls": [
+                "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
+                "https://www.ema.europa.eu/en/medicines/human/EPAR/erivedge",
+                "https://www.ema.europa.eu/en/medicines/human/EPAR/odomzo",
+                "https://www.ema.europa.eu/en/medicines/human/EPAR/libtayo"
+              ]
+            }
+          ]
+        },
+        {
+          "level": "supportive-care",
+          "interventions": [
+            {
+              "intervention": "UV protection, skin self-examination and counselling",
+              "details": "Counsel regular skin self-examination and UV protection, with particular emphasis on BCC syndromes or chronic immunosuppression. Immunosuppression is clinically relevant context and increases additional primary skin-cancer risk — it is NOT an S2k Table 2 high recurrence-risk criterion and must not create a third disease-level numerical follow-up schedule.",
+              "sourceUrls": [
+                "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
               ]
             }
           ]
         }
+      ],
+      "nonPharmacological": [
+        "Broad-spectrum UV protection and sun-behaviour counselling",
+        "Regular skin self-examination",
+        "Prompt clinical reassessment of new, recurrent, non-healing, enlarging, bleeding or otherwise suspicious lesions"
       ]
     },
     "followUp": {
       "strategy": "cancer-surveillance",
-      "text": "Risk-adapted surveillance for recurrence and additional primary skin cancers."
+      "text": "Follow-up is risk-adapted according to the German S2k guideline and includes surveillance for local recurrence and additional primary skin cancers. German numerical interval details are owned exclusively by the jurisdiction-specific protocol basal-cell-carcinoma-de — this disease record must not maintain a duplicate editable numerical schedule. Counsel regular skin self-examination and UV protection, with particular emphasis on BCC syndromes or chronic immunosuppression. New, recurrent, non-healing, enlarging, bleeding or otherwise suspicious lesions should prompt clinical reassessment. Do not invent a third immunosuppression-only numerical schedule."
     },
+    "redFlags": [
+      "Rapid growth, deep fixation or clinically suspected locally advanced disease",
+      "Neurologic symptoms suggesting perineural spread",
+      "Orbital, bone or soft-tissue invasion concerns",
+      "Suspected metastatic disease",
+      "Incomplete (R1) excision — generally requires re-excision planning",
+      "Clinicopathologic discordance or unexpected aggressive histology on partial biopsy",
+      "New, recurrent, non-healing, enlarging or bleeding lesions after prior BCC treatment"
+    ],
     "referral": [
       {
         "type": "biopsy-assessment",
-        "indication": "Suspected BCC requiring tissue diagnosis and risk characterization."
+        "indication": "Uncertain diagnosis; before nonsurgical therapy when subtype/characteristics may change selection; large, recurrent, poorly defined or high-risk tumours needing histologic planning."
       },
       {
         "type": "surgery",
-        "indication": "Definitive treatment planning, particularly for higher-risk tumors."
+        "indication": "Definitive excision planning, MCS pathway, R1 re-excision, or complex anatomic sites."
+      },
+      {
+        "type": "oncology",
+        "indication": "Locally advanced or metastatic BCC requiring MDT discussion of systemic therapy, radiotherapy or specialist procedures."
+      },
+      {
+        "type": "systemic-therapy-assessment",
+        "indication": "Consideration of Hedgehog inhibitors or cemiplimab under product-specific authorised indications and prerequisites."
+      },
+      {
+        "type": "dermatology",
+        "indication": "Multiple BCC, syndromic disease, chronic immunosuppression, field of prior radiation, or complex nonsurgical planning."
       }
     ],
     "oncology": {
-      "riskClassification": "Incorporate site, size, borders, histologic subtype and recurrence status.",
-      "histologicSubtype": "Document the final pathology subtype.",
-      "recurrenceMetastasis": "Follow-up includes recurrence surveillance; metastatic potential is very low but locally invasive growth can be destructive."
+      "riskClassification": "German S2k AWMF 032-021 v9.0 Table 2 is authoritative for Docutis German recurrence-risk: any one high-risk criterion classifies the tumour as high recurrence risk. Location × diameter zones — H-zone (central face including eyelids, eyebrows, periorbital region, nose, upper lip, mandibular angle region, pre- and postauricular areas, ears and temples; also genitalia, hands and feet): >6 mm high; <6 mm low when no other high-risk criterion. M-zone (cheeks, forehead, chin, lower lip, scalp, neck, pretibial): >10 mm high; <10 mm low when no other high-risk criterion. L-zone (trunk and extremities): >20 mm high; <20 mm low when no other high-risk criterion. UNRESOLVED SOURCE-BOUNDARY: Table 2 uses strict > and < and does not explicitly assign tumours measuring exactly 6 mm, 10 mm or 20 mm — do not silently convert to ≥/≤ and do not invent an equality rule. Other independent Table 2 high-risk criteria: poorly defined clinical borders; local recurrence; high-risk histology (sclerodermiform, infiltrative, metatypical, micronodular); tumour arising on radioderm/previously irradiated field as defined by the guideline; perineural growth. Lower recurrence-risk histologic variants in Table 2 include superficial, nodular, adenoid, trabecular, infundibulocystic, cystic, fibroepithelial (Pinkus). Mixed histology containing a listed high-risk component should be flagged for physician/pathology-aware handling without inventing a separate formal S2k mixed-pattern rule. Factors OUTSIDE Table 2 (do not insert into the formal classifier): age alone; immunosuppression (clinically relevant second-primary context only); genetic/syndromic predisposition; dermoscopic/clinical ulceration alone. Keep separate concepts: S2k recurrence risk ≠ incomplete/R1 excision ≠ locally advanced BCC (lfBZK/laBCC) ≠ metastatic BCC (mBCC).",
+      "histologicSubtype": "Document final pathology subtype. High-risk histology per Table 2: sclerodermiform, infiltrative, metatypical, micronodular. Do not auto-assign subtype from clinical appearance or dermoscopy.",
+      "excisionMargins": "Low recurrence-risk: 3–5 mm conventional peripheral margin. High-risk/recurrent: MCS preferred; if MCS unavailable >5 mm. 2–3 mm only as labelled specialist caveat — not core recommendation, not for automated recommendation.",
+      "staging": "No routine imaging for uncomplicated BCC. Indication-driven imaging when laBCC, deep extension, clinically relevant perineural spread, orbital/bone involvement or metastatic disease is suspected.",
+      "reExcision": "Histologically incomplete (R1) excision should generally be followed by re-excision; prefer MCS in high-risk, critical-site, recurrent or deep residual settings when feasible. R1 is not the same concept as laBCC or mBCC.",
+      "imaging": "Not routine for uncomplicated BCC; reserve for suspected locally advanced, perineural, orbital, bone or metastatic disease.",
+      "systemicTherapyReferral": "MDT referral for laBCC/mBCC. Vismodegib: laBCC + symptomatic mBCC. Sonidegib: laBCC only (authorisedMetastaticBCC=false). Cemiplimab: laBCC/mBCC only after HHI progression or intolerance. Neoadjuvant HHI selected/non-routine only.",
+      "recurrenceMetastasis": "Metastasis is very rare but locally destructive growth can be severe. Recurrence-risk surveillance is distinct from R1 management and from laBCC/mBCC pathways."
     },
+    "patientCounseling": [
+      "BCC is a locally invasive skin cancer; metastasis is very rare but untreated lesions can destroy local tissue.",
+      "Perform regular skin self-examination and use UV protection; emphasise this especially with BCC syndromes or chronic immunosuppression.",
+      "Seek prompt review for new, recurrent, non-healing, enlarging, bleeding or otherwise suspicious lesions.",
+      "German follow-up visit intervals are defined in the jurisdiction-specific BCC follow-up protocol, not as a second conflicting schedule in this disease summary.",
+      "Ordinary BCC is not BK 5103; occupational UV may still be clinically relevant to discuss with the treating clinician."
+    ],
+    "specialPopulations": [
+      {
+        "population": "immunocompromised",
+        "note": "Clinically relevant increased risk of additional primary skin cancers and counselling emphasis; immunosuppression is NOT an S2k Table 2 high recurrence-risk criterion and must not create a third numerical follow-up schedule."
+      },
+      {
+        "population": "pregnancy",
+        "note": "Hedgehog inhibitors are contraindicated in pregnancy with mandatory pregnancy-prevention programmes; topical fluorouracil is contraindicated; verify each product label before any therapy."
+      },
+      {
+        "population": "lactation",
+        "note": "Product-specific breastfeeding restrictions apply (including Hedgehog inhibitors and fluorouracil); verify current SmPC/Fachinformation."
+      }
+    ],
     "evidenceMap": {
       "presentation": [
+        "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
         "https://dermnetnz.org/topics/basal-cell-carcinoma"
       ],
       "dermoscopy": [
+        "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
         "https://dermnetnz.org/topics/basal-cell-carcinoma"
       ],
       "diagnostics": [
+        "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
         "https://www.aad.org/member/clinical-quality/guidelines/bcc"
       ],
       "differentials": [
+        "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
         "https://dermnetnz.org/topics/basal-cell-carcinoma"
       ],
       "treatment": [
+        "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
+        "https://www.fachinfo.de/fi/pdf/003976",
+        "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
+        "https://www.ema.europa.eu/en/medicines/human/EPAR/ameluz",
+        "https://www.fachinfo.de/fi/detail/007185/metvix-r-160-mg-g-creme",
+        "https://www.ema.europa.eu/en/medicines/human/EPAR/erivedge",
+        "https://www.ema.europa.eu/en/medicines/human/EPAR/odomzo",
+        "https://www.ema.europa.eu/en/medicines/human/EPAR/libtayo",
         "https://www.aad.org/member/clinical-quality/guidelines/bcc"
       ],
       "followUp": [
+        "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
         "https://www.aad.org/member/clinical-quality/guidelines/bcc"
       ],
+      "redFlags": [
+        "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+      ],
       "oncology": [
+        "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
         "https://www.aad.org/member/clinical-quality/guidelines/bcc"
       ]
     },
     "sourceUrls": [
+      "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
+      "https://klassifikationen.bfarm.de/icd-10-gm/kode-suche/htmlgm2026/block-c43-c44.htm",
+      "https://www.fachinfo.de/fi/pdf/003976",
+      "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
+      "https://www.ema.europa.eu/en/medicines/human/EPAR/ameluz",
+      "https://www.fachinfo.de/fi/detail/007185/metvix-r-160-mg-g-creme",
+      "https://www.ema.europa.eu/en/medicines/human/EPAR/erivedge",
+      "https://www.ema.europa.eu/en/medicines/human/EPAR/odomzo",
+      "https://www.ema.europa.eu/en/medicines/human/EPAR/libtayo",
+      "https://www.dguv.de/bk-info/icd-10-kapitel/kapitel_12/bk5103/index.jsp",
       "https://www.aad.org/member/clinical-quality/guidelines/bcc",
-      "https://dermnetnz.org/topics/basal-cell-carcinoma"
+      "https://dermnetnz.org/topics/basal-cell-carcinoma",
+      "https://icd.who.int/browse10/2019/en",
+      "https://www.who.int/standards/classifications/other-classifications/international-classification-of-diseases-for-oncology",
+      "https://whobluebooks.iarc.who.int/structures/skintumours/"
     ]
   },
   "references": [
+    {
+      "title": "S2k-Leitlinie Basalzellkarzinom der Haut",
+      "organization": "German Dermatological Society guideline group / AWMF 032-021",
+      "type": "guideline",
+      "year": 2024,
+      "version": "9.0; AWMF 032-021",
+      "url": "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-23"
+    },
+    {
+      "title": "ICD-10-GM Version 2026 — C43–C44 Melanom und sonstige bösartige Neubildungen der Haut",
+      "organization": "BfArM",
+      "type": "official classification",
+      "year": 2026,
+      "version": "2026",
+      "url": "https://klassifikationen.bfarm.de/icd-10-gm/kode-suche/htmlgm2026/block-c43-c44.htm",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-23"
+    },
     {
       "title": "Basal cell carcinoma clinical guideline",
       "organization": "American Academy of Dermatology",
@@ -938,6 +1396,86 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "metadataCheckedAt": "2026-09-15"
     },
     {
+      "title": "BK 5103 — Squamous cell carcinomas or multiple actinic keratoses of the skin caused by natural UV radiation",
+      "organization": "DGUV",
+      "type": "clinical reference",
+      "year": null,
+      "version": null,
+      "url": "https://www.dguv.de/bk-info/icd-10-kapitel/kapitel_12/bk5103/index.jsp",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-20"
+    },
+    {
+      "title": "Aldara 5% Creme — German Fachinformation",
+      "organization": "Fachinfo-Service / German product information",
+      "type": "clinical reference",
+      "year": null,
+      "version": "Februar 2024",
+      "url": "https://www.fachinfo.de/fi/pdf/003976",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-23"
+    },
+    {
+      "title": "Efudix 5% cream — German Fachinformation",
+      "organization": "German product information",
+      "type": "clinical reference",
+      "year": null,
+      "version": null,
+      "url": "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-20"
+    },
+    {
+      "title": "Ameluz — EPAR Product Information",
+      "organization": "European Medicines Agency",
+      "type": "clinical reference",
+      "year": null,
+      "version": null,
+      "url": "https://www.ema.europa.eu/en/medicines/human/EPAR/ameluz",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-23"
+    },
+    {
+      "title": "Metvix 160 mg/g Creme — German Fachinformation",
+      "organization": "Fachinfo-Service / German product information",
+      "type": "clinical reference",
+      "year": null,
+      "version": "12/2024",
+      "url": "https://www.fachinfo.de/fi/detail/007185/metvix-r-160-mg-g-creme",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-23"
+    },
+    {
+      "title": "Erivedge (vismodegib) — EPAR Product Information",
+      "organization": "European Medicines Agency",
+      "type": "clinical reference",
+      "year": null,
+      "version": null,
+      "url": "https://www.ema.europa.eu/en/medicines/human/EPAR/erivedge",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-23"
+    },
+    {
+      "title": "Odomzo (sonidegib) — EPAR Product Information",
+      "organization": "European Medicines Agency",
+      "type": "clinical reference",
+      "year": null,
+      "version": null,
+      "url": "https://www.ema.europa.eu/en/medicines/human/EPAR/odomzo",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-23"
+    },
+    {
+      "title": "Libtayo (cemiplimab) — EPAR Product Information",
+      "organization": "European Medicines Agency",
+      "type": "clinical reference",
+      "year": null,
+      "version": null,
+      "url": "https://www.ema.europa.eu/en/medicines/human/EPAR/libtayo",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-23"
+    },
+    {
       "title": "Basal cell carcinoma",
       "organization": "DermNet",
       "type": "clinical reference",
@@ -945,7 +1483,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "version": null,
       "url": "https://dermnetnz.org/topics/basal-cell-carcinoma",
       "doi": null,
-      "metadataCheckedAt": "2026-09-20"
+      "metadataCheckedAt": "2026-09-23"
     }
   ]
 }
