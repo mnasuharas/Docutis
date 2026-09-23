@@ -45,7 +45,6 @@ jobs:
           node --check scripts/quiz.js
           node --check review-data.js
           node --check review-status.js
-          node --check oss-feedback.js
           node --check review-ui.js
           node --check scripts/review-governance.js
           node --check scripts/review-batch.js
