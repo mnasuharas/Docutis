@@ -67,7 +67,7 @@ function quizHarness() {
   const document = { activeElement: null, createElement(tag) { return new Element(tag, document); }, getElementById(id) { return id === "quizApp" ? this.root : null; } };
   document.root = new Element("div", document);
   const context = { window: {}, document };
-  for (const file of ["data.js", "media-data.js", "quiz-data.js", "review-status.js", "review-ui.js", "quiz-app.js"]) vm.runInNewContext(fs.readFileSync(path.join(root, file), "utf8"), context);
+  for (const file of ["data.js", "media-data.js", "quiz-data.js", "review-status.js", "oss-feedback.js", "review-ui.js", "quiz-app.js"]) vm.runInNewContext(fs.readFileSync(path.join(root, file), "utf8"), context);
   return { document, root: document.root, quiz: context.window.DOCUTIS_QUIZ };
 }
 

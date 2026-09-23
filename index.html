@@ -23,11 +23,15 @@
     <div class="primary-links">
       <a href="#searchPanel">Search</a>
       <a href="#evidenceStatus">Clinical review</a>
+      <a href="#about">About</a>
       <a href="#followUpModule">Follow-up</a>
       <a href="#quizModule">Quiz</a>
       <a href="#conditionsTitle">Conditions</a>
     </div>
-    <div class="badge">Open source</div>
+    <div class="nav-oss" aria-label="Open-source project links">
+      <a href="https://github.com/mnasuharas/Docutis" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+    <div class="badge">Open source preview</div>
   </nav>
 </header>
 
@@ -40,6 +44,10 @@
     <p>
       An open-source dermatology reference and education toolkit
       designed for physicians, medical trainees and healthcare professionals.
+    </p>
+    <p class="hero-status">
+      Public preview · Clinical review pending · Not validated clinical decision support.
+      Recommendations are educational drafts, not clinician-approved guidance.
     </p>
 
     <div id="libraryStats" class="library-stats" aria-label="Current reference coverage"></div>
@@ -65,6 +73,14 @@
       <p>Docutis does not replace professional clinical judgment, diagnosis, treatment decisions or current guidelines.</p>
     </details>
     <p class="review-machine-link"><a href="review-status.json">Machine-readable public review status (JSON)</a></p>
+    <div class="clinical-feedback clinical-feedback--dashboard" aria-label="Clinical content feedback">
+      <p class="clinical-feedback-lede">Found a problem in educational content? Open a sourced correction request. Do not include patient-identifiable information.</p>
+      <div class="clinical-feedback-actions">
+        <a class="clinical-feedback-link" href="https://github.com/mnasuharas/Docutis/issues/new?template=clinical_content.yml&amp;title=%5BClinical%20content%5D%3A%20Suggest%20a%20correction%20%E2%80%94%20Evidence%20status%20%2F%20clinical%20review%20area" target="_blank" rel="noopener noreferrer">Suggest a correction</a>
+        <a class="clinical-feedback-link" href="https://github.com/mnasuharas/Docutis/issues/new?template=clinical_content.yml&amp;title=%5BClinical%20content%5D%3A%20Report%20outdated%20evidence%20%E2%80%94%20Evidence%20status%20%2F%20clinical%20review%20area" target="_blank" rel="noopener noreferrer">Report outdated evidence</a>
+      </div>
+      <p class="clinical-feedback-help">Include the affected record or page, the claim that needs attention, a verifiable source, and a proposed correction.</p>
+    </div>
   </section>
 
   <section id="searchPanel" class="search-panel" aria-labelledby="searchTitle">
@@ -139,6 +155,47 @@
 
   <section id="details" tabindex="-1" role="region" aria-labelledby="diseaseDetailsTitle" hidden></section>
 
+  <section id="about" class="about-section" aria-labelledby="aboutTitle">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Project status</p>
+        <h2 id="aboutTitle">About Docutis</h2>
+      </div>
+      <p>Who this preview is for, and what it is not.</p>
+    </div>
+    <div class="about-grid">
+      <div>
+        <h3>What it is</h3>
+        <p>Docutis is an open-source, structured dermatology reference and education toolkit for physicians, medical trainees and other healthcare professionals. It organizes concise educational records, follow-up references, visual learning aids and a small quiz behind a transparent clinical-review status model.</p>
+      </div>
+      <div>
+        <h3>Current status</h3>
+        <p><strong>Public preview.</strong> Human clinical review of the Goal 9 pilot assets remains pending. Automated schema, source-metadata and fingerprint checks are not physician attestation.</p>
+        <p><strong>Not validated clinical decision support.</strong> Content is educational draft material and is <strong>not</strong> clinician-approved recommendations for diagnosis, treatment or follow-up.</p>
+      </div>
+      <div>
+        <h3>Limitations</h3>
+        <ul class="about-list">
+          <li>Coverage is incomplete; many dermatology domains remain future work.</li>
+          <li>Treatment and surveillance wording intentionally avoids unsupported dosing and jurisdiction-specific instructions.</li>
+          <li>No completed human clinical-review decisions are published in this preview.</li>
+          <li>Always verify claims against current guidelines and professional judgment.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Open source</h3>
+        <p>Inspect the code, roadmap and changelog, or propose sourced corrections through GitHub.</p>
+        <ul class="about-oss-links">
+          <li><a href="https://github.com/mnasuharas/Docutis" target="_blank" rel="noopener noreferrer">GitHub repository</a></li>
+          <li><a href="https://github.com/mnasuharas/Docutis/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing guide</a></li>
+          <li><a href="https://github.com/mnasuharas/Docutis/blob/main/ROADMAP.md" target="_blank" rel="noopener noreferrer">Roadmap</a></li>
+          <li><a href="https://github.com/mnasuharas/Docutis/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a></li>
+          <li><a href="https://github.com/mnasuharas/Docutis/releases" target="_blank" rel="noopener noreferrer">Releases</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <div class="notice">
     <strong>Medical Disclaimer:</strong>
     Docutis is intended for educational and informational purposes only.
@@ -146,8 +203,16 @@
     decisions or consultation of current clinical guidelines.
   </div>
 
-  <footer>
-    Docutis · Open-source dermatology reference toolkit
+  <footer class="site-footer">
+    <p>Docutis · Open-source dermatology reference toolkit · Public preview</p>
+    <nav class="footer-oss" aria-label="Project documentation and source">
+      <a href="https://github.com/mnasuharas/Docutis" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://github.com/mnasuharas/Docutis/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing</a>
+      <a href="https://github.com/mnasuharas/Docutis/blob/main/ROADMAP.md" target="_blank" rel="noopener noreferrer">Roadmap</a>
+      <a href="https://github.com/mnasuharas/Docutis/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a>
+      <a href="https://github.com/mnasuharas/Docutis/releases" target="_blank" rel="noopener noreferrer">Releases</a>
+      <a href="#about">About / status</a>
+    </nav>
   </footer>
 
 </main>
@@ -158,6 +223,7 @@
 <script src="followup-data.js"></script>
 <script src="quiz-data.js"></script>
 <script src="review-status.js"></script>
+<script src="oss-feedback.js"></script>
 <script src="review-ui.js"></script>
 <script src="app.js"></script>
 <script src="followup-app.js"></script>

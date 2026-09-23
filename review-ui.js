@@ -2,6 +2,7 @@
   "use strict";
 
   const registry = window.DOCUTIS_REVIEW_STATUS || { assets: [], decisions: [], reviewers: [], latestValidHumanReviewDate: null };
+  const oss = window.DOCUTIS_OSS_FEEDBACK || null;
   const labels = Object.freeze({
     "clinician reviewed": "Clinician reviewed",
     "partially reviewed": "Partially reviewed",
@@ -33,6 +34,26 @@
 
   function statusLabel(value) { return labels[value] || "Clinical review pending"; }
   function shortFingerprint(value) { return value ? `${value.slice(0, 17)}…${value.slice(-8)}` : "Unavailable"; }
+
+  function appendExternalLink(parent, label, href, className) {
+    const link = append(parent, "a", label, className);
+    link.href = href;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    return link;
+  }
+
+  function appendFeedbackActions(parent, context = {}) {
+    if (!oss || !parent) return null;
+    const box = append(parent, "div", undefined, "clinical-feedback");
+    box.setAttribute("aria-label", "Clinical content feedback");
+    append(box, "p", "Suggest improvements to this educational material. Feedback opens a GitHub issue form and is not clinical advice.", "clinical-feedback-lede");
+    const actions = append(box, "div", undefined, "clinical-feedback-actions");
+    appendExternalLink(actions, "Suggest a correction", oss.buildCorrectionIssueUrl(context), "clinical-feedback-link");
+    appendExternalLink(actions, "Report outdated evidence", oss.buildOutdatedEvidenceIssueUrl(context), "clinical-feedback-link");
+    append(box, "p", oss.FEEDBACK_PROMPT, "clinical-feedback-help");
+    return box;
+  }
 
   function appendReviewPanel(parent, assetType, id, title = "Human clinical review") {
     const item = asset(assetType, id);
@@ -86,5 +107,5 @@
     return panel;
   }
 
-  window.DOCUTIS_REVIEW_UI = Object.freeze({ registry, asset, statusLabel, shortFingerprint, appendReviewPanel });
+  window.DOCUTIS_REVIEW_UI = Object.freeze({ registry, asset, statusLabel, shortFingerprint, appendReviewPanel, appendFeedbackActions });
 }());

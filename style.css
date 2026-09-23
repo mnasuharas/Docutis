@@ -1638,6 +1638,198 @@ footer {
   }
 }
 
+
+
+/* Goal 10 — public OSS surface, about/status, feedback CTAs */
+.nav-oss {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-left: var(--space-3);
+}
+
+.nav-oss a {
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.nav-oss a:hover,
+.nav-oss a:focus-visible {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.hero-status {
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid #e6d48d;
+  border-left: 4px solid #c9a227;
+  border-radius: var(--radius-md);
+  background: var(--color-warning-soft);
+  color: #5c4b12;
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 52rem;
+}
+
+.clinical-feedback {
+  margin-top: var(--space-5);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.clinical-feedback--dashboard {
+  margin-top: var(--space-6);
+}
+
+.clinical-feedback-lede {
+  margin: 0 0 var(--space-3);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-text);
+}
+
+.clinical-feedback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.clinical-feedback-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-accent);
+  background: #eef7f4;
+  color: #0f4f43;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.clinical-feedback-link:hover,
+.clinical-feedback-link:focus-visible {
+  background: #dcefe9;
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.clinical-feedback-help {
+  margin: var(--space-3) 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #526360;
+}
+
+.about-section {
+  margin-top: var(--space-12);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+.about-grid h3 {
+  margin: 0 0 var(--space-2);
+  font-size: 17px;
+}
+
+.about-grid p,
+.about-list {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.about-list {
+  padding-left: 1.2rem;
+}
+
+.about-list li + li {
+  margin-top: var(--space-2);
+}
+
+.about-oss-links {
+  margin: var(--space-3) 0 0;
+  padding-left: 1.2rem;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.about-oss-links a {
+  color: var(--color-accent);
+}
+
+.site-footer {
+  margin-top: var(--space-10);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  color: #526360;
+  font-size: 14px;
+}
+
+.site-footer p {
+  margin: 0 0 var(--space-3);
+}
+
+.footer-oss {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-4);
+}
+
+.footer-oss a {
+  color: #3f5f57;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer-oss a:hover,
+.footer-oss a:focus-visible {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .nav-oss {
+    margin-left: auto;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .clinical-feedback-actions {
+    flex-direction: column;
+  }
+
+  .clinical-feedback-link {
+    justify-content: center;
+  }
+
+  .about-section {
+    padding: var(--space-5);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

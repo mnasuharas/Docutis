@@ -224,6 +224,7 @@ function uiHarness(transform) {
   const context = { window: {}, document };
   vm.runInNewContext(fs.readFileSync(path.join(root, "followup-data.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(root, "review-status.js"), "utf8"), context);
+  vm.runInNewContext(fs.readFileSync(path.join(root, "oss-feedback.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(root, "review-ui.js"), "utf8"), context);
   if (transform) context.window.DOCUTIS_FOLLOW_UP_DATA = transform(clone(context.window.DOCUTIS_FOLLOW_UP_DATA));
   vm.runInNewContext(fs.readFileSync(path.join(root, "followup-app.js"), "utf8"), context);

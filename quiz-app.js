@@ -67,6 +67,7 @@
     const progress = element("p", `Question ${index + 1} of ${quiz.questions.length}`, "quiz-progress");
     root.appendChild(progress);
     if (reviewUi) reviewUi.appendReviewPanel(root, "quiz", question.id, "Quiz-item review status");
+    if (reviewUi && reviewUi.appendFeedbackActions) reviewUi.appendFeedbackActions(root, { id: question.id, title: question.prompt, assetType: "quiz" });
     const bar = element("div", undefined, "quiz-progress-track");
     bar.setAttribute("role", "progressbar");
     bar.setAttribute("aria-valuemin", "1");

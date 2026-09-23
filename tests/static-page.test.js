@@ -52,7 +52,8 @@ test("static page keeps load order, disclaimer and accessible controls", () => {
   assert.ok(html.indexOf('src="media-data.js"') < html.indexOf('src="app.js"'));
   assert.ok(html.indexOf('src="followup-data.js"') < html.indexOf('src="followup-app.js"'));
   assert.ok(html.indexOf('src="quiz-data.js"') < html.indexOf('src="quiz-app.js"'));
-  assert.ok(html.indexOf('src="review-status.js"') < html.indexOf('src="review-ui.js"'));
+  assert.ok(html.indexOf('src="review-status.js"') < html.indexOf('src="oss-feedback.js"'));
+  assert.ok(html.indexOf('src="oss-feedback.js"') < html.indexOf('src="review-ui.js"'));
   assert.ok(html.indexOf('src="review-ui.js"') < html.indexOf('src="app.js"'));
   assert.match(html, /href="review-status\.json"/);
   assert.match(html, /id="followUpDisease"/);

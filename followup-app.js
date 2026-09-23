@@ -88,6 +88,13 @@
     const publicReview = reviewUi?.asset("follow_up", protocol.id);
     if (publicReview) {
       reviewUi.appendReviewPanel(parent, "follow_up", protocol.id, "Follow-up protocol review status");
+      if (reviewUi.appendFeedbackActions) {
+        reviewUi.appendFeedbackActions(parent, {
+          id: protocol.id,
+          title: protocol.diseaseLabel || protocol.id,
+          assetType: "follow_up"
+        });
+      }
       return;
     }
     const review = protocol.clinicalReview;

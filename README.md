@@ -12,6 +12,8 @@ Docutis is an open-source project that presents dermatology information in a cle
 
 Clinical review is version-bound and independently tracked for disease records, quiz items, visual assets and follow-up protocols. The public dashboard and `review-status.json` distinguish human review from automated validation. The Goal 9 pilot infrastructure is prepared, but no human clinical-review decision has been published.
 
+Goal 10 adds a public OSS surface: About/project-status copy, repository and roadmap/changelog links, and “Suggest a correction” / “Report outdated evidence” CTAs that open the clinical content issue form. Docutis remains a public preview and is not validated clinical decision support.
+
 The current version contains 50 condition records. It retains the malignant and precancerous collection, the first common-dermatology package, and a new infectious-dermatology package spanning bacterial, dermatophyte, other fungal, parasitic and viral disease. It is intended for physicians, medical trainees and other healthcare professionals seeking a concise educational reference.
 
 Docutis is currently in active early development. Its content, structure and technical foundations are being expanded progressively.
