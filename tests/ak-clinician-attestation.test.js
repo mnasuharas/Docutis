@@ -39,7 +39,7 @@ test("About limitation text requires traceable product-specific dosing support",
   assert.doesNotMatch(html, /intentionally avoids unsupported dosing and jurisdiction-specific instructions/);
 });
 
-test("AK alone is clinician reviewed with matching fingerprint and training-role reviewer", () => {
+test("AK is clinician reviewed with matching fingerprint and training-role reviewer", () => {
   const status = buildPublicStatus();
   const ak = status.assets.find(item => item.id === "actinic-keratosis");
   assert.equal(ak.status, "clinician reviewed");
@@ -53,5 +53,7 @@ test("AK alone is clinician reviewed with matching fingerprint and training-role
     `${status.reviewers[0].professionalRole} ${status.reviewers[0].specialtyOrField}`,
     /Facharzt|board-certified|specialist dermatologist|consultant|attending/i
   );
-  assert.ok(status.assets.filter(item => item.id !== "actinic-keratosis").every(item => item.status === "review required"));
+  const reviewedIds = new Set(["actinic-keratosis", "basal-cell-carcinoma"]);
+  assert.ok(status.assets.filter(item => !reviewedIds.has(item.id)).every(item => item.status === "review required"));
+  assert.equal(status.assets.find(item => item.id === "basal-cell-carcinoma").status, "clinician reviewed");
 });
