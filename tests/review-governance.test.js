@@ -41,12 +41,18 @@ test("public manifest covers 23 independent Goal 9 review units with no implied 
   assert.equal(ak.activeDecisionId, "decision-ak-2026-09-23-001");
   assert.equal(bcc.status, "clinician reviewed");
   assert.equal(bcc.activeDecisionId, "decision-bcc-2026-09-23-001");
-  const reviewedIds = new Set(["actinic-keratosis", "basal-cell-carcinoma"]);
+  const reviewedIds = new Set([
+    "actinic-keratosis",
+    "basal-cell-carcinoma",
+    "basal-cell-carcinoma-de",
+    "bcc-dermoscopy",
+    "bcc-clues-schematic"
+  ]);
   assert.ok(status.assets.filter(item => !reviewedIds.has(item.id)).every(item => item.status === "review required"));
   assert.ok(status.assets.every(item => /^sha256-v1:[0-9a-f]{64}$/.test(item.currentFingerprint)), "machine-readable data preserves every full fingerprint");
   assert.equal(status.latestValidHumanReviewDate, "2026-09-23");
   assert.equal(status.reviewers.length, 1);
-  assert.equal(status.decisions.length, 2);
+  assert.equal(status.decisions.length, 5);
   assert.equal(status.reviewers[0].professionalRole, "Physician in dermatology specialty training");
   assert.doesNotMatch(JSON.stringify(status.reviewers[0]), /Facharzt|board-certified|specialist dermatologist|consultant|attending/i);
 });

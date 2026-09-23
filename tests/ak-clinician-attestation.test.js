@@ -53,7 +53,13 @@ test("AK is clinician reviewed with matching fingerprint and training-role revie
     `${status.reviewers[0].professionalRole} ${status.reviewers[0].specialtyOrField}`,
     /Facharzt|board-certified|specialist dermatologist|consultant|attending/i
   );
-  const reviewedIds = new Set(["actinic-keratosis", "basal-cell-carcinoma"]);
+  const reviewedIds = new Set([
+    "actinic-keratosis",
+    "basal-cell-carcinoma",
+    "basal-cell-carcinoma-de",
+    "bcc-dermoscopy",
+    "bcc-clues-schematic"
+  ]);
   assert.ok(status.assets.filter(item => !reviewedIds.has(item.id)).every(item => item.status === "review required"));
   assert.equal(status.assets.find(item => item.id === "basal-cell-carcinoma").status, "clinician reviewed");
 });

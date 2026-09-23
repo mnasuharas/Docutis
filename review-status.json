@@ -111,6 +111,97 @@
       "attestationText": "I confirm that I am a human reviewer and that I assessed only the content versions and sections identified by the recorded fingerprints. My decisions apply only to the recorded scope. Clinically meaningful future changes may invalidate the decisions. This educational governance review does not make Docutis an individual diagnostic or treatment service and does not guarantee completeness or universal applicability.",
       "provenance": "human-submitted",
       "supersededBy": null
+    },
+    {
+      "id": "decision-bcc-de-2026-09-23-001",
+      "assetId": "basal-cell-carcinoma-de",
+      "assetType": "follow_up",
+      "contentFingerprint": "sha256-v1:25cbf04b711b308ca456ab8b67a29bd056d3ccb69c0f404e285adaf8ab92c02e",
+      "schemaVersion": 1,
+      "reviewerId": "reviewer-mna-001",
+      "reviewerRole": "Physician in dermatology specialty training",
+      "reviewDate": "2026-09-23",
+      "reviewedSections": [
+        "scope",
+        "risk-groups",
+        "periods",
+        "clinical-examination",
+        "lymph-node-ultrasound",
+        "s100b",
+        "cross-sectional-imaging",
+        "context",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSourcesChecked": [
+        "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+      ],
+      "verdict": "approved",
+      "requiredCorrections": [],
+      "reviewerNotes": "Physician attestation for basal-cell-carcinoma-de follow-up asset at the recorded fingerprint only. Intensive Group B remains open-ended q3m without Years 1–2 / toYear:2 framing; annual follow-up only after >2 years without new BCC or recurrence; no automatic calendar transition at 24 months; no immunosuppression-only third schedule. This decision does not apply to basal-cell-carcinoma disease, actinic-keratosis, or other BCC-related assets.",
+      "attestationVersion": "docutis-human-clinical-review-v1",
+      "attestationText": "I confirm that I am a human reviewer and that I assessed only the content versions and sections identified by the recorded fingerprints. My decisions apply only to the recorded scope. Clinically meaningful future changes may invalidate the decisions. This educational governance review does not make Docutis an individual diagnostic or treatment service and does not guarantee completeness or universal applicability.",
+      "provenance": "human-submitted",
+      "supersededBy": null
+    },
+    {
+      "id": "decision-bcc-quiz-2026-09-23-001",
+      "assetId": "bcc-dermoscopy",
+      "assetType": "quiz",
+      "contentFingerprint": "sha256-v1:f4b9487215a415cfbbc159b5b1de4a64e77b27d816559b119a32e111276db338",
+      "schemaVersion": 1,
+      "reviewerId": "reviewer-mna-001",
+      "reviewerRole": "Physician in dermatology specialty training",
+      "reviewDate": "2026-09-23",
+      "reviewedSections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSourcesChecked": [
+        "https://dermnetnz.org/topics/basal-cell-carcinoma",
+        "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+      ],
+      "verdict": "approved",
+      "requiredCorrections": [],
+      "reviewerNotes": "Physician attestation for bcc-dermoscopy quiz asset at the recorded fingerprint only. Approved evidence mapping includes added S2k support and is consistent with the finalized basal-cell-carcinoma disease asset. This decision does not apply to basal-cell-carcinoma disease, basal-cell-carcinoma-de, bcc-clues-schematic, or actinic-keratosis.",
+      "attestationVersion": "docutis-human-clinical-review-v1",
+      "attestationText": "I confirm that I am a human reviewer and that I assessed only the content versions and sections identified by the recorded fingerprints. My decisions apply only to the recorded scope. Clinically meaningful future changes may invalidate the decisions. This educational governance review does not make Docutis an individual diagnostic or treatment service and does not guarantee completeness or universal applicability.",
+      "provenance": "human-submitted",
+      "supersededBy": null
+    },
+    {
+      "id": "decision-bcc-visual-2026-09-23-001",
+      "assetId": "bcc-clues-schematic",
+      "assetType": "visual",
+      "contentFingerprint": "sha256-v1:0d45d6d602b890b47548da1e708be5d3f365540b0a2b49240763504bfd6e0471",
+      "schemaVersion": 1,
+      "reviewerId": "reviewer-mna-001",
+      "reviewerRole": "Physician in dermatology specialty training",
+      "reviewDate": "2026-09-23",
+      "reviewedSections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSourcesChecked": [
+        "https://github.com/mnasuharas/Docutis/blob/main/assets/media/bcc-clues-schematic.svg"
+      ],
+      "verdict": "approved",
+      "requiredCorrections": [],
+      "reviewerNotes": "Physician attestation for bcc-clues-schematic visual asset at the recorded fingerprint only. \"Blue-grey ovoid nests\" terminology and conservative teaching approved. This decision does not apply to basal-cell-carcinoma disease, basal-cell-carcinoma-de, bcc-dermoscopy, or actinic-keratosis.",
+      "attestationVersion": "docutis-human-clinical-review-v1",
+      "attestationText": "I confirm that I am a human reviewer and that I assessed only the content versions and sections identified by the recorded fingerprints. My decisions apply only to the recorded scope. Clinically meaningful future changes may invalidate the decisions. This educational governance review does not make Docutis an individual diagnostic or treatment service and does not guarantee completeness or universal applicability.",
+      "provenance": "human-submitted",
+      "supersededBy": null
     }
   ],
   "assets": [
@@ -1090,17 +1181,40 @@
           "metadataCheckedAt": "2026-09-23"
         }
       ],
-      "status": "review required",
-      "activeDecisionId": null,
-      "history": [],
-      "awaitingSections": [
-        "prompt",
-        "options",
-        "best-answer",
-        "explanation",
-        "safety-notice",
-        "references"
-      ]
+      "status": "clinician reviewed",
+      "activeDecisionId": "decision-bcc-quiz-2026-09-23-001",
+      "history": [
+        {
+          "id": "decision-bcc-quiz-2026-09-23-001",
+          "assetId": "bcc-dermoscopy",
+          "assetType": "quiz",
+          "contentFingerprint": "sha256-v1:f4b9487215a415cfbbc159b5b1de4a64e77b27d816559b119a32e111276db338",
+          "schemaVersion": 1,
+          "reviewerId": "reviewer-mna-001",
+          "reviewerRole": "Physician in dermatology specialty training",
+          "reviewDate": "2026-09-23",
+          "reviewedSections": [
+            "prompt",
+            "options",
+            "best-answer",
+            "explanation",
+            "safety-notice",
+            "references"
+          ],
+          "evidenceSourcesChecked": [
+            "https://dermnetnz.org/topics/basal-cell-carcinoma",
+            "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+          ],
+          "verdict": "approved",
+          "requiredCorrections": [],
+          "reviewerNotes": "Physician attestation for bcc-dermoscopy quiz asset at the recorded fingerprint only. Approved evidence mapping includes added S2k support and is consistent with the finalized basal-cell-carcinoma disease asset. This decision does not apply to basal-cell-carcinoma disease, basal-cell-carcinoma-de, bcc-clues-schematic, or actinic-keratosis.",
+          "attestationVersion": "docutis-human-clinical-review-v1",
+          "attestationText": "I confirm that I am a human reviewer and that I assessed only the content versions and sections identified by the recorded fingerprints. My decisions apply only to the recorded scope. Clinically meaningful future changes may invalidate the decisions. This educational governance review does not make Docutis an individual diagnostic or treatment service and does not guarantee completeness or universal applicability.",
+          "provenance": "human-submitted",
+          "supersededBy": null
+        }
+      ],
+      "awaitingSections": []
     },
     {
       "id": "psoriasis-distribution",
@@ -1435,19 +1549,41 @@
           "metadataCheckedAt": "2026-09-20"
         }
       ],
-      "status": "review required",
-      "activeDecisionId": null,
-      "history": [],
-      "awaitingSections": [
-        "image",
-        "title",
-        "caption",
-        "alternative-text",
-        "educational-description",
-        "legend",
-        "safety-notice",
-        "provenance"
-      ]
+      "status": "clinician reviewed",
+      "activeDecisionId": "decision-bcc-visual-2026-09-23-001",
+      "history": [
+        {
+          "id": "decision-bcc-visual-2026-09-23-001",
+          "assetId": "bcc-clues-schematic",
+          "assetType": "visual",
+          "contentFingerprint": "sha256-v1:0d45d6d602b890b47548da1e708be5d3f365540b0a2b49240763504bfd6e0471",
+          "schemaVersion": 1,
+          "reviewerId": "reviewer-mna-001",
+          "reviewerRole": "Physician in dermatology specialty training",
+          "reviewDate": "2026-09-23",
+          "reviewedSections": [
+            "image",
+            "title",
+            "caption",
+            "alternative-text",
+            "educational-description",
+            "legend",
+            "safety-notice",
+            "provenance"
+          ],
+          "evidenceSourcesChecked": [
+            "https://github.com/mnasuharas/Docutis/blob/main/assets/media/bcc-clues-schematic.svg"
+          ],
+          "verdict": "approved",
+          "requiredCorrections": [],
+          "reviewerNotes": "Physician attestation for bcc-clues-schematic visual asset at the recorded fingerprint only. \"Blue-grey ovoid nests\" terminology and conservative teaching approved. This decision does not apply to basal-cell-carcinoma disease, basal-cell-carcinoma-de, bcc-dermoscopy, or actinic-keratosis.",
+          "attestationVersion": "docutis-human-clinical-review-v1",
+          "attestationText": "I confirm that I am a human reviewer and that I assessed only the content versions and sections identified by the recorded fingerprints. My decisions apply only to the recorded scope. Clinically meaningful future changes may invalidate the decisions. This educational governance review does not make Docutis an individual diagnostic or treatment service and does not guarantee completeness or universal applicability.",
+          "provenance": "human-submitted",
+          "supersededBy": null
+        }
+      ],
+      "awaitingSections": []
     },
     {
       "id": "psoriasis-distribution-schematic",
@@ -1654,21 +1790,43 @@
           "metadataCheckedAt": "2026-09-16"
         }
       ],
-      "status": "review required",
-      "activeDecisionId": null,
-      "history": [],
-      "awaitingSections": [
-        "scope",
-        "risk-groups",
-        "periods",
-        "clinical-examination",
-        "lymph-node-ultrasound",
-        "s100b",
-        "cross-sectional-imaging",
-        "context",
-        "safety-notice",
-        "references"
-      ]
+      "status": "clinician reviewed",
+      "activeDecisionId": "decision-bcc-de-2026-09-23-001",
+      "history": [
+        {
+          "id": "decision-bcc-de-2026-09-23-001",
+          "assetId": "basal-cell-carcinoma-de",
+          "assetType": "follow_up",
+          "contentFingerprint": "sha256-v1:25cbf04b711b308ca456ab8b67a29bd056d3ccb69c0f404e285adaf8ab92c02e",
+          "schemaVersion": 1,
+          "reviewerId": "reviewer-mna-001",
+          "reviewerRole": "Physician in dermatology specialty training",
+          "reviewDate": "2026-09-23",
+          "reviewedSections": [
+            "scope",
+            "risk-groups",
+            "periods",
+            "clinical-examination",
+            "lymph-node-ultrasound",
+            "s100b",
+            "cross-sectional-imaging",
+            "context",
+            "safety-notice",
+            "references"
+          ],
+          "evidenceSourcesChecked": [
+            "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
+          ],
+          "verdict": "approved",
+          "requiredCorrections": [],
+          "reviewerNotes": "Physician attestation for basal-cell-carcinoma-de follow-up asset at the recorded fingerprint only. Intensive Group B remains open-ended q3m without Years 1–2 / toYear:2 framing; annual follow-up only after >2 years without new BCC or recurrence; no automatic calendar transition at 24 months; no immunosuppression-only third schedule. This decision does not apply to basal-cell-carcinoma disease, actinic-keratosis, or other BCC-related assets.",
+          "attestationVersion": "docutis-human-clinical-review-v1",
+          "attestationText": "I confirm that I am a human reviewer and that I assessed only the content versions and sections identified by the recorded fingerprints. My decisions apply only to the recorded scope. Clinically meaningful future changes may invalidate the decisions. This educational governance review does not make Docutis an individual diagnostic or treatment service and does not guarantee completeness or universal applicability.",
+          "provenance": "human-submitted",
+          "supersededBy": null
+        }
+      ],
+      "awaitingSections": []
     },
     {
       "id": "cutaneous-squamous-cell-carcinoma-de",
