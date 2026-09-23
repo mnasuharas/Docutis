@@ -115,11 +115,11 @@ test("initial rendering creates all cards and eight category sections", () => {
   assert.ok(elements.categoryFilters.querySelectorAll("button").every(button => button.type === "button"));
   assert.match(elements.resultStatus.textContent, /50 conditions shown/);
   assert.match(textOf(elements.libraryStats), /3\s+oncology follow-up protocols/);
-  assert.match(textOf(elements.reviewDashboardCounts), /0\s+Clinician-reviewed records/);
+  assert.match(textOf(elements.reviewDashboardCounts), /1\s+Clinician-reviewed records/);
   assert.match(textOf(elements.reviewDashboardCounts), /0\s+Partially reviewed records/);
-  assert.match(textOf(elements.reviewDashboardCounts), /50\s+Records requiring clinician review/);
+  assert.match(textOf(elements.reviewDashboardCounts), /49\s+Records requiring clinician review/);
   assert.match(textOf(elements.reviewDashboardCounts), /0\/4\s+Reviewed visual items/);
-  assert.match(textOf(elements.reviewDashboardCounts), /None\s+Most recent valid human review/);
+  assert.match(textOf(elements.reviewDashboardCounts), /2026-09-23\s+Most recent valid human review/);
 });
 
 test("search covers names, aliases, categories, subcategories and both coding systems", () => {
@@ -180,7 +180,7 @@ test("new non-neoplastic details explain ICD-O applicability and expose guidelin
   const details = textOf(elements.details);
   assert.match(details, /ICD-10 WHO 2019: L80/);
   assert.match(details, /ICD-O 3.2 \(oncology registry coding\)/);
-  assert.match(details, /Not applicable — this non-neoplastic condition is outside ICD-O oncology registry coding/);
+  assert.match(details, /No ICD-O morphology code is assigned for this record/);
   assert.match(details, /International Vitiligo Task Force/);
   assert.match(details, /DOI: 10.1111\/jdv.19451/);
   assert.match(details, /Source metadata checked: 2026-09-16/);
@@ -192,7 +192,7 @@ test("infectious details render ICD-O non-applicability and source DOI metadata"
   card.dispatch("click");
   const details = textOf(elements.details);
   assert.match(details, /ICD-10 WHO 2019: B86/);
-  assert.match(details, /Not applicable — this non-neoplastic condition is outside ICD-O oncology registry coding/);
+  assert.match(details, /No ICD-O morphology code is assigned for this record/);
   assert.match(details, /DOI: 10.1111\/ijd.17327/);
   assert.match(details, /Source metadata checked: 2026-09-16/);
 });
@@ -372,7 +372,8 @@ test("optional educational media renders provenance and recovers from image fail
 
 test("unreviewed details use a compact pending badge and collapsed review disclosure", () => {
   const { elements } = createHarness();
-  elements.cards.querySelectorAll(".card")[0].dispatch("click");
+  const pendingCard = [...elements.cards.querySelectorAll(".card")].find(card => /Basal Cell Carcinoma/.test(textOf(card)));
+  pendingCard.dispatch("click");
   assert.match(textOf(elements.details), /Clinical review pending/);
   assert.match(textOf(elements.details), /This article has not yet completed human physician review/);
   assert.doesNotMatch(textOf(elements.details), /Reviewed:/);

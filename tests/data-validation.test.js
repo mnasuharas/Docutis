@@ -256,16 +256,18 @@ test("infectious records retain primary sources, coding and the review gate", ()
   assert.ok(condition("molluscum-contagiosum").references.some(reference => reference.url.includes("/molluscum-contagiosum/hcp/clinical-overview/")));
 });
 
-test("actinic keratosis keeps clinician review required and carries ICD-10-GM L57.0 with German topical labeling guardrails", () => {
+test("actinic keratosis carries ICD-10-GM L57.0 with German topical labeling guardrails and ICD-O not-applicable note", () => {
   const ak = condition("actinic-keratosis");
   assert.equal(ak.reviewStatus, "clinician review required");
   assert.equal(ak.clinicalReview, null);
   const systems = ak.coding.diagnoses.map(item => `${item.system}:${item.code}`);
   assert.ok(systems.includes("ICD-10 WHO:L57.0"));
   assert.ok(systems.includes("ICD-10-GM:L57.0"));
-  assert.match(ak.coding.verificationNote, /BK 5103/);
-  assert.match(ak.coding.verificationNote, /more than 5 AK/);
-  assert.match(ak.coding.verificationNote, /4 cm/);
+  assert.equal(ak.coding.icdoApplicability, "not applicable");
+  assert.match(ak.coding.verificationNote, /No ICD-O morphology code is assigned to routine clinically diagnosed actinic keratosis/);
+  assert.match(JSON.stringify(ak), /BK 5103/);
+  assert.match(JSON.stringify(ak), /more than 5 AK/);
+  assert.match(JSON.stringify(ak), /4 cm/);
   assert.match(JSON.stringify(ak), /ingenol mebutate/i);
   assert.match(JSON.stringify(ak), /withdrawn|not for use|not included/i);
   assert.doesNotMatch(JSON.stringify(ak), /100\s*cm/);

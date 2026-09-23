@@ -2,16 +2,74 @@
   "schemaVersion": 1,
   "generatedFrom": "review-data.js",
   "attestationVersion": "docutis-human-clinical-review-v1",
-  "latestValidHumanReviewDate": null,
-  "reviewers": [],
-  "decisions": [],
+  "latestValidHumanReviewDate": "2026-09-23",
+  "reviewers": [
+    {
+      "id": "reviewer-mna-001",
+      "displayName": "Murat Nasuh Aras",
+      "professionalRole": "Physician in dermatology specialty training",
+      "specialtyOrField": "Dermatology and Venereology — physician in specialty training",
+      "trainingStatus": "physician in specialty training",
+      "publicDisplayConsent": true
+    }
+  ],
+  "decisions": [
+    {
+      "id": "decision-ak-2026-09-23-001",
+      "assetId": "actinic-keratosis",
+      "assetType": "disease",
+      "contentFingerprint": "sha256-v1:92302d680f4c645cc1a91c9a827a3e44b0d965fa21fa019144458bd81c27a1dd",
+      "schemaVersion": 1,
+      "reviewerId": "reviewer-mna-001",
+      "reviewerRole": "Physician in dermatology specialty training",
+      "reviewDate": "2026-09-23",
+      "reviewedSections": [
+        "overview",
+        "clinical-presentation",
+        "diagnostics",
+        "dermoscopy",
+        "differential-diagnosis",
+        "treatment",
+        "follow-up",
+        "coding",
+        "references",
+        "histopathology",
+        "red-flags",
+        "referral",
+        "patient-safety"
+      ],
+      "evidenceSourcesChecked": [
+        "https://dermnetnz.org/topics/actinic-keratosis",
+        "https://icd.who.int/browse10/2019/en",
+        "https://klassifikationen.bfarm.de/icd-10-gm/kode-suche/htmlgm2026/block-l55-l59.htm",
+        "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
+        "https://register.awmf.org/assets/guidelines/032-022OLl_S3_Aktinische_Keratosen-Plattenepithelkarzinom-PEK_2023-01.pdf",
+        "https://register.awmf.org/assets/guidelines/032-052OLl_S3_Praevention-Hautkrebs_2021-09.pdf",
+        "https://www.dguv.de/bk-info/icd-10-kapitel/kapitel_12/bk5103/index.jsp",
+        "https://www.ema.europa.eu/en/medicines/human/EPAR/aldara",
+        "https://www.ema.europa.eu/en/medicines/human/EPAR/zyclara",
+        "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
+        "https://www.fachinfo.de/fi/detail/23428/Klisyri-10-mg-g-Salbe",
+        "https://www.fachinfo.de/fi/pdf/007858/solaraze-3-gel",
+        "https://www.fachinfo.de/fi/pdf/013084/actikerall-5-mg-g-100-mg-g-loesung-zur-anwendung-auf-der-haut",
+        "https://www.fachinfo.de/fi/pdf/022967/tolak-r-40-mg-g-creme"
+      ],
+      "verdict": "approved",
+      "requiredCorrections": [],
+      "reviewerNotes": "Section-by-section physician review completed. Requested clinical, terminology and source-provenance corrections were applied and verified before final approval.",
+      "attestationVersion": "docutis-human-clinical-review-v1",
+      "attestationText": "I confirm that I am a human reviewer and that I assessed only the content versions and sections identified by the recorded fingerprints. My decisions apply only to the recorded scope. Clinically meaningful future changes may invalidate the decisions. This educational governance review does not make Docutis an individual diagnostic or treatment service and does not guarantee completeness or universal applicability.",
+      "provenance": "human-submitted",
+      "supersededBy": null
+    }
+  ],
   "assets": [
     {
       "id": "actinic-keratosis",
       "assetType": "disease",
       "title": "Actinic Keratosis",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:7a0ad7895f1a359100f99a7e1e1e7ca12145fa63da8ffbfe76244dfdb61baed4",
+      "currentFingerprint": "sha256-v1:92302d680f4c645cc1a91c9a827a3e44b0d965fa21fa019144458bd81c27a1dd",
       "sections": [
         "overview",
         "clinical-presentation",
@@ -40,8 +98,8 @@
         "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
         "https://www.fachinfo.de/fi/detail/23428/Klisyri-10-mg-g-Salbe",
         "https://www.fachinfo.de/fi/pdf/007858/solaraze-3-gel",
-        "https://www.medicines.org.uk/emc/product/15802/smpc",
-        "https://www.medicines.org.uk/emc/product/4621/smpc"
+        "https://www.fachinfo.de/fi/pdf/013084/actikerall-5-mg-g-100-mg-g-loesung-zur-anwendung-auf-der-haut",
+        "https://www.fachinfo.de/fi/pdf/022967/tolak-r-40-mg-g-creme"
       ],
       "evidenceMetadata": [
         {
@@ -102,7 +160,7 @@
           "version": "2.1; AWMF 032/052OL",
           "doi": null,
           "url": "https://register.awmf.org/assets/guidelines/032-052OLl_S3_Praevention-Hautkrebs_2021-09.pdf",
-          "metadataCheckedAt": "2026-09-20"
+          "metadataCheckedAt": "2026-09-23"
         },
         {
           "title": "BK 5103 — Squamous cell carcinomas or multiple actinic keratoses of the skin caused by natural UV radiation",
@@ -165,44 +223,79 @@
           "metadataCheckedAt": "2026-09-20"
         },
         {
-          "title": "Tolak 40 mg/g cream — Summary of Product Characteristics / German Fachinformation",
-          "organization": "German product information / EU SmPC",
+          "title": "Actikerall 5 mg/g + 100 mg/g Lösung zur Anwendung auf der Haut — Fachinformation",
+          "organization": "Fachinfo-Service / Almirall Hermal GmbH / German product information",
           "type": "clinical reference",
           "year": null,
-          "version": null,
+          "version": "January 2023",
           "doi": null,
-          "url": "https://www.medicines.org.uk/emc/product/15802/smpc",
-          "metadataCheckedAt": "2026-09-20"
+          "url": "https://www.fachinfo.de/fi/pdf/013084/actikerall-5-mg-g-100-mg-g-loesung-zur-anwendung-auf-der-haut",
+          "metadataCheckedAt": "2026-09-23"
         },
         {
-          "title": "Actikerall 5 mg/g + 100 mg/g cutaneous solution — SmPC / Fachinformation",
-          "organization": "German product information / EU SmPC",
+          "title": "Tolak 40 mg/g Creme — Fachinformation",
+          "organization": "Fachinfo-Service / German product information",
           "type": "clinical reference",
           "year": null,
           "version": null,
           "doi": null,
-          "url": "https://www.medicines.org.uk/emc/product/4621/smpc",
-          "metadataCheckedAt": "2026-09-20"
+          "url": "https://www.fachinfo.de/fi/pdf/022967/tolak-r-40-mg-g-creme",
+          "metadataCheckedAt": "2026-09-23"
         }
       ],
-      "status": "review required",
-      "activeDecisionId": null,
-      "history": [],
-      "awaitingSections": [
-        "overview",
-        "clinical-presentation",
-        "diagnostics",
-        "dermoscopy",
-        "differential-diagnosis",
-        "treatment",
-        "follow-up",
-        "coding",
-        "references",
-        "histopathology",
-        "red-flags",
-        "referral",
-        "patient-safety"
-      ]
+      "status": "clinician reviewed",
+      "activeDecisionId": "decision-ak-2026-09-23-001",
+      "history": [
+        {
+          "id": "decision-ak-2026-09-23-001",
+          "assetId": "actinic-keratosis",
+          "assetType": "disease",
+          "contentFingerprint": "sha256-v1:92302d680f4c645cc1a91c9a827a3e44b0d965fa21fa019144458bd81c27a1dd",
+          "schemaVersion": 1,
+          "reviewerId": "reviewer-mna-001",
+          "reviewerRole": "Physician in dermatology specialty training",
+          "reviewDate": "2026-09-23",
+          "reviewedSections": [
+            "overview",
+            "clinical-presentation",
+            "diagnostics",
+            "dermoscopy",
+            "differential-diagnosis",
+            "treatment",
+            "follow-up",
+            "coding",
+            "references",
+            "histopathology",
+            "red-flags",
+            "referral",
+            "patient-safety"
+          ],
+          "evidenceSourcesChecked": [
+            "https://dermnetnz.org/topics/actinic-keratosis",
+            "https://icd.who.int/browse10/2019/en",
+            "https://klassifikationen.bfarm.de/icd-10-gm/kode-suche/htmlgm2026/block-l55-l59.htm",
+            "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
+            "https://register.awmf.org/assets/guidelines/032-022OLl_S3_Aktinische_Keratosen-Plattenepithelkarzinom-PEK_2023-01.pdf",
+            "https://register.awmf.org/assets/guidelines/032-052OLl_S3_Praevention-Hautkrebs_2021-09.pdf",
+            "https://www.dguv.de/bk-info/icd-10-kapitel/kapitel_12/bk5103/index.jsp",
+            "https://www.ema.europa.eu/en/medicines/human/EPAR/aldara",
+            "https://www.ema.europa.eu/en/medicines/human/EPAR/zyclara",
+            "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
+            "https://www.fachinfo.de/fi/detail/23428/Klisyri-10-mg-g-Salbe",
+            "https://www.fachinfo.de/fi/pdf/007858/solaraze-3-gel",
+            "https://www.fachinfo.de/fi/pdf/013084/actikerall-5-mg-g-100-mg-g-loesung-zur-anwendung-auf-der-haut",
+            "https://www.fachinfo.de/fi/pdf/022967/tolak-r-40-mg-g-creme"
+          ],
+          "verdict": "approved",
+          "requiredCorrections": [],
+          "reviewerNotes": "Section-by-section physician review completed. Requested clinical, terminology and source-provenance corrections were applied and verified before final approval.",
+          "attestationVersion": "docutis-human-clinical-review-v1",
+          "attestationText": "I confirm that I am a human reviewer and that I assessed only the content versions and sections identified by the recorded fingerprints. My decisions apply only to the recorded scope. Clinically meaningful future changes may invalidate the decisions. This educational governance review does not make Docutis an individual diagnostic or treatment service and does not guarantee completeness or universal applicability.",
+          "provenance": "human-submitted",
+          "supersededBy": null
+        }
+      ],
+      "awaitingSections": []
     },
     {
       "id": "basal-cell-carcinoma",

@@ -89,10 +89,11 @@ test("Goal 10 docs agree on public preview status and keep 23 review units pendi
   assert.match(roadmap, /Goal 10/);
   assert.match(changelog, /Goal 10/);
   assert.equal(reviewStatus.assets.length, 23);
-  assert.ok(reviewStatus.assets.every(item => item.status === "review required"));
-  assert.equal(reviewStatus.latestValidHumanReviewDate, null);
-  assert.equal((reviewStatus.reviewers || []).length, 0);
-  assert.equal((reviewStatus.decisions || []).length, 0);
+  assert.equal(reviewStatus.assets.filter(item => item.status === "clinician reviewed").length, 1);
+  assert.equal(reviewStatus.assets.filter(item => item.status === "review required").length, 22);
+  assert.equal(reviewStatus.latestValidHumanReviewDate, "2026-09-23");
+  assert.equal((reviewStatus.reviewers || []).length, 1);
+  assert.equal((reviewStatus.decisions || []).length, 1);
 });
 
 test("Goal 10 nav remains keyboard-discoverable in markup", () => {
