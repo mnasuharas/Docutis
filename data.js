@@ -67,12 +67,12 @@
     aadAk: source({ title: "Actinic keratosis clinical guideline", organization: "American Academy of Dermatology", type: "guideline", url: "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis", metadataCheckedAt: "2026-09-20" }),
     germanS3Ak: source({ title: "S3 guideline: actinic keratosis and cutaneous squamous cell carcinoma — update 2023, part 1: treatment of actinic keratosis, actinic cheilitis, Bowen disease, occupational disease and structures of care", organization: "German Dermatological Society guideline group / AWMF 032/022OL", type: "guideline", year: 2023, version: "2.0", url: "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231", doi: "10.1111/ddg.15231", metadataCheckedAt: "2026-09-20" }),
     awmfAkPdf: source({ title: "S3-Leitlinie Aktinische Keratose und Plattenepithelkarzinom der Haut (Langfassung)", organization: "Leitlinienprogramm Onkologie / AWMF", type: "guideline", year: 2023, version: "2.0; AWMF 032/022OL", url: "https://register.awmf.org/assets/guidelines/032-022OLl_S3_Aktinische_Keratosen-Plattenepithelkarzinom-PEK_2023-01.pdf", metadataCheckedAt: "2026-09-20" }),
-    awmfSkinCancerPrevention: source({ title: "S3-Leitlinie Prävention von Hautkrebs", organization: "Leitlinienprogramm Onkologie / AWMF", type: "guideline", year: 2021, version: "2.1; AWMF 032/052OL", url: "https://register.awmf.org/assets/guidelines/032-052OLl_S3_Praevention-Hautkrebs_2021-09.pdf", metadataCheckedAt: "2026-09-20" }),
+    awmfSkinCancerPrevention: source({ title: "S3-Leitlinie Prävention von Hautkrebs", organization: "Leitlinienprogramm Onkologie / AWMF", type: "guideline", year: 2021, version: "2.1; AWMF 032/052OL", url: "https://register.awmf.org/assets/guidelines/032-052OLl_S3_Praevention-Hautkrebs_2021-09.pdf", metadataCheckedAt: "2026-09-23" }),
     bfarmIcd10Gm2026: source({ title: "ICD-10-GM Version 2026 — L57.0 Aktinische Keratose", organization: "BfArM", type: "official classification", year: 2026, version: "2026", url: "https://klassifikationen.bfarm.de/icd-10-gm/kode-suche/htmlgm2026/block-l55-l59.htm", metadataCheckedAt: "2026-09-20" }),
     dguvBk5103: source({ title: "BK 5103 — Squamous cell carcinomas or multiple actinic keratoses of the skin caused by natural UV radiation", organization: "DGUV", type: "clinical reference", url: "https://www.dguv.de/bk-info/icd-10-kapitel/kapitel_12/bk5103/index.jsp", metadataCheckedAt: "2026-09-20" }),
-    fiTolak: source({ title: "Tolak 40 mg/g cream — Summary of Product Characteristics / German Fachinformation", organization: "German product information / EU SmPC", type: "clinical reference", url: "https://www.medicines.org.uk/emc/product/15802/smpc", metadataCheckedAt: "2026-09-20" }),
+    fiTolak: source({ title: "Tolak 40 mg/g Creme — Fachinformation", organization: "Fachinfo-Service / German product information", type: "clinical reference", url: "https://www.fachinfo.de/fi/pdf/022967/tolak-r-40-mg-g-creme", metadataCheckedAt: "2026-09-23" }),
     fiEfudix: source({ title: "Efudix 5% cream — German Fachinformation", organization: "German product information", type: "clinical reference", url: "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme", metadataCheckedAt: "2026-09-20" }),
-    fiActikerall: source({ title: "Actikerall 5 mg/g + 100 mg/g cutaneous solution — SmPC / Fachinformation", organization: "German product information / EU SmPC", type: "clinical reference", url: "https://www.medicines.org.uk/emc/product/4621/smpc", metadataCheckedAt: "2026-09-20" }),
+    fiActikerall: source({ title: "Actikerall 5 mg/g + 100 mg/g Lösung zur Anwendung auf der Haut — Fachinformation", organization: "Fachinfo-Service / Almirall Hermal GmbH / German product information", type: "clinical reference", version: "January 2023", url: "https://www.fachinfo.de/fi/pdf/013084/actikerall-5-mg-g-100-mg-g-loesung-zur-anwendung-auf-der-haut", metadataCheckedAt: "2026-09-23" }),
     fiAldara: source({ title: "Aldara 5% cream — EPAR Product Information", organization: "European Medicines Agency", type: "clinical reference", url: "https://www.ema.europa.eu/en/medicines/human/EPAR/aldara", metadataCheckedAt: "2026-09-20" }),
     fiZyclara: source({ title: "Zyclara 3.75% cream — EPAR Product Information", organization: "European Medicines Agency", type: "clinical reference", url: "https://www.ema.europa.eu/en/medicines/human/EPAR/zyclara", metadataCheckedAt: "2026-09-20" }),
     fiKlisyri: source({ title: "Klisyri 10 mg/g ointment (tirbanibulin) — German Fachinformation / EU product information", organization: "German product information / EMA", type: "clinical reference", url: "https://www.fachinfo.de/fi/detail/23428/Klisyri-10-mg-g-Salbe", metadataCheckedAt: "2026-09-20" }),
@@ -174,7 +174,7 @@
           icd10Gm("L57.0", "Aktinische Keratose", "German Modification code for German clinical documentation and billing; keep separate from ICD-10 WHO.")
         ],
         icdoApplicability: "not applicable",
-        verificationNote: "ICD-10 WHO L57.0 remains the international base code. ICD-10-GM 2026 L57.0 (Aktinische Keratose) is the relevant German national code. Do not invent ICD-O morphology from clinical AK alone. For suspected occupational natural UV causation, assess BK 5103 separately: multiple AK means more than 5 AK within 12 months or field cancerization greater than 4 cm² on occupationally exposed skin; statutory reporting applies when suspicion is justified — not automatic for every AK patient."
+        verificationNote: "No ICD-O morphology code is assigned to routine clinically diagnosed actinic keratosis in this record. If squamous cell carcinoma in situ or invasive cutaneous squamous cell carcinoma is histologically diagnosed, the neoplasm should be coded separately according to the pathological diagnosis and applicable registry system."
       }),
       description: "A UV-associated keratinocytic intraepidermal neoplastic lesion on chronically sun-exposed skin. It may progress to cutaneous squamous cell carcinoma in some lesions, but no precise universal lesion-to-cSCC progression percentage is asserted here.",
       clinical: "Typically a rough or gritty erythematous macule, papule or plaque with variable adherent scale or hyperkeratosis on chronically sun-exposed skin (face, ears, bald scalp, dorsal hands, forearms). Lesions may be tender and are often multiple within field cancerization. Pigmented AK is a recognized clinical variant. Actinic cheilitis is a related but distinct UV-associated disease of the lip and is not merged into ordinary cutaneous AK.",
@@ -261,7 +261,7 @@
                       precautions: "Generally for non-hyperkeratotic/non-hypertrophic (Olsen I–II) AK of face/ears/scalp per German/EU labeling; expect inflammatory local skin reactions; wash hands after application.",
                       monitoring: "Local skin reaction intensity; interrupt or treat supportively if severe; assess response after the post-treatment recovery period.",
                       pregnancy: "Contraindicated in pregnancy and breastfeeding per fluoropyrimidine labeling.",
-                      sourceUrls: ["https://www.medicines.org.uk/emc/product/15802/smpc"]
+                      sourceUrls: ["https://www.fachinfo.de/fi/pdf/022967/tolak-r-40-mg-g-creme"]
                     },
                     {
                       name: "5-Fluorouracil 5% cream (e.g. Efudix)",
@@ -283,11 +283,11 @@
                       dose: "Apply to affected area; total treated skin must not exceed 25 cm² (5×5 cm)",
                       frequency: "Once daily",
                       duration: "Until clearance or up to 12 weeks; reduce frequency if severe local reactions",
-                      contraindications: "Pregnancy and breastfeeding; renal impairment precautions as in Fachinformation; hypersensitivity to ingredients.",
+                      contraindications: "Contraindicated during pregnancy and breastfeeding, in patients with renal insufficiency, and in patients with hypersensitivity to fluorouracil, salicylic acid or any excipient. Actikerall must not be used concomitantly with brivudine, sorivudine or their analogues; a minimum interval of four weeks must be observed between treatment with these antiviral nucleoside analogues and fluorouracil.",
                       precautions: "Mild to moderately hyperkeratotic Olsen I–II AK in immunocompetent adults per German/EU PI; application precautions and occlusion/removal of film as labeled; max 25 cm² remains supported.",
                       monitoring: "Local reaction; response may continue for weeks after the end of treatment.",
                       pregnancy: "Contraindicated in pregnancy and breastfeeding.",
-                      sourceUrls: ["https://www.medicines.org.uk/emc/product/4621/smpc"]
+                      sourceUrls: ["https://www.fachinfo.de/fi/pdf/013084/actikerall-5-mg-g-100-mg-g-loesung-zur-anwendung-auf-der-haut"]
                     },
                     {
                       name: "Imiquimod 5% cream (e.g. Aldara)",
@@ -344,9 +344,9 @@
                   ],
                   sourceUrls: [
                     "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
-                    "https://www.medicines.org.uk/emc/product/15802/smpc",
+                    "https://www.fachinfo.de/fi/pdf/022967/tolak-r-40-mg-g-creme",
                     "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
-                    "https://www.medicines.org.uk/emc/product/4621/smpc",
+                    "https://www.fachinfo.de/fi/pdf/013084/actikerall-5-mg-g-100-mg-g-loesung-zur-anwendung-auf-der-haut",
                     "https://www.ema.europa.eu/en/medicines/human/EPAR/aldara",
                     "https://www.ema.europa.eu/en/medicines/human/EPAR/zyclara",
                     "https://www.fachinfo.de/fi/detail/23428/Klisyri-10-mg-g-Salbe",
@@ -421,7 +421,7 @@
           "Self-examine treated and surrounding skin; seek prompt review for thickening, pain, ulceration, bleeding, rapid growth or non-response.",
           "Expected local skin reactions to topical field therapy are common and treatment-specific — they are not ignored red flags for invasion.",
           "Actinic cheilitis of the lip is related but distinct; persistent lip erosions need separate assessment.",
-          "Occupational natural UV exposure may warrant BK 5103 assessment when clinically and occupationally appropriate — not automatic for every patient."
+          "For suspected occupational natural UV causation, assess BK 5103 separately: multiple AK means more than 5 AK within 12 months or field cancerization greater than 4 cm² on occupationally exposed skin; statutory reporting applies when suspicion is justified — not automatic for every AK patient."
         ],
         specialPopulations: [
           { population: "pregnancy", note: "Prefer non-systemically absorbed procedural options when treatment cannot wait; topical fluoropyrimidines and diclofenac (especially third trimester) have label restrictions — verify current Fachinformation." },
@@ -437,9 +437,9 @@
           treatment: [
             "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
             "https://register.awmf.org/assets/guidelines/032-022OLl_S3_Aktinische_Keratosen-Plattenepithelkarzinom-PEK_2023-01.pdf",
-            "https://www.medicines.org.uk/emc/product/15802/smpc",
+            "https://www.fachinfo.de/fi/pdf/022967/tolak-r-40-mg-g-creme",
             "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
-            "https://www.medicines.org.uk/emc/product/4621/smpc",
+            "https://www.fachinfo.de/fi/pdf/013084/actikerall-5-mg-g-100-mg-g-loesung-zur-anwendung-auf-der-haut",
             "https://www.ema.europa.eu/en/medicines/human/EPAR/aldara",
             "https://www.ema.europa.eu/en/medicines/human/EPAR/zyclara",
             "https://www.fachinfo.de/fi/detail/23428/Klisyri-10-mg-g-Salbe",
@@ -454,9 +454,9 @@
           "https://register.awmf.org/assets/guidelines/032-052OLl_S3_Praevention-Hautkrebs_2021-09.pdf",
           "https://klassifikationen.bfarm.de/icd-10-gm/kode-suche/htmlgm2026/block-l55-l59.htm",
           "https://www.dguv.de/bk-info/icd-10-kapitel/kapitel_12/bk5103/index.jsp",
-          "https://www.medicines.org.uk/emc/product/15802/smpc",
+          "https://www.fachinfo.de/fi/pdf/022967/tolak-r-40-mg-g-creme",
           "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
-          "https://www.medicines.org.uk/emc/product/4621/smpc",
+          "https://www.fachinfo.de/fi/pdf/013084/actikerall-5-mg-g-100-mg-g-loesung-zur-anwendung-auf-der-haut",
           "https://www.ema.europa.eu/en/medicines/human/EPAR/aldara",
           "https://www.ema.europa.eu/en/medicines/human/EPAR/zyclara",
           "https://www.fachinfo.de/fi/detail/23428/Klisyri-10-mg-g-Salbe",

@@ -35,11 +35,16 @@ test("public manifest covers 23 independent Goal 9 review units with no implied 
   const status = buildPublicStatus();
   assert.equal(status.assets.length, 23);
   assert.deepEqual(Object.fromEntries(["disease", "quiz", "visual", "follow_up"].map(type => [type, status.assets.filter(item => item.assetType === type).length])), { disease: 8, quiz: 8, visual: 4, follow_up: 3 });
-  assert.ok(status.assets.every(item => item.status === "review required" && item.history.length === 0));
+  const ak = status.assets.find(item => item.id === "actinic-keratosis");
+  assert.equal(ak.status, "clinician reviewed");
+  assert.equal(ak.activeDecisionId, "decision-ak-2026-09-23-001");
+  assert.ok(status.assets.filter(item => item.id !== "actinic-keratosis").every(item => item.status === "review required"));
   assert.ok(status.assets.every(item => /^sha256-v1:[0-9a-f]{64}$/.test(item.currentFingerprint)), "machine-readable data preserves every full fingerprint");
-  assert.equal(status.latestValidHumanReviewDate, null);
-  assert.deepEqual(status.reviewers, []);
-  assert.deepEqual(status.decisions, []);
+  assert.equal(status.latestValidHumanReviewDate, "2026-09-23");
+  assert.equal(status.reviewers.length, 1);
+  assert.equal(status.decisions.length, 1);
+  assert.equal(status.reviewers[0].professionalRole, "Physician in dermatology specialty training");
+  assert.doesNotMatch(JSON.stringify(status.reviewers[0]), /Facharzt|board-certified|specialist dermatologist|consultant|attending/i);
 });
 
 test("reviewer identity requires public consent, an accurate physician role and excludes private fields", () => {
@@ -119,9 +124,9 @@ test("malformed records, broken review references and stale source metadata fail
   const asset = buildAssets()[0];
   assert.throws(() => buildPublicStatus(reviewData([decision(asset, { reviewerId: "missing" })])), /resolve/);
   assert.throws(() => buildPublicStatus({ ...reviewData(), schemaVersion: 99 }), /Unsupported/);
-  assert.deepEqual(sourceMetadataWarnings(buildAssets(), "2026-09-20"), []);
+  assert.deepEqual(sourceMetadataWarnings(buildAssets(), "2026-09-23"), []);
   const stale = clone(asset); stale.evidenceMetadata[0].metadataCheckedAt = "2020-01-01";
-  assert.match(sourceMetadataWarnings([stale], "2026-09-20")[0], /stale source metadata/);
+  assert.match(sourceMetadataWarnings([stale], "2026-09-23")[0], /stale source metadata/);
 });
 
 test("committed machine-readable outputs exactly match the validated public manifest", () => {

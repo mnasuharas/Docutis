@@ -421,7 +421,7 @@
     } else {
       appendTextElement(section, "h4", "ICD-O 3.2 (oncology registry coding)");
       const applicabilityText = disease.coding.icdoApplicability === "not applicable"
-        ? "Not applicable — this non-neoplastic condition is outside ICD-O oncology registry coding."
+        ? "No ICD-O morphology code is assigned for this record."
         : "Not established for this record — no ICD-O mapping is asserted.";
       appendTextElement(section, "p", applicabilityText, "coding-note");
     }
