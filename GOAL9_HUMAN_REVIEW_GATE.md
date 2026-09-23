@@ -3179,11 +3179,12 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## quiz: Which schematic vascular clue is classically associated with basal cell carcinoma? (`bcc-dermoscopy`)
 
-- **Exact fingerprint:** `sha256-v1:088c6b43b3713d63d8d92ab1b5c9cc1fedd438057e0f5648013e8b098254f3f0`
+- **Exact fingerprint:** `sha256-v1:f4b9487215a415cfbbc159b5b1de4a64e77b27d816559b119a32e111276db338`
 - **Schema version:** 1
 - **Reviewable sections:** `prompt`, `options`, `best-answer`, `explanation`, `safety-notice`, `references`
 - **Mapped evidence sources:**
   - https://dermnetnz.org/topics/basal-cell-carcinoma
+  - https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf
 - **Automated warnings:**
   - Confirm one defensible best answer, distractor safety, explanation accuracy, and independence from the linked record review.
   - Automated source attachment and schema validation are not evidence of clinical approval.
@@ -3206,9 +3207,10 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
     "Glomerular vessels"
   ],
   "correctIndex": 0,
-  "explanation": "Arborising vessels are a high-yield dermoscopic clue for basal cell carcinoma, although diagnosis and subtype assessment still require the full clinical-pathologic context.",
+  "explanation": "Arborising vessels are a classically associated high-yield schematic dermoscopic clue for basal cell carcinoma, although diagnosis and subtype assessment still require the full clinical-pathologic context.",
   "sourceUrls": [
-    "https://dermnetnz.org/topics/basal-cell-carcinoma"
+    "https://dermnetnz.org/topics/basal-cell-carcinoma",
+    "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
   ],
   "reviewStatus": "clinician review required",
   "clinicalReview": null
@@ -3562,7 +3564,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## visual: Basal cell carcinoma morphology and dermoscopic clues (`bcc-clues-schematic`)
 
-- **Exact fingerprint:** `sha256-v1:f8732526c38d0364684d2eabf10e8e3fffd762f0725b9c806bf8976423afb3ea`
+- **Exact fingerprint:** `sha256-v1:0d45d6d602b890b47548da1e708be5d3f365540b0a2b49240763504bfd6e0471`
 - **Schema version:** 1
 - **Reviewable sections:** `image`, `title`, `caption`, `alternative-text`, `educational-description`, `legend`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -3587,7 +3589,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
   },
   "title": "Basal cell carcinoma morphology and dermoscopic clues",
   "caption": "Basal cell carcinoma clues — schematic",
-  "alt": "Labelled schematic lesion showing a pearly raised border, central ulceration, branching vessels and blue-grey ovoid clues.",
+  "alt": "Labelled schematic lesion showing a pearly raised border, central ulceration, branching vessels and blue-grey ovoid nests.",
   "diagnosis": "Basal Cell Carcinoma",
   "anatomicalSite": null,
   "educationalDescription": "A conservative visual summary of commonly described surface and dermoscopic clues; appearances vary by subtype and require clinical-pathologic assessment.",
@@ -4452,7 +4454,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## follow_up: Basal cell carcinoma — Germany (`basal-cell-carcinoma-de`)
 
-- **Exact fingerprint:** `sha256-v1:7100e89eed023219b5610e3973cf5f8d441daf8bad70a63deb329c83d275a7c1`
+- **Exact fingerprint:** `sha256-v1:25cbf04b711b308ca456ab8b67a29bd056d3ccb69c0f404e285adaf8ab92c02e`
 - **Schema version:** 1
 - **Reviewable sections:** `scope`, `risk-groups`, `periods`, `clinical-examination`, `lymph-node-ultrasound`, `s100b`, `cross-sectional-imaging`, `context`, `safety-notice`, `references`
 - **Mapped evidence sources:**
@@ -4481,7 +4483,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
     "registerNumber": "032-021",
     "sourceUrl": "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
     "sourceMetadataCheckedAt": "2026-09-16",
-    "recommendationLocation": "Chapter 12, pages 59–60"
+    "recommendationLocation": "Chapter 12, pages 59–61"
   },
   "groups": [
     {
@@ -4547,11 +4549,11 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "description": "The guideline combines multiple BCCs, high recurrence risk, locally advanced BCC, metastatic BCC and syndromes in one follow-up recommendation.",
       "periods": [
         {
-          "id": "years-1-2",
-          "label": "Years 1–2",
+          "id": "intensive-q3m-until-event-free",
+          "label": "Every 3 months until more than 2 years without new BCC or recurrence",
           "range": {
             "fromYear": 1,
-            "toYear": 2
+            "toYear": null
           },
           "recommendations": [
             {
@@ -4562,7 +4564,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
                 "min": 3,
                 "max": 3
               },
-              "note": null,
+              "note": "Continue every 3 months until more than 2 years without a new BCC or recurrence; do not transition to annual merely because two calendar years have elapsed.",
               "recommendationBasis": {
                 "character": "soll",
                 "consensus": "Konsens"
@@ -4605,7 +4607,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
     }
   ],
   "notes": [
-    "The guideline recommends regular self-examination. Other modalities are not assigned fixed routine intervals in the follow-up section."
+    "The guideline recommends regular self-examination. Patients should be counselled on UV protection, with particular emphasis on patients with BCC syndromes or chronic immunosuppression. Other modalities are not assigned fixed routine intervals in the follow-up section. Chronic immunosuppression does not create a separate numerical follow-up schedule in this protocol."
   ],
   "reviewStatus": "clinician review required",
   "clinicalReview": null

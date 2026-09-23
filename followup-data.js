@@ -94,7 +94,7 @@
     registerNumber: "032-021",
     sourceUrl: "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
     sourceMetadataCheckedAt: "2026-09-16",
-    recommendationLocation: "Chapter 12, pages 59–60"
+    recommendationLocation: "Chapter 12, pages 59–61"
   });
 
   const csccGuideline = Object.freeze({
@@ -149,8 +149,8 @@
 
   function bccIntensiveGroup() {
     return group("intensive-risk-group", "Multiple BCCs / high recurrence risk / locally advanced / metastatic / syndromic", "The guideline combines multiple BCCs, high recurrence risk, locally advanced BCC, metastatic BCC and syndromes in one follow-up recommendation.", [
-      period("years-1-2", "Years 1–2", { fromYear: 1, toYear: 2 }, [
-        recommendation("clinical_examination", "scheduled", exactMonths(3), null, basis("soll", "Konsens"))
+      period("intensive-q3m-until-event-free", "Every 3 months until more than 2 years without new BCC or recurrence", { fromYear: 1, toYear: null }, [
+        recommendation("clinical_examination", "scheduled", exactMonths(3), "Continue every 3 months until more than 2 years without a new BCC or recurrence; do not transition to annual merely because two calendar years have elapsed.", basis("soll", "Konsens"))
       ], ["Closer follow-up may be required on an individual basis."]),
       period("after-year-2-event-free", "After more than 2 event-free years", { fromYear: 3, toYear: null }, [
         recommendation("clinical_examination", "conditional", exactMonths(12), "Only if no new BCC or recurrence has occurred for more than 2 years.", basis("soll", "Konsens"))
@@ -201,7 +201,7 @@
         ]),
         bccIntensiveGroup()
       ]),
-      notes: Object.freeze(["The guideline recommends regular self-examination. Other modalities are not assigned fixed routine intervals in the follow-up section."]),
+      notes: Object.freeze(["The guideline recommends regular self-examination. Patients should be counselled on UV protection, with particular emphasis on patients with BCC syndromes or chronic immunosuppression. Other modalities are not assigned fixed routine intervals in the follow-up section. Chronic immunosuppression does not create a separate numerical follow-up schedule in this protocol."]),
       reviewStatus: reviewRequired,
       clinicalReview: null
     }),

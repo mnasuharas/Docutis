@@ -1056,7 +1056,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "quiz",
       "title": "Which schematic vascular clue is classically associated with basal cell carcinoma?",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:088c6b43b3713d63d8d92ab1b5c9cc1fedd438057e0f5648013e8b098254f3f0",
+      "currentFingerprint": "sha256-v1:f4b9487215a415cfbbc159b5b1de4a64e77b27d816559b119a32e111276db338",
       "sections": [
         "prompt",
         "options",
@@ -1066,7 +1066,8 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
         "references"
       ],
       "evidenceSources": [
-        "https://dermnetnz.org/topics/basal-cell-carcinoma"
+        "https://dermnetnz.org/topics/basal-cell-carcinoma",
+        "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
       ],
       "evidenceMetadata": [
         {
@@ -1077,6 +1078,16 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
           "version": null,
           "doi": null,
           "url": "https://dermnetnz.org/topics/basal-cell-carcinoma",
+          "metadataCheckedAt": "2026-09-23"
+        },
+        {
+          "title": "S2k-Leitlinie Basalzellkarzinom der Haut",
+          "organization": "German Dermatological Society guideline group / AWMF 032-021",
+          "type": "guideline",
+          "year": 2024,
+          "version": "9.0; AWMF 032-021",
+          "doi": null,
+          "url": "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf",
           "metadataCheckedAt": "2026-09-23"
         }
       ],
@@ -1399,7 +1410,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "visual",
       "title": "Basal cell carcinoma morphology and dermoscopic clues",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:f8732526c38d0364684d2eabf10e8e3fffd762f0725b9c806bf8976423afb3ea",
+      "currentFingerprint": "sha256-v1:0d45d6d602b890b47548da1e708be5d3f365540b0a2b49240763504bfd6e0471",
       "sections": [
         "image",
         "title",
@@ -1616,7 +1627,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "follow_up",
       "title": "Basal cell carcinoma — Germany",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:7100e89eed023219b5610e3973cf5f8d441daf8bad70a63deb329c83d275a7c1",
+      "currentFingerprint": "sha256-v1:25cbf04b711b308ca456ab8b67a29bd056d3ccb69c0f404e285adaf8ab92c02e",
       "sections": [
         "scope",
         "risk-groups",

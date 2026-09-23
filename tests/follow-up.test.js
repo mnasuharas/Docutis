@@ -37,7 +37,7 @@ test("authoritative German schedule matrix retains its key intervals", () => {
   assert.deepEqual(clone(find("cutaneous-melanoma-de", "stage-ib-iib", "years-6-10", "clinical_examination").frequency), { kind: "interval_months", min: 6, max: 12 });
   assert.deepEqual(clone(find("cutaneous-melanoma-de", "stage-iic-iv-r0", "years-1-3", "cross_sectional_imaging").frequency), { kind: "interval_months", min: 6, max: 6 });
   assert.deepEqual(clone(find("basal-cell-carcinoma-de", "isolated-low-risk", "month-6", "clinical_examination").frequency), { kind: "single_timepoint_month", month: 6 });
-  assert.deepEqual(clone(find("basal-cell-carcinoma-de", "intensive-risk-group", "years-1-2", "clinical_examination").frequency), { kind: "interval_months", min: 3, max: 3 });
+  assert.deepEqual(clone(find("basal-cell-carcinoma-de", "intensive-risk-group", "intensive-q3m-until-event-free", "clinical_examination").frequency), { kind: "interval_months", min: 3, max: 3 });
   assert.deepEqual(clone(find("cutaneous-squamous-cell-carcinoma-de", "low-risk", "years-1-2", "clinical_examination").frequency), { kind: "interval_months", min: 6, max: 6 });
   assert.deepEqual(clone(find("cutaneous-squamous-cell-carcinoma-de", "high-risk", "year-3", "cross_sectional_imaging").frequency), { kind: "occurrences_per_year", min: 0, max: 2 });
   assert.deepEqual(clone(find("cutaneous-squamous-cell-carcinoma-de", "immunosuppressed", "years-6-10", "clinical_examination").frequency), { kind: "interval_months", min: 3, max: 6 });
