@@ -28,11 +28,11 @@ test("exactly eight representative records use the structured pilot schema", () 
     structuredProfiles: 8,
     structuredMorphology: 8,
     structuredLocalization: 5,
-    structuredSymptoms: 1,
+    structuredSymptoms: 2,
     structuredDiagnostics: 8,
     structuredDifferentials: 8,
     structuredTreatment: 8,
-    structuredMedicationDetails: 0,
+    structuredMedicationDetails: 1,
     structuredFollowUp: 8,
     structuredRedFlags: 7,
     legacyCompatible: 42

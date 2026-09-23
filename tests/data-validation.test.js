@@ -105,8 +105,9 @@ test("coding systems are explicit and ICD-O topography is separate from morpholo
     assert.ok(applicabilityValues.has(disease.coding.icdoApplicability), `${disease.id} has invalid ICD-O applicability`);
     assert.ok(Array.isArray(disease.coding.diagnoses), `${disease.id} diagnoses must be an array`);
     for (const diagnosis of disease.coding.diagnoses) {
-      assert.equal(diagnosis.system, "ICD-10 WHO", `${disease.id} has an unlabelled or unsupported diagnosis system`);
-      assert.equal(diagnosis.version, "2019");
+      assert.ok(["ICD-10 WHO", "ICD-10-GM"].includes(diagnosis.system), `${disease.id} has an unlabelled or unsupported diagnosis system`);
+      if (diagnosis.system === "ICD-10 WHO") assert.equal(diagnosis.version, "2019");
+      if (diagnosis.system === "ICD-10-GM") assert.equal(diagnosis.version, "2026");
       assert.match(diagnosis.code, /^[A-Z][0-9]{2}(?:\.[0-9])?$/);
       assert.ok(diagnosis.label.trim());
     }
@@ -253,4 +254,31 @@ test("infectious records retain primary sources, coding and the review gate", ()
   }
   assert.ok(condition("herpes-zoster").references.some(reference => reference.url.includes("/shingles/hcp/clinical-overview/")));
   assert.ok(condition("molluscum-contagiosum").references.some(reference => reference.url.includes("/molluscum-contagiosum/hcp/clinical-overview/")));
+});
+
+test("actinic keratosis keeps clinician review required and carries ICD-10-GM L57.0 with German topical labeling guardrails", () => {
+  const ak = condition("actinic-keratosis");
+  assert.equal(ak.reviewStatus, "clinician review required");
+  assert.equal(ak.clinicalReview, null);
+  const systems = ak.coding.diagnoses.map(item => `${item.system}:${item.code}`);
+  assert.ok(systems.includes("ICD-10 WHO:L57.0"));
+  assert.ok(systems.includes("ICD-10-GM:L57.0"));
+  assert.match(ak.coding.verificationNote, /BK 5103/);
+  assert.match(ak.coding.verificationNote, /more than 5 AK/);
+  assert.match(ak.coding.verificationNote, /4 cm/);
+  assert.match(JSON.stringify(ak), /ingenol mebutate/i);
+  assert.match(JSON.stringify(ak), /withdrawn|not for use|not included/i);
+  assert.doesNotMatch(JSON.stringify(ak), /100\s*cm/);
+  assert.match(JSON.stringify(ak), /25\s*cm/);
+  assert.match(ak.differential, /lentigo maligna/i);
+  assert.match(ak.clinical, /field cancerization/i);
+  const meds = ak.clinicalProfile.treatment.steps.flatMap(step => step.interventions.flatMap(item => item.medications || []));
+  assert.ok(meds.some(med => /tirbanibulin/i.test(med.name) && /25/.test(`${med.dose} ${med.precautions || ""}`)));
+  assert.ok(meds.some(med => /4%/.test(`${med.name} ${med.formulation}`) && /once daily/i.test(med.frequency)));
+  assert.ok(meds.some(med => /3\.75%/.test(`${med.name} ${med.formulation}`)));
+  assert.ok(meds.some(med => /imiquimod 5%/i.test(`${med.name} ${med.formulation}`)));
+  assert.ok(ak.clinicalProfile.redFlags.some(flag => /ulceration|bleeding|induration|rapid growth|treatment resistance/i.test(flag)));
+  assert.ok(ak.clinicalProfile.diagnostics.some(item => item.method === "biopsy"));
+  assert.match(JSON.stringify(ak.clinicalProfile.dermoscopy), /strawberry|pseudonetwork/i);
+  assert.match(JSON.stringify(ak.clinicalProfile.dermoscopy), /pigmented|gray|rhomboid/i);
 });

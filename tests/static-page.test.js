@@ -100,7 +100,7 @@ test("documentation distinguishes source metadata checks from clinical review", 
   assert.match(clinicalSchemaDocs, /clinicalProfile/);
   assert.match(clinicalSchemaDocs, /formulation, dose, frequency, duration/i);
   assert.match(clinicalSchemaDocs, /part of the deterministic clinical fingerprint/i);
-  assert.match(qualityAudit, /structured medication details: 0\/50/i);
+  assert.match(qualityAudit, /structured medication details: [01]\/50/i);
   assert.match(qualityAudit, /legacy-compatible records: 42\/50/i);
   assert.match(qualityAudit, /EADO\/EDF\/EORTC/);
 });

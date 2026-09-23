@@ -11,7 +11,7 @@
       "assetType": "disease",
       "title": "Actinic Keratosis",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:7d1cfae0f3511337e27e43e9872efc75d515a88f83ce1a17edcee839b63c93d5",
+      "currentFingerprint": "sha256-v1:7a0ad7895f1a359100f99a7e1e1e7ca12145fa63da8ffbfe76244dfdb61baed4",
       "sections": [
         "overview",
         "clinical-presentation",
@@ -22,13 +22,26 @@
         "follow-up",
         "coding",
         "references",
+        "histopathology",
         "red-flags",
         "referral",
         "patient-safety"
       ],
       "evidenceSources": [
         "https://dermnetnz.org/topics/actinic-keratosis",
-        "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"
+        "https://icd.who.int/browse10/2019/en",
+        "https://klassifikationen.bfarm.de/icd-10-gm/kode-suche/htmlgm2026/block-l55-l59.htm",
+        "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
+        "https://register.awmf.org/assets/guidelines/032-022OLl_S3_Aktinische_Keratosen-Plattenepithelkarzinom-PEK_2023-01.pdf",
+        "https://register.awmf.org/assets/guidelines/032-052OLl_S3_Praevention-Hautkrebs_2021-09.pdf",
+        "https://www.dguv.de/bk-info/icd-10-kapitel/kapitel_12/bk5103/index.jsp",
+        "https://www.ema.europa.eu/en/medicines/human/EPAR/aldara",
+        "https://www.ema.europa.eu/en/medicines/human/EPAR/zyclara",
+        "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
+        "https://www.fachinfo.de/fi/detail/23428/Klisyri-10-mg-g-Salbe",
+        "https://www.fachinfo.de/fi/pdf/007858/solaraze-3-gel",
+        "https://www.medicines.org.uk/emc/product/15802/smpc",
+        "https://www.medicines.org.uk/emc/product/4621/smpc"
       ],
       "evidenceMetadata": [
         {
@@ -42,13 +55,133 @@
           "metadataCheckedAt": "2026-09-20"
         },
         {
-          "title": "Actinic keratosis clinical guideline",
-          "organization": "American Academy of Dermatology",
+          "title": "ICD-10 Version: 2019",
+          "organization": "World Health Organization",
+          "type": "official classification",
+          "year": null,
+          "version": "2019",
+          "doi": null,
+          "url": "https://icd.who.int/browse10/2019/en",
+          "metadataCheckedAt": "2026-09-15"
+        },
+        {
+          "title": "ICD-10-GM Version 2026 — L57.0 Aktinische Keratose",
+          "organization": "BfArM",
+          "type": "official classification",
+          "year": 2026,
+          "version": "2026",
+          "doi": null,
+          "url": "https://klassifikationen.bfarm.de/icd-10-gm/kode-suche/htmlgm2026/block-l55-l59.htm",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "S3 guideline: actinic keratosis and cutaneous squamous cell carcinoma — update 2023, part 1: treatment of actinic keratosis, actinic cheilitis, Bowen disease, occupational disease and structures of care",
+          "organization": "German Dermatological Society guideline group / AWMF 032/022OL",
           "type": "guideline",
+          "year": 2023,
+          "version": "2.0",
+          "doi": "10.1111/ddg.15231",
+          "url": "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "S3-Leitlinie Aktinische Keratose und Plattenepithelkarzinom der Haut (Langfassung)",
+          "organization": "Leitlinienprogramm Onkologie / AWMF",
+          "type": "guideline",
+          "year": 2023,
+          "version": "2.0; AWMF 032/022OL",
+          "doi": null,
+          "url": "https://register.awmf.org/assets/guidelines/032-022OLl_S3_Aktinische_Keratosen-Plattenepithelkarzinom-PEK_2023-01.pdf",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "S3-Leitlinie Prävention von Hautkrebs",
+          "organization": "Leitlinienprogramm Onkologie / AWMF",
+          "type": "guideline",
+          "year": 2021,
+          "version": "2.1; AWMF 032/052OL",
+          "doi": null,
+          "url": "https://register.awmf.org/assets/guidelines/032-052OLl_S3_Praevention-Hautkrebs_2021-09.pdf",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "BK 5103 — Squamous cell carcinomas or multiple actinic keratoses of the skin caused by natural UV radiation",
+          "organization": "DGUV",
+          "type": "clinical reference",
           "year": null,
           "version": null,
           "doi": null,
-          "url": "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis",
+          "url": "https://www.dguv.de/bk-info/icd-10-kapitel/kapitel_12/bk5103/index.jsp",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Aldara 5% cream — EPAR Product Information",
+          "organization": "European Medicines Agency",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://www.ema.europa.eu/en/medicines/human/EPAR/aldara",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Zyclara 3.75% cream — EPAR Product Information",
+          "organization": "European Medicines Agency",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://www.ema.europa.eu/en/medicines/human/EPAR/zyclara",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Efudix 5% cream — German Fachinformation",
+          "organization": "German product information",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Klisyri 10 mg/g ointment (tirbanibulin) — German Fachinformation / EU product information",
+          "organization": "German product information / EMA",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://www.fachinfo.de/fi/detail/23428/Klisyri-10-mg-g-Salbe",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Solaraze 3% gel — German Fachinformation",
+          "organization": "German product information",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://www.fachinfo.de/fi/pdf/007858/solaraze-3-gel",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Tolak 40 mg/g cream — Summary of Product Characteristics / German Fachinformation",
+          "organization": "German product information / EU SmPC",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://www.medicines.org.uk/emc/product/15802/smpc",
+          "metadataCheckedAt": "2026-09-20"
+        },
+        {
+          "title": "Actikerall 5 mg/g + 100 mg/g cutaneous solution — SmPC / Fachinformation",
+          "organization": "German product information / EU SmPC",
+          "type": "clinical reference",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://www.medicines.org.uk/emc/product/4621/smpc",
           "metadataCheckedAt": "2026-09-20"
         }
       ],
@@ -65,6 +198,7 @@
         "follow-up",
         "coding",
         "references",
+        "histopathology",
         "red-flags",
         "referral",
         "patient-safety"
@@ -729,7 +863,7 @@
       "assetType": "quiz",
       "title": "What is the appropriate next diagnostic step when an actinic keratosis is persistently thickened, tender or concerning for invasion?",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:d65667de0184ce6d83281df08132a5c7692d9ec33131011de0488f2c16be1fbf",
+      "currentFingerprint": "sha256-v1:99ea95c1e7735771d66d053dd15a67e811b3cd1d0b74fdf5130cfaeda2d08c00",
       "sections": [
         "prompt",
         "options",
@@ -739,17 +873,17 @@
         "references"
       ],
       "evidenceSources": [
-        "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"
+        "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231"
       ],
       "evidenceMetadata": [
         {
-          "title": "Actinic keratosis clinical guideline",
-          "organization": "American Academy of Dermatology",
+          "title": "S3 guideline: actinic keratosis and cutaneous squamous cell carcinoma — update 2023, part 1: treatment of actinic keratosis, actinic cheilitis, Bowen disease, occupational disease and structures of care",
+          "organization": "German Dermatological Society guideline group / AWMF 032/022OL",
           "type": "guideline",
-          "year": null,
-          "version": null,
-          "doi": null,
-          "url": "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis",
+          "year": 2023,
+          "version": "2.0",
+          "doi": "10.1111/ddg.15231",
+          "url": "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
           "metadataCheckedAt": "2026-09-20"
         }
       ],

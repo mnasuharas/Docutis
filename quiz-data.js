@@ -45,7 +45,7 @@
         domain: "diagnostics", prompt: "What is the appropriate next diagnostic step when an actinic keratosis is persistently thickened, tender or concerning for invasion?",
         options: ["Ignore the change", "Biopsy or specialist assessment", "Assign melanoma staging", "Use dermoscopy as definitive proof"], correctIndex: 1,
         explanation: "Diagnostic uncertainty or concern for invasive squamous cell carcinoma warrants biopsy or specialist assessment.",
-        sourceUrls: ["https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"], reviewStatus: "clinician review required", clinicalReview: null
+        sourceUrls: ["https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231"], reviewStatus: "clinician review required", clinicalReview: null
       }),
       freezeQuestion({
         id: "atopic-first-line", diseaseId: "atopic-dermatitis", mediaId: null,

@@ -27,12 +27,24 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## disease: Actinic Keratosis (`actinic-keratosis`)
 
-- **Exact fingerprint:** `sha256-v1:7d1cfae0f3511337e27e43e9872efc75d515a88f83ce1a17edcee839b63c93d5`
+- **Exact fingerprint:** `sha256-v1:7a0ad7895f1a359100f99a7e1e1e7ca12145fa63da8ffbfe76244dfdb61baed4`
 - **Schema version:** 1
-- **Reviewable sections:** `overview`, `clinical-presentation`, `diagnostics`, `dermoscopy`, `differential-diagnosis`, `treatment`, `follow-up`, `coding`, `references`, `red-flags`, `referral`, `patient-safety`
+- **Reviewable sections:** `overview`, `clinical-presentation`, `diagnostics`, `dermoscopy`, `differential-diagnosis`, `treatment`, `follow-up`, `coding`, `references`, `histopathology`, `red-flags`, `referral`, `patient-safety`
 - **Mapped evidence sources:**
   - https://dermnetnz.org/topics/actinic-keratosis
-  - https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis
+  - https://icd.who.int/browse10/2019/en
+  - https://klassifikationen.bfarm.de/icd-10-gm/kode-suche/htmlgm2026/block-l55-l59.htm
+  - https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231
+  - https://register.awmf.org/assets/guidelines/032-022OLl_S3_Aktinische_Keratosen-Plattenepithelkarzinom-PEK_2023-01.pdf
+  - https://register.awmf.org/assets/guidelines/032-052OLl_S3_Praevention-Hautkrebs_2021-09.pdf
+  - https://www.dguv.de/bk-info/icd-10-kapitel/kapitel_12/bk5103/index.jsp
+  - https://www.ema.europa.eu/en/medicines/human/EPAR/aldara
+  - https://www.ema.europa.eu/en/medicines/human/EPAR/zyclara
+  - https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme
+  - https://www.fachinfo.de/fi/detail/23428/Klisyri-10-mg-g-Salbe
+  - https://www.fachinfo.de/fi/pdf/007858/solaraze-3-gel
+  - https://www.medicines.org.uk/emc/product/15802/smpc
+  - https://www.medicines.org.uk/emc/product/4621/smpc
 - **Automated warnings:**
   - No structured medication regimen or dose is encoded; confirm that the scope is sufficiently explicit.
   - Automated source attachment and schema validation are not evidence of clinical approval.
@@ -58,18 +70,25 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
         "code": "L57.0",
         "label": "Actinic keratosis",
         "note": null
+      },
+      {
+        "system": "ICD-10-GM",
+        "version": "2026",
+        "code": "L57.0",
+        "label": "Aktinische Keratose",
+        "note": "German Modification code for German clinical documentation and billing; keep separate from ICD-10 WHO."
       }
     ],
     "icdo": null,
-    "icdoApplicability": "not established",
-    "verificationNote": "Confirm national modification and site-specific documentation requirements before clinical or billing use."
+    "icdoApplicability": "not applicable",
+    "verificationNote": "ICD-10 WHO L57.0 remains the international base code. ICD-10-GM 2026 L57.0 (Aktinische Keratose) is the relevant German national code. Do not invent ICD-O morphology from clinical AK alone. For suspected occupational natural UV causation, assess BK 5103 separately: multiple AK means more than 5 AK within 12 months or field cancerization greater than 4 cm² on occupationally exposed skin; statutory reporting applies when suspicion is justified — not automatic for every AK patient."
   },
-  "description": "A UV-induced keratinocytic lesion on chronically sun-exposed skin with potential to progress to cutaneous squamous cell carcinoma.",
-  "clinical": "Usually a rough, scaly or hyperkeratotic macule, papule or plaque on chronically sun-damaged skin; lesions may be easier to feel than see.",
-  "dermoscopy": "Facial lesions may show an erythematous pseudonetwork or strawberry pattern, prominent follicular openings and surface scale.",
-  "differential": "Squamous cell carcinoma in situ, invasive cutaneous squamous cell carcinoma, seborrhoeic keratosis, superficial basal cell carcinoma and inflammatory dermatoses.",
-  "treatment": "Management may be lesion-directed or field-directed. Selection depends on lesion burden, site, patient factors and current guidance; diagnostic uncertainty or concern for invasion warrants biopsy or specialist assessment.",
-  "followup": "Reassess persistent, recurrent, thickened, tender or rapidly changing lesions and account for the patient's overall actinic damage and skin-cancer risk.",
+  "description": "A UV-associated keratinocytic intraepidermal neoplastic lesion on chronically sun-exposed skin. It may progress to cutaneous squamous cell carcinoma in some lesions, but no precise universal lesion-to-cSCC progression percentage is asserted here.",
+  "clinical": "Typically a rough or gritty erythematous macule, papule or plaque with variable adherent scale or hyperkeratosis on chronically sun-exposed skin (face, ears, bald scalp, dorsal hands, forearms). Lesions may be tender and are often multiple within field cancerization. Pigmented AK is a recognized clinical variant. Actinic cheilitis is a related but distinct UV-associated disease of the lip and is not merged into ordinary cutaneous AK.",
+  "dermoscopy": "Non-pigmented facial AK may show an erythematous pseudonetwork or strawberry pattern, surface scale, follicular openings and keratotic plugs; the strawberry pattern is particularly described for non-pigmented facial AK and is not universal for every AK. Pigmented AK may show brown or gray pseudonetwork, annular-granular pigmentation, asymmetric pigmented follicular openings, gray dots or granularity and rhomboidal structures. Dermoscopy supports assessment but does not exclude malignancy when suspicious changes are present.",
+  "differential": "SCC in situ / Bowen disease, invasive cutaneous SCC, seborrhoeic keratosis, superficial BCC, inflammatory dermatoses, solar lentigo and — especially for pigmented facial lesions — lentigo maligna.",
+  "treatment": "First exclude invasive cSCC or other malignancy. Use lesion-directed therapy for isolated or limited disease and field-directed therapy for multiple AK or field cancerization. Individualize by number and thickness, site, field cancerization, immunosuppression, comorbidities, prior treatment, adherence, preference and tolerability or cosmetic outcome. Consistent UV protection is foundational. No single modality is universally superior. Topical regimens below reflect German/EU labeling and must not be extrapolated across concentrations. Distinguish approved labeling from guideline recommendations.",
+  "followup": "Assess response with a treatment-specific interval rather than one unsupported fixed universal schedule for uncomplicated AK. Reassess persistent, recurrent or changing lesions; obtain histology if SCC is suspected. Long-term surveillance is individualized by lesion burden, field cancerization, immunosuppression, prior keratinocyte cancer, treatment resistance and occupational UV exposure.",
   "clinicalProfile": {
     "schemaVersion": 1,
     "aliases": [
@@ -80,7 +99,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "mechanisms": [
         "uv-associated"
       ],
-      "text": "UV-associated keratinocytic lesion on chronically sun-damaged skin."
+      "text": "UV-associated keratinocytic intraepidermal neoplasia on chronically sun-damaged skin; field cancerization is common."
     },
     "presentation": {
       "morphology": {
@@ -96,56 +115,94 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
         "surface": [
           "rough"
         ],
-        "text": "Lesions may be easier to feel than see."
+        "colors": [
+          "erythematous",
+          "pigmented variant possible"
+        ],
+        "text": "Rough or gritty erythematous macule, papule or plaque with variable adherent scale; may be easier to feel than see; pigmented AK is a recognized variant."
       },
       "localization": {
         "sites": [
+          "face",
+          "scalp",
+          "upper-extremities",
           "sun-exposed-skin"
         ],
         "distribution": [
           "photo-distributed"
         ],
-        "text": "Chronically sun-exposed skin."
+        "text": "Face, ears, bald scalp, dorsal hands and forearms; often multiple lesions within field cancerization."
+      },
+      "symptoms": {
+        "values": [
+          "tender",
+          "asymptomatic"
+        ],
+        "text": "Often asymptomatic; tenderness may occur and is a clinical red-flag clue when new or progressive."
       },
       "course": {
         "values": [
           "chronic"
         ],
-        "text": "May persist, recur or change over time."
+        "text": "May persist, recur or change; selected lesions can progress to cSCC, without a universal progression percentage."
       }
     },
     "dermoscopy": {
       "patterns": [
-        "facial erythematous pseudonetwork",
-        "strawberry pattern"
+        "non-pigmented facial erythematous pseudonetwork / strawberry pattern (not universal for every AK)",
+        "pigmented brown/gray pseudonetwork",
+        "annular-granular pigmentation",
+        "rhomboidal structures"
+      ],
+      "pigmentStructures": [
+        "asymmetric pigmented follicular openings",
+        "gray dots / granularity"
       ],
       "scaleKeratinClues": [
-        "prominent follicular openings",
-        "surface scale"
-      ]
+        "surface scale",
+        "follicular openings",
+        "keratotic plugs"
+      ],
+      "highRiskClues": [
+        "features suggesting SCC in situ, invasive SCC or lentigo maligna require clinicopathologic correlation"
+      ],
+      "text": "Distinguish non-pigmented facial AK from pigmented AK. Dermoscopy supports assessment but does not exclude malignancy when suspicious changes are present."
     },
     "diagnostics": [
       {
         "method": "clinical-examination",
         "role": "routine",
-        "indication": "Assess morphology, lesion burden and surrounding actinic damage."
+        "indication": "Usual diagnosis is clinical, supported by dermoscopy when available; assess lesion number, thickness, field cancerization and red flags."
+      },
+      {
+        "method": "dermoscopy",
+        "role": "routine",
+        "indication": "Support characterization of non-pigmented versus pigmented AK and help triage mimics; does not replace biopsy when malignancy is suspected."
       },
       {
         "method": "biopsy",
         "role": "unclear-cases",
-        "indication": "Diagnostic uncertainty or concern for invasive cutaneous squamous cell carcinoma.",
+        "indication": "Histopathology when diagnosis is uncertain; lentigo maligna, SCC in situ or invasive cSCC is in the differential; the lesion persists or recurs after appropriate therapy; or clinical progression is suspicious. Do not imply that every typical AK needs routine biopsy.",
         "sourceUrls": [
-          "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"
+          "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
+          "https://register.awmf.org/assets/guidelines/032-022OLl_S3_Aktinische_Keratosen-Plattenepithelkarzinom-PEK_2023-01.pdf"
         ]
+      },
+      {
+        "method": "histopathology",
+        "role": "confirmatory",
+        "indication": "Confirm diagnosis and exclude invasion when biopsy is performed; adequate sampling is required if invasion is suspected."
       }
     ],
+    "histopathology": "Keratinocytic atypia within the epidermis with orthokeratosis/parakeratosis and solar elastosis is typical; the pathologist distinguishes AK from SCC in situ and invasive cSCC. No ICD-O code is assigned from clinical AK alone.",
     "differentials": [
       {
-        "diagnosis": "Squamous cell carcinoma in situ"
+        "diagnosis": "Squamous cell carcinoma in situ / Bowen disease",
+        "distinguishingClue": "Often broader, more plaque-like or atypical; biopsy when uncertain."
       },
       {
         "diagnosis": "Invasive cutaneous squamous cell carcinoma",
-        "distinguishingClue": "Consider biopsy for a persistent, thickened, tender or rapidly changing lesion."
+        "distinguishingClue": "Induration, ulceration, spontaneous bleeding, rapid growth or treatment resistance — biopsy rather than blind destruction."
       },
       {
         "diagnosis": "Seborrhoeic keratosis"
@@ -155,6 +212,18 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       },
       {
         "diagnosis": "Inflammatory dermatosis"
+      },
+      {
+        "diagnosis": "Solar lentigo",
+        "distinguishingClue": "Especially versus early pigmented AK."
+      },
+      {
+        "diagnosis": "Lentigo maligna",
+        "distinguishingClue": "Critical differential for pigmented facial lesions; biopsy or specialist assessment when suspected."
+      },
+      {
+        "diagnosis": "Actinic cheilitis",
+        "distinguishingClue": "Related UV-associated lip disease managed as a distinct entity; not ordinary cutaneous AK."
       }
     ],
     "treatment": {
@@ -163,9 +232,132 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
           "level": "first-line",
           "interventions": [
             {
-              "intervention": "Select lesion-directed or field-directed therapy according to lesion burden, site, patient factors and current guidance.",
+              "intervention": "Treatment-selection framework before choosing a modality",
+              "details": "1) Exclude invasive cSCC/malignancy first. 2) Lesion-directed therapy for isolated/limited disease. 3) Field-directed therapy for multiple AK or field cancerization. 4) Individualize by lesion number/thickness, site, field cancerization, immunosuppression, comorbidities, previous treatment, adherence, preference and tolerability/cosmetic outcome. 5) Consistent UV protection is foundational. No single modality is universally superior. Separate approved labeling from guideline recommendations.",
               "sourceUrls": [
-                "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"
+                "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
+                "https://register.awmf.org/assets/guidelines/032-022OLl_S3_Aktinische_Keratosen-Plattenepithelkarzinom-PEK_2023-01.pdf"
+              ]
+            },
+            {
+              "intervention": "Topical field- and lesion-directed drug therapy (formulation/concentration-specific; German/EU labeling)",
+              "details": "Do not extrapolate regimens across concentrations. Ingenol mebutate is not included (withdrawn / not for use). No unsupported efficacy percentages are stated.",
+              "medications": [
+                {
+                  "name": "5-Fluorouracil 4% cream (e.g. Tolak)",
+                  "route": "topical",
+                  "formulation": "40 mg/g (4%) cream",
+                  "dose": "Thin layer to affected face and/or ears and/or scalp field",
+                  "frequency": "Once daily",
+                  "duration": "4 weeks as tolerated",
+                  "contraindications": "Pregnancy and breastfeeding; known dihydropyrimidine dehydrogenase (DPD) deficiency; concomitant brivudine/sorivudine or related analogues.",
+                  "precautions": "Generally for non-hyperkeratotic/non-hypertrophic (Olsen I–II) AK of face/ears/scalp per German/EU labeling; expect inflammatory local skin reactions; wash hands after application.",
+                  "monitoring": "Local skin reaction intensity; interrupt or treat supportively if severe; assess response after the post-treatment recovery period.",
+                  "pregnancy": "Contraindicated in pregnancy and breastfeeding per fluoropyrimidine labeling.",
+                  "sourceUrls": [
+                    "https://www.medicines.org.uk/emc/product/15802/smpc"
+                  ]
+                },
+                {
+                  "name": "5-Fluorouracil 5% cream (e.g. Efudix)",
+                  "route": "topical",
+                  "formulation": "5% cream",
+                  "dose": "Thin layer covering lesions; German Fachinformation limits total treated area to a maximum of 500 cm² at one time — treat larger areas sequentially",
+                  "frequency": "Twice daily",
+                  "duration": "About 2–4 weeks until an inflammatory/erosive response is reached; healing may continue after stopping",
+                  "contraindications": "Pregnancy and breastfeeding; DPD deficiency; brivudine/sorivudine interaction — same fluoropyrimidine warnings as other 5-FU topicals.",
+                  "precautions": "Product-specific maximum area 500 cm² per current German Fachinformation; inflammatory local reactions are expected; do not extrapolate the 4% schedule to 5%.",
+                  "monitoring": "Local reaction and systemic fluoropyrimidine toxicity symptoms if extensive use or DPD risk.",
+                  "pregnancy": "Contraindicated in pregnancy and breastfeeding.",
+                  "sourceUrls": [
+                    "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme"
+                  ]
+                },
+                {
+                  "name": "5-Fluorouracil 0.5% + salicylic acid 10% solution (Actikerall)",
+                  "route": "topical",
+                  "formulation": "5 mg/g fluorouracil + 100 mg/g salicylic acid cutaneous solution",
+                  "dose": "Apply to affected area; total treated skin must not exceed 25 cm² (5×5 cm)",
+                  "frequency": "Once daily",
+                  "duration": "Until clearance or up to 12 weeks; reduce frequency if severe local reactions",
+                  "contraindications": "Pregnancy and breastfeeding; renal impairment precautions as in Fachinformation; hypersensitivity to ingredients.",
+                  "precautions": "Mild to moderately hyperkeratotic Olsen I–II AK in immunocompetent adults per German/EU PI; application precautions and occlusion/removal of film as labeled; max 25 cm² remains supported.",
+                  "monitoring": "Local reaction; response may continue for weeks after the end of treatment.",
+                  "pregnancy": "Contraindicated in pregnancy and breastfeeding.",
+                  "sourceUrls": [
+                    "https://www.medicines.org.uk/emc/product/4621/smpc"
+                  ]
+                },
+                {
+                  "name": "Imiquimod 5% cream (e.g. Aldara)",
+                  "route": "topical",
+                  "formulation": "5% cream sachets",
+                  "dose": "Thin layer to contiguous treatment field on face or balding scalp; one sachet is the usual maximum per application (~25 cm² guidance in labeling)",
+                  "frequency": "3 nights per week (e.g. Mon/Wed/Fri) with ~8 hours on-skin time",
+                  "duration": "4 weeks, then 4-week treatment-free interval and clinical assessment; an optional second 4-week course if residual AK and labeling allows",
+                  "contraindications": "Hypersensitivity to imiquimod; avoid on open wounds as labeled.",
+                  "precautions": "Local inflammatory reactions expected; caution in autoimmune disease, transplant recipients and other immunosuppression; keep separate from 3.75% regimen.",
+                  "monitoring": "Local skin reaction and flu-like symptoms; rest periods if intense inflammation.",
+                  "pregnancy": "Use only if clearly needed after product-specific risk assessment; verify current label.",
+                  "sourceUrls": [
+                    "https://www.ema.europa.eu/en/medicines/human/EPAR/aldara"
+                  ]
+                },
+                {
+                  "name": "Imiquimod 3.75% cream (e.g. Zyclara)",
+                  "route": "topical",
+                  "formulation": "3.75% cream",
+                  "dose": "Up to 2 sachets per application to face or balding scalp field as labeled",
+                  "frequency": "Once daily",
+                  "duration": "2 weeks on, 2 weeks off, then another 2-week course — keep separate from the 5% schedule",
+                  "contraindications": "Hypersensitivity to imiquimod.",
+                  "precautions": "Local inflammation expected; caution autoimmune disease, transplant/immunosuppression; do not interchange with 5% dosing.",
+                  "monitoring": "Local and systemic inflammatory symptoms; rest days per label if needed.",
+                  "pregnancy": "Use only if clearly needed after product-specific risk assessment; verify current label.",
+                  "sourceUrls": [
+                    "https://www.ema.europa.eu/en/medicines/human/EPAR/zyclara"
+                  ]
+                },
+                {
+                  "name": "Tirbanibulin 1% ointment (Klisyri)",
+                  "route": "topical",
+                  "formulation": "10 mg/g (1%) ointment in single-use sachets",
+                  "dose": "Thin layer to a contiguous field of up to 25 cm² on face or scalp (German/EU maximum — do not apply the larger US-labeled maximum field size)",
+                  "frequency": "Once daily",
+                  "duration": "5 consecutive days; assess response at about 8 weeks; do not apply to open wounds",
+                  "contraindications": "Hypersensitivity to tirbanibulin; application on open wounds or injured skin until healed.",
+                  "precautions": "Field treatment of non-hyperkeratotic, non-hypertrophic Olsen I AK of face/scalp in adults per GER/EU labeling; wash hands after use; keep treated area undisturbed for ~8 hours.",
+                  "monitoring": "Local reactions; therapeutic effect evaluable around 8 weeks after starting the cycle.",
+                  "pregnancy": "Avoid unless potential benefit justifies potential risk per current GER/EU label.",
+                  "sourceUrls": [
+                    "https://www.fachinfo.de/fi/detail/23428/Klisyri-10-mg-g-Salbe"
+                  ]
+                },
+                {
+                  "name": "Diclofenac 3% in hyaluronic acid gel (e.g. Solaraze / Solacutan)",
+                  "route": "topical",
+                  "formulation": "3% diclofenac sodium gel with sodium hyaluronate",
+                  "dose": "About 0.5 g (pea-sized) per 5×5 cm area; German Fachinformation maximum 8 g/day (up to about 200 cm²)",
+                  "frequency": "Twice daily",
+                  "duration": "60–90 days per product information",
+                  "contraindications": "NSAID hypersensitivity / NSAID-triggered asthma, urticaria or acute rhinitis; third trimester of pregnancy.",
+                  "precautions": "Avoid NSAID-sensitive patients; use caution earlier in pregnancy; photosensitivity counseling as labeled.",
+                  "monitoring": "Local tolerance and clinical response; complete healing may lag treatment end by up to ~30 days.",
+                  "pregnancy": "Contraindicated in the third trimester; avoid earlier unless justified — verify current label.",
+                  "sourceUrls": [
+                    "https://www.fachinfo.de/fi/pdf/007858/solaraze-3-gel"
+                  ]
+                }
+              ],
+              "sourceUrls": [
+                "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
+                "https://www.medicines.org.uk/emc/product/15802/smpc",
+                "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
+                "https://www.medicines.org.uk/emc/product/4621/smpc",
+                "https://www.ema.europa.eu/en/medicines/human/EPAR/aldara",
+                "https://www.ema.europa.eu/en/medicines/human/EPAR/zyclara",
+                "https://www.fachinfo.de/fi/detail/23428/Klisyri-10-mg-g-Salbe",
+                "https://www.fachinfo.de/fi/pdf/007858/solaraze-3-gel"
               ]
             }
           ]
@@ -174,7 +366,30 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
           "level": "procedural",
           "interventions": [
             {
-              "intervention": "Biopsy or specialist assessment when diagnosis is uncertain or invasion is a concern."
+              "intervention": "Cryotherapy (liquid nitrogen), lesion-directed",
+              "details": "Appropriate for selected Olsen I–III lesions when invasion has been excluded clinically. No universal freeze time: individualize. Guideline ranges may include 1–2 freeze–thaw cycles of about 15–60 seconds, but this is not mandatory for every lesion. Adverse effects: pain, blistering, erosion, pigment change, scarring, alopecia on hair-bearing skin, delayed healing. Suspicious thick, indurated, ulcerated or rapidly growing lesions need histology — not blind destruction.",
+              "sourceUrls": [
+                "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
+                "https://register.awmf.org/assets/guidelines/032-022OLl_S3_Aktinische_Keratosen-Plattenepithelkarzinom-PEK_2023-01.pdf"
+              ]
+            },
+            {
+              "intervention": "Curettage, shave or excision for selected isolated lesions",
+              "details": "Curettage may fragment tissue; superficial shave may miss depth. When invasion is suspected, obtain adequate biopsy or excision rather than destructive therapy alone.",
+              "sourceUrls": [
+                "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231"
+              ]
+            },
+            {
+              "intervention": "Photodynamic therapy (ALA/MAL)",
+              "details": "Conventional red-light ALA/MAL PDT, daylight PDT, or simulated daylight where appropriate. Useful for single, multiple or field treatment, especially non-pigmented Olsen I–II face/scalp disease; pretreat hyperkeratotic lesions when needed. Conventional PDT is typically more painful; daylight PDT is often better tolerated. Assess response at about 3 months and repeat per protocol.",
+              "sourceUrls": [
+                "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231"
+              ]
+            },
+            {
+              "intervention": "Biopsy or specialist assessment",
+              "details": "Required when diagnosis is uncertain, red flags are present, or invasion cannot be excluded before destructive therapy."
             }
           ]
         },
@@ -182,73 +397,245 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
           "level": "supportive-care",
           "interventions": [
             {
-              "intervention": "UV protection and management of field cancerization risk.",
+              "intervention": "Foundational UV protection and field-cancerization counseling",
+              "details": "Broad-spectrum UVA/UVB protection with adequate quantity and reapplication, clothing and headwear, avoidance of tanning devices, self-examination, and prompt assessment for red flags or persistence after therapy.",
               "sourceUrls": [
-                "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"
+                "https://register.awmf.org/assets/guidelines/032-052OLl_S3_Praevention-Hautkrebs_2021-09.pdf",
+                "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231"
               ]
             }
           ]
         }
       ],
       "nonPharmacological": [
-        "UV protection"
+        "Broad-spectrum UVA/UVB photoprotection with adequate quantity and reapplication",
+        "Protective clothing and headwear",
+        "No tanning devices",
+        "Skin self-examination and prompt review of red-flag changes"
       ]
     },
     "followUp": {
       "strategy": "risk-adapted",
-      "text": "Reassess persistent, recurrent, thickened, tender or rapidly changing lesions and consider overall actinic damage and skin-cancer risk."
+      "text": "Use treatment-specific response assessment rather than one fixed universal interval for uncomplicated AK. Reassess persistent, recurrent or changing lesions; pursue histology if SCC is suspected. Individualize long-term surveillance by burden, field cancerization, immunosuppression, prior keratinocyte cancer, treatment resistance and occupational UV exposure."
     },
     "redFlags": [
-      "Persistent thickening",
-      "Tenderness",
-      "Rapid change",
-      "Concern for invasion"
+      "Increasing thickness or hyperkeratosis",
+      "Induration",
+      "Tenderness or spontaneous pain",
+      "Ulceration",
+      "Spontaneous bleeding",
+      "Enlargement or rapid growth",
+      "Treatment resistance or recurrence after appropriate therapy",
+      "Pigmented facial lesion concerning for lentigo maligna"
     ],
     "referral": [
       {
         "type": "biopsy-assessment",
-        "indication": "Uncertain diagnosis or suspected invasive disease."
+        "indication": "Uncertain diagnosis, red-flag progression, or suspected invasive disease before destructive therapy."
+      },
+      {
+        "type": "dermatology",
+        "indication": "Field cancerization, complex topical/procedural planning, pigmented facial lesions needing LM exclusion, or immunosuppression."
       }
     ],
     "patientCounseling": [
-      "Use consistent sun protection and report persistent or changing lesions."
+      "AK is UV-associated; consistent photoprotection reduces further field damage.",
+      "Use broad-spectrum UVA/UVB protection with sufficient quantity and reapplication; add clothing and headwear; avoid tanning devices.",
+      "Self-examine treated and surrounding skin; seek prompt review for thickening, pain, ulceration, bleeding, rapid growth or non-response.",
+      "Expected local skin reactions to topical field therapy are common and treatment-specific — they are not ignored red flags for invasion.",
+      "Actinic cheilitis of the lip is related but distinct; persistent lip erosions need separate assessment.",
+      "Occupational natural UV exposure may warrant BK 5103 assessment when clinically and occupationally appropriate — not automatic for every patient."
+    ],
+    "specialPopulations": [
+      {
+        "population": "pregnancy",
+        "note": "Prefer non-systemically absorbed procedural options when treatment cannot wait; topical fluoropyrimidines and diclofenac (especially third trimester) have label restrictions — verify current Fachinformation."
+      },
+      {
+        "population": "lactation",
+        "note": "Fluoropyrimidine topicals are generally contraindicated while breastfeeding per labeling; verify each product."
+      },
+      {
+        "population": "immunocompromised",
+        "note": "Higher keratinocyte-cancer risk and atypical behavior; lower threshold for histology and specialist-led field management; imiquimod caution in transplant/autoimmune settings."
+      },
+      {
+        "population": "renal-impairment",
+        "note": "Relevant for fluorouracil/salicylic acid solution per Fachinformation application precautions."
+      }
     ],
     "evidenceMap": {
       "presentation": [
+        "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
         "https://dermnetnz.org/topics/actinic-keratosis"
       ],
       "dermoscopy": [
-        "https://dermnetnz.org/topics/actinic-keratosis"
+        "https://dermnetnz.org/topics/actinic-keratosis",
+        "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231"
       ],
       "diagnostics": [
-        "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"
+        "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
+        "https://register.awmf.org/assets/guidelines/032-022OLl_S3_Aktinische_Keratosen-Plattenepithelkarzinom-PEK_2023-01.pdf"
       ],
       "differentials": [
-        "https://dermnetnz.org/topics/actinic-keratosis"
+        "https://dermnetnz.org/topics/actinic-keratosis",
+        "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231"
       ],
       "treatment": [
-        "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"
+        "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
+        "https://register.awmf.org/assets/guidelines/032-022OLl_S3_Aktinische_Keratosen-Plattenepithelkarzinom-PEK_2023-01.pdf",
+        "https://www.medicines.org.uk/emc/product/15802/smpc",
+        "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
+        "https://www.medicines.org.uk/emc/product/4621/smpc",
+        "https://www.ema.europa.eu/en/medicines/human/EPAR/aldara",
+        "https://www.ema.europa.eu/en/medicines/human/EPAR/zyclara",
+        "https://www.fachinfo.de/fi/detail/23428/Klisyri-10-mg-g-Salbe",
+        "https://www.fachinfo.de/fi/pdf/007858/solaraze-3-gel"
       ],
       "followUp": [
-        "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"
+        "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
+        "https://register.awmf.org/assets/guidelines/032-052OLl_S3_Praevention-Hautkrebs_2021-09.pdf"
       ],
       "redFlags": [
-        "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"
+        "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
+        "https://register.awmf.org/assets/guidelines/032-022OLl_S3_Aktinische_Keratosen-Plattenepithelkarzinom-PEK_2023-01.pdf"
       ]
     },
     "sourceUrls": [
-      "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis",
+      "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
+      "https://register.awmf.org/assets/guidelines/032-022OLl_S3_Aktinische_Keratosen-Plattenepithelkarzinom-PEK_2023-01.pdf",
+      "https://register.awmf.org/assets/guidelines/032-052OLl_S3_Praevention-Hautkrebs_2021-09.pdf",
+      "https://klassifikationen.bfarm.de/icd-10-gm/kode-suche/htmlgm2026/block-l55-l59.htm",
+      "https://www.dguv.de/bk-info/icd-10-kapitel/kapitel_12/bk5103/index.jsp",
+      "https://www.medicines.org.uk/emc/product/15802/smpc",
+      "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
+      "https://www.medicines.org.uk/emc/product/4621/smpc",
+      "https://www.ema.europa.eu/en/medicines/human/EPAR/aldara",
+      "https://www.ema.europa.eu/en/medicines/human/EPAR/zyclara",
+      "https://www.fachinfo.de/fi/detail/23428/Klisyri-10-mg-g-Salbe",
+      "https://www.fachinfo.de/fi/pdf/007858/solaraze-3-gel",
+      "https://icd.who.int/browse10/2019/en",
       "https://dermnetnz.org/topics/actinic-keratosis"
     ]
   },
   "references": [
     {
-      "title": "Actinic keratosis clinical guideline",
-      "organization": "American Academy of Dermatology",
+      "title": "S3 guideline: actinic keratosis and cutaneous squamous cell carcinoma — update 2023, part 1: treatment of actinic keratosis, actinic cheilitis, Bowen disease, occupational disease and structures of care",
+      "organization": "German Dermatological Society guideline group / AWMF 032/022OL",
       "type": "guideline",
+      "year": 2023,
+      "version": "2.0",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231",
+      "doi": "10.1111/ddg.15231",
+      "metadataCheckedAt": "2026-09-20"
+    },
+    {
+      "title": "S3-Leitlinie Aktinische Keratose und Plattenepithelkarzinom der Haut (Langfassung)",
+      "organization": "Leitlinienprogramm Onkologie / AWMF",
+      "type": "guideline",
+      "year": 2023,
+      "version": "2.0; AWMF 032/022OL",
+      "url": "https://register.awmf.org/assets/guidelines/032-022OLl_S3_Aktinische_Keratosen-Plattenepithelkarzinom-PEK_2023-01.pdf",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-20"
+    },
+    {
+      "title": "S3-Leitlinie Prävention von Hautkrebs",
+      "organization": "Leitlinienprogramm Onkologie / AWMF",
+      "type": "guideline",
+      "year": 2021,
+      "version": "2.1; AWMF 032/052OL",
+      "url": "https://register.awmf.org/assets/guidelines/032-052OLl_S3_Praevention-Hautkrebs_2021-09.pdf",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-20"
+    },
+    {
+      "title": "ICD-10-GM Version 2026 — L57.0 Aktinische Keratose",
+      "organization": "BfArM",
+      "type": "official classification",
+      "year": 2026,
+      "version": "2026",
+      "url": "https://klassifikationen.bfarm.de/icd-10-gm/kode-suche/htmlgm2026/block-l55-l59.htm",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-20"
+    },
+    {
+      "title": "BK 5103 — Squamous cell carcinomas or multiple actinic keratoses of the skin caused by natural UV radiation",
+      "organization": "DGUV",
+      "type": "clinical reference",
       "year": null,
       "version": null,
-      "url": "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis",
+      "url": "https://www.dguv.de/bk-info/icd-10-kapitel/kapitel_12/bk5103/index.jsp",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-20"
+    },
+    {
+      "title": "Tolak 40 mg/g cream — Summary of Product Characteristics / German Fachinformation",
+      "organization": "German product information / EU SmPC",
+      "type": "clinical reference",
+      "year": null,
+      "version": null,
+      "url": "https://www.medicines.org.uk/emc/product/15802/smpc",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-20"
+    },
+    {
+      "title": "Efudix 5% cream — German Fachinformation",
+      "organization": "German product information",
+      "type": "clinical reference",
+      "year": null,
+      "version": null,
+      "url": "https://www.fachinfo.de/fi/detail/003786/efudix-r-5-creme",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-20"
+    },
+    {
+      "title": "Actikerall 5 mg/g + 100 mg/g cutaneous solution — SmPC / Fachinformation",
+      "organization": "German product information / EU SmPC",
+      "type": "clinical reference",
+      "year": null,
+      "version": null,
+      "url": "https://www.medicines.org.uk/emc/product/4621/smpc",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-20"
+    },
+    {
+      "title": "Aldara 5% cream — EPAR Product Information",
+      "organization": "European Medicines Agency",
+      "type": "clinical reference",
+      "year": null,
+      "version": null,
+      "url": "https://www.ema.europa.eu/en/medicines/human/EPAR/aldara",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-20"
+    },
+    {
+      "title": "Zyclara 3.75% cream — EPAR Product Information",
+      "organization": "European Medicines Agency",
+      "type": "clinical reference",
+      "year": null,
+      "version": null,
+      "url": "https://www.ema.europa.eu/en/medicines/human/EPAR/zyclara",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-20"
+    },
+    {
+      "title": "Klisyri 10 mg/g ointment (tirbanibulin) — German Fachinformation / EU product information",
+      "organization": "German product information / EMA",
+      "type": "clinical reference",
+      "year": null,
+      "version": null,
+      "url": "https://www.fachinfo.de/fi/detail/23428/Klisyri-10-mg-g-Salbe",
+      "doi": null,
+      "metadataCheckedAt": "2026-09-20"
+    },
+    {
+      "title": "Solaraze 3% gel — German Fachinformation",
+      "organization": "German product information",
+      "type": "clinical reference",
+      "year": null,
+      "version": null,
+      "url": "https://www.fachinfo.de/fi/pdf/007858/solaraze-3-gel",
       "doi": null,
       "metadataCheckedAt": "2026-09-20"
     },
@@ -259,16 +646,6 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "year": null,
       "version": "2019",
       "url": "https://icd.who.int/browse10/2019/en",
-      "doi": null,
-      "metadataCheckedAt": "2026-09-15"
-    },
-    {
-      "title": "WHO Classification of Skin Tumours, fifth edition",
-      "organization": "WHO Classification of Tumours Editorial Board / IARC",
-      "type": "official classification",
-      "year": 2025,
-      "version": "5th edition",
-      "url": "https://whobluebooks.iarc.who.int/structures/skintumours/",
       "doi": null,
       "metadataCheckedAt": "2026-09-15"
     },
@@ -2407,11 +2784,11 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## quiz: What is the appropriate next diagnostic step when an actinic keratosis is persistently thickened, tender or concerning for invasion? (`ak-biopsy`)
 
-- **Exact fingerprint:** `sha256-v1:d65667de0184ce6d83281df08132a5c7692d9ec33131011de0488f2c16be1fbf`
+- **Exact fingerprint:** `sha256-v1:99ea95c1e7735771d66d053dd15a67e811b3cd1d0b74fdf5130cfaeda2d08c00`
 - **Schema version:** 1
 - **Reviewable sections:** `prompt`, `options`, `best-answer`, `explanation`, `safety-notice`, `references`
 - **Mapped evidence sources:**
-  - https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis
+  - https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231
 - **Automated warnings:**
   - Confirm one defensible best answer, distractor safety, explanation accuracy, and independence from the linked record review.
   - Automated source attachment and schema validation are not evidence of clinical approval.
@@ -2436,7 +2813,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
   "correctIndex": 1,
   "explanation": "Diagnostic uncertainty or concern for invasive squamous cell carcinoma warrants biopsy or specialist assessment.",
   "sourceUrls": [
-    "https://www.aad.org/member/clinical-quality/guidelines/actinic-keratosis"
+    "https://onlinelibrary.wiley.com/doi/10.1111/ddg.15231"
   ],
   "reviewStatus": "clinician review required",
   "clinicalReview": null
