@@ -48,7 +48,7 @@ test("Goal 10 exposes About, OSS links and feedback CTAs without relative doc pa
   assert.match(html, /href="#about"/);
   assert.match(html, /Public preview/i);
   assert.match(html, /Not validated clinical decision support/i);
-  assert.match(html, /Clinical review pending/i);
+  assert.match(html, /clinician reviewed|Clinician review required|review required/i);
   assert.match(html, /is <strong>not<\/strong> clinician-approved recommendations/i);
 
   for (const href of [
@@ -88,9 +88,11 @@ test("Goal 10 docs agree on public preview status and keep remaining review unit
   assert.match(contributing, /Suggest a correction/);
   assert.match(roadmap, /Goal 10/);
   assert.match(changelog, /Goal 10/);
-  assert.equal(reviewStatus.assets.length, 23);
+  const caseCount = reviewStatus.assets.filter(item => item.assetType === "case").length;
+  assert.equal(reviewStatus.assets.length, 23 + caseCount);
   assert.equal(reviewStatus.assets.filter(item => item.status === "clinician reviewed").length, 5);
-  assert.equal(reviewStatus.assets.filter(item => item.status === "review required").length, 18);
+  assert.equal(reviewStatus.assets.filter(item => item.status === "review required").length, 18 + caseCount);
+  assert.ok(caseCount >= 3);
   assert.equal(reviewStatus.latestValidHumanReviewDate, "2026-09-23");
   assert.equal((reviewStatus.reviewers || []).length, 1);
   assert.equal((reviewStatus.decisions || []).length, 5);

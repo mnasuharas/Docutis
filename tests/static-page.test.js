@@ -52,6 +52,9 @@ test("static page keeps load order, disclaimer and accessible controls", () => {
   assert.ok(html.indexOf('src="media-data.js"') < html.indexOf('src="app.js"'));
   assert.ok(html.indexOf('src="followup-data.js"') < html.indexOf('src="followup-app.js"'));
   assert.ok(html.indexOf('src="quiz-data.js"') < html.indexOf('src="quiz-app.js"'));
+  assert.ok(html.indexOf('src="case-data.js"') < html.indexOf('src="case-app.js"'));
+  assert.match(html, /id="caseModule"/);
+  assert.match(html, /href="#caseModule"/);
   assert.ok(html.indexOf('src="review-status.js"') < html.indexOf('src="oss-feedback.js"'));
   assert.ok(html.indexOf('src="oss-feedback.js"') < html.indexOf('src="review-ui.js"'));
   assert.ok(html.indexOf('src="review-ui.js"') < html.indexOf('src="app.js"'));
@@ -192,9 +195,11 @@ test("Goal 8 exposes review transparency, quiz and deep-link architecture", () =
 });
 
 test("Goal 9 exposes independent public review status without fabricated approval", () => {
-  assert.equal(reviewStatus.assets.length, 23);
+  const caseCount = reviewStatus.assets.filter(item => item.assetType === "case").length;
+  assert.equal(reviewStatus.assets.length, 23 + caseCount);
   assert.equal(reviewStatus.assets.filter(item => item.status === "clinician reviewed").length, 5);
-  assert.equal(reviewStatus.assets.filter(item => item.status === "review required").length, 18);
+  assert.equal(reviewStatus.assets.filter(item => item.status === "review required").length, 18 + caseCount);
+  assert.ok(caseCount >= 3);
   assert.equal(reviewStatus.latestValidHumanReviewDate, "2026-09-23");
   assert.match(reviewUi, /No valid human approval is bound to this exact content version/);
   assert.match(reviewUi, /Review details/);
@@ -227,4 +232,11 @@ test("result status and footer meet WCAG AA normal-text contrast", () => {
     const ratio = contrastRatio(cssProperty(selector, "color"), background);
     assert.ok(ratio >= 4.5, `${selector} contrast ${ratio.toFixed(2)} is below 4.5:1`);
   }
+});
+
+test("CI includes case validation beside quiz and media checks", () => {
+  assert.match(workflow, /node --check case-data\.js/);
+  assert.match(workflow, /node --check case-app\.js/);
+  assert.match(workflow, /node --check scripts\/case\.js/);
+  assert.match(workflow, /node scripts\/case\.js/);
 });
