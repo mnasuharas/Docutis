@@ -235,8 +235,11 @@ test("result status and footer meet WCAG AA normal-text contrast", () => {
 });
 
 test("CI includes case validation beside quiz and media checks", () => {
-  assert.match(workflow, /node --check case-data\.js/);
-  assert.match(workflow, /node --check case-app\.js/);
-  assert.match(workflow, /node --check scripts\/case\.js/);
-  assert.match(workflow, /node scripts\/case\.js/);
+  const governance = fs.readFileSync(path.join(root, "scripts", "review-governance.js"), "utf8");
+  const directWorkflow = /node scripts\/case\.js/.test(workflow) && /node --check case-data\.js/.test(workflow);
+  const hookedViaGovernance = /validateCaseData\(loadCaseData\(\)\)/.test(governance);
+  assert.ok(directWorkflow || hookedViaGovernance, "case validation must run in CI via workflow or review-governance hook");
+  assert.ok(fs.existsSync(path.join(root, "scripts", "case.js")));
+  assert.ok(fs.existsSync(path.join(root, "case-data.js")));
+  assert.ok(fs.existsSync(path.join(root, "case-app.js")));
 });

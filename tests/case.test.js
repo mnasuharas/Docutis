@@ -66,3 +66,10 @@ test("case UI shell and progressive disclosure controls exist", () => {
   assert.match(app, /aria-live/);
   assert.match(app, /progressive|observations|differentials|teachingPoints/i);
 });
+
+test("case modules pass node syntax checks", () => {
+  const { execFileSync } = require("node:child_process");
+  for (const file of ["case-data.js", "case-app.js", "scripts/case.js"]) {
+    execFileSync(process.execPath, ["--check", file], { cwd: root });
+  }
+});

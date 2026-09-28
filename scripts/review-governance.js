@@ -6,7 +6,7 @@ const path = require("node:path");
 const vm = require("node:vm");
 const { canonicalize, fingerprint, followUpFingerprint, loadData, loadFollowUpData } = require("./clinical-review");
 const { mediaFingerprint, loadMediaData } = require("./media");
-const { caseFingerprint, loadCaseData } = require("./case");
+const { caseFingerprint, loadCaseData, validateCaseData } = require("./case");
 
 const root = path.join(__dirname, "..");
 const assetTypes = new Set(["disease", "quiz", "visual", "follow_up", "case"]);
@@ -211,6 +211,7 @@ function writePublicStatus(status) {
 }
 
 function main(args = process.argv.slice(2)) {
+  validateCaseData(loadCaseData());
   const status = buildPublicStatus();
   validatePublicStatus(status);
   if (args.includes("--write")) writePublicStatus(status);
