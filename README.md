@@ -10,7 +10,7 @@
 
 Docutis is an open-source project that presents dermatology information in a clear, searchable and structured format.
 
-Clinical review is version-bound and independently tracked for disease records, quiz items, visual assets and follow-up protocols. The public dashboard and `review-status.json` distinguish human review from automated validation. The Goal 9 pilot infrastructure is prepared, but no human clinical-review decision has been published.
+Clinical review is version-bound and independently tracked for disease records, quiz items, visual assets, follow-up protocols and case-based learning units. The public dashboard and `review-status.json` distinguish human review from automated validation. The Goal 9 public layer currently publishes **5 clinician-reviewed** assets and **18 review-required** assets among the original 23 pilot units; additional case units start as review required. AI interpretation is not clinician review. Release notes for older tags are point-in-time and may not match current `main`.
 
 Goal 10 adds a public OSS surface: About/project-status copy, repository and roadmap/changelog links, and “Suggest a correction” / “Report outdated evidence” CTAs that open the clinical content issue form. Docutis remains a public preview and is not validated clinical decision support.
 
@@ -34,7 +34,7 @@ Docutis is currently in active early development. Its content, structure and tec
 - Links to external clinical references
 - Responsive browser-based interface
 - Optional governed educational-media architecture with license, attribution, accessibility and independent review metadata
-- Four original governed SVG learning schematics and an eight-question clinical-pattern quiz
+- Four original governed SVG learning schematics, an eight-question clinical-pattern quiz and a case-based learning foundation with open-license pilot cases
 - Section-level evidence maps for the eight structured pilot records
 - URL-addressable condition details such as `?condition=acne-vulgaris`, including browser Back/Forward support
 - Dependency-free automated validation on pull requests and `main` pushes
@@ -75,7 +75,7 @@ Medical content contributions should include appropriate references. All current
 
 ## Clinical governance
 
-Clinical review governance distinguishes automated source/schema validation from a physician's personal review of a specific content version. The two statuses are `clinician review required` and `clinician reviewed`; all 50 records currently require review and 0 are clinician reviewed.
+Clinical review governance distinguishes automated source/schema validation from a physician's personal review of a specific content version. Legacy embedded `reviewStatus` fields on disease records remain `clinician review required` for all 50 records. The authoritative public Goal 9 layer (`review-status.json`) currently marks **5** pilot assets as `clinician reviewed` (actinic keratosis and basal cell carcinoma disease records, BCC follow-up, BCC quiz item, BCC schematic) and the remaining Goal 9 units as `review required`.
 
 `clinicalReview` is null until a physician review is documented. A reviewed record stores the date, physician role, specialty and a deterministic content fingerprint. Local validation and CI reject stale fingerprints after clinical changes; contributors must obtain re-review or reset the record to review-required. A matching hash does not establish reviewer credentials or guarantee correctness. See [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md) for the human procedure and the read-only `node scripts/clinical-review.js "Acne Vulgaris"` utility.
 

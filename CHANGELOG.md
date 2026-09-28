@@ -4,6 +4,17 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## Unreleased
 
+### Goal 11 — Case-based learning foundation
+
+- Add structured case registry (`case-data.js`), progressive-disclosure case UI, offline validator/fingerprint helper and contributor schema/licensing docs.
+- Extend Goal 9 governance with independent `case` review units; all new pilots start as review required (AI interpretation is not clinician review).
+- Add open-license pilot cases covering acral melanoma, BCC (nodular and pigmented dermoscopy), actinic keratosis field cancerization and cSCC with adjacent AK.
+
+### Post–Goal 10 clinical attestation merges (factual)
+
+- Publish genuine physician decisions for actinic keratosis and basal cell carcinoma disease records.
+- Publish independent clinician-reviewed decisions for BCC German follow-up, BCC dermoscopy quiz item and BCC clues schematic (fingerprints unchanged from attestation PRs).
+
 ### Goal 10 — Public OSS surface
 
 - Add discoverable GitHub, Contributing, Roadmap, Changelog and Releases links in navigation/footer.
@@ -27,7 +38,7 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 - Add URL-addressable condition details and browser history behavior.
 - Add a physician review worksheet and community health files.
 
-All clinical records, visual items, quiz items and follow-up protocols remain `clinician review required` unless genuine physician metadata states otherwise.
+Clinical content remains educational draft material unless a matching public Goal 9 physician decision or genuine embedded physician metadata states otherwise. Historical Goal 8–10 changelog bullets above describe their original landings; later AK/BCC attestations and Goal 11 are recorded in the sections above.
 
 ## 2026-09-17
 
