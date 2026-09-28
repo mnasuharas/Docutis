@@ -8,6 +8,7 @@ const { buildAssets, loadQuizData, attestationText } = (() => {
 })();
 const { loadData, loadFollowUpData } = require("./clinical-review");
 const { loadMediaData } = require("./media");
+const { loadCaseData } = require("./case");
 
 const root = path.join(__dirname, "..");
 const generatedAt = "2026-09-20";
@@ -16,6 +17,7 @@ function assetContent(asset) {
   if (asset.assetType === "disease") return loadData().diseases.find(item => item.id === asset.id);
   if (asset.assetType === "quiz") return loadQuizData().questions.find(item => item.id === asset.id);
   if (asset.assetType === "visual") return loadMediaData().items.find(item => item.id === asset.id);
+  if (asset.assetType === "case") return loadCaseData().cases.find(item => item.id === asset.id);
   return loadFollowUpData().protocols.find(item => item.id === asset.id);
 }
 
@@ -29,6 +31,7 @@ function warnings(asset, content) {
   if (asset.assetType === "quiz") values.push("Confirm one defensible best answer, distractor safety, explanation accuracy, and independence from the linked record review.");
   if (asset.assetType === "visual") values.push("Confirm every label, spatial relationship, caption, alternative text, legend, and non-diagnostic framing independently.");
   if (asset.assetType === "follow_up") values.push("Confirm German jurisdiction, guideline version, every interval/status, modality, recommendation strength, and contextual source independently.");
+  if (asset.assetType === "case") values.push("Confirm image provenance/license, observations vs interpretations separation, differentials, diagnostic confirmation method honesty, and that AI interpretation is not treated as clinician review.");
   values.push("Automated source attachment and schema validation are not evidence of clinical approval.");
   return values;
 }
@@ -100,7 +103,8 @@ function main(args = process.argv.slice(2)) {
     fs.writeFileSync(path.join(root, "GOAL9_HUMAN_REVIEW_GATE.md"), markdown(assets));
     fs.writeFileSync(path.join(root, "goal9-review-decisions.template.json"), `${JSON.stringify(template(assets), null, 2)}\n`);
   }
-  console.log(`Prepared ${assets.length} independent review units: 8 diseases, 8 quiz questions, 4 visuals and 3 follow-up protocols.`);
+  const counts = Object.fromEntries(["disease", "quiz", "visual", "follow_up", "case"].map(type => [type, assets.filter(item => item.assetType === type).length]));
+  console.log(`Prepared ${assets.length} independent review units: ${counts.disease} diseases, ${counts.quiz} quiz questions, ${counts.visual} visuals, ${counts.follow_up} follow-up protocols and ${counts.case} cases.`);
   console.log("No human decisions or attestations were created.");
 }
 
