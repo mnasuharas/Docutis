@@ -4,6 +4,14 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## Unreleased
 
+### Goal 15 — Cross-browser UX hardening
+
+- Define the missing `--color-focus`, `--color-surface-subtle`, and `--shadow-sm` tokens so focus outlines, panel backgrounds, and the small shadow are not dropped.
+- Keep primary navigation reachable below 900px instead of `display: none`.
+- Honor `prefers-reduced-motion` for condition scrolling, and fall back when `focus({ preventScroll })` throws.
+- Add a one-sentence no-JS notice for the library, quiz, follow-up, and review counts without copying clinical text.
+- Add [BROWSER_COMPATIBILITY.md](BROWSER_COMPATIBILITY.md). No browser core flow was marked verified. Clinical content, review decisions, and fingerprints are unchanged.
+
 ### Goal 12 — Case learning UX
 
 - Step the five existing pilot cases through inspect, observe, differential, reveal and review, with view-only image zoom, separated observations and interpretations, an unscored differential disclosure and an explicit diagnosis reveal.
