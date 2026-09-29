@@ -160,6 +160,9 @@ test("case learning flow hides diagnosis until reveal and keeps five cases revie
   assert.ok(cases.every(item => item.reviewStatus === "clinician review required" && item.clinicalReview === null));
   const listText = caseText(harness.root);
   for (const item of cases) assert.equal(listText.includes(item.diagnosisLabel), false);
+  const diseaseNames = harness.window.DOCUTIS_DATA.diseases.map(item => item.name).filter(Boolean);
+  for (const name of diseaseNames) assert.equal(listText.includes(name), false, `case list leaked disease name: ${name}`);
+  assert.doesNotMatch(listText, /Linked condition/);
   assert.match(listText, /Review required/);
   assert.match(listText, /5 cases shown/);
 

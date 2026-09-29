@@ -56,7 +56,6 @@
 
   function cases() {
     return registry.cases.filter(item => {
-      if (filters.diseaseId && item.diseaseId !== filters.diseaseId) return false;
       if (filters.caseType && item.caseType !== filters.caseType) return false;
       if (filters.educationalLevel && item.educationalLevel !== filters.educationalLevel) return false;
       if (filters.anatomicalSite && !(item.patientContext && item.patientContext.anatomicalSite || "").toLocaleLowerCase("en").includes(filters.anatomicalSite.toLocaleLowerCase("en"))) return false;
@@ -134,7 +133,6 @@
   function renderFilters(parent) {
     const bar = element("div", undefined, "case-filters");
     const specs = [
-      ["diseaseId", "Linked condition", uniqueValues(item => item.diseaseId).map(id => [id, diseaseName(id)])],
       ["caseType", "Case type", uniqueValues(item => item.caseType).map(value => [value, String(value).replaceAll("_", " ")])],
       ["educationalLevel", "Level", uniqueValues(item => item.educationalLevel).map(value => [value, value])],
       ["anatomicalSite", "Site contains", null]
