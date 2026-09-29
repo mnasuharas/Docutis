@@ -430,3 +430,121 @@ test("site filter keeps focus and typed characters across list refresh", () => {
   assert.match(caseText(harness.root), /2 cases shown/);
   assert.doesNotMatch(caseText(harness.root), /Linked condition|Actinic Keratosis|Basal Cell Carcinoma|Squamous Cell Carcinoma|Acral Melanoma/);
 });
+
+test("explicit diagnosis confirmations stay hidden until reveal and remain available afterward", () => {
+  const harness = caseHarness(caseUiFiles);
+  const cases = harness.window.DOCUTIS_CASES.cases;
+  const expectations = [
+    {
+      id: "case-acral-melanoma-plantar",
+      hidden: [
+        "This published case was histopathologically confirmed as acral lentiginous melanoma."
+      ],
+      kept: ["Acral lentiginous melanoma", "raises concern for acral melanoma"]
+    },
+    {
+      id: "case-bcc-nodular-dermoscopy",
+      hidden: [
+        "Author-labeled nodular BCC; vascular clues are the teaching focus.",
+        "Classic arborizing BCC-type vessels and translucent BCC pattern favor BCC in this labeled example"
+      ],
+      kept: [
+        "Basal cell carcinoma (nodular)",
+        "associated with basal cell carcinoma",
+        "Vascular clues are the teaching focus.",
+        "Classic arborizing BCC-type vessels and translucent BCC pattern favor BCC"
+      ]
+    },
+    {
+      id: "case-bcc-pigmented-dermoscopy",
+      hidden: [
+        "Author-labeled pigmented BCC; emphasize BCC pigment structures vs melanocytic network."
+      ],
+      kept: [
+        "Pigmented basal cell carcinoma",
+        "Pigmented BCC often shows",
+        "Emphasize BCC pigment structures vs melanocytic network."
+      ]
+    },
+    {
+      id: "case-ak-field-hand",
+      hidden: [
+        "Multiple AKs on a sun-damaged field illustrate field cancerization rather than an isolated keratosis.",
+        "Discrete grit-like keratotic AKs on photoaged skin differ from diffuse eczematous plaques"
+      ],
+      kept: [
+        "Actinic keratoses / field cancerization",
+        "Multiple rough spots on a sun-damaged field illustrate field change rather than an isolated lesion.",
+        "Discrete grit-like keratotic spots on photoaged skin differ from diffuse eczematous plaques"
+      ]
+    },
+    {
+      id: "case-scc-ak-paraspinal",
+      hidden: [
+        "The pairing illustrates the AK\u2013SCC continuum: a more concerning hypertrophic focus beside an adjacent actinic keratosis in damaged skin.",
+        "Uploader SCC label",
+        "Primary teaching diagnosis for the marked lesion per source caption.",
+        "Source caption specifies well-differentiated SCC for the marked lesion",
+        "Adjacent AK supports continuum teaching without merging both labels into one lesion."
+      ],
+      kept: [
+        "Cutaneous squamous cell carcinoma",
+        "Actinic keratosis (adjacent)",
+        "A more concerning hypertrophic focus sits beside an adjacent flatter keratotic change in damaged skin.",
+        "Hypertrophic marked focus",
+        "A neighboring flatter keratotic change supports continuum teaching without merging both findings into one lesion."
+      ]
+    }
+  ];
+
+  function openCase(item) {
+    const back = caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Back to case list")[0];
+    if (back) back.dispatch("click");
+    const start = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === `Start case: ${item.title}`)[0];
+    assert.ok(start, item.id);
+    start.dispatch("click");
+  }
+
+  function showStep(label) {
+    const tab = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === label)[0];
+    assert.ok(tab, label);
+    tab.dispatch("click");
+    return caseText(harness.root);
+  }
+
+  assert.equal(expectations.length, 5);
+  for (const expected of expectations) {
+    const item = cases.find(entry => entry.id === expected.id);
+    assert.ok(item, expected.id);
+    openCase(item);
+    const before = [
+      showStep("Step 1 of 5: Inspect"),
+      showStep("Step 2 of 5: Observe"),
+      showStep("Step 3 of 5: Differential")
+    ].join("\n");
+    for (const phrase of expected.hidden) {
+      assert.equal(before.includes(phrase), false, `${expected.id} showed "${phrase}" before reveal`);
+    }
+    for (const phrase of expected.kept) {
+      assert.equal(before.includes(phrase), true, `${expected.id} lost "${phrase}" before reveal`);
+    }
+    showStep("Step 4 of 5: Reveal");
+    assert.equal(caseText(harness.root).includes(item.diagnosisLabel), false, `${expected.id} label visible before reveal`);
+    for (const phrase of expected.hidden) {
+      assert.equal(caseText(harness.root).includes(phrase), false, `${expected.id} showed "${phrase}" on the closed reveal step`);
+    }
+    const reveal = caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Reveal diagnosis")[0];
+    assert.ok(reveal, expected.id);
+    reveal.dispatch("click");
+    const revealed = caseText(harness.root);
+    assert.equal(revealed.includes(item.diagnosisLabel), true, `${expected.id} diagnosis label`);
+    for (const phrase of expected.hidden) {
+      assert.equal(revealed.includes(phrase), true, `${expected.id} dropped "${phrase}" after reveal`);
+    }
+    const review = showStep("Step 5 of 5: Review");
+    assert.equal(review.includes(item.diagnosisLabel), true, `${expected.id} review label`);
+    for (const phrase of expected.hidden) {
+      assert.equal(review.includes(phrase), true, `${expected.id} review dropped "${phrase}"`);
+    }
+  }
+});

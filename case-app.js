@@ -192,6 +192,83 @@
     return alt;
   }
 
+
+  const CONFIRMATION_PATTERN = /\b(?:histopathologically\s+confirmed\s+as|was\s+confirmed\s+as|confirmed\s+as|author-labeled|uploader-labeled|uploader\s+[a-z0-9-]+\s+label|source\s+caption\s+specifies|primary\s+teaching\s+diagnosis|in\s+this\s+labeled\s+example)\b/i;
+  const EXACT_PRE_REVEAL = new Map([
+    ["Multiple AKs on a sun-damaged field illustrate field cancerization rather than an isolated keratosis.", "Multiple rough spots on a sun-damaged field illustrate field change rather than an isolated lesion."],
+    ["The pairing illustrates the AK\u2013SCC continuum: a more concerning hypertrophic focus beside an adjacent actinic keratosis in damaged skin.", "A more concerning hypertrophic focus sits beside an adjacent flatter keratotic change in damaged skin."],
+    ["Discrete grit-like keratotic AKs on photoaged skin differ from diffuse eczematous plaques", "Discrete grit-like keratotic spots on photoaged skin differ from diffuse eczematous plaques"],
+    ["Adjacent AK supports continuum teaching without merging both labels into one lesion.", "A neighboring flatter keratotic change supports continuum teaching without merging both findings into one lesion."]
+  ]);
+
+  function stripConfirmingTail(clause) {
+    return String(clause || "").replace(/\s+in this labeled example\b/ig, "").replace(/[;,]\s*$/, "").trim();
+  }
+
+  function splitDisclosure(text) {
+    const original = String(text || "");
+    const trimmed = original.trim();
+    if (!trimmed) return { visible: "", withheld: "" };
+    if (EXACT_PRE_REVEAL.has(trimmed)) return { visible: EXACT_PRE_REVEAL.get(trimmed), withheld: trimmed };
+    if (!CONFIRMATION_PATTERN.test(trimmed)) return { visible: original, withheld: "" };
+    const clauses = trimmed.split(/\s*;\s*/);
+    if (clauses.length > 1) {
+      const kept = clauses.map(stripConfirmingTail).filter(clause => clause && !CONFIRMATION_PATTERN.test(clause));
+      let visible = kept.join("; ");
+      if (visible) visible = visible.charAt(0).toUpperCase() + visible.slice(1);
+      return { visible, withheld: trimmed };
+    }
+    const stripped = stripConfirmingTail(trimmed);
+    if (stripped && stripped !== trimmed && !CONFIRMATION_PATTERN.test(stripped)) return { visible: stripped, withheld: trimmed };
+    return { visible: "", withheld: trimmed };
+  }
+
+  function preRevealDisplay(text) {
+    if (text == null) return "";
+    if (diagnosisRevealed) return text;
+    return splitDisclosure(text).visible;
+  }
+
+  function heldSourceNotes(caseItem) {
+    const notes = [];
+    const seen = new Set();
+    function consider(value) {
+      const parts = splitDisclosure(value);
+      if (!parts.withheld || seen.has(parts.withheld)) return;
+      seen.add(parts.withheld);
+      notes.push(parts.withheld);
+    }
+    asList(caseItem.observations).forEach(item => consider(item && item.text));
+    asList(caseItem.dermoscopicFeatures).forEach(item => consider(item && (item.label || item.token)));
+    asList(caseItem.interpretations).forEach(item => consider(item && item.text));
+    asList(caseItem.differentials).forEach(diff => {
+      if (!diff) return;
+      consider(diff.teachingDistinction);
+      asList(diff.supportingFeatures).forEach(consider);
+      asList(diff.contradictingFeatures).forEach(consider);
+    });
+    return notes;
+  }
+
+  function appendHeldSourceNotes(parent, caseItem) {
+    const notes = heldSourceNotes(caseItem);
+    if (!notes.length) return;
+    const section = element("section", undefined, "case-held-notes");
+    section.appendChild(element("h5", "Source notes"));
+    notes.forEach(note => section.appendChild(element("p", note)));
+    parent.appendChild(section);
+  }
+
+  function appendRecordedOrConcealed(section, items, kindLabel, className, textOfItem, emptyText) {
+    if (!renderLabeledList(section, items, kindLabel, className, textOfItem)) {
+      const stored = items.some(item => {
+        const text = textOfItem(item);
+        return text || (item && ((item.text || item.label || item.token || "").trim()));
+      });
+      if (!stored || diagnosisRevealed) section.appendChild(element("p", emptyText, "case-empty"));
+    }
+  }
+
   function flowMessage(caseItem) {
     const step = STEPS[activeStep];
     const nameVisible = diagnosisRevealed && activeStep >= 3 && caseItem.diagnosisLabel;
@@ -354,25 +431,19 @@
     const observationSection = element("section", undefined, "case-kind-section case-kind-section-observation");
     observationSection.appendChild(element("h5", "Observations"));
     observationSection.appendChild(element("p", "Observation means a visible finding written on the case, not a diagnosis.", "case-kind-note"));
-    if (!renderLabeledList(observationSection, observations, "Observation", "case-kind-observation", item => item && item.text)) {
-      observationSection.appendChild(element("p", "No observations are recorded for this case. None were added.", "case-empty"));
-    }
+    appendRecordedOrConcealed(observationSection, observations, "Observation", "case-kind-observation", item => item && preRevealDisplay(item.text), "No observations are recorded for this case. None were added.");
     parent.appendChild(observationSection);
 
     const featureSection = element("section", undefined, "case-kind-section");
     featureSection.appendChild(element("h5", "Dermoscopic features"));
     featureSection.appendChild(element("p", "Dermoscopic feature means a recorded structure or vessel finding, not a diagnosis.", "case-kind-note"));
-    if (!renderLabeledList(featureSection, features, "Dermoscopic feature", "case-kind-feature", item => item && (item.label || item.token))) {
-      featureSection.appendChild(element("p", "No dermoscopic features are recorded for this case. None were added.", "case-empty"));
-    }
+    appendRecordedOrConcealed(featureSection, features, "Dermoscopic feature", "case-kind-feature", item => item && preRevealDisplay(item.label || item.token), "No dermoscopic features are recorded for this case. None were added.");
     parent.appendChild(featureSection);
 
     const interpretationSection = element("section", undefined, "case-kind-section case-kind-section-interpretation");
     interpretationSection.appendChild(element("h5", "Interpretations"));
     interpretationSection.appendChild(element("p", "Interpretation means a reading of the observations. It is not a confirmed diagnosis and not clinician review.", "case-kind-note"));
-    if (!renderLabeledList(interpretationSection, interpretations, "Interpretation", "case-kind-interpretation", item => item && item.text)) {
-      interpretationSection.appendChild(element("p", "No interpretations are recorded for this case. None were added.", "case-empty"));
-    }
+    appendRecordedOrConcealed(interpretationSection, interpretations, "Interpretation", "case-kind-interpretation", item => item && preRevealDisplay(item.text), "No interpretations are recorded for this case. None were added.");
     parent.appendChild(interpretationSection);
   }
 
@@ -392,9 +463,12 @@
       if (!diff) return;
       const card = element("article", undefined, "case-diff");
       card.appendChild(element("h5", diff.diagnosis || "Unlabeled differential"));
-      if (diff.teachingDistinction) card.appendChild(element("p", diff.teachingDistinction));
-      if (asList(diff.supportingFeatures).length) card.appendChild(element("p", `Supports: ${diff.supportingFeatures.join("; ")}`));
-      if (asList(diff.contradictingFeatures).length) card.appendChild(element("p", `Against: ${diff.contradictingFeatures.join("; ")}`));
+      const teaching = preRevealDisplay(diff.teachingDistinction);
+      if (teaching) card.appendChild(element("p", teaching));
+      const supports = asList(diff.supportingFeatures).map(preRevealDisplay).filter(Boolean);
+      if (supports.length) card.appendChild(element("p", `Supports: ${supports.join("; ")}`));
+      const against = asList(diff.contradictingFeatures).map(preRevealDisplay).filter(Boolean);
+      if (against.length) card.appendChild(element("p", `Against: ${against.join("; ")}`));
       body.appendChild(card);
     });
     details.appendChild(body);
@@ -441,6 +515,7 @@
     if (diagnosisRevealed) {
       panel.appendChild(element("h5", caseItem.diagnosisLabel || "No diagnosis label is recorded for this case."));
       appendEvidence(panel, caseItem);
+      appendHeldSourceNotes(panel, caseItem);
     }
     revealWrap.appendChild(revealBtn);
     revealWrap.appendChild(status);
@@ -481,6 +556,7 @@
     const label = caseItem.diagnosisLabel || "No diagnosis label is recorded";
     summary.appendChild(element("p", `${caseItem.title || "This case"}. Recorded diagnosis: ${label}.`));
     appendEvidence(summary, caseItem);
+    appendHeldSourceNotes(summary, caseItem);
     asList(caseItem.images).forEach(image => {
       if (image && image.caption) summary.appendChild(element("p", `Image caption on record: ${image.caption}`, "case-attribution"));
     });
