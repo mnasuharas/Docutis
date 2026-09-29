@@ -12,6 +12,15 @@
   let score = 0;
   let answered = false;
 
+  function focusWithoutScrolling(element) {
+    if (!element || typeof element.focus !== "function") return;
+    try {
+      element.focus({ preventScroll: true });
+    } catch (error) {
+      element.focus();
+    }
+  }
+
   function element(tag, text, className) {
     const node = document.createElement(tag);
     if (text !== undefined) node.textContent = text;
@@ -146,7 +155,7 @@
       next.type = "button";
       next.addEventListener("click", () => {
         if (index === quiz.questions.length - 1) renderResult();
-        else { index += 1; renderQuestion(); root.focus({ preventScroll: true }); }
+        else { index += 1; renderQuestion(); focusWithoutScrolling(root); }
       });
       actions.appendChild(next);
       feedback.focus?.();

@@ -3,7 +3,9 @@
   --color-canvas: #f4f7f8;
   --color-surface: #ffffff;
   --color-surface-muted: #f7faf9;
+  --color-surface-subtle: #f7faf9;
   --color-surface-accent: #edf5f3;
+  --color-focus: #0d5149;
   --color-text: #182422;
   --color-text-secondary: #44524f;
   --color-text-muted: #5f6f6c;
@@ -18,6 +20,7 @@
   --color-warning-soft: #fff8df;
   --color-danger: #9b2c2c;
   --shadow-subtle: 0 1px 2px rgba(15, 35, 31, 0.04), 0 10px 28px rgba(15, 35, 31, 0.05);
+  --shadow-sm: 0 1px 2px rgba(15, 35, 31, 0.04), 0 10px 28px rgba(15, 35, 31, 0.05);
   --shadow-raised: 0 14px 38px rgba(15, 35, 31, 0.09);
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -80,6 +83,10 @@ a:hover {
   border: 0;
 }
 
+html.no-js .js-only {
+  display: none;
+}
+
 .skip-link {
   position: fixed;
   left: var(--space-4);
@@ -103,6 +110,7 @@ a:hover {
   z-index: 20;
   background: rgba(255, 255, 255, 0.96);
   border-bottom: 1px solid var(--color-border);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
@@ -322,6 +330,14 @@ kbd {
 #searchInput:focus {
   border-color: var(--color-accent);
   box-shadow: 0 0 0 3px rgba(23, 107, 97, 0.16);
+}
+
+#searchInput::-webkit-search-decoration,
+#searchInput::-webkit-search-cancel-button,
+#searchInput::-webkit-search-results-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
 }
 
 .search-clear {
@@ -1484,12 +1500,29 @@ footer {
 }
 
 @media (max-width: 900px) {
+  .brand,
+  .nav-oss,
+  .badge {
+    flex-shrink: 0;
+  }
+
   .primary-links {
-    display: none;
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-left: var(--space-3);
+    gap: var(--space-3);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+  }
+
+  .primary-links a {
+    flex: 0 0 auto;
   }
 
   .badge {
-    margin-left: auto;
+    margin-left: 0;
   }
 
   .section-heading {
@@ -2096,6 +2129,7 @@ footer {
 .case-zoom-viewport {
   overflow: auto;
   max-height: min(70vh, 640px);
+  max-height: min(70dvh, 640px);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-surface-muted);
@@ -2118,7 +2152,8 @@ footer {
   border-radius: 0;
 }
 
-.case-empty {
+.case-empty,
+.js-fallback {
   margin: var(--space-3) 0;
   padding: var(--space-3);
   border: 1px dashed var(--color-border-strong);
@@ -2154,5 +2189,27 @@ footer {
   .case-reveal .case-button,
   .case-zoom-button {
     width: 100%;
+  }
+}
+
+@supports not selector(:focus-visible) {
+  .card:focus,
+  .filter-button:focus,
+  .close-button:focus,
+  .search-clear:focus,
+  .follow-up-controls select:focus,
+  .follow-up-provenance summary:focus,
+  .detail-jump-nav a:focus,
+  .public-review-summary:focus,
+  .nav-oss a:focus,
+  .clinical-feedback-link:focus,
+  .footer-oss a:focus,
+  .case-zoom-viewport:focus,
+  .case-step-tab:focus,
+  .case-button:focus,
+  .case-disclosure summary:focus,
+  .quiz-option:focus-within {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
   }
 }

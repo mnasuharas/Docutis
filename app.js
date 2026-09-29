@@ -16,6 +16,33 @@
   let activeCategory = "all";
   let lastOpenedCard = null;
 
+  function prefersReducedMotion() {
+    try {
+      return Boolean(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function focusWithoutScrolling(element) {
+    if (!element || typeof element.focus !== "function") return;
+    try {
+      element.focus({ preventScroll: true });
+    } catch (error) {
+      element.focus();
+    }
+  }
+
+  function scrollElementIntoView(element) {
+    if (!element || typeof element.scrollIntoView !== "function") return;
+    const behavior = prefersReducedMotion() ? "auto" : "smooth";
+    try {
+      element.scrollIntoView({ behavior, block: "start" });
+    } catch (error) {
+      element.scrollIntoView();
+    }
+  }
+
   function appendTextElement(parent, tagName, value, className) {
     const element = document.createElement(tagName);
     if (className) element.className = className;
@@ -631,8 +658,8 @@
     addReferencesSection(content, disease);
     detailsElement.appendChild(content);
     detailsElement.hidden = false;
-    detailsElement.focus({ preventScroll: true });
-    detailsElement.scrollIntoView({ behavior: "smooth", block: "start" });
+    focusWithoutScrolling(detailsElement);
+    scrollElementIntoView(detailsElement);
     return true;
   }
 
