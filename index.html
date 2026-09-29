@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8">
+  <script>document.documentElement.classList.remove("no-js");</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Docutis | Dermatology Reference Toolkit</title>
@@ -51,7 +52,7 @@
       Recommendations are educational drafts unless a matching physician decision exists.
     </p>
 
-    <div id="libraryStats" class="library-stats" aria-label="Current reference coverage"></div>
+    <div id="libraryStats" class="library-stats js-only" aria-label="Current reference coverage"></div>
   </section>
 
   <section id="evidenceStatus" class="evidence-dashboard" aria-labelledby="evidenceStatusTitle">
@@ -62,7 +63,8 @@
       </div>
       <p>Live coverage counts are calculated from the published records, follow-up protocols and governed media registry.</p>
     </div>
-    <div id="reviewDashboardCounts" class="review-dashboard-counts" aria-label="Clinical review coverage"></div>
+    <noscript><p class="js-fallback">This interactive section requires JavaScript.</p></noscript>
+    <div id="reviewDashboardCounts" class="review-dashboard-counts js-only" aria-label="Clinical review coverage"></div>
     <details class="review-meaning">
       <summary>What these states mean</summary>
       <dl>
@@ -92,15 +94,16 @@
       </div>
       <p class="keyboard-hint"><kbd>/</kbd> to focus search</p>
     </div>
-    <div class="search-wrapper">
+    <noscript><p class="js-fallback">This interactive section requires JavaScript.</p></noscript>
+    <div class="search-wrapper js-only">
       <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"/></svg>
       <label class="visually-hidden" for="searchInput">Search conditions</label>
       <input id="searchInput" type="search" placeholder="Search by condition, alias, category or code" autocomplete="off" aria-controls="cards" aria-describedby="searchHelp">
       <button id="searchClear" class="search-clear" type="button" hidden>Clear</button>
     </div>
     <p id="searchHelp" class="search-help">Examples: melanoma, shingles, eczema, C43</p>
-    <div id="categoryFilters" class="category-filters" aria-label="Filter conditions by category"></div>
-    <p id="resultStatus" class="result-status" role="status" aria-live="polite"></p>
+    <div id="categoryFilters" class="category-filters js-only" aria-label="Filter conditions by category"></div>
+    <p id="resultStatus" class="result-status js-only" role="status" aria-live="polite"></p>
   </section>
 
   <section id="quizModule" class="quiz-module" aria-labelledby="quizTitle">
@@ -112,7 +115,8 @@
       <p>Eight educational questions use only the structured pilot records and original Docutis schematics.</p>
     </div>
     <p class="quiz-disclaimer">Educational pattern recognition only. This quiz is not clinical decision support and does not replace professional judgment. Most quiz items remain clinician review required; the BCC dermoscopy item is clinician reviewed in the public Goal 9 layer.</p>
-    <div id="quizApp" class="quiz-app" tabindex="-1"></div>
+    <noscript><p class="js-fallback">This interactive section requires JavaScript.</p></noscript>
+    <div id="quizApp" class="quiz-app js-only" tabindex="-1"></div>
   </section>
 
   <section id="caseModule" class="case-module" aria-labelledby="caseTitle">
@@ -127,7 +131,7 @@
     <noscript>
       <p class="case-empty">Cases cannot be shown because JavaScript is unavailable. No diagnosis, observation or teaching text is substituted. The published pilot cases remain clinician review required.</p>
     </noscript>
-    <div id="caseApp" class="case-app" tabindex="-1"></div>
+    <div id="caseApp" class="case-app js-only" tabindex="-1"></div>
   </section>
 
   <section id="followUpModule" class="follow-up-module" aria-labelledby="followUpTitle">
@@ -139,7 +143,8 @@
       <span class="module-badge">Mixed review status</span>
     </div>
     <p class="follow-up-intro">Structured German guideline-based follow-up for melanoma, basal cell carcinoma and cutaneous squamous cell carcinoma. This reference does not replace individual risk assessment, current guidelines or clinical judgment.</p>
-    <div class="follow-up-controls">
+    <noscript><p class="js-fallback">This interactive section requires JavaScript.</p></noscript>
+    <div class="follow-up-controls js-only">
       <label for="followUpDisease">Disease
         <select id="followUpDisease"></select>
       </label>
@@ -151,7 +156,7 @@
       </label>
     </div>
     <p id="followUpStatus" class="visually-hidden" role="status" aria-live="polite"></p>
-    <div id="followUpResult" class="follow-up-result" role="region" aria-labelledby="followUpResultHeading"></div>
+    <div id="followUpResult" class="follow-up-result js-only" role="region" aria-labelledby="followUpResultHeading"></div>
   </section>
 
   <section class="reference-library" aria-labelledby="conditionsTitle">
@@ -162,7 +167,8 @@
       </div>
       <p>Open any record for clinical features, dermoscopy, differential diagnosis, treatment, follow-up, coding and sources.</p>
     </div>
-    <div id="cards" class="cards"></div>
+    <noscript><p class="js-fallback">This interactive section requires JavaScript.</p></noscript>
+    <div id="cards" class="cards js-only"></div>
     <div id="noResult" class="no-result">
       <strong>No matching condition found.</strong>
       <span>Try another name, alias, category or classification code.</span>

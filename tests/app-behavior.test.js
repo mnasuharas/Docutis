@@ -24,8 +24,18 @@ class Element {
   getAttribute(name) { return this.attributes[name]; }
   addEventListener(type, listener) { (this.listeners[type] ||= []).push(listener); }
   dispatch(type, extra = {}) { for (const listener of this.listeners[type] || []) listener({ type, key: extra.key, target: this }); }
-  focus() { this.ownerDocument.activeElement = this; }
-  scrollIntoView() {}
+  focus(...args) {
+    this.focusCalls = this.focusCalls || [];
+    this.focusCalls.push(args);
+    if (this.ownerDocument.focusThrowsOnOptions && args.length > 0) {
+      throw new TypeError("focus options are not supported");
+    }
+    this.ownerDocument.activeElement = this;
+  }
+  scrollIntoView(options) {
+    this.scrollIntoViewOptions = options === undefined ? null : options;
+    this.scrollIntoViewCalls = (this.scrollIntoViewCalls || 0) + 1;
+  }
   querySelectorAll(selector) {
     const matches = [];
     const visit = node => {
@@ -38,7 +48,7 @@ class Element {
   }
 }
 
-function createHarness(transformData, transformMedia, initialHref = "https://example.test/Docutis/") {
+function createHarness(transformData, transformMedia, initialHref = "https://example.test/Docutis/", extras = {}) {
   const document = {
     activeElement: null,
     elements: {},
@@ -82,6 +92,7 @@ function createHarness(transformData, transformMedia, initialHref = "https://exa
       historyIndex += 1; const entry = entries[historyIndex]; this.state = entry.state; window.location.href = entry.href; window.dispatch("popstate");
     }
   };
+  if (typeof extras.matchMedia === "function") window.matchMedia = extras.matchMedia;
   const context = { window, document, URL };
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "clinical-schema.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "data.js"), "utf8"), context);
@@ -408,4 +419,27 @@ test("synthetic reviewed details show physician specialty and date and preserve 
   assert.doesNotMatch(textOf(elements.details), /sha256-v1:/);
   elements.details.dispatch("keydown", { key: "Escape" });
   assert.equal(document.activeElement, card);
+});
+
+test("opening a condition respects reduced motion and legacy focus options", () => {
+  const reduced = createHarness(undefined, undefined, "https://example.test/Docutis/", {
+    matchMedia(query) { return { matches: query === "(prefers-reduced-motion: reduce)", media: query }; }
+  });
+  reduced.elements.cards.querySelectorAll(".card")[0].dispatch("click");
+  assert.equal(reduced.elements.details.hidden, false);
+  assert.equal(reduced.elements.details.scrollIntoViewOptions.behavior, "auto");
+  assert.equal(reduced.elements.details.scrollIntoViewOptions.block, "start");
+
+  const smooth = createHarness();
+  smooth.elements.cards.querySelectorAll(".card")[0].dispatch("click");
+  assert.equal(smooth.elements.details.scrollIntoViewOptions.behavior, "smooth");
+  assert.equal(smooth.elements.details.scrollIntoViewOptions.block, "start");
+
+  const legacy = createHarness();
+  legacy.document.focusThrowsOnOptions = true;
+  legacy.elements.cards.querySelectorAll(".card")[0].dispatch("click");
+  assert.equal(legacy.elements.details.hidden, false);
+  assert.equal(legacy.document.activeElement, legacy.elements.details);
+  assert.equal(legacy.elements.details.scrollIntoViewCalls, 1);
+  assert.ok(legacy.elements.details.focusCalls.some(args => args.length === 0));
 });

@@ -171,6 +171,8 @@ git diff --check
 
 The `.github/workflows/validate.yml` workflow runs these checks for pull requests targeting `main`, pushes to `main`, and manual dispatches. It uses a read-only token and does not deploy the site or make network requests to medical sources.
 
+Cross-browser engineering notes, including which browsers were actually executed, are in [BROWSER_COMPATIBILITY.md](BROWSER_COMPATIBILITY.md). That file is not medical validation.
+
 ## Contributing
 
 Contributions, suggestions and bug reports are welcome.

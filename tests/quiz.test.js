@@ -45,7 +45,12 @@ class Element {
   setAttribute(name, value) { this.attributes[name] = String(value); }
   addEventListener(type, listener) { (this.listeners[type] ||= []).push(listener); }
   dispatch(type) { for (const listener of this.listeners[type] || []) listener({ type, preventDefault() {}, target: this }); }
-  focus() { this.ownerDocument.activeElement = this; }
+  focus(...args) {
+    if (this.ownerDocument.focusThrowsOnOptions && args.length > 0) {
+      throw new TypeError("focus options are not supported");
+    }
+    this.ownerDocument.activeElement = this;
+  }
   remove() { if (this.parentElement) this.parentElement.children = this.parentElement.children.filter(child => child !== this); }
   querySelectorAll(selector) {
     const result = [];
@@ -115,4 +120,16 @@ test("quiz implementation stays local, keyboard-native and reduced-motion ready"
   assert.doesNotMatch(app, /localStorage|sessionStorage|fetch\(|analytics/i);
   assert.match(css, /prefers-reduced-motion/);
   assert.match(css, /\.quiz-option:focus-within/);
+});
+
+test("quiz next question still moves focus when focus options throw", () => {
+  const harness = quizHarness();
+  harness.document.focusThrowsOnOptions = true;
+  const form = harness.root.querySelector("form");
+  form.querySelectorAll("input")[0].checked = true;
+  form.dispatch("submit");
+  const next = harness.root.querySelectorAll("button").at(-1);
+  assert.doesNotThrow(() => next.dispatch("click"));
+  assert.match(textOf(harness.root), /Question 2 of 8/);
+  assert.equal(harness.document.activeElement, harness.root);
 });
