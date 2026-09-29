@@ -91,6 +91,7 @@ Allowed source types are `official classification`, `guideline`, `consensus`, `s
 - Separate observations from interpretations. Do not claim histopathology unless the source states it.
 - Keep `reviewStatus: "clinician review required"` and `clinicalReview: null`. AI interpretation is not clinician review.
 - Store images under `assets/media/cases/` and run `node scripts/case.js` before proposing changes.
+- The learner flow in `case-app.js` is inspect (image, attribution, license, view-only zoom), observe (observations and dermoscopic features separate from interpretations), differential (keyboard disclosure, not a scored quiz), explicit diagnosis reveal, then review. Do not invent observations, differentials or a new "why this diagnosis" explanation. Mention histopathology in interface copy only when `confirmationMethod` is `histopathology`. Keep `review required` visible. The UI must not mark a case clinician reviewed.
 
 
 ### Classification and coding policy

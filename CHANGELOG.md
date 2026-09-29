@@ -4,6 +4,11 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## Unreleased
 
+### Goal 12 — Case learning UX
+
+- Step the five existing pilot cases through inspect, observe, differential, reveal and review, with view-only image zoom, separated observations and interpretations, an unscored differential disclosure and an explicit diagnosis reveal.
+- Keep every pilot case `clinician review required`. No new cases, images, licenses or clinical claims were added.
+
 ### Goal 11 — Case-based learning foundation
 
 - Add structured case registry (`case-data.js`), progressive-disclosure case UI, offline validator/fingerprint helper and contributor schema/licensing docs.
