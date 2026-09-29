@@ -50,8 +50,8 @@
         patientContext: {
           ageBand: null,
           sex: null,
-          anatomicalSite: "Plantar foot / toe",
-          presentationNotes: "Large asymmetric dark-brown macule on acral skin (open-access published case photography)."
+          anatomicalSite: "Left plantar foot",
+          presentationNotes: "Large asymmetric dark-brown macule on the left plantar foot in the source photograph. The paper also describes spread toward the toes; that extension is a separate figure, not this image."
         },
         images: [{
           id: "img-acral-melanoma-plantar",
@@ -116,7 +116,7 @@
           { id: "tp-am-2", title: "Key features", text: "Acral location plus ABCDE-like irregularity is a high-yield concern pattern." },
           { id: "tp-am-3", title: "Suspicion", text: "Large irregular acral pigmented patches require specialist assessment; histopathology confirmed melanoma in the source paper." },
           { id: "tp-am-4", title: "Pitfall", text: "Do not reassure based on acral site alone; acral melanoma is a classic miss." },
-          { id: "tp-am-5", title: "Why this fits", text: "Published clinical morphology matches an advanced acral lentiginous melanoma later confirmed histologically." }
+          { id: "tp-am-5", title: "Why this fits", text: "Published clinical morphology matches a large acral lentiginous melanoma later confirmed histologically (Clark level IV, Breslow 2.6 mm in the source paper). Large size is not the same as advanced-stage disease." }
         ],
         clinicalAction: "Open the Docutis acral melanoma record for structured reference context after you finish the case.",
         annotations: [],
@@ -144,8 +144,8 @@
           type: "dermoscopy",
           src: "assets/media/cases/bcc-nodular-wikiderm-dermoscopy.jpg",
           dimensions: { width: 1600, height: 1200 },
-          alt: "Dermoscopic photograph of a nodular basal cell carcinoma showing focused vascular structures within a translucent lesion field.",
-          caption: "Dermatoscopy of a nodular basal cell carcinoma (clinician-authored educational image).",
+          alt: "Dermoscopic close-up of pink to salmon skin with in-focus branching red vessels and a few small dark red-brown foci. A pale curved line and a millimetre scale are also visible.",
+          caption: "Dermatoscopy labeled by the clinician author as nodular basal cell carcinoma. The frame shows branching vessels on a pink background; translucency is not separately described by the source.",
           source: "Dr. Thomas Brinkmeier / WIKIDERM, via Wikimedia Commons",
           sourceUrl: "https://commons.wikimedia.org/wiki/File:Dermatoskopie_eines_nodul%C3%A4ren_Basalzellkarzinoms,_WIKIDERM%C2%AE.jpg",
           creator: "Dr. Thomas Brinkmeier",
@@ -168,12 +168,13 @@
           confidenceNote: "Expert clinician label only until Docutis physician review."
         },
         observations: [
-          { id: "obs-bccn-1", kind: "observation", text: "Focused dermoscopic field of a nodular lesion." },
-          { id: "obs-bccn-2", kind: "observation", text: "Branching / telangiectatic vascular structures are visible." },
-          { id: "obs-bccn-3", kind: "observation", text: "Translucent to pink structural background without a regular pigment network of a banal nevus." }
+          { id: "obs-bccn-1", kind: "observation", text: "Circular dermoscopic close-up of pink to salmon skin." },
+          { id: "obs-bccn-2", kind: "observation", text: "Branching red vessels are in focus, with thicker stems dividing into finer branches." },
+          { id: "obs-bccn-3", kind: "observation", text: "No regular pigment network is visible." },
+          { id: "obs-bccn-4", kind: "observation", text: "A few small dark red-brown foci are visible. A pale curved line and a millimetre scale are also in the frame and are photograph markings, not dermoscopic structures." }
         ],
         interpretations: [
-          { id: "int-bccn-1", kind: "interpretation", relatedObservationIds: ["obs-bccn-2", "obs-bccn-3"], text: "Arborizing or telangiectatic vessels on a translucent background are classic dermoscopic clues associated with basal cell carcinoma." }
+          { id: "int-bccn-1", kind: "interpretation", relatedObservationIds: ["obs-bccn-2", "obs-bccn-3"], text: "In-focus branching vessels on a pink background are dermoscopic findings associated with basal cell carcinoma. They support that pattern but are not specific enough to exclude mimics." }
         ],
         dermoscopicFeatures: [
           { token: "arborizing_vessels", label: "Arborizing / branching vessels" },
@@ -182,28 +183,28 @@
         differentials: [
           {
             diagnosis: "Basal cell carcinoma (nodular)",
-            supportingFeatures: ["Branching vessels", "Translucent vascularized nodule pattern"],
+            supportingFeatures: ["In-focus branching vessels", "Pink background without a pigment network"],
             contradictingFeatures: [],
             teachingDistinction: "Author-labeled nodular BCC; vascular clues are the teaching focus."
           },
           {
             diagnosis: "Amelanotic / hypomelanotic melanoma",
             supportingFeatures: ["Can show atypical vessels"],
-            contradictingFeatures: ["Classic arborizing BCC-type vessels and translucent BCC pattern favor BCC in this labeled example"],
+            contradictingFeatures: ["In-focus branching vessels on a pink background favor BCC over a banal vascular pattern in this labeled example"],
             teachingDistinction: "Always keep amelanotic melanoma in mind for atypical pink lesions; confirmation pathway is clinical-pathologic, not image quiz alone."
           },
           {
             diagnosis: "Sebaceous hyperplasia / other adnexal nodule",
-            supportingFeatures: ["Facial/nodular pink lesions can mimic"],
+            supportingFeatures: ["Pink lesions with vessels can mimic BCC; the source does not name a body site"],
             contradictingFeatures: ["Crown vessels of sebaceous hyperplasia differ from arborizing BCC vessels"],
             teachingDistinction: "Vessel morphology and overall pattern help, but uncertain lesions need clinicopathologic correlation."
           }
         ],
         teachingPoints: [
           { id: "tp-bccn-1", title: "Notice first", text: "Look for vessel morphology before committing to a diagnosis name." },
-          { id: "tp-bccn-2", title: "Key features", text: "Arborizing/telangiectatic vessels are high-yield BCC dermoscopic clues." },
-          { id: "tp-bccn-3", title: "Pitfall", text: "Pink lesions are not automatically BCC; amelanotic melanoma remains an important differential." },
-          { id: "tp-bccn-4", title: "Why this fits", text: "The clinician-authored label and vascular pattern align with nodular BCC teaching." }
+          { id: "tp-bccn-2", title: "Key features", text: "In-focus branching vessels are a supportive BCC dermoscopic clue on this frame. They are not pathognomonic." },
+          { id: "tp-bccn-3", title: "Pitfall", text: "Pink lesions are not automatically BCC; amelanotic melanoma remains an important differential. Do not read the pale curved line as a shiny white structure." },
+          { id: "tp-bccn-4", title: "Why this fits", text: "The clinician-authored label is nodular basal cell carcinoma. The visible teaching clue is the branching vessels. Nodularity and translucency are not demonstrated by this dermoscopic frame, and histopathology is not cited on the source page." }
         ],
         clinicalAction: "Compare with the Docutis basal cell carcinoma record and the BCC clues schematic after the case.",
         annotations: [],
@@ -231,8 +232,8 @@
           type: "dermoscopy",
           src: "assets/media/cases/bcc-pigmented-wikiderm-dermoscopy.jpg",
           dimensions: { width: 1600, height: 1200 },
-          alt: "Dermoscopic photograph of a pigmented basal cell carcinoma on the back showing asymmetric pigment structures without a typical melanocytic network of a banal nevus.",
-          caption: "Dermatoscopy of a pigmented basal cell carcinoma on the back (clinician-authored educational image).",
+          alt: "Dermoscopic close-up with asymmetric brown leaf-like pigment aggregates and terminal hairs, without a regular pigment network. A millimetre scale is visible.",
+          caption: "Dermatoscopy labeled by the clinician author as pigmented basal cell carcinoma on the back. Leaf-like brown pigment is the visible clue; blue-gray ovoid nests are not clearly shown.",
           source: "Dr. Thomas Brinkmeier / WIKIDERM, via Wikimedia Commons",
           sourceUrl: "https://commons.wikimedia.org/wiki/File:Dermatoskopie_eines_pigmentierten_Basalzellkarzinoms.jpg",
           creator: "Dr. Thomas Brinkmeier",
@@ -255,22 +256,21 @@
           confidenceNote: "Expert clinician label only until Docutis physician review."
         },
         observations: [
-          { id: "obs-bccp-1", kind: "observation", text: "Pigmented dermoscopic structures within a focal lesion on truncal skin context." },
+          { id: "obs-bccp-1", kind: "observation", text: "Brown pigmented structures in a dermoscopic field that also contains terminal hairs." },
           { id: "obs-bccp-2", kind: "observation", text: "Asymmetric distribution of pigment." },
-          { id: "obs-bccp-3", kind: "observation", text: "Leaf-like or ovoid pigment aggregates rather than a regular reticular melanocytic network." }
+          { id: "obs-bccp-3", kind: "observation", text: "Leaf-like brown pigment aggregates rather than a regular reticular melanocytic network." }
         ],
         interpretations: [
-          { id: "int-bccp-1", kind: "interpretation", relatedObservationIds: ["obs-bccp-2", "obs-bccp-3"], text: "Pigmented BCC often shows maple-leaf / ovoid nests and lacks a typical nevus network; melanoma remains the key differential for pigmented lesions." }
+          { id: "int-bccp-1", kind: "interpretation", relatedObservationIds: ["obs-bccp-2", "obs-bccp-3"], text: "Leaf-like brown pigment without a typical nevus network can be associated with pigmented basal cell carcinoma. Blue-gray ovoid nests are a recognized BCC clue but are not clearly shown on this frame. Melanoma remains an important differential." }
         ],
         dermoscopicFeatures: [
-          { token: "maple_leaf_areas", label: "Maple leaf-like pigment areas" },
-          { token: "blue_gray_ovoid_nests", label: "Blue-gray ovoid nests / pigment aggregates" },
-          { token: "structureless_areas", label: "Structureless pigmented areas" }
+          { token: "maple_leaf_areas", label: "Maple leaf-like brown pigment areas" },
+          { token: "other", label: "Brown to grey-brown pigment clumps without a regular pigment network. Blue-gray ovoid nests are not clearly shown." }
         ],
         differentials: [
           {
             diagnosis: "Pigmented basal cell carcinoma",
-            supportingFeatures: ["Leaf-like / ovoid pigment aggregates", "Absent regular nevus network"],
+            supportingFeatures: ["Leaf-like brown pigment aggregates", "Absent regular nevus network"],
             contradictingFeatures: [],
             teachingDistinction: "Author-labeled pigmented BCC; emphasize BCC pigment structures vs melanocytic network."
           },
@@ -289,7 +289,7 @@
         ],
         teachingPoints: [
           { id: "tp-bccp-1", title: "Notice first", text: "Is there a melanocytic network, or BCC-type pigment architecture?" },
-          { id: "tp-bccp-2", title: "Key features", text: "Maple-leaf areas and blue-gray ovoid nests support pigmented BCC." },
+          { id: "tp-bccp-2", title: "Key features", text: "Maple-leaf-like brown pigment supports the author-labeled pigmented BCC on this frame. Do not teach blue-gray ovoid nests as present here; they are not clearly shown." },
           { id: "tp-bccp-3", title: "Main differential", text: "Melanoma is the safety-critical differential for any atypical pigmented lesion." },
           { id: "tp-bccp-4", title: "Why this fits", text: "Clinician-authored pigmented BCC label with BCC-type pigment structures." }
         ],
@@ -427,24 +427,25 @@
           confidenceNote: "Biopsy marking is noted by the uploader; Docutis does not claim an unseen pathology report."
         },
         observations: [
-          { id: "obs-scc-1", kind: "observation", text: "Two neighboring lesions on sun-exposed paraspinal back skin." },
-          { id: "obs-scc-2", kind: "observation", text: "One focus is marked for biopsy and appears more built-up than the neighbor." },
-          { id: "obs-scc-3", kind: "observation", text: "An adjacent flatter keratotic change is present in the same field." }
+          { id: "obs-scc-1", kind: "observation", text: "Two neighboring lesions in the same close-up field." },
+          { id: "obs-scc-2", kind: "observation", text: "One lesion is more raised, with a rough keratotic surface." },
+          { id: "obs-scc-3", kind: "observation", text: "The neighboring lesion is flatter, pink-red and scaly." },
+          { id: "obs-scc-4", kind: "observation", text: "Purple ink marks sit in the field. The photograph alone does not show which mark was the biopsy target." }
         ],
         interpretations: [
-          { id: "int-scc-1", kind: "interpretation", relatedObservationIds: ["obs-scc-1", "obs-scc-2", "obs-scc-3"], text: "The pairing illustrates the AK–SCC continuum: a more concerning hypertrophic focus beside an adjacent actinic keratosis in damaged skin." }
+          { id: "int-scc-1", kind: "interpretation", relatedObservationIds: ["obs-scc-1", "obs-scc-2", "obs-scc-3"], text: "The pairing illustrates the AK–SCC continuum: a more raised keratotic focus beside an adjacent actinic keratosis." }
         ],
         dermoscopicFeatures: [],
         differentials: [
           {
             diagnosis: "Cutaneous squamous cell carcinoma",
-            supportingFeatures: ["Hypertrophic marked focus", "Actinically damaged background", "Uploader SCC label"],
+            supportingFeatures: ["Raised keratotic focus", "Uploader SCC label"],
             contradictingFeatures: [],
             teachingDistinction: "Primary teaching diagnosis for the marked lesion per source caption."
           },
           {
             diagnosis: "Actinic keratosis (adjacent)",
-            supportingFeatures: ["Flatter keratotic neighbor", "Same sun-damaged field"],
+            supportingFeatures: ["Flatter pink-red scaly neighbor", "Same close-up field"],
             contradictingFeatures: [],
             teachingDistinction: "Adjacent AK supports continuum teaching without merging both labels into one lesion."
           },
@@ -456,7 +457,7 @@
           }
         ],
         teachingPoints: [
-          { id: "tp-scc-1", title: "Notice first", text: "Compare the thicker marked focus with the flatter neighbor before naming either." },
+          { id: "tp-scc-1", title: "Notice first", text: "Compare the more raised keratotic focus with the flatter neighbor before naming either." },
           { id: "tp-scc-2", title: "Key features", text: "SCC can arise in a field of actinic damage beside residual AK." },
           { id: "tp-scc-3", title: "Pitfall", text: "Do not dismiss a hypertrophic focus because nearby thinner AKs look familiar." },
           { id: "tp-scc-4", title: "Why this fits", text: "Uploader caption explicitly pairs well-differentiated SCC with adjacent AK." }
