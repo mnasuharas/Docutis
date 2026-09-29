@@ -110,6 +110,10 @@ class CaseElement {
     return event;
   }
   focus() { this.ownerDocument.activeElement = this; }
+  setSelectionRange(start, end) {
+    this.selectionStart = start;
+    this.selectionEnd = end;
+  }
   scrollBy() {}
 }
 
@@ -281,4 +285,148 @@ test("case UI keeps zoom, reveal and noscript guards without a scored quiz", () 
     const published = statusFile.assets.find(asset => asset.assetType === "case" && asset.id === item.id);
     return published && published.currentFingerprint === item.currentFingerprint && published.status === "review required";
   }));
+});
+
+function accessibleCaseNames(node) {
+  const names = [];
+  caseWalk(node, item => {
+    if (!item || item.nodeType === 3) return;
+    if (item.tagName === "IMG" && item.alt) names.push(item.alt);
+    if (item.tagName === "FIGCAPTION") names.push(item.textContent || "");
+    const aria = item.getAttribute && item.getAttribute("aria-label");
+    if (aria) names.push(aria);
+    if (item.tagName === "BUTTON" || item.tagName === "SUMMARY") names.push(item.textContent || "");
+  });
+  return names.join("\n");
+}
+
+function assertTextAbsent(blob, phrase, context) {
+  const needle = String(phrase || "").trim();
+  if (needle.length < 4) return;
+  assert.equal(
+    blob.toLocaleLowerCase("en").includes(needle.toLocaleLowerCase("en")),
+    false,
+    `${context} exposed "${needle}"`
+  );
+}
+
+test("inspect image alts and control names hide diagnosis variants until reveal", () => {
+  const harness = caseHarness(caseUiFiles);
+  const cases = harness.window.DOCUTIS_CASES.cases;
+  const diseases = harness.window.DOCUTIS_DATA.diseases;
+  const sharedVariants = [
+    "actinic keratosis",
+    "actinic keratoses",
+    "field cancerization",
+    "squamous cell carcinoma",
+    "basal cell carcinoma",
+    "acral lentiginous melanoma"
+  ];
+  const publishedDiagnosisAlts = {
+    "case-ak-field-hand": "Clinical photograph of the dorsum of a hand showing multiple rough erythematous and keratotic spots consistent with actinic keratoses and field cancerization.",
+    "case-scc-ak-paraspinal": "Clinical photograph of the left upper paraspinal back showing a marked lesion labeled as well-differentiated squamous cell carcinoma beside an adjacent actinic keratosis."
+  };
+
+  function openCase(item) {
+    const back = caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Back to case list")[0];
+    if (back) back.dispatch("click");
+    const start = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === `Start case: ${item.title}`)[0];
+    assert.ok(start, item.id);
+    start.dispatch("click");
+  }
+
+  for (const item of cases) {
+    const disease = diseases.find(entry => entry.id === item.diseaseId);
+    openCase(item);
+    const names = accessibleCaseNames(harness.root);
+    const img = caseFind(harness.root, node => node.tagName === "IMG")[0];
+    assert.ok(img && img.alt, `${item.id} image alt`);
+    assert.notEqual(img.alt, "");
+    assert.notEqual(img.getAttribute("role"), "presentation");
+    const forbidden = [
+      item.diagnosisLabel,
+      item.diagnosticGroundTruth && item.diagnosticGroundTruth.confirmedDiagnosis,
+      disease && disease.name,
+      ...sharedVariants
+    ];
+    const recordedName = [item.diagnosisLabel, item.diagnosticGroundTruth && item.diagnosticGroundTruth.confirmedDiagnosis, disease && disease.name].join(" ");
+    if (/\bmelanoma\b/i.test(recordedName)) forbidden.push("melanoma");
+    for (const phrase of forbidden) assertTextAbsent(names, phrase, item.id);
+
+    if (item.id === "case-acral-melanoma-plantar") {
+      assert.equal(img.alt, item.images[0].alt);
+    }
+    if (publishedDiagnosisAlts[item.id]) {
+      assert.notEqual(img.alt, item.images[0].alt);
+      assert.notEqual(img.alt, publishedDiagnosisAlts[item.id]);
+      const kind = item.images[0].type === "clinical" ? "Clinical photograph" : "Image";
+      const site = item.patientContext.anatomicalSite;
+      assert.ok(img.alt.startsWith(`${kind}, ${site}. Recorded observations: `), img.alt);
+      for (const observation of item.observations) assert.ok(img.alt.includes(observation.text), observation.text);
+      for (const interpretation of item.interpretations || []) {
+        assert.equal(img.alt.includes(interpretation.text), false, interpretation.text);
+      }
+      assert.match(img.alt, /keratotic/);
+      assert.doesNotMatch(img.alt, /\bkeratosis(?:es)?\b/i);
+    }
+
+    caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === "Step 4 of 5: Reveal")[0].dispatch("click");
+    assert.equal(caseText(harness.root).includes(item.diagnosisLabel), false, `${item.id} label visible before reveal`);
+    caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Reveal diagnosis")[0].dispatch("click");
+    const revealed = caseText(harness.root);
+    assert.match(revealed, /Diagnosis revealed/);
+    assert.ok(revealed.includes(item.diagnosisLabel), item.id);
+  }
+});
+
+test("site filter keeps focus and typed characters across list refresh", () => {
+  const harness = caseHarness(caseUiFiles);
+  const siteFilter = () => caseFind(harness.root, node => node.getAttribute && node.getAttribute("data-filter-key") === "anatomicalSite")[0];
+  let filter = siteFilter();
+  assert.equal(filter.getAttribute("aria-label"), "Site contains");
+  filter.focus();
+  filter.value = "h";
+  filter.selectionStart = 1;
+  filter.selectionEnd = 1;
+  filter.dispatch("input");
+  filter = siteFilter();
+  assert.equal(harness.document.activeElement, filter);
+  assert.equal(filter.getAttribute("data-filter-key"), "anatomicalSite");
+  assert.equal(filter.value, "h");
+  assert.equal(filter.selectionStart, 1);
+  filter.value = "ha";
+  filter.selectionStart = 2;
+  filter.selectionEnd = 2;
+  filter.dispatch("input");
+  filter = siteFilter();
+  assert.equal(harness.document.activeElement, filter);
+  assert.equal(filter.value, "ha");
+  assert.equal(filter.selectionStart, 2);
+  filter.value = "hand";
+  filter.selectionStart = 4;
+  filter.selectionEnd = 4;
+  filter.dispatch("input");
+  filter = siteFilter();
+  assert.equal(filter.value, "hand");
+  assert.match(caseText(harness.root), /1 case shown/);
+  assert.match(caseText(harness.root), /Field change on the dorsum of the hand/);
+  const diseaseNames = harness.window.DOCUTIS_DATA.diseases.map(item => item.name).filter(Boolean);
+  const listText = caseText(harness.root);
+  for (const name of diseaseNames) assert.equal(listText.includes(name), false, name);
+
+  filter.value = "";
+  filter.selectionStart = 0;
+  filter.selectionEnd = 0;
+  filter.dispatch("input");
+  const typeFilter = () => caseFind(harness.root, node => node.getAttribute && node.getAttribute("data-filter-key") === "caseType")[0];
+  let select = typeFilter();
+  select.focus();
+  select.value = "dermoscopic";
+  select.dispatch("change");
+  select = typeFilter();
+  assert.equal(harness.document.activeElement, select);
+  assert.equal(select.getAttribute("data-filter-key"), "caseType");
+  assert.equal(select.value, "dermoscopic");
+  assert.match(caseText(harness.root), /2 cases shown/);
+  assert.doesNotMatch(caseText(harness.root), /Linked condition|Actinic Keratosis|Basal Cell Carcinoma|Squamous Cell Carcinoma|Acral Melanoma/);
 });

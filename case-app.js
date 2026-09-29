@@ -90,14 +90,75 @@
     return "Recorded confirmation method";
   }
 
-  function mentionsRecordedDiagnosis(text, caseItem) {
-    const names = [
+  const DIAGNOSIS_MODIFIERS = new Set([
+    "well", "differentiated", "cutaneous", "adjacent", "nodular", "pigmented",
+    "acral", "lentiginous", "superficial", "invasive", "ulcerated", "early",
+    "advanced", "amelanotic", "hypomelanotic", "hypertrophic"
+  ]);
+
+  function foldDiagnosisToken(token) {
+    if (token === "keratoses") return "keratosis";
+    if (token === "carcinomas") return "carcinoma";
+    if (token === "melanomas") return "melanoma";
+    return token;
+  }
+
+  function diagnosisTokens(text) {
+    return String(text || "")
+      .replace(/\([^)]*\)/g, " ")
+      .toLocaleLowerCase("en")
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .map(foldDiagnosisToken);
+  }
+
+  function recordedDiagnosisPhrases(caseItem) {
+    const sources = [
       caseItem.diagnosisLabel,
       caseItem.diagnosticGroundTruth && caseItem.diagnosticGroundTruth.confirmedDiagnosis,
       diseaseName(caseItem.diseaseId)
     ].filter(name => typeof name === "string" && name.trim().length > 3);
-    const haystack = String(text || "").toLocaleLowerCase("en");
-    return names.some(name => haystack.includes(name.toLocaleLowerCase("en")));
+    const phrases = [];
+    const seen = new Set();
+    function add(tokens) {
+      if (!tokens.length) return;
+      if (tokens.length === 1 && tokens[0].length < 6) return;
+      const key = tokens.join(" ");
+      if (seen.has(key)) return;
+      seen.add(key);
+      phrases.push(tokens);
+    }
+    sources.forEach(source => {
+      String(source).replace(/\([^)]*\)/g, " ").split(/\s*(?:\/|\band\b|\bwith\b)\s*/i).forEach(segment => {
+        const tokens = diagnosisTokens(segment);
+        add(tokens);
+        add(tokens.filter(token => !DIAGNOSIS_MODIFIERS.has(token)));
+      });
+    });
+    return phrases;
+  }
+
+  function tokensContainPhrase(haystack, phrase) {
+    if (!phrase.length || haystack.length < phrase.length) return false;
+    for (let index = 0; index <= haystack.length - phrase.length; index += 1) {
+      let matched = true;
+      for (let offset = 0; offset < phrase.length; offset += 1) {
+        if (haystack[index + offset] !== phrase[offset]) {
+          matched = false;
+          break;
+        }
+      }
+      if (matched) return true;
+    }
+    return false;
+  }
+
+  function mentionsRecordedDiagnosis(text, caseItem) {
+    const haystack = diagnosisTokens(text);
+    if (!haystack.length) return false;
+    return recordedDiagnosisPhrases(caseItem).some(phrase => tokensContainPhrase(haystack, phrase));
   }
 
   function imageKindLabel(image) {
@@ -109,12 +170,26 @@
 
   function inspectAlt(caseItem, image) {
     if (image.alt && !mentionsRecordedDiagnosis(image.alt, caseItem)) return image.alt;
-    const observations = asList(caseItem.observations).map(item => item && item.text).filter(Boolean);
-    const site = caseItem.patientContext && caseItem.patientContext.anatomicalSite || "site not recorded";
-    if (!observations.length) {
-      return `${imageKindLabel(image)}, ${site}. No observation text is recorded for this case.`;
+    const kind = imageKindLabel(image);
+    const siteRaw = caseItem.patientContext && caseItem.patientContext.anatomicalSite || "site not recorded";
+    const site = mentionsRecordedDiagnosis(siteRaw, caseItem) ? "site not recorded" : siteRaw;
+    const recorded = asList(caseItem.observations).map(item => item && item.text).filter(Boolean);
+    const observations = recorded.filter(item => !mentionsRecordedDiagnosis(item, caseItem));
+    let alt;
+    if (!recorded.length) {
+      alt = `${kind}, ${site}. No observation text is recorded for this case.`;
+    } else if (!observations.length) {
+      alt = `${kind}, ${site}. No diagnosis is included in this image description.`;
+    } else {
+      alt = `${kind}, ${site}. Recorded observations: ${observations.join(" ")}`;
     }
-    return `${imageKindLabel(image)}, ${site}. Recorded observations: ${observations.join(" ")}`;
+    if (mentionsRecordedDiagnosis(alt, caseItem)) {
+      alt = `${kind}, ${site}. No diagnosis is included in this image description.`;
+    }
+    if (mentionsRecordedDiagnosis(alt, caseItem)) {
+      alt = `${kind}. No diagnosis is included in this image description.`;
+    }
+    return alt;
   }
 
   function flowMessage(caseItem) {
@@ -143,6 +218,7 @@
       if (options) {
         const select = document.createElement("select");
         select.setAttribute("aria-label", label);
+        select.setAttribute("data-filter-key", key);
         select.appendChild(new Option("All", ""));
         options.forEach(([value, text]) => select.appendChild(new Option(text, value)));
         select.value = filters[key];
@@ -152,6 +228,7 @@
         const input = document.createElement("input");
         input.type = "search";
         input.setAttribute("aria-label", label);
+        input.setAttribute("data-filter-key", key);
         input.placeholder = "e.g. hand, back";
         input.value = filters[key];
         input.addEventListener("input", () => { filters[key] = input.value.trim(); renderList(); });
@@ -516,7 +593,40 @@
     }
   }
 
+  function focusedFilterSnapshot() {
+    const active = document.activeElement;
+    if (!active || typeof active.getAttribute !== "function") return null;
+    const key = active.getAttribute("data-filter-key");
+    if (!key) return null;
+    const start = typeof active.selectionStart === "number" ? active.selectionStart : null;
+    const end = typeof active.selectionEnd === "number" ? active.selectionEnd : start;
+    return { key, start, end };
+  }
+
+  function restoreFilterFocus(snapshot) {
+    if (!snapshot) return;
+    let match = null;
+    function walk(node) {
+      if (!node || match) return;
+      if (typeof node.getAttribute === "function" && node.getAttribute("data-filter-key") === snapshot.key) {
+        match = node;
+        return;
+      }
+      const children = node.children || [];
+      for (let index = 0; index < children.length; index += 1) walk(children[index]);
+    }
+    walk(root);
+    if (!match || typeof match.focus !== "function") return;
+    match.focus();
+    if (snapshot.start == null || typeof match.setSelectionRange !== "function") return;
+    const length = String(match.value || "").length;
+    const start = Math.min(snapshot.start, length);
+    const end = Math.min(snapshot.end == null ? start : snapshot.end, length);
+    match.setSelectionRange(start, end);
+  }
+
   function renderList() {
+    const filterFocus = focusedFilterSnapshot();
     try {
       root.replaceChildren();
       root.appendChild(element("p", registry.disclaimer || "Educational cases only. Not clinical decision support.", "case-inline-disclaimer"));
@@ -528,6 +638,7 @@
       root.appendChild(status);
       if (!list.length) {
         root.appendChild(element("p", "No cases match the current filters.", "case-empty"));
+        restoreFilterFocus(filterFocus);
         return;
       }
       const grid = element("div", undefined, "case-grid");
@@ -553,6 +664,7 @@
         grid.appendChild(card);
       });
       root.appendChild(grid);
+      restoreFilterFocus(filterFocus);
     } catch (error) {
       showLoadError("The case list could not be shown. No substitute clinical content was added.");
     }
