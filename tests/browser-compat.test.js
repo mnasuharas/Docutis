@@ -89,6 +89,21 @@ test("condition scrolling can choose auto motion and legacy focus does not abort
   assert.doesNotMatch(app, /scrollIntoView\(\{\s*behavior:\s*"smooth"/);
 });
 
+test("very narrow header puts primary links on their own visible row", () => {
+  const block = css.slice(css.indexOf("@media (max-width: 600px)"));
+  const nav = block.match(/\.nav\s*\{([^}]*)\}/);
+  assert.ok(nav, "missing narrow nav rule");
+  assert.match(nav[1], /flex-wrap:\s*wrap/);
+  const links = block.match(/\.primary-links\s*\{([^}]*)\}/);
+  assert.ok(links, "missing narrow primary-links rule");
+  assert.match(links[1], /flex:\s*1 0 100%/);
+  assert.match(links[1], /max-width:\s*100%/);
+  assert.match(block, /\.primary-links a:focus-visible\s*\{[^}]*scroll-margin-inline:\s*12px/);
+  const wide = css.match(/@media\s*\(max-width:\s*900px\)\s*\{[\s\S]*?\.primary-links\s*\{([^}]*)\}/);
+  assert.match(wide[1], /overflow-x:\s*auto/);
+  assert.doesNotMatch(wide[1], /flex:\s*1 0 100%/);
+});
+
 test("browser support doc stays an engineering matrix and does not claim unrun browsers", () => {
   for (const column of ["Browser", "Version", "OS", "Real execution?", "Desktop", "768px", "Mobile", "Keyboard", "History/navigation", "Cases", "Quiz", "Follow-up", "Known limitations"]) {
     assert.ok(doc.includes(column), `matrix missing ${column}`);
@@ -98,11 +113,14 @@ test("browser support doc stays an engineering matrix and does not claim unrun b
   assert.match(doc, /not installed\. Unverified\./);
   assert.match(doc, /Unverified separately from Chrome/);
   assert.match(doc, /pending real execution/i);
+  assert.match(doc, /fix applied, real retest pending/i);
   assert.match(doc, /Repeat the core matrix/);
   assert.match(doc, /This was not a screen-reader test and does not establish WCAG conformance\./);
+  assert.match(doc, /Escape closes the whole condition panel/);
+  assert.match(doc, /bogus condition id/i);
+  assert.match(doc, /distinction is the label text/i);
   assert.doesNotMatch(doc, /Safari[^\n|]*Verified in real browser/);
   assert.doesNotMatch(doc, /Firefox[^\n|]*Verified in real browser/);
+  assert.doesNotMatch(doc, /390[^\n]*\bPASS\b/);
   assert.equal(doc.includes("Verified in real browser** —"), true);
-  assert.equal([...doc.matchAll(/Verified in real browser/g)].length >= 1, true);
-  assert.match(doc, /No cell below is \*\*Verified in real browser\*\*/);
 });

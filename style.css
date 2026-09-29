@@ -1550,8 +1550,23 @@ footer {
   }
 
   .nav {
+    flex-wrap: wrap;
+    column-gap: var(--space-3);
+    row-gap: var(--space-2);
     min-height: 60px;
-    padding: 0 var(--space-4);
+    min-width: 0;
+    padding: var(--space-2) var(--space-4);
+  }
+
+  .primary-links {
+    flex: 1 0 100%;
+    order: 1;
+    margin-left: 0;
+    max-width: 100%;
+  }
+
+  .primary-links a:focus-visible {
+    scroll-margin-inline: 12px;
   }
 
   .badge {

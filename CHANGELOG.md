@@ -8,9 +8,10 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 - Define the missing `--color-focus`, `--color-surface-subtle`, and `--shadow-sm` tokens so focus outlines, panel backgrounds, and the small shadow are not dropped.
 - Keep primary navigation reachable below 900px instead of `display: none`.
+- At 600px and below, put those links on their own row so the GitHub link and preview pill cannot cover them or widen the page.
 - Honor `prefers-reduced-motion` for condition scrolling, and fall back when `focus({ preventScroll })` throws.
 - Add a one-sentence no-JS notice for the library, quiz, follow-up, and review counts without copying clinical text.
-- Add [BROWSER_COMPATIBILITY.md](BROWSER_COMPATIBILITY.md). No browser core flow was marked verified. Clinical content, review decisions, and fingerprints are unchanged.
+- Add [BROWSER_COMPATIBILITY.md](BROWSER_COMPATIBILITY.md). Chrome 151 desktop and 768px flows that were actually run are marked verified; 390px is a fix with retest still pending. Firefox, Edge, and Safari are not marked verified. Clinical content, review decisions, and fingerprints are unchanged.
 
 ### Goal 12 — Case learning UX
 
