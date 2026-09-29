@@ -316,14 +316,20 @@
     parent.appendChild(bar);
   }
 
-  function renderProvenance(parent, image) {
-    const box = element("div", undefined, "case-provenance");
-    box.appendChild(element("p", `${image.creator} · ${image.license}`, "case-provenance-line"));
+  function appendSourcePageLink(parent, image) {
+    if (!image || !image.sourceUrl) return;
     const link = element("a", "Source page (opens in a new tab)");
     link.href = image.sourceUrl;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
-    box.appendChild(link);
+    parent.appendChild(link);
+  }
+
+  function renderProvenance(parent, image) {
+    const box = element("div", undefined, "case-provenance");
+    box.appendChild(element("p", `${image.creator} · ${image.license}`, "case-provenance-line"));
+    if (diagnosisRevealed) appendSourcePageLink(box, image);
+    else box.appendChild(element("p", "Source page opens after the diagnosis is revealed.", "case-provenance-held"));
     box.appendChild(element("p", image.attribution, "case-attribution"));
     if (image.modificationStatus !== "unmodified" && image.modificationsNotes) {
       box.appendChild(element("p", `Modification: ${image.modificationsNotes}`, "case-mod-note"));
@@ -516,6 +522,7 @@
       panel.appendChild(element("h5", caseItem.diagnosisLabel || "No diagnosis label is recorded for this case."));
       appendEvidence(panel, caseItem);
       appendHeldSourceNotes(panel, caseItem);
+      asList(caseItem.images).forEach(image => appendSourcePageLink(panel, image));
     }
     revealWrap.appendChild(revealBtn);
     revealWrap.appendChild(status);
@@ -557,6 +564,7 @@
     summary.appendChild(element("p", `${caseItem.title || "This case"}. Recorded diagnosis: ${label}.`));
     appendEvidence(summary, caseItem);
     appendHeldSourceNotes(summary, caseItem);
+    asList(caseItem.images).forEach(image => appendSourcePageLink(summary, image));
     asList(caseItem.images).forEach(image => {
       if (image && image.caption) summary.appendChild(element("p", `Image caption on record: ${image.caption}`, "case-attribution"));
     });
@@ -637,7 +645,11 @@
       root.appendChild(element("p", reviewExplanation(caseItem), "case-review-note"));
       if (reviewUi) {
         reviewUi.appendReviewPanel(root, "case", caseItem.id, "Case review status");
-        if (reviewUi.appendFeedbackActions) reviewUi.appendFeedbackActions(root, { id: caseItem.id, title: caseItem.title, assetType: "case" });
+        if (reviewUi.appendFeedbackActions) {
+          const feedback = { title: caseItem.title, assetType: "case" };
+          if (diagnosisRevealed) feedback.id = caseItem.id;
+          reviewUi.appendFeedbackActions(root, feedback);
+        }
       }
       const live = element("p", flowMessage(caseItem), "visually-hidden");
       live.id = "caseFlowStatus";

@@ -548,3 +548,119 @@ test("explicit diagnosis confirmations stay hidden until reveal and remain avail
     }
   }
 });
+
+function controlLeakSurface(node) {
+  const chunks = [];
+  caseWalk(node, item => {
+    if (!item || item.nodeType === 3 || typeof item.getAttribute !== "function") return;
+    const tag = item.tagName;
+    const href = item.href || item.getAttribute("href") || "";
+    const download = item.download || item.getAttribute("download") || "";
+    const title = item.title || item.getAttribute("title") || "";
+    const aria = item.getAttribute("aria-label") || "";
+    const description = item.getAttribute("aria-description") || "";
+    const interactive = tag === "A" || tag === "BUTTON" || tag === "AREA" || tag === "SUMMARY" || href || download || title;
+    if (!interactive && tag !== "IMG") return;
+    const label = interactive ? (item.textContent || "") : "";
+    const alt = tag === "IMG" ? (item.alt || "") : "";
+    chunks.push([href, download, title, aria, description, label, alt].join("\n"));
+  });
+  const raw = chunks.join("\n").replace(/\+/g, " ");
+  try {
+    return decodeURIComponent(raw);
+  } catch (error) {
+    return raw;
+  }
+}
+
+test("diagnosis-bearing source links stay off interactive controls until reveal", () => {
+  const harness = caseHarness(caseUiFiles);
+  const cases = harness.window.DOCUTIS_CASES.cases;
+  assert.equal(cases.length, 5);
+  const filenameFragments = [
+    "Photography_of_a_large_acral_lentiginous_melanoma",
+    "Dermatoskopie_eines_nodulären_Basalzellkarzinoms",
+    "pigmentierten_Basalzellkarzinoms",
+    "Aktinische_Keratosen",
+    "Feldkanzerisierung",
+    "Squamous_Cell_Carcinoma_well_differentiated_",
+    "adjacent_actinic_keratosis"
+  ];
+  const decodedSources = cases.flatMap(item => item.images.map(image => decodeURIComponent(image.sourceUrl)));
+  for (const fragment of filenameFragments) {
+    assert.ok(decodedSources.some(url => url.includes(fragment)), `fixture missing ${fragment}`);
+  }
+
+  function openCase(item) {
+    const back = caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Back to case list")[0];
+    if (back) back.dispatch("click");
+    const start = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === `Start case: ${item.title}`)[0];
+    assert.ok(start, item.id);
+    start.dispatch("click");
+  }
+
+  function showStep(label) {
+    const tab = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === label)[0];
+    assert.ok(tab, label);
+    tab.dispatch("click");
+  }
+
+  const preRevealSteps = [
+    "Step 1 of 5: Inspect",
+    "Step 2 of 5: Observe",
+    "Step 3 of 5: Differential",
+    "Step 4 of 5: Reveal",
+    "Step 5 of 5: Review"
+  ];
+
+  for (const item of cases) {
+    openCase(item);
+    const leaks = [];
+    for (const image of item.images) {
+      leaks.push(decodeURIComponent(image.sourceUrl).split("/").pop());
+      leaks.push(image.src.split("/").pop());
+    }
+    leaks.push(item.id);
+    for (const step of preRevealSteps) {
+      showStep(step);
+      const surface = controlLeakSurface(harness.root);
+      for (const leak of leaks) {
+        assert.equal(surface.includes(leak), false, `${item.id} ${step} exposed ${leak}`);
+      }
+      const sourceAnchors = caseFind(harness.root, node => node.tagName === "A" && node.href && item.images.some(image => node.href === image.sourceUrl));
+      assert.equal(sourceAnchors.length, 0, `${item.id} ${step} activated a source link`);
+    }
+
+    showStep("Step 4 of 5: Reveal");
+    caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Reveal diagnosis")[0].dispatch("click");
+    for (const image of item.images) {
+      const revealedLink = caseFind(harness.root, node => node.tagName === "A" && node.href === image.sourceUrl)[0];
+      assert.ok(revealedLink, `${item.id} source link missing after reveal`);
+      assert.equal(revealedLink.textContent, "Source page (opens in a new tab)");
+    }
+    assert.match(caseText(harness.root), /Source notes|Recorded diagnosis|Diagnosis revealed/);
+
+    showStep("Step 5 of 5: Review");
+    for (const image of item.images) {
+      assert.ok(
+        caseFind(harness.root, node => node.tagName === "A" && node.href === image.sourceUrl)[0],
+        `${item.id} source link missing in review`
+      );
+    }
+
+    showStep("Step 1 of 5: Inspect");
+    for (const image of item.images) {
+      assert.ok(
+        caseFind(harness.root, node => node.tagName === "A" && node.href === image.sourceUrl)[0],
+        `${item.id} source link missing when inspect is reopened after reveal`
+      );
+    }
+
+    showStep("Step 4 of 5: Reveal");
+    caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Hide diagnosis")[0].dispatch("click");
+    const hiddenAgain = controlLeakSurface(harness.root);
+    for (const leak of leaks) {
+      assert.equal(hiddenAgain.includes(leak), false, `${item.id} still exposed ${leak} after hiding the diagnosis`);
+    }
+  }
+});
