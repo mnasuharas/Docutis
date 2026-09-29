@@ -8,13 +8,17 @@
 
 ## About
 
-Docutis is an open-source project that presents dermatology information in a clear, searchable and structured format.
+Docutis is an open-source educational and professional reference. It presents dermatology information in a searchable, structured format for physicians, medical trainees and other healthcare professionals. It is not a substitute for individual care, diagnosis, treatment or a current guideline.
+
+**Maturity:** active development, and a public preview / pre-release. Some assets have a published clinician review. Most content is still review required. This site is not production-ready, not clinically validated decision support, and not a statement that every record has been clinician reviewed.
+
+Live site: [https://mnasuharas.github.io/Docutis/](https://mnasuharas.github.io/Docutis/)
 
 Clinical review is version-bound and independently tracked for disease records, quiz items, visual assets, follow-up protocols and case-based learning units. The public dashboard and `review-status.json` distinguish human review from automated validation. The Goal 9 public layer currently publishes **5 clinician-reviewed** assets and **18 review-required** assets among the original 23 pilot units; additional case units start as review required. AI interpretation is not clinician review. Release notes for older tags are point-in-time and may not match current `main`.
 
 Goal 12 steps through the existing pilot cases (inspect, observe, differential, reveal, review) without new cases or clinician-reviewed status. Goal 10 adds a public OSS surface: About/project-status copy, repository and roadmap/changelog links, and “Suggest a correction” / “Report outdated evidence” CTAs that open the clinical content issue form. Docutis remains a public preview and is not validated clinical decision support.
 
-The current version contains 50 condition records. It retains the malignant and precancerous collection, the first common-dermatology package, and a new infectious-dermatology package spanning bacterial, dermatophyte, other fungal, parasitic and viral disease. It is intended for physicians, medical trainees and other healthcare professionals seeking a concise educational reference.
+The current site contains 50 condition records. It retains the malignant and precancerous collection, the first common-dermatology package, and a new infectious-dermatology package spanning bacterial, dermatophyte, other fungal, parasitic and viral disease. It is intended for physicians, medical trainees and other healthcare professionals seeking a concise educational reference.
 
 Docutis is currently in active early development. Its content, structure and technical foundations are being expanded progressively.
 
@@ -71,7 +75,7 @@ Docutis aims to make medical information:
 - Transparent about uncertainty and limitations
 - Suitable for independent professional review
 
-Medical content contributions should include appropriate references. All current medical records are marked `clinician review required`. New or substantially changed medical content must remain in that state until a qualified clinician documents review.
+Medical content contributions should include appropriate references. Legacy embedded `reviewStatus` fields on the 50 disease records remain `clinician review required`. The public review layer is different and is summarized under Clinical governance below. New or substantially changed medical content stays review required until a qualified clinician documents review of that version. Do not describe the whole collection as clinician reviewed.
 
 ## Clinical governance
 
@@ -87,7 +91,7 @@ The follow-up module uses English clinical UI terminology while its current guid
 
 Melanoma in situ (Stage 0) is represented as structured guidance without a fabricated German S3 interval. The formal German S3 risk-adapted tables begin with Stage IA, while separately identified German expert information supports at least annual dermatologic full-skin examination, shorter intervals for additional melanoma risk factors and monthly skin self-examination. Routine lymph-node ultrasound, S100B and cross-sectional imaging are shown as not routinely scheduled for Stage 0; symptoms or another clinical indication remain outside routine surveillance. A subordinate international-context note summarizes AAD support for ongoing risk-adapted dermatologic surveillance without presenting it as German S3 guidance.
 
-Protocols live in `followup-data.js`, separate from disease records and rendering. The schema supports multiple jurisdictions for a disease, but this release displays Germany only; it does not expose an unsupported jurisdiction switch. All three protocols remain `clinician review required`. See [FOLLOW_UP_PROTOCOLS.md](FOLLOW_UP_PROTOCOLS.md) for the implementation matrix, authoritative sources, schema, update policy and extension procedure; [GOAL5_CLINICAL_REVIEW.md](GOAL5_CLINICAL_REVIEW.md) is the uncompleted dermatologist review worksheet.
+Protocols live in `followup-data.js`, separate from disease records and rendering. The schema supports multiple jurisdictions for a disease, but the current site displays Germany only; it does not expose an unsupported jurisdiction switch. In the public review layer the BCC German protocol is clinician reviewed; the melanoma and cSCC German protocols remain review required. Embedded follow-up review fields are a separate compatibility layer. See [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md). See [FOLLOW_UP_PROTOCOLS.md](FOLLOW_UP_PROTOCOLS.md) for the implementation matrix, authoritative sources, schema, update policy and extension procedure; [GOAL5_CLINICAL_REVIEW.md](GOAL5_CLINICAL_REVIEW.md) is the uncompleted dermatologist review worksheet.
 
 ## Project Status
 
@@ -108,6 +112,20 @@ Current development priorities include:
 
 See [ROADMAP.md](ROADMAP.md) for completed foundations, known gaps, the medical review workflow and release direction.
 
+## Repository structure
+
+The live site is static HTML, CSS and JavaScript. No build step and no package install.
+
+- `index.html`, `style.css`, `app.js` — condition library
+- `data.js` — 50 condition records
+- `followup-data.js`, `followup-app.js` — German dermato-oncology follow-up UI
+- `quiz-data.js`, `quiz-app.js` — eight-question educational quiz
+- `case-data.js`, `case-app.js` — five pilot cases (diagnosis stays hidden until reveal)
+- `media-data.js` and `assets/media/` — four original SVG schematics; case images are separate
+- `review-data.js`, `review-status.json` — published clinical-review decisions
+- `scripts/` and `tests/` — dependency-free checks
+- Human review procedure: [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md) (do not treat this README as the full policy)
+
 ## Technology
 
 The current application uses:
@@ -121,7 +139,7 @@ Medical records live in `data.js`; `app.js` contains filtering, rendering and in
 
 Goal 7 adds an optional versioned `clinicalProfile` for structured morphology, localization, symptoms, diagnostic workflow, concise differential clues, treatment hierarchy, medication-regimen metadata, follow-up strategy, red flags, referral and oncology context. Eight representative records use the profile; the remaining 42 continue through the legacy-compatible renderer. See [CLINICAL_SCHEMA.md](CLINICAL_SCHEMA.md) and [CONTENT_QUALITY_AUDIT.md](CONTENT_QUALITY_AUDIT.md). Structured clinical fields are still drafts requiring physician review.
 
-Optional educational media lives separately in `media-data.js`. Goal 8 includes four project-authored SVG schematics for melanoma, basal cell carcinoma, plaque psoriasis and acne vulgaris. They contain no patient imagery, are registered as `Project-owned`, include accessible titles/descriptions and remain `clinician review required`. See [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md).
+Optional educational media lives separately in `media-data.js`. Goal 8 includes four project-authored SVG schematics for melanoma, basal cell carcinoma, plaque psoriasis and acne vulgaris. They contain no patient imagery, are registered as `Project-owned`, and include accessible titles and descriptions. In the public review layer the BCC schematic is clinician reviewed; the other three schematics remain review required. Embedded media review fields are a separate compatibility layer. See [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md).
 
 Quiz content lives in `quiz-data.js`, separate from `quiz-app.js`. Eight one-best-answer questions link to the structured pilot records and their attached sources. The quiz stores no account, score or analytics data and is explicitly educational rather than clinical decision support.
 
@@ -145,29 +163,34 @@ To run the same dependency-free syntax and test checks used by GitHub Actions wi
 ```shell
 node --check data.js
 node --check clinical-schema.js
+node --check scripts/clinical-schema.js
 node --check app.js
 node --check media-data.js
-node --check followup-data.js
-node --check followup-app.js
+node --check scripts/media.js
 node --check quiz-data.js
 node --check quiz-app.js
+node --check scripts/quiz.js
 node --check review-data.js
 node --check review-status.js
 node --check review-ui.js
-node --check scripts/media.js
-node --check scripts/clinical-schema.js
 node --check scripts/review-governance.js
 node --check scripts/review-batch.js
+node --check followup-data.js
+node --check followup-app.js
+node --check scripts/clinical-review.js
+node --check scripts/follow-up.js
+node scripts/clinical-review.js --validate
+node scripts/clinical-schema.js
 node scripts/follow-up.js
 node scripts/media.js
-node scripts/clinical-schema.js
 node scripts/quiz.js
-node scripts/clinical-review.js --validate
-node scripts/review-governance.js --write
-node scripts/review-batch.js --write
+node scripts/case.js
+node scripts/review-governance.js
 node --test tests/*.test.js
 git diff --check
 ```
+
+`node scripts/review-governance.js` also validates case data. To confirm generated review artifacts are unchanged, run `node scripts/review-governance.js --write` and `node scripts/review-batch.js --write`, then `git diff --exit-code -- review-status.json review-status.js GOAL9_HUMAN_REVIEW_GATE.md goal9-review-decisions.template.json`. Those write commands must not be used to refresh a fingerprint after a clinical edit.
 
 The `.github/workflows/validate.yml` workflow runs these checks for pull requests targeting `main`, pushes to `main`, and manual dispatches. It uses a read-only token and does not deploy the site or make network requests to medical sources.
 
@@ -177,9 +200,11 @@ Cross-browser engineering notes, including which browsers were actually executed
 
 Contributions, suggestions and bug reports are welcome.
 
-Before proposing substantial medical content changes, please include reliable and current references and clearly describe the reason for the change.
+Start with [CONTRIBUTING.md](CONTRIBUTING.md), the GitHub issue templates (bug, clinical correction, evidence update, feature, media/license), and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Report vulnerabilities as described in [SECURITY.md](SECURITY.md). Medical corrections and broken references are not security issues.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution guidelines.
+Before proposing substantial medical content changes, please include reliable and current references and clearly describe the reason for the change. Clinical review rules are in [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md). Release wording, if a release is ever cut, is described in [RELEASES.md](RELEASES.md). No release is published by these documents.
+
+On the live site, **Suggest a correction** and **Report outdated evidence** open GitHub issue forms. Visitors do not need repository file names. Case links omit diagnosis-bearing case ids until the learner reveals the diagnosis.
 
 ## Medical Disclaimer
 
@@ -189,4 +214,6 @@ It does not replace professional medical judgment, diagnosis, treatment decision
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+Source code and the project documentation are under the [MIT License](LICENSE).
+
+The MIT license does not relicense images. Each image keeps the license recorded on that asset. The four SVG schematics in `media-data.js` are `Project-owned`. The five case images in `case-data.js` are recorded as CC BY 4.0 (four) or CC BY-SA 4.0 (one). New media needs its own source URL, license and attribution. See [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md) and [CASE_LICENSING.md](CASE_LICENSING.md).
