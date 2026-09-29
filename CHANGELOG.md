@@ -11,7 +11,8 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 - At 600px and below, put those links on their own row so the GitHub link and preview pill cannot cover them or widen the page.
 - Honor `prefers-reduced-motion` for condition scrolling, and fall back when `focus({ preventScroll })` throws.
 - Add a one-sentence no-JS notice for the library, quiz, follow-up, and review counts without copying clinical text.
-- Add [BROWSER_COMPATIBILITY.md](BROWSER_COMPATIBILITY.md). Chrome 151 desktop and 768px flows that were actually run are marked verified; 390px is a fix with retest still pending. Firefox, Edge, and Safari are not marked verified. Clinical content, review decisions, and fingerprints are unchanged.
+- Add [BROWSER_COMPATIBILITY.md](BROWSER_COMPATIBILITY.md). Chrome 151 desktop, 768px, and 390×700 flows that were actually run are marked verified. Firefox, Edge, and Safari are not marked verified. Clinical content, review decisions, and fingerprints are unchanged.
+- Chrome 151 retest at 390×700 after `6579485` passed; the nav strip clips the top and bottom of the focus outline and that was left unchanged.
 
 ### Goal 12 — Case learning UX
 

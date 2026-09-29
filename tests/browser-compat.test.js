@@ -113,7 +113,8 @@ test("browser support doc stays an engineering matrix and does not claim unrun b
   assert.match(doc, /not installed\. Unverified\./);
   assert.match(doc, /Unverified separately from Chrome/);
   assert.match(doc, /pending real execution/i);
-  assert.match(doc, /fix applied, real retest pending/i);
+  assert.match(doc, /Verified in real Google Chrome 151\.0\.7922\.169 on Linux at 390×700/);
+  assert.doesNotMatch(doc, /fix applied, real retest pending/i);
   assert.match(doc, /Repeat the core matrix/);
   assert.match(doc, /This was not a screen-reader test and does not establish WCAG conformance\./);
   assert.match(doc, /Escape closes the whole condition panel/);
