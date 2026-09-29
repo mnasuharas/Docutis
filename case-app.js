@@ -15,6 +15,20 @@
   const ZOOM_MIN = 1;
   const ZOOM_MAX = 2.5;
   const ZOOM_STEP = 0.25;
+  // Governed image.src stays in the clinical payload: caseFingerprint hashes it
+  // (only accessDate and metadataCheckedAt are removed). These public paths are
+  // byte-identical copies with clinically meaningless names, not a new image.
+  const PUBLIC_CASE_IMAGE_SRC = Object.freeze({
+    "assets/media/cases/acral-melanoma-plantar-clinical.jpg": "assets/media/cases/case-01-clinical.jpg",
+    "assets/media/cases/bcc-nodular-wikiderm-dermoscopy.jpg": "assets/media/cases/case-02-dermoscopy.jpg",
+    "assets/media/cases/bcc-pigmented-wikiderm-dermoscopy.jpg": "assets/media/cases/case-03-dermoscopy.jpg",
+    "assets/media/cases/ak-field-hand-clinical.jpg": "assets/media/cases/case-04-clinical.jpg",
+    "assets/media/cases/scc-ak-paraspinal-clinical.jpg": "assets/media/cases/case-05-clinical.jpg"
+  });
+
+  function publicCaseImageSrc(image) {
+    return PUBLIC_CASE_IMAGE_SRC[image && image.src] || null;
+  }
   const EVIDENCE_LABELS = Object.freeze({
     histopathology: "Histopathology",
     expert_diagnosis: "Expert diagnosis",
@@ -338,6 +352,11 @@
   }
 
   function renderZoomableImage(parent, caseItem, image) {
+    const publicSrc = publicCaseImageSrc(image);
+    if (!publicSrc) {
+      parent.appendChild(element("p", "This image has no diagnosis-neutral public file. The stored filename was not used.", "case-empty"));
+      return;
+    }
     const figure = element("figure", undefined, "case-figure");
     const controls = element("div", undefined, "case-zoom-controls");
     controls.setAttribute("role", "group");
@@ -355,7 +374,7 @@
     viewport.setAttribute("role", "region");
     viewport.setAttribute("aria-label", "Image inspection. Scroll or use arrow keys to pan when zoomed in.");
     const img = document.createElement("img");
-    img.src = image.src;
+    img.src = publicSrc;
     img.alt = inspectAlt(caseItem, image);
     if (image.dimensions) {
       img.width = image.dimensions.width;

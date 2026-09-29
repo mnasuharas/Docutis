@@ -46,6 +46,13 @@ test("case fingerprints ignore metadata check dates and review fields", () => {
   assert.notEqual(caseFingerprint(item), base);
 });
 
+test("case image src participates in the clinical fingerprint", () => {
+  const item = structuredClone(loadCaseData().cases[0]);
+  const base = caseFingerprint(item);
+  item.images[0].src = "assets/media/cases/case-01-clinical.jpg";
+  assert.notEqual(caseFingerprint(item), base);
+});
+
 test("cases join Goal 9 public assets as review-required case units", () => {
   const status = buildPublicStatus();
   const caseAssets = status.assets.filter(item => item.assetType === "case");
@@ -662,5 +669,86 @@ test("diagnosis-bearing source links stay off interactive controls until reveal"
     for (const leak of leaks) {
       assert.equal(hiddenAgain.includes(leak), false, `${item.id} still exposed ${leak} after hiding the diagnosis`);
     }
+  }
+});
+
+test("pre-reveal case images use diagnosis-neutral public paths", () => {
+  const harness = caseHarness(caseUiFiles);
+  const cases = harness.window.DOCUTIS_CASES.cases;
+  const expectedPublicSrc = {
+    "case-acral-melanoma-plantar": "assets/media/cases/case-01-clinical.jpg",
+    "case-bcc-nodular-dermoscopy": "assets/media/cases/case-02-dermoscopy.jpg",
+    "case-bcc-pigmented-dermoscopy": "assets/media/cases/case-03-dermoscopy.jpg",
+    "case-ak-field-hand": "assets/media/cases/case-04-clinical.jpg",
+    "case-scc-ak-paraspinal": "assets/media/cases/case-05-clinical.jpg"
+  };
+  const governedSrc = {
+    "case-acral-melanoma-plantar": "assets/media/cases/acral-melanoma-plantar-clinical.jpg",
+    "case-bcc-nodular-dermoscopy": "assets/media/cases/bcc-nodular-wikiderm-dermoscopy.jpg",
+    "case-bcc-pigmented-dermoscopy": "assets/media/cases/bcc-pigmented-wikiderm-dermoscopy.jpg",
+    "case-ak-field-hand": "assets/media/cases/ak-field-hand-clinical.jpg",
+    "case-scc-ak-paraspinal": "assets/media/cases/scc-ak-paraspinal-clinical.jpg"
+  };
+  const answerBearing = /(?:^|[\/_.-])(?:melanoma|bcc|scc|ak|actinic-keratosis|actinic-keratoses|basal-cell|squamous-cell)(?=$|[\/_.-])/i;
+
+  function openCase(item) {
+    const back = caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Back to case list")[0];
+    if (back) back.dispatch("click");
+    const start = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === `Start case: ${item.title}`)[0];
+    assert.ok(start, item.id);
+    start.dispatch("click");
+  }
+
+  function showStep(label) {
+    const tab = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === label)[0];
+    assert.ok(tab, label);
+    tab.dispatch("click");
+  }
+
+  assert.equal(cases.length, 5);
+  for (const item of cases) {
+    assert.equal(item.images.length, 1, item.id);
+    assert.equal(item.images[0].src, governedSrc[item.id], item.id);
+    assert.equal(item.reviewStatus, "clinician review required");
+    assert.equal(item.clinicalReview, null);
+    const governedBytes = fs.readFileSync(path.join(root, governedSrc[item.id]));
+    const publicBytes = fs.readFileSync(path.join(root, expectedPublicSrc[item.id]));
+    assert.deepEqual(publicBytes, governedBytes, item.id);
+    assert.doesNotMatch(expectedPublicSrc[item.id], answerBearing, item.id);
+    assert.match(expectedPublicSrc[item.id], /^assets\/media\/cases\/case-0[1-5]-(?:clinical|dermoscopy)\.jpg$/);
+
+    openCase(item);
+    const imgs = caseFind(harness.root, node => node.tagName === "IMG");
+    assert.equal(imgs.length, 1, item.id);
+    const img = imgs[0];
+    assert.equal(img.src, expectedPublicSrc[item.id], item.id);
+    assert.doesNotMatch(img.src, answerBearing, item.id);
+    assert.notEqual(img.src, item.images[0].src);
+    assert.equal(img.getAttribute("download") || "", "");
+    assert.equal(img.download || "", "");
+    assert.equal(img.getAttribute("title") || "", "");
+    assert.ok(img.alt, item.id);
+    assert.equal(img.alt.includes(item.diagnosisLabel), false, item.id);
+    const localName = governedSrc[item.id].split("/").pop();
+    const hrefs = caseFind(harness.root, node => node.tagName === "A").map(node => node.href || node.getAttribute("href") || "");
+    for (const href of hrefs) {
+      assert.equal(String(href).includes(localName), false, `${item.id} href ${href}`);
+      assert.doesNotMatch(String(href), answerBearing, `${item.id} href ${href}`);
+    }
+
+    showStep("Step 4 of 5: Reveal");
+    caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Reveal diagnosis")[0].dispatch("click");
+    assert.ok(
+      caseFind(harness.root, node => node.tagName === "A" && node.href === item.images[0].sourceUrl)[0],
+      `${item.id} source link missing after reveal`
+    );
+    showStep("Step 1 of 5: Inspect");
+    const after = caseFind(harness.root, node => node.tagName === "IMG")[0];
+    assert.equal(after.src, expectedPublicSrc[item.id], `${item.id} src changed after reveal`);
+    assert.equal(after.getAttribute("download") || "", "");
+    assert.ok(
+      caseFind(harness.root, node => node.tagName === "A" && node.href === item.images[0].sourceUrl)[0],
+      `${item.id} source link missing when inspect is reopened after reveal`
+    );
   }
 });
