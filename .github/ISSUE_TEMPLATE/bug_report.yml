@@ -10,7 +10,19 @@ body:
     id: description
     attributes:
       label: Problem
-      description: What happened, and what did you expect?
+      description: Which page, and what went wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual
     validations:
       required: true
   - type: textarea
@@ -18,6 +30,20 @@ body:
     attributes:
       label: Reproduction steps
       placeholder: "1. Open…\n2. Select…\n3. Observe…"
+    validations:
+      required: true
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Optional. Do not include patient information or credentials.
+  - type: dropdown
+    id: clinical
+    attributes:
+      label: Could this be a clinical content problem rather than a software bug?
+      options:
+        - "No"
+        - "Yes — I will also use the clinical correction or evidence template"
     validations:
       required: true
   - type: input

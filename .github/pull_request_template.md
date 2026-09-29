@@ -1,30 +1,43 @@
-## Summary
+## Scope
 
-- Summary item
+<!-- One sentence. -->
 
-## Scope and evidence
+## Why
 
-- Related issue or record IDs:
-- Clinical sources added or rechecked:
-- Jurisdiction/limitations:
+## Files
 
-## Clinical governance
+## Testing
 
-- [ ] No clinical content changed.
-- [ ] Changed clinical content remains `clinician review required`.
-- [ ] Genuine physician review metadata and the exact fingerprint are included and documented.
-- [ ] No patient-identifiable or unlicensed content is included.
+- [ ] I ran the validation commands in the README that apply to this change
+- [ ] `node --test tests/*.test.js` passes, or the exception is explained here
+- [ ] `git diff --check` passes
 
-## Accessibility and privacy
+## Screenshots
 
-- [ ] Keyboard and focus behavior checked where relevant.
-- [ ] Mobile layout checked where relevant.
-- [ ] No analytics, account data or sensitive information added.
+<!-- For interface changes. Otherwise write "none". -->
 
-## Validation
+## Clinical content
 
-- [ ] Syntax and data validators pass.
-- [ ] `node --test tests/*.test.js` passes.
-- [ ] `git diff --check` passes.
+Clinical content changed: yes / no
 
-Delete checklist items that do not apply and explain any exception.
+## Governance or fingerprints
+
+Governance or fingerprint impact: yes / no
+
+## Clinician review required
+
+Clinician review required for this change: yes / no
+
+Pure software, documentation, and other non-clinical changes do not require clinician approval.
+
+## Sources and licenses
+
+<!-- New or rechecked sources, or image license and attribution. Write "none" if unchanged. -->
+
+## Limitations
+
+## Checklist
+
+- [ ] I did not fabricate clinician approval, reviewer identity, or an attestation
+- [ ] Tests I claim above were actually run
+- [ ] Unrelated changes are excluded

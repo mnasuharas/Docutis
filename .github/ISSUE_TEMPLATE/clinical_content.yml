@@ -9,7 +9,8 @@ body:
   - type: input
     id: record
     attributes:
-      label: Condition name and record ID
+      label: Page or case
+      description: Use the condition name, case title, or page you were viewing. A repository id is optional. Do not guess a hidden case id.
     validations:
       required: true
   - type: textarea
@@ -45,3 +46,10 @@ body:
     id: limits
     attributes:
       label: Jurisdiction or uncertainty
+  - type: checkboxes
+    id: review-ack
+    attributes:
+      label: Review required
+      options:
+        - label: I understand a clinician review is still required. I cannot self-certify clinician approval by opening this issue.
+          required: true

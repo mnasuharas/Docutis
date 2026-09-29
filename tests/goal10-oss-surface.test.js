@@ -27,9 +27,12 @@ test("Goal 10 feedback helpers build Pages-safe clinical issue URLs", () => {
 
   for (const url of [correction, outdated, generic]) {
     assert.match(url, new RegExp(`^${REPO}/issues/new\\?`));
-    assert.match(url, /template=clinical_content\.yml/);
-    assert.match(decodeURIComponent(url.replace(/\+/g, " ")), /\[Clinical content\]:/);
   }
+  assert.match(correction, /template=clinical_content\.yml/);
+  assert.match(outdated, /template=evidence_update\.yml/);
+  assert.match(generic, /template=evidence_update\.yml/);
+  assert.match(decodeURIComponent(correction.replace(/\+/g, " ")), /\[Clinical content\]:/);
+  assert.match(decodeURIComponent(outdated.replace(/\+/g, " ")), /\[Evidence\]:/);
 
   const decodedCorrection = decodeURIComponent(correction.replace(/\+/g, " "));
   const decodedOutdated = decodeURIComponent(outdated.replace(/\+/g, " "));

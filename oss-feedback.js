@@ -9,6 +9,7 @@
 
   const REPO_URL = "https://github.com/mnasuharas/Docutis";
   const CLINICAL_CONTENT_TEMPLATE = "clinical_content.yml";
+  const EVIDENCE_UPDATE_TEMPLATE = "evidence_update.yml";
   const DOC_LINKS = Object.freeze({
     repository: REPO_URL,
     contributing: `${REPO_URL}/blob/main/CONTRIBUTING.md`,
@@ -53,8 +54,8 @@
 
   function buildOutdatedEvidenceIssueUrl(context = {}) {
     return buildIssueUrl(
-      CLINICAL_CONTENT_TEMPLATE,
-      `[Clinical content]: Report outdated evidence — ${contextLabel(context)}`
+      EVIDENCE_UPDATE_TEMPLATE,
+      `[Evidence]: Report outdated evidence — ${contextLabel(context)}`
     );
   }
 
@@ -68,6 +69,7 @@
   return Object.freeze({
     REPO_URL,
     CLINICAL_CONTENT_TEMPLATE,
+    EVIDENCE_UPDATE_TEMPLATE,
     DOC_LINKS,
     FEEDBACK_PROMPT,
     buildIssueUrl,

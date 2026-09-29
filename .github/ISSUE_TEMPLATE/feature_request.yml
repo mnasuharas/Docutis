@@ -24,3 +24,10 @@ body:
     id: alternatives
     attributes:
       label: Lower-complexity alternatives considered
+  - type: textarea
+    id: clinical-impact
+    attributes:
+      label: Clinical impact
+      description: Say "none" for a pure software or documentation idea. Do not imply clinician approval.
+    validations:
+      required: true
