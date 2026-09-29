@@ -46,6 +46,13 @@ test("case fingerprints ignore metadata check dates and review fields", () => {
   assert.notEqual(caseFingerprint(item), base);
 });
 
+test("case image src participates in the clinical fingerprint", () => {
+  const item = structuredClone(loadCaseData().cases[0]);
+  const base = caseFingerprint(item);
+  item.images[0].src = "assets/media/cases/case-01-clinical.jpg";
+  assert.notEqual(caseFingerprint(item), base);
+});
+
 test("cases join Goal 9 public assets as review-required case units", () => {
   const status = buildPublicStatus();
   const caseAssets = status.assets.filter(item => item.assetType === "case");
@@ -110,6 +117,10 @@ class CaseElement {
     return event;
   }
   focus() { this.ownerDocument.activeElement = this; }
+  setSelectionRange(start, end) {
+    this.selectionStart = start;
+    this.selectionEnd = end;
+  }
   scrollBy() {}
 }
 
@@ -281,4 +292,463 @@ test("case UI keeps zoom, reveal and noscript guards without a scored quiz", () 
     const published = statusFile.assets.find(asset => asset.assetType === "case" && asset.id === item.id);
     return published && published.currentFingerprint === item.currentFingerprint && published.status === "review required";
   }));
+});
+
+function accessibleCaseNames(node) {
+  const names = [];
+  caseWalk(node, item => {
+    if (!item || item.nodeType === 3) return;
+    if (item.tagName === "IMG" && item.alt) names.push(item.alt);
+    if (item.tagName === "FIGCAPTION") names.push(item.textContent || "");
+    const aria = item.getAttribute && item.getAttribute("aria-label");
+    if (aria) names.push(aria);
+    if (item.tagName === "BUTTON" || item.tagName === "SUMMARY") names.push(item.textContent || "");
+  });
+  return names.join("\n");
+}
+
+function assertTextAbsent(blob, phrase, context) {
+  const needle = String(phrase || "").trim();
+  if (needle.length < 4) return;
+  assert.equal(
+    blob.toLocaleLowerCase("en").includes(needle.toLocaleLowerCase("en")),
+    false,
+    `${context} exposed "${needle}"`
+  );
+}
+
+test("inspect image alts and control names hide diagnosis variants until reveal", () => {
+  const harness = caseHarness(caseUiFiles);
+  const cases = harness.window.DOCUTIS_CASES.cases;
+  const diseases = harness.window.DOCUTIS_DATA.diseases;
+  const sharedVariants = [
+    "actinic keratosis",
+    "actinic keratoses",
+    "field cancerization",
+    "squamous cell carcinoma",
+    "basal cell carcinoma",
+    "acral lentiginous melanoma"
+  ];
+  const publishedDiagnosisAlts = {
+    "case-ak-field-hand": "Clinical photograph of the dorsum of a hand showing multiple rough erythematous and keratotic spots consistent with actinic keratoses and field cancerization.",
+    "case-scc-ak-paraspinal": "Clinical photograph of the left upper paraspinal back showing a marked lesion labeled as well-differentiated squamous cell carcinoma beside an adjacent actinic keratosis."
+  };
+
+  function openCase(item) {
+    const back = caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Back to case list")[0];
+    if (back) back.dispatch("click");
+    const start = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === `Start case: ${item.title}`)[0];
+    assert.ok(start, item.id);
+    start.dispatch("click");
+  }
+
+  for (const item of cases) {
+    const disease = diseases.find(entry => entry.id === item.diseaseId);
+    openCase(item);
+    const names = accessibleCaseNames(harness.root);
+    const img = caseFind(harness.root, node => node.tagName === "IMG")[0];
+    assert.ok(img && img.alt, `${item.id} image alt`);
+    assert.notEqual(img.alt, "");
+    assert.notEqual(img.getAttribute("role"), "presentation");
+    const forbidden = [
+      item.diagnosisLabel,
+      item.diagnosticGroundTruth && item.diagnosticGroundTruth.confirmedDiagnosis,
+      disease && disease.name,
+      ...sharedVariants
+    ];
+    const recordedName = [item.diagnosisLabel, item.diagnosticGroundTruth && item.diagnosticGroundTruth.confirmedDiagnosis, disease && disease.name].join(" ");
+    if (/\bmelanoma\b/i.test(recordedName)) forbidden.push("melanoma");
+    for (const phrase of forbidden) assertTextAbsent(names, phrase, item.id);
+
+    if (item.id === "case-acral-melanoma-plantar") {
+      assert.equal(img.alt, item.images[0].alt);
+    }
+    if (publishedDiagnosisAlts[item.id]) {
+      assert.notEqual(img.alt, item.images[0].alt);
+      assert.notEqual(img.alt, publishedDiagnosisAlts[item.id]);
+      const kind = item.images[0].type === "clinical" ? "Clinical photograph" : "Image";
+      const site = item.patientContext.anatomicalSite;
+      assert.ok(img.alt.startsWith(`${kind}, ${site}. Recorded observations: `), img.alt);
+      for (const observation of item.observations) assert.ok(img.alt.includes(observation.text), observation.text);
+      for (const interpretation of item.interpretations || []) {
+        assert.equal(img.alt.includes(interpretation.text), false, interpretation.text);
+      }
+      assert.match(img.alt, /keratotic/);
+      assert.doesNotMatch(img.alt, /\bkeratosis(?:es)?\b/i);
+    }
+
+    caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === "Step 4 of 5: Reveal")[0].dispatch("click");
+    assert.equal(caseText(harness.root).includes(item.diagnosisLabel), false, `${item.id} label visible before reveal`);
+    caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Reveal diagnosis")[0].dispatch("click");
+    const revealed = caseText(harness.root);
+    assert.match(revealed, /Diagnosis revealed/);
+    assert.ok(revealed.includes(item.diagnosisLabel), item.id);
+  }
+});
+
+test("site filter keeps focus and typed characters across list refresh", () => {
+  const harness = caseHarness(caseUiFiles);
+  const siteFilter = () => caseFind(harness.root, node => node.getAttribute && node.getAttribute("data-filter-key") === "anatomicalSite")[0];
+  let filter = siteFilter();
+  assert.equal(filter.getAttribute("aria-label"), "Site contains");
+  filter.focus();
+  filter.value = "h";
+  filter.selectionStart = 1;
+  filter.selectionEnd = 1;
+  filter.dispatch("input");
+  filter = siteFilter();
+  assert.equal(harness.document.activeElement, filter);
+  assert.equal(filter.getAttribute("data-filter-key"), "anatomicalSite");
+  assert.equal(filter.value, "h");
+  assert.equal(filter.selectionStart, 1);
+  filter.value = "ha";
+  filter.selectionStart = 2;
+  filter.selectionEnd = 2;
+  filter.dispatch("input");
+  filter = siteFilter();
+  assert.equal(harness.document.activeElement, filter);
+  assert.equal(filter.value, "ha");
+  assert.equal(filter.selectionStart, 2);
+  filter.value = "hand";
+  filter.selectionStart = 4;
+  filter.selectionEnd = 4;
+  filter.dispatch("input");
+  filter = siteFilter();
+  assert.equal(filter.value, "hand");
+  assert.match(caseText(harness.root), /1 case shown/);
+  assert.match(caseText(harness.root), /Field change on the dorsum of the hand/);
+  const diseaseNames = harness.window.DOCUTIS_DATA.diseases.map(item => item.name).filter(Boolean);
+  const listText = caseText(harness.root);
+  for (const name of diseaseNames) assert.equal(listText.includes(name), false, name);
+
+  filter.value = "";
+  filter.selectionStart = 0;
+  filter.selectionEnd = 0;
+  filter.dispatch("input");
+  const typeFilter = () => caseFind(harness.root, node => node.getAttribute && node.getAttribute("data-filter-key") === "caseType")[0];
+  let select = typeFilter();
+  select.focus();
+  select.value = "dermoscopic";
+  select.dispatch("change");
+  select = typeFilter();
+  assert.equal(harness.document.activeElement, select);
+  assert.equal(select.getAttribute("data-filter-key"), "caseType");
+  assert.equal(select.value, "dermoscopic");
+  assert.match(caseText(harness.root), /2 cases shown/);
+  assert.doesNotMatch(caseText(harness.root), /Linked condition|Actinic Keratosis|Basal Cell Carcinoma|Squamous Cell Carcinoma|Acral Melanoma/);
+});
+
+test("explicit diagnosis confirmations stay hidden until reveal and remain available afterward", () => {
+  const harness = caseHarness(caseUiFiles);
+  const cases = harness.window.DOCUTIS_CASES.cases;
+  const expectations = [
+    {
+      id: "case-acral-melanoma-plantar",
+      hidden: [
+        "This published case was histopathologically confirmed as acral lentiginous melanoma."
+      ],
+      kept: ["Acral lentiginous melanoma", "raises concern for acral melanoma"]
+    },
+    {
+      id: "case-bcc-nodular-dermoscopy",
+      hidden: [
+        "Author-labeled nodular BCC; vascular clues are the teaching focus.",
+        "Classic arborizing BCC-type vessels and translucent BCC pattern favor BCC in this labeled example"
+      ],
+      kept: [
+        "Basal cell carcinoma (nodular)",
+        "associated with basal cell carcinoma",
+        "Vascular clues are the teaching focus.",
+        "Classic arborizing BCC-type vessels and translucent BCC pattern favor BCC"
+      ]
+    },
+    {
+      id: "case-bcc-pigmented-dermoscopy",
+      hidden: [
+        "Author-labeled pigmented BCC; emphasize BCC pigment structures vs melanocytic network."
+      ],
+      kept: [
+        "Pigmented basal cell carcinoma",
+        "Pigmented BCC often shows",
+        "Emphasize BCC pigment structures vs melanocytic network."
+      ]
+    },
+    {
+      id: "case-ak-field-hand",
+      hidden: [
+        "Multiple AKs on a sun-damaged field illustrate field cancerization rather than an isolated keratosis.",
+        "Discrete grit-like keratotic AKs on photoaged skin differ from diffuse eczematous plaques"
+      ],
+      kept: [
+        "Actinic keratoses / field cancerization",
+        "Multiple rough spots on a sun-damaged field illustrate field change rather than an isolated lesion.",
+        "Discrete grit-like keratotic spots on photoaged skin differ from diffuse eczematous plaques"
+      ]
+    },
+    {
+      id: "case-scc-ak-paraspinal",
+      hidden: [
+        "The pairing illustrates the AK\u2013SCC continuum: a more concerning hypertrophic focus beside an adjacent actinic keratosis in damaged skin.",
+        "Uploader SCC label",
+        "Primary teaching diagnosis for the marked lesion per source caption.",
+        "Source caption specifies well-differentiated SCC for the marked lesion",
+        "Adjacent AK supports continuum teaching without merging both labels into one lesion."
+      ],
+      kept: [
+        "Cutaneous squamous cell carcinoma",
+        "Actinic keratosis (adjacent)",
+        "A more concerning hypertrophic focus sits beside an adjacent flatter keratotic change in damaged skin.",
+        "Hypertrophic marked focus",
+        "A neighboring flatter keratotic change supports continuum teaching without merging both findings into one lesion."
+      ]
+    }
+  ];
+
+  function openCase(item) {
+    const back = caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Back to case list")[0];
+    if (back) back.dispatch("click");
+    const start = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === `Start case: ${item.title}`)[0];
+    assert.ok(start, item.id);
+    start.dispatch("click");
+  }
+
+  function showStep(label) {
+    const tab = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === label)[0];
+    assert.ok(tab, label);
+    tab.dispatch("click");
+    return caseText(harness.root);
+  }
+
+  assert.equal(expectations.length, 5);
+  for (const expected of expectations) {
+    const item = cases.find(entry => entry.id === expected.id);
+    assert.ok(item, expected.id);
+    openCase(item);
+    const before = [
+      showStep("Step 1 of 5: Inspect"),
+      showStep("Step 2 of 5: Observe"),
+      showStep("Step 3 of 5: Differential")
+    ].join("\n");
+    for (const phrase of expected.hidden) {
+      assert.equal(before.includes(phrase), false, `${expected.id} showed "${phrase}" before reveal`);
+    }
+    for (const phrase of expected.kept) {
+      assert.equal(before.includes(phrase), true, `${expected.id} lost "${phrase}" before reveal`);
+    }
+    showStep("Step 4 of 5: Reveal");
+    assert.equal(caseText(harness.root).includes(item.diagnosisLabel), false, `${expected.id} label visible before reveal`);
+    for (const phrase of expected.hidden) {
+      assert.equal(caseText(harness.root).includes(phrase), false, `${expected.id} showed "${phrase}" on the closed reveal step`);
+    }
+    const reveal = caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Reveal diagnosis")[0];
+    assert.ok(reveal, expected.id);
+    reveal.dispatch("click");
+    const revealed = caseText(harness.root);
+    assert.equal(revealed.includes(item.diagnosisLabel), true, `${expected.id} diagnosis label`);
+    for (const phrase of expected.hidden) {
+      assert.equal(revealed.includes(phrase), true, `${expected.id} dropped "${phrase}" after reveal`);
+    }
+    const review = showStep("Step 5 of 5: Review");
+    assert.equal(review.includes(item.diagnosisLabel), true, `${expected.id} review label`);
+    for (const phrase of expected.hidden) {
+      assert.equal(review.includes(phrase), true, `${expected.id} review dropped "${phrase}"`);
+    }
+  }
+});
+
+function controlLeakSurface(node) {
+  const chunks = [];
+  caseWalk(node, item => {
+    if (!item || item.nodeType === 3 || typeof item.getAttribute !== "function") return;
+    const tag = item.tagName;
+    const href = item.href || item.getAttribute("href") || "";
+    const download = item.download || item.getAttribute("download") || "";
+    const title = item.title || item.getAttribute("title") || "";
+    const aria = item.getAttribute("aria-label") || "";
+    const description = item.getAttribute("aria-description") || "";
+    const interactive = tag === "A" || tag === "BUTTON" || tag === "AREA" || tag === "SUMMARY" || href || download || title;
+    if (!interactive && tag !== "IMG") return;
+    const label = interactive ? (item.textContent || "") : "";
+    const alt = tag === "IMG" ? (item.alt || "") : "";
+    chunks.push([href, download, title, aria, description, label, alt].join("\n"));
+  });
+  const raw = chunks.join("\n").replace(/\+/g, " ");
+  try {
+    return decodeURIComponent(raw);
+  } catch (error) {
+    return raw;
+  }
+}
+
+test("diagnosis-bearing source links stay off interactive controls until reveal", () => {
+  const harness = caseHarness(caseUiFiles);
+  const cases = harness.window.DOCUTIS_CASES.cases;
+  assert.equal(cases.length, 5);
+  const filenameFragments = [
+    "Photography_of_a_large_acral_lentiginous_melanoma",
+    "Dermatoskopie_eines_nodulären_Basalzellkarzinoms",
+    "pigmentierten_Basalzellkarzinoms",
+    "Aktinische_Keratosen",
+    "Feldkanzerisierung",
+    "Squamous_Cell_Carcinoma_well_differentiated_",
+    "adjacent_actinic_keratosis"
+  ];
+  const decodedSources = cases.flatMap(item => item.images.map(image => decodeURIComponent(image.sourceUrl)));
+  for (const fragment of filenameFragments) {
+    assert.ok(decodedSources.some(url => url.includes(fragment)), `fixture missing ${fragment}`);
+  }
+
+  function openCase(item) {
+    const back = caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Back to case list")[0];
+    if (back) back.dispatch("click");
+    const start = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === `Start case: ${item.title}`)[0];
+    assert.ok(start, item.id);
+    start.dispatch("click");
+  }
+
+  function showStep(label) {
+    const tab = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === label)[0];
+    assert.ok(tab, label);
+    tab.dispatch("click");
+  }
+
+  const preRevealSteps = [
+    "Step 1 of 5: Inspect",
+    "Step 2 of 5: Observe",
+    "Step 3 of 5: Differential",
+    "Step 4 of 5: Reveal",
+    "Step 5 of 5: Review"
+  ];
+
+  for (const item of cases) {
+    openCase(item);
+    const leaks = [];
+    for (const image of item.images) {
+      leaks.push(decodeURIComponent(image.sourceUrl).split("/").pop());
+      leaks.push(image.src.split("/").pop());
+    }
+    leaks.push(item.id);
+    for (const step of preRevealSteps) {
+      showStep(step);
+      const surface = controlLeakSurface(harness.root);
+      for (const leak of leaks) {
+        assert.equal(surface.includes(leak), false, `${item.id} ${step} exposed ${leak}`);
+      }
+      const sourceAnchors = caseFind(harness.root, node => node.tagName === "A" && node.href && item.images.some(image => node.href === image.sourceUrl));
+      assert.equal(sourceAnchors.length, 0, `${item.id} ${step} activated a source link`);
+    }
+
+    showStep("Step 4 of 5: Reveal");
+    caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Reveal diagnosis")[0].dispatch("click");
+    for (const image of item.images) {
+      const revealedLink = caseFind(harness.root, node => node.tagName === "A" && node.href === image.sourceUrl)[0];
+      assert.ok(revealedLink, `${item.id} source link missing after reveal`);
+      assert.equal(revealedLink.textContent, "Source page (opens in a new tab)");
+    }
+    assert.match(caseText(harness.root), /Source notes|Recorded diagnosis|Diagnosis revealed/);
+
+    showStep("Step 5 of 5: Review");
+    for (const image of item.images) {
+      assert.ok(
+        caseFind(harness.root, node => node.tagName === "A" && node.href === image.sourceUrl)[0],
+        `${item.id} source link missing in review`
+      );
+    }
+
+    showStep("Step 1 of 5: Inspect");
+    for (const image of item.images) {
+      assert.ok(
+        caseFind(harness.root, node => node.tagName === "A" && node.href === image.sourceUrl)[0],
+        `${item.id} source link missing when inspect is reopened after reveal`
+      );
+    }
+
+    showStep("Step 4 of 5: Reveal");
+    caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Hide diagnosis")[0].dispatch("click");
+    const hiddenAgain = controlLeakSurface(harness.root);
+    for (const leak of leaks) {
+      assert.equal(hiddenAgain.includes(leak), false, `${item.id} still exposed ${leak} after hiding the diagnosis`);
+    }
+  }
+});
+
+test("pre-reveal case images use diagnosis-neutral public paths", () => {
+  const harness = caseHarness(caseUiFiles);
+  const cases = harness.window.DOCUTIS_CASES.cases;
+  const expectedPublicSrc = {
+    "case-acral-melanoma-plantar": "assets/media/cases/case-01-clinical.jpg",
+    "case-bcc-nodular-dermoscopy": "assets/media/cases/case-02-dermoscopy.jpg",
+    "case-bcc-pigmented-dermoscopy": "assets/media/cases/case-03-dermoscopy.jpg",
+    "case-ak-field-hand": "assets/media/cases/case-04-clinical.jpg",
+    "case-scc-ak-paraspinal": "assets/media/cases/case-05-clinical.jpg"
+  };
+  const governedSrc = {
+    "case-acral-melanoma-plantar": "assets/media/cases/acral-melanoma-plantar-clinical.jpg",
+    "case-bcc-nodular-dermoscopy": "assets/media/cases/bcc-nodular-wikiderm-dermoscopy.jpg",
+    "case-bcc-pigmented-dermoscopy": "assets/media/cases/bcc-pigmented-wikiderm-dermoscopy.jpg",
+    "case-ak-field-hand": "assets/media/cases/ak-field-hand-clinical.jpg",
+    "case-scc-ak-paraspinal": "assets/media/cases/scc-ak-paraspinal-clinical.jpg"
+  };
+  const answerBearing = /(?:^|[\/_.-])(?:melanoma|bcc|scc|ak|actinic-keratosis|actinic-keratoses|basal-cell|squamous-cell)(?=$|[\/_.-])/i;
+
+  function openCase(item) {
+    const back = caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Back to case list")[0];
+    if (back) back.dispatch("click");
+    const start = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === `Start case: ${item.title}`)[0];
+    assert.ok(start, item.id);
+    start.dispatch("click");
+  }
+
+  function showStep(label) {
+    const tab = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === label)[0];
+    assert.ok(tab, label);
+    tab.dispatch("click");
+  }
+
+  assert.equal(cases.length, 5);
+  for (const item of cases) {
+    assert.equal(item.images.length, 1, item.id);
+    assert.equal(item.images[0].src, governedSrc[item.id], item.id);
+    assert.equal(item.reviewStatus, "clinician review required");
+    assert.equal(item.clinicalReview, null);
+    const governedBytes = fs.readFileSync(path.join(root, governedSrc[item.id]));
+    const publicBytes = fs.readFileSync(path.join(root, expectedPublicSrc[item.id]));
+    assert.deepEqual(publicBytes, governedBytes, item.id);
+    assert.doesNotMatch(expectedPublicSrc[item.id], answerBearing, item.id);
+    assert.match(expectedPublicSrc[item.id], /^assets\/media\/cases\/case-0[1-5]-(?:clinical|dermoscopy)\.jpg$/);
+
+    openCase(item);
+    const imgs = caseFind(harness.root, node => node.tagName === "IMG");
+    assert.equal(imgs.length, 1, item.id);
+    const img = imgs[0];
+    assert.equal(img.src, expectedPublicSrc[item.id], item.id);
+    assert.doesNotMatch(img.src, answerBearing, item.id);
+    assert.notEqual(img.src, item.images[0].src);
+    assert.equal(img.getAttribute("download") || "", "");
+    assert.equal(img.download || "", "");
+    assert.equal(img.getAttribute("title") || "", "");
+    assert.ok(img.alt, item.id);
+    assert.equal(img.alt.includes(item.diagnosisLabel), false, item.id);
+    const localName = governedSrc[item.id].split("/").pop();
+    const hrefs = caseFind(harness.root, node => node.tagName === "A").map(node => node.href || node.getAttribute("href") || "");
+    for (const href of hrefs) {
+      assert.equal(String(href).includes(localName), false, `${item.id} href ${href}`);
+      assert.doesNotMatch(String(href), answerBearing, `${item.id} href ${href}`);
+    }
+
+    showStep("Step 4 of 5: Reveal");
+    caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Reveal diagnosis")[0].dispatch("click");
+    assert.ok(
+      caseFind(harness.root, node => node.tagName === "A" && node.href === item.images[0].sourceUrl)[0],
+      `${item.id} source link missing after reveal`
+    );
+    showStep("Step 1 of 5: Inspect");
+    const after = caseFind(harness.root, node => node.tagName === "IMG")[0];
+    assert.equal(after.src, expectedPublicSrc[item.id], `${item.id} src changed after reveal`);
+    assert.equal(after.getAttribute("download") || "", "");
+    assert.ok(
+      caseFind(harness.root, node => node.tagName === "A" && node.href === item.images[0].sourceUrl)[0],
+      `${item.id} source link missing when inspect is reopened after reveal`
+    );
+  }
 });
