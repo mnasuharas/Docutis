@@ -1,8 +1,8 @@
 # Clinical review procedure
 
-Goal 9 uses the append-only public decision model documented in `REVIEW_SCHEMA.md`. The older inline `reviewStatus` and `clinicalReview` fields remain compatibility safeguards for fully reviewed record versions; partial review, changes requested, invalidation, asset-level independence and public history are represented by `review-data.js` and the generated `review-status.json`. No Goal 9 human decisions have been supplied yet.
+Goal 9 uses the append-only public decision model documented in `REVIEW_SCHEMA.md`. The older inline `reviewStatus` and `clinicalReview` fields remain compatibility safeguards for fully reviewed record versions; partial review, changes requested, invalidation, asset-level independence and public history are represented by `review-data.js` and the generated `review-status.json`. Human decisions for actinic keratosis and basal cell carcinoma (disease) plus BCC follow-up, BCC quiz and BCC schematic are published; other units including Goal 11 cases remain review required until genuine physician decisions exist.
 
-Automated schema, source metadata, DOI, coding and CI checks are distinct from human clinical review. Only a human physician can personally review a specific record version. Current state: 50 records require clinician review; 0 records are clinician reviewed.
+Automated schema, source metadata, DOI, coding and CI checks are distinct from human clinical review. Only a human physician can personally review a specific record version. Current state: the disease catalogue contains 50 records, and legacy embedded `reviewStatus` fields remain `clinician review required` for all 50. That catalogue count is not the Goal 9 public review-unit count. The authoritative public manifest in `review-status.json` currently lists 28 independent review units: 5 `clinician reviewed` and 23 `review required` (including five Goal 11 cases). Do not equate "50 disease records" with "28 Goal 9 review units."
 
 ## Review a record
 
@@ -31,7 +31,7 @@ The optional Goal 7 `clinicalProfile` is clinical content and participates fully
 
 ## Scope and accountability
 
-Exactly two statuses are allowed: `clinician review required` and `clinician reviewed`. Missing status/metadata on existing source entries defaults to required/null in the record factory, preserving compatibility. Explicit invalid values fail validation. The current 50-record review-required assertion is a release guard; a future genuine review PR must update that assertion and documented counts alongside the physician's attestation. Keep generic metadata and stale-hash tests in place.
+Exactly two statuses are allowed: `clinician review required` and `clinician reviewed`. Missing status/metadata on existing source entries defaults to required/null in the record factory, preserving compatibility. Explicit invalid values fail validation. The data-validation assertion that all 50 catalogue disease records still carry embedded `clinician review required` is a legacy release guard for `data.js`; it is separate from Goal 9 public counts in `review-status.json`. A future PR that updates embedded disease review metadata must revise that assertion and documented counts alongside the physician's attestation. Keep generic metadata and stale-hash tests in place.
 
 The hash binds the review to content; it is not a signature, identity check, guarantee of correctness or protection against a maintainer deliberately falsifying data. PR accountability supplies the human evidence. The static UI displays the reviewed metadata after repository validation; it does not verify credentials or recompute Node hashes in the browser. CI must pass before publication. No authentication, personal reviewer database or runtime network service is involved.
 
@@ -53,6 +53,11 @@ The worksheet is deliberately unsigned and every checkbox starts empty. Completi
 
 ## Goal 9 consolidated gate
 
-Run `node scripts/review-governance.js --write` and `node scripts/review-batch.js --write`, then use `GOAL9_HUMAN_REVIEW_GATE.md` with `goal9-review-decisions.template.json`. The packet contains 23 independent units: eight structured disease records, eight quiz questions, four original visuals and three follow-up protocols. A reviewer must decide each unit separately. The generated files contain fingerprints and current content but do not constitute attestation.
+Run `node scripts/review-governance.js --write` and `node scripts/review-batch.js --write`, then use `GOAL9_HUMAN_REVIEW_GATE.md` with `goal9-review-decisions.template.json`. The packet contains the Goal 9 pilot units (eight structured disease records, eight quiz questions, four original visuals and three follow-up protocols) plus any Goal 11 case units. A reviewer must decide each unit separately. Case review never follows automatically from a reviewed disease, quiz or visual. The generated files contain fingerprints and current content but do not constitute attestation.
 
 After a human returns the completed package, apply only supplied or explicitly approved corrections, regenerate fingerprints, and obtain confirmation of every final corrected fingerprint. Copy only consented public identity metadata and completed decisions into `review-data.js`; never copy private contact or credential evidence. Review history is append-only. See `REVIEW_SCHEMA.md` for controlled verdicts, supersession and invalidation.
+
+
+## Case-based learning review
+
+Cases in `case-data.js` are independent `case` assets. Review images/provenance, observation vs interpretation separation, differentials, diagnostic confirmation honesty and teaching points. Generate fingerprints with `node scripts/case.js` context via `scripts/review-governance.js`. Do not mark a case clinician reviewed because automated tests pass or because an AI drafted teaching text.

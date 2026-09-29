@@ -2,7 +2,9 @@
 
 Docutis supports optional educational media without making imagery a prerequisite for a complete condition record. Goal 8 contains four original repository-native SVG schematics: melanoma ABCDE warning features, basal cell carcinoma clues, plaque psoriasis distribution and acne lesion types. No external clinical photograph, dermoscopy image, histopathology image or patient content is included.
 
-The four assets are registered as `Project-owned`, attributed to the Docutis project and remain `clinician review required`. Each SVG has an internal title and description, a meaningful HTML alt text and adjacent educational explanation. Project ownership and automated structural validation do not establish clinical correctness or make a schematic a diagnostic substitute.
+The four assets are registered as `Project-owned` and attributed to the Docutis project. Embedded `media-data.js` fields still list `clinician review required` / `clinicalReview: null` for all four items (legacy per-asset layer). In the **public Goal 9 layer**, `bcc-clues-schematic` is `clinician reviewed`; the other three schematics remain `review required`. Docutis therefore uses a two-layer model: embedded fields are compatibility safeguards, while `review-status.json` is authoritative for published review badges. Do not rewrite historical attestations to force the layers to match. Each SVG has an internal title and description, a meaningful HTML alt text and adjacent educational explanation. Project ownership and automated structural validation do not establish clinical correctness or make a schematic a diagnostic substitute.
+
+Case-based learning images live under `assets/media/cases/` and are registered in `case-data.js` (not `media-data.js`). Acceptable licenses match this document: `CC BY 4.0`, `CC BY-SA 4.0`, `CC0 1.0`, `Public domain` and `Project-owned`. See `CASE_SCHEMA.md` and `CASE_LICENSING.md`.
 
 ## Data model
 

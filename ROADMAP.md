@@ -6,15 +6,16 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Implemented
 
+- Goal 11 case-based learning foundation: structured case registry, progressive-disclosure learner UI, offline validator/fingerprint helper, Goal 9 `case` asset type, contributor schema/licensing docs and open-license pilot cases that remain `clinician review required` until genuine physician decisions exist.
 - Goal 10 public OSS surface: discoverable repository and docs links, About/project-status copy for the public preview, and sourced correction/outdated-evidence feedback CTAs that open GitHub issue forms. No clinician-reviewed claims were added.
-- Goal 9 review infrastructure: public decision schema, exact fingerprints for 23 independent pilot assets, invalidation and supersession logic, public audit UI, machine-readable status, source audit and a consolidated human-review packet. Genuine reviewer identity consent, attestation and explicit decisions remain pending; no item is marked clinician reviewed.
+- Goal 9 review infrastructure: public decision schema, exact fingerprints for independent pilot assets, invalidation and supersession logic, public audit UI, machine-readable status, source audit and a consolidated human-review packet. Human decisions for actinic keratosis and basal cell carcinoma (disease) plus BCC follow-up, BCC quiz and BCC schematic are published as clinician reviewed; other Goal 9 units remain review required.
 - Goal 8 clinical review readiness and visual learning pilot: public evidence-status counts, eight section-level evidence maps, four original governed SVG schematics, an eight-question accessible quiz, URL-addressable condition details, a physician review batch and repository community-health files. All clinical and visual content remains review-required.
 - Goal 7 clinical content architecture: optional versioned profiles, bounded controlled vocabularies, structured presentation/diagnostics/differentials/treatment/follow-up, medication-regimen support, source-reference validation, legacy-compatible rendering and an eight-record pilot spanning oncology, inflammatory, acneiform and infectious disease. Production dosing remains intentionally empty until explicit regimen evidence is reviewed.
 - Goal 7 data-quality audit and validator: quantitative coverage for all 50 records, malformed-value tests, source attachment checks and fingerprint coverage for structured clinical changes.
 - Goal 6 clinical UX and visual foundation: normalized semantic color and spacing tokens, compact professional navigation, visible library coverage, improved search and filter affordances, denser cards, scannable two-column condition details, sticky section navigation, progressive source disclosure, four responsive breakpoints and reduced-motion support.
 - Optional educational-media framework separated into `media-data.js`, with controlled media types and licenses, mandatory source/attribution/alt-text/dimensions metadata, independent clinician-review fingerprints, lazy rendering and image-failure fallback. No pilot images are included until reuse rights and clinical value are independently verified.
-- English-language dermato-oncology follow-up UI with German guideline jurisdiction for melanoma, BCC and cSCC: structured disease/jurisdiction protocols, stage/risk and time-period or non-interval guidance selectors, modality-specific states, provenance, offline validation and stale-review fingerprints. Melanoma in situ separates the absence of a German S3 Stage 0 interval from sourced German expert-practice and international surveillance context. All three protocols still require physician review.
-- Clinical review governance infrastructure: controlled statuses, structured `clinicalReview` metadata, deterministic content fingerprints, stale-review validation, maintainer utility and documented human review procedure. All 50 records still require physician review; 0 are clinician reviewed.
+- English-language dermato-oncology follow-up UI with German guideline jurisdiction for melanoma, BCC and cSCC: structured disease/jurisdiction protocols, stage/risk and time-period or non-interval guidance selectors, modality-specific states, provenance, offline validation and stale-review fingerprints. Melanoma in situ separates the absence of a German S3 Stage 0 interval from sourced German expert-practice and international surveillance context. The BCC German protocol is clinician reviewed in the public Goal 9 layer; melanoma and cSCC protocols remain review required.
+- Clinical review governance infrastructure: controlled statuses, structured `clinicalReview` metadata, deterministic content fingerprints, stale-review validation, maintainer utility and documented human review procedure. Legacy disease embedded fields remain review-required for all 50 records; the public Goal 9 layer publishes five clinician-reviewed pilot assets (see Goal 9 bullet).
 - Static GitHub Pages-compatible application using HTML, CSS, and vanilla JavaScript
 - Search across condition name, alternative name, summary, category, subcategory, and explicitly labelled classification/coding metadata
 - Eight populated clinical groups: four cutaneous-oncology groups plus inflammatory and eczematous disorders, acneiform and sebaceous disorders, pigmentary disorders, and infectious and infestation disorders
@@ -34,7 +35,7 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Known engineering and usability gaps
 
-- Obtain physician review of all three German follow-up protocols and reconcile any interpretive questions in the cSCC modality table before the first reviewed Nachsorge release.
+- Obtain physician review of the remaining German follow-up protocols (melanoma-de and cSCC-de; BCC-de is already clinician reviewed) and reconcile any interpretive questions in the cSCC modality table before a broader reviewed Nachsorge release.
 - Obtain dermatologist sign-off on the melanoma in situ statement, the absence of a German S3 structured interval, at least annual full-skin examination, risk-factor qualifier, monthly self-examination, non-routine ultrasound/S100B/imaging wording and separation of AAD international context.
 - Add a second jurisdiction only after its source matrix is independently researched and reviewed; do not expose an empty jurisdiction selector.
 - Add automated browser tests for search, category filters, card/detail behavior, Escape/Close focus restoration, and external links.
@@ -50,7 +51,7 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Current focus
 
-The collection now contains 50 records: the original 26 cutaneous malignancy and premalignant records, eight common inflammatory and pigmentary records, and 16 infectious and infestation records. All remain `clinician review required`.
+The collection now contains 50 records: the original 26 cutaneous malignancy and premalignant records, eight common inflammatory and pigmentary records, and 16 infectious and infestation records. Legacy embedded disease review fields remain `clinician review required` for all 50. In the public Goal 9 layer, actinic keratosis and basal cell carcinoma disease records are clinician reviewed; case-based learning pilots from Goal 11 remain review required pending physician attestation.
 
 ### Next content packages
 

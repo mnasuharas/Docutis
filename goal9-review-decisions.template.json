@@ -313,6 +313,71 @@
       "requiredCorrections": [],
       "approvedReplacementWording": null,
       "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-acral-melanoma-plantar",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:2e75fd0df582a96aa54c6bd247adf309edd61035acf1baac90aebca4dea3226d",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-bcc-nodular-dermoscopy",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:986c85eaca4eedd59c689380a30a711924daa290c40a7bd451bdfbf8c97c4203",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-bcc-pigmented-dermoscopy",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:55128f9c0ebc0b1d595205cd4ad0cd100c37edde116db5eb57138975f42acc58",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-ak-field-hand",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:e1aad888f61babb1a3efd9b4c3f6417050a4c4331411848b5ce3ae14194146c3",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-scc-ak-paraspinal",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:add58f1939191020d8991eeab99589a9cdb56c82e24ada85471867d9402239e6",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
     }
   ]
 }

@@ -76,12 +76,22 @@ Read [CLINICAL_SCHEMA.md](CLINICAL_SCHEMA.md) before adding or changing `clinica
 - Follow [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md). Prefer original repository-native SVG diagrams; do not add patient photographs or third-party images without documented rights and consent where applicable.
 - Every visual needs a stable ID, disease association, dimensions, title, caption, meaningful alt text, adjacent educational description, provenance, license, attribution, metadata-check date and independent review state.
 - Quiz questions belong in `quiz-data.js`, not rendering code. Use one best answer, three or four distinct options, a concise explanation, a linked structured condition and one or more sources already attached to that condition.
-- Quiz and visual content must remain `clinician review required` until genuine physician metadata exists. Run `node scripts/media.js` and `node scripts/quiz.js` before proposing changes.
+- Quiz and visual content must remain `clinician review required` until genuine physician metadata exists. Run `node scripts/media.js` and `node scripts/quiz.js` before proposing changes. For cases also run `node scripts/case.js`.
 - Do not add patient-specific scenarios, scores persisted to a browser, analytics or unsupported medication doses.
 
 Allowed source types are `official classification`, `guideline`, `consensus`, `systematic review`, `peer-reviewed review`, and `clinical reference`. Choose the type from the publication itself; do not describe an ordinary review as a consensus or an institutional landing page as a peer-reviewed guideline.
 
 `metadataCheckedAt` must be an ISO `YYYY-MM-DD` date and belongs to one source object. It records only when that source's title, organization or journal, type, year/version, DOI, and link were checked. It is not the source publication year, guideline version, access date for every record, or a clinician review date. Update it only after rechecking that individual source; never change a shared default to make unrelated sources appear newly checked.
+
+
+### Case-based learning contributions
+
+- Cases belong in `case-data.js` with progressive-disclosure fields documented in [CASE_SCHEMA.md](CASE_SCHEMA.md).
+- Image licenses must match [CASE_LICENSING.md](CASE_LICENSING.md) / [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md). Prefer CC BY 4.0 / CC BY-SA 4.0 / CC0 / Public domain. Do not import CC BY-NC.
+- Separate observations from interpretations. Do not claim histopathology unless the source states it.
+- Keep `reviewStatus: "clinician review required"` and `clinicalReview: null`. AI interpretation is not clinician review.
+- Store images under `assets/media/cases/` and run `node scripts/case.js` before proposing changes.
+
 
 ### Classification and coding policy
 

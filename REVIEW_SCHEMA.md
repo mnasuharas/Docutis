@@ -23,7 +23,7 @@ Each decision records:
 - provenance `human-submitted`;
 - an optional `supersededBy` decision ID.
 
-Disease records, quiz items, visual assets and follow-up protocols are independent review units. Approval of one never approves another.
+Disease records, quiz items, visual assets, follow-up protocols and case-based learning units are independent review units. Approval of one never approves another.
 
 ## Derived public states
 
@@ -38,7 +38,7 @@ The public view includes the current fingerprint, scope, awaiting sections, deci
 
 ## Fingerprints and invalidation
 
-Disease fingerprints include all record content except review metadata and source metadata check dates. Media fingerprints include the teaching asset, title, caption, alternative text, educational description, provenance and licensing but exclude review metadata and its metadata-check date. Quiz fingerprints include the prompt, choices, best-answer index, explanation, linked evidence and media relationship. Follow-up fingerprints include clinically meaningful protocol structure, intervals, recommendation status, strength, evidence relationships and guideline identity while excluding presentation-only labels and metadata-check dates as documented in `CLINICAL_REVIEW.md`.
+Disease fingerprints include all record content except review metadata and source metadata check dates. Media fingerprints include the teaching asset, title, caption, alternative text, educational description, provenance and licensing but exclude review metadata and its metadata-check date. Quiz fingerprints include the prompt, choices, best-answer index, explanation, linked evidence and media relationship. Follow-up fingerprints include clinically meaningful protocol structure, intervals, recommendation status, strength, evidence relationships and guideline identity while excluding presentation-only labels and metadata-check dates as documented in `CLINICAL_REVIEW.md`. Case fingerprints include teaching content, images (except metadata/access dates), observations, interpretations, features, differentials, ground truth and teaching points while excluding review metadata.
 
 A clinically meaningful edit produces a new fingerprint. The earlier decision remains in history, becomes inactive for the new version and yields `review invalidated` until a new valid decision is supplied. Layout-only changes outside these assets do not alter fingerprints. Changes to a visual's teaching meaning, alternative text, references or accessibility interpretation do alter its fingerprint.
 

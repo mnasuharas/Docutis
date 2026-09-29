@@ -148,3 +148,19 @@ test("governance documentation explains human review and stale review handling",
   const procedure = fs.readFileSync(path.join(root, "CLINICAL_REVIEW.md"), "utf8");
   for (const phrase of ["reviewedContentHash", "physician", "metadataCheckedAt", "--validate", "re-review"]) assert.ok(procedure.includes(phrase));
 });
+
+test("CLINICAL_REVIEW.md current-state summary matches public review-status.json", () => {
+  const procedure = fs.readFileSync(path.join(root, "CLINICAL_REVIEW.md"), "utf8");
+  const status = JSON.parse(fs.readFileSync(path.join(root, "review-status.json"), "utf8"));
+  const reviewed = status.assets.filter(item => item.status === "clinician reviewed").length;
+  const required = status.assets.filter(item => item.status === "review required").length;
+  const total = status.assets.length;
+  assert.equal(data.diseases.length, 50);
+  assert.doesNotMatch(procedure, /0 records are clinician reviewed/i);
+  assert.doesNotMatch(procedure, /Current state:\s*50 records require clinician review;\s*0 records are clinician reviewed/i);
+  assert.match(procedure, new RegExp(`${total}\\s+independent review units`, "i"));
+  assert.match(procedure, new RegExp(`${reviewed}\\s+\`clinician reviewed\``));
+  assert.match(procedure, new RegExp(`${required}\\s+\`review required\``));
+  assert.match(procedure, /disease catalogue contains 50 records/i);
+  assert.match(procedure, /not the Goal 9 public review-unit count|Do not equate/i);
+});

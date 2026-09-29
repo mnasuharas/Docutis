@@ -713,6 +713,7 @@
       [`${statusCount("quiz", "clinician reviewed")}/${publicAssets.filter(item => item.assetType === "quiz").length || 0}`, "Reviewed quiz items"],
       [`${statusCount("visual", "clinician reviewed")}/${mediaItems.length}`, "Reviewed visual items"],
       [`${statusCount("follow_up", "clinician reviewed")}/${followUps.length}`, "Reviewed follow-up protocols"],
+      [`${statusCount("case", "clinician reviewed")}/${publicAssets.filter(item => item.assetType === "case").length || (window.DOCUTIS_CASES?.cases || []).length}`, "Reviewed case units"],
       [reviewUi?.registry.latestValidHumanReviewDate || "None", "Most recent valid human review"]
     ];
     stats.forEach(([value, label]) => {

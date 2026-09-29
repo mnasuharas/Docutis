@@ -1877,6 +1877,241 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
         "safety-notice",
         "references"
       ]
+    },
+    {
+      "id": "case-acral-melanoma-plantar",
+      "assetType": "case",
+      "title": "Large plantar pigmented macule",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:2e75fd0df582a96aa54c6bd247adf309edd61035acf1baac90aebca4dea3226d",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Photography_of_a_large_acral_lentiginous_melanoma.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Xavier-Júnior et al., Diagnostic Pathology (2015), via Wikimedia Commons",
+          "organization": "Xavier-Júnior et al. 2015, Diagnostic Pathology. CC BY 4.0. https://doi.org/10.1186/s13000-015-0307-z",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Photography_of_a_large_acral_lentiginous_melanoma.jpg",
+          "metadataCheckedAt": "2026-09-28"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-bcc-nodular-dermoscopy",
+      "assetType": "case",
+      "title": "Nodular lesion dermatoscopy with vessels",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:986c85eaca4eedd59c689380a30a711924daa290c40a7bd451bdfbf8c97c4203",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Dermatoskopie_eines_nodul%C3%A4ren_Basalzellkarzinoms,_WIKIDERM%C2%AE.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dr. Thomas Brinkmeier / WIKIDERM, via Wikimedia Commons",
+          "organization": "Dr. Thomas Brinkmeier, WIKIDERM. CC BY 4.0.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Dermatoskopie_eines_nodul%C3%A4ren_Basalzellkarzinoms,_WIKIDERM%C2%AE.jpg",
+          "metadataCheckedAt": "2026-09-28"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-bcc-pigmented-dermoscopy",
+      "assetType": "case",
+      "title": "Pigmented lesion dermatoscopy on the back",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:55128f9c0ebc0b1d595205cd4ad0cd100c37edde116db5eb57138975f42acc58",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Dermatoskopie_eines_pigmentierten_Basalzellkarzinoms.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dr. Thomas Brinkmeier / WIKIDERM, via Wikimedia Commons",
+          "organization": "Dr. Thomas Brinkmeier, WIKIDERM. CC BY 4.0.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Dermatoskopie_eines_pigmentierten_Basalzellkarzinoms.jpg",
+          "metadataCheckedAt": "2026-09-28"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-ak-field-hand",
+      "assetType": "case",
+      "title": "Field change on the dorsum of the hand",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:e1aad888f61babb1a3efd9b4c3f6417050a4c4331411848b5ce3ae14194146c3",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Aktinische_Keratosen_am_Handr%C3%BCcken,_sog._Feldkanzerisierung,_%C2%A9WIKIDERM.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dr. Thomas Brinkmeier / WIKIDERM, via Wikimedia Commons",
+          "organization": "Dr. Thomas Brinkmeier, WIKIDERM. CC BY 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Aktinische_Keratosen_am_Handr%C3%BCcken,_sog._Feldkanzerisierung,_%C2%A9WIKIDERM.jpg",
+          "metadataCheckedAt": "2026-09-28"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-scc-ak-paraspinal",
+      "assetType": "case",
+      "title": "Two neighboring lesions on the upper back",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:add58f1939191020d8991eeab99589a9cdb56c82e24ada85471867d9402239e6",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Squamous_Cell_Carcinoma_well_differentiated_Left_upper_paraspinal_back_with_adjacent_actinic_keratosis.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dermanonymous, via Wikimedia Commons",
+          "organization": "Dermanonymous. CC BY-SA 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Squamous_Cell_Carcinoma_well_differentiated_Left_upper_paraspinal_back_with_adjacent_actinic_keratosis.jpg",
+          "metadataCheckedAt": "2026-09-28"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
     }
   ]
 });

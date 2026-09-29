@@ -31,10 +31,13 @@ function reviewData(decisions = [], reviewers = [reviewer]) {
   return { schemaVersion: 1, attestationVersion: "docutis-human-clinical-review-v1", reviewers, decisions };
 }
 
-test("public manifest covers 23 independent Goal 9 review units with no implied approval", () => {
+test("public manifest covers Goal 9 review units plus case assets with no implied case approval", () => {
   const status = buildPublicStatus();
-  assert.equal(status.assets.length, 23);
+  const caseCount = status.assets.filter(item => item.assetType === "case").length;
+  assert.equal(status.assets.length, 23 + caseCount);
+  assert.ok(caseCount >= 3);
   assert.deepEqual(Object.fromEntries(["disease", "quiz", "visual", "follow_up"].map(type => [type, status.assets.filter(item => item.assetType === type).length])), { disease: 8, quiz: 8, visual: 4, follow_up: 3 });
+  assert.ok(status.assets.filter(item => item.assetType === "case").every(item => item.status === "review required"));
   const ak = status.assets.find(item => item.id === "actinic-keratosis");
   const bcc = status.assets.find(item => item.id === "basal-cell-carcinoma");
   assert.equal(ak.status, "clinician reviewed");
@@ -134,9 +137,9 @@ test("malformed records, broken review references and stale source metadata fail
   const asset = buildAssets()[0];
   assert.throws(() => buildPublicStatus(reviewData([decision(asset, { reviewerId: "missing" })])), /resolve/);
   assert.throws(() => buildPublicStatus({ ...reviewData(), schemaVersion: 99 }), /Unsupported/);
-  assert.deepEqual(sourceMetadataWarnings(buildAssets(), "2026-09-23"), []);
+  assert.deepEqual(sourceMetadataWarnings(buildAssets(), "2026-09-28"), []);
   const stale = clone(asset); stale.evidenceMetadata[0].metadataCheckedAt = "2020-01-01";
-  assert.match(sourceMetadataWarnings([stale], "2026-09-23")[0], /stale source metadata/);
+  assert.match(sourceMetadataWarnings([stale], "2026-09-28")[0], /stale source metadata/);
 });
 
 test("committed machine-readable outputs exactly match the validated public manifest", () => {
@@ -152,7 +155,7 @@ test("consolidated human gate contains every fingerprint and leaves all decision
   const markdown = fs.readFileSync(path.join(root, "GOAL9_HUMAN_REVIEW_GATE.md"), "utf8");
   const template = JSON.parse(fs.readFileSync(path.join(root, "goal9-review-decisions.template.json"), "utf8"));
   for (const asset of buildAssets()) assert.match(markdown, new RegExp(asset.currentFingerprint.replace(":", "\\:")));
-  assert.equal(template.decisions.length, 23);
+  assert.equal(template.decisions.length, buildAssets().length);
   assert.ok(template.decisions.every(item => item.verdict === null));
   assert.equal(template.attestationAccepted, null);
 });

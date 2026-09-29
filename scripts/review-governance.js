@@ -6,9 +6,10 @@ const path = require("node:path");
 const vm = require("node:vm");
 const { canonicalize, fingerprint, followUpFingerprint, loadData, loadFollowUpData } = require("./clinical-review");
 const { mediaFingerprint, loadMediaData } = require("./media");
+const { caseFingerprint, loadCaseData, validateCaseData } = require("./case");
 
 const root = path.join(__dirname, "..");
-const assetTypes = new Set(["disease", "quiz", "visual", "follow_up"]);
+const assetTypes = new Set(["disease", "quiz", "visual", "follow_up", "case"]);
 const verdicts = new Set(["approved", "approved_with_minor_corrections", "changes_requested", "not_reviewed", "not_applicable"]);
 const publicStatuses = new Set(["clinician reviewed", "partially reviewed", "changes requested", "review required", "review invalidated", "not applicable"]);
 const completeVerdicts = new Set(["approved", "approved_with_minor_corrections"]);
@@ -80,6 +81,8 @@ function buildAssets() {
   const quiz = loadQuizData().questions;
   const visuals = loadMediaData().items;
   const followUps = loadFollowUpData().protocols;
+  const caseData = loadCaseData();
+  const cases = caseData.cases || [];
   const diseaseMap = new Map(loadData().diseases.map(record => [record.id, record]));
   return [
     ...diseases.map(record => { const evidenceSources = evidenceUrlsForDisease(record); return {
@@ -105,6 +108,16 @@ function buildAssets() {
         { title: protocol.guideline.title, organization: protocol.guideline.organization, type: protocol.guideline.guidelineSystem, year: protocol.guideline.publishedAt, version: protocol.guideline.version, doi: null, url: protocol.guideline.sourceUrl, metadataCheckedAt: protocol.guideline.sourceMetadataCheckedAt },
         ...(protocol.supplementalSources || []).map(source => ({ title: source.title, organization: source.organization, type: source.sourceType, year: source.publishedAt || null, version: source.version || null, doi: source.doi || null, url: source.sourceUrl, metadataCheckedAt: source.sourceMetadataCheckedAt }))
       ]
+    })),
+    ...cases.map(caseItem => ({
+      id: caseItem.id, assetType: "case", title: caseItem.title, schemaVersion: caseData.schemaVersion || 1,
+      currentFingerprint: caseFingerprint(caseItem),
+      sections: ["images", "observations", "interpretations", "dermoscopic-features", "differentials", "diagnostic-ground-truth", "teaching-points", "safety-notice", "provenance"],
+      evidenceSources: [...new Set(caseItem.images.map(image => image.sourceUrl))],
+      evidenceMetadata: caseItem.images.map(image => ({
+        title: image.source, organization: image.attribution, type: image.type, year: null, version: null, doi: null,
+        url: image.sourceUrl, metadataCheckedAt: image.metadataCheckedAt
+      }))
     }))
   ];
 }
@@ -198,6 +211,7 @@ function writePublicStatus(status) {
 }
 
 function main(args = process.argv.slice(2)) {
+  validateCaseData(loadCaseData());
   const status = buildPublicStatus();
   validatePublicStatus(status);
   if (args.includes("--write")) writePublicStatus(status);
@@ -206,7 +220,7 @@ function main(args = process.argv.slice(2)) {
   console.log("Automated validation cannot create or imply human clinical review.");
 }
 
-module.exports = { assetTypes, verdicts, publicStatuses, completeVerdicts, attestationText, quizClinicalContent, quizFingerprint, buildAssets, validateReviewer, validateDecision, deriveAssetStatus, buildPublicStatus, validatePublicStatus, sourceAgeDays, sourceMetadataWarnings, renderBrowserScript, writePublicStatus, main };
+module.exports = { assetTypes, verdicts, publicStatuses, completeVerdicts, attestationText, quizClinicalContent, quizFingerprint, caseFingerprint, buildAssets, validateReviewer, validateDecision, deriveAssetStatus, buildPublicStatus, validatePublicStatus, sourceAgeDays, sourceMetadataWarnings, renderBrowserScript, writePublicStatus, main };
 if (require.main === module) {
   try { main(); } catch (error) { console.error(error.message); process.exitCode = 1; }
 }
