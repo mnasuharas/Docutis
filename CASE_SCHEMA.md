@@ -5,6 +5,7 @@ Structured educational cases live in `case-data.js` as `window.DOCUTIS_CASES` (s
 ## Principles
 
 - Prefer observable visual facts before interpretation or diagnosis reveal.
+- The learner UI walks inspect → observe → differential → reveal → review. Do not add observations, differentials, images or confirmation claims that are not already in the case record. Zoom is not a download or reshare control.
 - Separate **observations** from **interpretations**.
 - Do not invent licenses, histopathology confirmation, patient identifiers or clinician review.
 - AI-assisted drafting is not clinician review. New cases start as `clinician review required` with `clinicalReview: null`.

@@ -6,6 +6,7 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Implemented
 
+- Goal 12 case learning UX: the five existing pilot cases step through inspect, observe, differential, reveal and review. Image zoom is view-only. Observations stay separate from interpretations. Differentials are an unscored disclosure. Diagnosis stays hidden until an explicit reveal. No new cases, images, clinical claims or clinician-reviewed status.
 - Goal 11 case-based learning foundation: structured case registry, progressive-disclosure learner UI, offline validator/fingerprint helper, Goal 9 `case` asset type, contributor schema/licensing docs and open-license pilot cases that remain `clinician review required` until genuine physician decisions exist.
 - Goal 10 public OSS surface: discoverable repository and docs links, About/project-status copy for the public preview, and sourced correction/outdated-evidence feedback CTAs that open GitHub issue forms. No clinician-reviewed claims were added.
 - Goal 9 review infrastructure: public decision schema, exact fingerprints for independent pilot assets, invalidation and supersession logic, public audit UI, machine-readable status, source audit and a consolidated human-review packet. Human decisions for actinic keratosis and basal cell carcinoma (disease) plus BCC follow-up, BCC quiz and BCC schematic are published as clinician reviewed; other Goal 9 units remain review required.
@@ -51,7 +52,7 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Current focus
 
-The collection now contains 50 records: the original 26 cutaneous malignancy and premalignant records, eight common inflammatory and pigmentary records, and 16 infectious and infestation records. Legacy embedded disease review fields remain `clinician review required` for all 50. In the public Goal 9 layer, actinic keratosis and basal cell carcinoma disease records are clinician reviewed; case-based learning pilots from Goal 11 remain review required pending physician attestation.
+The collection now contains 50 records: the original 26 cutaneous malignancy and premalignant records, eight common inflammatory and pigmentary records, and 16 infectious and infestation records. Legacy embedded disease review fields remain `clinician review required` for all 50. In the public Goal 9 layer, actinic keratosis and basal cell carcinoma disease records are clinician reviewed; case-based learning pilots from Goal 11 remain review required pending physician attestation. Goal 12 does not change that state.
 
 ### Next content packages
 
