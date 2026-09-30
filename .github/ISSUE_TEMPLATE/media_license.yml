@@ -1,0 +1,43 @@
+name: Media or license
+description: Report an image source, license, or attribution problem.
+title: "[Media/license]: "
+labels: [documentation]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not upload patient photos or personal medical records. The MIT code license does not relicense images."
+  - type: input
+    id: asset
+    attributes:
+      label: Asset
+      description: What you see on the page (caption, case title, or schematic name). A filename is optional.
+    validations:
+      required: true
+  - type: input
+    id: source-url
+    attributes:
+      label: Source URL
+      description: Page that states the creator and license. Do not paste a search-result URL as proof.
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License
+      description: The license named by the source, such as CC BY 4.0 or CC BY-SA 4.0.
+    validations:
+      required: true
+  - type: textarea
+    id: attribution
+    attributes:
+      label: Attribution
+      description: Creator, title, license, and any change note the source requires.
+    validations:
+      required: true
+  - type: checkboxes
+    id: ack
+    attributes:
+      label: Acknowledgement
+      options:
+        - label: I am not inferring a license only because the image is publicly visible, and this report is not clinician approval.
+          required: true

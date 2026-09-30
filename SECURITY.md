@@ -1,15 +1,17 @@
 # Security policy
 
-## Supported version
+## Supported versions
 
-Docutis is an early-stage static web project. Security fixes are applied to the current `main` branch; older snapshots are not maintained as supported releases.
+Docutis is an early-stage static site in active development. Security fixes are applied to the current `main` branch. The historical tag `v0.1.0-preview.1` is not a maintained release line.
 
 ## Reporting a vulnerability
 
-Please use the repository’s private GitHub vulnerability-reporting feature when available. If that feature is unavailable, open a minimal public issue that requests a private maintainer contact without disclosing exploit details, credentials, personal data or protected health information.
+Use the repository’s private GitHub vulnerability-reporting feature when it is available. If it is not available, open a short public issue that asks maintainers for a private contact. Do not include exploit steps, credentials, personal data, or protected health information in that issue.
 
-Do not include patient information, access tokens or other secrets in an issue, pull request, screenshot or test fixture.
+## Not a security issue
 
-## Scope
+Medical corrections, outdated evidence, and broken references are not security reports. Use the clinical content template or the evidence update template. Ordinary bugs use the bug template.
 
-Relevant reports include unsafe link handling, script injection, supply-chain or workflow risks, inadvertent data collection, exposed credentials and weaknesses that could misrepresent clinical-review state. Clinical-content corrections should use the clinical-content issue template rather than a security report unless they also create a security or privacy risk.
+## Do not post
+
+Do not put protected health information, personal medical records, credentials, tokens, or other secrets in an issue, pull request, screenshot, or test fixture.

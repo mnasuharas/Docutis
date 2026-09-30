@@ -6,18 +6,49 @@ Docutis is an open-source dermatology reference and education toolkit. Contribut
 
 ## Ways to Contribute
 
-From the live site, use **Suggest a correction** or **Report outdated evidence** to open the `clinical_content.yml` issue form with a helpful title. Include the affected record or page, the claim, a verifiable source and a proposed correction. Never include patient-identifiable information.
+From the live site, use **Suggest a correction** or **Report outdated evidence**. Those links open a GitHub issue form. You do not need to know file names. On a case, the link uses the visible case title and does not add a diagnosis-bearing case id until the diagnosis is revealed. Include the page you were looking at, the claim, a verifiable source and a proposed correction. Never include patient-identifiable information, credentials or personal medical records.
 
-You can contribute by:
+**Suggest a correction** uses the clinical content template. **Report outdated evidence** uses the evidence update template. A separate media/license template is in the issue chooser.
 
-- Reporting bugs
-- Suggesting new features
-- Improving documentation
-- Improving the user interface
-- Suggesting dermatologic conditions to add
-- Correcting or improving medical content
-- Adding reliable guidelines and references
-- Improving accessibility and usability
+Contribution types:
+
+- Software and UX
+- Documentation
+- Medical correction
+- Evidence and source updates
+- Media and license
+- Accessibility and browser compatibility
+- Features
+
+You can also:
+
+- Report bugs
+- Suggest new features
+- Improve documentation
+- Improve the user interface
+- Suggest dermatologic conditions to add
+- Correct or improve medical content
+- Add reliable guidelines and references
+- Improve accessibility and usability
+
+## Before a pull request
+
+- Search open issues and pull requests first.
+- Keep the change narrow. Do not mix unrelated clinical edits and engineering work in one pull request.
+- Run the validation commands in the README for the area you touched, and update tests when behavior changes.
+- Read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Vulnerabilities go through [SECURITY.md](SECURITY.md), not the clinical templates.
+
+Clinical changes, including text suggested by an AI or a bot:
+
+- An AI or bot is not clinician approval.
+- A clinical edit may invalidate an existing fingerprint. Do not refresh a hash to make checks pass.
+- Do not fabricate attestations, reviewer names, roles or dates.
+- The content may stay `clinician review required`. That is a valid outcome.
+- The author of a correction cannot self-certify clinician approval.
+
+## What a pull request should contain
+
+Use the repository pull request template. State the problem, the change, the validation you ran, clinical impact (or none), governance or fingerprint impact (or none), screenshots when the interface changes, and limitations. Pure software work does not require clinician approval. Say so explicitly when that is the case.
 
 ## Medical Content
 
@@ -174,7 +205,7 @@ Please describe:
 
 Pull requests should focus on one clear change whenever possible.
 
-Use a short and descriptive title and explain what was changed.
+Use a short and descriptive title. Explain the problem, what changed, how you validated it, any clinical or governance impact, and limitations. The checklist in the pull request template includes: no fabricated clinician approval, tests actually run, and unrelated changes excluded.
 
 ## Commit Messages
 

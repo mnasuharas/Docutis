@@ -4,6 +4,33 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## Unreleased
 
+Entries under this heading are repository changes after the historical tag `v0.1.0-preview.1` (2026-09-23), unless a bullet says the work is still pending. This heading is not a GitHub Release and does not choose a version number.
+
+### Added
+
+- Case trainer: five open-license pilot cases with inspect, observe, differential, reveal, and review steps. No case is clinician reviewed.
+- Release-readiness documents: `RELEASES.md`, `RELEASE_CHECKLIST.md`, and `RELEASE_NOTES_TEMPLATE.md`. No tag and no GitHub Release were created.
+
+### Changed
+
+- Diagnosis concealment: before reveal, case images use diagnosis-neutral public filenames, image descriptions omit diagnosis variants, and diagnosis-bearing source links stay off the controls. Revealing a diagnosis is not clinician review.
+
+### Fixed
+
+- Cross-browser UX on the recorded Chrome session: missing focus, surface, and shadow tokens; primary links stay available below 900px; at 600px and below those links sit on their own row; reduced-motion scrolling; a focus fallback when `preventScroll` throws; one-sentence no-JavaScript notices that do not copy clinical text.
+
+### Documentation
+
+- [BROWSER_COMPATIBILITY.md](BROWSER_COMPATIBILITY.md) records what was actually run. Google Chrome 151 on Linux was verified at desktop, 768px, and 390×700, including a 390×700 retest after the header fix. Firefox, Edge, and Safari were not run in those browsers.
+- Contributor and release documents now separate software preview status from clinical-review status, and separate the MIT code license from per-image licenses.
+
+### Clinical governance
+
+- Public review state remains 28 units: 5 `clinician reviewed` (actinic keratosis disease, basal cell carcinoma disease, BCC German follow-up, BCC dermoscopy quiz item, BCC clues schematic) and 23 `review required`, with latest valid human review date 2026-09-23. This changelog does not add a decision.
+- Goal 14 pilot-case clinician review is pending and deferred. It is not merged, not imported into this branch, and not an approval. Do not read any bullet here as Goal 14 sign-off.
+
+### Earlier unreleased milestone notes
+
 ### Goal 15 — Cross-browser UX hardening
 
 - Define the missing `--color-focus`, `--color-surface-subtle`, and `--shadow-sm` tokens so focus outlines, panel backgrounds, and the small shadow are not dropped.
@@ -13,6 +40,10 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 - Add a one-sentence no-JS notice for the library, quiz, follow-up, and review counts without copying clinical text.
 - Add [BROWSER_COMPATIBILITY.md](BROWSER_COMPATIBILITY.md). Chrome 151 desktop, 768px, and 390×700 flows that were actually run are marked verified. Firefox, Edge, and Safari are not marked verified. Clinical content, review decisions, and fingerprints are unchanged.
 - Chrome 151 retest at 390×700 after `6579485` passed; the nav strip clips the top and bottom of the focus outline and that was left unchanged.
+
+### Goal 13 — Diagnosis concealment
+
+- Keep diagnosis-bearing filenames, image text, confirmation lines, and source links hidden until the learner reveals the diagnosis. Public case image paths are diagnosis-neutral. Clinical wording, review decisions, and fingerprints were not edited for that concealment work.
 
 ### Goal 12 — Case learning UX
 

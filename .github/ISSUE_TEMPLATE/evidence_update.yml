@@ -1,0 +1,43 @@
+name: Evidence update
+description: Report a broken, outdated, or replaced source. This is not a security report.
+title: "[Evidence]: "
+labels: [documentation]
+body:
+  - type: markdown
+    attributes:
+      value: "Name the page or record you were viewing. Do not include patient-identifiable information, credentials, or personal medical records. A replacement link is not clinician approval."
+  - type: input
+    id: content
+    attributes:
+      label: Content
+      description: Condition, case title, quiz item, follow-up view, or page. Use the words shown on the site.
+    validations:
+      required: true
+  - type: textarea
+    id: broken-source
+    attributes:
+      label: Broken or outdated source
+      description: Quote the citation as shown, including the URL if you have it.
+    validations:
+      required: true
+  - type: textarea
+    id: replacement
+    attributes:
+      label: Replacement source
+      description: Preferred guideline, society, government, or classification page. Say if you do not have a replacement yet.
+    validations:
+      required: true
+  - type: input
+    id: date-version
+    attributes:
+      label: Date or version
+      description: Publication or guideline version, and the date you checked it, if known.
+    validations:
+      required: true
+  - type: checkboxes
+    id: ack
+    attributes:
+      label: Acknowledgement
+      options:
+        - label: I understand this report does not certify clinician approval, and I cannot self-certify it.
+          required: true

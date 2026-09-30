@@ -10,11 +10,11 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 - Goal 11 case-based learning foundation: structured case registry, progressive-disclosure learner UI, offline validator/fingerprint helper, Goal 9 `case` asset type, contributor schema/licensing docs and open-license pilot cases that remain `clinician review required` until genuine physician decisions exist.
 - Goal 10 public OSS surface: discoverable repository and docs links, About/project-status copy for the public preview, and sourced correction/outdated-evidence feedback CTAs that open GitHub issue forms. No clinician-reviewed claims were added.
 - Goal 9 review infrastructure: public decision schema, exact fingerprints for independent pilot assets, invalidation and supersession logic, public audit UI, machine-readable status, source audit and a consolidated human-review packet. Human decisions for actinic keratosis and basal cell carcinoma (disease) plus BCC follow-up, BCC quiz and BCC schematic are published as clinician reviewed; other Goal 9 units remain review required.
-- Goal 8 clinical review readiness and visual learning pilot: public evidence-status counts, eight section-level evidence maps, four original governed SVG schematics, an eight-question accessible quiz, URL-addressable condition details, a physician review batch and repository community-health files. All clinical and visual content remains review-required.
+- Goal 8 clinical review readiness and visual learning pilot: public evidence-status counts, eight section-level evidence maps, four original governed SVG schematics, an eight-question accessible quiz, URL-addressable condition details, a physician review batch and repository community-health files. Goal 8 did not itself record a completed clinician review. Later public decisions reviewed specific assets named in the Goal 9 bullet; the other schematics and quiz items stay review required.
 - Goal 7 clinical content architecture: optional versioned profiles, bounded controlled vocabularies, structured presentation/diagnostics/differentials/treatment/follow-up, medication-regimen support, source-reference validation, legacy-compatible rendering and an eight-record pilot spanning oncology, inflammatory, acneiform and infectious disease. Production dosing remains intentionally empty until explicit regimen evidence is reviewed.
 - Goal 7 data-quality audit and validator: quantitative coverage for all 50 records, malformed-value tests, source attachment checks and fingerprint coverage for structured clinical changes.
 - Goal 6 clinical UX and visual foundation: normalized semantic color and spacing tokens, compact professional navigation, visible library coverage, improved search and filter affordances, denser cards, scannable two-column condition details, sticky section navigation, progressive source disclosure, four responsive breakpoints and reduced-motion support.
-- Optional educational-media framework separated into `media-data.js`, with controlled media types and licenses, mandatory source/attribution/alt-text/dimensions metadata, independent clinician-review fingerprints, lazy rendering and image-failure fallback. No pilot images are included until reuse rights and clinical value are independently verified.
+- Optional educational-media framework separated into `media-data.js`, with controlled media types and licenses, mandatory source/attribution/alt-text/dimensions metadata, independent clinician-review fingerprints, lazy rendering and image-failure fallback. That Goal 6 change did not itself publish images. Four original schematics and separately licensed case images were added later; each image keeps its own license.
 - English-language dermato-oncology follow-up UI with German guideline jurisdiction for melanoma, BCC and cSCC: structured disease/jurisdiction protocols, stage/risk and time-period or non-interval guidance selectors, modality-specific states, provenance, offline validation and stale-review fingerprints. Melanoma in situ separates the absence of a German S3 Stage 0 interval from sourced German expert-practice and international surveillance context. The BCC German protocol is clinician reviewed in the public Goal 9 layer; melanoma and cSCC protocols remain review required.
 - Clinical review governance infrastructure: controlled statuses, structured `clinicalReview` metadata, deterministic content fingerprints, stale-review validation, maintainer utility and documented human review procedure. Legacy disease embedded fields remain review-required for all 50 records; the public Goal 9 layer publishes five clinician-reviewed pilot assets (see Goal 9 bullet).
 - Static GitHub Pages-compatible application using HTML, CSS, and vanilla JavaScript
@@ -40,10 +40,11 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 - Obtain dermatologist sign-off on the melanoma in situ statement, the absence of a German S3 structured interval, at least annual full-skin examination, risk-factor qualifier, monthly self-examination, non-routine ultrasound/S100B/imaging wording and separation of AAD international context.
 - Add a second jurisdiction only after its source matrix is independently researched and reviewed; do not expose an empty jurisdiction selector.
 - Add automated browser tests for search, category filters, card/detail behavior, Escape/Close focus restoration, and external links.
+- Pilot-case clinician review is pending and is not in this tree. The unmerged Goal 14 pull request is deferred for later clinician review. It was not merged here, and it is not an approval of any case. Do not describe that work as delivered.
 - Test with representative screen readers and document results.
 - Evaluate a persistent visual link from details back to results beyond the current Close/Escape and browser-history behavior.
 - Add a lightweight broken-link check with respectful rate limiting and clear handling of redirects or bot-blocked sites.
-- Add cross-browser checks for current Chrome, Firefox, Safari, and Edge.
+- Chrome 151 on Linux desktop, 768px, and 390×700 was verified for the flows in [BROWSER_COMPATIBILITY.md](BROWSER_COMPATIBILITY.md). Firefox, Edge, and Safari have not been verified in those browsers. A Chrome result is not Firefox, Edge, or Safari coverage. Automated cross-browser tests are still absent.
 - Obtain physician review of the four-item original schematic pilot and eight quiz questions; do not infer visual review from a reviewed disease record.
 - Continue evidence-led `clinicalProfile` migration, prioritizing cSCC/SCC in situ/keratoacanthoma, remaining melanoma subtypes and conditions where diagnostics or escalation materially affect safety. Do not bulk-fill optional fields.
 - Add the first production medication regimen only after formulation, frequency, duration, major precautions and source scope can be verified together.
@@ -96,7 +97,7 @@ Potential next records, only after adequate sourcing and clinician prioritizatio
 2. Automated validation confirms the complete schema, unique identifiers, valid category/subcategory mapping, separated ICD-O fields, structured HTTPS references, and the required review state.
 3. A qualified clinician checks every clinical claim against the cited source and records the guideline version/date, jurisdiction, and review date in the pull request.
 4. A second reviewer checks language, uncertainty, duplication, category placement, link behavior, and preservation of the medical disclaimer.
-5. Follow [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md): a maintainer may record `clinician reviewed` only after a physician attests to the specific version, with date, role, specialty and matching fingerprint. Infrastructure is implemented; actual physician review of priority records and the first reviewed release remain future work.
+5. Follow [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md): a maintainer may record `clinician reviewed` only after a physician attests to the specific version, with date, role, specialty and matching fingerprint. Infrastructure is implemented. Five public assets are clinician reviewed, as listed in the Goal 9 baseline bullet. Every other review unit, including all five pilot cases, remains review required. A software release would not clinically validate the remaining content.
 6. Records are re-reviewed when a source is replaced, a recommendation changes, or the agreed review interval expires.
 
 ## Data-schema evolution
@@ -157,12 +158,16 @@ The optional media data model, independent review fingerprint, renderer, load-fa
 
 ## Release direction
 
+The version headings below are direction, not shipped releases. The only existing tag is the historical pre-release `v0.1.0-preview.1`. Adding this roadmap does not publish a release. See [RELEASES.md](RELEASES.md).
+
+Completed work is the Implemented list above. Pending work is the gaps, content packages and version headings in the rest of this file. Do not read a future heading as delivered.
+
 ### Version 0.1 — reviewed foundation
 
 - Clinician review of the initial malignancy collection
 - Clinician and coding-specialist review of ICD-10 WHO and ICD-O mappings, with jurisdictional limits clearly documented
 - Maintain the read-only GitHub Actions workflow for syntax, schema, synthetic-DOM behavior, documentation, and whitespace checks
-- Real-browser end-to-end coverage remains required
+- Real-browser coverage beyond the recorded Chrome 151 session remains required. Firefox, Edge, and Safari are not verified.
 - Accessibility audit and contribution templates
 
 ### Version 0.2 — deeper oncology coverage
