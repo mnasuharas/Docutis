@@ -179,6 +179,92 @@ function validateCase(caseItem, diseaseIds) {
   return true;
 }
 
+const academySpectra = new Set(["melanoma", "mimic"]);
+
+function requireAcademyText(obj, field, id) {
+  if (typeof obj[field] !== "string" || !obj[field].trim()) throw new Error(`${id}: ${field} is required`);
+}
+
+function validateAcademyCase(caseItem) {
+  const id = caseItem.id;
+  const academy = caseItem.academy;
+  if (!academy || typeof academy !== "object") throw new Error(`${id}: academy block required`);
+  if (!Number.isInteger(academy.level) || academy.level < 1 || academy.level > 5) throw new Error(`${id}: academy.level must be 1-5`);
+  if (!academySpectra.has(academy.spectrum)) throw new Error(`${id}: academy.spectrum must be melanoma or mimic`);
+  if (!Array.isArray(academy.skillIds) || !academy.skillIds.length || academy.skillIds.some(skill => typeof skill !== "string" || !skill.trim())) {
+    throw new Error(`${id}: academy.skillIds required`);
+  }
+  if (!Array.isArray(caseItem.patterns) || !caseItem.patterns.length) throw new Error(`${id}: patterns required`);
+  for (const pattern of caseItem.patterns) {
+    if (!pattern?.id?.trim() || !pattern.label?.trim() || !pattern.specificityNote?.trim()) {
+      throw new Error(`${id}: pattern id, label and specificityNote required`);
+    }
+  }
+  for (const field of ["synthesis", "evidenceWeighting", "diagnosticTrap", "mentorNote", "takeHomeRule", "managementBrief"]) {
+    requireAcademyText(caseItem, field, id);
+  }
+  if (academy.level >= 4) {
+    if (!Array.isArray(caseItem.whyNot) || caseItem.whyNot.length < 2) throw new Error(`${id}: level 4-5 cases need two why-not mimics`);
+    for (const item of caseItem.whyNot) {
+      if (!item?.mimic?.trim() || !item.text?.trim()) throw new Error(`${id}: whyNot mimic and text required`);
+    }
+  }
+  if (caseItem.differentials.length < 2) throw new Error(`${id}: ranked differential needs at least two entries`);
+}
+
+function validateCurriculum(caseData) {
+  const curriculum = caseData.curriculum;
+  if (!curriculum) throw new Error("curriculum map is required");
+  if (curriculum.schemaVersion !== 1 || !curriculum.id?.trim() || !curriculum.title?.trim()) {
+    throw new Error("curriculum schemaVersion, id and title are required");
+  }
+  if (!Array.isArray(curriculum.levels) || curriculum.levels.length !== 5) throw new Error("curriculum needs exactly five levels");
+  const levelNums = new Set();
+  for (const level of curriculum.levels) {
+    if (!Number.isInteger(level.level) || level.level < 1 || level.level > 5 || levelNums.has(level.level)) {
+      throw new Error("curriculum levels must be unique integers 1-5");
+    }
+    levelNums.add(level.level);
+    if (!level.key?.trim() || !level.title?.trim() || !level.aim?.trim()) throw new Error(`level ${level.level} needs key, title and aim`);
+  }
+  if (!Array.isArray(curriculum.skills) || !curriculum.skills.length) throw new Error("skills taxonomy is required");
+  const skillIds = new Set();
+  for (const skill of curriculum.skills) {
+    if (!skill?.id?.trim() || skillIds.has(skill.id) || !skill.title?.trim() || !skill.summary?.trim()) throw new Error("invalid skill");
+    skillIds.add(skill.id);
+  }
+  if (!Array.isArray(curriculum.entries) || !curriculum.entries.length) throw new Error("curriculum entries are required");
+  const caseById = new Map(caseData.cases.map(item => [item.id, item]));
+  const seen = new Set();
+  const orders = new Set();
+  for (const entry of curriculum.entries) {
+    const caseItem = caseById.get(entry.caseId);
+    if (!caseItem) throw new Error(`curriculum entry does not resolve: ${entry.caseId}`);
+    if (seen.has(entry.caseId) || !Number.isInteger(entry.order) || orders.has(entry.order)) {
+      throw new Error(`curriculum identity or order is duplicated for ${entry.caseId}`);
+    }
+    seen.add(entry.caseId);
+    orders.add(entry.order);
+    if (!levelNums.has(entry.level) || !academySpectra.has(entry.spectrum)) throw new Error(`curriculum entry invalid: ${entry.caseId}`);
+    if (!Array.isArray(entry.skillIds) || !entry.skillIds.length || entry.skillIds.some(id => !skillIds.has(id))) {
+      throw new Error(`curriculum skills invalid: ${entry.caseId}`);
+    }
+    if (caseItem.academy) {
+      if (caseItem.academy.level !== entry.level || caseItem.academy.spectrum !== entry.spectrum) {
+        throw new Error(`${entry.caseId}: academy block must match the curriculum entry`);
+      }
+      if (JSON.stringify(caseItem.academy.skillIds) !== JSON.stringify(entry.skillIds)) {
+        throw new Error(`${entry.caseId}: academy.skillIds must match the curriculum entry`);
+      }
+    }
+  }
+  for (const item of caseData.cases) {
+    if (!item.academy) continue;
+    if (!seen.has(item.id)) throw new Error(`${item.id}: academy case is missing from the curriculum map`);
+    validateAcademyCase(item);
+  }
+}
+
 function validateCaseData(caseData = loadCaseData(), diseaseData = loadDiseaseData()) {
   if (!caseData || caseData.schemaVersion !== 1 || !Array.isArray(caseData.cases)) {
     throw new Error("Case registry must use schemaVersion 1 with a cases array");
@@ -193,6 +279,7 @@ function validateCaseData(caseData = loadCaseData(), diseaseData = loadDiseaseDa
     slugs.add(item.slug);
     validateCase(item, diseaseIds);
   }
+  validateCurriculum(caseData);
   return true;
 }
 
@@ -204,7 +291,7 @@ function main() {
 
 module.exports = {
   allowedLevels, allowedCaseTypes, allowedLicenses, allowedConfirm,
-  caseClinicalContent, caseFingerprint, validateCaseData, loadCaseData, loadDiseaseData, main
+  caseClinicalContent, caseFingerprint, validateCaseData, validateCurriculum, loadCaseData, loadDiseaseData, main
 };
 
 if (require.main === module) {

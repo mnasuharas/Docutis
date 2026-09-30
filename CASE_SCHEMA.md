@@ -64,3 +64,14 @@ The validator fails if critical provenance/license/`src` fields are missing or t
 4. Keep differentials educational and non-prescriptive.
 5. Leave review status as required; never auto-approve.
 6. Run `node scripts/case.js` and the full test suite.
+
+
+## Goal 18 curriculum extension
+
+`DOCUTIS_CASES.curriculum` is a machine-readable Learn Melanoma map: five levels, a skills taxonomy, and ordered entries. New cases may carry `academy`, `patterns` (with a specificity note), `synthesis`, `evidenceWeighting`, `diagnosticTrap`, `mentorNote`, `takeHomeRule`, and `managementBrief`. Level 4 and 5 cases also carry two `whyNot` mimics. These fields are teaching text, not probabilities and not clinician review.
+
+The five Goal 11 pilot cases are referenced by the map where they belong. Their governed clinical objects are not given an `academy` block, so their fingerprints stay put. Pilot cases that are not melanoma teaching (actinic keratosis field and the squamous cell carcinoma case) stay in the registry and outside the pathway.
+
+`managementBrief` is separate from the diagnosis. It stays review required. Histopathology is still allowed only when the source states it. None of the Goal 18 additions use that method, because the captions that were actually reused did not say histopathology.
+
+Rendered image paths for new cases are diagnosis-neutral (`case-06` onward). Source URLs stay hidden until reveal. Annotations were not added.
