@@ -29,6 +29,13 @@ Entries under this heading are repository changes after the historical tag `v0.1
 - Public review state remains 28 units: 5 `clinician reviewed` (actinic keratosis disease, basal cell carcinoma disease, BCC German follow-up, BCC dermoscopy quiz item, BCC clues schematic) and 23 `review required`, with latest valid human review date 2026-09-23. This changelog does not add a decision.
 - Goal 14 pilot-case clinician review is pending and deferred. It is not merged, not imported into this branch, and not an approval. Do not read any bullet here as Goal 14 sign-off.
 
+### Goal 18 — Melanoma clinical case academy
+
+- Add a Learn Melanoma pathway with five levels, a skills taxonomy, and curriculum order. It is not a certificate, not a score, and not a diagnostic device.
+- Add 16 source-labeled cases (public domain or CC BY 4.0) on diagnosis-neutral filenames. Thirteen pathway entries are melanoma-spectrum and six are mimics, including three existing pilots. Two existing pilots stay outside the pathway.
+- No new case is clinician reviewed. The five pilot clinical payloads and fingerprints were not edited. Histopathology was not claimed for the new cases because the reused captions did not state it. No educational-efficacy claim is made.
+- No GitHub release or tag was created. Pull request #21 was not merged and was not the base of this work.
+
 ### Earlier unreleased milestone notes
 
 ### Goal 15 — Cross-browser UX hardening

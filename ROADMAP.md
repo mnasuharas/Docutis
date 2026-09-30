@@ -6,6 +6,7 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Implemented
 
+- Goal 18 melanoma clinical case academy: a five-level Learn Melanoma map, skills taxonomy, and 16 additional source-labeled cases (13 melanoma-spectrum and 6 mimics in the 19-case pathway, counting three existing pilots). New cases stay review required. The pathway does not certify competence and does not claim educational efficacy. No release tag was created. Pull request #21 was not merged and was not used as the base.
 - Goal 12 case learning UX: the five existing pilot cases step through inspect, observe, differential, reveal and review. Image zoom is view-only. Observations stay separate from interpretations. Differentials are an unscored disclosure. Diagnosis stays hidden until an explicit reveal. No new cases, images, clinical claims or clinician-reviewed status.
 - Goal 11 case-based learning foundation: structured case registry, progressive-disclosure learner UI, offline validator/fingerprint helper, Goal 9 `case` asset type, contributor schema/licensing docs and open-license pilot cases that remain `clinician review required` until genuine physician decisions exist.
 - Goal 10 public OSS surface: discoverable repository and docs links, About/project-status copy for the public preview, and sourced correction/outdated-evidence feedback CTAs that open GitHub issue forms. No clinician-reviewed claims were added.
@@ -97,7 +98,7 @@ Potential next records, only after adequate sourcing and clinician prioritizatio
 2. Automated validation confirms the complete schema, unique identifiers, valid category/subcategory mapping, separated ICD-O fields, structured HTTPS references, and the required review state.
 3. A qualified clinician checks every clinical claim against the cited source and records the guideline version/date, jurisdiction, and review date in the pull request.
 4. A second reviewer checks language, uncertainty, duplication, category placement, link behavior, and preservation of the medical disclaimer.
-5. Follow [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md): a maintainer may record `clinician reviewed` only after a physician attests to the specific version, with date, role, specialty and matching fingerprint. Infrastructure is implemented. Five public assets are clinician reviewed, as listed in the Goal 9 baseline bullet. Every other review unit, including all five pilot cases, remains review required. A software release would not clinically validate the remaining content.
+5. Follow [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md): a maintainer may record `clinician reviewed` only after a physician attests to the specific version, with date, role, specialty and matching fingerprint. Infrastructure is implemented. Five public assets are clinician reviewed, as listed in the Goal 9 baseline bullet. Every other review unit, including all 21 cases, remains review required. A software release would not clinically validate the remaining content.
 6. Records are re-reviewed when a source is replaced, a recommendation changes, or the agreed review interval expires.
 
 ## Data-schema evolution
