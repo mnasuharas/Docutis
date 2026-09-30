@@ -180,6 +180,34 @@ function validateCase(caseItem, diseaseIds) {
 }
 
 const academySpectra = new Set(["melanoma", "mimic"]);
+const teachingTypes = new Set(["teaching", "reasoning", "expert-challenge"]);
+const featureCertainties = new Set(["clearly_visible", "probably", "uncertain", "not_visible"]);
+const featureWeights = new Set(["major", "supportive", "weak", "conflicting"]);
+const numericCertainty = /\b(?:sensitivity|specificity)\b|\blikelihood ratio\b|\bpredictive value\b|\d+(?:\.\d+)?\s*%/i;
+
+function leaksRecordedDiagnosis(value, caseItem) {
+  const hay = String(value || "").toLowerCase();
+  const labels = [caseItem.diagnosisLabel, caseItem.diagnosticGroundTruth && caseItem.diagnosticGroundTruth.confirmedDiagnosis];
+  for (const label of labels) {
+    if (typeof label === "string" && label.trim() && hay.includes(label.toLowerCase())) return true;
+  }
+  const diagnosis = String(caseItem.diagnosisLabel || "").toLowerCase();
+  const tokens = ["melanoma", "basal cell", "squamous cell", "keratoacanthoma", "actinic keratos"];
+  return tokens.some(token => diagnosis.includes(token) && hay.includes(token));
+}
+
+function teachingFieldBlob(caseItem) {
+  const parts = [];
+  function walk(value) {
+    if (typeof value === "string") parts.push(value);
+    else if (Array.isArray(value)) value.forEach(walk);
+    else if (value && typeof value === "object") Object.values(value).forEach(walk);
+  }
+  for (const key of ["patterns", "synthesis", "evidenceWeighting", "diagnosticTrap", "mentorNote", "takeHomeRule", "managementBrief", "whyNot", "observationPrompts", "hints", "closestMimic", "teachingPoints"]) {
+    walk(caseItem[key]);
+  }
+  return parts.join("\n");
+}
 
 function requireAcademyText(obj, field, id) {
   if (typeof obj[field] !== "string" || !obj[field].trim()) throw new Error(`${id}: ${field} is required`);
@@ -194,11 +222,36 @@ function validateAcademyCase(caseItem) {
   if (!Array.isArray(academy.skillIds) || !academy.skillIds.length || academy.skillIds.some(skill => typeof skill !== "string" || !skill.trim())) {
     throw new Error(`${id}: academy.skillIds required`);
   }
+  if (!teachingTypes.has(academy.teachingType)) throw new Error(`${id}: academy.teachingType must be teaching, reasoning, or expert-challenge`);
   if (!Array.isArray(caseItem.patterns) || !caseItem.patterns.length) throw new Error(`${id}: patterns required`);
   for (const pattern of caseItem.patterns) {
     if (!pattern?.id?.trim() || !pattern.label?.trim() || !pattern.specificityNote?.trim()) {
       throw new Error(`${id}: pattern id, label and specificityNote required`);
     }
+    if (!featureCertainties.has(pattern.certainty)) throw new Error(`${id}: pattern certainty must be clearly_visible, probably, uncertain, or not_visible`);
+    if (!featureWeights.has(pattern.weight)) throw new Error(`${id}: pattern weight must be major, supportive, weak, or conflicting`);
+    if (leaksRecordedDiagnosis(`${pattern.label} ${pattern.specificityNote}`, caseItem)) {
+      throw new Error(`${id}: pattern text names the recorded diagnosis`);
+    }
+  }
+  if (!Array.isArray(caseItem.observationPrompts) || caseItem.observationPrompts.length < 2) {
+    throw new Error(`${id}: at least two observationPrompts are required`);
+  }
+  for (const prompt of caseItem.observationPrompts) {
+    if (typeof prompt !== "string" || !prompt.trim()) throw new Error(`${id}: observation prompt must be text`);
+    if (leaksRecordedDiagnosis(prompt, caseItem)) throw new Error(`${id}: observation prompt names the recorded diagnosis`);
+  }
+  if (caseItem.hints !== undefined) {
+    if (!Array.isArray(caseItem.hints) || !caseItem.hints.length || caseItem.hints.length > 2) {
+      throw new Error(`${id}: hints must be one or two strings when present`);
+    }
+    for (const hint of caseItem.hints) {
+      if (typeof hint !== "string" || !hint.trim()) throw new Error(`${id}: hint must be text`);
+      if (leaksRecordedDiagnosis(hint, caseItem)) throw new Error(`${id}: hint names the recorded diagnosis`);
+    }
+  }
+  if (!caseItem.closestMimic || typeof caseItem.closestMimic !== "object" || !caseItem.closestMimic.name?.trim() || !caseItem.closestMimic.whyClosest?.trim()) {
+    throw new Error(`${id}: closestMimic name and whyClosest are required`);
   }
   for (const field of ["synthesis", "evidenceWeighting", "diagnosticTrap", "mentorNote", "takeHomeRule", "managementBrief"]) {
     requireAcademyText(caseItem, field, id);
@@ -246,11 +299,12 @@ function validateCurriculum(caseData) {
     seen.add(entry.caseId);
     orders.add(entry.order);
     if (!levelNums.has(entry.level) || !academySpectra.has(entry.spectrum)) throw new Error(`curriculum entry invalid: ${entry.caseId}`);
+    if (!teachingTypes.has(entry.teachingType)) throw new Error(`curriculum teachingType invalid: ${entry.caseId}`);
     if (!Array.isArray(entry.skillIds) || !entry.skillIds.length || entry.skillIds.some(id => !skillIds.has(id))) {
       throw new Error(`curriculum skills invalid: ${entry.caseId}`);
     }
     if (caseItem.academy) {
-      if (caseItem.academy.level !== entry.level || caseItem.academy.spectrum !== entry.spectrum) {
+      if (caseItem.academy.level !== entry.level || caseItem.academy.spectrum !== entry.spectrum || caseItem.academy.teachingType !== entry.teachingType) {
         throw new Error(`${entry.caseId}: academy block must match the curriculum entry`);
       }
       if (JSON.stringify(caseItem.academy.skillIds) !== JSON.stringify(entry.skillIds)) {
@@ -263,6 +317,51 @@ function validateCurriculum(caseData) {
     if (!seen.has(item.id)) throw new Error(`${item.id}: academy case is missing from the curriculum map`);
     validateAcademyCase(item);
   }
+}
+
+
+function primaryPathGate(caseData = loadCaseData()) {
+  const curriculum = caseData.curriculum;
+  if (!curriculum || curriculum.qualityGate?.kind !== "qualitative") {
+    throw new Error("curriculum qualityGate must stay qualitative");
+  }
+  const skillIds = new Set(curriculum.skills.map(skill => skill.id));
+  const seenSkills = new Set();
+  const covered = new Map(curriculum.skills.map(skill => [skill.id, []]));
+  const failed = [];
+  for (const entry of curriculum.entries) {
+    const caseItem = caseData.cases.find(item => item.id === entry.caseId);
+    const issues = [];
+    if (!caseItem) issues.push("missing case");
+    else {
+      if (!caseItem.images?.length) issues.push("image");
+      if (!Array.isArray(caseItem.observations) || caseItem.observations.length < 2) issues.push("observations");
+      if (!Array.isArray(caseItem.differentials) || !caseItem.differentials.length) issues.push("differential");
+      if (!entry.skillIds?.length || entry.skillIds.some(id => !skillIds.has(id))) issues.push("skill");
+      const signature = JSON.stringify(entry.skillIds);
+      if (seenSkills.has(signature)) issues.push("skill assignment is not distinct");
+      seenSkills.add(signature);
+      entry.skillIds.forEach(id => covered.get(id).push(entry.caseId));
+      if (!teachingTypes.has(entry.teachingType)) issues.push("teaching type");
+      if (caseItem.reviewStatus !== "clinician review required" || caseItem.clinicalReview !== null) issues.push("review status is not honest");
+      if (numericCertainty.test(teachingFieldBlob(caseItem))) issues.push("numeric certainty");
+      if (caseItem.academy) {
+        if (caseItem.differentials.length < 2) issues.push("differential depth");
+        if (!caseItem.observationPrompts || caseItem.observationPrompts.length < 2) issues.push("observation prompts");
+        if (!caseItem.patterns?.every(pattern => featureCertainties.has(pattern.certainty) && featureWeights.has(pattern.weight))) issues.push("feature weight");
+        if (!caseItem.closestMimic?.name) issues.push("closest mimic");
+        const reasoning = entry.teachingType === "reasoning" || entry.teachingType === "expert-challenge";
+        if (reasoning && (!caseItem.diagnosticTrap?.trim() || !caseItem.evidenceWeighting?.trim())) issues.push("non-trivial reasoning");
+        if (entry.teachingType === "teaching" && !caseItem.takeHomeRule?.trim()) issues.push("take-home rule");
+        if (!/review required/i.test(caseItem.managementBrief || "")) issues.push("management review label");
+      } else if (!caseItem.teachingPoints || caseItem.teachingPoints.length < 2) {
+        issues.push("legacy teaching points");
+      }
+    }
+    if (issues.length) failed.push({ caseId: entry.caseId, issues });
+  }
+  const gaps = [...covered.entries()].filter(([, ids]) => !ids.length).map(([id]) => id);
+  return { passed: failed.length === 0 && gaps.length === 0, failed, gaps };
 }
 
 function validateCaseData(caseData = loadCaseData(), diseaseData = loadDiseaseData()) {
@@ -280,6 +379,11 @@ function validateCaseData(caseData = loadCaseData(), diseaseData = loadDiseaseDa
     validateCase(item, diseaseIds);
   }
   validateCurriculum(caseData);
+  const gate = primaryPathGate(caseData);
+  if (!gate.passed) {
+    const detail = gate.failed.map(item => `${item.caseId}: ${item.issues.join(", ")}`).join("; ");
+    throw new Error(`primary-path quality gate failed (${detail || "skill gaps: " + gate.gaps.join(", ")})`);
+  }
   return true;
 }
 
@@ -291,7 +395,8 @@ function main() {
 
 module.exports = {
   allowedLevels, allowedCaseTypes, allowedLicenses, allowedConfirm,
-  caseClinicalContent, caseFingerprint, validateCaseData, validateCurriculum, loadCaseData, loadDiseaseData, main
+  caseClinicalContent, caseFingerprint, validateCaseData, validateCurriculum, primaryPathGate,
+  teachingTypes, featureCertainties, featureWeights, leaksRecordedDiagnosis, loadCaseData, loadDiseaseData, main
 };
 
 if (require.main === module) {
