@@ -27,7 +27,10 @@
   });
 
   function publicCaseImageSrc(image) {
-    return PUBLIC_CASE_IMAGE_SRC[image && image.src] || null;
+    if (!image || typeof image.src !== "string") return null;
+    if (PUBLIC_CASE_IMAGE_SRC[image.src]) return PUBLIC_CASE_IMAGE_SRC[image.src];
+    if (/^assets\/media\/cases\/case-\d{2}-(?:clinical|dermoscopy)\.jpg$/.test(image.src)) return image.src;
+    return null;
   }
   const EVIDENCE_LABELS = Object.freeze({
     histopathology: "Histopathology",
@@ -41,7 +44,26 @@
   let activeStep = 0;
   let diagnosisRevealed = false;
   let zoomScales = Object.create(null);
-  const filters = { diseaseId: "", caseType: "", educationalLevel: "", anatomicalSite: "" };
+  const impressions = Object.create(null);
+  const descriptions = Object.create(null);
+  const filters = {
+    diseaseId: "",
+    caseType: "",
+    educationalLevel: "",
+    anatomicalSite: "",
+    pathway: "",
+    curriculumLevel: "",
+    spectrum: "",
+    pattern: "",
+    skill: "",
+    reviewStatus: ""
+  };
+  const IMPRESSIONS = Object.freeze([
+    ["benign-appearing", "Benign-appearing"],
+    ["suspicious", "Suspicious"],
+    ["malignant-appearing", "Malignant-appearing"],
+    ["uncertain", "Uncertain"]
+  ]);
 
   function element(tag, text, className) {
     const node = document.createElement(tag);
@@ -68,13 +90,44 @@
     return Array.isArray(value) ? value : [];
   }
 
+  function curriculumMap() {
+    return registry.curriculum || null;
+  }
+
+  function curriculumEntries() {
+    const map = curriculumMap();
+    return map && Array.isArray(map.entries) ? map.entries : [];
+  }
+
+  function entryFor(caseItem) {
+    if (!caseItem) return null;
+    return curriculumEntries().find(entry => entry.caseId === caseItem.id) || null;
+  }
+
+  function levelMeta(level) {
+    const map = curriculumMap();
+    return map && Array.isArray(map.levels) ? map.levels.find(item => item.level === level) || null : null;
+  }
+
   function cases() {
-    return registry.cases.filter(item => {
+    const list = registry.cases.filter(item => {
       if (filters.caseType && item.caseType !== filters.caseType) return false;
       if (filters.educationalLevel && item.educationalLevel !== filters.educationalLevel) return false;
       if (filters.anatomicalSite && !(item.patientContext && item.patientContext.anatomicalSite || "").toLocaleLowerCase("en").includes(filters.anatomicalSite.toLocaleLowerCase("en"))) return false;
+      const entry = entryFor(item);
+      if (filters.pathway && (!entry || !curriculumMap() || curriculumMap().id !== filters.pathway)) return false;
+      if (filters.curriculumLevel && (!entry || String(entry.level) !== String(filters.curriculumLevel))) return false;
+      if (filters.spectrum && (!entry || entry.spectrum !== filters.spectrum)) return false;
+      if (filters.skill && (!entry || !asList(entry.skillIds).includes(filters.skill))) return false;
+      if (filters.pattern && !asList(item.patterns).some(pattern => pattern && pattern.id === filters.pattern)) return false;
+      if (filters.reviewStatus === "reviewed" && !isReviewed(item)) return false;
+      if (filters.reviewStatus === "required" && isReviewed(item)) return false;
       return true;
     });
+    if (filters.pathway) {
+      list.sort((a, b) => ((entryFor(a) || {}).order || 0) - ((entryFor(b) || {}).order || 0));
+    }
+    return list;
   }
 
   function diseaseName(id) {
@@ -296,38 +349,70 @@
     return [...new Set(registry.cases.map(getter).filter(Boolean))].sort((a, b) => String(a).localeCompare(String(b)));
   }
 
+  function addSelect(parent, key, label, options) {
+    const wrap = element("label", undefined, "case-filter");
+    wrap.appendChild(document.createTextNode(label));
+    const select = document.createElement("select");
+    select.setAttribute("aria-label", label);
+    select.setAttribute("data-filter-key", key);
+    options.forEach(([value, textValue]) => select.appendChild(new Option(textValue, value)));
+    select.value = filters[key] || "";
+    select.addEventListener("change", () => { filters[key] = select.value; renderList(); });
+    wrap.appendChild(select);
+    parent.appendChild(wrap);
+  }
+
   function renderFilters(parent) {
+    const pathway = curriculumMap();
+    if (pathway && pathway.title) {
+      const toggle = element("button", filters.pathway ? "Show all cases" : pathway.title, "case-button case-button-secondary");
+      toggle.type = "button";
+      toggle.setAttribute("aria-pressed", filters.pathway ? "true" : "false");
+      toggle.setAttribute("aria-label", filters.pathway ? "Show all cases" : "Learn Melanoma pathway");
+      toggle.addEventListener("click", () => {
+        filters.pathway = filters.pathway ? "" : pathway.id;
+        renderList();
+      });
+      parent.appendChild(toggle);
+      parent.appendChild(element("p", filters.pathway
+        ? "This pathway follows the curriculum order. It is not a certificate, not a score, and not a device."
+        : "Learn Melanoma is an optional sequence. The default list stays unfiltered.", "case-kind-note"));
+    }
     const bar = element("div", undefined, "case-filters");
-    const specs = [
-      ["caseType", "Case type", uniqueValues(item => item.caseType).map(value => [value, String(value).replaceAll("_", " ")])],
-      ["educationalLevel", "Level", uniqueValues(item => item.educationalLevel).map(value => [value, value])],
-      ["anatomicalSite", "Site contains", null]
-    ];
-    specs.forEach(([key, label, options]) => {
-      const wrap = element("label", undefined, "case-filter");
-      wrap.appendChild(document.createTextNode(label));
-      if (options) {
-        const select = document.createElement("select");
-        select.setAttribute("aria-label", label);
-        select.setAttribute("data-filter-key", key);
-        select.appendChild(new Option("All", ""));
-        options.forEach(([value, text]) => select.appendChild(new Option(text, value)));
-        select.value = filters[key];
-        select.addEventListener("change", () => { filters[key] = select.value; renderList(); });
-        wrap.appendChild(select);
-      } else {
-        const input = document.createElement("input");
-        input.type = "search";
-        input.setAttribute("aria-label", label);
-        input.setAttribute("data-filter-key", key);
-        input.placeholder = "e.g. hand, back";
-        input.value = filters[key];
-        input.addEventListener("input", () => { filters[key] = input.value.trim(); renderList(); });
-        wrap.appendChild(input);
-      }
-      bar.appendChild(wrap);
-    });
+    addSelect(bar, "caseType", "Case type", [["", "All"], ...uniqueValues(item => item.caseType).map(value => [value, String(value).replaceAll("_", " ")])]);
+    addSelect(bar, "educationalLevel", "Level", [["", "All"], ...uniqueValues(item => item.educationalLevel).map(value => [value, value])]);
+    addSelect(bar, "curriculumLevel", "Curriculum level", [["", "All"], ...((pathway && pathway.levels) || []).map(level => [String(level.level), `${level.level}. ${level.title}`])]);
+    const siteWrap = element("label", undefined, "case-filter");
+    siteWrap.appendChild(document.createTextNode("Site contains"));
+    const input = document.createElement("input");
+    input.type = "search";
+    input.setAttribute("aria-label", "Site contains");
+    input.setAttribute("data-filter-key", "anatomicalSite");
+    input.placeholder = "e.g. hand, back";
+    input.value = filters.anatomicalSite;
+    input.addEventListener("input", () => { filters.anatomicalSite = input.value.trim(); renderList(); });
+    siteWrap.appendChild(input);
+    bar.appendChild(siteWrap);
     parent.appendChild(bar);
+
+    const teacher = document.createElement("details");
+    teacher.className = "case-teacher-filters";
+    teacher.appendChild(element("summary", "Teacher filters"));
+    teacher.appendChild(element("p", "Closed by default. Spectrum and skill filters expose the curriculum class, so leave them closed during a first pass.", "case-kind-note"));
+    const teacherBar = element("div", undefined, "case-filters");
+    addSelect(teacherBar, "spectrum", "Spectrum", [["", "All"], ["melanoma", "Melanoma-spectrum"], ["mimic", "Mimic"]]);
+    addSelect(teacherBar, "skill", "Skill", [["", "All"], ...((pathway && pathway.skills) || []).map(skill => [skill.id, skill.title])]);
+    const patternOptions = [["", "All"]];
+    const seenPatterns = new Set();
+    registry.cases.forEach(item => asList(item.patterns).forEach(pattern => {
+      if (!pattern || !pattern.id || seenPatterns.has(pattern.id)) return;
+      seenPatterns.add(pattern.id);
+      patternOptions.push([pattern.id, pattern.label || pattern.id]);
+    }));
+    addSelect(teacherBar, "pattern", "Pattern", patternOptions);
+    addSelect(teacherBar, "reviewStatus", "Review status", [["", "All"], ["required", "Review required"], ["reviewed", "Clinician reviewed"]]);
+    teacher.appendChild(teacherBar);
+    parent.appendChild(teacher);
   }
 
   function appendSourcePageLink(parent, image) {
@@ -421,8 +506,30 @@
     renderProvenance(parent, image);
   }
 
+  function renderFirstImpression(parent, caseItem) {
+    const box = element("fieldset", undefined, "case-impression");
+    box.appendChild(element("legend", "First impression, before you read a diagnosis"));
+    box.appendChild(element("p", "Self-assessment only. Not a device output, not a score, and not a diagnosis.", "case-kind-note"));
+    const row = element("div", undefined, "case-impression-row");
+    IMPRESSIONS.forEach(([value, label]) => {
+      const button = element("button", label, "case-button case-button-secondary");
+      button.type = "button";
+      button.setAttribute("aria-pressed", impressions[caseItem.id] === value ? "true" : "false");
+      button.addEventListener("click", () => {
+        impressions[caseItem.id] = value;
+        renderDetail(caseItem, "none");
+      });
+      row.appendChild(button);
+    });
+    box.appendChild(row);
+    const chosen = IMPRESSIONS.find(item => item[0] === impressions[caseItem.id]);
+    if (chosen) box.appendChild(element("p", `Recorded in this page session: ${chosen[1]}. Not submitted and not scored.`, "case-kind-note"));
+    parent.appendChild(box);
+  }
+
   function renderInspect(parent, caseItem) {
     parent.appendChild(element("p", "Look at the image, creator, license and attribution. Zoom only changes the view on this page. The diagnosis stays hidden on this step.", "case-step-intro"));
+    renderFirstImpression(parent, caseItem);
     const images = asList(caseItem.images);
     if (!images.length) {
       parent.appendChild(element("p", "No image is recorded for this case. None was added.", "case-empty"));
@@ -449,6 +556,29 @@
 
   function renderObserve(parent, caseItem) {
     parent.appendChild(element("p", "Observations and dermoscopic features are separate from interpretations. Only items already stored on this case are shown.", "case-step-intro"));
+    const describe = element("label", undefined, "case-filter");
+    describe.appendChild(element("span", "Describe what you see before you read a diagnosis"));
+    const area = document.createElement("textarea");
+    area.value = descriptions[caseItem.id] || "";
+    area.setAttribute("aria-label", "Your description before the diagnosis");
+    area.addEventListener("input", () => { descriptions[caseItem.id] = area.value; });
+    describe.appendChild(area);
+    parent.appendChild(describe);
+    parent.appendChild(element("p", "This note stays in the page session. It is not saved and not scored.", "case-kind-note"));
+    const patterns = asList(caseItem.patterns);
+    if (patterns.length) {
+      const section = element("section", undefined, "case-kind-section");
+      section.appendChild(element("h5", "Patterns"));
+      section.appendChild(element("p", "A pattern is a named look. The specificity note says it is not a diagnosis.", "case-kind-note"));
+      patterns.forEach(pattern => {
+        if (!pattern) return;
+        const label = preRevealDisplay(pattern.label);
+        const note = preRevealDisplay(pattern.specificityNote);
+        if (label) section.appendChild(element("h6", label));
+        if (note) section.appendChild(element("p", note));
+      });
+      parent.appendChild(section);
+    }
     const observations = asList(caseItem.observations);
     const features = asList(caseItem.dermoscopicFeatures);
     const interpretations = asList(caseItem.interpretations);
@@ -473,7 +603,7 @@
   }
 
   function renderDifferential(parent, caseItem) {
-    parent.appendChild(element("p", "These are differentials already stored for this case. Opening the list is optional. It is not a scored quiz and it does not confirm a diagnosis.", "case-step-intro"));
+    parent.appendChild(element("p", "These are differentials already stored for this case. Opening the list is optional. It is not a scored quiz and it does not confirm a diagnosis. Order is a teaching rank, not a probability.", "case-step-intro"));
     const differentials = asList(caseItem.differentials);
     if (!differentials.length) {
       parent.appendChild(element("p", "No differentials are recorded for this case. None were added.", "case-empty"));
@@ -550,6 +680,45 @@
     return revealBtn;
   }
 
+  function renderAcademyReview(parent, caseItem) {
+    if (!caseItem || (!caseItem.synthesis && !caseItem.managementBrief && !caseItem.whyNot)) return;
+    const section = element("section", undefined, "case-teaching");
+    section.appendChild(element("h5", "After the source diagnosis"));
+    const chosen = IMPRESSIONS.find(item => item[0] === impressions[caseItem.id]);
+    if (chosen) section.appendChild(element("p", `Your first impression was ${chosen[1]}. That choice is not scored and is not marked right or wrong.`, "case-kind-note"));
+    if (caseItem.synthesis) {
+      section.appendChild(element("h6", "Synthesis"));
+      section.appendChild(element("p", caseItem.synthesis));
+    }
+    asList(caseItem.whyNot).forEach(item => {
+      if (!item) return;
+      section.appendChild(element("h6", `Why not: ${item.mimic || "Mimic"}`));
+      if (item.text) section.appendChild(element("p", item.text));
+    });
+    if (caseItem.evidenceWeighting) {
+      section.appendChild(element("h6", "Evidence weighting"));
+      section.appendChild(element("p", caseItem.evidenceWeighting));
+    }
+    if (caseItem.diagnosticTrap) {
+      section.appendChild(element("h6", "Diagnostic trap"));
+      section.appendChild(element("p", caseItem.diagnosticTrap));
+    }
+    if (caseItem.mentorNote) {
+      section.appendChild(element("h6", "Mentor note"));
+      section.appendChild(element("p", caseItem.mentorNote));
+    }
+    if (caseItem.takeHomeRule) {
+      section.appendChild(element("h6", "Take-home rule"));
+      section.appendChild(element("p", caseItem.takeHomeRule));
+    }
+    if (caseItem.managementBrief) {
+      section.appendChild(element("h6", "Management brief"));
+      section.appendChild(element("p", "Review required. This is not a protocol and not clinician reviewed.", "case-kind-note"));
+      section.appendChild(element("p", caseItem.managementBrief));
+    }
+    parent.appendChild(section);
+  }
+
   function renderReview(parent, caseItem) {
     parent.appendChild(element("p", "This step uses only teaching points and confirmation text already stored on the case. It does not add a new reason for the diagnosis.", "case-step-intro"));
     if (!diagnosisRevealed) {
@@ -577,6 +746,7 @@
       });
     }
     parent.appendChild(teaching);
+    renderAcademyReview(parent, caseItem);
     const summary = element("section", undefined, "case-summary");
     summary.appendChild(element("h5", "Summary"));
     const label = caseItem.diagnosisLabel || "No diagnosis label is recorded";
@@ -641,6 +811,25 @@
     });
     bar.appendChild(previous);
     bar.appendChild(next);
+    const entry = entryFor(caseItem);
+    if (entry && activeStep === STEPS.length - 1) {
+      const ordered = curriculumEntries().slice().sort((a, b) => a.order - b.order);
+      const index = ordered.findIndex(item => item.caseId === caseItem.id);
+      const nextEntry = index >= 0 ? ordered[index + 1] : null;
+      const nextCase = nextEntry && registry.cases.find(item => item.id === nextEntry.caseId);
+      if (nextCase) {
+        const jump = element("button", `Next curriculum case: ${nextCase.title || "Untitled case"}`, "case-button case-button-secondary");
+        jump.type = "button";
+        jump.addEventListener("click", () => {
+          activeId = nextCase.id;
+          activeStep = 0;
+          diagnosisRevealed = false;
+          zoomScales = Object.create(null);
+          renderDetail(nextCase, "step");
+        });
+        bar.appendChild(jump);
+      }
+    }
     parent.appendChild(bar);
   }
 
@@ -756,6 +945,11 @@
         card.appendChild(element("h3", item.title || "Untitled case"));
         const caseType = item.caseType ? String(item.caseType).replaceAll("_", " ") : "case";
         card.appendChild(element("p", `${caseType} · ${item.educationalLevel || "level not recorded"}`));
+        const entry = entryFor(item);
+        if (entry) {
+          const meta = levelMeta(entry.level);
+          card.appendChild(element("p", `Curriculum level ${entry.level}${meta ? `: ${meta.title}` : ""}`, "case-site"));
+        }
         card.appendChild(element("p", item.patientContext && item.patientContext.anatomicalSite || "Site not recorded", "case-site"));
         const open = element("button", "Start case", "case-button");
         open.type = "button";
