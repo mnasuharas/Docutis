@@ -46,6 +46,25 @@
   let zoomScales = Object.create(null);
   const impressions = Object.create(null);
   const descriptions = Object.create(null);
+  const hintsOpen = Object.create(null);
+  let lastHintButton = null;
+  const TEACHING_TYPE_LABELS = Object.freeze({
+    teaching: "Teaching case",
+    reasoning: "Reasoning case",
+    "expert-challenge": "Expert-challenge case"
+  });
+  const CERTAINTY_LABELS = Object.freeze({
+    clearly_visible: "Clearly visible",
+    probably: "Probably present",
+    uncertain: "Uncertain",
+    not_visible: "Not visible in this image"
+  });
+  const WEIGHT_LABELS = Object.freeze({
+    major: "Major clue",
+    supportive: "Supportive",
+    weak: "Weak",
+    conflicting: "Conflicts with a simple reading"
+  });
   const filters = {
     diseaseId: "",
     caseType: "",
@@ -56,7 +75,8 @@
     spectrum: "",
     pattern: "",
     skill: "",
-    reviewStatus: ""
+    reviewStatus: "",
+    teachingType: ""
   };
   const IMPRESSIONS = Object.freeze([
     ["benign-appearing", "Benign-appearing"],
@@ -122,12 +142,25 @@
       if (filters.pattern && !asList(item.patterns).some(pattern => pattern && pattern.id === filters.pattern)) return false;
       if (filters.reviewStatus === "reviewed" && !isReviewed(item)) return false;
       if (filters.reviewStatus === "required" && isReviewed(item)) return false;
+      if (filters.teachingType && teachingTypeOf(item) !== filters.teachingType) return false;
       return true;
     });
     if (filters.pathway) {
       list.sort((a, b) => ((entryFor(a) || {}).order || 0) - ((entryFor(b) || {}).order || 0));
     }
     return list;
+  }
+
+
+  function teachingTypeOf(caseItem) {
+    const entry = entryFor(caseItem);
+    if (entry && entry.teachingType) return entry.teachingType;
+    if (caseItem && caseItem.academy && caseItem.academy.teachingType) return caseItem.academy.teachingType;
+    return "";
+  }
+
+  function teachingTypeLabel(caseItem) {
+    return TEACHING_TYPE_LABELS[teachingTypeOf(caseItem)] || "";
   }
 
   function diseaseName(id) {
@@ -382,6 +415,7 @@
     addSelect(bar, "caseType", "Case type", [["", "All"], ...uniqueValues(item => item.caseType).map(value => [value, String(value).replaceAll("_", " ")])]);
     addSelect(bar, "educationalLevel", "Level", [["", "All"], ...uniqueValues(item => item.educationalLevel).map(value => [value, value])]);
     addSelect(bar, "curriculumLevel", "Curriculum level", [["", "All"], ...((pathway && pathway.levels) || []).map(level => [String(level.level), `${level.level}. ${level.title}`])]);
+    addSelect(bar, "teachingType", "Teaching type", [["", "All"], ["teaching", "Teaching case"], ["reasoning", "Reasoning case"], ["expert-challenge", "Expert-challenge case"]]);
     const siteWrap = element("label", undefined, "case-filter");
     siteWrap.appendChild(document.createTextNode("Site contains"));
     const input = document.createElement("input");
@@ -554,8 +588,42 @@
     return true;
   }
 
+  function renderObservationPrompts(parent, caseItem) {
+    const prompts = asList(caseItem.observationPrompts).map(preRevealDisplay).filter(Boolean);
+    if (!prompts.length) return;
+    const section = element("section", undefined, "case-kind-section case-kind-section-observation");
+    section.appendChild(element("h5", "Look for"));
+    section.appendChild(element("p", "These prompts name what to inspect. They do not name the diagnosis.", "case-kind-note"));
+    const list = element("ul", undefined, "case-kind-list");
+    prompts.forEach(prompt => {
+      const item = element("li", prompt);
+      list.appendChild(item);
+    });
+    section.appendChild(list);
+    const hints = asList(caseItem.hints).map(preRevealDisplay).filter(Boolean);
+    if (hints.length) {
+      const hintButton = element("button", hintsOpen[caseItem.id] ? "Hide hint" : "Show a hint", "case-button case-button-secondary");
+      hintButton.type = "button";
+      hintButton.setAttribute("aria-pressed", hintsOpen[caseItem.id] ? "true" : "false");
+      hintButton.setAttribute("aria-controls", "caseHintPanel");
+      lastHintButton = hintButton;
+      hintButton.addEventListener("click", () => {
+        hintsOpen[caseItem.id] = !hintsOpen[caseItem.id];
+        renderDetail(caseItem, "hint");
+      });
+      section.appendChild(hintButton);
+      const panel = element("div", undefined, "case-hint");
+      panel.id = "caseHintPanel";
+      panel.hidden = !hintsOpen[caseItem.id];
+      if (hintsOpen[caseItem.id]) hints.forEach(hint => panel.appendChild(element("p", hint)));
+      section.appendChild(panel);
+    }
+    parent.appendChild(section);
+  }
+
   function renderObserve(parent, caseItem) {
     parent.appendChild(element("p", "Observations and dermoscopic features are separate from interpretations. Only items already stored on this case are shown.", "case-step-intro"));
+    renderObservationPrompts(parent, caseItem);
     const describe = element("label", undefined, "case-filter");
     describe.appendChild(element("span", "Describe what you see before you read a diagnosis"));
     const area = document.createElement("textarea");
@@ -686,9 +754,38 @@
     section.appendChild(element("h5", "After the source diagnosis"));
     const chosen = IMPRESSIONS.find(item => item[0] === impressions[caseItem.id]);
     if (chosen) section.appendChild(element("p", `Your first impression was ${chosen[1]}. That choice is not scored and is not marked right or wrong.`, "case-kind-note"));
+    const patterns = asList(caseItem.patterns).filter(Boolean);
+    if (patterns.length) {
+      section.appendChild(element("h6", "Feature weights"));
+      section.appendChild(element("p", "Certainty is what this image shows. Weight is qualitative. Neither is a sensitivity, a specificity, or a probability.", "case-kind-note"));
+      patterns.forEach(pattern => {
+        const certainty = CERTAINTY_LABELS[pattern.certainty] || "Certainty not recorded";
+        const weight = WEIGHT_LABELS[pattern.weight] || "Weight not recorded";
+        const line = element("p", `${pattern.label || "Feature"}: ${certainty}. ${weight}.`, "case-feature-weight");
+        section.appendChild(line);
+        if (pattern.specificityNote) section.appendChild(element("p", pattern.specificityNote));
+      });
+    }
+    if (caseItem.closestMimic && caseItem.closestMimic.name) {
+      section.appendChild(element("h6", "Closest mimic"));
+      section.appendChild(element("p", caseItem.closestMimic.name));
+      if (caseItem.closestMimic.whyClosest) section.appendChild(element("p", caseItem.closestMimic.whyClosest));
+    }
     if (caseItem.synthesis) {
       section.appendChild(element("h6", "Synthesis"));
       section.appendChild(element("p", caseItem.synthesis));
+    }
+    if (asList(caseItem.differentials).length) {
+      section.appendChild(element("h6", "Differential discrimination"));
+      section.appendChild(element("p", "Why a stored competitor fits, and why it does not settle the case. This is not a probability.", "case-kind-note"));
+      asList(caseItem.differentials).forEach(diff => {
+        if (!diff) return;
+        section.appendChild(element("p", diff.diagnosis || "Unlabeled differential", "case-feature-weight"));
+        const supports = asList(diff.supportingFeatures).filter(Boolean);
+        const against = asList(diff.contradictingFeatures).filter(Boolean);
+        if (supports.length) section.appendChild(element("p", `Why it fits: ${supports.join("; ")}`));
+        if (against.length) section.appendChild(element("p", `Why not: ${against.join("; ")}`));
+      });
     }
     asList(caseItem.whyNot).forEach(item => {
       if (!item) return;
@@ -847,7 +944,8 @@
       root.appendChild(back);
       const site = caseItem.patientContext && caseItem.patientContext.anatomicalSite || "Site not recorded";
       const caseType = caseItem.caseType ? String(caseItem.caseType).replaceAll("_", " ") : "case";
-      root.appendChild(element("p", `${caseType} · ${caseItem.educationalLevel || "level not recorded"} · ${site}`, "case-meta"));
+      const lesson = teachingTypeLabel(caseItem);
+      root.appendChild(element("p", `${caseType} · ${caseItem.educationalLevel || "level not recorded"} · ${site}${lesson ? ` · ${lesson}` : ""}`, "case-meta"));
       root.appendChild(element("h3", caseItem.title || "Untitled case"));
       root.appendChild(element("p", reviewLabel(caseItem), "case-review-badge"));
       root.appendChild(element("p", reviewExplanation(caseItem), "case-review-note"));
@@ -883,6 +981,7 @@
       root.appendChild(region);
       renderPager(root, caseItem);
       if (focusTarget === "reveal" && revealButton && typeof revealButton.focus === "function") revealButton.focus();
+      else if (focusTarget === "hint" && lastHintButton && typeof lastHintButton.focus === "function") lastHintButton.focus();
       else if (focusTarget !== "none" && typeof heading.focus === "function") heading.focus();
     } catch (error) {
       showLoadError("The case view could not be shown. No substitute clinical content was added.");
@@ -949,6 +1048,8 @@
         if (entry) {
           const meta = levelMeta(entry.level);
           card.appendChild(element("p", `Curriculum level ${entry.level}${meta ? `: ${meta.title}` : ""}`, "case-site"));
+          const lesson = teachingTypeLabel(item);
+          if (lesson) card.appendChild(element("p", lesson, "case-teaching-type"));
         }
         card.appendChild(element("p", item.patientContext && item.patientContext.anatomicalSite || "Site not recorded", "case-site"));
         const open = element("button", "Start case", "case-button");

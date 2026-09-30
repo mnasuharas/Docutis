@@ -2267,3 +2267,18 @@ footer {
   outline: 2px solid var(--color-focus, currentColor);
   outline-offset: 2px;
 }
+
+.case-teaching-type {
+  margin: 0;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.case-feature-weight {
+  margin: 0 0 var(--space-2);
+  font-weight: 700;
+}
+
+.case-hint {
+  margin-top: var(--space-3);
+}
