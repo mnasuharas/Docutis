@@ -364,11 +364,102 @@ function primaryPathGate(caseData = loadCaseData()) {
   return { passed: failed.length === 0 && gaps.length === 0, failed, gaps };
 }
 
+function validateTeachingDiagnoses(caseData) {
+  if (!Array.isArray(caseData.teachingDiagnoses)) throw new Error("teachingDiagnoses array is required");
+  const ids = new Set();
+  for (const item of caseData.teachingDiagnoses) {
+    if (!item?.id?.trim() || ids.has(item.id)) throw new Error(`invalid teaching diagnosis: ${item?.id}`);
+    ids.add(item.id);
+    if (item.pole !== "benign") throw new Error(`${item.id}: teaching diagnoses in this layer are benign linkage records`);
+    if (item.monograph !== false) throw new Error(`${item.id}: teaching diagnosis must not pretend to be a condition monograph`);
+    if (item.reviewStatus !== "clinician review required" || item.clinicalReview !== null) {
+      throw new Error(`${item.id}: teaching diagnosis must stay review required`);
+    }
+    if (!item.name?.trim() || !item.limitation?.trim()) throw new Error(`${item.id}: name and limitation are required`);
+  }
+  return ids;
+}
+
+function validateContrastiveLayer(caseData) {
+  const caseIds = new Set(caseData.cases.map(item => item.id));
+  validateTeachingDiagnoses(caseData);
+  const screening = caseData.screening;
+  if (!screening || screening.schemaVersion !== 1 || !Array.isArray(screening.categories) || !screening.categories.length) {
+    throw new Error("screening vocabulary is required and is not a session");
+  }
+  const screeningIds = new Set();
+  for (const category of screening.categories) {
+    if (!category?.id?.trim() || screeningIds.has(category.id) || !category.label?.trim()) throw new Error("invalid screening category");
+    screeningIds.add(category.id);
+  }
+  if (!screeningIds.has("routine-benign-impression")) throw new Error("routine-benign-impression category must exist and must not be auto-filled");
+  if (!Array.isArray(caseData.comparisons)) throw new Error("comparisons array is required");
+  const comparisons = new Map();
+  for (const item of caseData.comparisons) {
+    if (!item?.id?.trim() || comparisons.has(item.id)) throw new Error(`invalid comparison: ${item?.id}`);
+    comparisons.set(item.id, item);
+    if (!caseIds.has(item.caseIdA) || !caseIds.has(item.caseIdB) || item.caseIdA === item.caseIdB) {
+      throw new Error(`${item.id}: comparison cases must be two different real cases`);
+    }
+    for (const field of ["sharedFeatures", "favouringA", "favouringB"]) {
+      if (!Array.isArray(item[field]) || !item[field].length || item[field].some(value => typeof value !== "string" || !value.trim())) {
+        throw new Error(`${item.id}: ${field} must be non-empty`);
+      }
+    }
+    if (item.discriminator !== null && (typeof item.discriminator !== "string" || !item.discriminator.trim())) {
+      throw new Error(`${item.id}: discriminator must be a sentence or null`);
+    }
+    if (typeof item.commonTrap !== "string" || !item.commonTrap.trim() || typeof item.limits !== "string" || !item.limits.trim()) {
+      throw new Error(`${item.id}: trap and limits are required`);
+    }
+    if (numericCertainty.test(JSON.stringify(item))) throw new Error(`${item.id}: numeric certainty is not allowed`);
+  }
+  const teachings = new Map(caseData.teachingDiagnoses.map(item => [item.id, item]));
+  for (const caseItem of caseData.cases) {
+    if (Array.isArray(caseItem.compareWith)) {
+      for (const id of caseItem.compareWith) {
+        const comparison = comparisons.get(id);
+        if (!comparison || (comparison.caseIdA !== caseItem.id && comparison.caseIdB !== caseItem.id)) {
+          throw new Error(`${caseItem.id}: compareWith does not resolve: ${id}`);
+        }
+      }
+    }
+    if (Object.prototype.hasOwnProperty.call(caseItem, "recordedScreeningDecision") && caseItem.recordedScreeningDecision !== null) {
+      const decision = caseItem.recordedScreeningDecision;
+      if (!decision || !screeningIds.has(decision.categoryId) || typeof decision.sourceSupport !== "string" || decision.sourceSupport.trim().length < 40) {
+        throw new Error(`${caseItem.id}: a screening decision needs a real category and a source sentence`);
+      }
+      if (decision.sourceSupport.trim().toLowerCase() === String(caseItem.diagnosisLabel || "").trim().toLowerCase()) {
+        throw new Error(`${caseItem.id}: the diagnosis label is not a screening decision`);
+      }
+      const teaching = teachings.get(caseItem.diseaseId);
+      if (teaching && teaching.pole === "benign" && decision.categoryId === "routine-benign-impression") {
+        throw new Error(`${caseItem.id}: a benign label must not be stored as a routine benign impression`);
+      }
+    }
+  }
+  const proposal = caseData.proposedProgression;
+  if (!proposal || proposal.hardCodedPath !== false || proposal.status !== "proposal" || !Array.isArray(proposal.tracks)) {
+    throw new Error("proposed progression must stay a proposal and must not be a hard-coded path");
+  }
+  for (const track of proposal.tracks) {
+    if (!track?.id?.trim() || !track.title?.trim() || !Array.isArray(track.caseIds)) throw new Error("invalid proposed track");
+    for (const id of track.caseIds) if (!caseIds.has(id)) throw new Error(`${track.id}: proposed case does not exist: ${id}`);
+    if (!track.caseIds.length && track.id !== "screening-integration") throw new Error(`${track.id}: an empty track is only allowed for the unbuilt screening session`);
+  }
+  return true;
+}
+
 function validateCaseData(caseData = loadCaseData(), diseaseData = loadDiseaseData()) {
   if (!caseData || caseData.schemaVersion !== 1 || !Array.isArray(caseData.cases)) {
     throw new Error("Case registry must use schemaVersion 1 with a cases array");
   }
+  const teachingIds = validateTeachingDiagnoses(caseData);
   const diseaseIds = new Set(diseaseData.diseases.map(item => item.id));
+  for (const id of teachingIds) {
+    if (diseaseIds.has(id)) throw new Error(`${id}: teaching diagnosis collides with a condition id`);
+    diseaseIds.add(id);
+  }
   const ids = new Set();
   const slugs = new Set();
   for (const item of caseData.cases) {
@@ -379,6 +470,7 @@ function validateCaseData(caseData = loadCaseData(), diseaseData = loadDiseaseDa
     validateCase(item, diseaseIds);
   }
   validateCurriculum(caseData);
+  validateContrastiveLayer(caseData);
   const { validatePatternLibrary } = require("./pattern");
   validatePatternLibrary(undefined, caseData);
   const gate = primaryPathGate(caseData);
@@ -397,7 +489,7 @@ function main() {
 
 module.exports = {
   allowedLevels, allowedCaseTypes, allowedLicenses, allowedConfirm,
-  caseClinicalContent, caseFingerprint, validateCaseData, validateCurriculum, primaryPathGate,
+  caseClinicalContent, caseFingerprint, validateCaseData, validateCurriculum, validateContrastiveLayer, primaryPathGate,
   teachingTypes, featureCertainties, featureWeights, leaksRecordedDiagnosis, loadCaseData, loadDiseaseData, main
 };
 

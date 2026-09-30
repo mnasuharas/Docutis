@@ -8,7 +8,7 @@ A primary-path case has all of the following, checked by `primaryPathGate` in `s
 
 - A real source and a local image with an allowed license.
 - At least two observations and a differential.
-- A skill assignment that is not a copy of another pathway case's skill list. The 19 skills are a taxonomy, not a checklist of melanoma structures. An empty `dermoscopicFeatures` array is valid.
+- A skill assignment that is not a copy of another pathway case's skill list. The skills are a taxonomy, not a checklist of melanoma structures. An empty `dermoscopicFeatures` array is valid.
 - Honest review status. New and changed teaching stays `clinician review required` with `clinicalReview: null`.
 - A teaching type: `teaching`, `reasoning`, or `expert-challenge`. The type is the shape of the lesson. It is not the diagnosis and it may be shown before reveal.
 
@@ -31,7 +31,7 @@ Many pathway photographs are public-domain catalog images with a short caption a
 - Confirmation methods were not upgraded. `clinical_diagnosis` stays `clinical_diagnosis`. Histopathology was not added.
 - No Breslow thickness, histologic subtype, or stage was invented.
 - Dermoscopic structures were not named unless the existing observation already recorded them. A soft photograph does not gain vessels.
-- No seborrheic keratosis, dermatofibroma, or lentigo maligna case was added. Those disease records were not used as an excuse to invent an image.
+- Goal 19 did not add a seborrheic keratosis, dermatofibroma, or lentigo maligna case. Goal 21 later added sourced benign mimics and one lentigo maligna melanoma photograph. Dermatofibroma and lichenoid keratosis are still absent. Disease records were not used as an excuse to invent an image.
 - Level 5 stays one case: nail-unit damage with a thin clinical label. A second advanced case was not invented.
 - No educational-efficacy claim is made.
 

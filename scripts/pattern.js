@@ -199,6 +199,17 @@ function diseaseById(diseaseData = loadDiseaseData()) {
   return new Map((diseaseData.diseases || []).map(item => [item.id, item]));
 }
 
+function teachingById(caseData = loadCaseData()) {
+  return new Map((caseData.teachingDiagnoses || []).map(item => [item.id, item]));
+}
+
+function casePole(caseItem, diseases, teaching) {
+  const disease = diseases.get(caseItem.diseaseId) || null;
+  if (disease) return lesionPole(disease);
+  const record = teaching.get(caseItem.diseaseId);
+  return record && record.pole ? record.pole : "unknown";
+}
+
 function occurrenceShell(caseItem, diseases, extra) {
   const disease = diseases.get(caseItem.diseaseId) || null;
   const entry = (caseItem && extra.curriculumEntry) || null;
@@ -207,7 +218,7 @@ function occurrenceShell(caseItem, diseases, extra) {
     caseTitle: caseItem.title,
     diagnosisLabel: caseItem.diagnosisLabel,
     diseaseId: caseItem.diseaseId,
-    pole: lesionPole(disease),
+    pole: casePole(caseItem, diseases, extra.teaching || new Map()),
     caseType: caseItem.caseType,
     anatomicalSite: caseItem.patientContext && caseItem.patientContext.anatomicalSite || "",
     specialSite: specialSite(caseItem.patientContext && caseItem.patientContext.anatomicalSite),
@@ -222,6 +233,7 @@ function occurrenceShell(caseItem, diseases, extra) {
 
 function deriveOccurrences(patternData = loadPatternData(), caseData = loadCaseData(), diseaseData = loadDiseaseData()) {
   const diseases = diseaseById(diseaseData);
+  const teaching = teachingById(caseData);
   const index = casePatternIndex(caseData);
   const curriculum = new Map(((caseData.curriculum && caseData.curriculum.entries) || []).map(entry => [entry.caseId, entry]));
   const grouped = new Map();
@@ -234,6 +246,7 @@ function deriveOccurrences(patternData = loadPatternData(), caseData = loadCaseD
     if (!found) continue;
     const { caseItem, pattern } = found;
     add(link.canonicalId, occurrenceShell(caseItem, diseases, {
+      teaching,
       curriculumEntry: curriculum.get(caseItem.id) || null,
       casePatternId: pattern.id,
       label: pattern.label,
@@ -254,6 +267,7 @@ function deriveOccurrences(patternData = loadPatternData(), caseData = loadCaseD
         continue;
       }
       add(canonicalId, occurrenceShell(caseItem, diseases, {
+        teaching,
         curriculumEntry: curriculum.get(caseItem.id) || null,
         casePatternId: null,
         label: features[0].label || token,
@@ -367,6 +381,7 @@ function spectrumSlot(id, label, cases) {
 function buildAudit(patternData = loadPatternData(), caseData = loadCaseData(), diseaseData = loadDiseaseData()) {
   validatePatternLibrary(patternData, caseData);
   const diseases = diseaseById(diseaseData);
+  const teaching = teachingById(caseData);
   const coverage = classifyPatternCoverage(patternData, caseData, diseaseData);
   const occurrences = deriveOccurrences(patternData, caseData, diseaseData);
   const hitsByCase = new Map();
@@ -384,7 +399,7 @@ function buildAudit(patternData = loadPatternData(), caseData = loadCaseData(), 
       title: caseItem.title,
       diagnosisLabel: caseItem.diagnosisLabel,
       diseaseId: caseItem.diseaseId,
-      pole: lesionPole(disease),
+      pole: casePole(caseItem, diseases, teaching),
       caseType: caseItem.caseType,
       anatomicalSite: caseItem.patientContext.anatomicalSite,
       specialSite: specialSite(caseItem.patientContext.anatomicalSite),
@@ -416,7 +431,13 @@ function buildAudit(patternData = loadPatternData(), caseData = loadCaseData(), 
     spectrumSlot("seborrheic-keratosis", "Seborrheic keratosis", caseData.cases.filter(item => /seborrheic keratosis/i.test(item.diagnosisLabel))),
     spectrumSlot("dermatofibroma", "Dermatofibroma", caseData.cases.filter(item => /dermatofibroma/i.test(item.diagnosisLabel))),
     spectrumSlot("benign-nevus", "Benign nevus as the case diagnosis", caseData.cases.filter(item => /\bnevu?s\b/i.test(item.diagnosisLabel) && !/melanoma/i.test(item.diagnosisLabel))),
-    spectrumSlot("solar-lentigo", "Solar lentigo", caseData.cases.filter(item => /solar lentigo|lentigo solaris/i.test(item.diagnosisLabel)))
+    spectrumSlot("solar-lentigo", "Solar lentigo", caseData.cases.filter(item => /solar lentigo|lentigo solaris/i.test(item.diagnosisLabel))),
+    spectrumSlot("blue-nevus", "Blue nevus", caseData.cases.filter(item => /blue nevus|blue naevus/i.test(item.diagnosisLabel))),
+    spectrumSlot("cherry-angioma", "Cherry angioma", caseData.cases.filter(item => /angioma|haemangioma|hemangioma/i.test(item.diagnosisLabel))),
+    spectrumSlot("sebaceous-hyperplasia", "Sebaceous hyperplasia", caseData.cases.filter(item => /sebaceous hyperplasia/i.test(item.diagnosisLabel))),
+    spectrumSlot("lichenoid-keratosis", "Lichenoid keratosis", caseData.cases.filter(item => /lichenoid keratosis|lichen planus-like/i.test(item.diagnosisLabel))),
+    spectrumSlot("benign-acral", "Benign acral melanocytic lesion", caseData.cases.filter(item => /acral/i.test(item.diagnosisLabel) && /nevus|naevus/i.test(item.diagnosisLabel))),
+    spectrumSlot("subungual-haemorrhage", "Subungual haemorrhage", caseData.cases.filter(item => /subungual h[ae]emorrhage/i.test(item.diagnosisLabel)))
   ];
   const mimicCounts = new Map();
   for (const caseItem of caseData.cases) {
@@ -451,7 +472,10 @@ function buildAudit(patternData = loadPatternData(), caseData = loadCaseData(), 
     spectrum: slots,
     benignGaps,
     knownConcerns: known,
-    adequateRepetitionClaim: false
+    adequateRepetitionClaim: false,
+    comparisons: (caseData.comparisons || []).map(item => ({ id: item.id, caseIdA: item.caseIdA, caseIdB: item.caseIdB })),
+    screeningCategories: ((caseData.screening || {}).categories || []).slice(),
+    teachingDiagnoses: (caseData.teachingDiagnoses || []).map(item => ({ id: item.id, name: item.name, pole: item.pole, monograph: item.monograph }))
   };
 }
 
@@ -534,6 +558,13 @@ function formatAudit(audit) {
   lines.push("");
   lines.push("Benign mimic names stored as closest mimic with no case of that diagnosis:");
   for (const gap of audit.benignGaps) lines.push(`- ${gap.name}: named on ${gap.closestMimicUses} case(s)`);
+  lines.push("");
+  lines.push("Explicit contrastive pairs (structured relationships, not inferred):");
+  if (!audit.comparisons.length) lines.push("- none");
+  for (const item of audit.comparisons) lines.push(`- ${item.id}: ${item.caseIdA} <-> ${item.caseIdB}`);
+  lines.push(`Screening vocabulary only: ${(audit.screeningCategories || []).map(item => item && (item.label || item.id) || item).join(", ") || "none"}. No session is implemented.`);
+  lines.push("Teaching diagnoses are not condition monographs and are not clinician reviewed:");
+  for (const item of audit.teachingDiagnoses || []) lines.push(`- ${item.id}: ${item.name}; pole ${item.pole}; monograph ${item.monograph}`);
   return lines.join("\n");
 }
 

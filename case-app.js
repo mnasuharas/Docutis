@@ -43,6 +43,7 @@
   let activeId = null;
   let activeStep = 0;
   let diagnosisRevealed = false;
+  let openComparisonId = null;
   let zoomScales = Object.create(null);
   const impressions = Object.create(null);
   const descriptions = Object.create(null);
@@ -725,6 +726,82 @@
     if (groundTruth.confidenceNote) parent.appendChild(element("p", groundTruth.confidenceNote, "case-confidence"));
   }
 
+
+  function teachingDiagnosis(id) {
+    return asList(registry && registry.teachingDiagnoses).find(item => item && item.id === id) || null;
+  }
+
+  function comparisonsFor(caseId) {
+    const caseItem = registry.cases.find(item => item.id === caseId);
+    const allowed = new Set(asList(caseItem && caseItem.compareWith));
+    return asList(registry.comparisons).filter(item => item && allowed.has(item.id) && (item.caseIdA === caseId || item.caseIdB === caseId));
+  }
+
+  function appendNamedLines(parent, title, values) {
+    parent.appendChild(element("h6", title));
+    const lines = asList(values).filter(value => typeof value === "string" && value.trim());
+    if (!lines.length) {
+      parent.appendChild(element("p", "None stored.", "case-empty"));
+      return;
+    }
+    lines.forEach(value => parent.appendChild(element("p", value)));
+  }
+
+  function renderCompare(parent, caseItem) {
+    if (!diagnosisRevealed) return;
+    const rows = comparisonsFor(caseItem.id);
+    if (!rows.length) return;
+    const section = element("section", undefined, "case-compare");
+    section.appendChild(element("h5", "Compare with"));
+    section.appendChild(element("p", "These links are stored relationships. They appear only after this diagnosis is revealed. Opening another case hides that diagnosis again.", "case-kind-note"));
+    rows.forEach(row => {
+      const otherId = row.caseIdA === caseItem.id ? row.caseIdB : row.caseIdA;
+      const other = registry.cases.find(item => item.id === otherId);
+      if (!other) return;
+      const title = other.title || "Untitled case";
+      const button = element("button", `Compare with: ${title}`, "case-button case-button-secondary");
+      button.type = "button";
+      button.setAttribute("aria-expanded", openComparisonId === row.id ? "true" : "false");
+      button.setAttribute("aria-controls", `case-compare-${row.id}`);
+      button.addEventListener("click", () => {
+        openComparisonId = openComparisonId === row.id ? null : row.id;
+        renderDetail(caseItem, "compare");
+      });
+      section.appendChild(button);
+      if (openComparisonId !== row.id) return;
+      const panel = element("div", undefined, "case-compare-panel");
+      panel.id = `case-compare-${row.id}`;
+      panel.setAttribute("role", "region");
+      panel.setAttribute("aria-label", `Comparison with ${title}`);
+      panel.tabIndex = -1;
+      const favourThis = row.caseIdA === caseItem.id ? row.favouringA : row.favouringB;
+      const favourOther = row.caseIdA === caseItem.id ? row.favouringB : row.favouringA;
+      appendNamedLines(panel, "Shared features", row.sharedFeatures);
+      appendNamedLines(panel, "Features favouring this case", favourThis);
+      appendNamedLines(panel, `Features favouring ${title}`, favourOther);
+      panel.appendChild(element("h6", "Most useful discriminator"));
+      panel.appendChild(element("p", row.discriminator || "No single discriminator is stored for this pair."));
+      panel.appendChild(element("h6", "Common trap"));
+      panel.appendChild(element("p", row.commonTrap));
+      panel.appendChild(element("h6", "Limits"));
+      panel.appendChild(element("p", row.limits));
+      const open = element("button", `Open case: ${title}`, "case-button case-button-secondary");
+      open.type = "button";
+      open.addEventListener("click", () => {
+        activeId = other.id;
+        activeStep = 0;
+        diagnosisRevealed = false;
+        openComparisonId = null;
+        zoomScales = Object.create(null);
+        patternFocusId = null;
+        renderDetail(other, "step");
+      });
+      panel.appendChild(open);
+      section.appendChild(panel);
+    });
+    parent.appendChild(section);
+  }
+
   function renderReveal(parent, caseItem) {
     parent.appendChild(element("p", "The recorded diagnosis stays hidden until you activate the button. Revealing it is not a score and not a clinical certainty.", "case-step-intro"));
     const revealWrap = element("div", undefined, "case-reveal");
@@ -752,6 +829,7 @@
       appendEvidence(panel, caseItem);
       appendHeldSourceNotes(panel, caseItem);
       asList(caseItem.images).forEach(image => appendSourcePageLink(panel, image));
+      renderCompare(panel, caseItem);
     }
     revealWrap.appendChild(revealBtn);
     revealWrap.appendChild(status);
@@ -880,6 +958,7 @@
         activeId = otherCase.id;
         activeStep = 0;
         diagnosisRevealed = false;
+        openComparisonId = null;
         zoomScales = Object.create(null);
         patternFocusId = null;
         renderDetail(otherCase, "step");
@@ -1077,11 +1156,18 @@
     summary.appendChild(element("p", reviewExplanation(caseItem), "case-review-note"));
     parent.appendChild(summary);
     if (caseItem.clinicalAction) parent.appendChild(element("p", caseItem.clinicalAction, "case-action"));
-    if (caseItem.diseaseId) {
+    if (Object.prototype.hasOwnProperty.call(caseItem, "recordedScreeningDecision") && caseItem.recordedScreeningDecision === null) {
+      parent.appendChild(element("p", "No screening decision is stored. A benign label is not a guarantee that the lesion is safe.", "case-kind-note"));
+    }
+    const teachingRecord = teachingDiagnosis(caseItem.diseaseId);
+    if (teachingRecord && teachingRecord.monograph === false) {
+      parent.appendChild(element("p", "No condition monograph is stored for this teaching diagnosis. The label is not a reviewed disease record.", "case-kind-note"));
+    } else if (caseItem.diseaseId && data.diseases.some(item => item.id === caseItem.diseaseId)) {
       const link = element("a", `Open ${diseaseName(caseItem.diseaseId)} condition record`);
       link.href = `?condition=${encodeURIComponent(caseItem.diseaseId)}`;
       parent.appendChild(link);
     }
+    renderCompare(parent, caseItem);
   }
 
   function renderStepNav(parent, caseItem) {
@@ -1141,6 +1227,7 @@
           activeId = nextCase.id;
           activeStep = 0;
           diagnosisRevealed = false;
+          openComparisonId = null;
           zoomScales = Object.create(null);
           renderDetail(nextCase, "step");
         });
@@ -1204,6 +1291,19 @@
       else if (focusTarget === "hint" && lastHintButton && typeof lastHintButton.focus === "function") lastHintButton.focus();
       else if (focusTarget === "pattern-open" && lastPatternPanel && typeof lastPatternPanel.focus === "function") lastPatternPanel.focus();
       else if (focusTarget === "pattern-close" && lastPatternButton && typeof lastPatternButton.focus === "function") lastPatternButton.focus();
+      else if (focusTarget === "compare") {
+        const panel = region.querySelector ? null : null;
+        const comparePanel = (function findPanel(node) {
+          if (node && node.className === "case-compare-panel") return node;
+          for (const child of (node && node.children) || []) {
+            const found = findPanel(child);
+            if (found) return found;
+          }
+          return null;
+        })(region);
+        if (comparePanel && typeof comparePanel.focus === "function") comparePanel.focus();
+        else if (typeof heading.focus === "function") heading.focus();
+      }
       else if (focusTarget !== "none" && typeof heading.focus === "function") heading.focus();
     } catch (error) {
       showLoadError("The case view could not be shown. No substitute clinical content was added.");
@@ -1281,6 +1381,7 @@
           activeId = item.id;
           activeStep = 0;
           diagnosisRevealed = false;
+          openComparisonId = null;
           zoomScales = Object.create(null);
           renderDetail(item, "step");
         });

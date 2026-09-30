@@ -85,7 +85,15 @@
         Object.freeze({ id: "acral-pigment", title: "Acral pigment", summary: "Pigment on the palm, sole or nail apparatus is described on its own site. Acral location is not reassuring." }),
         Object.freeze({ id: "vessel-pattern", title: "Branching vessels", summary: "Branching vessels on a translucent field are a dermoscopic clue recorded only when the image shows them." }),
         Object.freeze({ id: "pigment-architecture", title: "Pigment architecture", summary: "Leaf-like or ovoid pigment is compared with a network. The comparison is teaching, not a device read." }),
-        Object.freeze({ id: "evidence-weighting", title: "Evidence weighting", summary: "Separate the visible frame, the source sentence, and what the source does not say." })
+        Object.freeze({ id: "evidence-weighting", title: "Evidence weighting", summary: "Separate the visible frame, the source sentence, and what the source does not say." }),
+        Object.freeze({ id: "nevus-range", title: "Range of ordinary moles", summary: "A plate can hold a small brown spot and a dark papule. One panel does not answer for the others, and a benign label is not a guarantee." }),
+        Object.freeze({ id: "stuck-on-surface", title: "Stuck-on rough surface", summary: "A rough surface that looks stuck on the skin is a clue. It is not proof of a benign lesion." }),
+        Object.freeze({ id: "fissured-surface", title: "Ridged surface", summary: "Ridges under a dermatoscope are described before a diagnosis is borrowed from another photograph." }),
+        Object.freeze({ id: "many-brown-macules", title: "Many flat brown macules", summary: "A field of flat brown macules is not one broad patch, and it does not clear every spot." }),
+        Object.freeze({ id: "bright-red-papule", title: "Bright red papule", summary: "A bright red papule is a color finding. A second similar papule is part of the frame, not a proof." }),
+        Object.freeze({ id: "blue-color", title: "Blue color", summary: "Blue is a color. It does not assign a subtype and it does not make the next blue-black lesion safe." }),
+        Object.freeze({ id: "marked-cheek-patch", title: "Marked cheek patch", summary: "Separate ink from the brown patch. A biopsy mark is not a result." }),
+        Object.freeze({ id: "grouped-papules", title: "Grouped papules", summary: "A group of papules is not the same frame as one shiny red papule." })
       ]),
       entries: Object.freeze([
         Object.freeze({ caseId: "case-g18-01", order: 1, level: 1, spectrum: "melanoma", teachingType: "teaching", skillIds: Object.freeze(["asymmetry", "evidence-weighting"]) }),
@@ -106,7 +114,150 @@
         Object.freeze({ caseId: "case-g18-09", order: 16, level: 4, spectrum: "melanoma", teachingType: "reasoning", skillIds: Object.freeze(["change-not-in-one-photo", "border-irregularity"]) }),
         Object.freeze({ caseId: "case-g18-08", order: 17, level: 4, spectrum: "melanoma", teachingType: "expert-challenge", skillIds: Object.freeze(["evidence-weighting", "change-not-in-one-photo"]) }),
         Object.freeze({ caseId: "case-g18-16", order: 18, level: 4, spectrum: "mimic", teachingType: "reasoning", skillIds: Object.freeze(["crateriform-center"]) }),
-        Object.freeze({ caseId: "case-g18-12", order: 19, level: 5, spectrum: "melanoma", teachingType: "expert-challenge", skillIds: Object.freeze(["nail-unit-damage", "evidence-weighting"]) })
+        Object.freeze({ caseId: "case-g18-12", order: 19, level: 5, spectrum: "melanoma", teachingType: "expert-challenge", skillIds: Object.freeze(["nail-unit-damage", "evidence-weighting"]) }),
+        Object.freeze({ caseId: "case-g21-01", order: 20, level: 1, spectrum: "mimic", teachingType: "teaching", skillIds: Object.freeze(["nevus-range"]) }),
+        Object.freeze({ caseId: "case-g21-02", order: 21, level: 2, spectrum: "mimic", teachingType: "teaching", skillIds: Object.freeze(["stuck-on-surface"]) }),
+        Object.freeze({ caseId: "case-g21-03", order: 22, level: 2, spectrum: "mimic", teachingType: "teaching", skillIds: Object.freeze(["fissured-surface"]) }),
+        Object.freeze({ caseId: "case-g21-04", order: 23, level: 2, spectrum: "mimic", teachingType: "teaching", skillIds: Object.freeze(["many-brown-macules"]) }),
+        Object.freeze({ caseId: "case-g21-05", order: 24, level: 2, spectrum: "mimic", teachingType: "teaching", skillIds: Object.freeze(["bright-red-papule"]) }),
+        Object.freeze({ caseId: "case-g21-06", order: 25, level: 3, spectrum: "mimic", teachingType: "reasoning", skillIds: Object.freeze(["blue-color"]) }),
+        Object.freeze({ caseId: "case-g21-08", order: 26, level: 3, spectrum: "mimic", teachingType: "teaching", skillIds: Object.freeze(["grouped-papules"]) }),
+        Object.freeze({ caseId: "case-g21-07", order: 27, level: 4, spectrum: "melanoma", teachingType: "expert-challenge", skillIds: Object.freeze(["marked-cheek-patch"]) })
+      ])
+    }),
+
+    teachingDiagnoses: Object.freeze([
+      Object.freeze({ id: "melanocytic-nevus", name: "Melanocytic nevus", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record." }),
+      Object.freeze({ id: "seborrheic-keratosis", name: "Seborrheic keratosis", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record." }),
+      Object.freeze({ id: "solar-lentigo", name: "Solar lentigo", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record." }),
+      Object.freeze({ id: "cherry-angioma", name: "Cherry angioma", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record." }),
+      Object.freeze({ id: "blue-nevus", name: "Blue nevus", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record." }),
+      Object.freeze({ id: "sebaceous-hyperplasia", name: "Sebaceous hyperplasia", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record." })
+    ]),
+    screening: Object.freeze({
+      schemaVersion: 1,
+      purpose: "Vocabulary for a future session. Not a simulation, not a score, and not a stored decision.",
+      categories: Object.freeze([
+        Object.freeze({ id: "routine-benign-impression", label: "Routine or benign impression" }),
+        Object.freeze({ id: "monitor", label: "Monitor" }),
+        Object.freeze({ id: "further-dermoscopy", label: "Further dermoscopy" }),
+        Object.freeze({ id: "biopsy-excision-consideration", label: "Biopsy or excision consideration" }),
+        Object.freeze({ id: "specialist-evaluation", label: "Specialist evaluation" })
+      ])
+    }),
+    comparisons: Object.freeze([
+      Object.freeze({
+        id: "cmp-nevus-dark-papule",
+        caseIdA: "case-g21-01",
+        caseIdB: "case-g18-08",
+        sharedFeatures: Object.freeze(["A solitary dark papule is in one panel of the plate and is the lesion in the other photograph."]),
+        favouringA: Object.freeze(["The source caption calls the plate ordinary moles and also shows small brown macules and a pale papule."]),
+        favouringB: Object.freeze(["That case is one lesion. Its caption says invasive melanoma arising in a dysplastic nevus. It is not a five-panel plate."]),
+        discriminator: null,
+        commonTrap: "Letting the calmest panel answer for the dark papule.",
+        limits: "No single discriminator in these frames separates the dark panel from that melanoma photograph. The NCI plate assigns histologic names without a slide in the file. Those names are not re-verified."
+      }),
+      Object.freeze({
+        id: "cmp-sk-color",
+        caseIdA: "case-g21-02",
+        caseIdB: "case-g18-03",
+        sharedFeatures: Object.freeze(["More than one brown or dark color is visible in the lesion."]),
+        favouringA: Object.freeze(["The surface is rough and looks stuck on the skin. The caption says seborrheic keratosis and does not cite histopathology."]),
+        favouringB: Object.freeze(["The NCI caption names cutaneous melanoma for the color example. That frame is not a thick rough plate."]),
+        discriminator: "In these two frames, a rough stuck-on surface versus a color mix without that rough plate is the difference you can point to. It is not a rule for the next lesion.",
+        commonTrap: "Stopping at the first familiar benign name because the colors overlap.",
+        limits: "Neither caption used here is a histopathology report. Neither source names a body site."
+      }),
+      Object.freeze({
+        id: "cmp-sk-border",
+        caseIdA: "case-g21-02",
+        caseIdB: "case-g18-02",
+        sharedFeatures: Object.freeze(["The outline is not a smooth oval."]),
+        favouringA: Object.freeze(["The surface is rough and stuck-on."]),
+        favouringB: Object.freeze(["The melanoma teaching frame shows a notch. Its caption is the NCI border example."]),
+        discriminator: "A notch and a rough stuck-on surface are different if you can see both. If you cannot, do not force a winner.",
+        commonTrap: "Calling every uneven edge one diagnosis.",
+        limits: "No histopathology is in either caption. The scale in the melanoma frame is not a measurement."
+      }),
+      Object.freeze({
+        id: "cmp-sk-dermoscopy",
+        caseIdA: "case-g21-03",
+        caseIdB: "case-g18-03",
+        sharedFeatures: Object.freeze(["Both are pigmented lesions. Color alone does not separate them."]),
+        favouringA: Object.freeze(["The dermoscopic surface is broken into yellow-tan ridges. The author caption says seborrheic keratosis."]),
+        favouringB: Object.freeze(["The comparison melanoma frame is a clinical photograph whose caption names melanoma for several dark colors. It does not show these ridges."]),
+        discriminator: "Ridges on the dermoscopic frame are the difference you can see. The millimeter scale is not the discriminator.",
+        commonTrap: "Reading the scale as skin, or ignoring ridges because the lesion is pigmented.",
+        limits: "One frame is dermoscopy and the other is clinical. That is not a matched pair of the same modality. No histopathology is attached to the dermoscopic caption."
+      }),
+      Object.freeze({
+        id: "cmp-lentigo-broad-patch",
+        caseIdA: "case-g21-04",
+        caseIdB: "case-g18-04",
+        sharedFeatures: Object.freeze(["Brown pigment is on the skin."]),
+        favouringA: Object.freeze(["Many separate flat macules are on the dorsum of the hand. The caption says lentigo sénile."]),
+        favouringB: Object.freeze(["One broad uneven brown patch. The NCI caption names cutaneous melanoma. The site is not named."]),
+        discriminator: "Many separate macules versus one broad patch, in these two frames only.",
+        commonTrap: "Calling every brown macule on the hand harmless, or calling every broad patch a lentigo.",
+        limits: "The hand photograph cannot clear every macule. The melanoma photograph does not say lentigo maligna. No histopathology is in either caption."
+      }),
+      Object.freeze({
+        id: "cmp-lmm-lentigo",
+        caseIdA: "case-g21-07",
+        caseIdB: "case-g21-04",
+        sharedFeatures: Object.freeze(["Brown pigment on sun-exposed skin."]),
+        favouringA: Object.freeze(["One cheek patch with marker ink. The caption says lentigo maligna melanoma marked for biopsy."]),
+        favouringB: Object.freeze(["Many macules on the dorsum of the hand. The caption says lentigo sénile. No biopsy mark."]),
+        discriminator: "One marked cheek patch versus a field of hand macules. The ink is not the discriminator and not a diagnosis.",
+        commonTrap: "Using the benign field to dismiss a single cheek patch, or using the melanoma caption to rename every hand macule.",
+        limits: "No histopathology result is in the cheek caption. That image is small. Marker dots are not skin. The hand field does not certify every macule."
+      }),
+      Object.freeze({
+        id: "cmp-angioma-bcc",
+        caseIdA: "case-g21-05",
+        caseIdB: "case-g18-15",
+        sharedFeatures: Object.freeze(["A red papule is in the frame."]),
+        favouringA: Object.freeze(["The papules are bright red, and a second similar papule is in the same frame. The caption says cherry angioma."]),
+        favouringB: Object.freeze(["One shiny red papule. The source label is basal cell carcinoma on the lower back."]),
+        discriminator: "A second similar bright red papule is more in keeping with the angioma caption than with the single shiny red papule. It does not prove either papule.",
+        commonTrap: "Calling every red papule an angioma, or every red papule a carcinoma.",
+        limits: "No dermoscopy on the angioma file. Its site is not named. No histopathology is in either caption."
+      }),
+      Object.freeze({
+        id: "cmp-blue-melanoma",
+        caseIdA: "case-g21-06",
+        caseIdB: "case-g18-07",
+        sharedFeatures: Object.freeze(["Blue or blue-black color is in the lesion."]),
+        favouringA: Object.freeze(["A small blue spot on the shin. The caption says blue nevus. No flat brown companion is in the frame. Hairs cross the spot."]),
+        favouringB: Object.freeze(["A blue-black raised area beside a flatter area, with a printed arrow. The caption says superficial spreading melanoma arising from a dysplastic nevus."]),
+        discriminator: "A companion flat area is in the melanoma frame and not in the blue-spot frame. That difference does not prove the blue spot is benign.",
+        commonTrap: "Treating blue color as a benign diagnosis or as a melanoma diagnosis by itself.",
+        limits: "No histopathology is attached to the blue-spot caption. Hair hides part of its border. No subtype was assigned."
+      }),
+      Object.freeze({
+        id: "cmp-sebaceous-bcc",
+        caseIdA: "case-g21-08",
+        caseIdB: "case-g18-15",
+        sharedFeatures: Object.freeze(["Small papules can raise the same first worry."]),
+        favouringA: Object.freeze(["A group of skin-colored papules on the chest, with yellow-white lobules on the dermoscopic frame. The case report says sebaceous hyperplasia."]),
+        favouringB: Object.freeze(["One shiny red papule labeled basal cell carcinoma on the lower back."]),
+        discriminator: "A skin-colored group with lobules versus one shiny red papule, in these frames. The difference is not a proof.",
+        commonTrap: "Calling every grouped papule sebaceous hyperplasia, or every papule a carcinoma.",
+        limits: "Linear vessels mentioned in the sebaceous hyperplasia caption were not counted. Histopathology was not quoted. The linear chest pattern is this case, not every presentation."
+      })
+    ]),
+    proposedProgression: Object.freeze({
+      status: "proposal",
+      hardCodedPath: false,
+      note: "Not the learner path and not a score. A track is named only where a case already exists. Screening integration has the vocabulary and no session.",
+      tracks: Object.freeze([
+        Object.freeze({ id: "foundation", title: "Foundation", caseIds: Object.freeze(["case-g21-01", "case-g21-02", "case-g21-05"]) }),
+        Object.freeze({ id: "pattern-recognition", title: "Pattern recognition", caseIds: Object.freeze(["case-g21-03", "case-g21-08", "case-g18-03"]) }),
+        Object.freeze({ id: "differential", title: "Differential", caseIds: Object.freeze(["case-g21-02", "case-g18-03", "case-g21-04", "case-g18-04"]) }),
+        Object.freeze({ id: "melanoma-spectrum", title: "Melanoma spectrum", caseIds: Object.freeze(["case-g18-06", "case-g18-10", "case-g21-07", "case-acral-melanoma-plantar", "case-g18-12"]) }),
+        Object.freeze({ id: "difficult-mimics", title: "Difficult mimics", caseIds: Object.freeze(["case-g21-06", "case-g21-08", "case-g21-07", "case-g21-04"]) }),
+        Object.freeze({ id: "special-sites", title: "Special sites", caseIds: Object.freeze(["case-g21-07", "case-g21-04", "case-acral-melanoma-plantar", "case-g18-12", "case-g18-14"]) }),
+        Object.freeze({ id: "screening-integration", title: "Screening integration", caseIds: Object.freeze([]), note: "Decision categories exist. No session is built, and no case is assigned a decision." })
       ])
     }),
     cases: Object.freeze([
@@ -3301,7 +3452,1350 @@
                               "crateriform-center"
                             ]
                 }
-      })
+      }),
+      freezeCase({
+  "id": "case-g21-01",
+  "slug": "g21-five-looks-in-one-plate",
+  "title": "Five looks in one teaching plate",
+  "diagnosisLabel": "Common acquired nevus",
+  "diseaseId": "melanocytic-nevus",
+  "category": "Benign melanocytic",
+  "educationalLevel": "introductory",
+  "caseType": "clinical",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Skin, site not named on the source",
+    "presentationNotes": null
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-10-01",
+      "metadataCheckedAt": "2026-09-30",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g21-01",
+      "type": "clinical",
+      "src": "assets/media/cases/case-22-clinical.jpg",
+      "dimensions": {
+        "width": 1600,
+        "height": 1517
+      },
+      "alt": "A plate of five clinical photographs: small brown spots, a larger brown spot, two dark raised spots, and a pale pink papule. No diagnosis is included.",
+      "caption": "NCI teaching plate of the range of ordinary moles. The catalog label stays hidden until reveal.",
+      "source": "National Cancer Institute, via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Normal_mole_(1).jpg",
+      "creator": "National Cancer Institute",
+      "license": "Public domain",
+      "licenseUrl": "https://www.usa.gov/government-works",
+      "attribution": "National Cancer Institute. Public domain.",
+      "modificationsNotes": "Recompressed for web delivery and file metadata removed. No crop and no annotation. The longest edge was limited to 1600 pixels.",
+      "consentBasis": "US government public-domain teaching plate released through NCI Visuals Online and Wikimedia Commons under PD-USGov-HHS-NIH. No name and no portrait are in the frame."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Common acquired nevi (NCI normal-mole teaching plate)",
+    "confirmationMethod": "source_dataset_diagnosis",
+    "confirmationNotes": "The NCI caption calls this the natural history of common acquired nevi and says the panels are ordinary moles, from a small macule to a pale papule. The same caption assigns junctional, compound, and dermal names. This file has no histopathology image, so those histologic words are not re-verified and are not used as the case method.",
+    "confidenceNote": "Source-catalog diagnosis only. Not a Docutis clinician review. Not histopathology."
+  },
+  "observations": [
+    {
+      "id": "obs-g21-01a",
+      "kind": "observation",
+      "text": "The file is a plate of five separate photographs, not one lesion."
+    },
+    {
+      "id": "obs-g21-01b",
+      "kind": "observation",
+      "text": "Some panels are small brown spots. One panel is a dark raised papule. One panel is a pale pink papule."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g21-01",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g21-01a",
+        "obs-g21-01b"
+      ],
+      "text": "The plate shows a range of looks. A dark papule in one panel does not borrow a benign reading from a small brown spot in another panel."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Common acquired nevus",
+      "supportingFeatures": [
+        "The source caption names ordinary moles and shows more than one look"
+      ],
+      "contradictingFeatures": [
+        "No histopathology image is in the file"
+      ],
+      "teachingDistinction": "The plate is the source's range of ordinary moles. It is not one patient's history."
+    },
+    {
+      "diagnosis": "Invasive melanoma arising in a dysplastic nevus",
+      "supportingFeatures": [
+        "One panel is a solitary dark papule"
+      ],
+      "contradictingFeatures": [
+        "The other panels are small brown spots and a pale papule, and the caption is not that melanoma label"
+      ],
+      "teachingDistinction": "One dark panel can resemble a melanoma photograph. The rest of the plate is not that case."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g21-01a",
+      "title": "Notice first",
+      "text": "Count the panels. Say which are flat and brown, which is dark and raised, and which is pale."
+    },
+    {
+      "id": "tp-g21-01b",
+      "title": "Limit",
+      "text": "A benign-looking panel is not a guarantee, and it does not clear the dark panel. The histologic names in the caption are not a slide."
+    }
+  ],
+  "observationPrompts": [
+    "How many separate photographs are in the file?",
+    "Which panel is a dark raised spot, and which is pale?"
+  ],
+  "hints": [
+    "Do not let the smallest brown spot answer for the dark papule."
+  ],
+  "closestMimic": {
+    "name": "Invasive melanoma arising in a dysplastic nevus",
+    "whyClosest": "One panel is a solitary dark papule. That is the look of the library case with that recorded diagnosis. The other panels are not that lesion."
+  },
+  "patterns": [
+    {
+      "id": "pat-g21-01-macule",
+      "label": "Small brown macules",
+      "specificityNote": "Small brown macules are in this plate. Size and a brown color do not prove a benign outcome.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g21-01-papule",
+      "label": "Dark raised papule in one panel",
+      "specificityNote": "One panel is a solitary dark papule. It does not inherit a benign reading from the other panels.",
+      "certainty": "clearly_visible",
+      "weight": "supportive"
+    },
+    {
+      "id": "pat-g21-01-pale",
+      "label": "Pale papule in one panel",
+      "specificityNote": "The pale panel is not a pale center inside a darker rim.",
+      "certainty": "clearly_visible",
+      "weight": "weak"
+    }
+  ],
+  "synthesis": "The NCI plate is a range of ordinary-mole looks, including a dark papule and a pale papule. The caption's histologic names are not a slide in this file.",
+  "evidenceWeighting": "The small brown macules carry the major weight for what the caption is illustrating. The dark papule is supportive of the trap, not proof of a second diagnosis. The pale papule is a weak extra look. None of these weights is a probability.",
+  "diagnosticTrap": "Treating the calmest panel as proof that the dark panel is harmless.",
+  "mentorNote": "This is a composite plate. Sites are not named. Do not turn five photographs into one patient's story.",
+  "takeHomeRule": "A benign source label on a plate is not a guarantee for every panel, and not a guarantee for the next lesion you see.",
+  "compareWith": [
+    "cmp-nevus-dark-papule"
+  ],
+  "academy": {
+    "level": 1,
+    "spectrum": "mimic",
+    "teachingType": "teaching",
+    "skillIds": [
+      "nevus-range"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "clinicalAction": "No condition monograph is stored for this teaching diagnosis. Do not treat from this case.",
+  "managementBrief": "No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g21-02",
+  "slug": "g21-rough-brown-papule",
+  "title": "Rough brown papule",
+  "diagnosisLabel": "Seborrheic keratosis",
+  "diseaseId": "seborrheic-keratosis",
+  "category": "Benign keratinocytic",
+  "educationalLevel": "introductory",
+  "caseType": "clinical",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Skin, site not named on the source",
+    "presentationNotes": null
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-10-01",
+      "metadataCheckedAt": "2026-09-30",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g21-02",
+      "type": "clinical",
+      "src": "assets/media/cases/case-23-clinical.jpg",
+      "dimensions": {
+        "width": 1449,
+        "height": 1265
+      },
+      "alt": "Close clinical photograph of a rough brown oval lesion with an uneven surface on otherwise even skin. No diagnosis is included.",
+      "caption": "Close clinical photograph. The uploader's diagnosis stays hidden until reveal.",
+      "source": "Assafn, via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Seborrheic_keratosis_closup.jpg",
+      "creator": "Assafn",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Assafn, via Wikimedia Commons. CC BY-SA 4.0.",
+      "modificationsNotes": "Recompressed for web delivery and file metadata removed. No crop and no annotation.",
+      "consentBasis": "Uploader published this own photograph under CC BY-SA 4.0. The frame is a skin close-up without a face. No separate patient-consent document is on the file page."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Seborrheic keratosis",
+    "confirmationMethod": "clinical_diagnosis",
+    "confirmationNotes": "The Commons description says seborrheic keratosis close-up. It does not state histopathology or name a body site.",
+    "confidenceNote": "Uploader clinical label only. Not a Docutis clinician review and not histopathology."
+  },
+  "observations": [
+    {
+      "id": "obs-g21-02a",
+      "kind": "observation",
+      "text": "A single brown oval lesion sits on otherwise even skin."
+    },
+    {
+      "id": "obs-g21-02b",
+      "kind": "observation",
+      "text": "The surface is rough, with lighter tan and darker brown areas, and the edge looks as if the lesion sits on the skin."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g21-02",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g21-02a",
+        "obs-g21-02b"
+      ],
+      "text": "A rough surface and more than one brown color can be shared with a suspicious pigmented lesion. The surface has to be described before a name is chosen."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Seborrheic keratosis",
+      "supportingFeatures": [
+        "Rough surface",
+        "Edge that looks stuck on the skin",
+        "Uploader label"
+      ],
+      "contradictingFeatures": [
+        "No histopathology is stated"
+      ],
+      "teachingDistinction": "The label matches the stuck-on rough surface. The label is still a clinical caption."
+    },
+    {
+      "diagnosis": "Cutaneous melanoma",
+      "supportingFeatures": [
+        "More than one brown color",
+        "An outline that is not a perfect oval"
+      ],
+      "contradictingFeatures": [
+        "The surface is rough and stuck-on rather than a flat dark macule in this frame"
+      ],
+      "teachingDistinction": "Shared color is not the whole reading. The rough surface is the point of the comparison."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g21-02a",
+      "title": "Notice first",
+      "text": "Say whether the surface is smooth or rough, and whether the edge looks stuck on."
+    },
+    {
+      "id": "tp-g21-02b",
+      "title": "Limit",
+      "text": "A stuck-on look is not proof of a benign lesion, and a benign caption is not a guarantee about a different lesion."
+    }
+  ],
+  "observationPrompts": [
+    "Is the surface smooth or rough?",
+    "Does the edge look as if it sits on the skin?"
+  ],
+  "hints": [
+    "Look at the surface before you settle on a color story."
+  ],
+  "closestMimic": {
+    "name": "Cutaneous melanoma",
+    "whyClosest": "More than one brown color and an uneven outline are the looks already used on cutaneous melanoma cases in this library. This frame adds a rough stuck-on surface those frames do not show."
+  },
+  "patterns": [
+    {
+      "id": "pat-g21-02-surface",
+      "label": "Rough stuck-on surface",
+      "specificityNote": "A rough surface that looks stuck on is a clue. It is not proof of a benign lesion.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g21-02-color",
+      "label": "More than one brown color",
+      "specificityNote": "Tan and darker brown are both visible. Shared color is not a diagnosis.",
+      "certainty": "clearly_visible",
+      "weight": "supportive"
+    }
+  ],
+  "synthesis": "The caption says seborrheic keratosis. The frame shows a rough brown papule with more than one brown color. Color overlap with melanoma cases is real. The rough surface is what this frame adds.",
+  "evidenceWeighting": "The rough stuck-on surface is the major clue. The second brown color is supportive and is also seen on melanoma cases, so it does not settle the reading. No histology is in the caption.",
+  "diagnosticTrap": "Stopping at the first familiar benign name because the colors look like a melanoma photograph, or the reverse: ignoring a rough surface because the colors worry you.",
+  "mentorNote": "The uploader did not name a site and did not cite a pathology report. Do not add either.",
+  "takeHomeRule": "Describe the surface. A benign caption does not make the next rough brown lesion safe.",
+  "compareWith": [
+    "cmp-sk-color",
+    "cmp-sk-border"
+  ],
+  "academy": {
+    "level": 2,
+    "spectrum": "mimic",
+    "teachingType": "teaching",
+    "skillIds": [
+      "stuck-on-surface"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "clinicalAction": "No condition monograph is stored for this teaching diagnosis. Do not treat from this case.",
+  "managementBrief": "No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g21-03",
+  "slug": "g21-ridged-dermoscopic-surface",
+  "title": "Ridged surface under a dermatoscope",
+  "diagnosisLabel": "Seborrheic keratosis",
+  "diseaseId": "seborrheic-keratosis",
+  "category": "Benign keratinocytic",
+  "educationalLevel": "intermediate",
+  "caseType": "dermoscopic",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Not specified; dermoscopic close-up",
+    "presentationNotes": null
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-10-01",
+      "metadataCheckedAt": "2026-09-30",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g21-03",
+      "type": "dermoscopy",
+      "src": "assets/media/cases/case-24-dermoscopy.jpg",
+      "dimensions": {
+        "width": 600,
+        "height": 457
+      },
+      "alt": "Dermoscopic photograph of a yellow-tan oval lesion with a ridged surface, beside a millimeter scale, with a few hairs crossing it. No diagnosis is included.",
+      "caption": "Polarized dermoscopic photograph with a millimeter scale. The author's diagnosis stays hidden until reveal.",
+      "source": "Philipp Tschandl, via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dermatoscopy_SebK.jpg",
+      "creator": "Philipp Tschandl",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Philipp Tschandl, via Wikimedia Commons. CC BY-SA 4.0.",
+      "modificationsNotes": "Recompressed for web delivery and file metadata removed. No crop and no annotation.",
+      "consentBasis": "The author published this own dermoscopic photograph under CC BY-SA 4.0. The frame is a skin close-up without a face. No separate patient-consent document is on the file page."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Seborrheic keratosis",
+    "confirmationMethod": "clinical_diagnosis",
+    "confirmationNotes": "The author states that this polarized dermoscopic image shows a seborrheic keratosis. No histopathology report is attached. The method stays clinical_diagnosis rather than histopathology.",
+    "confidenceNote": "Author caption on a dermoscopic photograph. Not a Docutis clinician review."
+  },
+  "observations": [
+    {
+      "id": "obs-g21-03a",
+      "kind": "observation",
+      "text": "A yellow-tan oval lesion has a surface broken into ridges."
+    },
+    {
+      "id": "obs-g21-03b",
+      "kind": "observation",
+      "text": "A millimeter scale lies beside the lesion. A few hairs cross the field."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g21-03",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g21-03a",
+        "obs-g21-03b"
+      ],
+      "text": "The ridged surface is the dermoscopic finding. The scale is print, not skin, and it is not a measurement you should invent."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Seborrheic keratosis",
+      "supportingFeatures": [
+        "Ridged yellow-tan surface",
+        "Author caption on a dermoscopic image"
+      ],
+      "contradictingFeatures": [
+        "No histopathology is attached"
+      ],
+      "teachingDistinction": "The ridges are why this frame is in the library. The caption is still not a pathology report."
+    },
+    {
+      "diagnosis": "Cutaneous melanoma",
+      "supportingFeatures": [
+        "A pigmented lesion can be the worry before the surface is described"
+      ],
+      "contradictingFeatures": [
+        "This frame's surface is ridged and yellow-tan rather than a structureless dark blotch"
+      ],
+      "teachingDistinction": "Do not import a melanoma reading from another case before you describe these ridges."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g21-03a",
+      "title": "Notice first",
+      "text": "Say whether the surface is smooth or broken into ridges. Then notice the scale."
+    },
+    {
+      "id": "tp-g21-03b",
+      "title": "Limit",
+      "text": "Ridges are not proof of a benign lesion. Small pits were not named, because they were not recorded as a separate structure."
+    }
+  ],
+  "observationPrompts": [
+    "Is the surface smooth or broken into ridges?",
+    "What is printed beside the lesion, and is it skin?"
+  ],
+  "hints": [
+    "The scale is not a skin finding and not a number you should calculate."
+  ],
+  "closestMimic": {
+    "name": "Cutaneous melanoma",
+    "whyClosest": "A pigmented dermoscopic lesion is compared with cutaneous melanoma before the surface is described. This frame's ridges are the difference you can see."
+  },
+  "patterns": [
+    {
+      "id": "pat-g21-03-ridges",
+      "label": "Cerebriform ridges",
+      "specificityNote": "A ridged surface is a dermoscopic clue. It is not proof of a benign lesion and it is not a count of pits.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g21-03-scale",
+      "label": "Millimeter scale in the frame",
+      "specificityNote": "The scale is print. It is not skin and it is not a recorded measurement.",
+      "certainty": "clearly_visible",
+      "weight": "weak"
+    }
+  ],
+  "synthesis": "The author calls this a seborrheic keratosis under polarized dermoscopy. The ridges are visible. The scale is not a finding. Pits and cysts were not added.",
+  "evidenceWeighting": "The ridges carry the major weight. The scale is weak because it is not skin. No vessel pattern and no milia-like cyst were encoded.",
+  "diagnosticTrap": "Reading the millimeter scale as a skin structure, or naming pits you have not separated from the ridges.",
+  "mentorNote": "The file is 600 pixels on the long edge. The ridges are still readable. It was not enlarged.",
+  "takeHomeRule": "Describe ridges before you borrow a diagnosis from a different pigmented photograph. A benign caption is not a guarantee.",
+  "compareWith": [
+    "cmp-sk-dermoscopy"
+  ],
+  "academy": {
+    "level": 2,
+    "spectrum": "mimic",
+    "teachingType": "teaching",
+    "skillIds": [
+      "fissured-surface"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "clinicalAction": "No condition monograph is stored for this teaching diagnosis. Do not treat from this case.",
+  "managementBrief": "No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g21-04",
+  "slug": "g21-many-brown-macules-on-the-hand",
+  "title": "Many brown spots on the back of a hand",
+  "diagnosisLabel": "Solar lentigo",
+  "diseaseId": "solar-lentigo",
+  "category": "Benign pigmented",
+  "educationalLevel": "introductory",
+  "caseType": "clinical",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Dorsum of the hand",
+    "presentationNotes": null
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-10-01",
+      "metadataCheckedAt": "2026-09-30",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g21-04",
+      "type": "clinical",
+      "src": "assets/media/cases/case-25-clinical.jpg",
+      "dimensions": {
+        "width": 1600,
+        "height": 1200
+      },
+      "alt": "Clinical photograph of the back of a hand and wrist with many separate brown spots. No diagnosis is included.",
+      "caption": "The back of a hand with many brown macules. The uploader's diagnosis stays hidden until reveal.",
+      "source": "Alain G\u00e9rard, via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lentigo_s%C3%A9nile.jpg",
+      "creator": "Alain G\u00e9rard",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Alain G\u00e9rard, via Wikimedia Commons. CC BY-SA 4.0.",
+      "modificationsNotes": "Recompressed for web delivery and file metadata removed. No crop and no annotation.",
+      "consentBasis": "The photographer published this photograph under CC BY-SA 4.0. The frame shows a hand, not a face. No separate patient-consent document is on the file page."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Lentigo s\u00e9nile (solar lentigo) on the dorsum of the hand",
+    "confirmationMethod": "clinical_diagnosis",
+    "confirmationNotes": "The French caption says lentigo s\u00e9nile on the dorsum of the hand. Solar lentigo is the English name used for that caption. Histopathology is not stated. The photograph cannot clear every macule.",
+    "confidenceNote": "Uploader clinical label for a field of macules. Not a Docutis clinician review."
+  },
+  "observations": [
+    {
+      "id": "obs-g21-04a",
+      "kind": "observation",
+      "text": "Many separate brown macules sit on the back of a hand and the wrist."
+    },
+    {
+      "id": "obs-g21-04b",
+      "kind": "observation",
+      "text": "The macules are not one broad patch. Some are small and some are larger. The borders are not all the same."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g21-04",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g21-04a",
+        "obs-g21-04b"
+      ],
+      "text": "A field of flat brown macules on the hand is the look the caption names. One irregular macule inside a field is not automatically the same as a single broad patch on another case."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Solar lentigo",
+      "supportingFeatures": [
+        "Many flat brown macules on the dorsum of the hand",
+        "Caption says lentigo s\u00e9nile"
+      ],
+      "contradictingFeatures": [
+        "No histopathology",
+        "Not every macule has the same border"
+      ],
+      "teachingDistinction": "The caption names the field. It does not certify each spot."
+    },
+    {
+      "diagnosis": "Lentigo maligna melanoma",
+      "supportingFeatures": [
+        "Brown pigment on sun-exposed skin"
+      ],
+      "contradictingFeatures": [
+        "This frame is many hand macules, not one cheek patch marked for biopsy"
+      ],
+      "teachingDistinction": "Do not use a hand field to dismiss a single facial patch, or the reverse."
+    },
+    {
+      "diagnosis": "Cutaneous melanoma",
+      "supportingFeatures": [
+        "Brown pigment can be uneven"
+      ],
+      "contradictingFeatures": [
+        "This frame is a field of macules, not one broad patch"
+      ],
+      "teachingDistinction": "The library's broad brown melanoma photograph is a different shape."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g21-04a",
+      "title": "Notice first",
+      "text": "Count whether you see one patch or many separate spots, and name the site you can see."
+    },
+    {
+      "id": "tp-g21-04b",
+      "title": "Limit",
+      "text": "A field of solar lentigines does not prove that every brown macule is harmless."
+    }
+  ],
+  "observationPrompts": [
+    "Is this one brown patch or many separate spots?",
+    "What body site can you actually see?"
+  ],
+  "hints": [
+    "Name the hand before you borrow a diagnosis from a facial photograph."
+  ],
+  "closestMimic": {
+    "name": "Lentigo maligna melanoma",
+    "whyClosest": "Both are brown pigment on sun-exposed skin. This frame is many macules on a hand. The lentigo maligna melanoma case is one cheek patch."
+  },
+  "patterns": [
+    {
+      "id": "pat-g21-04-macules",
+      "label": "Many flat brown macules",
+      "specificityNote": "A field of flat brown macules is not one broad patch, and it is not proof that every macule is benign.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    }
+  ],
+  "synthesis": "The caption says lentigo s\u00e9nile on the dorsum of the hand. The frame shows many flat brown macules, not one patch. That does not clear every spot.",
+  "evidenceWeighting": "The field of flat brown macules is the major clue and matches the caption's site. Uneven borders on some macules are not given a second diagnosis from this photograph.",
+  "diagnosticTrap": "Calling every brown spot on the hand harmless, or calling this field the same thing as one broad patch.",
+  "mentorNote": "Nail polish and a watch are in the frame. They are not skin findings. No face is shown.",
+  "takeHomeRule": "Many flat brown macules on the hand are not a promise about the next single brown patch.",
+  "compareWith": [
+    "cmp-lentigo-broad-patch",
+    "cmp-lmm-lentigo"
+  ],
+  "academy": {
+    "level": 2,
+    "spectrum": "mimic",
+    "teachingType": "teaching",
+    "skillIds": [
+      "many-brown-macules"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "clinicalAction": "No condition monograph is stored for this teaching diagnosis. Do not treat from this case.",
+  "managementBrief": "No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g21-05",
+  "slug": "g21-two-bright-red-papules",
+  "title": "Two bright red papules",
+  "diagnosisLabel": "Cherry angioma",
+  "diseaseId": "cherry-angioma",
+  "category": "Benign vascular",
+  "educationalLevel": "introductory",
+  "caseType": "clinical",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Skin, site not named on the source",
+    "presentationNotes": null
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-10-01",
+      "metadataCheckedAt": "2026-09-30",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g21-05",
+      "type": "clinical",
+      "src": "assets/media/cases/case-26-clinical.jpg",
+      "dimensions": {
+        "width": 1505,
+        "height": 1096
+      },
+      "alt": "Close clinical photograph of two bright red papules on otherwise even skin. No diagnosis is included.",
+      "caption": "Two bright red papules. The uploader's diagnosis stays hidden until reveal.",
+      "source": "Assafn, via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cherry_angioma_closeup.jpg",
+      "creator": "Assafn",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Assafn, via Wikimedia Commons. CC BY-SA 4.0.",
+      "modificationsNotes": "Recompressed for web delivery and file metadata removed. No crop and no annotation.",
+      "consentBasis": "Uploader published this own photograph under CC BY-SA 4.0. The frame is a skin close-up without a face. No separate patient-consent document is on the file page."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Cherry angioma",
+    "confirmationMethod": "clinical_diagnosis",
+    "confirmationNotes": "The Commons description says cherry angioma close-up. It does not name a site and does not state histopathology. Two papules are in the frame.",
+    "confidenceNote": "Uploader clinical label only. Not a Docutis clinician review."
+  },
+  "observations": [
+    {
+      "id": "obs-g21-05a",
+      "kind": "observation",
+      "text": "Two bright red papules sit on otherwise even skin."
+    },
+    {
+      "id": "obs-g21-05b",
+      "kind": "observation",
+      "text": "They are a similar vivid red. No brown pigment is visible in them. The site is not named."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g21-05",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g21-05a",
+        "obs-g21-05b"
+      ],
+      "text": "A second similar bright red papule is part of this frame. One shiny red papule on another case is a different photograph."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Cherry angioma",
+      "supportingFeatures": [
+        "Bright red papules",
+        "A second similar papule",
+        "Uploader label"
+      ],
+      "contradictingFeatures": [
+        "No dermoscopy and no histopathology"
+      ],
+      "teachingDistinction": "The caption matches the color. Two papules still do not prove both are benign forever."
+    },
+    {
+      "diagnosis": "Basal cell carcinoma",
+      "supportingFeatures": [
+        "A red papule is also the look of a shiny red papule case in this library"
+      ],
+      "contradictingFeatures": [
+        "This frame has two vivid red papules, not one shiny papule with a named site"
+      ],
+      "teachingDistinction": "Do not call every red papule an angioma or every red papule a carcinoma."
+    },
+    {
+      "diagnosis": "Amelanotic melanoma",
+      "supportingFeatures": [
+        "A red papule without brown pigment can be a melanocytic trap"
+      ],
+      "contradictingFeatures": [
+        "A second matching bright red papule is in this same frame"
+      ],
+      "teachingDistinction": "Absence of brown pigment is not a reassuring test."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g21-05a",
+      "title": "Notice first",
+      "text": "Count the red papules and name the color you see."
+    },
+    {
+      "id": "tp-g21-05b",
+      "title": "Limit",
+      "text": "Bright red is not proof of a benign lesion. No vessels were named because none were separated in this clinical frame."
+    }
+  ],
+  "observationPrompts": [
+    "How many red spots are in the frame?",
+    "Are they the same color as each other?"
+  ],
+  "hints": [
+    "Count before you pick a single-papule diagnosis from another case."
+  ],
+  "closestMimic": {
+    "name": "Basal cell carcinoma",
+    "whyClosest": "The library's solitary shiny red papule is a basal cell carcinoma. This frame is bright red and there are two papules."
+  },
+  "patterns": [
+    {
+      "id": "pat-g21-05-red",
+      "label": "Bright red papules",
+      "specificityNote": "Bright red papules are a color finding. A second papule does not prove either one is benign.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    }
+  ],
+  "synthesis": "The caption says cherry angioma. Two bright red papules are visible. That is not the solitary shiny red papule of the basal cell carcinoma case, and it is not a proof.",
+  "evidenceWeighting": "The bright red color and the second papule are the major clue. No vessel pattern was encoded. No site was stored because the caption does not name one.",
+  "diagnosticTrap": "Calling every red papule an angioma, or calling every red papule a carcinoma.",
+  "mentorNote": "A different cherry angioma file on Commons carried location metadata and was not used. This close-up does not.",
+  "takeHomeRule": "A bright red papule can be benign in the caption and still not be a rule for the next red papule.",
+  "compareWith": [
+    "cmp-angioma-bcc"
+  ],
+  "academy": {
+    "level": 2,
+    "spectrum": "mimic",
+    "teachingType": "teaching",
+    "skillIds": [
+      "bright-red-papule"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "clinicalAction": "No condition monograph is stored for this teaching diagnosis. Do not treat from this case.",
+  "managementBrief": "No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g21-06",
+  "slug": "g21-small-blue-spot",
+  "title": "Small blue spot under hair",
+  "diagnosisLabel": "Blue nevus",
+  "diseaseId": "blue-nevus",
+  "category": "Benign melanocytic",
+  "educationalLevel": "intermediate",
+  "caseType": "clinical",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Shin",
+    "presentationNotes": null
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-10-01",
+      "metadataCheckedAt": "2026-09-30",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g21-06",
+      "type": "clinical",
+      "src": "assets/media/cases/case-27-clinical.jpg",
+      "dimensions": {
+        "width": 1223,
+        "height": 1600
+      },
+      "alt": "Clinical photograph of a small blue spot on hair-bearing skin, with hairs crossing the spot. No diagnosis is included.",
+      "caption": "A small blue spot on hair-bearing skin. The uploader's diagnosis stays hidden until reveal.",
+      "source": "Nictitate, via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blue_nevus.png",
+      "creator": "Nictitate",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "attribution": "Nictitate, via Wikimedia Commons. CC0 1.0.",
+      "modificationsNotes": "Recompressed for web delivery and file metadata removed. No crop and no annotation. The longest edge was limited to 1600 pixels.",
+      "consentBasis": "The author released this own photograph under CC0 1.0. The frame is a shin close-up without a face. No separate patient-consent document is on the file page."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Blue nevus on the shin",
+    "confirmationMethod": "clinical_diagnosis",
+    "confirmationNotes": "The Commons description says a blue nevus on the shin. It does not state a histologic subtype and does not cite histopathology. Hairs cross the spot, so the full border is not traced.",
+    "confidenceNote": "Uploader clinical label only. Not a Docutis clinician review. Not a deep-penetrating or cellular subtype."
+  },
+  "observations": [
+    {
+      "id": "obs-g21-06a",
+      "kind": "observation",
+      "text": "A small blue spot sits on the skin."
+    },
+    {
+      "id": "obs-g21-06b",
+      "kind": "observation",
+      "text": "Terminal hairs cross the spot, so part of the edge is hidden. No flat brown companion lesion is in the frame."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g21-06",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g21-06a",
+        "obs-g21-06b"
+      ],
+      "text": "Blue color is the finding. It is not specific. Hair is an occlusion, not a structure."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Blue nevus",
+      "supportingFeatures": [
+        "Blue color",
+        "Caption names the shin"
+      ],
+      "contradictingFeatures": [
+        "No histopathology",
+        "Border partly hidden by hair"
+      ],
+      "teachingDistinction": "The caption is a clinical label for a blue spot. It does not assign a histologic subtype."
+    },
+    {
+      "diagnosis": "Superficial spreading melanoma arising from a dysplastic nevus",
+      "supportingFeatures": [
+        "That library case has a blue-black raised area"
+      ],
+      "contradictingFeatures": [
+        "That case also has a flatter area and a printed arrow. This frame does not."
+      ],
+      "teachingDistinction": "Blue-black color is shared as a worry. The companion flat area is not in this frame."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g21-06a",
+      "title": "Notice first",
+      "text": "Name the color, then say whether hair hides the edge."
+    },
+    {
+      "id": "tp-g21-06b",
+      "title": "Limit",
+      "text": "Blue does not mean blue nevus in the next patient, and a benign caption is not a guarantee."
+    }
+  ],
+  "observationPrompts": [
+    "What color is the small spot?",
+    "Do hairs hide any of its edge?"
+  ],
+  "hints": [
+    "Color is not a subtype."
+  ],
+  "closestMimic": {
+    "name": "Superficial spreading melanoma arising from a dysplastic nevus",
+    "whyClosest": "That case records a blue-black raised area. This frame is a small blue spot without the flat companion seen there."
+  },
+  "patterns": [
+    {
+      "id": "pat-g21-06-blue",
+      "label": "Blue papule or macule",
+      "specificityNote": "Blue color is visible. It does not prove the source label and it does not name a subtype.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g21-06-hair",
+      "label": "Hairs crossing the spot",
+      "specificityNote": "Hair hides part of the edge. It is not a skin structure.",
+      "certainty": "clearly_visible",
+      "weight": "weak"
+    }
+  ],
+  "synthesis": "The caption says blue nevus on the shin. The spot is blue and partly covered by hair. No subtype was added.",
+  "evidenceWeighting": "Blue color is the major clue and is not specific. Hair is weak because it is occlusion. The missing flat companion is a difference from the melanoma case, not a proof.",
+  "diagnosticTrap": "Treating blue color as a benign diagnosis, or as a melanoma diagnosis, without the rest of the frame.",
+  "mentorNote": "A second blue-nevus file was rejected because marker streaks hid the border. This one still has hair across the spot. That limit stays in the note.",
+  "takeHomeRule": "Blue is a color. A benign caption for one blue spot is not a guarantee for the next blue-black lesion.",
+  "whyNot": [
+    {
+      "mimic": "Superficial spreading melanoma arising from a dysplastic nevus",
+      "text": "That case has a blue-black raised area beside a flatter area and a printed arrow. This frame has no flat companion and no arrow."
+    },
+    {
+      "mimic": "Pigmented basal cell carcinoma",
+      "text": "No leaf-like or ovoid structure is visible here. Blue color alone does not make that diagnosis."
+    }
+  ],
+  "compareWith": [
+    "cmp-blue-melanoma"
+  ],
+  "academy": {
+    "level": 3,
+    "spectrum": "mimic",
+    "teachingType": "reasoning",
+    "skillIds": [
+      "blue-color"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "clinicalAction": "No condition monograph is stored for this teaching diagnosis. Do not treat from this case.",
+  "managementBrief": "No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g21-07",
+  "slug": "g21-brown-cheek-patch-with-ink",
+  "title": "Brown patch with ink dots",
+  "diagnosisLabel": "Lentigo maligna melanoma",
+  "diseaseId": "lentigo-maligna-melanoma",
+  "category": "Melanocytic malignancies",
+  "educationalLevel": "advanced",
+  "caseType": "clinical",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Left central malar cheek",
+    "presentationNotes": "The source says the patch was marked for biopsy. A biopsy result is not in the caption."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-10-01",
+      "metadataCheckedAt": "2026-09-30",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g21-07",
+      "type": "clinical",
+      "src": "assets/media/cases/case-28-clinical.jpg",
+      "dimensions": {
+        "width": 426,
+        "height": 318
+      },
+      "alt": "Close clinical photograph of a brown patch on skin, with several small dark dots around it. No diagnosis is included.",
+      "caption": "A brown cheek patch with marker dots. The source diagnosis stays hidden until reveal.",
+      "source": "Dermanonymous, via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lentigo_Maligna_Melanoma_Left_Central_Malar_Cheek.jpg",
+      "creator": "Dermanonymous",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.",
+      "modificationsNotes": "Recompressed for web delivery and file metadata removed. No crop and no annotation.",
+      "consentBasis": "Uploader published this own photograph under CC BY-SA 4.0. The frame is a close crop of cheek skin with marker dots, not a portrait. No separate patient-consent document is on the file page."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Lentigo maligna melanoma, left central malar cheek, marked for biopsy",
+    "confirmationMethod": "expert_diagnosis",
+    "confirmationNotes": "The caption says lentigo maligna melanoma of the left central malar cheek marked for biopsy. A histopathology report is not on the Commons page. The method stays expert_diagnosis, the same limit used for this uploader's other biopsy-marked caption in the library, and it is not histopathology.",
+    "confidenceNote": "Biopsy marking is not a result. Not a Docutis clinician review. Not lentigo maligna in situ unless the caption had said only that."
+  },
+  "observations": [
+    {
+      "id": "obs-g21-07a",
+      "kind": "observation",
+      "text": "One brown patch sits in a tight crop of skin."
+    },
+    {
+      "id": "obs-g21-07b",
+      "kind": "observation",
+      "text": "Several small dark dots surround the patch. They look like marker ink, not a second lesion."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g21-07",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g21-07a",
+        "obs-g21-07b"
+      ],
+      "text": "The brown patch is the skin finding. The dots are ink. The caption, not the ink, supplies the name, and the caption does not include a pathology result."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Lentigo maligna melanoma",
+      "supportingFeatures": [
+        "Caption names that diagnosis on the cheek",
+        "One brown patch"
+      ],
+      "contradictingFeatures": [
+        "No histopathology result is linked",
+        "The image is small"
+      ],
+      "teachingDistinction": "Use the caption's words. Do not shorten them to in situ, and do not invent a subtype beyond the caption."
+    },
+    {
+      "diagnosis": "Solar lentigo",
+      "supportingFeatures": [
+        "Flat brown pigment on sun-exposed skin"
+      ],
+      "contradictingFeatures": [
+        "This frame is one cheek patch with ink, not a field of hand macules"
+      ],
+      "teachingDistinction": "The hand field and this cheek patch are different photographs."
+    },
+    {
+      "diagnosis": "Pigmented actinic keratosis",
+      "supportingFeatures": [
+        "A brown patch on the cheek can raise that question"
+      ],
+      "contradictingFeatures": [
+        "Scale and a rough surface are not what this frame shows"
+      ],
+      "teachingDistinction": "Do not add scale that is not visible."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g21-07a",
+      "title": "Notice first",
+      "text": "Separate the brown patch from the ink dots."
+    },
+    {
+      "id": "tp-g21-07b",
+      "title": "Limit",
+      "text": "Marked for biopsy is not a report. The file is small. Lentigo maligna in situ was not the caption."
+    }
+  ],
+  "observationPrompts": [
+    "Is the brown pigment one patch or many separate spots?",
+    "What are the small dark dots around it?"
+  ],
+  "hints": [
+    "Separate ink from skin before you name the patch."
+  ],
+  "closestMimic": {
+    "name": "Solar lentigo",
+    "whyClosest": "Both are brown pigment. The solar lentigo case is many macules on a hand. This frame is one cheek patch with marker ink."
+  },
+  "patterns": [
+    {
+      "id": "pat-g21-07-patch",
+      "label": "Brown patch",
+      "specificityNote": "One brown patch is visible. Flatness is probable in this crop and is not a histologic level.",
+      "certainty": "probably",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g21-07-ink",
+      "label": "Marker dots around the patch",
+      "specificityNote": "Ink is not a border and not a diagnosis.",
+      "certainty": "clearly_visible",
+      "weight": "conflicting"
+    }
+  ],
+  "whyNot": [
+    {
+      "mimic": "Solar lentigo",
+      "text": "The solar lentigo photograph is a field of macules on the dorsum of the hand. This is one cheek patch. The field does not answer for this patch."
+    },
+    {
+      "mimic": "Pigmented actinic keratosis",
+      "text": "This frame does not show a rough scaly surface. That absence is not a proof, and scale was not invented."
+    }
+  ],
+  "synthesis": "The caption says lentigo maligna melanoma on the malar cheek, marked for biopsy. The image shows one brown patch and ink. It does not show a pathology result, and it is not a field of hand macules.",
+  "evidenceWeighting": "The brown patch is the major clue and is only probably a flat macule, because the crop does not prove height. Ink conflicts with any reading that treats the dots as skin. The diagnosis is the caption, not a slide.",
+  "diagnosticTrap": "Using a hand full of brown spots to dismiss a single cheek patch, or shortening this caption to in situ.",
+  "mentorNote": "The file is 426 by 318 pixels. It was kept because the patch and the ink are still readable, and a larger licensed lentigo maligna melanoma photograph was not substituted.",
+  "takeHomeRule": "Read the caption's full words. Ink is not skin, a biopsy mark is not a result, and a benign field elsewhere is not this lesion.",
+  "clinicalAction": "After reveal, the linked condition record is reference context only. Do not treat from this case.",
+  "compareWith": [
+    "cmp-lmm-lentigo"
+  ],
+  "academy": {
+    "level": 4,
+    "spectrum": "melanoma",
+    "teachingType": "expert-challenge",
+    "skillIds": [
+      "marked-cheek-patch"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "managementBrief": "No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g21-08",
+  "slug": "g21-grouped-chest-papules",
+  "title": "A group of papules on the chest",
+  "diagnosisLabel": "Sebaceous hyperplasia",
+  "diseaseId": "sebaceous-hyperplasia",
+  "category": "Benign sebaceous",
+  "educationalLevel": "intermediate",
+  "caseType": "clinical_dermoscopic",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Chest",
+    "presentationNotes": "The source describes a linear group on the chest. That distribution is what the paper shows. It is not the only way this diagnosis looks."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-10-01",
+      "metadataCheckedAt": "2026-09-30",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g21-08a",
+      "type": "clinical",
+      "src": "assets/media/cases/case-29-clinical.jpg",
+      "dimensions": {
+        "width": 600,
+        "height": 450
+      },
+      "alt": "Clinical photograph of a group of skin-colored papules on the chest, with a nipple at the lower edge. No diagnosis is included.",
+      "caption": "Clinical photograph of grouped papules on the chest. The paper's diagnosis stays hidden until reveal.",
+      "source": "Sato and Tanaka, Dermatology Practical & Conceptual (2014), via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Photography_of_sebaceous_hyperplasia.jpg",
+      "creator": "Toshitsugu Sato and Masaru Tanaka",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Sato T, Tanaka M. Dermatology Practical & Conceptual. 2014. Via Wikimedia Commons. CC BY 4.0.",
+      "modificationsNotes": "Recompressed for web delivery and file metadata removed. No crop and no annotation.",
+      "consentBasis": "Open-access case-report photograph distributed on Wikimedia Commons under the file's CC BY 4.0 template. The frame shows chest skin, not a face. No name is printed on the image."
+    },
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-10-01",
+      "metadataCheckedAt": "2026-09-30",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g21-08b",
+      "type": "dermoscopy",
+      "src": "assets/media/cases/case-29-dermoscopy.jpg",
+      "dimensions": {
+        "width": 600,
+        "height": 450
+      },
+      "alt": "Dermoscopic photograph of clustered yellow-white lobules. No diagnosis is included.",
+      "caption": "Dermoscopic photograph from the same case report. Lobules are described. A vessel count was not added.",
+      "source": "Sato and Tanaka, Dermatology Practical & Conceptual (2014), via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dermoscopy_of_sebaceous_hyperplasia.jpg",
+      "creator": "Toshitsugu Sato and Masaru Tanaka",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Sato T, Tanaka M. Dermatology Practical & Conceptual. 2014. Via Wikimedia Commons. CC BY 4.0.",
+      "modificationsNotes": "Recompressed for web delivery and file metadata removed. No crop and no annotation.",
+      "consentBasis": "Open-access case-report dermoscopic photograph distributed on Wikimedia Commons under the file's CC BY 4.0 template. No face is in the frame."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Sebaceous hyperplasia (linear, chest)",
+    "confirmationMethod": "expert_diagnosis",
+    "confirmationNotes": "The Commons description cites a 2014 case report that labels the photographs sebaceous gland hyperplasia in a linear group on the chest. The file description does not quote a histopathology sentence, so histopathology is not claimed. The journal statement reprinted on the file page is an unversioned attribution license; the file itself is tagged CC BY 4.0.",
+    "confidenceNote": "Published case-report label. Not a Docutis clinician review. Not the only clinical pattern of this diagnosis."
+  },
+  "observations": [
+    {
+      "id": "obs-g21-08a",
+      "kind": "observation",
+      "text": "A group of skin-colored papules sits on the chest in a loose line. A nipple is at the edge of the clinical frame."
+    },
+    {
+      "id": "obs-g21-08b",
+      "kind": "observation",
+      "text": "The dermoscopic frame shows clustered yellow-white lobules. A gel bubble is at the edge."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g21-08",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g21-08a",
+        "obs-g21-08b"
+      ],
+      "text": "Grouped papules plus lobules are the two frames. Linear vessels are named in the file caption and are not encoded here as a counted structure."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Sebaceous hyperplasia",
+      "supportingFeatures": [
+        "Grouped skin-colored papules",
+        "Yellow-white lobules",
+        "Case-report label and chest site"
+      ],
+      "contradictingFeatures": [
+        "Histopathology is not quoted from the file page"
+      ],
+      "teachingDistinction": "The paper label matches these frames. The linear arrangement is this case, not a rule for every papule."
+    },
+    {
+      "diagnosis": "Basal cell carcinoma",
+      "supportingFeatures": [
+        "Small papules can raise that question",
+        "A solitary shiny red papule is a different library case"
+      ],
+      "contradictingFeatures": [
+        "This clinical frame is a group of skin-colored papules, not one shiny red papule"
+      ],
+      "teachingDistinction": "Number and color differ from the solitary shiny red papule. That is not a proof."
+    },
+    {
+      "diagnosis": "Molluscum contagiosum",
+      "supportingFeatures": [
+        "Grouped papules can look similar at a glance"
+      ],
+      "contradictingFeatures": [
+        "The dermoscopic frame shows yellow-white lobules rather than a single central plug you can point to"
+      ],
+      "teachingDistinction": "Do not rename lobules as a plug."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g21-08a",
+      "title": "Notice first",
+      "text": "Count whether the papules are one or a group. On the dermoscopic frame, say whether you see lobules."
+    },
+    {
+      "id": "tp-g21-08b",
+      "title": "Limit",
+      "text": "The caption mentions linear vessels. They were not encoded, because a vessel count was not made. This linear chest pattern is not every presentation."
+    }
+  ],
+  "observationPrompts": [
+    "Are the bumps one lesion or a group?",
+    "On the close view, are the bumps smooth or lobulated?"
+  ],
+  "hints": [
+    "A group is not the same photograph as one shiny red papule."
+  ],
+  "closestMimic": {
+    "name": "Basal cell carcinoma",
+    "whyClosest": "Small papules raise that comparison. The basal cell carcinoma case in the pair is one shiny red papule. This frame is a skin-colored group."
+  },
+  "patterns": [
+    {
+      "id": "pat-g21-08-group",
+      "label": "Grouped skin-colored papules",
+      "specificityNote": "A group of skin-colored papules is this clinical frame. It is not proof of a benign lesion.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g21-08-lobules",
+      "label": "Yellow-white lobules",
+      "specificityNote": "Lobules are visible on the dermoscopic frame. Vessels were not counted.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    }
+  ],
+  "synthesis": "The case report labels these chest photographs sebaceous hyperplasia. The clinical frame is a group of papules. The dermoscopic frame shows yellow-white lobules. Vessels were left uncounted.",
+  "evidenceWeighting": "Both the group and the lobules are major and clearly visible. Vessels stay out of the pattern list. The linear distribution is the paper's description of this case, not a required shape.",
+  "diagnosticTrap": "Calling every grouped papule this diagnosis, or calling every papule a carcinoma because another case is a red papule.",
+  "mentorNote": "The Commons tag is CC BY 4.0. The reprinted journal sentence does not name the version. That limit is recorded and the images were still used because the file page states CC BY 4.0.",
+  "takeHomeRule": "Grouped lobulated papules are a look. A benign case-report label is not a guarantee for the next papule.",
+  "compareWith": [
+    "cmp-sebaceous-bcc"
+  ],
+  "academy": {
+    "level": 3,
+    "spectrum": "mimic",
+    "teachingType": "teaching",
+    "skillIds": [
+      "grouped-papules"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "clinicalAction": "No condition monograph is stored for this teaching diagnosis. Do not treat from this case.",
+  "managementBrief": "No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+})
     ])
   });
 }());

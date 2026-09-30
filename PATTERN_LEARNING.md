@@ -70,7 +70,7 @@ Add the case the same way as any other case: real source, local image, allowed l
 
 Then add case pattern rows with certainty and weight, and link those ids to existing canonical patterns when the image really shows them. If the benign case is the mimic a melanoma case already names, the coverage classifier can reach `contrastive_coverage` only after both sides are encoded. Do not rewrite the melanoma diagnosis label to force that match.
 
-Benign lesions are part of screening teaching. The current library has no seborrheic keratosis case and no dermatofibroma case. That gap is real. Filling it takes a sourced case, not a sentence in this file.
+Benign lesions are part of screening teaching. Goal 21 added sourced seborrheic keratosis, solar lentigo, common acquired nevus, blue nevus, cherry angioma, and sebaceous hyperplasia cases. Dermatofibroma, lichenoid keratosis, a benign acral melanocytic lesion, and subungual haemorrhage are still absent. Filling a remaining gap takes a sourced case, not a sentence in this file.
 
 ## Governance
 

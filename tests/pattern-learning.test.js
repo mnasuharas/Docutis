@@ -125,7 +125,7 @@ test("case certainty and weight stay on the case when two cases share a pattern"
   const cases = loadCaseData();
   const grouped = deriveOccurrences();
   const rows = grouped.get("color-variegation");
-  assert.equal(rows.length, 2);
+  assert.equal(rows.length, 3);
   const weights = new Set(rows.map(row => row.weight));
   assert.ok(weights.has("supportive"));
   assert.ok(weights.has("major"));
@@ -204,7 +204,7 @@ test("post-reveal pattern teaching is interactive and does not overwrite the cas
 test("pattern links use structured evidence and do not treat uncertain examples as clear", () => {
   const grouped = deriveOccurrences();
   const color = grouped.get("color-variegation").map(row => row.caseId).sort();
-  assert.deepEqual(color, ["case-g18-02", "case-g18-03"]);
+  assert.deepEqual(color, ["case-g18-02", "case-g18-03", "case-g21-02"]);
   const vessels = grouped.get("polymorphous-vessels");
   assert.equal(vessels.length, 1);
   assert.equal(vessels[0].caseId, "case-g18-11");
@@ -278,7 +278,8 @@ test("coverage does not call one example broad, and pilots stay untouched", () =
   }
   assert.equal(loadPatternData().clinicalReview, null);
   const color = classifyPatternCoverage().find(item => item.id === "color-variegation");
-  assert.equal(color.independentExamples, 2);
-  assert.equal(color.status, "limited_variation");
-  assert.equal(color.broadCoverage, false);
+  assert.equal(color.independentExamples, 3);
+  assert.equal(color.status, "contrastive_coverage");
+  assert.equal(color.broadCoverage, true);
+  assert.equal(color.mastery, false);
 });

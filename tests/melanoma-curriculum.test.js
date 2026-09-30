@@ -14,7 +14,7 @@ const PILOTS = [
   "case-scc-ak-paraspinal"
 ];
 
-test("melanoma curriculum map is complete and stays inside 60-70 percent melanoma-spectrum", () => {
+test("melanoma curriculum keeps prior melanoma cases and does not use a melanoma-share floor", () => {
   const data = loadCaseData();
   assert.doesNotThrow(() => validateCaseData(data));
   const curriculum = data.curriculum;
@@ -22,20 +22,22 @@ test("melanoma curriculum map is complete and stays inside 60-70 percent melanom
   assert.equal(curriculum.levels.length, 5);
   assert.equal(curriculum.levels.map(level => level.level).join(","), "1,2,3,4,5");
   const skillIds = new Set(curriculum.skills.map(skill => skill.id));
-  assert.equal(curriculum.entries.length, 19);
+  assert.equal(curriculum.entries.length, 27);
   const melanoma = curriculum.entries.filter(entry => entry.spectrum === "melanoma");
   const mimics = curriculum.entries.filter(entry => entry.spectrum === "mimic");
-  assert.equal(melanoma.length, 13);
-  assert.equal(mimics.length, 6);
+  assert.equal(melanoma.length, 14);
+  assert.equal(mimics.length, 13);
+  const priorMelanoma = ["case-g18-01","case-g18-02","case-g18-03","case-g18-04","case-acral-melanoma-plantar","case-g18-05","case-g18-06","case-g18-07","case-g18-10","case-g18-11","case-g18-09","case-g18-08","case-g18-12"];
+  for (const id of priorMelanoma) assert.ok(melanoma.some(entry => entry.caseId === id), id);
   const share = melanoma.length / curriculum.entries.length;
-  assert.ok(share >= 0.6 && share <= 0.7, share);
+  assert.ok(share < 0.6, share);
   for (const entry of curriculum.entries) {
     entry.skillIds.forEach(id => assert.ok(skillIds.has(id), id));
     assert.ok(data.cases.some(item => item.id === entry.caseId));
   }
   const academyCases = data.cases.filter(item => item.academy);
-  assert.equal(academyCases.length, 16);
-  assert.equal(data.cases.length, 21);
+  assert.equal(academyCases.length, 24);
+  assert.equal(data.cases.length, 29);
   for (const item of academyCases) {
     assert.equal(item.reviewStatus, "clinician review required");
     assert.equal(item.clinicalReview, null);
@@ -122,10 +124,10 @@ test("Learn Melanoma pathway orders the next case and keeps teacher filters clos
   }
   const teacher = find(node => node.tagName === "DETAILS")[0];
   assert.equal(teacher.open, false);
-  assert.match(text(document.root), /21 cases shown/);
+  assert.match(text(document.root), /29 cases shown/);
   const pathway = find(node => node.tagName === "BUTTON" && node.getAttribute("aria-label") === "Learn Melanoma pathway")[0];
   pathway.dispatch("click");
-  assert.match(text(document.root), /19 cases shown/);
+  assert.match(text(document.root), /27 cases shown/);
   assert.doesNotMatch(text(document.root), /Field change on the dorsum of the hand/);
   const first = find(node => node.tagName === "BUTTON" && node.getAttribute("aria-label") === "Start case: Dark lesion thicker on one side")[0];
   first.dispatch("click");

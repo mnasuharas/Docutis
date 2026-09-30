@@ -102,3 +102,11 @@ Pull request #21 was not the base. Goal 18 pull request #24 was not merged into 
 Schema version stays 1. Case payloads are not given a new clinical field for Goal 20, so existing case fingerprints stay valid. The crosswalk from a case pattern id to a canonical pattern id lives in `pattern-data.js`. Dermoscopic tokens link only when `dermoscopicTokenLinks` names a token that a case actually stores. See [PATTERN_LEARNING.md](PATTERN_LEARNING.md).
 
 `node scripts/case.js` now also validates the pattern library. That check is structural. It is not clinician review.
+
+## Goal 21 contrastive layer
+
+Schema version stays 1. Eight new cases use the same case object. Benign labels that are not in the locked 50-condition catalog are `teachingDiagnoses`: `pole: "benign"`, `monograph: false`, `clinician review required`, `clinicalReview: null`. They are not disease records.
+
+`comparisons` stores explicit pairs (`caseIdA`, `caseIdB`, shared features, features favouring each side, `discriminator` or null, trap, limits). A case lists pair ids in `compareWith`. The learner UI shows that offer only after the current diagnosis is revealed. `recordedScreeningDecision` may be null. A benign label must not be stored as `routine-benign-impression`. `screening.categories` is vocabulary for a future session and is not a simulation. `proposedProgression.hardCodedPath` stays false.
+
+No new case is clinician reviewed. See [CONTRASTIVE_CURRICULUM.md](CONTRASTIVE_CURRICULUM.md).

@@ -21,7 +21,7 @@
   <h1>Learn Melanoma reviewer workspace</h1>
   <p>Generated from <code>case-data.js</code> by <code>node scripts/academy-review.js --write</code>. Do not hand-edit. If the cases change, regenerate this file.</p>
   <p>Learn Melanoma is a teaching sequence. It does not certify competence, estimate a probability, or act as a diagnostic device. New cases stay review required. Teaching type is a lesson shape, not a diagnosis and not a score.</p>
-  <p>Primary path: 19 cases. Registry: 21. Teaching 10, reasoning 6, expert-challenge 3. 1. Recognition: 3; 2. Differentiation: 5; 3. Pattern integration: 5; 4. Diagnostic traps: 5; 5. Advanced reasoning: 1.</p>
+  <p>Primary path: 27 cases. Registry: 29. Teaching 16, reasoning 7, expert-challenge 4. 1. Recognition: 4; 2. Differentiation: 9; 3. Pattern integration: 7; 4. Diagnostic traps: 6; 5. Advanced reasoning: 1.</p>
   <p>A primary-path case needs a source, a local image, a differential, a distinct skill assignment, and honest review status. Academy cases also need observation prompts, feature certainty and weight, a closest mimic, and a non-trivial trap or take-home rule. Legacy pilots stay on the path without new clinical fields. This is not a numeric score and not a pass mark.</p>
   <h2>Outside the primary path</h2>
   <ul><li>Field change on the dorsum of the hand (case-ak-field-hand) stays in the library and outside Learn Melanoma. Default reason: it is not a melanoma-pathway skill case.</li><li>Two neighboring lesions on the upper back (case-scc-ak-paraspinal) stays in the library and outside Learn Melanoma. Default reason: it is not a melanoma-pathway skill case.</li></ul>
@@ -1399,6 +1399,584 @@
     <h3>Management brief</h3>
     <p class="banner">Review required. Not a protocol.</p>
     <p>Management is not chosen from this photograph. Concerning pigmented, pink, or nail-unit lesions are assessed in clinic. When melanoma is suspected, histopathology is the usual confirmation. This brief is not a protocol, not a probability, and remains review required.</p>
+  </article>
+
+  <article id="case-g21-01">
+    <h2>Five looks in one teaching plate <span class="meta">(case-g21-01)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Teaching case</dd></div>
+      <div><dt>Curriculum level</dt><dd>1 · mimic</dd></div>
+      <div><dt>Skills</dt><dd>Range of ordinary moles</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Common acquired nevus</dd></div>
+      <div><dt>Disease record</dt><dd>melanocytic-nevus</dd></div>
+      <div><dt>Confirmation</dt><dd>source_dataset_diagnosis — The NCI caption calls this the natural history of common acquired nevi and says the panels are ordinary moles, from a small macule to a pale papule. The same caption assigns junctional, compound, and dermal names. This file has no histopathology image, so those histologic words are not re-verified and are not used as the case method.</dd></div>
+      <div><dt>Site</dt><dd>Skin, site not named on the source</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · Public domain · National Cancer Institute</p>
+      <p>File: assets/media/cases/case-22-clinical.jpg</p>
+      <p>Source: <a href="https://commons.wikimedia.org/wiki/File:Normal_mole_(1).jpg">National Cancer Institute, via Wikimedia Commons</a></p>
+      <p>National Cancer Institute. Public domain.</p>
+      <p>Modification: other-described — Recompressed for web delivery and file metadata removed. No crop and no annotation. The longest edge was limited to 1600 pixels.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>The file is a plate of five separate photographs, not one lesion.</li><li>Some panels are small brown spots. One panel is a dark raised papule. One panel is a pale pink papule.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>How many separate photographs are in the file?</li><li>Which panel is a dark raised spot, and which is pale?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <ul>
+    <li>
+      <p><strong>Small brown macules</strong> — Clearly visible; Major clue</p>
+      <p>Small brown macules are in this plate. Size and a brown color do not prove a benign outcome.</p>
+      <p>Canonical pattern: small-brown-macule. Case certainty and weight stay on this case.</p>
+    </li>
+    <li>
+      <p><strong>Dark raised papule in one panel</strong> — Clearly visible; Supportive</p>
+      <p>One panel is a solitary dark papule. It does not inherit a benign reading from the other panels.</p>
+      <p>Canonical pattern: solitary-dark-papule. Case certainty and weight stay on this case.</p>
+    </li>
+    <li>
+      <p><strong>Pale papule in one panel</strong> — Clearly visible; Weak</p>
+      <p>The pale panel is not a pale center inside a darker rim.</p>
+      <p>Canonical pattern: not linked. One panel is a pale papule. It is not a pale center inside a darker rim, so it is not that pattern.</p>
+    </li></ul>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Common acquired nevus</strong></p>
+      <p>Why it fits: The source caption names ordinary moles and shows more than one look</p>
+      <p>Why not: No histopathology image is in the file</p>
+      <p>The plate is the source's range of ordinary moles. It is not one patient's history.</p>
+    </li>
+    <li>
+      <p><strong>Invasive melanoma arising in a dysplastic nevus</strong></p>
+      <p>Why it fits: One panel is a solitary dark papule</p>
+      <p>Why not: The other panels are small brown spots and a pale papule, and the caption is not that melanoma label</p>
+      <p>One dark panel can resemble a melanoma photograph. The rest of the plate is not that case.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Invasive melanoma arising in a dysplastic nevus</p><p>One panel is a solitary dark papule. That is the look of the library case with that recorded diagnosis. The other panels are not that lesion.</p>
+    <h3>Why not</h3>
+    <p>None recorded on this case.</p>
+    <h3>Reasoning</h3>
+    <p>The NCI plate is a range of ordinary-mole looks, including a dark papule and a pale papule. The caption's histologic names are not a slide in this file.</p>
+    <p>The small brown macules carry the major weight for what the caption is illustrating. The dark papule is supportive of the trap, not proof of a second diagnosis. The pale papule is a weak extra look. None of these weights is a probability.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Treating the calmest panel as proof that the dark panel is harmless.</p>
+    <h3>Mentor note</h3>
+    <p>This is a composite plate. Sites are not named. Do not turn five photographs into one patient's story.</p>
+    <h3>Take-home rule</h3>
+    <p>A benign source label on a plate is not a guarantee for every panel, and not a guarantee for the next lesion you see.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g21-02">
+    <h2>Rough brown papule <span class="meta">(case-g21-02)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Teaching case</dd></div>
+      <div><dt>Curriculum level</dt><dd>2 · mimic</dd></div>
+      <div><dt>Skills</dt><dd>Stuck-on rough surface</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Seborrheic keratosis</dd></div>
+      <div><dt>Disease record</dt><dd>seborrheic-keratosis</dd></div>
+      <div><dt>Confirmation</dt><dd>clinical_diagnosis — The Commons description says seborrheic keratosis close-up. It does not state histopathology or name a body site.</dd></div>
+      <div><dt>Site</dt><dd>Skin, site not named on the source</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · CC BY-SA 4.0 · Assafn</p>
+      <p>File: assets/media/cases/case-23-clinical.jpg</p>
+      <p>Source: <a href="https://commons.wikimedia.org/wiki/File:Seborrheic_keratosis_closup.jpg">Assafn, via Wikimedia Commons</a></p>
+      <p>Assafn, via Wikimedia Commons. CC BY-SA 4.0.</p>
+      <p>Modification: other-described — Recompressed for web delivery and file metadata removed. No crop and no annotation.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>A single brown oval lesion sits on otherwise even skin.</li><li>The surface is rough, with lighter tan and darker brown areas, and the edge looks as if the lesion sits on the skin.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>Is the surface smooth or rough?</li><li>Does the edge look as if it sits on the skin?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <ul>
+    <li>
+      <p><strong>Rough stuck-on surface</strong> — Clearly visible; Major clue</p>
+      <p>A rough surface that looks stuck on is a clue. It is not proof of a benign lesion.</p>
+      <p>Canonical pattern: stuck-on-rough-surface. Case certainty and weight stay on this case.</p>
+    </li>
+    <li>
+      <p><strong>More than one brown color</strong> — Clearly visible; Supportive</p>
+      <p>Tan and darker brown are both visible. Shared color is not a diagnosis.</p>
+      <p>Canonical pattern: color-variegation. Case certainty and weight stay on this case.</p>
+    </li></ul>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Seborrheic keratosis</strong></p>
+      <p>Why it fits: Rough surface; Edge that looks stuck on the skin; Uploader label</p>
+      <p>Why not: No histopathology is stated</p>
+      <p>The label matches the stuck-on rough surface. The label is still a clinical caption.</p>
+    </li>
+    <li>
+      <p><strong>Cutaneous melanoma</strong></p>
+      <p>Why it fits: More than one brown color; An outline that is not a perfect oval</p>
+      <p>Why not: The surface is rough and stuck-on rather than a flat dark macule in this frame</p>
+      <p>Shared color is not the whole reading. The rough surface is the point of the comparison.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Cutaneous melanoma</p><p>More than one brown color and an uneven outline are the looks already used on cutaneous melanoma cases in this library. This frame adds a rough stuck-on surface those frames do not show.</p>
+    <h3>Why not</h3>
+    <p>None recorded on this case.</p>
+    <h3>Reasoning</h3>
+    <p>The caption says seborrheic keratosis. The frame shows a rough brown papule with more than one brown color. Color overlap with melanoma cases is real. The rough surface is what this frame adds.</p>
+    <p>The rough stuck-on surface is the major clue. The second brown color is supportive and is also seen on melanoma cases, so it does not settle the reading. No histology is in the caption.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Stopping at the first familiar benign name because the colors look like a melanoma photograph, or the reverse: ignoring a rough surface because the colors worry you.</p>
+    <h3>Mentor note</h3>
+    <p>The uploader did not name a site and did not cite a pathology report. Do not add either.</p>
+    <h3>Take-home rule</h3>
+    <p>Describe the surface. A benign caption does not make the next rough brown lesion safe.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g21-03">
+    <h2>Ridged surface under a dermatoscope <span class="meta">(case-g21-03)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Teaching case</dd></div>
+      <div><dt>Curriculum level</dt><dd>2 · mimic</dd></div>
+      <div><dt>Skills</dt><dd>Ridged surface</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Seborrheic keratosis</dd></div>
+      <div><dt>Disease record</dt><dd>seborrheic-keratosis</dd></div>
+      <div><dt>Confirmation</dt><dd>clinical_diagnosis — The author states that this polarized dermoscopic image shows a seborrheic keratosis. No histopathology report is attached. The method stays clinical_diagnosis rather than histopathology.</dd></div>
+      <div><dt>Site</dt><dd>Not specified; dermoscopic close-up</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>dermoscopy</strong> · CC BY-SA 4.0 · Philipp Tschandl</p>
+      <p>File: assets/media/cases/case-24-dermoscopy.jpg</p>
+      <p>Source: <a href="https://commons.wikimedia.org/wiki/File:Dermatoscopy_SebK.jpg">Philipp Tschandl, via Wikimedia Commons</a></p>
+      <p>Philipp Tschandl, via Wikimedia Commons. CC BY-SA 4.0.</p>
+      <p>Modification: other-described — Recompressed for web delivery and file metadata removed. No crop and no annotation.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>A yellow-tan oval lesion has a surface broken into ridges.</li><li>A millimeter scale lies beside the lesion. A few hairs cross the field.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>Is the surface smooth or broken into ridges?</li><li>What is printed beside the lesion, and is it skin?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <ul>
+    <li>
+      <p><strong>Cerebriform ridges</strong> — Clearly visible; Major clue</p>
+      <p>A ridged surface is a dermoscopic clue. It is not proof of a benign lesion and it is not a count of pits.</p>
+      <p>Canonical pattern: cerebriform-surface. Case certainty and weight stay on this case.</p>
+    </li>
+    <li>
+      <p><strong>Millimeter scale in the frame</strong> — Clearly visible; Weak</p>
+      <p>The scale is print. It is not skin and it is not a recorded measurement.</p>
+      <p>Canonical pattern: measuring-scale-in-frame. Case certainty and weight stay on this case.</p>
+    </li></ul>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Seborrheic keratosis</strong></p>
+      <p>Why it fits: Ridged yellow-tan surface; Author caption on a dermoscopic image</p>
+      <p>Why not: No histopathology is attached</p>
+      <p>The ridges are why this frame is in the library. The caption is still not a pathology report.</p>
+    </li>
+    <li>
+      <p><strong>Cutaneous melanoma</strong></p>
+      <p>Why it fits: A pigmented lesion can be the worry before the surface is described</p>
+      <p>Why not: This frame's surface is ridged and yellow-tan rather than a structureless dark blotch</p>
+      <p>Do not import a melanoma reading from another case before you describe these ridges.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Cutaneous melanoma</p><p>A pigmented dermoscopic lesion is compared with cutaneous melanoma before the surface is described. This frame's ridges are the difference you can see.</p>
+    <h3>Why not</h3>
+    <p>None recorded on this case.</p>
+    <h3>Reasoning</h3>
+    <p>The author calls this a seborrheic keratosis under polarized dermoscopy. The ridges are visible. The scale is not a finding. Pits and cysts were not added.</p>
+    <p>The ridges carry the major weight. The scale is weak because it is not skin. No vessel pattern and no milia-like cyst were encoded.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Reading the millimeter scale as a skin structure, or naming pits you have not separated from the ridges.</p>
+    <h3>Mentor note</h3>
+    <p>The file is 600 pixels on the long edge. The ridges are still readable. It was not enlarged.</p>
+    <h3>Take-home rule</h3>
+    <p>Describe ridges before you borrow a diagnosis from a different pigmented photograph. A benign caption is not a guarantee.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g21-04">
+    <h2>Many brown spots on the back of a hand <span class="meta">(case-g21-04)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Teaching case</dd></div>
+      <div><dt>Curriculum level</dt><dd>2 · mimic</dd></div>
+      <div><dt>Skills</dt><dd>Many flat brown macules</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Solar lentigo</dd></div>
+      <div><dt>Disease record</dt><dd>solar-lentigo</dd></div>
+      <div><dt>Confirmation</dt><dd>clinical_diagnosis — The French caption says lentigo sénile on the dorsum of the hand. Solar lentigo is the English name used for that caption. Histopathology is not stated. The photograph cannot clear every macule.</dd></div>
+      <div><dt>Site</dt><dd>Dorsum of the hand</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · CC BY-SA 4.0 · Alain Gérard</p>
+      <p>File: assets/media/cases/case-25-clinical.jpg</p>
+      <p>Source: <a href="https://commons.wikimedia.org/wiki/File:Lentigo_s%C3%A9nile.jpg">Alain Gérard, via Wikimedia Commons</a></p>
+      <p>Alain Gérard, via Wikimedia Commons. CC BY-SA 4.0.</p>
+      <p>Modification: other-described — Recompressed for web delivery and file metadata removed. No crop and no annotation.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>Many separate brown macules sit on the back of a hand and the wrist.</li><li>The macules are not one broad patch. Some are small and some are larger. The borders are not all the same.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>Is this one brown patch or many separate spots?</li><li>What body site can you actually see?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <ul>
+    <li>
+      <p><strong>Many flat brown macules</strong> — Clearly visible; Major clue</p>
+      <p>A field of flat brown macules is not one broad patch, and it is not proof that every macule is benign.</p>
+      <p>Canonical pattern: flat-brown-macule. Case certainty and weight stay on this case.</p>
+    </li></ul>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Solar lentigo</strong></p>
+      <p>Why it fits: Many flat brown macules on the dorsum of the hand; Caption says lentigo sénile</p>
+      <p>Why not: No histopathology; Not every macule has the same border</p>
+      <p>The caption names the field. It does not certify each spot.</p>
+    </li>
+    <li>
+      <p><strong>Lentigo maligna melanoma</strong></p>
+      <p>Why it fits: Brown pigment on sun-exposed skin</p>
+      <p>Why not: This frame is many hand macules, not one cheek patch marked for biopsy</p>
+      <p>Do not use a hand field to dismiss a single facial patch, or the reverse.</p>
+    </li>
+    <li>
+      <p><strong>Cutaneous melanoma</strong></p>
+      <p>Why it fits: Brown pigment can be uneven</p>
+      <p>Why not: This frame is a field of macules, not one broad patch</p>
+      <p>The library's broad brown melanoma photograph is a different shape.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Lentigo maligna melanoma</p><p>Both are brown pigment on sun-exposed skin. This frame is many macules on a hand. The lentigo maligna melanoma case is one cheek patch.</p>
+    <h3>Why not</h3>
+    <p>None recorded on this case.</p>
+    <h3>Reasoning</h3>
+    <p>The caption says lentigo sénile on the dorsum of the hand. The frame shows many flat brown macules, not one patch. That does not clear every spot.</p>
+    <p>The field of flat brown macules is the major clue and matches the caption's site. Uneven borders on some macules are not given a second diagnosis from this photograph.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Calling every brown spot on the hand harmless, or calling this field the same thing as one broad patch.</p>
+    <h3>Mentor note</h3>
+    <p>Nail polish and a watch are in the frame. They are not skin findings. No face is shown.</p>
+    <h3>Take-home rule</h3>
+    <p>Many flat brown macules on the hand are not a promise about the next single brown patch.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g21-05">
+    <h2>Two bright red papules <span class="meta">(case-g21-05)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Teaching case</dd></div>
+      <div><dt>Curriculum level</dt><dd>2 · mimic</dd></div>
+      <div><dt>Skills</dt><dd>Bright red papule</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Cherry angioma</dd></div>
+      <div><dt>Disease record</dt><dd>cherry-angioma</dd></div>
+      <div><dt>Confirmation</dt><dd>clinical_diagnosis — The Commons description says cherry angioma close-up. It does not name a site and does not state histopathology. Two papules are in the frame.</dd></div>
+      <div><dt>Site</dt><dd>Skin, site not named on the source</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · CC BY-SA 4.0 · Assafn</p>
+      <p>File: assets/media/cases/case-26-clinical.jpg</p>
+      <p>Source: <a href="https://commons.wikimedia.org/wiki/File:Cherry_angioma_closeup.jpg">Assafn, via Wikimedia Commons</a></p>
+      <p>Assafn, via Wikimedia Commons. CC BY-SA 4.0.</p>
+      <p>Modification: other-described — Recompressed for web delivery and file metadata removed. No crop and no annotation.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>Two bright red papules sit on otherwise even skin.</li><li>They are a similar vivid red. No brown pigment is visible in them. The site is not named.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>How many red spots are in the frame?</li><li>Are they the same color as each other?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <ul>
+    <li>
+      <p><strong>Bright red papules</strong> — Clearly visible; Major clue</p>
+      <p>Bright red papules are a color finding. A second papule does not prove either one is benign.</p>
+      <p>Canonical pattern: bright-red-papule. Case certainty and weight stay on this case.</p>
+    </li></ul>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Cherry angioma</strong></p>
+      <p>Why it fits: Bright red papules; A second similar papule; Uploader label</p>
+      <p>Why not: No dermoscopy and no histopathology</p>
+      <p>The caption matches the color. Two papules still do not prove both are benign forever.</p>
+    </li>
+    <li>
+      <p><strong>Basal cell carcinoma</strong></p>
+      <p>Why it fits: A red papule is also the look of a shiny red papule case in this library</p>
+      <p>Why not: This frame has two vivid red papules, not one shiny papule with a named site</p>
+      <p>Do not call every red papule an angioma or every red papule a carcinoma.</p>
+    </li>
+    <li>
+      <p><strong>Amelanotic melanoma</strong></p>
+      <p>Why it fits: A red papule without brown pigment can be a melanocytic trap</p>
+      <p>Why not: A second matching bright red papule is in this same frame</p>
+      <p>Absence of brown pigment is not a reassuring test.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Basal cell carcinoma</p><p>The library's solitary shiny red papule is a basal cell carcinoma. This frame is bright red and there are two papules.</p>
+    <h3>Why not</h3>
+    <p>None recorded on this case.</p>
+    <h3>Reasoning</h3>
+    <p>The caption says cherry angioma. Two bright red papules are visible. That is not the solitary shiny red papule of the basal cell carcinoma case, and it is not a proof.</p>
+    <p>The bright red color and the second papule are the major clue. No vessel pattern was encoded. No site was stored because the caption does not name one.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Calling every red papule an angioma, or calling every red papule a carcinoma.</p>
+    <h3>Mentor note</h3>
+    <p>A different cherry angioma file on Commons carried location metadata and was not used. This close-up does not.</p>
+    <h3>Take-home rule</h3>
+    <p>A bright red papule can be benign in the caption and still not be a rule for the next red papule.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g21-06">
+    <h2>Small blue spot under hair <span class="meta">(case-g21-06)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Reasoning case</dd></div>
+      <div><dt>Curriculum level</dt><dd>3 · mimic</dd></div>
+      <div><dt>Skills</dt><dd>Blue color</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Blue nevus</dd></div>
+      <div><dt>Disease record</dt><dd>blue-nevus</dd></div>
+      <div><dt>Confirmation</dt><dd>clinical_diagnosis — The Commons description says a blue nevus on the shin. It does not state a histologic subtype and does not cite histopathology. Hairs cross the spot, so the full border is not traced.</dd></div>
+      <div><dt>Site</dt><dd>Shin</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · CC0 1.0 · Nictitate</p>
+      <p>File: assets/media/cases/case-27-clinical.jpg</p>
+      <p>Source: <a href="https://commons.wikimedia.org/wiki/File:Blue_nevus.png">Nictitate, via Wikimedia Commons</a></p>
+      <p>Nictitate, via Wikimedia Commons. CC0 1.0.</p>
+      <p>Modification: other-described — Recompressed for web delivery and file metadata removed. No crop and no annotation. The longest edge was limited to 1600 pixels.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>A small blue spot sits on the skin.</li><li>Terminal hairs cross the spot, so part of the edge is hidden. No flat brown companion lesion is in the frame.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>What color is the small spot?</li><li>Do hairs hide any of its edge?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <ul>
+    <li>
+      <p><strong>Blue papule or macule</strong> — Clearly visible; Major clue</p>
+      <p>Blue color is visible. It does not prove the source label and it does not name a subtype.</p>
+      <p>Canonical pattern: blue-papule. Case certainty and weight stay on this case.</p>
+    </li>
+    <li>
+      <p><strong>Hairs crossing the spot</strong> — Clearly visible; Weak</p>
+      <p>Hair hides part of the edge. It is not a skin structure.</p>
+      <p>Canonical pattern: not linked. Hairs cross the spot and hide part of the edge. Occlusion is not a reusable skin pattern.</p>
+    </li></ul>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Blue nevus</strong></p>
+      <p>Why it fits: Blue color; Caption names the shin</p>
+      <p>Why not: No histopathology; Border partly hidden by hair</p>
+      <p>The caption is a clinical label for a blue spot. It does not assign a histologic subtype.</p>
+    </li>
+    <li>
+      <p><strong>Superficial spreading melanoma arising from a dysplastic nevus</strong></p>
+      <p>Why it fits: That library case has a blue-black raised area</p>
+      <p>Why not: That case also has a flatter area and a printed arrow. This frame does not.</p>
+      <p>Blue-black color is shared as a worry. The companion flat area is not in this frame.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Superficial spreading melanoma arising from a dysplastic nevus</p><p>That case records a blue-black raised area. This frame is a small blue spot without the flat companion seen there.</p>
+    <h3>Why not</h3>
+    <ul><li><strong>Superficial spreading melanoma arising from a dysplastic nevus</strong> — That case has a blue-black raised area beside a flatter area and a printed arrow. This frame has no flat companion and no arrow.</li><li><strong>Pigmented basal cell carcinoma</strong> — No leaf-like or ovoid structure is visible here. Blue color alone does not make that diagnosis.</li></ul>
+    <h3>Reasoning</h3>
+    <p>The caption says blue nevus on the shin. The spot is blue and partly covered by hair. No subtype was added.</p>
+    <p>Blue color is the major clue and is not specific. Hair is weak because it is occlusion. The missing flat companion is a difference from the melanoma case, not a proof.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Treating blue color as a benign diagnosis, or as a melanoma diagnosis, without the rest of the frame.</p>
+    <h3>Mentor note</h3>
+    <p>A second blue-nevus file was rejected because marker streaks hid the border. This one still has hair across the spot. That limit stays in the note.</p>
+    <h3>Take-home rule</h3>
+    <p>Blue is a color. A benign caption for one blue spot is not a guarantee for the next blue-black lesion.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g21-08">
+    <h2>A group of papules on the chest <span class="meta">(case-g21-08)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Teaching case</dd></div>
+      <div><dt>Curriculum level</dt><dd>3 · mimic</dd></div>
+      <div><dt>Skills</dt><dd>Grouped papules</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Sebaceous hyperplasia</dd></div>
+      <div><dt>Disease record</dt><dd>sebaceous-hyperplasia</dd></div>
+      <div><dt>Confirmation</dt><dd>expert_diagnosis — The Commons description cites a 2014 case report that labels the photographs sebaceous gland hyperplasia in a linear group on the chest. The file description does not quote a histopathology sentence, so histopathology is not claimed. The journal statement reprinted on the file page is an unversioned attribution license; the file itself is tagged CC BY 4.0.</dd></div>
+      <div><dt>Site</dt><dd>Chest</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · CC BY 4.0 · Toshitsugu Sato and Masaru Tanaka</p>
+      <p>File: assets/media/cases/case-29-clinical.jpg</p>
+      <p>Source: <a href="https://commons.wikimedia.org/wiki/File:Photography_of_sebaceous_hyperplasia.jpg">Sato and Tanaka, Dermatology Practical &amp; Conceptual (2014), via Wikimedia Commons</a></p>
+      <p>Sato T, Tanaka M. Dermatology Practical &amp; Conceptual. 2014. Via Wikimedia Commons. CC BY 4.0.</p>
+      <p>Modification: other-described — Recompressed for web delivery and file metadata removed. No crop and no annotation.</p>
+    </li>
+    <li>
+      <p><strong>dermoscopy</strong> · CC BY 4.0 · Toshitsugu Sato and Masaru Tanaka</p>
+      <p>File: assets/media/cases/case-29-dermoscopy.jpg</p>
+      <p>Source: <a href="https://commons.wikimedia.org/wiki/File:Dermoscopy_of_sebaceous_hyperplasia.jpg">Sato and Tanaka, Dermatology Practical &amp; Conceptual (2014), via Wikimedia Commons</a></p>
+      <p>Sato T, Tanaka M. Dermatology Practical &amp; Conceptual. 2014. Via Wikimedia Commons. CC BY 4.0.</p>
+      <p>Modification: other-described — Recompressed for web delivery and file metadata removed. No crop and no annotation.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>A group of skin-colored papules sits on the chest in a loose line. A nipple is at the edge of the clinical frame.</li><li>The dermoscopic frame shows clustered yellow-white lobules. A gel bubble is at the edge.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>Are the bumps one lesion or a group?</li><li>On the close view, are the bumps smooth or lobulated?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <ul>
+    <li>
+      <p><strong>Grouped skin-colored papules</strong> — Clearly visible; Major clue</p>
+      <p>A group of skin-colored papules is this clinical frame. It is not proof of a benign lesion.</p>
+      <p>Canonical pattern: grouped-skin-colored-papules. Case certainty and weight stay on this case.</p>
+    </li>
+    <li>
+      <p><strong>Yellow-white lobules</strong> — Clearly visible; Major clue</p>
+      <p>Lobules are visible on the dermoscopic frame. Vessels were not counted.</p>
+      <p>Canonical pattern: yellow-white-lobules. Case certainty and weight stay on this case.</p>
+    </li></ul>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Sebaceous hyperplasia</strong></p>
+      <p>Why it fits: Grouped skin-colored papules; Yellow-white lobules; Case-report label and chest site</p>
+      <p>Why not: Histopathology is not quoted from the file page</p>
+      <p>The paper label matches these frames. The linear arrangement is this case, not a rule for every papule.</p>
+    </li>
+    <li>
+      <p><strong>Basal cell carcinoma</strong></p>
+      <p>Why it fits: Small papules can raise that question; A solitary shiny red papule is a different library case</p>
+      <p>Why not: This clinical frame is a group of skin-colored papules, not one shiny red papule</p>
+      <p>Number and color differ from the solitary shiny red papule. That is not a proof.</p>
+    </li>
+    <li>
+      <p><strong>Molluscum contagiosum</strong></p>
+      <p>Why it fits: Grouped papules can look similar at a glance</p>
+      <p>Why not: The dermoscopic frame shows yellow-white lobules rather than a single central plug you can point to</p>
+      <p>Do not rename lobules as a plug.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Basal cell carcinoma</p><p>Small papules raise that comparison. The basal cell carcinoma case in the pair is one shiny red papule. This frame is a skin-colored group.</p>
+    <h3>Why not</h3>
+    <p>None recorded on this case.</p>
+    <h3>Reasoning</h3>
+    <p>The case report labels these chest photographs sebaceous hyperplasia. The clinical frame is a group of papules. The dermoscopic frame shows yellow-white lobules. Vessels were left uncounted.</p>
+    <p>Both the group and the lobules are major and clearly visible. Vessels stay out of the pattern list. The linear distribution is the paper's description of this case, not a required shape.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Calling every grouped papule this diagnosis, or calling every papule a carcinoma because another case is a red papule.</p>
+    <h3>Mentor note</h3>
+    <p>The Commons tag is CC BY 4.0. The reprinted journal sentence does not name the version. That limit is recorded and the images were still used because the file page states CC BY 4.0.</p>
+    <h3>Take-home rule</h3>
+    <p>Grouped lobulated papules are a look. A benign case-report label is not a guarantee for the next papule.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g21-07">
+    <h2>Brown patch with ink dots <span class="meta">(case-g21-07)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Expert-challenge case</dd></div>
+      <div><dt>Curriculum level</dt><dd>4 · melanoma</dd></div>
+      <div><dt>Skills</dt><dd>Marked cheek patch</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Lentigo maligna melanoma</dd></div>
+      <div><dt>Disease record</dt><dd>lentigo-maligna-melanoma</dd></div>
+      <div><dt>Confirmation</dt><dd>expert_diagnosis — The caption says lentigo maligna melanoma of the left central malar cheek marked for biopsy. A histopathology report is not on the Commons page. The method stays expert_diagnosis, the same limit used for this uploader's other biopsy-marked caption in the library, and it is not histopathology.</dd></div>
+      <div><dt>Site</dt><dd>Left central malar cheek</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · CC BY-SA 4.0 · Dermanonymous</p>
+      <p>File: assets/media/cases/case-28-clinical.jpg</p>
+      <p>Source: <a href="https://commons.wikimedia.org/wiki/File:Lentigo_Maligna_Melanoma_Left_Central_Malar_Cheek.jpg">Dermanonymous, via Wikimedia Commons</a></p>
+      <p>Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.</p>
+      <p>Modification: other-described — Recompressed for web delivery and file metadata removed. No crop and no annotation.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>One brown patch sits in a tight crop of skin.</li><li>Several small dark dots surround the patch. They look like marker ink, not a second lesion.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>Is the brown pigment one patch or many separate spots?</li><li>What are the small dark dots around it?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <ul>
+    <li>
+      <p><strong>Brown patch</strong> — Probably present; Major clue</p>
+      <p>One brown patch is visible. Flatness is probable in this crop and is not a histologic level.</p>
+      <p>Canonical pattern: flat-brown-macule. Case certainty and weight stay on this case.</p>
+    </li>
+    <li>
+      <p><strong>Marker dots around the patch</strong> — Clearly visible; Conflicts with a simple reading</p>
+      <p>Ink is not a border and not a diagnosis.</p>
+      <p>Canonical pattern: marker-ink. Case certainty and weight stay on this case.</p>
+    </li></ul>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Lentigo maligna melanoma</strong></p>
+      <p>Why it fits: Caption names that diagnosis on the cheek; One brown patch</p>
+      <p>Why not: No histopathology result is linked; The image is small</p>
+      <p>Use the caption's words. Do not shorten them to in situ, and do not invent a subtype beyond the caption.</p>
+    </li>
+    <li>
+      <p><strong>Solar lentigo</strong></p>
+      <p>Why it fits: Flat brown pigment on sun-exposed skin</p>
+      <p>Why not: This frame is one cheek patch with ink, not a field of hand macules</p>
+      <p>The hand field and this cheek patch are different photographs.</p>
+    </li>
+    <li>
+      <p><strong>Pigmented actinic keratosis</strong></p>
+      <p>Why it fits: A brown patch on the cheek can raise that question</p>
+      <p>Why not: Scale and a rough surface are not what this frame shows</p>
+      <p>Do not add scale that is not visible.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Solar lentigo</p><p>Both are brown pigment. The solar lentigo case is many macules on a hand. This frame is one cheek patch with marker ink.</p>
+    <h3>Why not</h3>
+    <ul><li><strong>Solar lentigo</strong> — The solar lentigo photograph is a field of macules on the dorsum of the hand. This is one cheek patch. The field does not answer for this patch.</li><li><strong>Pigmented actinic keratosis</strong> — This frame does not show a rough scaly surface. That absence is not a proof, and scale was not invented.</li></ul>
+    <h3>Reasoning</h3>
+    <p>The caption says lentigo maligna melanoma on the malar cheek, marked for biopsy. The image shows one brown patch and ink. It does not show a pathology result, and it is not a field of hand macules.</p>
+    <p>The brown patch is the major clue and is only probably a flat macule, because the crop does not prove height. Ink conflicts with any reading that treats the dots as skin. The diagnosis is the caption, not a slide.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Using a hand full of brown spots to dismiss a single cheek patch, or shortening this caption to in situ.</p>
+    <h3>Mentor note</h3>
+    <p>The file is 426 by 318 pixels. It was kept because the patch and the ink are still readable, and a larger licensed lentigo maligna melanoma photograph was not substituted.</p>
+    <h3>Take-home rule</h3>
+    <p>Read the caption's full words. Ink is not skin, a biopsy mark is not a result, and a benign field elsewhere is not this lesion.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.</p>
   </article>
 </main>
 </body>

@@ -42,9 +42,9 @@ test("teaching types, quality gate, skills, and pilot payloads stay compatible",
   assert.equal(gate.passed, true);
   assert.deepEqual(gate.gaps, []);
   assert.equal(data.curriculum.qualityGate.kind, "qualitative");
-  assert.equal(data.curriculum.skills.length, 19);
-  assert.equal(data.cases.length, 21);
-  assert.equal(data.curriculum.entries.length, 19);
+  assert.equal(data.curriculum.skills.length, 27);
+  assert.equal(data.cases.length, 29);
+  assert.equal(data.curriculum.entries.length, 27);
   const types = data.curriculum.entries.map(entry => entry.teachingType);
   assert.ok(types.every(type => ["teaching", "reasoning", "expert-challenge"].includes(type)));
   assert.ok(types.includes("teaching") && types.includes("reasoning") && types.includes("expert-challenge"));
@@ -75,8 +75,9 @@ test("teaching types, quality gate, skills, and pilot payloads stay compatible",
     assert.ok(data.diseases === undefined);
   }
   const diseaseIds = new Set(JSON.parse(JSON.stringify(require("../scripts/case").loadDiseaseData().diseases)).map(item => item.id));
+  const teachingIds = new Set((data.teachingDiagnoses || []).filter(item => item.monograph === false).map(item => item.id));
   for (const item of data.cases) {
-    assert.ok(diseaseIds.has(item.diseaseId), item.diseaseId);
+    assert.ok(diseaseIds.has(item.diseaseId) || teachingIds.has(item.diseaseId), item.diseaseId);
     assert.equal(item.clinicalReview, null);
     for (const image of item.images) {
       assert.ok(fs.existsSync(path.join(root, image.src)), image.src);

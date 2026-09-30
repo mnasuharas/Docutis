@@ -2863,6 +2863,393 @@
         "safety-notice",
         "provenance"
       ]
+    },
+    {
+      "id": "case-g21-01",
+      "assetType": "case",
+      "title": "Five looks in one teaching plate",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:bd05c875530fbd07fac02f6569c57a0fe13e9abd2e123a51370e0676dfa09e36",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Normal_mole_(1).jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Normal_mole_(1).jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g21-02",
+      "assetType": "case",
+      "title": "Rough brown papule",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:4a3e66f08339888dab9b6f878837e044b5a6232873e2db5288266a731fcd3126",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Seborrheic_keratosis_closup.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Assafn, via Wikimedia Commons",
+          "organization": "Assafn, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Seborrheic_keratosis_closup.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g21-03",
+      "assetType": "case",
+      "title": "Ridged surface under a dermatoscope",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:891b582114730b0e673b6db39d829d793556c5fac43a53e30b99ec8faf67e84c",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Dermatoscopy_SebK.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Philipp Tschandl, via Wikimedia Commons",
+          "organization": "Philipp Tschandl, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Dermatoscopy_SebK.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g21-04",
+      "assetType": "case",
+      "title": "Many brown spots on the back of a hand",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:45eaceabe1ef31fde0f886ad791eed7c1914435c9a6031c6d41ab474e6cef0c2",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Lentigo_s%C3%A9nile.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Alain Gérard, via Wikimedia Commons",
+          "organization": "Alain Gérard, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Lentigo_s%C3%A9nile.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g21-05",
+      "assetType": "case",
+      "title": "Two bright red papules",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:7457b2b9f63bd49cdb5625c30a840ee01fb3fb93da5833e5a977eb553545a596",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Cherry_angioma_closeup.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Assafn, via Wikimedia Commons",
+          "organization": "Assafn, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Cherry_angioma_closeup.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g21-06",
+      "assetType": "case",
+      "title": "Small blue spot under hair",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:fbe26b6a1bc5f7878de1fd6eea35336a1db68b28f3bb701766ed9d0d4a191380",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Blue_nevus.png"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Nictitate, via Wikimedia Commons",
+          "organization": "Nictitate, via Wikimedia Commons. CC0 1.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Blue_nevus.png",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g21-07",
+      "assetType": "case",
+      "title": "Brown patch with ink dots",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:5bc1f06bbc0d1180e70534ca23d1cf10a289e8bb66d20a6ea6eb45014508e0cd",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Lentigo_Maligna_Melanoma_Left_Central_Malar_Cheek.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dermanonymous, via Wikimedia Commons",
+          "organization": "Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Lentigo_Maligna_Melanoma_Left_Central_Malar_Cheek.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g21-08",
+      "assetType": "case",
+      "title": "A group of papules on the chest",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:124f83359206f73d57df250acf339ed679d00a19c9218c7e34310821ebae164f",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Photography_of_sebaceous_hyperplasia.jpg",
+        "https://commons.wikimedia.org/wiki/File:Dermoscopy_of_sebaceous_hyperplasia.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Sato and Tanaka, Dermatology Practical & Conceptual (2014), via Wikimedia Commons",
+          "organization": "Sato T, Tanaka M. Dermatology Practical & Conceptual. 2014. Via Wikimedia Commons. CC BY 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Photography_of_sebaceous_hyperplasia.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        },
+        {
+          "title": "Sato and Tanaka, Dermatology Practical & Conceptual (2014), via Wikimedia Commons",
+          "organization": "Sato T, Tanaka M. Dermatology Practical & Conceptual. 2014. Via Wikimedia Commons. CC BY 4.0.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Dermoscopy_of_sebaceous_hyperplasia.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
     }
   ]
 }
