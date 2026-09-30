@@ -75,3 +75,23 @@ The five Goal 11 pilot cases are referenced by the map where they belong. Their 
 `managementBrief` is separate from the diagnosis. It stays review required. Histopathology is still allowed only when the source states it. None of the Goal 18 additions use that method, because the captions that were actually reused did not say histopathology.
 
 Rendered image paths for new cases are diagnosis-neutral (`case-06` onward). Source URLs stay hidden until reveal. Annotations were not added.
+
+## Goal 19 teaching types
+
+Schema version stays 1. Optional fields are additive. `freezeCase` copies `observationPrompts`, `hints`, and `closestMimic` only when the case already has them, so the five pilot objects do not gain academy keys and their fingerprints stay put.
+
+| Field | Where | Notes |
+|-------|--------|--------|
+| `teachingType` | `academy` and each curriculum entry | `teaching`, `reasoning`, or `expert-challenge`. Not a diagnosis. Shown before reveal. |
+| `observationPrompts` | academy cases | Questions for the observe step. Must not name the recorded diagnosis. |
+| `hints` | academy cases | One or two optional lines behind a button. Same secrecy rule. |
+| `patterns[].certainty` | academy cases | `clearly_visible`, `probably`, `uncertain`, `not_visible` |
+| `patterns[].weight` | academy cases | `major`, `supportive`, `weak`, `conflicting`. Not a sensitivity or a percent. |
+| `closestMimic` | academy cases | `{ name, whyClosest }`. Shown after reveal. |
+| `curriculum.qualityGate` | map | Qualitative. Not a numeric score. |
+
+Learning objectives stay in `teachingPoints`. Skills stay in `academy.skillIds`. Level stays in `academy.level`. Management stays in `managementBrief` and remains review required. Differentials already carry why a competitor fits and why it does not.
+
+The primary-path gate is `primaryPathGate` in `scripts/case.js`. It does not require every melanoma structure on every case. See [ACADEMY_AUTHORING.md](ACADEMY_AUTHORING.md).
+
+Pull request #21 was not the base. Goal 18 pull request #24 was not merged into `main`. No clinician reviewed a Goal 19 text change.

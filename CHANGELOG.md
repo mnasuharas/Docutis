@@ -2,6 +2,17 @@
 
 All notable project changes are documented here. Docutis is in active pre-1.0 development; entries describe repository milestones rather than clinically reviewed releases.
 
+## [Unreleased]
+
+### Goal 19 — Professional case teaching system
+
+- Label each Learn Melanoma case as a teaching case, a reasoning case, or an expert-challenge case. The label is not a diagnosis and is not a score.
+- Add observation prompts, optional hints, feature certainty and qualitative weight, and a closest mimic to the 16 academy cases. The five pilot clinical payloads were not edited.
+- Add a qualitative primary-path gate and `ACADEMY_AUTHORING.md`. The gate is not a numeric score and does not claim educational efficacy.
+- Add `academy-review.html`, generated from case data, labeled review required. No clinician review was recorded. Management briefs were not rewritten. Confirmation methods were not upgraded.
+- Reorder level 4 so the pink nodule is practiced before its dermoscopic counterpart. Case count, spectrum mix, and level sizes are unchanged. Level 5 remains one case.
+- No release tag was created. Pull request #21 was not the base. Goal 18 pull request #24 was not merged.
+
 ## [0.2.0-preview.1] — 2026-09-30
 
 Entries under this heading are repository changes after the historical tag `v0.1.0-preview.1` (2026-09-23), unless a bullet says the work is still pending. This heading is pre-release `v0.2.0-preview.1`. It is not a GitHub Release by itself and it is not clinical validation.

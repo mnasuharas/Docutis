@@ -16,7 +16,7 @@ Live site: [https://mnasuharas.github.io/Docutis/](https://mnasuharas.github.io/
 
 Clinical review is version-bound and independently tracked for disease records, quiz items, visual assets, follow-up protocols and case-based learning units. The public dashboard and `review-status.json` distinguish human review from automated validation. The Goal 9 public layer currently publishes **5 clinician-reviewed** assets and **39 review-required** assets across 44 units. The original 23 pilot units are unchanged in review state (5 reviewed, 18 review required). Sixteen Goal 18 cases were added as review required. AI interpretation is not clinician review. Release notes for older tags are point-in-time and may not match current `main`.
 
-Goal 18 adds a Learn Melanoma pathway on top of that flow. It is a teaching sequence, not a certificate and not evidence that the cases improve diagnostic skill. No case is clinician reviewed. Goal 10 adds a public OSS surface: About/project-status copy, repository and roadmap/changelog links, and “Suggest a correction” / “Report outdated evidence” CTAs that open the clinical content issue form. Docutis remains a public preview and is not validated clinical decision support.
+Goal 18 adds a Learn Melanoma pathway on top of that flow. It is a teaching sequence, not a certificate and not evidence that the cases improve diagnostic skill. No case is clinician reviewed. Goal 19 adds teaching types, observation prompts, qualitative feature weights, and a closest mimic on the academy cases only. It does not add cases, does not claim that learners improve, and does not review any case. The five pilot payloads were not edited. Pull request #21 was not the base, and Goal 18 pull request #24 was not merged. Goal 10 adds a public OSS surface: About/project-status copy, repository and roadmap/changelog links, and “Suggest a correction” / “Report outdated evidence” CTAs that open the clinical content issue form. Docutis remains a public preview and is not validated clinical decision support.
 
 The current site contains 50 condition records. It retains the malignant and precancerous collection, the first common-dermatology package, and a new infectious-dermatology package spanning bacterial, dermatophyte, other fungal, parasitic and viral disease. It is intended for physicians, medical trainees and other healthcare professionals seeking a concise educational reference.
 
@@ -120,7 +120,7 @@ The live site is static HTML, CSS and JavaScript. No build step and no package i
 - `data.js` — 50 condition records
 - `followup-data.js`, `followup-app.js` — German dermato-oncology follow-up UI
 - `quiz-data.js`, `quiz-app.js` — eight-question educational quiz
-- `case-data.js`, `case-app.js` — five pilot cases plus 16 Goal 18 cases (diagnosis stays hidden until reveal)
+- `case-data.js`, `case-app.js` — five pilot cases plus 16 Goal 18 cases (diagnosis stays hidden until reveal). `academy-review.html` is the generated reviewer workspace, not a learner step.
 - `media-data.js` and `assets/media/` — four original SVG schematics; case images are separate
 - `review-data.js`, `review-status.json` — published clinical-review decisions
 - `scripts/` and `tests/` — dependency-free checks

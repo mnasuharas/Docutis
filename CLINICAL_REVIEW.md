@@ -61,3 +61,9 @@ After a human returns the completed package, apply only supplied or explicitly a
 ## Case-based learning review
 
 Cases in `case-data.js` are independent `case` assets. Review images/provenance, observation vs interpretation separation, differentials, diagnostic confirmation honesty and teaching points. Generate fingerprints with `node scripts/case.js` context via `scripts/review-governance.js`. Do not mark a case clinician reviewed because automated tests pass or because an AI drafted teaching text.
+
+## Goal 19 reviewer workspace
+
+`academy-review.html` is generated from `case-data.js` by `node scripts/academy-review.js --write`. It puts provenance, license, features, certainty, weight, differential, closest mimic, trap, mentor note, take-home rule, management brief, skills, level, and teaching type on one page so a reviewer does not hunt files. The page is labeled review required. Generating it does not set `clinicalReview`, a reviewer name, a review date, or an approval. Regenerate after teaching edits. `node scripts/academy-review.js --check` fails if the file is stale.
+
+Goal 19 did not record a clinician review. Management briefs were not rewritten. Diagnosis labels and confirmation methods were not upgraded. Pull request #21 was not the base, and Goal 18 pull request #24 was not merged.
