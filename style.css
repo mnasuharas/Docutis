@@ -2327,3 +2327,37 @@ footer {
 .case-pattern-panel h6 {
   margin-bottom: var(--space-1);
 }
+
+.case-view,
+.case-pattern-group {
+  margin: var(--space-4) 0;
+}
+
+.case-view-integration {
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.case-pattern-context {
+  margin: var(--space-4) 0;
+  padding: var(--space-3);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: transparent;
+}
+
+.case-pattern-context summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.case-pattern-artifact h6 {
+  font-weight: 500;
+}
+
+.case-context-disclosure summary:focus-visible,
+.case-pattern-group h5:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 3px;
+}

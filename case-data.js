@@ -93,7 +93,8 @@
         Object.freeze({ id: "bright-red-papule", title: "Bright red papule", summary: "A bright red papule is a color finding. A second similar papule is part of the frame, not a proof." }),
         Object.freeze({ id: "blue-color", title: "Blue color", summary: "Blue is a color. It does not assign a subtype and it does not make the next blue-black lesion safe." }),
         Object.freeze({ id: "marked-cheek-patch", title: "Marked cheek patch", summary: "Separate ink from the brown patch. A biopsy mark is not a result." }),
-        Object.freeze({ id: "grouped-papules", title: "Grouped papules", summary: "A group of papules is not the same frame as one shiny red papule." })
+        Object.freeze({ id: "grouped-papules", title: "Grouped papules", summary: "A group of papules is not the same frame as one shiny red papule." }),
+        Object.freeze({ id: "subungual-color", title: "Color under a nail", summary: "A patch under a nail plate is not the same frame as a destroyed plate, and it is not a longitudinal streak unless you can see one." })
       ]),
       entries: Object.freeze([
         Object.freeze({ caseId: "case-g18-01", order: 1, level: 1, spectrum: "melanoma", teachingType: "teaching", skillIds: Object.freeze(["asymmetry", "evidence-weighting"]) }),
@@ -122,7 +123,8 @@
         Object.freeze({ caseId: "case-g21-05", order: 24, level: 2, spectrum: "mimic", teachingType: "teaching", skillIds: Object.freeze(["bright-red-papule"]) }),
         Object.freeze({ caseId: "case-g21-06", order: 25, level: 3, spectrum: "mimic", teachingType: "reasoning", skillIds: Object.freeze(["blue-color"]) }),
         Object.freeze({ caseId: "case-g21-08", order: 26, level: 3, spectrum: "mimic", teachingType: "teaching", skillIds: Object.freeze(["grouped-papules"]) }),
-        Object.freeze({ caseId: "case-g21-07", order: 27, level: 4, spectrum: "melanoma", teachingType: "expert-challenge", skillIds: Object.freeze(["marked-cheek-patch"]) })
+        Object.freeze({ caseId: "case-g21-07", order: 27, level: 4, spectrum: "melanoma", teachingType: "expert-challenge", skillIds: Object.freeze(["marked-cheek-patch"]) }),
+        Object.freeze({ caseId: "case-g22-01", order: 28, level: 4, spectrum: "mimic", teachingType: "reasoning", skillIds: Object.freeze(["subungual-color"]) })
       ])
     }),
 
@@ -132,7 +134,8 @@
       Object.freeze({ id: "solar-lentigo", name: "Solar lentigo", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record." }),
       Object.freeze({ id: "cherry-angioma", name: "Cherry angioma", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record." }),
       Object.freeze({ id: "blue-nevus", name: "Blue nevus", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record." }),
-      Object.freeze({ id: "sebaceous-hyperplasia", name: "Sebaceous hyperplasia", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record." })
+      Object.freeze({ id: "sebaceous-hyperplasia", name: "Sebaceous hyperplasia", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record." }),
+      Object.freeze({ id: "subungual-haemorrhage", name: "Subungual haemorrhage", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record. The source caption says hematoma. Histopathology is not claimed." })
     ]),
     screening: Object.freeze({
       schemaVersion: 1,
@@ -244,6 +247,17 @@
         discriminator: "A skin-colored group with lobules versus one shiny red papule, in these frames. The difference is not a proof.",
         commonTrap: "Calling every grouped papule sebaceous hyperplasia, or every papule a carcinoma.",
         limits: "Linear vessels mentioned in the sebaceous hyperplasia caption were not counted. Histopathology was not quoted. The linear chest pattern is this case, not every presentation."
+      }),
+      Object.freeze({
+        id: "cmp-nail-color",
+        caseIdA: "case-g22-01",
+        caseIdB: "case-g18-12",
+        sharedFeatures: Object.freeze(["Both frames are clinical photographs of a nail unit. Neither frame is dermoscopy."]),
+        favouringA: Object.freeze(["A purple patch sits under a fingernail whose pale free edge is still there. The caption says subungual hematoma. The plate is not missing in this frame."]),
+        favouringB: Object.freeze(["The nail plate is destroyed, with dark debris. The caption says melanoma of the thumb and does not cite histopathology."]),
+        discriminator: "An intact nail plate with color under it versus a destroyed plate, in these two frames. That difference is not a proof, and it is not an image mark.",
+        commonTrap: "Calling every dark nail a haemorrhage, or every dark nail a melanoma, from one photograph.",
+        limits: "No trauma history is stored. No dermoscopy is stored. No histopathology is stored for either caption. One benign caption is not a guarantee. A longitudinal streak was not seen and was not invented."
       })
     ]),
     proposedProgression: Object.freeze({
@@ -256,7 +270,7 @@
         Object.freeze({ id: "differential", title: "Differential", caseIds: Object.freeze(["case-g21-02", "case-g18-03", "case-g21-04", "case-g18-04"]) }),
         Object.freeze({ id: "melanoma-spectrum", title: "Melanoma spectrum", caseIds: Object.freeze(["case-g18-06", "case-g18-10", "case-g21-07", "case-acral-melanoma-plantar", "case-g18-12"]) }),
         Object.freeze({ id: "difficult-mimics", title: "Difficult mimics", caseIds: Object.freeze(["case-g21-06", "case-g21-08", "case-g21-07", "case-g21-04"]) }),
-        Object.freeze({ id: "special-sites", title: "Special sites", caseIds: Object.freeze(["case-g21-07", "case-g21-04", "case-acral-melanoma-plantar", "case-g18-12", "case-g18-14"]) }),
+        Object.freeze({ id: "special-sites", title: "Special sites", caseIds: Object.freeze(["case-g21-07", "case-g21-04", "case-acral-melanoma-plantar", "case-g18-12", "case-g22-01", "case-g18-14"]) }),
         Object.freeze({ id: "screening-integration", title: "Screening integration", caseIds: Object.freeze([]), note: "Decision categories exist. No session is built, and no case is assigned a decision." })
       ])
     }),
@@ -2769,6 +2783,7 @@
         diagnosticTrap: "Diagnosing a stripe that is not there, or treating this uploader line as if it were a pathology report.",
         mentorNote: "This is the advanced evidence case because the picture is dramatic and the confirmation is thin. Drama is not certainty.",
         takeHomeRule: "Nail destruction needs a differential. A short source line does not become histopathology.",
+        compareWith: ["cmp-nail-color"],
         academy: {
                   level: 5,
                   spectrum: "melanoma",
@@ -4780,6 +4795,7 @@
   "compareWith": [
     "cmp-sebaceous-bcc"
   ],
+  "modalityIntegration": "The first frame is the clinical photograph of grouped papules. The second frame is the dermoscopic photograph from the same source and shows yellow-white lobules. Do not read those lobules onto the clinical photograph, and do not add vessels that were not counted.",
   "academy": {
     "level": 3,
     "spectrum": "mimic",
@@ -4791,6 +4807,126 @@
   "recordedScreeningDecision": null,
   "annotations": [],
   "dermoscopicFeatures": [],
+  "clinicalAction": "No condition monograph is stored for this teaching diagnosis. Do not treat from this case.",
+  "managementBrief": "No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g22-01",
+  "slug": "g22-dark-patch-under-a-nail",
+  "title": "Dark patch under a fingernail",
+  "diagnosisLabel": "Subungual haemorrhage",
+  "diseaseId": "subungual-haemorrhage",
+  "category": "Nail",
+  "educationalLevel": "advanced",
+  "caseType": "clinical",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Finger nail unit",
+    "presentationNotes": "The caption names a finger. It does not name which finger, a trauma history, or a dermoscopic view."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-10-01",
+      "metadataCheckedAt": "2026-09-30",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g22-01",
+      "type": "clinical",
+      "src": "assets/media/cases/case-30-clinical.jpg",
+      "dimensions": { "width": 1600, "height": 1318 },
+      "alt": "Clinical photograph of fingers. One nail has a purple patch under the plate, and the free edge of that nail is still pale. No diagnosis is included.",
+      "caption": "Clinical photograph of a purple patch under a fingernail. The uploader's diagnosis stays hidden until reveal. This is not a dermoscopic image.",
+      "source": "Callaleo, via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Subungal_hematoma_of_the_finger.jpg",
+      "creator": "Callaleo",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Callaleo, via Wikimedia Commons. CC BY-SA 4.0.",
+      "modificationsNotes": "The Commons file had already been cropped by a later editor. This copy was recompressed for web delivery, the longest edge was limited to 1600 pixels, and file metadata was removed. No further crop and no annotation.",
+      "consentBasis": "The author released this own photograph under CC BY-SA 4.0. The frame shows fingers, not a face. No separate patient-consent document is on the file page."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Subungual hematoma of the finger",
+    "confirmationMethod": "clinical_diagnosis",
+    "confirmationNotes": "The Commons description says this is a subungual hematoma of the finger. It does not cite histopathology, a clinician role, dermoscopy, or a trauma history. The spelling on the file is hematoma. Docutis uses haemorrhage as the teaching label and does not upgrade the method.",
+    "confidenceNote": "Uploader clinical label only. Not a Docutis clinician review. Not histopathology."
+  },
+  "observations": [
+    { "id": "obs-g22-01a", "kind": "observation", "text": "One fingernail has a purple to blue-black patch under the nail plate. The free edge of that nail is still pale." },
+    { "id": "obs-g22-01b", "kind": "observation", "text": "Other nails in the frame do not show the same patch. No scale, ink, or dermatoscope is in the frame." }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g22-01",
+      "kind": "interpretation",
+      "relatedObservationIds": ["obs-g22-01a", "obs-g22-01b"],
+      "text": "The patch is under an intact-looking plate. It is not a longitudinal streak, and this clinical photograph is not dermoscopy."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Subungual haemorrhage",
+      "supportingFeatures": ["Purple patch under the nail", "Pale free edge still present", "Caption names a hematoma of the finger"],
+      "contradictingFeatures": ["No trauma history is written", "No histopathology"],
+      "teachingDistinction": "The caption is a clinical label for this finger. It does not clear the next dark nail."
+    },
+    {
+      "diagnosis": "Melanoma of the thumb",
+      "supportingFeatures": ["Both are nail-unit photographs with dark color"],
+      "contradictingFeatures": ["That case shows a destroyed nail plate. This plate is not missing."],
+      "teachingDistinction": "Plate destruction is the visible difference in those two frames. It is not a proof."
+    }
+  ],
+  "teachingPoints": [
+    { "id": "tp-g22-01a", "title": "What I see", "text": "Name the color under the nail, then say whether the plate and the pale free edge are still there." },
+    { "id": "tp-g22-01b", "title": "What I cannot know", "text": "This frame does not show trauma, a streak on the fold, dermoscopy, or a pathology result." }
+  ],
+  "observationPrompts": [
+    "What color is under the nail?",
+    "Is the nail plate missing, or is the free edge still pale?"
+  ],
+  "hints": ["A pale free edge is still a nail plate."],
+  "closestMimic": {
+    "name": "Melanoma of the thumb",
+    "whyClosest": "That case is also a nail-unit photograph with dark material. Its plate is destroyed. This frame keeps a pale free edge."
+  },
+  "patterns": [
+    {
+      "id": "pat-g22-01-color",
+      "label": "Purple patch under the nail",
+      "specificityNote": "A purple patch is visible under the plate. It is not a longitudinal streak and it does not prove the caption.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g22-01-plate",
+      "label": "Destroyed nail plate",
+      "specificityNote": "The plate and pale free edge are still in the frame. Destruction is not visible. Absence is not a proof.",
+      "certainty": "not_visible",
+      "weight": "conflicting"
+    }
+  ],
+  "synthesis": "The caption says a subungual hematoma of the finger. The photograph shows a purple patch under a nail whose free edge is still pale. It does not show a destroyed plate, a fold streak, or dermoscopy.",
+  "evidenceWeighting": "The patch is clearly visible and is the major clue. It is not specific. Plate destruction conflicts with treating this as the destroyed-plate photograph, and it stays not visible. The caption is a clinical label, which is a weak confirmation.",
+  "diagnosticTrap": "Reading every dark nail as blood, or as melanoma, because another nail photograph was dramatic.",
+  "mentorNote": "No dermoscopic partner with a compatible license was added. A clinical photograph was not relabeled as dermoscopy. A longitudinal streak was not inferred from the diagnosis.",
+  "takeHomeRule": "Color under a nail is a look. A benign caption for one finger is not a guarantee, and a destroyed plate in another case is a different frame.",
+  "whyNot": [
+    { "mimic": "Melanoma of the thumb", "text": "That photograph shows a destroyed nail plate with debris. This plate is still there, with a pale free edge. The difference does not prove either caption." },
+    { "mimic": "Nail-unit squamous cell carcinoma or other keratinocyte tumor", "text": "No mass and no destroyed plate are in this frame. That absence does not exclude a keratinocyte tumor, and this caption does not diagnose one." }
+  ],
+  "compareWith": ["cmp-nail-color"],
+  "academy": { "level": 4, "spectrum": "mimic", "teachingType": "reasoning", "skillIds": ["subungual-color"] },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "localization": null,
   "clinicalAction": "No condition monograph is stored for this teaching diagnosis. Do not treat from this case.",
   "managementBrief": "No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.",
   "reviewStatus": "clinician review required",

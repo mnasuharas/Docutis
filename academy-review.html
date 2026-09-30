@@ -21,8 +21,10 @@
   <h1>Learn Melanoma reviewer workspace</h1>
   <p>Generated from <code>case-data.js</code> by <code>node scripts/academy-review.js --write</code>. Do not hand-edit. If the cases change, regenerate this file.</p>
   <p>Learn Melanoma is a teaching sequence. It does not certify competence, estimate a probability, or act as a diagnostic device. New cases stay review required. Teaching type is a lesson shape, not a diagnosis and not a score.</p>
-  <p>Primary path: 27 cases. Registry: 29. Teaching 16, reasoning 7, expert-challenge 4. 1. Recognition: 4; 2. Differentiation: 9; 3. Pattern integration: 7; 4. Diagnostic traps: 6; 5. Advanced reasoning: 1.</p>
+  <p>Primary path: 28 cases. Registry: 30. Teaching 16, reasoning 8, expert-challenge 4. 1. Recognition: 4; 2. Differentiation: 9; 3. Pattern integration: 7; 4. Diagnostic traps: 7; 5. Advanced reasoning: 1.</p>
   <p>A primary-path case needs a source, a local image, a differential, a distinct skill assignment, and honest review status. Academy cases also need observation prompts, feature certainty and weight, a closest mimic, and a non-trivial trap or take-home rule. Legacy pilots stay on the path without new clinical fields. This is not a numeric score and not a pass mark.</p>
+  <h2>Verification, not a total</h2>
+  <p>Melanoma labels by stored confirmation method: clinical_diagnosis: case-g18-12; expert_diagnosis: case-g18-10, case-g18-11, case-g21-07; histopathology: case-acral-melanoma-plantar; source_dataset_diagnosis: case-g18-01, case-g18-02, case-g18-03, case-g18-04, case-g18-05, case-g18-06, case-g18-07, case-g18-08, case-g18-09. Histopathology-confirmed melanoma: case-acral-melanoma-plantar. A larger total does not make the other methods histopathology. Clinical review remains deferred.</p>
   <h2>Outside the primary path</h2>
   <ul><li>Field change on the dorsum of the hand (case-ak-field-hand) stays in the library and outside Learn Melanoma. Default reason: it is not a melanoma-pathway skill case.</li><li>Two neighboring lesions on the upper back (case-scc-ak-paraspinal) stays in the library and outside Learn Melanoma. Default reason: it is not a melanoma-pathway skill case.</li></ul>
   
@@ -52,16 +54,17 @@
     <h3>Observation prompts</h3>
     <ul><li>Which half of the dark lesion looks thicker?</li><li>A measuring scale is in the frame. What does it not let you claim?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Asymmetric thickness</strong> — Clearly visible; Major clue</p>
       <p>A thicker half is a clue. It is not specific for one diagnosis.</p>
-      <p>Canonical pattern: asymmetric-thickness. Case certainty and weight stay on this case.</p>
-    </li>
+      <p>Canonical pattern: asymmetric-thickness. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><ul>
     <li>
       <p><strong>Measuring scale without a recorded reading</strong> — Clearly visible; Weak</p>
       <p>A scale in the frame is not a measurement and not a diagnosis.</p>
-      <p>Canonical pattern: measuring-scale-in-frame. Case certainty and weight stay on this case.</p>
+      <p>Canonical pattern: measuring-scale-in-frame. Educational role: Image mark, not a skin finding. Case certainty and weight stay on this case.</p>
     </li></ul>
     <h3>Differential</h3>
     <ul>
@@ -127,17 +130,18 @@
     <h3>Observation prompts</h3>
     <ul><li>Is the outline a smooth oval or notched?</li><li>Which dark colors are actually in the lesion?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Notched border</strong> — Clearly visible; Major clue</p>
       <p>A notched edge raises concern and is not specific.</p>
-      <p>Canonical pattern: notched-border. Case certainty and weight stay on this case.</p>
+      <p>Canonical pattern: notched-border. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
     </li>
     <li>
       <p><strong>More than one dark color</strong> — Clearly visible; Supportive</p>
       <p>A second dark color supports concern. It is not specific and it is not a count of colors beyond what you can see.</p>
-      <p>Canonical pattern: color-variegation. Case certainty and weight stay on this case.</p>
-    </li></ul>
+      <p>Canonical pattern: color-variegation. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -202,12 +206,13 @@
     <h3>Observation prompts</h3>
     <ul><li>How many dark colors can you name without adding one?</li><li>Is the outline round and even, or irregular?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Several dark colors</strong> — Clearly visible; Major clue</p>
       <p>Color mix increases concern. It is not specific and it is not a probability.</p>
-      <p>Canonical pattern: color-variegation. Case certainty and weight stay on this case.</p>
-    </li></ul>
+      <p>Canonical pattern: color-variegation. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -272,17 +277,18 @@
     <h3>Observation prompts</h3>
     <ul><li>Is this a tiny round macule or a broad patch?</li><li>Where is the darker focus relative to the rest of the patch?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Broad uneven brown patch</strong> — Clearly visible; Major clue</p>
       <p>A broad brown patch is not specific. Site and subtype are not in this caption.</p>
-      <p>Canonical pattern: broad-brown-patch. Case certainty and weight stay on this case.</p>
+      <p>Canonical pattern: broad-brown-patch. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
     </li>
     <li>
       <p><strong>Darker focus at one edge</strong> — Clearly visible; Supportive</p>
       <p>A darker edge is supportive of uneven color. It is not a subtype and not a measurement.</p>
-      <p>Canonical pattern: peripheral-dark-focus. Case certainty and weight stay on this case.</p>
-    </li></ul>
+      <p>Canonical pattern: peripheral-dark-focus. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -347,12 +353,13 @@
     <h3>Observation prompts</h3>
     <ul><li>Is the pink spot small and flat, or a large nodule?</li><li>Can you see scale on it?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Small pink scaly spot</strong> — Clearly visible; Major clue</p>
       <p>Scale on a small pink spot is not specific.</p>
-      <p>Canonical pattern: pink-scaly-spot. Case certainty and weight stay on this case.</p>
-    </li></ul>
+      <p>Canonical pattern: pink-scaly-spot. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -417,7 +424,8 @@
     <h3>Observation prompts</h3>
     <p>Legacy pilot. No new prompt field was added, so the governed payload stays unchanged.</p>
     <h3>Features, certainty, and weight</h3>
-    <p>Legacy pilot. Feature weights were not injected into this payload.</p>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><p>None stored on this case.</p><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -482,12 +490,13 @@
     <h3>Observation prompts</h3>
     <ul><li>Is the red spot a small erosion or a large ulcer?</li><li>What else is in the frame that is not the spot?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Small erosion on the ear</strong> — Clearly visible; Major clue</p>
       <p>A small erosion is not specific.</p>
-      <p>Canonical pattern: small-erosion. Case certainty and weight stay on this case.</p>
-    </li></ul>
+      <p>Canonical pattern: small-erosion. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -552,7 +561,8 @@
     <h3>Observation prompts</h3>
     <p>Legacy pilot. No new prompt field was added, so the governed payload stays unchanged.</p>
     <h3>Features, certainty, and weight</h3>
-    <p>Legacy pilot. Feature weights were not injected into this payload.</p>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><p>None stored on this case.</p><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -617,17 +627,18 @@
     <h3>Observation prompts</h3>
     <ul><li>How does the center compare with the rim?</li><li>What name are you tempted to give the pale center, and is that name written in the title?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Pale center inside a darker rim</strong> — Clearly visible; Major clue</p>
       <p>Pallor is not specific and is not a synonym for a histologic process in this title.</p>
-      <p>Canonical pattern: pale-center. Case certainty and weight stay on this case.</p>
-    </li>
+      <p>Canonical pattern: pale-center. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><ul>
     <li>
       <p><strong>A histologic name for the pale center</strong> — Not visible in this image; Conflicts with a simple reading</p>
       <p>The NCI title does not give the pale center a histologic name. Do not supply one.</p>
       <p>Canonical pattern: not linked. The case records that the source gives the pale center no histologic name. That absence is not a reusable visual pattern.</p>
-    </li></ul>
+    </li></ul><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -692,16 +703,17 @@
     <h3>Observation prompts</h3>
     <ul><li>How many separate skin findings are inside the inked field?</li><li>Which marks are ink rather than skin?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Red nodule touching a dark macule</strong> — Clearly visible; Major clue</p>
       <p>The combination is concerning and not specific until the source is read.</p>
-      <p>Canonical pattern: nodule-beside-pigmented-macule. Case certainty and weight stay on this case.</p>
-    </li>
+      <p>Canonical pattern: nodule-beside-pigmented-macule. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><ul>
     <li>
       <p><strong>Marker ink around the field</strong> — Clearly visible; Conflicts with a simple reading</p>
       <p>Ink is not a clinical border. Treating it as skin gives it conflicting weight.</p>
-      <p>Canonical pattern: marker-ink. Case certainty and weight stay on this case.</p>
+      <p>Canonical pattern: marker-ink. Educational role: Image mark, not a skin finding. Case certainty and weight stay on this case.</p>
     </li></ul>
     <h3>Differential</h3>
     <ul>
@@ -767,17 +779,18 @@
     <h3>Observation prompts</h3>
     <ul><li>Is the papule solitary, shiny, and red?</li><li>Which parts of the original file are missing from this crop?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Solitary shiny red papule</strong> — Clearly visible; Major clue</p>
       <p>A shiny red papule is not specific.</p>
-      <p>Canonical pattern: shiny-red-papule. Case certainty and weight stay on this case.</p>
-    </li>
+      <p>Canonical pattern: shiny-red-papule. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><ul>
     <li>
       <p><strong>Vessels on the papule</strong> — Uncertain; Weak</p>
       <p>Count a vessel only if you can see it. The caption mentions vessels as a general feature, which is not the same as a vessel you have confirmed.</p>
-      <p>Canonical pattern: surface-vessels. Case certainty and weight stay on this case.</p>
-    </li></ul>
+      <p>Canonical pattern: surface-vessels. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -842,7 +855,8 @@
     <h3>Observation prompts</h3>
     <p>Legacy pilot. No new prompt field was added, so the governed payload stays unchanged.</p>
     <h3>Features, certainty, and weight</h3>
-    <p>Legacy pilot. Feature weights were not injected into this payload.</p>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><p>None stored on this case.</p><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -907,16 +921,17 @@
     <h3>Observation prompts</h3>
     <ul><li>What does the printed arrow point at?</li><li>Which area is raised, and which area looks gray?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Flat area, raised dark focus, and gray zone</strong> — Clearly visible; Major clue</p>
       <p>Gray color is not specific. A histologic word for the gray area belongs to the caption, not to the gray color alone.</p>
-      <p>Canonical pattern: flat-area-with-raised-focus. Case certainty and weight stay on this case.</p>
-    </li>
+      <p>Canonical pattern: flat-area-with-raised-focus. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><ul>
     <li>
       <p><strong>Printed arrow</strong> — Clearly visible; Weak</p>
       <p>The arrow is already in the public-domain file. It is a pointer, not a skin finding, so its weight is weak.</p>
-      <p>Canonical pattern: printed-pointer. Case certainty and weight stay on this case.</p>
+      <p>Canonical pattern: printed-pointer. Educational role: Image mark, not a skin finding. Case certainty and weight stay on this case.</p>
     </li></ul>
     <h3>Differential</h3>
     <ul>
@@ -982,12 +997,13 @@
     <h3>Observation prompts</h3>
     <ul><li>Is there brown pigment inside the nodule itself?</li><li>What else around the nodule is drape or background skin?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Pink nodule without pigment</strong> — Clearly visible; Major clue</p>
       <p>Lack of pigment is not reassuring and is not specific.</p>
-      <p>Canonical pattern: pink-nodule-without-pigment. Case certainty and weight stay on this case.</p>
-    </li></ul>
+      <p>Canonical pattern: pink-nodule-without-pigment. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -1052,16 +1068,17 @@
     <h3>Observation prompts</h3>
     <ul><li>Are the red vessels one shape or more than one?</li><li>Which marks are a printed circle or a scale, rather than skin?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><p>None stored on this case.</p><h4>Dermoscopic structure</h4><ul>
     <li>
       <p><strong>Mixed vessel shapes on pink skin</strong> — Clearly visible; Major clue</p>
       <p>Mixed vessels raise concern. They are not specific for one tumor and they are not a probability.</p>
-      <p>Canonical pattern: polymorphous-vessels. Case certainty and weight stay on this case.</p>
-    </li>
+      <p>Canonical pattern: polymorphous-vessels. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><ul>
     <li>
       <p><strong>Printed circle and scale</strong> — Clearly visible; Conflicts with a simple reading</p>
       <p>The circle and the scale are printed in the file. They are not shiny lines and not a skin finding.</p>
-      <p>Canonical pattern: printed-circle-and-scale. Case certainty and weight stay on this case.</p>
+      <p>Canonical pattern: printed-circle-and-scale. Educational role: Image mark, not a skin finding. Case certainty and weight stay on this case.</p>
     </li></ul>
     <h3>Differential</h3>
     <ul>
@@ -1127,16 +1144,17 @@
     <h3>Observation prompts</h3>
     <ul><li>Can this single frame show that a diameter changed?</li><li>Is the small red macule part of the brown patch, or separate?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Irregular brown patch</strong> — Clearly visible; Major clue</p>
       <p>An irregular brown patch is not specific. Change in size is not visible in one frame.</p>
-      <p>Canonical pattern: irregular-brown-patch. Case certainty and weight stay on this case.</p>
-    </li>
+      <p>Canonical pattern: irregular-brown-patch. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><ul>
     <li>
       <p><strong>A second date showing a smaller patch</strong> — Not visible in this image; Conflicts with a simple reading</p>
       <p>The caption says the diameter had changed. This file has only one date.</p>
-      <p>Canonical pattern: change-outside-one-frame. Case certainty and weight stay on this case.</p>
+      <p>Canonical pattern: change-outside-one-frame. Educational role: Context, not a diagnostic structure. Case certainty and weight stay on this case.</p>
     </li></ul>
     <h3>Differential</h3>
     <ul>
@@ -1202,16 +1220,17 @@
     <h3>Observation prompts</h3>
     <ul><li>How many dates or earlier photographs are in this file?</li><li>What can you say about change from this frame alone?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Single dark papule</strong> — Clearly visible; Major clue</p>
       <p>A dark papule is not specific. Change over time is not visible here.</p>
-      <p>Canonical pattern: solitary-dark-papule. Case certainty and weight stay on this case.</p>
-    </li>
+      <p>Canonical pattern: solitary-dark-papule. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><ul>
     <li>
       <p><strong>An earlier photograph of the same papule</strong> — Not visible in this image; Conflicts with a simple reading</p>
       <p>The narrative describes change. This file does not contain the earlier look.</p>
-      <p>Canonical pattern: change-outside-one-frame. Case certainty and weight stay on this case.</p>
+      <p>Canonical pattern: change-outside-one-frame. Educational role: Context, not a diagnostic structure. Case certainty and weight stay on this case.</p>
     </li></ul>
     <h3>Differential</h3>
     <ul>
@@ -1277,17 +1296,18 @@
     <h3>Observation prompts</h3>
     <ul><li>What shape is the center of the nodule?</li><li>Is the photograph sharp enough to name fine vessels?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Crater or plug in a red nodule</strong> — Probably present; Major clue</p>
       <p>A crater is not specific for one keratinizing tumor and is not proof against a melanocytic nodule. Detail is limited.</p>
-      <p>Canonical pattern: crateriform-center. Case certainty and weight stay on this case.</p>
-    </li>
+      <p>Canonical pattern: crateriform-center. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><ul>
     <li>
       <p><strong>Fine surface vessels</strong> — Not visible in this image; Weak</p>
       <p>This file does not resolve fine vessels. Do not add them.</p>
-      <p>Canonical pattern: surface-vessels. Case certainty and weight stay on this case.</p>
-    </li></ul>
+      <p>Canonical pattern: surface-vessels. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -1352,17 +1372,18 @@
     <h3>Observation prompts</h3>
     <ul><li>What has happened to the nail plate?</li><li>Can you point to a pigmented streak on the fold, or would that be a guess?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Destroyed nail plate with dark debris</strong> — Clearly visible; Major clue</p>
       <p>Nail destruction is not specific for a melanocytic tumor.</p>
-      <p>Canonical pattern: nail-plate-destruction. Case certainty and weight stay on this case.</p>
+      <p>Canonical pattern: nail-plate-destruction. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
     </li>
     <li>
       <p><strong>A clear pigmented streak on the nail fold</strong> — Not visible in this image; Weak</p>
       <p>A fold streak is not claimed from this frame. Do not supply one.</p>
-      <p>Canonical pattern: pigmented-nail-streak. Case certainty and weight stay on this case.</p>
-    </li></ul>
+      <p>Canonical pattern: pigmented-nail-streak. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -1427,22 +1448,23 @@
     <h3>Observation prompts</h3>
     <ul><li>How many separate photographs are in the file?</li><li>Which panel is a dark raised spot, and which is pale?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Small brown macules</strong> — Clearly visible; Major clue</p>
       <p>Small brown macules are in this plate. Size and a brown color do not prove a benign outcome.</p>
-      <p>Canonical pattern: small-brown-macule. Case certainty and weight stay on this case.</p>
+      <p>Canonical pattern: small-brown-macule. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
     </li>
     <li>
       <p><strong>Dark raised papule in one panel</strong> — Clearly visible; Supportive</p>
       <p>One panel is a solitary dark papule. It does not inherit a benign reading from the other panels.</p>
-      <p>Canonical pattern: solitary-dark-papule. Case certainty and weight stay on this case.</p>
-    </li>
+      <p>Canonical pattern: solitary-dark-papule. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><ul>
     <li>
       <p><strong>Pale papule in one panel</strong> — Clearly visible; Weak</p>
       <p>The pale panel is not a pale center inside a darker rim.</p>
       <p>Canonical pattern: not linked. One panel is a pale papule. It is not a pale center inside a darker rim, so it is not that pattern.</p>
-    </li></ul>
+    </li></ul><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -1501,17 +1523,18 @@
     <h3>Observation prompts</h3>
     <ul><li>Is the surface smooth or rough?</li><li>Does the edge look as if it sits on the skin?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Rough stuck-on surface</strong> — Clearly visible; Major clue</p>
       <p>A rough surface that looks stuck on is a clue. It is not proof of a benign lesion.</p>
-      <p>Canonical pattern: stuck-on-rough-surface. Case certainty and weight stay on this case.</p>
+      <p>Canonical pattern: stuck-on-rough-surface. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
     </li>
     <li>
       <p><strong>More than one brown color</strong> — Clearly visible; Supportive</p>
       <p>Tan and darker brown are both visible. Shared color is not a diagnosis.</p>
-      <p>Canonical pattern: color-variegation. Case certainty and weight stay on this case.</p>
-    </li></ul>
+      <p>Canonical pattern: color-variegation. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -1570,16 +1593,17 @@
     <h3>Observation prompts</h3>
     <ul><li>Is the surface smooth or broken into ridges?</li><li>What is printed beside the lesion, and is it skin?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><p>None stored on this case.</p><h4>Dermoscopic structure</h4><ul>
     <li>
       <p><strong>Cerebriform ridges</strong> — Clearly visible; Major clue</p>
       <p>A ridged surface is a dermoscopic clue. It is not proof of a benign lesion and it is not a count of pits.</p>
-      <p>Canonical pattern: cerebriform-surface. Case certainty and weight stay on this case.</p>
-    </li>
+      <p>Canonical pattern: cerebriform-surface. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><ul>
     <li>
       <p><strong>Millimeter scale in the frame</strong> — Clearly visible; Weak</p>
       <p>The scale is print. It is not skin and it is not a recorded measurement.</p>
-      <p>Canonical pattern: measuring-scale-in-frame. Case certainty and weight stay on this case.</p>
+      <p>Canonical pattern: measuring-scale-in-frame. Educational role: Image mark, not a skin finding. Case certainty and weight stay on this case.</p>
     </li></ul>
     <h3>Differential</h3>
     <ul>
@@ -1639,12 +1663,13 @@
     <h3>Observation prompts</h3>
     <ul><li>Is this one brown patch or many separate spots?</li><li>What body site can you actually see?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Many flat brown macules</strong> — Clearly visible; Major clue</p>
       <p>A field of flat brown macules is not one broad patch, and it is not proof that every macule is benign.</p>
-      <p>Canonical pattern: flat-brown-macule. Case certainty and weight stay on this case.</p>
-    </li></ul>
+      <p>Canonical pattern: flat-brown-macule. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -1709,12 +1734,13 @@
     <h3>Observation prompts</h3>
     <ul><li>How many red spots are in the frame?</li><li>Are they the same color as each other?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Bright red papules</strong> — Clearly visible; Major clue</p>
       <p>Bright red papules are a color finding. A second papule does not prove either one is benign.</p>
-      <p>Canonical pattern: bright-red-papule. Case certainty and weight stay on this case.</p>
-    </li></ul>
+      <p>Canonical pattern: bright-red-papule. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -1779,17 +1805,18 @@
     <h3>Observation prompts</h3>
     <ul><li>What color is the small spot?</li><li>Do hairs hide any of its edge?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Blue papule or macule</strong> — Clearly visible; Major clue</p>
       <p>Blue color is visible. It does not prove the source label and it does not name a subtype.</p>
-      <p>Canonical pattern: blue-papule. Case certainty and weight stay on this case.</p>
-    </li>
+      <p>Canonical pattern: blue-papule. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><ul>
     <li>
       <p><strong>Hairs crossing the spot</strong> — Clearly visible; Weak</p>
       <p>Hair hides part of the edge. It is not a skin structure.</p>
       <p>Canonical pattern: not linked. Hairs cross the spot and hide part of the edge. Occlusion is not a reusable skin pattern.</p>
-    </li></ul>
+    </li></ul><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -1855,17 +1882,18 @@
     <h3>Observation prompts</h3>
     <ul><li>Are the bumps one lesion or a group?</li><li>On the close view, are the bumps smooth or lobulated?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Grouped skin-colored papules</strong> — Clearly visible; Major clue</p>
       <p>A group of skin-colored papules is this clinical frame. It is not proof of a benign lesion.</p>
-      <p>Canonical pattern: grouped-skin-colored-papules. Case certainty and weight stay on this case.</p>
-    </li>
+      <p>Canonical pattern: grouped-skin-colored-papules. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><ul>
     <li>
       <p><strong>Yellow-white lobules</strong> — Clearly visible; Major clue</p>
       <p>Lobules are visible on the dermoscopic frame. Vessels were not counted.</p>
-      <p>Canonical pattern: yellow-white-lobules. Case certainty and weight stay on this case.</p>
-    </li></ul>
+      <p>Canonical pattern: yellow-white-lobules. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><p>None stored on this case.</p>
     <h3>Differential</h3>
     <ul>
     <li>
@@ -1930,16 +1958,17 @@
     <h3>Observation prompts</h3>
     <ul><li>Is the brown pigment one patch or many separate spots?</li><li>What are the small dark dots around it?</li></ul>
     <h3>Features, certainty, and weight</h3>
-    <ul>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
     <li>
       <p><strong>Brown patch</strong> — Probably present; Major clue</p>
       <p>One brown patch is visible. Flatness is probable in this crop and is not a histologic level.</p>
-      <p>Canonical pattern: flat-brown-macule. Case certainty and weight stay on this case.</p>
-    </li>
+      <p>Canonical pattern: flat-brown-macule. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><ul>
     <li>
       <p><strong>Marker dots around the patch</strong> — Clearly visible; Conflicts with a simple reading</p>
       <p>Ink is not a border and not a diagnosis.</p>
-      <p>Canonical pattern: marker-ink. Case certainty and weight stay on this case.</p>
+      <p>Canonical pattern: marker-ink. Educational role: Image mark, not a skin finding. Case certainty and weight stay on this case.</p>
     </li></ul>
     <h3>Differential</h3>
     <ul>
@@ -1974,6 +2003,76 @@
     <p>The file is 426 by 318 pixels. It was kept because the patch and the ink are still readable, and a larger licensed lentigo maligna melanoma photograph was not substituted.</p>
     <h3>Take-home rule</h3>
     <p>Read the caption's full words. Ink is not skin, a biopsy mark is not a result, and a benign field elsewhere is not this lesion.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g22-01">
+    <h2>Dark patch under a fingernail <span class="meta">(case-g22-01)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Reasoning case</dd></div>
+      <div><dt>Curriculum level</dt><dd>4 · mimic</dd></div>
+      <div><dt>Skills</dt><dd>Color under a nail</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Subungual haemorrhage</dd></div>
+      <div><dt>Disease record</dt><dd>subungual-haemorrhage</dd></div>
+      <div><dt>Confirmation</dt><dd>clinical_diagnosis — The Commons description says this is a subungual hematoma of the finger. It does not cite histopathology, a clinician role, dermoscopy, or a trauma history. The spelling on the file is hematoma. Docutis uses haemorrhage as the teaching label and does not upgrade the method.</dd></div>
+      <div><dt>Site</dt><dd>Finger nail unit</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · CC BY-SA 4.0 · Callaleo</p>
+      <p>File: assets/media/cases/case-30-clinical.jpg</p>
+      <p>Source: <a href="https://commons.wikimedia.org/wiki/File:Subungal_hematoma_of_the_finger.jpg">Callaleo, via Wikimedia Commons</a></p>
+      <p>Callaleo, via Wikimedia Commons. CC BY-SA 4.0.</p>
+      <p>Modification: other-described — The Commons file had already been cropped by a later editor. This copy was recompressed for web delivery, the longest edge was limited to 1600 pixels, and file metadata was removed. No further crop and no annotation.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>One fingernail has a purple to blue-black patch under the nail plate. The free edge of that nail is still pale.</li><li>Other nails in the frame do not show the same patch. No scale, ink, or dermatoscope is in the frame.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>What color is under the nail?</li><li>Is the nail plate missing, or is the free edge still pale?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
+    <li>
+      <p><strong>Destroyed nail plate</strong> — Not visible in this image; Conflicts with a simple reading</p>
+      <p>The plate and pale free edge are still in the frame. Destruction is not visible. Absence is not a proof.</p>
+      <p>Canonical pattern: nail-plate-destruction. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><ul>
+    <li>
+      <p><strong>Purple patch under the nail</strong> — Clearly visible; Major clue</p>
+      <p>A purple patch is visible under the plate. It is not a longitudinal streak and it does not prove the caption.</p>
+      <p>Canonical pattern: not linked. A purple patch under an intact nail plate is not the destroyed-plate pattern and not a longitudinal streak. It stays case-specific rather than a new pattern id.</p>
+    </li></ul><h4>Context and image information</h4><p>None stored on this case.</p>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Subungual haemorrhage</strong></p>
+      <p>Why it fits: Purple patch under the nail; Pale free edge still present; Caption names a hematoma of the finger</p>
+      <p>Why not: No trauma history is written; No histopathology</p>
+      <p>The caption is a clinical label for this finger. It does not clear the next dark nail.</p>
+    </li>
+    <li>
+      <p><strong>Melanoma of the thumb</strong></p>
+      <p>Why it fits: Both are nail-unit photographs with dark color</p>
+      <p>Why not: That case shows a destroyed nail plate. This plate is not missing.</p>
+      <p>Plate destruction is the visible difference in those two frames. It is not a proof.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Melanoma of the thumb</p><p>That case is also a nail-unit photograph with dark material. Its plate is destroyed. This frame keeps a pale free edge.</p>
+    <h3>Why not</h3>
+    <ul><li><strong>Melanoma of the thumb</strong> — That photograph shows a destroyed nail plate with debris. This plate is still there, with a pale free edge. The difference does not prove either caption.</li><li><strong>Nail-unit squamous cell carcinoma or other keratinocyte tumor</strong> — No mass and no destroyed plate are in this frame. That absence does not exclude a keratinocyte tumor, and this caption does not diagnose one.</li></ul>
+    <h3>Reasoning</h3>
+    <p>The caption says a subungual hematoma of the finger. The photograph shows a purple patch under a nail whose free edge is still pale. It does not show a destroyed plate, a fold streak, or dermoscopy.</p>
+    <p>The patch is clearly visible and is the major clue. It is not specific. Plate destruction conflicts with treating this as the destroyed-plate photograph, and it stays not visible. The caption is a clinical label, which is a weak confirmation.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Reading every dark nail as blood, or as melanoma, because another nail photograph was dramatic.</p>
+    <h3>Mentor note</h3>
+    <p>No dermoscopic partner with a compatible license was added. A clinical photograph was not relabeled as dermoscopy. A longitudinal streak was not inferred from the diagnosis.</p>
+    <h3>Take-home rule</h3>
+    <p>Color under a nail is a look. A benign caption for one finger is not a guarantee, and a destroyed plate in another case is a different frame.</p>
     <h3>Management brief</h3>
     <p class="banner">Review required. Not a protocol.</p>
     <p>No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.</p>

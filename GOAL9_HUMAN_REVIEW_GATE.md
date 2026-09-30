@@ -8492,7 +8492,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Damaged thumbnail with dark debris (`case-g18-12`)
 
-- **Exact fingerprint:** `sha256-v1:da594e21b6388bcec1526efc767a7bb6ea806a5f6f51c83fbe952b389f4c14d2`
+- **Exact fingerprint:** `sha256-v1:df5e8c0f8b00d121650b1ebeca113eb07f6f8db2562bb13c1846eab19b5135a9`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -8677,6 +8677,9 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
   "diagnosticTrap": "Diagnosing a stripe that is not there, or treating this uploader line as if it were a pathology report.",
   "mentorNote": "This is the advanced evidence case because the picture is dramatic and the confirmation is thin. Drama is not certainty.",
   "takeHomeRule": "Nail destruction needs a differential. A short source line does not become histopathology.",
+  "compareWith": [
+    "cmp-nail-color"
+  ],
   "academy": {
     "level": 5,
     "spectrum": "melanoma",
@@ -10816,7 +10819,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: A group of papules on the chest (`case-g21-08`)
 
-- **Exact fingerprint:** `sha256-v1:124f83359206f73d57df250acf339ed679d00a19c9218c7e34310821ebae164f`
+- **Exact fingerprint:** `sha256-v1:415be0e48d5d00aab30601b7c98d71b70dbfc1b0c6e0bf7560b5a6d7a0bdbcf9`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -11009,6 +11012,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
   "compareWith": [
     "cmp-sebaceous-bcc"
   ],
+  "modalityIntegration": "The first frame is the clinical photograph of grouped papules. The second frame is the dermoscopic photograph from the same source and shows yellow-white lobules. Do not read those lobules onto the clinical photograph, and do not add vessels that were not counted.",
   "academy": {
     "level": 3,
     "spectrum": "mimic",
@@ -11020,6 +11024,203 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
   "recordedScreeningDecision": null,
   "annotations": [],
   "dermoscopicFeatures": [],
+  "clinicalAction": "No condition monograph is stored for this teaching diagnosis. Do not treat from this case.",
+  "managementBrief": "No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}
+```
+
+</details>
+
+- Verdict:
+- Reviewed sections:
+- Evidence sources actually checked:
+- Approved exact replacement wording (if any):
+- Required corrections / rejected claims:
+- Public reviewer notes:
+
+## case: Dark patch under a fingernail (`case-g22-01`)
+
+- **Exact fingerprint:** `sha256-v1:db1ecca0441280b9ba9b33d319d4e1b61f3c0104729334921c07c2e5799f5351`
+- **Schema version:** 1
+- **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
+- **Mapped evidence sources:**
+  - https://commons.wikimedia.org/wiki/File:Subungal_hematoma_of_the_finger.jpg
+- **Automated warnings:**
+  - Confirm image provenance/license, observations vs interpretations separation, differentials, diagnostic confirmation method honesty, and that AI interpretation is not treated as clinician review.
+  - Automated source attachment and schema validation are not evidence of clinical approval.
+- **AI-generated proposal:** No clinical wording change has been applied. Review the current text below and either approve it unchanged, approve exact replacement wording, request changes, reject an unsupported claim, or defer.
+
+<details>
+<summary>Current exact content</summary>
+
+```json
+{
+  "id": "case-g22-01",
+  "slug": "g22-dark-patch-under-a-nail",
+  "title": "Dark patch under a fingernail",
+  "diagnosisLabel": "Subungual haemorrhage",
+  "diseaseId": "subungual-haemorrhage",
+  "category": "Nail",
+  "educationalLevel": "advanced",
+  "caseType": "clinical",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Finger nail unit",
+    "presentationNotes": "The caption names a finger. It does not name which finger, a trauma history, or a dermoscopic view."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-10-01",
+      "metadataCheckedAt": "2026-09-30",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g22-01",
+      "type": "clinical",
+      "src": "assets/media/cases/case-30-clinical.jpg",
+      "dimensions": {
+        "width": 1600,
+        "height": 1318
+      },
+      "alt": "Clinical photograph of fingers. One nail has a purple patch under the plate, and the free edge of that nail is still pale. No diagnosis is included.",
+      "caption": "Clinical photograph of a purple patch under a fingernail. The uploader's diagnosis stays hidden until reveal. This is not a dermoscopic image.",
+      "source": "Callaleo, via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Subungal_hematoma_of_the_finger.jpg",
+      "creator": "Callaleo",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Callaleo, via Wikimedia Commons. CC BY-SA 4.0.",
+      "modificationsNotes": "The Commons file had already been cropped by a later editor. This copy was recompressed for web delivery, the longest edge was limited to 1600 pixels, and file metadata was removed. No further crop and no annotation.",
+      "consentBasis": "The author released this own photograph under CC BY-SA 4.0. The frame shows fingers, not a face. No separate patient-consent document is on the file page."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Subungual hematoma of the finger",
+    "confirmationMethod": "clinical_diagnosis",
+    "confirmationNotes": "The Commons description says this is a subungual hematoma of the finger. It does not cite histopathology, a clinician role, dermoscopy, or a trauma history. The spelling on the file is hematoma. Docutis uses haemorrhage as the teaching label and does not upgrade the method.",
+    "confidenceNote": "Uploader clinical label only. Not a Docutis clinician review. Not histopathology."
+  },
+  "observations": [
+    {
+      "id": "obs-g22-01a",
+      "kind": "observation",
+      "text": "One fingernail has a purple to blue-black patch under the nail plate. The free edge of that nail is still pale."
+    },
+    {
+      "id": "obs-g22-01b",
+      "kind": "observation",
+      "text": "Other nails in the frame do not show the same patch. No scale, ink, or dermatoscope is in the frame."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g22-01",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g22-01a",
+        "obs-g22-01b"
+      ],
+      "text": "The patch is under an intact-looking plate. It is not a longitudinal streak, and this clinical photograph is not dermoscopy."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Subungual haemorrhage",
+      "supportingFeatures": [
+        "Purple patch under the nail",
+        "Pale free edge still present",
+        "Caption names a hematoma of the finger"
+      ],
+      "contradictingFeatures": [
+        "No trauma history is written",
+        "No histopathology"
+      ],
+      "teachingDistinction": "The caption is a clinical label for this finger. It does not clear the next dark nail."
+    },
+    {
+      "diagnosis": "Melanoma of the thumb",
+      "supportingFeatures": [
+        "Both are nail-unit photographs with dark color"
+      ],
+      "contradictingFeatures": [
+        "That case shows a destroyed nail plate. This plate is not missing."
+      ],
+      "teachingDistinction": "Plate destruction is the visible difference in those two frames. It is not a proof."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g22-01a",
+      "title": "What I see",
+      "text": "Name the color under the nail, then say whether the plate and the pale free edge are still there."
+    },
+    {
+      "id": "tp-g22-01b",
+      "title": "What I cannot know",
+      "text": "This frame does not show trauma, a streak on the fold, dermoscopy, or a pathology result."
+    }
+  ],
+  "observationPrompts": [
+    "What color is under the nail?",
+    "Is the nail plate missing, or is the free edge still pale?"
+  ],
+  "hints": [
+    "A pale free edge is still a nail plate."
+  ],
+  "closestMimic": {
+    "name": "Melanoma of the thumb",
+    "whyClosest": "That case is also a nail-unit photograph with dark material. Its plate is destroyed. This frame keeps a pale free edge."
+  },
+  "patterns": [
+    {
+      "id": "pat-g22-01-color",
+      "label": "Purple patch under the nail",
+      "specificityNote": "A purple patch is visible under the plate. It is not a longitudinal streak and it does not prove the caption.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g22-01-plate",
+      "label": "Destroyed nail plate",
+      "specificityNote": "The plate and pale free edge are still in the frame. Destruction is not visible. Absence is not a proof.",
+      "certainty": "not_visible",
+      "weight": "conflicting"
+    }
+  ],
+  "synthesis": "The caption says a subungual hematoma of the finger. The photograph shows a purple patch under a nail whose free edge is still pale. It does not show a destroyed plate, a fold streak, or dermoscopy.",
+  "evidenceWeighting": "The patch is clearly visible and is the major clue. It is not specific. Plate destruction conflicts with treating this as the destroyed-plate photograph, and it stays not visible. The caption is a clinical label, which is a weak confirmation.",
+  "diagnosticTrap": "Reading every dark nail as blood, or as melanoma, because another nail photograph was dramatic.",
+  "mentorNote": "No dermoscopic partner with a compatible license was added. A clinical photograph was not relabeled as dermoscopy. A longitudinal streak was not inferred from the diagnosis.",
+  "takeHomeRule": "Color under a nail is a look. A benign caption for one finger is not a guarantee, and a destroyed plate in another case is a different frame.",
+  "whyNot": [
+    {
+      "mimic": "Melanoma of the thumb",
+      "text": "That photograph shows a destroyed nail plate with debris. This plate is still there, with a pale free edge. The difference does not prove either caption."
+    },
+    {
+      "mimic": "Nail-unit squamous cell carcinoma or other keratinocyte tumor",
+      "text": "No mass and no destroyed plate are in this frame. That absence does not exclude a keratinocyte tumor, and this caption does not diagnose one."
+    }
+  ],
+  "compareWith": [
+    "cmp-nail-color"
+  ],
+  "academy": {
+    "level": 4,
+    "spectrum": "mimic",
+    "teachingType": "reasoning",
+    "skillIds": [
+      "subungual-color"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "localization": null,
   "clinicalAction": "No condition monograph is stored for this teaching diagnosis. Do not treat from this case.",
   "managementBrief": "No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.",
   "reviewStatus": "clinician review required",

@@ -52,4 +52,6 @@ Pairs are stored in `comparisons` and referenced by `compareWith`. The learner s
 
 ## Coverage words
 
-`node scripts/curriculum-coverage.js` prints qualitative statuses. `contrastive_coverage` means the classifier found a closest-mimic string that matches another case's diagnosis label. That can mark a measuring scale as contrastive because the seborrheic keratosis case names cutaneous melanoma as its closest mimic and another case has that label. The scale is not the clinical discriminator. `mastery` stays false. One example is not mastery. A benign label is not a guarantee.
+`node scripts/curriculum-coverage.js` prints qualitative statuses. The raw occurrence status can still say `contrastive_coverage` when two diagnoses share a feature. Diagnostic contrastive coverage and diagnostic breadth now count only `diagnostic_structure`. `measuring-scale-in-frame` and `marker-ink` remain recorded and do not increase those metrics, dermoscopy coverage, or mastery. `mastery` stays false. One example is not mastery. A benign label is not a guarantee. `node scripts/diagnostic-signal.js` checks the split.
+
+Goal 22 added one nail case, subungual haemorrhage, clinical only, uploader label, CC BY-SA 4.0. It did not add dermatofibroma, lichenoid keratosis, a benign acral melanocytic lesion, or a paired facial in-situ photograph, because a compatible source with a usable image was not established in this pass. DermNet, CC BY-SA 3.0, and an unversioned Creative Commons dermoscopy file were rejected. Clinical review remains deferred.

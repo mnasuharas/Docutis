@@ -10,6 +10,10 @@ This note is for contributors. It is not evidence that the pathway teaches well,
 - The pattern owns the reusable meaning: what the look usually is, what to look for, where it can occur, what can mimic it, and what it does not prove.
 - A pattern object must not say that a pattern is definitely present in a particular image. `clearly_visible`, `probably`, `uncertain`, and `not_visible` stay on the case pattern. `major`, `supportive`, `weak`, and `conflicting` stay on the case pattern. Those are the Goal 19 words. Do not invent a second scoring system.
 - `usualRole` on a pattern is only the usual teaching role (`characteristic`, `supportive`, `weak`, `conflicting`, `nonspecific`, or `context-dependent`). The screen labels it as not this case's weight.
+- `educationalRole` is required on every reusable feature: `diagnostic_structure`, `descriptive_morphology`, `contextual_feature`, or `image_artifact_or_annotation`. A brown macule, red papule, or blue papule is descriptive morphology, not a dermoscopic structure. Marker ink and a measuring scale are image marks. They stay in the library and do not increase diagnostic breadth, contrastive coverage, dermoscopy coverage, or mastery.
+- The learner view lists clinical morphology, dermoscopic structure, and context or image information separately. Image marks sit in a quieter disclosure so they do not compete with diagnostic structures.
+- A clinical-only case must not mark a dermoscopic structure `clearly_visible` or `probably`. A paired case stores both image types and a diagnosis-neutral `modalityIntegration` sentence. Localization (`roi`, `bbox`, `polygon`, `crop`, pattern `localization`) stays empty unless an annotation is actually supported by the image. None are populated.
+
 
 ## How to reference a canonical pattern
 

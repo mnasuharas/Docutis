@@ -66,17 +66,42 @@ function renderCase(caseItem, entry, skills, patternData) {
     </li>`).join("");
   const linkMap = new Map((patternData.links || []).map(link => [link.casePatternId, link.canonicalId]));
   const exempt = new Map((patternData.unlinkedObservations || []).map(item => [item.casePatternId, item.reason]));
-  const patterns = (caseItem.patterns || []).map(pattern => {
-    const canonical = linkMap.get(pattern.id);
+  const canonicalById = new Map((patternData.patterns || []).map(item => [item.id, item]));
+  const roleLabels = {
+    diagnostic_structure: "Diagnostic structure",
+    descriptive_morphology: "Descriptive morphology, not a dermoscopic structure",
+    contextual_feature: "Context, not a diagnostic structure",
+    image_artifact_or_annotation: "Image mark, not a skin finding"
+  };
+  function bucketFor(canonical) {
+    if (!canonical) return "case-specific";
+    if (canonical.educationalRole === "image_artifact_or_annotation" || canonical.educationalRole === "contextual_feature") return "context";
+    if (canonical.category === "dermoscopic-structure") return "dermoscopic-structure";
+    return "clinical-morphology";
+  }
+  const buckets = { "clinical-morphology": [], "dermoscopic-structure": [], "case-specific": [], context: [] };
+  for (const pattern of caseItem.patterns || []) {
+    const canonicalId = linkMap.get(pattern.id);
+    const canonical = canonicalId ? canonicalById.get(canonicalId) : null;
     const linkLine = canonical
-      ? `<p>Canonical pattern: ${escapeHtml(canonical)}. Case certainty and weight stay on this case.</p>`
+      ? `<p>Canonical pattern: ${escapeHtml(canonicalId)}. Educational role: ${escapeHtml(roleLabels[canonical.educationalRole] || canonical.educationalRole)}. Case certainty and weight stay on this case.</p>`
       : `<p>Canonical pattern: not linked. ${escapeHtml(exempt.get(pattern.id) || "No reusable pattern was inferred.")}</p>`;
-    return `
+    buckets[bucketFor(canonical)].push(`
     <li>
       <p><strong>${escapeHtml(pattern.label)}</strong> — ${escapeHtml(CERTAINTY[pattern.certainty] || "Certainty not recorded")}; ${escapeHtml(WEIGHT[pattern.weight] || "Weight not recorded")}</p>
       <p>${escapeHtml(pattern.specificityNote || "")}</p>
       ${linkLine}
-    </li>`;
+    </li>`);
+  }
+  const groupTitles = [
+    ["clinical-morphology", "Clinical morphology"],
+    ["dermoscopic-structure", "Dermoscopic structure"],
+    ["case-specific", "Case-specific observation"],
+    ["context", "Context and image information"]
+  ];
+  const patterns = groupTitles.map(([key, title]) => {
+    const items = buckets[key];
+    return `<h4>${escapeHtml(title)}</h4>${items.length ? `<ul>${items.join("")}</ul>` : "<p>None stored on this case.</p>"}`;
   }).join("");
   const differentials = (caseItem.differentials || []).map(diff => `
     <li>
@@ -107,7 +132,8 @@ function renderCase(caseItem, entry, skills, patternData) {
     <h3>Observation prompts</h3>
     ${caseItem.observationPrompts ? list(caseItem.observationPrompts) : "<p>Legacy pilot. No new prompt field was added, so the governed payload stays unchanged.</p>"}
     <h3>Features, certainty, and weight</h3>
-    ${patterns ? `<ul>${patterns}</ul>` : "<p>Legacy pilot. Feature weights were not injected into this payload.</p>"}
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    ${patterns || "<p>Legacy pilot. Feature weights were not injected into this payload.</p>"}
     <h3>Differential</h3>
     <ul>${differentials}</ul>
     <h3>Closest mimic</h3>
@@ -146,6 +172,15 @@ function renderDocument(caseData) {
     .map(entry => renderCase(byId.get(entry.caseId), entry, curriculum.skills, patternData))
     .join("\n");
   const outsideHtml = outside.map(item => `<li>${escapeHtml(item.title)} (${escapeHtml(item.id)}) stays in the library and outside Learn Melanoma. Default reason: it is not a melanoma-pathway skill case.</li>`).join("");
+  const melanoma = caseData.cases.filter(item => /melanoma/i.test(item.diagnosisLabel || ""));
+  const byMethod = new Map();
+  for (const item of melanoma) {
+    const method = item.diagnosticGroundTruth && item.diagnosticGroundTruth.confirmationMethod || "unknown";
+    if (!byMethod.has(method)) byMethod.set(method, []);
+    byMethod.get(method).push(item.id);
+  }
+  const verificationLines = [...byMethod.entries()].sort((a, b) => a[0].localeCompare(b[0])).map(([method, ids]) => `${method}: ${ids.join(", ")}`).join("; ");
+  const histo = (byMethod.get("histopathology") || []).join(", ") || "none";
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -171,6 +206,8 @@ function renderDocument(caseData) {
   <p>${escapeHtml(curriculum.disclaimer || "")}</p>
   <p>Primary path: ${curriculum.entries.length} cases. Registry: ${caseData.cases.length}. Teaching ${counts.teaching}, reasoning ${counts.reasoning}, expert-challenge ${counts["expert-challenge"]}. ${escapeHtml(levelCounts)}.</p>
   <p>${escapeHtml(curriculum.qualityGate && curriculum.qualityGate.summary || "")}</p>
+  <h2>Verification, not a total</h2>
+  <p>Melanoma labels by stored confirmation method: ${escapeHtml(verificationLines || "none")}. Histopathology-confirmed melanoma: ${escapeHtml(histo)}. A larger total does not make the other methods histopathology. Clinical review remains deferred.</p>
   <h2>Outside the primary path</h2>
   <ul>${outsideHtml}</ul>
   ${body}

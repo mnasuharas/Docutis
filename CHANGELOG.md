@@ -4,6 +4,12 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
+### Goal 22 — Diagnostic signal and dermoscopy depth
+
+- Every reusable feature now has an educational role: diagnostic structure, descriptive morphology, contextual feature, or image mark. Marker ink and a measuring scale stay in the library and no longer increase diagnostic breadth, contrastive coverage, or dermoscopy coverage.
+- Learner and reviewer views separate clinical morphology, dermoscopic structure, and context or image information. Paired cases name a clinical view, a dermoscopic view, and an integration sentence. Localization fields stay empty.
+- One new case: subungual haemorrhage, clinical photograph, CC BY-SA 4.0, uploader clinical label, review required. Histopathology-confirmed melanoma remains the plantar case only. No clinician review was recorded. No release was published.
+
 ### Goal 19 — Professional case teaching system
 
 - Label each Learn Melanoma case as a teaching case, a reasoning case, or an expert-challenge case. The label is not a diagnosis and is not a score.

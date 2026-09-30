@@ -162,6 +162,30 @@ function validateCase(caseItem, diseaseIds) {
   if (caseItem.clinicalAction !== undefined && caseItem.clinicalAction !== null) {
     if (typeof caseItem.clinicalAction !== "string" || !caseItem.clinicalAction.trim()) throw new Error(`${id}: clinicalAction must be a non-empty string when provided`);
   }
+  const imageTypes = new Set(caseItem.images.map(image => image.type));
+  const pairedViews = imageTypes.has("clinical") && imageTypes.has("dermoscopy");
+  if (pairedViews) {
+    if (typeof caseItem.modalityIntegration !== "string" || caseItem.modalityIntegration.trim().length < 40) {
+      throw new Error(`${id}: a paired clinical and dermoscopic case needs an integration sentence grounded in the two frames`);
+    }
+    if (leaksRecordedDiagnosis(caseItem.modalityIntegration, caseItem)) {
+      throw new Error(`${id}: integration text names the recorded diagnosis`);
+    }
+  } else if (caseItem.modalityIntegration != null) {
+    throw new Error(`${id}: integration text is only for a case that has both a clinical image and a dermoscopic image`);
+  }
+  for (const image of caseItem.images) {
+    for (const key of ["roi", "bbox", "polygon", "crop"]) {
+      if (Object.prototype.hasOwnProperty.call(image, key) && image[key] != null) {
+        throw new Error(`${id}: ${key} stays empty unless a real annotation is stored`);
+      }
+    }
+  }
+  for (const pattern of caseItem.patterns || []) {
+    if (pattern && Object.prototype.hasOwnProperty.call(pattern, "localization") && pattern.localization != null) {
+      throw new Error(`${id}: pattern localization stays empty unless image evidence supports it`);
+    }
+  }
   if (!Array.isArray(caseItem.annotations)) throw new Error(`${id}: annotations array required (may be empty)`);
   for (const ann of caseItem.annotations) {
     for (const key of ["x", "y", "w", "h"]) {

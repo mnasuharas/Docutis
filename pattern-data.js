@@ -1,4 +1,4 @@
-/* Goal 20 reusable pattern library. Educational teaching text. Review required. Not clinician reviewed. A pattern is not a diagnosis. */
+/* Reusable pattern library. Educational teaching text. Review required. Not clinician reviewed. A pattern is not a diagnosis. educationalRole separates diagnostic structures from descriptive looks, context, and image marks. */
 (function () {
   "use strict";
 
@@ -51,10 +51,52 @@
     })
   });
 
+  const educationalRoles = Object.freeze({
+    "asymmetric-thickness": "diagnostic_structure",
+    "notched-border": "diagnostic_structure",
+    "color-variegation": "diagnostic_structure",
+    "peripheral-dark-focus": "diagnostic_structure",
+    "pale-center": "diagnostic_structure",
+    "nodule-beside-pigmented-macule": "diagnostic_structure",
+    "flat-area-with-raised-focus": "diagnostic_structure",
+    "polymorphous-vessels": "diagnostic_structure",
+    "nail-plate-destruction": "diagnostic_structure",
+    "pigmented-nail-streak": "diagnostic_structure",
+    "surface-vessels": "diagnostic_structure",
+    "crateriform-center": "diagnostic_structure",
+    "arborizing-vessels": "diagnostic_structure",
+    "telangiectasia": "diagnostic_structure",
+    "maple-leaf-like-areas": "diagnostic_structure",
+    "blue-gray-ovoid-nests": "diagnostic_structure",
+    "stuck-on-rough-surface": "diagnostic_structure",
+    "cerebriform-surface": "diagnostic_structure",
+    "yellow-white-lobules": "diagnostic_structure",
+    "broad-brown-patch": "descriptive_morphology",
+    "solitary-dark-papule": "descriptive_morphology",
+    "irregular-brown-patch": "descriptive_morphology",
+    "pink-nodule-without-pigment": "descriptive_morphology",
+    "pink-scaly-spot": "descriptive_morphology",
+    "small-erosion": "descriptive_morphology",
+    "shiny-red-papule": "descriptive_morphology",
+    "small-brown-macule": "descriptive_morphology",
+    "flat-brown-macule": "descriptive_morphology",
+    "bright-red-papule": "descriptive_morphology",
+    "blue-papule": "descriptive_morphology",
+    "grouped-skin-colored-papules": "descriptive_morphology",
+    "change-outside-one-frame": "contextual_feature",
+    "measuring-scale-in-frame": "image_artifact_or_annotation",
+    "marker-ink": "image_artifact_or_annotation",
+    "printed-pointer": "image_artifact_or_annotation",
+    "printed-circle-and-scale": "image_artifact_or_annotation"
+  });
+
   function pat(item) {
+    const educationalRole = educationalRoles[item.id];
+    if (!educationalRole) throw new Error("missing educational role: " + item.id);
     return Object.freeze({
       id: item.id,
       displayName: item.displayName,
+      educationalRole: educationalRole,
       displayNameDe: item.displayNameDe || null,
       internationalTerm: item.internationalTerm || null,
       aliases: Object.freeze(item.aliases || []),
@@ -874,6 +916,7 @@
       Object.freeze({ casePatternId: "pat-g21-07-ink", canonicalId: "marker-ink" }),
       Object.freeze({ casePatternId: "pat-g21-08-group", canonicalId: "grouped-skin-colored-papules" }),
       Object.freeze({ casePatternId: "pat-g21-08-lobules", canonicalId: "yellow-white-lobules" }),
+      Object.freeze({ casePatternId: "pat-g22-01-plate", canonicalId: "nail-plate-destruction" }),
     ]),
     dermoscopicTokenLinks: Object.freeze({
       arborizing_vessels: "arborizing-vessels",
@@ -894,6 +937,10 @@
       Object.freeze({
         casePatternId: "pat-g21-06-hair",
         reason: "Hairs cross the spot and hide part of the edge. Occlusion is not a reusable skin pattern."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g22-01-color",
+        reason: "A purple patch under an intact nail plate is not the destroyed-plate pattern and not a longitudinal streak. It stays case-specific rather than a new pattern id."
       })
     ])
   });

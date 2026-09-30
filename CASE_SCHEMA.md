@@ -30,7 +30,9 @@ Structured educational cases live in `case-data.js` as `window.DOCUTIS_CASES` (s
 | `differentials` | `{ diagnosis, supportingFeatures[], contradictingFeatures[], teachingDistinction }` |
 | `teachingPoints` | Short structured items `{ id, title, text }` |
 | `clinicalAction` | Optional short pointer to the Docutis disease record; no guideline duplication |
-| `annotations` | Optional future regions `{ id, imageId, label, x, y, w, h }` with normalized 0–1 coords; may be `[]` |
+| `annotations` | Optional future regions `{ id, imageId, label, x, y, w, h }` with normalized 0–1 coords; may be `[]`. Do not invent a region from the diagnosis. |
+| `modalityIntegration` | Required only when the case has both a clinical image and a dermoscopic image. Diagnosis-neutral. A clinical photograph is not called dermoscopy. |
+| `localization` | Optional and empty. `roi`, `bbox`, `polygon`, and `crop` on an image, and `localization` on a case pattern, must stay null until image evidence supports them. |
 | `reviewStatus` | Must be `clinician review required` until a genuine physician decision exists |
 | `clinicalReview` | Must be `null` for new pilots |
 

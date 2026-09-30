@@ -21,7 +21,7 @@ test("Goal 21 cases resolve, stay review required, and do not auto-approve", () 
   assert.doesNotThrow(() => validateCaseData(data));
   const added = data.cases.filter(item => item.id.startsWith("case-g21-"));
   assert.equal(added.length, 8);
-  assert.equal(data.cases.length, 29);
+  assert.equal(data.cases.length, 30);
   const patterns = loadPatternData();
   const canonical = new Set(patterns.patterns.map(item => item.id));
   const links = new Map(patterns.links.map(item => [item.casePatternId, item.canonicalId]));
@@ -75,11 +75,17 @@ test("one pattern does not infer malignancy, and benign cases are not automatica
   }
   const coverage = classifyPatternCoverage();
   const flat = coverage.find(item => item.id === "flat-brown-macule");
-  assert.equal(flat.status, "contrastive_coverage");
+  assert.equal(flat.educationalRole, "descriptive_morphology");
+  assert.equal(flat.occurrenceStatus, "contrastive_coverage");
+  assert.equal(flat.contrastiveCoverage, false);
   const scale = coverage.find(item => item.id === "measuring-scale-in-frame");
-  assert.equal(scale.status, "contrastive_coverage");
+  assert.equal(scale.educationalRole, "image_artifact_or_annotation");
+  assert.equal(scale.occurrenceStatus, "contrastive_coverage");
+  assert.equal(scale.contrastiveCoverage, false);
+  assert.equal(scale.broadCoverage, false);
+  assert.equal(scale.countsTowardDermoscopyCoverage, false);
   const audit = buildAudit();
-  assert.equal(audit.cases.filter(item => item.pole === "benign").length, 7);
+  assert.equal(audit.cases.filter(item => item.pole === "benign").length, 8);
   assert.ok(audit.comparisons.length >= 9);
   assert.equal(audit.spectrum.find(item => item.id === "dermatofibroma").count, 0);
   assert.equal(audit.spectrum.find(item => item.id === "lichenoid-keratosis").count, 0);

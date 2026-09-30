@@ -9,6 +9,7 @@ const { loadCaseData, loadDiseaseData } = require("./case");
 const root = path.join(__dirname, "..");
 const modalities = new Set(["clinical", "dermoscopic", "both", "none"]);
 const categories = new Set(["clinical-morphology", "dermoscopic-structure", "frame-artifact", "observation-limit"]);
+const educationalRoles = new Set(["diagnostic_structure", "descriptive_morphology", "contextual_feature", "image_artifact_or_annotation"]);
 const usualRoles = new Set(["characteristic", "supportive", "weak", "conflicting", "nonspecific", "context-dependent"]);
 const clearCertainties = new Set(["clearly_visible", "probably"]);
 const numericClaim = /\b(?:sensitivity|specificity)\b|\blikelihood ratio\b|\bpredictive value\b|\d+(?:\.\d+)?\s*%/i;
@@ -124,6 +125,22 @@ function validatePatternLibrary(patternData = loadPatternData(), caseData = load
     if (!pattern.displayName || !pattern.displayName.trim()) throw new Error(`${pattern.id}: displayName is required`);
     if (!modalities.has(pattern.modality)) throw new Error(`${pattern.id}: unsupported modality`);
     if (!categories.has(pattern.category)) throw new Error(`${pattern.id}: unsupported category`);
+    if (!educationalRoles.has(pattern.educationalRole)) throw new Error(`${pattern.id}: educationalRole is required`);
+    if (pattern.category === "frame-artifact" && pattern.educationalRole !== "image_artifact_or_annotation") {
+      throw new Error(`${pattern.id}: a frame artifact is image context, not a diagnostic structure`);
+    }
+    if (pattern.category === "observation-limit" && pattern.educationalRole !== "contextual_feature") {
+      throw new Error(`${pattern.id}: an observation limit is context, not a diagnostic structure`);
+    }
+    if (pattern.educationalRole === "image_artifact_or_annotation" && pattern.category !== "frame-artifact") {
+      throw new Error(`${pattern.id}: only a frame artifact uses the image-mark role`);
+    }
+    if (pattern.category === "dermoscopic-structure" && pattern.educationalRole !== "diagnostic_structure") {
+      throw new Error(`${pattern.id}: a dermoscopic structure is not generic descriptive morphology`);
+    }
+    if (pattern.educationalRole === "descriptive_morphology" && pattern.category !== "clinical-morphology") {
+      throw new Error(`${pattern.id}: descriptive morphology stays a clinical look`);
+    }
     if ((pattern.category === "frame-artifact" || pattern.category === "observation-limit") && pattern.modality !== "none") {
       throw new Error(`${pattern.id}: frame artifacts and observation limits use modality none`);
     }
@@ -191,6 +208,16 @@ function validatePatternLibrary(patternData = loadPatternData(), caseData = load
   }
   if (Object.prototype.hasOwnProperty.call(tokenLinks, "structureless_areas")) {
     throw new Error("structureless_areas is used for more than one look and must not be auto-linked");
+  }
+  for (const link of patternData.links) {
+    const pattern = byId.get(link.canonicalId);
+    const found = index.get(link.casePatternId);
+    if (!pattern || !found) continue;
+    const hasDermoscopy = (found.caseItem.images || []).some(image => image && image.type === "dermoscopy");
+    const claimsDermoscopicStructure = pattern.category === "dermoscopic-structure" || pattern.modality === "dermoscopic";
+    if (claimsDermoscopicStructure && !hasDermoscopy && clearCertainties.has(found.pattern.certainty)) {
+      throw new Error(`${found.caseItem.id}: a clinical-only case cannot claim a clearly visible dermoscopic structure (${pattern.id})`);
+    }
   }
   return true;
 }
@@ -295,7 +322,13 @@ function isContrastive(examples) {
   return false;
 }
 
-function classifyOccurrences(occurrences) {
+function exposureBucket(educationalRole) {
+  if (educationalRole === "diagnostic_structure") return "diagnostic";
+  if (educationalRole === "descriptive_morphology") return "descriptive";
+  return "context_or_artifact";
+}
+
+function classifyOccurrences(occurrences, educationalRole = "diagnostic_structure") {
   const list = Array.isArray(occurrences) ? occurrences : [];
   const notVisible = list.filter(item => item.certainty === "not_visible");
   const uncertain = list.filter(item => item.certainty === "uncertain");
@@ -312,9 +345,15 @@ function classifyOccurrences(occurrences) {
     else status = "limited_variation";
   }
   if (!coverageStatuses.has(status)) throw new Error(`bad coverage status ${status}`);
+  const diagnostic = educationalRole === "diagnostic_structure";
   return {
     status,
-    broadCoverage: status === "multi_context" || status === "contrastive_coverage",
+    occurrenceStatus: status,
+    educationalRole,
+    exposureBucket: exposureBucket(educationalRole),
+    broadCoverage: diagnostic && (status === "multi_context" || status === "contrastive_coverage"),
+    contrastiveCoverage: diagnostic && status === "contrastive_coverage",
+    countsTowardDiagnosticCoverage: diagnostic,
     mastery: false,
     independentExamples,
     clearExamples: clear.length,
@@ -328,14 +367,18 @@ function classifyPatternCoverage(patternData = loadPatternData(), caseData = loa
   const occurrences = deriveOccurrences(patternData, caseData, diseaseData);
   return patternData.patterns.map(pattern => {
     const rows = occurrences.get(pattern.id) || [];
+    const classified = classifyOccurrences(rows, pattern.educationalRole);
+    const dermoscopicModality = pattern.modality === "dermoscopic" || pattern.modality === "both";
     return {
       id: pattern.id,
       displayName: pattern.displayName,
       modality: pattern.modality,
       category: pattern.category,
+      educationalRole: pattern.educationalRole,
       usualRole: pattern.usualRole,
       occurrences: rows,
-      ...classifyOccurrences(rows)
+      ...classified,
+      countsTowardDermoscopyCoverage: classified.countsTowardDiagnosticCoverage && dermoscopicModality && classified.independentExamples > 0
     };
   });
 }
@@ -378,6 +421,55 @@ function spectrumSlot(id, label, cases) {
   return { id, label, cases: cases.map(item => item.id), count: cases.length, status: cases.length ? "represented" : "missing" };
 }
 
+function imageModality(imageTypes) {
+  const types = new Set(imageTypes || []);
+  const clinical = types.has("clinical");
+  const dermoscopy = types.has("dermoscopy");
+  if (clinical && dermoscopy) return "paired";
+  if (dermoscopy) return "dermoscopy-only";
+  if (clinical) return "clinical-only";
+  return "none";
+}
+
+function diagnosticSignal(coverage, cases) {
+  const diagnostic = coverage.filter(item => item.educationalRole === "diagnostic_structure");
+  const descriptive = coverage.filter(item => item.educationalRole === "descriptive_morphology");
+  const context = coverage.filter(item => item.exposureBucket === "context_or_artifact");
+  const melanoma = cases.filter(item => /melanoma/i.test(item.diagnosisLabel));
+  const byMethod = new Map();
+  for (const item of melanoma) byMethod.set(item.confirmationMethod, (byMethod.get(item.confirmationMethod) || []).concat(item.id));
+  const sites = ["acral", "nail", "face"].map(site => {
+    const rows = cases.filter(item => item.specialSite === site);
+    const benign = rows.filter(item => item.pole === "benign" || item.pole === "benign-or-inflammatory");
+    const malignant = rows.filter(item => item.pole === "malignant");
+    return {
+      site,
+      caseIds: rows.map(item => item.id),
+      usefulClinicalImage: rows.some(item => (item.imageTypes || []).includes("clinical")),
+      dermoscopy: rows.some(item => (item.imageTypes || []).includes("dermoscopy")),
+      benignMimic: benign.map(item => item.id),
+      malignantComparison: malignant.map(item => item.id),
+      meaningfulContrast: benign.length > 0 && malignant.length > 0,
+      completesSiteCurriculum: false
+    };
+  });
+  return {
+    diagnosticBroad: diagnostic.filter(item => item.broadCoverage).map(item => item.id),
+    diagnosticContrastive: diagnostic.filter(item => item.contrastiveCoverage).map(item => item.id),
+    dermoscopyCoverage: diagnostic.filter(item => item.countsTowardDermoscopyCoverage).map(item => item.id),
+    descriptiveExposure: descriptive.filter(item => item.independentExamples > 0).map(item => item.id),
+    contextArtifactExposure: context.filter(item => item.independentExamples > 0 || item.notVisibleExamples > 0 || item.uncertainExamples > 0).map(item => item.id),
+    modality: {
+      clinicalOnly: cases.filter(item => imageModality(item.imageTypes) === "clinical-only").map(item => item.id),
+      dermoscopyOnly: cases.filter(item => imageModality(item.imageTypes) === "dermoscopy-only").map(item => item.id),
+      paired: cases.filter(item => imageModality(item.imageTypes) === "paired").map(item => item.id)
+    },
+    melanomaByVerification: Object.fromEntries([...byMethod.entries()].sort((a, b) => a[0].localeCompare(b[0]))),
+    histopathologyConfirmedMelanoma: byMethod.get("histopathology") || [],
+    specialSites: sites
+  };
+}
+
 function buildAudit(patternData = loadPatternData(), caseData = loadCaseData(), diseaseData = loadDiseaseData()) {
   validatePatternLibrary(patternData, caseData);
   const diseases = diseaseById(diseaseData);
@@ -408,6 +500,7 @@ function buildAudit(patternData = loadPatternData(), caseData = loadCaseData(), 
       academyLevel: entry ? entry.level : "unknown",
       teachingType: entry ? entry.teachingType : "unknown",
       closestMimic: caseItem.closestMimic ? caseItem.closestMimic.name : null,
+      imageTypes: (caseItem.images || []).map(image => image.type),
       differentialCount: caseItem.differentials.length,
       patternHits: hitsByCase.get(caseItem.id) || [],
       reasoning: reasoningCoverage(caseItem, hitsByCase.get(caseItem.id) || [])
@@ -473,6 +566,7 @@ function buildAudit(patternData = loadPatternData(), caseData = loadCaseData(), 
     benignGaps,
     knownConcerns: known,
     adequateRepetitionClaim: false,
+    signal: diagnosticSignal(coverage, cases),
     comparisons: (caseData.comparisons || []).map(item => ({ id: item.id, caseIdA: item.caseIdA, caseIdB: item.caseIdB })),
     screeningCategories: ((caseData.screening || {}).categories || []).slice(),
     teachingDiagnoses: (caseData.teachingDiagnoses || []).map(item => ({ id: item.id, name: item.name, pole: item.pole, monograph: item.monograph }))
@@ -505,9 +599,10 @@ function formatAudit(audit) {
   lines.push("3. Benign, premalignant, malignant, uncertain");
   for (const [pole, count] of tally(audit.cases, item => item.pole)) lines.push(`- ${pole}: ${count}`);
   lines.push("");
-  lines.push("4. Pattern coverage");
+  lines.push("4. Pattern coverage, split by educational role");
+  lines.push("Diagnostic coverage counts only diagnostic_structure. Descriptive looks and image marks are exposure, not diagnostic breadth, not contrastive coverage, and not dermoscopy coverage.");
   for (const pattern of audit.patterns) {
-    lines.push(`- ${pattern.id}: ${pattern.status}; examples ${pattern.independentExamples}; clear ${pattern.clearExamples}; unrated ${pattern.unratedExamples}; uncertain ${pattern.uncertainExamples}; not visible ${pattern.notVisibleExamples}; broad ${pattern.broadCoverage}; mastery ${pattern.mastery}`);
+    lines.push(`- ${pattern.id}: role ${pattern.educationalRole}; occurrence ${pattern.occurrenceStatus}; examples ${pattern.independentExamples}; clear ${pattern.clearExamples}; unrated ${pattern.unratedExamples}; uncertain ${pattern.uncertainExamples}; not visible ${pattern.notVisibleExamples}; diagnostic broad ${pattern.broadCoverage}; diagnostic contrastive ${pattern.contrastiveCoverage}; dermoscopy coverage ${pattern.countsTowardDermoscopyCoverage}; mastery ${pattern.mastery}`);
   }
   lines.push("Unmapped dermoscopic tokens (not inferred):");
   if (!audit.unmappedDermoscopicTokens.length) lines.push("- none");
@@ -544,10 +639,28 @@ function formatAudit(audit) {
   for (const [key, count] of tally(audit.cases, item => `educational ${item.educationalLevel}`)) lines.push(`- ${key}: ${count}`);
   for (const [key, count] of tally(audit.cases, item => `curriculum ${item.academyLevel}`)) lines.push(`- ${key}: ${count}`);
   for (const [key, count] of tally(audit.cases, item => `teaching ${item.teachingType}`)) lines.push(`- ${key}: ${count}`);
-  const broad = audit.patterns.filter(item => item.broadCoverage).length;
-  const single = audit.patterns.filter(item => item.status === "single_example").length;
-  lines.push(`Patterns with broad coverage: ${broad}. Patterns with a single example: ${single}.`);
-  lines.push("Adequate repetition is not claimed. mastery is false for every pattern.");
+  const signal = audit.signal;
+  lines.push(`Diagnostic structures with broad coverage: ${signal.diagnosticBroad.length} (${signal.diagnosticBroad.join(", ") || "none"}).`);
+  lines.push(`Diagnostic contrastive coverage: ${signal.diagnosticContrastive.length} (${signal.diagnosticContrastive.join(", ") || "none"}). Image marks are excluded.`);
+  lines.push(`Dermoscopy coverage, diagnostic structures only: ${signal.dermoscopyCoverage.length} (${signal.dermoscopyCoverage.join(", ") || "none"}).`);
+  lines.push(`Descriptive exposure: ${signal.descriptiveExposure.length}. Context or artifact exposure: ${signal.contextArtifactExposure.length}.`);
+  lines.push("Adequate repetition is not claimed. mastery is false for every pattern. One case does not complete a site curriculum.");
+  lines.push("");
+  lines.push("Image modality from stored image types, not from the diagnosis:");
+  lines.push(`- clinical-only: ${signal.modality.clinicalOnly.length}`);
+  lines.push(`- dermoscopy-only: ${signal.modality.dermoscopyOnly.length}`);
+  lines.push(`- paired clinical and dermoscopy: ${signal.modality.paired.join(", ") || "none"}`);
+  lines.push("");
+  lines.push("Melanoma labels by verification method. Totals do not hide the histopathology count.");
+  const methods = Object.keys(signal.melanomaByVerification);
+  if (!methods.length) lines.push("- none");
+  for (const method of methods) lines.push(`- ${method}: ${signal.melanomaByVerification[method].join(", ")}`);
+  lines.push(`Histopathology-confirmed melanoma: ${signal.histopathologyConfirmedMelanoma.length} (${signal.histopathologyConfirmedMelanoma.join(", ") || "none"}).`);
+  lines.push("");
+  lines.push("Special sites. A single case does not complete the site.");
+  for (const site of signal.specialSites) {
+    lines.push(`- ${site.site}: cases ${site.caseIds.join(", ") || "none"}; clinical image ${site.usefulClinicalImage}; dermoscopy ${site.dermoscopy}; benign ${site.benignMimic.join(", ") || "none"}; malignant ${site.malignantComparison.join(", ") || "none"}; meaningful contrast ${site.meaningfulContrast}; completes curriculum ${site.completesSiteCurriculum}`);
+  }
   lines.push("");
   lines.push("Known concerns checked against the files, not copied forward:");
   lines.push(`- Seborrheic keratosis cases: ${audit.spectrum.find(item => item.id === "seborrheic-keratosis").count}. Matching images: ${audit.knownConcerns.seborrheicKeratosisImages.length}.`);
@@ -579,10 +692,10 @@ function main() {
 }
 
 module.exports = {
-  modalities, categories, usualRoles, coverageStatuses, REASONING_STEPS,
+  modalities, categories, educationalRoles, usualRoles, coverageStatuses, REASONING_STEPS,
   loadPatternData, patternFingerprint, libraryFingerprint, validatePatternLibrary,
   deriveOccurrences, classifyOccurrences, classifyPatternCoverage, buildAudit, formatAudit,
-  lesionPole, specialSite, unmappedDermoscopicTokens, main
+  lesionPole, specialSite, imageModality, diagnosticSignal, unmappedDermoscopicTokens, main
 };
 
 if (require.main === module) {

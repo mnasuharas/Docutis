@@ -78,6 +78,18 @@
     nonspecific: "Nonspecific",
     "context-dependent": "Context-dependent"
   });
+  const EDUCATIONAL_ROLE_LABELS = Object.freeze({
+    diagnostic_structure: "Diagnostic structure",
+    descriptive_morphology: "Descriptive morphology, not a dermoscopic structure",
+    contextual_feature: "Context, not a diagnostic structure",
+    image_artifact_or_annotation: "Image mark, not a skin finding"
+  });
+  const PATTERN_GROUPS = Object.freeze([
+    Object.freeze({ id: "clinical-morphology", title: "Clinical morphology", note: "Clinical looks stored on this case. A brown spot, red papule, or other descriptive shape is not a dermoscopic structure." }),
+    Object.freeze({ id: "dermoscopic-structure", title: "Dermoscopic structure", note: "Named only when a dermoscopic frame supports it. A clinical photograph is not dermoscopy." }),
+    Object.freeze({ id: "case-specific", title: "Case-specific observation", note: "Not promoted to a reusable pattern. Nothing was inferred from the diagnosis." }),
+    Object.freeze({ id: "context", title: "Context and image information", note: "Limits and image marks. They do not count as diagnostic structures and they are not a discriminator.", quiet: true })
+  ]);
   const filters = {
     diseaseId: "",
     caseType: "",
@@ -574,15 +586,41 @@
     parent.appendChild(box);
   }
 
+  function pairedImageViews(caseItem) {
+    const images = asList(caseItem.images).filter(Boolean);
+    const clinical = images.filter(image => image.type === "clinical");
+    const dermoscopy = images.filter(image => image.type === "dermoscopy");
+    return { images, clinical, dermoscopy, paired: clinical.length > 0 && dermoscopy.length > 0 };
+  }
+
   function renderInspect(parent, caseItem) {
     parent.appendChild(element("p", "Look at the image, creator, license and attribution. Zoom only changes the view on this page. The diagnosis stays hidden on this step.", "case-step-intro"));
     renderFirstImpression(parent, caseItem);
-    const images = asList(caseItem.images);
-    if (!images.length) {
+    const views = pairedImageViews(caseItem);
+    if (!views.images.length) {
       parent.appendChild(element("p", "No image is recorded for this case. None was added.", "case-empty"));
       return;
     }
-    images.forEach(image => renderZoomableImage(parent, caseItem, image));
+    if (!views.paired) {
+      views.images.forEach(image => renderZoomableImage(parent, caseItem, image));
+      return;
+    }
+    const clinicalSection = element("section", undefined, "case-view");
+    clinicalSection.appendChild(element("h5", "Clinical view"));
+    clinicalSection.appendChild(element("p", "This frame is a clinical photograph. It is not a dermoscopic structure.", "case-kind-note"));
+    views.clinical.forEach(image => renderZoomableImage(clinicalSection, caseItem, image));
+    parent.appendChild(clinicalSection);
+    const dermoSection = element("section", undefined, "case-view");
+    dermoSection.appendChild(element("h5", "Dermoscopic view"));
+    dermoSection.appendChild(element("p", "This frame is dermoscopy. Do not read its structures back onto the clinical photograph unless the case says they are there.", "case-kind-note"));
+    views.dermoscopy.forEach(image => renderZoomableImage(dermoSection, caseItem, image));
+    parent.appendChild(dermoSection);
+    if (typeof caseItem.modalityIntegration === "string" && caseItem.modalityIntegration.trim()) {
+      const integration = element("section", undefined, "case-view case-view-integration");
+      integration.appendChild(element("h5", "Integration"));
+      integration.appendChild(element("p", caseItem.modalityIntegration));
+      parent.appendChild(integration);
+    }
   }
 
   function renderLabeledList(parent, items, kindLabel, className, textOfItem) {
@@ -634,6 +672,80 @@
     parent.appendChild(section);
   }
 
+  function patternGroupId(canonical) {
+    if (!canonical) return "case-specific";
+    if (canonical.educationalRole === "image_artifact_or_annotation" || canonical.educationalRole === "contextual_feature" || canonical.category === "frame-artifact" || canonical.category === "observation-limit") return "context";
+    if (canonical.category === "dermoscopic-structure") return "dermoscopic-structure";
+    return "clinical-morphology";
+  }
+
+  function patternRows(caseItem) {
+    const rows = [];
+    asList(caseItem.patterns).forEach(pattern => {
+      if (!pattern) return;
+      rows.push({ kind: "case-pattern", pattern, canonicalId: canonicalIdForCasePattern(pattern.id) });
+    });
+    const library = patternLibrary();
+    const tokenLinks = library ? (library.dermoscopicTokenLinks || {}) : {};
+    asList(caseItem.dermoscopicFeatures).forEach(feature => {
+      if (!feature || !feature.token || !tokenLinks[feature.token]) return;
+      const canonicalId = tokenLinks[feature.token];
+      if (rows.some(row => row.canonicalId === canonicalId)) return;
+      rows.push({ kind: "token", feature, canonicalId });
+    });
+    return rows;
+  }
+
+  function renderGroupedPatterns(parent, caseItem, mode) {
+    const rows = patternRows(caseItem);
+    if (!rows.length) return;
+    const intro = element("section", undefined, mode === "study" ? "case-pattern-study" : "case-kind-section");
+    const heading = element("h5", mode === "study" ? "Patterns in this case" : "Patterns");
+    if (mode === "study") heading.id = "patternsInThisCase";
+    intro.appendChild(heading);
+    intro.appendChild(element("p", mode === "study"
+      ? "Certainty and weight belong to this case. Clinical morphology, dermoscopic structure, and image context are separate. A pattern note does not replace the case weight."
+      : "A named look is not a diagnosis. Clinical morphology, dermoscopic structure, and image marks are listed separately.", "case-kind-note"));
+    parent.appendChild(intro);
+    PATTERN_GROUPS.forEach(group => {
+      const groupRows = rows.filter(row => patternGroupId(patternRecord(row.canonicalId)) === group.id);
+      if (!groupRows.length) return;
+      const section = element("section", undefined, group.quiet ? "case-pattern-context" : "case-pattern-group");
+      section.appendChild(element("h5", group.title));
+      section.appendChild(element("p", group.note, "case-kind-note"));
+      const body = element("div");
+      groupRows.forEach(row => {
+        if (mode === "study") appendPatternStudyArticle(body, caseItem, row);
+        else appendPreRevealPattern(body, row);
+      });
+      if (group.quiet) {
+        const details = document.createElement("details");
+        details.className = "case-context-disclosure";
+        const summary = element("summary", group.title);
+        details.appendChild(summary);
+        details.appendChild(element("p", group.note, "case-kind-note"));
+        details.appendChild(body);
+        const quiet = element("section", undefined, "case-pattern-context");
+        quiet.appendChild(details);
+        parent.appendChild(quiet);
+        return;
+      }
+      section.appendChild(body);
+      parent.appendChild(section);
+    });
+  }
+
+  function appendPreRevealPattern(parent, row) {
+    const label = preRevealDisplay(row.kind === "case-pattern" ? row.pattern.label : (row.feature.label || row.feature.token));
+    const note = row.kind === "case-pattern" ? preRevealDisplay(row.pattern.specificityNote) : "";
+    const canonical = patternRecord(row.canonicalId);
+    if (label) parent.appendChild(element("h6", label));
+    if (canonical && EDUCATIONAL_ROLE_LABELS[canonical.educationalRole]) {
+      parent.appendChild(element("p", EDUCATIONAL_ROLE_LABELS[canonical.educationalRole], "case-kind-note"));
+    }
+    if (note) parent.appendChild(element("p", note));
+  }
+
   function renderObserve(parent, caseItem) {
     parent.appendChild(element("p", "Observations and dermoscopic features are separate from interpretations. Only items already stored on this case are shown.", "case-step-intro"));
     renderObservationPrompts(parent, caseItem);
@@ -646,20 +758,7 @@
     describe.appendChild(area);
     parent.appendChild(describe);
     parent.appendChild(element("p", "This note stays in the page session. It is not saved and not scored.", "case-kind-note"));
-    const patterns = asList(caseItem.patterns);
-    if (patterns.length) {
-      const section = element("section", undefined, "case-kind-section");
-      section.appendChild(element("h5", "Patterns"));
-      section.appendChild(element("p", "A pattern is a named look. The specificity note says it is not a diagnosis.", "case-kind-note"));
-      patterns.forEach(pattern => {
-        if (!pattern) return;
-        const label = preRevealDisplay(pattern.label);
-        const note = preRevealDisplay(pattern.specificityNote);
-        if (label) section.appendChild(element("h6", label));
-        if (note) section.appendChild(element("p", note));
-      });
-      parent.appendChild(section);
-    }
+    renderGroupedPatterns(parent, caseItem, "observe");
     const observations = asList(caseItem.observations);
     const features = asList(caseItem.dermoscopicFeatures);
     const interpretations = asList(caseItem.interpretations);
@@ -936,6 +1035,9 @@
     }
     panel.appendChild(element("p", `${certaintySentence(row.kind === "case-pattern" ? row.pattern.certainty : "unrated")}. ${weightSentence(row.kind === "case-pattern" ? row.pattern.weight : null)}.`, "case-feature-weight"));
     panel.appendChild(element("p", `Usual teaching role, not this case's weight: ${ROLE_LABELS[canonical.usualRole] || canonical.usualRole}.`, "case-kind-note"));
+    if (canonical.educationalRole) {
+      panel.appendChild(element("p", `Educational role: ${EDUCATIONAL_ROLE_LABELS[canonical.educationalRole] || canonical.educationalRole}.`, "case-kind-note"));
+    }
     appendPatternLines(panel, "Where else can it occur?", canonical.malignantAssociations.concat(canonical.benignAssociations));
     appendPatternLines(panel, "What can mimic it?", canonical.mimics);
     appendPatternLines(panel, "Common trap", canonical.traps);
@@ -967,83 +1069,75 @@
     });
   }
 
+  function appendPatternStudyArticle(parent, caseItem, row) {
+    const article = element("article", undefined, "case-pattern");
+    const canonical = patternRecord(row.canonicalId);
+    if (canonical && (canonical.educationalRole === "image_artifact_or_annotation" || canonical.educationalRole === "contextual_feature")) {
+      article.className = "case-pattern case-pattern-artifact";
+    }
+    const name = row.kind === "case-pattern" ? (row.pattern.label || "Feature") : (row.feature.label || row.feature.token);
+    const certainty = row.kind === "case-pattern" ? row.pattern.certainty : "unrated";
+    const weight = row.kind === "case-pattern" ? row.pattern.weight : null;
+    article.setAttribute("data-certainty", certainty || "unknown");
+    if (row.canonicalId) article.setAttribute("data-pattern-id", row.canonicalId);
+    if (canonical && canonical.educationalRole) article.setAttribute("data-educational-role", canonical.educationalRole);
+    article.appendChild(element("h6", name));
+    if (canonical && EDUCATIONAL_ROLE_LABELS[canonical.educationalRole]) {
+      article.appendChild(element("p", EDUCATIONAL_ROLE_LABELS[canonical.educationalRole], "case-kind-note"));
+    }
+    article.appendChild(element("p", `${certaintySentence(certainty)}. ${weightSentence(weight)}.`, "case-feature-weight"));
+    if (!canonical) {
+      const reason = row.kind === "case-pattern" ? unlinkedPatternReason(row.pattern.id) : null;
+      article.appendChild(element("p", reason || "This observation is not linked to a reusable pattern. Nothing was inferred.", "case-kind-note"));
+      parent.appendChild(article);
+      return;
+    }
+    const localId = row.kind === "case-pattern" ? row.pattern.id : row.feature.token;
+    const key = `${caseItem.id}:${localId}`;
+    const open = !!openPatternKeys[key];
+    const button = element("button", open ? "Close pattern teaching" : "Open pattern teaching", "case-button case-button-secondary case-pattern-toggle");
+    button.type = "button";
+    const panelId = `pattern-panel-${key.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
+    button.setAttribute("aria-expanded", open ? "true" : "false");
+    button.setAttribute("aria-controls", panelId);
+    button.setAttribute("data-pattern-key", key);
+    if (patternFocusId === key) lastPatternButton = button;
+    button.addEventListener("click", () => {
+      openPatternKeys[key] = !openPatternKeys[key];
+      patternFocusId = key;
+      renderDetail(caseItem, openPatternKeys[key] ? "pattern-open" : "pattern-close");
+    });
+    article.appendChild(button);
+    if (open) {
+      const panel = element("div", undefined, "case-pattern-panel");
+      panel.id = panelId;
+      panel.setAttribute("role", "region");
+      panel.setAttribute("aria-label", `Pattern teaching: ${canonical.displayName}`);
+      panel.tabIndex = -1;
+      if (patternFocusId === key) lastPatternPanel = panel;
+      appendPatternDetail(panel, canonical, row, caseItem);
+      article.appendChild(panel);
+    }
+    parent.appendChild(article);
+  }
+
   function renderPatternStudy(parent, caseItem) {
     if (!diagnosisRevealed) return;
     lastPatternButton = null;
     lastPatternPanel = null;
-    const section = element("section", undefined, "case-pattern-study");
-    const heading = element("h5", "Patterns in this case");
-    heading.id = "patternsInThisCase";
-    section.appendChild(heading);
-    section.appendChild(element("p", "Certainty and weight belong to this case. A pattern note does not replace them.", "case-kind-note"));
-    const library = patternLibrary();
-    if (!library) {
+    if (!patternLibrary()) {
+      const section = element("section", undefined, "case-pattern-study");
       section.appendChild(element("p", "Pattern library did not load. No pattern teaching was invented for this view.", "case-empty"));
       parent.appendChild(section);
       return;
     }
-    const rows = [];
-    asList(caseItem.patterns).forEach(pattern => {
-      if (!pattern) return;
-      rows.push({ kind: "case-pattern", pattern, canonicalId: canonicalIdForCasePattern(pattern.id) });
-    });
-    const tokenLinks = library.dermoscopicTokenLinks || {};
-    asList(caseItem.dermoscopicFeatures).forEach(feature => {
-      if (!feature || !feature.token || !tokenLinks[feature.token]) return;
-      const canonicalId = tokenLinks[feature.token];
-      if (rows.some(row => row.canonicalId === canonicalId)) return;
-      rows.push({ kind: "token", feature, canonicalId });
-    });
-    if (!rows.length) {
+    if (!patternRows(caseItem).length) {
+      const section = element("section", undefined, "case-pattern-study");
       section.appendChild(element("p", "No canonical pattern is encoded on this case. The diagnosis was not used to invent one.", "case-empty"));
       parent.appendChild(section);
       return;
     }
-    rows.forEach(row => {
-      const article = element("article", undefined, "case-pattern");
-      const name = row.kind === "case-pattern" ? (row.pattern.label || "Feature") : (row.feature.label || row.feature.token);
-      const certainty = row.kind === "case-pattern" ? row.pattern.certainty : "unrated";
-      const weight = row.kind === "case-pattern" ? row.pattern.weight : null;
-      article.setAttribute("data-certainty", certainty || "unknown");
-      if (row.canonicalId) article.setAttribute("data-pattern-id", row.canonicalId);
-      article.appendChild(element("h6", name));
-      article.appendChild(element("p", `${certaintySentence(certainty)}. ${weightSentence(weight)}.`, "case-feature-weight"));
-      const canonical = patternRecord(row.canonicalId);
-      if (!canonical) {
-        const reason = row.kind === "case-pattern" ? unlinkedPatternReason(row.pattern.id) : null;
-        article.appendChild(element("p", reason || "This observation is not linked to a reusable pattern. Nothing was inferred.", "case-kind-note"));
-        section.appendChild(article);
-        return;
-      }
-      const localId = row.kind === "case-pattern" ? row.pattern.id : row.feature.token;
-      const key = `${caseItem.id}:${localId}`;
-      const open = !!openPatternKeys[key];
-      const button = element("button", open ? "Close pattern teaching" : "Open pattern teaching", "case-button case-button-secondary case-pattern-toggle");
-      button.type = "button";
-      const panelId = `pattern-panel-${key.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
-      button.setAttribute("aria-expanded", open ? "true" : "false");
-      button.setAttribute("aria-controls", panelId);
-      button.setAttribute("data-pattern-key", key);
-      if (patternFocusId === key) lastPatternButton = button;
-      button.addEventListener("click", () => {
-        openPatternKeys[key] = !openPatternKeys[key];
-        patternFocusId = key;
-        renderDetail(caseItem, openPatternKeys[key] ? "pattern-open" : "pattern-close");
-      });
-      article.appendChild(button);
-      if (open) {
-        const panel = element("div", undefined, "case-pattern-panel");
-        panel.id = panelId;
-        panel.setAttribute("role", "region");
-        panel.setAttribute("aria-label", `Pattern teaching: ${canonical.displayName}`);
-        panel.tabIndex = -1;
-        if (patternFocusId === key) lastPatternPanel = panel;
-        appendPatternDetail(panel, canonical, row, caseItem);
-        article.appendChild(panel);
-      }
-      section.appendChild(article);
-    });
-    parent.appendChild(section);
+    renderGroupedPatterns(parent, caseItem, "study");
   }
 
   function renderAcademyReview(parent, caseItem) {

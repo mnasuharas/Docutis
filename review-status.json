@@ -2634,7 +2634,7 @@
       "assetType": "case",
       "title": "Damaged thumbnail with dark debris",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:da594e21b6388bcec1526efc767a7bb6ea806a5f6f51c83fbe952b389f4c14d2",
+      "currentFingerprint": "sha256-v1:df5e8c0f8b00d121650b1ebeca113eb07f6f8db2562bb13c1846eab19b5135a9",
       "sections": [
         "images",
         "observations",
@@ -3198,7 +3198,7 @@
       "assetType": "case",
       "title": "A group of papules on the chest",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:124f83359206f73d57df250acf339ed679d00a19c9218c7e34310821ebae164f",
+      "currentFingerprint": "sha256-v1:415be0e48d5d00aab30601b7c98d71b70dbfc1b0c6e0bf7560b5a6d7a0bdbcf9",
       "sections": [
         "images",
         "observations",
@@ -3233,6 +3233,53 @@
           "version": null,
           "doi": null,
           "url": "https://commons.wikimedia.org/wiki/File:Dermoscopy_of_sebaceous_hyperplasia.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g22-01",
+      "assetType": "case",
+      "title": "Dark patch under a fingernail",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:db1ecca0441280b9ba9b33d319d4e1b61f3c0104729334921c07c2e5799f5351",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Subungal_hematoma_of_the_finger.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Callaleo, via Wikimedia Commons",
+          "organization": "Callaleo, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Subungal_hematoma_of_the_finger.jpg",
           "metadataCheckedAt": "2026-09-30"
         }
       ],
