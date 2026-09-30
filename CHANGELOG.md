@@ -45,6 +45,12 @@ Entries under this heading are repository changes after the historical tag `v0.1
 
 - Keep diagnosis-bearing filenames, image text, confirmation lines, and source links hidden until the learner reveals the diagnosis. Public case image paths are diagnosis-neutral. Clinical wording, review decisions, and fingerprints were not edited for that concealment work.
 
+### Goal 14 — Pilot case review readiness
+
+- Correct pilot-case wording that the source page or the image does not support. Cases stay clinician review required with `clinicalReview` null.
+- Refresh case fingerprints through `scripts/review-governance.js --write` and `scripts/review-batch.js --write`. No clinician decision was added.
+- Add `GOAL_14_PILOT_CASE_REVIEW.md` for a later human review. The checklist is unsigned.
+
 ### Goal 12 — Case learning UX
 
 - Step the five existing pilot cases through inspect, observe, differential, reveal and review, with view-only image zoom, separated observations and interpretations, an unscored differential disclosure and an explicit diagnosis reveal.

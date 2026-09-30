@@ -210,7 +210,7 @@
   const CONFIRMATION_PATTERN = /\b(?:histopathologically\s+confirmed\s+as|was\s+confirmed\s+as|confirmed\s+as|author-labeled|uploader-labeled|uploader\s+[a-z0-9-]+\s+label|source\s+caption\s+specifies|primary\s+teaching\s+diagnosis|in\s+this\s+labeled\s+example)\b/i;
   const EXACT_PRE_REVEAL = new Map([
     ["Multiple AKs on a sun-damaged field illustrate field cancerization rather than an isolated keratosis.", "Multiple rough spots on a sun-damaged field illustrate field change rather than an isolated lesion."],
-    ["The pairing illustrates the AK\u2013SCC continuum: a more concerning hypertrophic focus beside an adjacent actinic keratosis in damaged skin.", "A more concerning hypertrophic focus sits beside an adjacent flatter keratotic change in damaged skin."],
+    ["The pairing illustrates the AK\u2013SCC continuum: a more raised keratotic focus beside an adjacent actinic keratosis.", "A more raised keratotic focus sits beside an adjacent flatter scaly change."],
     ["Discrete grit-like keratotic AKs on photoaged skin differ from diffuse eczematous plaques", "Discrete grit-like keratotic spots on photoaged skin differ from diffuse eczematous plaques"],
     ["Adjacent AK supports continuum teaching without merging both labels into one lesion.", "A neighboring flatter keratotic change supports continuum teaching without merging both findings into one lesion."]
   ]);

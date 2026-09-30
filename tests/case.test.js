@@ -453,13 +453,13 @@ test("explicit diagnosis confirmations stay hidden until reveal and remain avail
       id: "case-bcc-nodular-dermoscopy",
       hidden: [
         "Author-labeled nodular BCC; vascular clues are the teaching focus.",
-        "Classic arborizing BCC-type vessels and translucent BCC pattern favor BCC in this labeled example"
+        "In-focus branching vessels on a pink background favor BCC over a banal vascular pattern in this labeled example"
       ],
       kept: [
         "Basal cell carcinoma (nodular)",
         "associated with basal cell carcinoma",
         "Vascular clues are the teaching focus.",
-        "Classic arborizing BCC-type vessels and translucent BCC pattern favor BCC"
+        "In-focus branching vessels on a pink background favor BCC over a banal vascular pattern"
       ]
     },
     {
@@ -469,7 +469,7 @@ test("explicit diagnosis confirmations stay hidden until reveal and remain avail
       ],
       kept: [
         "Pigmented basal cell carcinoma",
-        "Pigmented BCC often shows",
+        "not clearly shown on this frame",
         "Emphasize BCC pigment structures vs melanocytic network."
       ]
     },
@@ -488,7 +488,7 @@ test("explicit diagnosis confirmations stay hidden until reveal and remain avail
     {
       id: "case-scc-ak-paraspinal",
       hidden: [
-        "The pairing illustrates the AK\u2013SCC continuum: a more concerning hypertrophic focus beside an adjacent actinic keratosis in damaged skin.",
+        "The pairing illustrates the AK\u2013SCC continuum: a more raised keratotic focus beside an adjacent actinic keratosis.",
         "Uploader SCC label",
         "Primary teaching diagnosis for the marked lesion per source caption.",
         "Source caption specifies well-differentiated SCC for the marked lesion",
@@ -497,8 +497,8 @@ test("explicit diagnosis confirmations stay hidden until reveal and remain avail
       kept: [
         "Cutaneous squamous cell carcinoma",
         "Actinic keratosis (adjacent)",
-        "A more concerning hypertrophic focus sits beside an adjacent flatter keratotic change in damaged skin.",
-        "Hypertrophic marked focus",
+        "A more raised keratotic focus sits beside an adjacent flatter scaly change.",
+        "Raised keratotic focus",
         "A neighboring flatter keratotic change supports continuum teaching without merging both findings into one lesion."
       ]
     }
