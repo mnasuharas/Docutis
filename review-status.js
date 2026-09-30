@@ -2118,7 +2118,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Dark lesion thicker on one side",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:03854f969f4b8be2014bb2ab5ea88d5bc855975022359629de50fbdc631f0173",
+      "currentFingerprint": "sha256-v1:1fe2a3b9f4f99fd64877d40941fd8ed826e433d1a90e3a2558a5662507798ce4",
       "sections": [
         "images",
         "observations",
@@ -2165,7 +2165,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Dark lesion with an uneven edge",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:b7c44b95da2700cb5dd604aae73702c0034bf0ff92b452456de4dd92c24a9f94",
+      "currentFingerprint": "sha256-v1:7a2ad423eabf7ce92f89db4ebca8df560e37dbe968fbc5eef9d0919284396a1b",
       "sections": [
         "images",
         "observations",
@@ -2212,7 +2212,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Lesion with several dark colors",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:e9b94946e62c0be706ff60d47f26be6013c5186363ef3cf45aebc9e59e72cd03",
+      "currentFingerprint": "sha256-v1:a9faefe1881adcd0c57b927835f67dcc6ba9ea45a03cb51520f88a82715656f1",
       "sections": [
         "images",
         "observations",
@@ -2259,7 +2259,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Broad brown patch with an uneven edge",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:0e84160f2b639df23ab799a990658725ff9ba3ad4c6b8fa2d9a1243ef2a748fa",
+      "currentFingerprint": "sha256-v1:61c244cc5230ced6f74ce29486f95e0ebbbbe94a568710e0bf6dc31ee198eb9f",
       "sections": [
         "images",
         "observations",
@@ -2306,7 +2306,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Brown lesion with a pale center",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:6f556bf77932c3d95e696fa39b724d616aaa553b704246823af0c06b4ca1aa55",
+      "currentFingerprint": "sha256-v1:b40305fba9fd0934c3233e7be7c7c6a52bd83ae30a5cffe530a3316557b193d8",
       "sections": [
         "images",
         "observations",
@@ -2353,7 +2353,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Red nodule beside a dark macule",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:816d5b8f34256a8b9442ce27625a1a2a6847bf85a323f74d44ea5f565312a524",
+      "currentFingerprint": "sha256-v1:e5e1ba1b65fc346eb35338d712e0a13ce817ffe059cbb789414dd93738ffd66c",
       "sections": [
         "images",
         "observations",
@@ -2400,7 +2400,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Flat brown area beside a blue-black papule",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:14ba49b8af079badecefcd9f585cb232ab4f1bc4c7cd5e99c9d6ba5cd539643d",
+      "currentFingerprint": "sha256-v1:968c9e81909a0354460b487c007bbfffc03c792a0c054d6743bc1e03812ffa17",
       "sections": [
         "images",
         "observations",
@@ -2447,7 +2447,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Single dark papule with a brown edge",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:cd00140969723efe3e7156892cfaeb3d31f636068742d14496129768fe1cdfd9",
+      "currentFingerprint": "sha256-v1:468c697b17544f0144e7fced84efad033868ddd8770f41e5d685c62311184902",
       "sections": [
         "images",
         "observations",
@@ -2494,7 +2494,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Brown patch beside a skin crease",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:ffc3b04d9270f9ef9397f05b1c8e4ec4beed52b243f12359bfc7ffe35ee77147",
+      "currentFingerprint": "sha256-v1:0cf6bdae97039df86713c8ba1e4811b9efffcaf4bfae8a1a50561e7497c20ffc",
       "sections": [
         "images",
         "observations",
@@ -2541,7 +2541,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Pink nodule inside a drape",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:df3ba16523f47ea95e3b4985ada7ed80854a262cda6ed2982b234aec7b92362b",
+      "currentFingerprint": "sha256-v1:fa6449e9d81d83a1884fa7d142eb5f774ac9862773c27e4ef9e76fe93a4062e8",
       "sections": [
         "images",
         "observations",
@@ -2588,7 +2588,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Pink field with more than one vessel shape",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:dfea3b040181f7a272fbf1eba54253baf41252624d77bc6fb8259747e99b8f43",
+      "currentFingerprint": "sha256-v1:dd9d39cd1e7acbe3044879a74d5a6f40c38f7243217d38f68e00001c09cc7b3e",
       "sections": [
         "images",
         "observations",
@@ -2635,7 +2635,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Damaged thumbnail with dark debris",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:58b6683db84f59b50dd80d319d72b7f305d341b7549392e5931dedfddac8f844",
+      "currentFingerprint": "sha256-v1:da594e21b6388bcec1526efc767a7bb6ea806a5f6f51c83fbe952b389f4c14d2",
       "sections": [
         "images",
         "observations",
@@ -2682,7 +2682,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Small pink scaly spot",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:46ad1ceb9d09ab79076e63a7dc7a9dadc2232294eb7ec33c3be22535d9e1ff39",
+      "currentFingerprint": "sha256-v1:0a21243a0e214db5f15f1ae45c5b9a4991cd4a02dffa28d06c91b810708e2b5e",
       "sections": [
         "images",
         "observations",
@@ -2729,7 +2729,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Small eroded spot on the ear",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:18a87ce017c959fc298cd4c4c9594196b9ae08fb0c56bce28fc752e7d63d398f",
+      "currentFingerprint": "sha256-v1:544b35891d3f38761e46fe53fe02161be1e89df9afaed0b61923ce370307d438",
       "sections": [
         "images",
         "observations",
@@ -2776,7 +2776,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Shiny red papule on hair-bearing skin",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:2ba7e638f9bb369732bc68058b3e8d392cc2923e4fad5060188d5029d54a2893",
+      "currentFingerprint": "sha256-v1:ccaec047bb43b9623742354d0a039a6e1b32ae3ab116d81eb8fea09785ca8290",
       "sections": [
         "images",
         "observations",
@@ -2823,7 +2823,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Nodule with a dark plugged center",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:02276b1bacf0039fc1d029388f60ef628a10c4901c5e3d69a0d2feae4853c589",
+      "currentFingerprint": "sha256-v1:ecfaa33bc932608d32ee6c9e23dd9a8d4fc06d064c22d8d4d277c64a29541004",
       "sections": [
         "images",
         "observations",

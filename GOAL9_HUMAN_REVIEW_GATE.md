@@ -6298,7 +6298,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Dark lesion thicker on one side (`case-g18-01`)
 
-- **Exact fingerprint:** `sha256-v1:03854f969f4b8be2014bb2ab5ea88d5bc855975022359629de50fbdc631f0173`
+- **Exact fingerprint:** `sha256-v1:1fe2a3b9f4f99fd64877d40941fd8ed826e433d1a90e3a2558a5662507798ce4`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -6439,21 +6439,42 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "Asymmetry is not specific. The diagnosis in this case is the NCI caption, not a new reading."
     }
   ],
+  "observationPrompts": [
+    "Which half of the dark lesion looks thicker?",
+    "A measuring scale is in the frame. What does it not let you claim?"
+  ],
+  "hints": [
+    "Stay with the thicker half. Do not turn the scale into a millimeter number."
+  ],
+  "closestMimic": {
+    "name": "Pigmented keratinocyte tumor",
+    "whyClosest": "A dark raised lesion can be keratinocytic. This clinical frame does not show dermoscopic structures that separate the two, so the catalog sentence is what names it."
+  },
   "patterns": [
     {
       "id": "pat-g18-01",
       "label": "Asymmetric thickness",
-      "specificityNote": "A thicker half is a clue. It is not specific for one diagnosis."
+      "specificityNote": "A thicker half is a clue. It is not specific for one diagnosis.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g18-01-scale",
+      "label": "Measuring scale without a recorded reading",
+      "specificityNote": "A scale in the frame is not a measurement and not a diagnosis.",
+      "certainty": "clearly_visible",
+      "weight": "weak"
     }
   ],
   "synthesis": "One dark lesion is thicker on one side. The NCI caption calls the lesion melanoma and does not include a histopathology report.",
-  "evidenceWeighting": "The asymmetry is visible. The diagnosis weight is the NCI sentence. There is no histopathology sentence to weigh.",
+  "evidenceWeighting": "Asymmetric thickness is clearly visible and is the major clue. It is not specific. The diagnosis weight is the NCI sentence. The scale is visible and weak, because no measurement is read from it. There is no histopathology sentence to weigh.",
   "diagnosticTrap": "Treating asymmetry as proof, or ignoring it because a ruler is in the frame.",
   "mentorNote": "Do not invent a thickness in millimeters. The scale is visible; a number is not recorded here.",
   "takeHomeRule": "Describe the uneven half first. Keep the source diagnosis separate from the clue.",
   "academy": {
     "level": 1,
     "spectrum": "melanoma",
+    "teachingType": "teaching",
     "skillIds": [
       "asymmetry",
       "evidence-weighting"
@@ -6473,7 +6494,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Dark lesion with an uneven edge (`case-g18-02`)
 
-- **Exact fingerprint:** `sha256-v1:b7c44b95da2700cb5dd604aae73702c0034bf0ff92b452456de4dd92c24a9f94`
+- **Exact fingerprint:** `sha256-v1:7a2ad423eabf7ce92f89db4ebca8df560e37dbe968fbc5eef9d0919284396a1b`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -6614,21 +6635,42 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "An ABCD teaching caption is not a pathology report."
     }
   ],
+  "observationPrompts": [
+    "Is the outline a smooth oval or notched?",
+    "Which dark colors are actually in the lesion?"
+  ],
+  "hints": [
+    "Trace the edge before you pick a familiar benign name."
+  ],
+  "closestMimic": {
+    "name": "Seborrheic keratosis",
+    "whyClosest": "An irregular dark outline is shared with seborrheic keratosis. This frame does not show a thick waxy plate, so that mimic stays possible and is not preferred from pixels alone."
+  },
   "patterns": [
     {
       "id": "pat-g18-02",
       "label": "Notched border",
-      "specificityNote": "A notched edge raises concern and is not specific."
+      "specificityNote": "A notched edge raises concern and is not specific.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g18-02-color",
+      "label": "More than one dark color",
+      "specificityNote": "A second dark color supports concern. It is not specific and it is not a count of colors beyond what you can see.",
+      "certainty": "clearly_visible",
+      "weight": "supportive"
     }
   ],
   "synthesis": "The lesion has a notched outline and mixed dark colors. The NCI caption calls it melanoma and does not cite histopathology.",
-  "evidenceWeighting": "Border and color are visible. Diagnosis weight is the catalog sentence only.",
+  "evidenceWeighting": "The notched border is clearly visible and is the major clue. The second dark color is supportive. Diagnosis weight is the catalog sentence only. No pathology sentence is present.",
   "diagnosticTrap": "Using the word notched as if it were a diagnosis.",
   "mentorNote": "The scale lets you see that the lesion is small. Small does not cancel an uneven edge.",
   "takeHomeRule": "An uneven border is described before it is named.",
   "academy": {
     "level": 1,
     "spectrum": "melanoma",
+    "teachingType": "teaching",
     "skillIds": [
       "border-irregularity"
     ]
@@ -6647,7 +6689,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Lesion with several dark colors (`case-g18-03`)
 
-- **Exact fingerprint:** `sha256-v1:e9b94946e62c0be706ff60d47f26be6013c5186363ef3cf45aebc9e59e72cd03`
+- **Exact fingerprint:** `sha256-v1:a9faefe1881adcd0c57b927835f67dcc6ba9ea45a03cb51520f88a82715656f1`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -6788,21 +6830,35 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "Do not add blue or red if you do not see them."
     }
   ],
+  "observationPrompts": [
+    "How many dark colors can you name without adding one?",
+    "Is the outline round and even, or irregular?"
+  ],
+  "hints": [
+    "Name only colors you can point to in the frame."
+  ],
+  "closestMimic": {
+    "name": "Seborrheic keratosis",
+    "whyClosest": "A dark uneven lesion can be a seborrheic keratosis. Classic stuck-on waxy horns are not the main finding here, and color mix alone does not settle the source label."
+  },
   "patterns": [
     {
       "id": "pat-g18-03",
       "label": "Several dark colors",
-      "specificityNote": "Color mix increases concern. It is not specific and it is not a probability."
+      "specificityNote": "Color mix increases concern. It is not specific and it is not a probability.",
+      "certainty": "clearly_visible",
+      "weight": "major"
     }
   ],
   "synthesis": "The lesion is irregular and contains more than one dark color. The NCI caption calls it melanoma without a histopathology statement.",
-  "evidenceWeighting": "Colors are visible evidence. The diagnosis is the catalog label. No numeric risk is attached.",
+  "evidenceWeighting": "Several dark colors are clearly visible and are the major clue. They are not specific. The diagnosis is the catalog label. No numeric risk is attached, and no extra color was added to match a mnemonic.",
   "diagnosticTrap": "Inventing an extra color to match an ABCD mnemonic.",
   "mentorNote": "A duplicate Commons upload of this same photograph was rejected so the curriculum would not repeat one lesion.",
   "takeHomeRule": "Name only the colors in the frame, then read the source diagnosis.",
   "academy": {
     "level": 1,
     "spectrum": "melanoma",
+    "teachingType": "teaching",
     "skillIds": [
       "color-variegation"
     ]
@@ -6821,7 +6877,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Broad brown patch with an uneven edge (`case-g18-04`)
 
-- **Exact fingerprint:** `sha256-v1:0e84160f2b639df23ab799a990658725ff9ba3ad4c6b8fa2d9a1243ef2a748fa`
+- **Exact fingerprint:** `sha256-v1:61c244cc5230ced6f74ce29486f95e0ebbbbe94a568710e0bf6dc31ee198eb9f`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -6963,21 +7019,42 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "The caption does not name a subtype. Do not add one."
     }
   ],
+  "observationPrompts": [
+    "Is this a tiny round macule or a broad patch?",
+    "Where is the darker focus relative to the rest of the patch?"
+  ],
+  "hints": [
+    "Do not assign a subtype the caption does not use."
+  ],
+  "closestMimic": {
+    "name": "Solar lentigo",
+    "whyClosest": "A brown patch is the shared look. This patch is less even than a typical lentigo, and the caption still does not name a subtype."
+  },
   "patterns": [
     {
       "id": "pat-g18-04",
       "label": "Broad uneven brown patch",
-      "specificityNote": "A broad brown patch is not specific. Site and subtype are not in this caption."
+      "specificityNote": "A broad brown patch is not specific. Site and subtype are not in this caption.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g18-04-edge",
+      "label": "Darker focus at one edge",
+      "specificityNote": "A darker edge is supportive of uneven color. It is not a subtype and not a measurement.",
+      "certainty": "clearly_visible",
+      "weight": "supportive"
     }
   ],
   "synthesis": "The frame is a broad brown patch with a darker edge and a scalloped outline. The NCI text says melanoma without subtype or histopathology.",
-  "evidenceWeighting": "Morphology is visible. Diagnostic weight is a short catalog sentence. Missing subtype is a real gap, not a reason to invent one.",
+  "evidenceWeighting": "The broad uneven patch and darker edge are visible. The patch is the major clue and the darker edge is supportive. Diagnostic weight is a short catalog sentence. Missing subtype is a real gap, not a reason to invent one.",
   "diagnosticTrap": "Upgrading a generic melanoma caption into superficial spreading or nodular disease.",
   "mentorNote": "This is a differentiation case because benign brown patches are the nearby lookalikes. The source does not show dermoscopy.",
   "takeHomeRule": "Do not invent a subtype the caption does not state.",
   "academy": {
     "level": 2,
     "spectrum": "melanoma",
+    "teachingType": "teaching",
     "skillIds": [
       "variegated-plaque",
       "color-variegation"
@@ -6997,7 +7074,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Brown lesion with a pale center (`case-g18-05`)
 
-- **Exact fingerprint:** `sha256-v1:6f556bf77932c3d95e696fa39b724d616aaa553b704246823af0c06b4ca1aa55`
+- **Exact fingerprint:** `sha256-v1:b40305fba9fd0934c3233e7be7c7c6a52bd83ae30a5cffe530a3316557b193d8`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -7138,21 +7215,42 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "Do not relabel pallor as regression unless the source says so."
     }
   ],
+  "observationPrompts": [
+    "How does the center compare with the rim?",
+    "What name are you tempted to give the pale center, and is that name written in the title?"
+  ],
+  "hints": [
+    "Paler is a color word. Do not upgrade it."
+  ],
+  "closestMimic": {
+    "name": "Lichenoid keratosis or inflamed benign lesion",
+    "whyClosest": "A pale center can be inflammation or a treated site. The source does not describe either, and it also does not give the pale center a histologic name."
+  },
   "patterns": [
     {
       "id": "pat-g18-05",
       "label": "Pale center inside a darker rim",
-      "specificityNote": "Pallor is not specific and is not a synonym for regression in this caption."
+      "specificityNote": "Pallor is not specific and is not a synonym for a histologic process in this title.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g18-05-name",
+      "label": "A histologic name for the pale center",
+      "specificityNote": "The NCI title does not give the pale center a histologic name. Do not supply one.",
+      "certainty": "not_visible",
+      "weight": "conflicting"
     }
   ],
   "synthesis": "An irregular brown-black lesion has a paler center. The NCI title is melanoma. The repeated ABCD sentence is not a measurement and not histopathology.",
-  "evidenceWeighting": "The pale center is visible. Regression is not in the source text, so it gets no weight. The diagnosis weight is the catalog title.",
+  "evidenceWeighting": "The pale center is clearly visible and is the major clue as a color finding. A histologic name for that center is not in the source, so it gets conflicting weight: it must not be added. The repeated ABCD sentence is not a measurement. The diagnosis weight is the catalog title.",
   "diagnosticTrap": "Calling every pale center regression, or trusting a boilerplate ABCD line as if each letter were measured.",
   "mentorNote": "This photograph is smaller and softer than the other NCI frames. Teach only what remains visible.",
   "takeHomeRule": "A pale center is a color finding until the source gives it another name.",
   "academy": {
     "level": 3,
     "spectrum": "melanoma",
+    "teachingType": "reasoning",
     "skillIds": [
       "pale-area",
       "border-irregularity"
@@ -7172,7 +7270,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Red nodule beside a dark macule (`case-g18-06`)
 
-- **Exact fingerprint:** `sha256-v1:816d5b8f34256a8b9442ce27625a1a2a6847bf85a323f74d44ea5f565312a524`
+- **Exact fingerprint:** `sha256-v1:e5e1ba1b65fc346eb35338d712e0a13ce817ffe059cbb789414dd93738ffd66c`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -7313,21 +7411,42 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "Do not turn a general prognosis sentence in an old caption into this person's outcome."
     }
   ],
+  "observationPrompts": [
+    "How many separate skin findings are inside the inked field?",
+    "Which marks are ink rather than skin?"
+  ],
+  "hints": [
+    "Describe the red part and the dark part as two findings."
+  ],
+  "closestMimic": {
+    "name": "Nodular basal cell carcinoma",
+    "whyClosest": "A shiny red nodule is where a keratinocyte tumor remains realistic. The source describes one contiguous lesion and does not cite histopathology."
+  },
   "patterns": [
     {
       "id": "pat-g18-06",
       "label": "Red nodule touching a dark macule",
-      "specificityNote": "The combination is concerning and not specific until the source is read. Marker ink is not a dermoscopic structure."
+      "specificityNote": "The combination is concerning and not specific until the source is read.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g18-06-ink",
+      "label": "Marker ink around the field",
+      "specificityNote": "Ink is not a clinical border. Treating it as skin gives it conflicting weight.",
+      "certainty": "clearly_visible",
+      "weight": "conflicting"
     }
   ],
   "synthesis": "The cropped frame shows a shiny red nodule against a dark macule inside marker ink. NCI calls this advanced melanoma with a superficial spreading component and an amelanotic nodule. Histopathology is not stated.",
-  "evidenceWeighting": "The two components are visible. Growth-phase names have weight only as NCI wording. The prognostic sentence in the same caption is not evidence about this patient.",
+  "evidenceWeighting": "The red nodule and the dark macule are clearly visible and together are the major clue. Marker ink is clearly visible and conflicting if you read it as a border. Growth-phase names have weight only as NCI wording. The prognostic sentence in the same caption is not evidence about this patient. Histopathology has no weight because it is absent.",
   "diagnosticTrap": "Reading marker ink as a clinical border, or quoting the caption's general death sentence as this patient's result.",
   "mentorNote": "The crop removed initials and a date. It also removed the scale. Do not estimate millimeters from memory of the uncropped file.",
   "takeHomeRule": "A pink nodule beside pigment is described as two findings. Growth-phase labels belong to the source text.",
   "academy": {
     "level": 3,
     "spectrum": "melanoma",
+    "teachingType": "reasoning",
     "skillIds": [
       "nodule-beside-macule"
     ]
@@ -7346,7 +7465,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Flat brown area beside a blue-black papule (`case-g18-07`)
 
-- **Exact fingerprint:** `sha256-v1:14ba49b8af079badecefcd9f585cb232ab4f1bc4c7cd5e99c9d6ba5cd539643d`
+- **Exact fingerprint:** `sha256-v1:968c9e81909a0354460b487c007bbfffc03c792a0c054d6743bc1e03812ffa17`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -7489,21 +7608,42 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "Gray color is visible. Calling it regression is the caption's interpretation, and it is not specific."
     }
   ],
+  "observationPrompts": [
+    "What does the printed arrow point at?",
+    "Which area is raised, and which area looks gray?"
+  ],
+  "hints": [
+    "Keep each area separate until the caption names it."
+  ],
+  "closestMimic": {
+    "name": "Pigmented basal cell carcinoma",
+    "whyClosest": "Irregular dark pigment can be a pigmented keratinocyte tumor. This clinical frame does not show leaf-like structures, and the caption is not that label."
+  },
   "patterns": [
     {
       "id": "pat-g18-07",
       "label": "Flat area, raised dark focus, and gray zone",
-      "specificityNote": "Gray-white color is not specific. The regression wording belongs to the NCI caption."
+      "specificityNote": "Gray color is not specific. A histologic word for the gray area belongs to the caption, not to the gray color alone.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g18-07-arrow",
+      "label": "Printed arrow",
+      "specificityNote": "The arrow is already in the public-domain file. It is a pointer, not a skin finding, so its weight is weak.",
+      "certainty": "clearly_visible",
+      "weight": "weak"
     }
   ],
   "synthesis": "The photograph shows a flat brown-pink area at a printed arrow, a blue-black raised area, and a gray zone. NCI calls this superficial spreading melanoma arising in a dysplastic nevus and calls the gray area regression, without a histopathology sentence.",
-  "evidenceWeighting": "Three colors and shapes are visible. The 4-by-8-mm measurement and the word regression have weight only as caption text. Histopathology has no weight because it is absent.",
+  "evidenceWeighting": "Three colors and shapes are clearly visible and are the major clue. The printed arrow is visible and weak: it is not skin. The 4-by-8-mm measurement and the caption's word for the gray area have weight only as caption text. Histopathology has no weight because it is absent.",
   "diagnosticTrap": "Adding your own arrow, or treating regression as a diagnosis you made from gray color.",
   "mentorNote": "The arrow is a derivative already present in the public-domain file. Docutis did not draw it.",
   "takeHomeRule": "Map each caption phrase to the area it names. Do not merge them into one word.",
   "academy": {
     "level": 3,
     "spectrum": "melanoma",
+    "teachingType": "reasoning",
     "skillIds": [
       "flat-and-raised",
       "pale-area"
@@ -7523,7 +7663,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Single dark papule with a brown edge (`case-g18-08`)
 
-- **Exact fingerprint:** `sha256-v1:cd00140969723efe3e7156892cfaeb3d31f636068742d14496129768fe1cdfd9`
+- **Exact fingerprint:** `sha256-v1:468c697b17544f0144e7fced84efad033868ddd8770f41e5d685c62311184902`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -7675,21 +7815,42 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "Do not rewrite 'proved' as histopathology."
     }
   ],
+  "observationPrompts": [
+    "How many dates or earlier photographs are in this file?",
+    "What can you say about change from this frame alone?"
+  ],
+  "hints": [
+    "A follow-up story in the caption is not a second photograph."
+  ],
+  "closestMimic": {
+    "name": "Inflamed or traumatized nevus",
+    "whyClosest": "A dark papule with a brown edge can be an irritated nevus. The source narrative is what overrides that mimic, and the narrative is not a visible timeline."
+  },
   "patterns": [
     {
       "id": "pat-g18-08",
       "label": "Single dark papule",
-      "specificityNote": "A dark papule is not specific. Change over time is not visible here."
+      "specificityNote": "A dark papule is not specific. Change over time is not visible here.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g18-08-prior",
+      "label": "An earlier photograph of the same papule",
+      "specificityNote": "The narrative describes change. This file does not contain the earlier look.",
+      "certainty": "not_visible",
+      "weight": "conflicting"
     }
   ],
   "synthesis": "One dark papule with a brown edge is visible. The NCI narrative adds a family follow-up story and says the nodule proved to be invasive melanoma in a dysplastic nevus. That narrative is not a second photograph and does not say histopathology.",
-  "evidenceWeighting": "Pixels support a dark papule only. The 18-month change, the 3-mm size, and the diagnosis have weight as source text. Histopathology has none. The demographic sentence is context, not something seen on the skin.",
+  "evidenceWeighting": "Pixels support a dark papule only, and that papule is the major visible clue. An earlier photograph is not in the file, so a change you cannot see gets conflicting weight. The 18-month story, the 3-mm size, and the diagnosis have weight as source text. Histopathology has none. The word proved in the narrative is not a pathology report.",
   "diagnosticTrap": "Teaching a before-and-after lesson from a file that contains only the later look, or upgrading 'proved' into a pathology report.",
   "mentorNote": "This is an evidence-weighting case. If you cannot point to the earlier photo, do not pretend it is on the page.",
   "takeHomeRule": "Separate the frame from the follow-up story, and do not invent the confirmation method.",
   "academy": {
     "level": 4,
     "spectrum": "melanoma",
+    "teachingType": "expert-challenge",
     "skillIds": [
       "evidence-weighting",
       "change-not-in-one-photo"
@@ -7709,7 +7870,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Brown patch beside a skin crease (`case-g18-09`)
 
-- **Exact fingerprint:** `sha256-v1:ffc3b04d9270f9ef9397f05b1c8e4ec4beed52b243f12359bfc7ffe35ee77147`
+- **Exact fingerprint:** `sha256-v1:0cf6bdae97039df86713c8ba1e4811b9efffcaf4bfae8a1a50561e7497c20ffc`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -7861,21 +8022,42 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "A caption can assert change that one picture cannot display."
     }
   ],
+  "observationPrompts": [
+    "Can this single frame show that a diameter changed?",
+    "Is the small red macule part of the brown patch, or separate?"
+  ],
+  "hints": [
+    "Do not narrate growth you cannot see."
+  ],
+  "closestMimic": {
+    "name": "Seborrheic keratosis",
+    "whyClosest": "A brown patch near a crease can be a seborrheic keratosis. This frame does not show a thick warty plate clearly enough to prefer that mimic over the source label."
+  },
   "patterns": [
     {
       "id": "pat-g18-09",
       "label": "Irregular brown patch",
-      "specificityNote": "An irregular brown patch is not specific. Change in size is not visible in one frame."
+      "specificityNote": "An irregular brown patch is not specific. Change in size is not visible in one frame.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g18-09-change",
+      "label": "A second date showing a smaller patch",
+      "specificityNote": "The caption says the diameter had changed. This file has only one date.",
+      "certainty": "not_visible",
+      "weight": "conflicting"
     }
   ],
   "synthesis": "An irregular brown patch is visible beside a crease, with a separate small red macule. NCI calls the lesion melanoma and says the diameter had changed. The change is not in the image.",
-  "evidenceWeighting": "Border and color are visible. History of growth has weight only as caption text. A nearby red macule is a separate finding, not proof of growth.",
+  "evidenceWeighting": "Border and color are clearly visible and are the major clue. A second date is not in the file, so visible growth gets conflicting weight: do not pretend to see it. History of growth has weight only as caption text. A nearby red macule is a separate finding, not proof of growth.",
   "diagnosticTrap": "Narrating growth you cannot see, or ignoring a stated history because the picture is static.",
   "mentorNote": "The small red spot is in the frame. Do not fold it into the brown patch without a reason.",
   "takeHomeRule": "One photograph cannot show that a diameter changed.",
   "academy": {
     "level": 4,
     "spectrum": "melanoma",
+    "teachingType": "reasoning",
     "skillIds": [
       "change-not-in-one-photo",
       "border-irregularity"
@@ -7895,7 +8077,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Pink nodule inside a drape (`case-g18-10`)
 
-- **Exact fingerprint:** `sha256-v1:df3ba16523f47ea95e3b4985ada7ed80854a262cda6ed2982b234aec7b92362b`
+- **Exact fingerprint:** `sha256-v1:fa6449e9d81d83a1884fa7d142eb5f774ac9862773c27e4ef9e76fe93a4062e8`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -8047,21 +8229,35 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "Do not call it nodular subtype. The source says amelanotic melanoma, and the shape is a nodule."
     }
   ],
+  "observationPrompts": [
+    "Is there brown pigment inside the nodule itself?",
+    "What else around the nodule is drape or background skin?"
+  ],
+  "hints": [
+    "Lack of brown pigment is not a reassuring finding."
+  ],
+  "closestMimic": {
+    "name": "Nodular basal cell carcinoma",
+    "whyClosest": "A pink nodule is the common keratinocyte-tumor look. Vessel clues are not available in this clinical file, and the author label is what ranks the source diagnosis."
+  },
   "patterns": [
     {
       "id": "pat-g18-10",
       "label": "Pink nodule without pigment",
-      "specificityNote": "Lack of pigment is not reassuring and is not specific."
+      "specificityNote": "Lack of pigment is not reassuring and is not specific.",
+      "certainty": "clearly_visible",
+      "weight": "major"
     }
   ],
   "synthesis": "A shiny pink nodule sits in a drape. Dr. Thomas Brinkmeier labels it amelanotic melanoma. Histopathology and histologic subtype are not stated. A separate dermoscopic file was not assumed to be the same lesion.",
-  "evidenceWeighting": "The pink nodule is visible. The diagnosis weight is an expert author label. Histopathology has no weight. Nearby brown macules are background, not part of the nodule.",
+  "evidenceWeighting": "The pink nodule without brown pigment in the nodule is clearly visible and is the major clue. The diagnosis weight is an expert author label. Histopathology has no weight. Nearby brown macules are background, not part of the nodule. No subtype is stated.",
   "diagnosticTrap": "Reassuring yourself because the lesion is not brown, or pairing it with an unmatched dermoscopic image.",
   "mentorNote": "CC BY 4.0 allows a resized derivative. The note records the resize. No marks were drawn.",
   "takeHomeRule": "A pink nodule still needs a melanoma line in the differential. Pigment is not required.",
   "academy": {
     "level": 4,
     "spectrum": "melanoma",
+    "teachingType": "reasoning",
     "skillIds": [
       "pink-nodule"
     ]
@@ -8080,7 +8276,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Pink field with more than one vessel shape (`case-g18-11`)
 
-- **Exact fingerprint:** `sha256-v1:dfea3b040181f7a272fbf1eba54253baf41252624d77bc6fb8259747e99b8f43`
+- **Exact fingerprint:** `sha256-v1:dd9d39cd1e7acbe3044879a74d5a6f40c38f7243217d38f68e00001c09cc7b3e`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -8241,21 +8437,42 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "Do not call the white circle a dermoscopic structure. It is a mark in the file."
     }
   ],
+  "observationPrompts": [
+    "Are the red vessels one shape or more than one?",
+    "Which marks are a printed circle or a scale, rather than skin?"
+  ],
+  "hints": [
+    "If you cannot tell dotted from linear, say so. Do not add structures you cannot see."
+  ],
+  "closestMimic": {
+    "name": "Basal cell carcinoma",
+    "whyClosest": "A pink field with vessels keeps a keratinocyte tumor in view. Branching vessels are not the pattern described here, and mixed dots and lines do not settle the author label."
+  },
   "patterns": [
     {
       "id": "pat-g18-11",
       "label": "Mixed vessel shapes on pink skin",
-      "specificityNote": "Mixed vessels raise concern. They are not specific for one tumor and they are not a probability."
+      "specificityNote": "Mixed vessels raise concern. They are not specific for one tumor and they are not a probability.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g18-11-print",
+      "label": "Printed circle and scale",
+      "specificityNote": "The circle and the scale are printed in the file. They are not shiny lines and not a skin finding.",
+      "certainty": "clearly_visible",
+      "weight": "conflicting"
     }
   ],
   "synthesis": "Dermoscopy shows dotted and linear red vessels around a paler pink center, plus a printed circle and scale. The author calls it amelanotic melanoma. Histopathology is not cited, and this is not merged with the clinical nodule file.",
-  "evidenceWeighting": "Vessel shapes are visible. The diagnosis is an expert label. Specificity of polymorphous vessels is low, so the label carries the diagnosis and the vessels carry the teaching clue.",
+  "evidenceWeighting": "Dotted and linear red vessels are clearly visible and are the major clue. They are not specific, so they do not carry the diagnosis. The author label carries the diagnosis. The printed circle and scale are visible and conflicting if you treat them as structures. Histopathology is not cited.",
   "diagnosticTrap": "Treating any pink vessel pattern as basal cell carcinoma, or treating the printed circle as shiny white lines.",
   "mentorNote": "If you cannot tell dotted from linear in this file, say so. Do not invent milky-red globules.",
-  "takeHomeRule": "More than one vessel shape is a clue with low specificity. Read the source diagnosis separately.",
+  "takeHomeRule": "More than one vessel shape is a clue and it is not specific. Read the source diagnosis separately.",
   "academy": {
     "level": 4,
     "spectrum": "melanoma",
+    "teachingType": "expert-challenge",
     "skillIds": [
       "polymorphous-vessels",
       "evidence-weighting"
@@ -8275,7 +8492,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Damaged thumbnail with dark debris (`case-g18-12`)
 
-- **Exact fingerprint:** `sha256-v1:58b6683db84f59b50dd80d319d72b7f305d341b7549392e5931dedfddac8f844`
+- **Exact fingerprint:** `sha256-v1:da594e21b6388bcec1526efc767a7bb6ea806a5f6f51c83fbe952b389f4c14d2`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -8428,21 +8645,42 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "An uploader sentence is not histopathology and not a subtype."
     }
   ],
+  "observationPrompts": [
+    "What has happened to the nail plate?",
+    "Can you point to a pigmented streak on the fold, or would that be a guess?"
+  ],
+  "hints": [
+    "A dramatic nail plate is not a stronger confirmation method."
+  ],
+  "closestMimic": {
+    "name": "Nail-unit squamous cell carcinoma or other keratinocyte tumor",
+    "whyClosest": "Nail destruction is shared with keratinocyte tumors and with injury. The source line is a clinical label, which is the weakest confirmation method in this pathway."
+  },
   "patterns": [
     {
       "id": "pat-g18-12",
       "label": "Destroyed nail plate with dark debris",
-      "specificityNote": "Nail destruction is not specific for a melanocytic tumor."
+      "specificityNote": "Nail destruction is not specific for a melanocytic tumor.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g18-12-streak",
+      "label": "A clear pigmented streak on the nail fold",
+      "specificityNote": "A fold streak is not claimed from this frame. Do not supply one.",
+      "certainty": "not_visible",
+      "weight": "weak"
     }
   ],
   "synthesis": "The thumbnail is destroyed, with dark and pale debris. The Commons line says melanoma of the thumb in an older woman and cites neither histopathology nor a subtype. The acral melanoma record is only the nearest Docutis page.",
-  "evidenceWeighting": "Nail destruction is visible. Diagnostic weight is a one-line clinical label, which is lower than an expert-attributed or pathology-cited source. Subtype and Hutchinson wording get no weight because they are not in the source and a clear pigmented fold streak is not claimed.",
+  "evidenceWeighting": "Nail destruction is clearly visible and is the major clue. A pigmented fold streak is not claimed, so it stays not visible and weak: do not add it. Diagnostic weight is a one-line clinical label, which is lower than an expert-attributed or pathology-cited source. Subtype has no weight because it is not in the source.",
   "diagnosticTrap": "Diagnosing a stripe that is not there, or treating this uploader line as if it were a pathology report.",
   "mentorNote": "This is the advanced evidence case because the picture is dramatic and the confirmation is thin. Drama is not certainty.",
   "takeHomeRule": "Nail destruction needs a differential. A short source line does not become histopathology.",
   "academy": {
     "level": 5,
     "spectrum": "melanoma",
+    "teachingType": "expert-challenge",
     "skillIds": [
       "nail-unit-damage",
       "evidence-weighting"
@@ -8462,7 +8700,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Small pink scaly spot (`case-g18-13`)
 
-- **Exact fingerprint:** `sha256-v1:46ad1ceb9d09ab79076e63a7dc7a9dadc2232294eb7ec33c3be22535d9e1ff39`
+- **Exact fingerprint:** `sha256-v1:0a21243a0e214db5f15f1ae45c5b9a4991cd4a02dffa28d06c91b810708e2b5e`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -8603,21 +8841,35 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "A small pink spot is not a benign conclusion."
     }
   ],
+  "observationPrompts": [
+    "Is the pink spot small and flat, or a large nodule?",
+    "Can you see scale on it?"
+  ],
+  "hints": [
+    "Small size does not end the differential."
+  ],
+  "closestMimic": {
+    "name": "Amelanotic melanoma",
+    "whyClosest": "A pink lesion can be a melanocytic tumor without brown pigment. The source title is a keratinocyte tumor, and that safety line is why the spot is on this pathway."
+  },
   "patterns": [
     {
       "id": "pat-g18-13",
       "label": "Small pink scaly spot",
-      "specificityNote": "Scale on a small pink spot is not specific."
+      "specificityNote": "Scale on a small pink spot is not specific.",
+      "certainty": "clearly_visible",
+      "weight": "major"
     }
   ],
   "synthesis": "A small pink scaly spot is visible. NCI calls it superficial basal cell carcinoma and does not cite histopathology. In this pathway it is a mimic, not a melanoma.",
-  "evidenceWeighting": "Pink scale is visible. The diagnosis is the NCI title. The melanoma line in the differential is a safety mimic, not a second source diagnosis.",
+  "evidenceWeighting": "Pink scale on a small spot is clearly visible and is the major clue. The diagnosis is the NCI title. The non-pigmented melanocytic line in the differential is a safety mimic, not a second source diagnosis. Histopathology is not stated.",
   "diagnosticTrap": "Dismissing a small pink spot, or calling it melanoma because you are studying melanoma.",
   "mentorNote": "The photograph is modest. That is acceptable if the finding you teach is actually there.",
   "takeHomeRule": "A small pink scaly spot still has a melanoma line and a keratinocyte-tumor line.",
   "academy": {
     "level": 2,
     "spectrum": "mimic",
+    "teachingType": "teaching",
     "skillIds": [
       "pink-scaly-spot"
     ]
@@ -8636,7 +8888,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Small eroded spot on the ear (`case-g18-14`)
 
-- **Exact fingerprint:** `sha256-v1:18a87ce017c959fc298cd4c4c9594196b9ae08fb0c56bce28fc752e7d63d398f`
+- **Exact fingerprint:** `sha256-v1:544b35891d3f38761e46fe53fe02161be1e89df9afaed0b61923ce370307d438`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -8777,21 +9029,35 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "Do not insist on a pearly rim if you are not sure you see it. The caption says it; your eyes still have to agree."
     }
   ],
+  "observationPrompts": [
+    "Is the red spot a small erosion or a large ulcer?",
+    "What else is in the frame that is not the spot?"
+  ],
+  "hints": [
+    "Describe the erosion before you choose a name."
+  ],
+  "closestMimic": {
+    "name": "Amelanotic melanoma",
+    "whyClosest": "A red eroded papule on the ear can be a non-pigmented melanocytic tumor. The source title is a keratinocyte tumor, and the melanoma line stays because the site is a classic place not to drop it."
+  },
   "patterns": [
     {
       "id": "pat-g18-14",
       "label": "Small erosion on the ear",
-      "specificityNote": "A small erosion is not specific."
+      "specificityNote": "A small erosion is not specific.",
+      "certainty": "clearly_visible",
+      "weight": "major"
     }
   ],
   "synthesis": "A small red erosion is visible on an ear. NCI calls it ulcerated basal cell carcinoma and mentions a pearly rim. Histopathology is not stated. It is a mimic in this pathway.",
-  "evidenceWeighting": "Erosion and site are visible. The pearly-rim phrase has weight as caption text, not as a structure Docutis drew. The melanoma differential is a safety line, not a second label.",
+  "evidenceWeighting": "The small erosion and the ear site are clearly visible. The erosion is the major clue. A pearly rim has weight only as caption text, not as a structure drawn on the image. Histopathology is not stated. The non-pigmented melanocytic differential is a safety line, not a second label.",
   "diagnosticTrap": "Calling every ear papule a basal cell carcinoma and dropping melanoma, or claiming a pearly rim you cannot see.",
   "mentorNote": "The partial ear and hair are not a named portrait. No name is in the file.",
   "takeHomeRule": "On the ear, describe the erosion and keep both a keratinocyte tumor and a non-pigmented melanoma in mind.",
   "academy": {
     "level": 2,
     "spectrum": "mimic",
+    "teachingType": "teaching",
     "skillIds": [
       "eroded-papule"
     ]
@@ -8810,7 +9076,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Shiny red papule on hair-bearing skin (`case-g18-15`)
 
-- **Exact fingerprint:** `sha256-v1:2ba7e638f9bb369732bc68058b3e8d392cc2923e4fad5060188d5029d54a2893`
+- **Exact fingerprint:** `sha256-v1:ccaec047bb43b9623742354d0a039a6e1b32ae3ab116d81eb8fea09785ca8290`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -8952,21 +9218,42 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "If you cannot see vessels, do not draw them in words."
     }
   ],
+  "observationPrompts": [
+    "Is the papule solitary, shiny, and red?",
+    "Which parts of the original file are missing from this crop?"
+  ],
+  "hints": [
+    "Do not add vessels to match a textbook sentence."
+  ],
+  "closestMimic": {
+    "name": "Amelanotic melanoma",
+    "whyClosest": "A solitary red papule can be a melanocytic tumor without pigment. The source text describes a keratinocyte tumor, which is why both lines stay open."
+  },
   "patterns": [
     {
       "id": "pat-g18-15",
       "label": "Solitary shiny red papule",
-      "specificityNote": "A shiny red papule is not specific."
+      "specificityNote": "A shiny red papule is not specific.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g18-15-vessels",
+      "label": "Vessels on the papule",
+      "specificityNote": "Count a vessel only if you can see it. The caption mentions vessels as a general feature, which is not the same as a vessel you have confirmed.",
+      "certainty": "uncertain",
+      "weight": "weak"
     }
   ],
   "synthesis": "A shiny red papule remains after the label was cropped off. NCI describes a basal cell carcinoma papule and mentions vessels and a pearly look as general features. Histopathology is not stated.",
-  "evidenceWeighting": "The red papule is visible. Caption phrases about vessels and pearliness are not given extra weight beyond what a viewer can confirm. The site 'lower back' is source text because the card was removed.",
+  "evidenceWeighting": "The shiny red papule is clearly visible and is the major clue. Vessels are uncertain in this crop, so they stay weak and are not confirmed. Caption phrases about pearliness are not given extra weight beyond what a viewer can confirm. The site is source text because the card was removed. Histopathology is not stated.",
   "diagnosticTrap": "Inventing telangiectasia to match a textbook sentence, or forgetting melanoma because the papule is red.",
   "mentorNote": "The crop is a de-identification edit of a date card, not a clinical annotation.",
   "takeHomeRule": "A shiny red papule keeps amelanotic melanoma in the differential even when the source says basal cell carcinoma.",
   "academy": {
     "level": 3,
     "spectrum": "mimic",
+    "teachingType": "teaching",
     "skillIds": [
       "shiny-red-papule"
     ]
@@ -8985,7 +9272,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Nodule with a dark plugged center (`case-g18-16`)
 
-- **Exact fingerprint:** `sha256-v1:02276b1bacf0039fc1d029388f60ef628a10c4901c5e3d69a0d2feae4853c589`
+- **Exact fingerprint:** `sha256-v1:ecfaa33bc932608d32ee6c9e23dd9a8d4fc06d064c22d8d4d277c64a29541004`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -9137,21 +9424,42 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
       "text": "An atlas plate is not the same sentence as a histopathology report."
     }
   ],
+  "observationPrompts": [
+    "What shape is the center of the nodule?",
+    "Is the photograph sharp enough to name fine vessels?"
+  ],
+  "hints": [
+    "A plugged center is a shape. Sharpness is not a report."
+  ],
+  "closestMimic": {
+    "name": "Nodular melanoma",
+    "whyClosest": "A dark raised center can be a melanocytic nodule. This file is too soft to map dermoscopic pigment, and the plate label is not that diagnosis."
+  },
   "patterns": [
     {
       "id": "pat-g18-16",
       "label": "Crater or plug in a red nodule",
-      "specificityNote": "A crater is not specific for one keratinizing tumor and is not proof against a melanocytic nodule."
+      "specificityNote": "A crater is not specific for one keratinizing tumor and is not proof against a melanocytic nodule. Detail is limited.",
+      "certainty": "probably",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g18-16-vessels",
+      "label": "Fine surface vessels",
+      "specificityNote": "This file does not resolve fine vessels. Do not add them.",
+      "certainty": "not_visible",
+      "weight": "weak"
     }
   ],
   "synthesis": "A soft photograph shows a round red nodule with a dark center. The AFIP plate says keratoacanthoma and does not quote microscopy. It is the crateriform mimic in this pathway.",
-  "evidenceWeighting": "The crater shape is visible at low detail. The diagnosis is the atlas label. Histopathology is not quoted, so it is not counted. Image quality limits how many structures you may name.",
+  "evidenceWeighting": "The crater shape is the major clue and is only probably resolved, because the photograph is soft. Fine vessels are not visible, so they get weak weight and must not be named. The diagnosis is the atlas label. Histopathology is not quoted, so it is not counted.",
   "diagnosticTrap": "Calling every dark nodule melanoma, or calling every crater a keratoacanthoma without reading the label's limits.",
   "mentorNote": "Low resolution was accepted because the crater is still the teaching point and better licensed crater images were not added as filler.",
   "takeHomeRule": "A plugged center is a shape. Read the source label, and do not pretend a tumor atlas sentence is a slide review.",
   "academy": {
     "level": 4,
     "spectrum": "mimic",
+    "teachingType": "reasoning",
     "skillIds": [
       "crateriform-center"
     ]
