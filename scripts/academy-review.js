@@ -2,6 +2,7 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const vm = require("node:vm");
 const { loadCaseData } = require("./case");
 
 const root = path.join(__dirname, "..");
@@ -44,7 +45,13 @@ function list(items) {
   return `<ul>${rows.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
 }
 
-function renderCase(caseItem, entry, skills) {
+function loadPatternData() {
+  const context = { window: {} };
+  vm.runInNewContext(fs.readFileSync(path.join(root, "pattern-data.js"), "utf8"), context, { filename: "pattern-data.js" });
+  return context.window.DOCUTIS_PATTERNS;
+}
+
+function renderCase(caseItem, entry, skills, patternData) {
   const skillTitles = (entry.skillIds || []).map(id => {
     const skill = skills.find(item => item.id === id);
     return skill ? skill.title : id;
@@ -57,11 +64,20 @@ function renderCase(caseItem, entry, skills) {
       <p>${escapeHtml(image.attribution || "")}</p>
       <p>Modification: ${escapeHtml(image.modificationStatus)}${image.modificationsNotes ? ` — ${escapeHtml(image.modificationsNotes)}` : ""}</p>
     </li>`).join("");
-  const patterns = (caseItem.patterns || []).map(pattern => `
+  const linkMap = new Map((patternData.links || []).map(link => [link.casePatternId, link.canonicalId]));
+  const exempt = new Map((patternData.unlinkedObservations || []).map(item => [item.casePatternId, item.reason]));
+  const patterns = (caseItem.patterns || []).map(pattern => {
+    const canonical = linkMap.get(pattern.id);
+    const linkLine = canonical
+      ? `<p>Canonical pattern: ${escapeHtml(canonical)}. Case certainty and weight stay on this case.</p>`
+      : `<p>Canonical pattern: not linked. ${escapeHtml(exempt.get(pattern.id) || "No reusable pattern was inferred.")}</p>`;
+    return `
     <li>
       <p><strong>${escapeHtml(pattern.label)}</strong> — ${escapeHtml(CERTAINTY[pattern.certainty] || "Certainty not recorded")}; ${escapeHtml(WEIGHT[pattern.weight] || "Weight not recorded")}</p>
       <p>${escapeHtml(pattern.specificityNote || "")}</p>
-    </li>`).join("");
+      ${linkLine}
+    </li>`;
+  }).join("");
   const differentials = (caseItem.differentials || []).map(diff => `
     <li>
       <p><strong>${escapeHtml(diff.diagnosis)}</strong></p>
@@ -114,6 +130,7 @@ function renderCase(caseItem, entry, skills) {
 }
 
 function renderDocument(caseData) {
+  const patternData = loadPatternData();
   const curriculum = caseData.curriculum;
   const byId = new Map(caseData.cases.map(item => [item.id, item]));
   const outside = caseData.cases.filter(item => !curriculum.entries.some(entry => entry.caseId === item.id));
@@ -126,7 +143,7 @@ function renderDocument(caseData) {
   const body = curriculum.entries
     .slice()
     .sort((a, b) => a.order - b.order)
-    .map(entry => renderCase(byId.get(entry.caseId), entry, curriculum.skills))
+    .map(entry => renderCase(byId.get(entry.caseId), entry, curriculum.skills, patternData))
     .join("\n");
   const outsideHtml = outside.map(item => `<li>${escapeHtml(item.title)} (${escapeHtml(item.id)}) stays in the library and outside Learn Melanoma. Default reason: it is not a melanoma-pathway skill case.</li>`).join("");
   return `<!DOCTYPE html>

@@ -95,3 +95,10 @@ Learning objectives stay in `teachingPoints`. Skills stay in `academy.skillIds`.
 The primary-path gate is `primaryPathGate` in `scripts/case.js`. It does not require every melanoma structure on every case. See [ACADEMY_AUTHORING.md](ACADEMY_AUTHORING.md).
 
 Pull request #21 was not the base. Goal 18 pull request #24 was not merged into `main`. No clinician reviewed a Goal 19 text change.
+
+
+## Goal 20 pattern links
+
+Schema version stays 1. Case payloads are not given a new clinical field for Goal 20, so existing case fingerprints stay valid. The crosswalk from a case pattern id to a canonical pattern id lives in `pattern-data.js`. Dermoscopic tokens link only when `dermoscopicTokenLinks` names a token that a case actually stores. See [PATTERN_LEARNING.md](PATTERN_LEARNING.md).
+
+`node scripts/case.js` now also validates the pattern library. That check is structural. It is not clinician review.

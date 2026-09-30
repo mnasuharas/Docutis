@@ -43,6 +43,9 @@ jobs:
           node --check quiz-data.js
           node --check quiz-app.js
           node --check scripts/quiz.js
+          node --check pattern-data.js
+          node --check scripts/pattern.js
+          node --check scripts/curriculum-coverage.js
           node --check review-data.js
           node --check review-status.js
           node --check review-ui.js
@@ -64,6 +67,9 @@ jobs:
           node scripts/media.js
           node scripts/quiz.js
           node scripts/review-governance.js
+          node scripts/pattern.js
+          node scripts/curriculum-coverage.js
+          node scripts/academy-review.js --check
 
       - name: Verify generated public review artifacts
         shell: bash

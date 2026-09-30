@@ -379,6 +379,8 @@ function validateCaseData(caseData = loadCaseData(), diseaseData = loadDiseaseDa
     validateCase(item, diseaseIds);
   }
   validateCurriculum(caseData);
+  const { validatePatternLibrary } = require("./pattern");
+  validatePatternLibrary(undefined, caseData);
   const gate = primaryPathGate(caseData);
   if (!gate.passed) {
     const detail = gate.failed.map(item => `${item.caseId}: ${item.issues.join(", ")}`).join("; ");

@@ -48,6 +48,10 @@
   const descriptions = Object.create(null);
   const hintsOpen = Object.create(null);
   let lastHintButton = null;
+  const openPatternKeys = Object.create(null);
+  let patternFocusId = null;
+  let lastPatternButton = null;
+  let lastPatternPanel = null;
   const TEACHING_TYPE_LABELS = Object.freeze({
     teaching: "Teaching case",
     reasoning: "Reasoning case",
@@ -64,6 +68,14 @@
     supportive: "Supportive",
     weak: "Weak",
     conflicting: "Conflicts with a simple reading"
+  });
+  const ROLE_LABELS = Object.freeze({
+    characteristic: "Characteristic",
+    supportive: "Supportive",
+    weak: "Weak",
+    conflicting: "Conflicts with a simple reading",
+    nonspecific: "Nonspecific",
+    "context-dependent": "Context-dependent"
   });
   const filters = {
     diseaseId: "",
@@ -748,6 +760,213 @@
     return revealBtn;
   }
 
+
+  function patternLibrary() {
+    const library = window.DOCUTIS_PATTERNS;
+    if (!library || !Array.isArray(library.patterns)) return null;
+    return library;
+  }
+
+  function patternRecord(id) {
+    const library = patternLibrary();
+    if (!library || !id) return null;
+    return library.patterns.find(item => item && item.id === id) || null;
+  }
+
+  function canonicalIdForCasePattern(casePatternId) {
+    const library = patternLibrary();
+    if (!library || !casePatternId) return null;
+    const link = asList(library.links).find(item => item && item.casePatternId === casePatternId);
+    return link ? link.canonicalId : null;
+  }
+
+  function unlinkedPatternReason(casePatternId) {
+    const library = patternLibrary();
+    if (!library) return null;
+    const row = asList(library.unlinkedObservations).find(item => item && item.casePatternId === casePatternId);
+    return row ? row.reason : null;
+  }
+
+  function patternOccurrences(canonicalId) {
+    const library = patternLibrary();
+    if (!library || !canonicalId) return [];
+    const rows = [];
+    registry.cases.forEach(caseItem => {
+      asList(caseItem.patterns).forEach(pattern => {
+        if (!pattern || canonicalIdForCasePattern(pattern.id) !== canonicalId) return;
+        rows.push({
+          caseId: caseItem.id,
+          title: caseItem.title || "Untitled case",
+          certainty: pattern.certainty,
+          weight: pattern.weight,
+          evidence: "case-pattern"
+        });
+      });
+    });
+    const tokens = library.dermoscopicTokenLinks || {};
+    registry.cases.forEach(caseItem => {
+      asList(caseItem.dermoscopicFeatures).forEach(feature => {
+        if (!feature || !feature.token || tokens[feature.token] !== canonicalId) return;
+        const existing = rows.find(row => row.caseId === caseItem.id);
+        if (existing) return;
+        rows.push({
+          caseId: caseItem.id,
+          title: caseItem.title || "Untitled case",
+          certainty: "unrated",
+          weight: null,
+          evidence: "dermoscopic-token"
+        });
+      });
+    });
+    return rows;
+  }
+
+  function certaintySentence(certainty) {
+    if (certainty === "unrated") return "Certainty was not rated on this case";
+    return CERTAINTY_LABELS[certainty] || "Certainty not recorded";
+  }
+
+  function weightSentence(weight) {
+    if (!weight) return "Weight was not rated on this case";
+    return WEIGHT_LABELS[weight] || "Weight not recorded";
+  }
+
+  function appendPatternLines(parent, title, lines) {
+    const usable = asList(lines).filter(line => typeof line === "string" && line.trim());
+    if (!usable.length) return;
+    parent.appendChild(element("h6", title));
+    usable.forEach(line => parent.appendChild(element("p", line)));
+  }
+
+  function appendPatternDetail(panel, canonical, row, caseItem) {
+    panel.appendChild(element("p", "Pattern text is review required. It is not clinician reviewed, and it is not a diagnosis.", "case-kind-note"));
+    panel.appendChild(element("h6", "What is it?"));
+    panel.appendChild(element("p", canonical.definition));
+    if (canonical.displayName && canonical.displayName !== (row.kind === "case-pattern" ? row.pattern.label : row.feature.label)) {
+      panel.appendChild(element("p", `Canonical name: ${canonical.displayName}.`, "case-kind-note"));
+    }
+    if (canonical.displayNameDe) panel.appendChild(element("p", `German term: ${canonical.displayNameDe}.`));
+    if (canonical.internationalTerm) panel.appendChild(element("p", `International term: ${canonical.internationalTerm}.`));
+    panel.appendChild(element("h6", "What should I look for?"));
+    panel.appendChild(element("p", canonical.lookFor));
+    appendPatternLines(panel, "Recognition clues", canonical.morphologyClues);
+    panel.appendChild(element("h6", "Why does it matter here?"));
+    if (row.kind === "case-pattern" && row.pattern.specificityNote) {
+      panel.appendChild(element("p", row.pattern.specificityNote));
+    } else {
+      panel.appendChild(element("p", "This case records the feature and does not record a Goal 19 certainty or weight. The pattern definition does not add either."));
+    }
+    panel.appendChild(element("p", `${certaintySentence(row.kind === "case-pattern" ? row.pattern.certainty : "unrated")}. ${weightSentence(row.kind === "case-pattern" ? row.pattern.weight : null)}.`, "case-feature-weight"));
+    panel.appendChild(element("p", `Usual teaching role, not this case's weight: ${ROLE_LABELS[canonical.usualRole] || canonical.usualRole}.`, "case-kind-note"));
+    appendPatternLines(panel, "Where else can it occur?", canonical.malignantAssociations.concat(canonical.benignAssociations));
+    appendPatternLines(panel, "What can mimic it?", canonical.mimics);
+    appendPatternLines(panel, "Common trap", canonical.traps);
+    appendPatternLines(panel, "Limits", canonical.doesNotProve);
+    panel.appendChild(element("h6", "Learn from other cases"));
+    const others = patternOccurrences(canonical.id).filter(item => item.caseId !== caseItem.id);
+    if (!others.length) {
+      panel.appendChild(element("p", "This is the only structured example in the current library. One exposure is not mastery."));
+      return;
+    }
+    panel.appendChild(element("p", "Other cases encode this pattern. Their diagnoses stay hidden until you reveal them there. One extra case is not mastery.", "case-kind-note"));
+    others.forEach(other => {
+      const otherCase = registry.cases.find(item => item.id === other.caseId);
+      if (!otherCase) return;
+      const line = element("p", `${other.title}. ${certaintySentence(other.certainty)}. ${weightSentence(other.weight)}.`);
+      panel.appendChild(line);
+      const open = element("button", `Open case: ${other.title}`, "case-button case-button-secondary");
+      open.type = "button";
+      open.addEventListener("click", () => {
+        activeId = otherCase.id;
+        activeStep = 0;
+        diagnosisRevealed = false;
+        zoomScales = Object.create(null);
+        patternFocusId = null;
+        renderDetail(otherCase, "step");
+      });
+      panel.appendChild(open);
+    });
+  }
+
+  function renderPatternStudy(parent, caseItem) {
+    if (!diagnosisRevealed) return;
+    lastPatternButton = null;
+    lastPatternPanel = null;
+    const section = element("section", undefined, "case-pattern-study");
+    const heading = element("h5", "Patterns in this case");
+    heading.id = "patternsInThisCase";
+    section.appendChild(heading);
+    section.appendChild(element("p", "Certainty and weight belong to this case. A pattern note does not replace them.", "case-kind-note"));
+    const library = patternLibrary();
+    if (!library) {
+      section.appendChild(element("p", "Pattern library did not load. No pattern teaching was invented for this view.", "case-empty"));
+      parent.appendChild(section);
+      return;
+    }
+    const rows = [];
+    asList(caseItem.patterns).forEach(pattern => {
+      if (!pattern) return;
+      rows.push({ kind: "case-pattern", pattern, canonicalId: canonicalIdForCasePattern(pattern.id) });
+    });
+    const tokenLinks = library.dermoscopicTokenLinks || {};
+    asList(caseItem.dermoscopicFeatures).forEach(feature => {
+      if (!feature || !feature.token || !tokenLinks[feature.token]) return;
+      const canonicalId = tokenLinks[feature.token];
+      if (rows.some(row => row.canonicalId === canonicalId)) return;
+      rows.push({ kind: "token", feature, canonicalId });
+    });
+    if (!rows.length) {
+      section.appendChild(element("p", "No canonical pattern is encoded on this case. The diagnosis was not used to invent one.", "case-empty"));
+      parent.appendChild(section);
+      return;
+    }
+    rows.forEach(row => {
+      const article = element("article", undefined, "case-pattern");
+      const name = row.kind === "case-pattern" ? (row.pattern.label || "Feature") : (row.feature.label || row.feature.token);
+      const certainty = row.kind === "case-pattern" ? row.pattern.certainty : "unrated";
+      const weight = row.kind === "case-pattern" ? row.pattern.weight : null;
+      article.setAttribute("data-certainty", certainty || "unknown");
+      if (row.canonicalId) article.setAttribute("data-pattern-id", row.canonicalId);
+      article.appendChild(element("h6", name));
+      article.appendChild(element("p", `${certaintySentence(certainty)}. ${weightSentence(weight)}.`, "case-feature-weight"));
+      const canonical = patternRecord(row.canonicalId);
+      if (!canonical) {
+        const reason = row.kind === "case-pattern" ? unlinkedPatternReason(row.pattern.id) : null;
+        article.appendChild(element("p", reason || "This observation is not linked to a reusable pattern. Nothing was inferred.", "case-kind-note"));
+        section.appendChild(article);
+        return;
+      }
+      const localId = row.kind === "case-pattern" ? row.pattern.id : row.feature.token;
+      const key = `${caseItem.id}:${localId}`;
+      const open = !!openPatternKeys[key];
+      const button = element("button", open ? "Close pattern teaching" : "Open pattern teaching", "case-button case-button-secondary case-pattern-toggle");
+      button.type = "button";
+      const panelId = `pattern-panel-${key.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
+      button.setAttribute("aria-expanded", open ? "true" : "false");
+      button.setAttribute("aria-controls", panelId);
+      button.setAttribute("data-pattern-key", key);
+      if (patternFocusId === key) lastPatternButton = button;
+      button.addEventListener("click", () => {
+        openPatternKeys[key] = !openPatternKeys[key];
+        patternFocusId = key;
+        renderDetail(caseItem, openPatternKeys[key] ? "pattern-open" : "pattern-close");
+      });
+      article.appendChild(button);
+      if (open) {
+        const panel = element("div", undefined, "case-pattern-panel");
+        panel.id = panelId;
+        panel.setAttribute("role", "region");
+        panel.setAttribute("aria-label", `Pattern teaching: ${canonical.displayName}`);
+        panel.tabIndex = -1;
+        if (patternFocusId === key) lastPatternPanel = panel;
+        appendPatternDetail(panel, canonical, row, caseItem);
+        article.appendChild(panel);
+      }
+      section.appendChild(article);
+    });
+    parent.appendChild(section);
+  }
+
   function renderAcademyReview(parent, caseItem) {
     if (!caseItem || (!caseItem.synthesis && !caseItem.managementBrief && !caseItem.whyNot)) return;
     const section = element("section", undefined, "case-teaching");
@@ -830,6 +1049,7 @@
       return;
     }
     renderObserve(parent, caseItem);
+    renderPatternStudy(parent, caseItem);
     const teachingPoints = asList(caseItem.teachingPoints);
     const teaching = element("section", undefined, "case-teaching");
     teaching.appendChild(element("h5", "Teaching points"));
@@ -982,6 +1202,8 @@
       renderPager(root, caseItem);
       if (focusTarget === "reveal" && revealButton && typeof revealButton.focus === "function") revealButton.focus();
       else if (focusTarget === "hint" && lastHintButton && typeof lastHintButton.focus === "function") lastHintButton.focus();
+      else if (focusTarget === "pattern-open" && lastPatternPanel && typeof lastPatternPanel.focus === "function") lastPatternPanel.focus();
+      else if (focusTarget === "pattern-close" && lastPatternButton && typeof lastPatternButton.focus === "function") lastPatternButton.focus();
       else if (focusTarget !== "none" && typeof heading.focus === "function") heading.focus();
     } catch (error) {
       showLoadError("The case view could not be shown. No substitute clinical content was added.");

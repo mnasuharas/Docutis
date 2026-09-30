@@ -40,3 +40,10 @@ Many pathway photographs are public-domain catalog images with a short caption a
 Use `teaching` when the learner should name one visible clue and then read the source. Use `reasoning` when the work is to separate what the frame shows from what it cannot show. Use `expert-challenge` when the source itself is thin or the clue is easy to over-read. Do not use the type as a difficulty badge or a point value.
 
 Pull request #21 was not the base of this work. Goal 18 pull request #24 was not merged. This note does not approve any case.
+
+
+## Patterns after the case
+
+Goal 20 does not add a pattern encyclopedia and does not add cases. Reusable pattern text lives in `pattern-data.js`. Certainty and weight stay on the case. See [PATTERN_LEARNING.md](PATTERN_LEARNING.md).
+
+A learner still inspects, observes, and reveals before pattern teaching opens. Pattern names that already passed the secrecy check can remain on the observe step. Weights, closest-mimic conclusions, and the reusable pattern note stay hidden until reveal. One encoded example is not mastery and is not a numeric score.
