@@ -2,14 +2,14 @@
 
 All notable project changes are documented here. Docutis is in active pre-1.0 development; entries describe repository milestones rather than clinically reviewed releases.
 
-## Unreleased
+## [0.2.0-preview.1] — 2026-09-30
 
-Entries under this heading are repository changes after the historical tag `v0.1.0-preview.1` (2026-09-23), unless a bullet says the work is still pending. This heading is not a GitHub Release and does not choose a version number.
+Entries under this heading are repository changes after the historical tag `v0.1.0-preview.1` (2026-09-23), unless a bullet says the work is still pending. This heading is pre-release `v0.2.0-preview.1`. It is not a GitHub Release by itself and it is not clinical validation.
 
 ### Added
 
 - Case trainer: five open-license pilot cases with inspect, observe, differential, reveal, and review steps. No case is clinician reviewed.
-- Release-readiness documents: `RELEASES.md`, `RELEASE_CHECKLIST.md`, and `RELEASE_NOTES_TEMPLATE.md`. No tag and no GitHub Release were created.
+- Release-readiness documents: `RELEASES.md`, `RELEASE_CHECKLIST.md`, and `RELEASE_NOTES_TEMPLATE.md`.
 
 ### Changed
 
