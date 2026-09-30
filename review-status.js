@@ -2112,6 +2112,758 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
         "safety-notice",
         "provenance"
       ]
+    },
+    {
+      "id": "case-g18-01",
+      "assetType": "case",
+      "title": "Dark lesion thicker on one side",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:03854f969f4b8be2014bb2ab5ea88d5bc855975022359629de50fbdc631f0173",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Asymmetrical_melanoma.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Asymmetrical_melanoma.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-02",
+      "assetType": "case",
+      "title": "Dark lesion with an uneven edge",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:b7c44b95da2700cb5dd604aae73702c0034bf0ff92b452456de4dd92c24a9f94",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma_border.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma_border.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-03",
+      "assetType": "case",
+      "title": "Lesion with several dark colors",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:e9b94946e62c0be706ff60d47f26be6013c5186363ef3cf45aebc9e59e72cd03",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma1.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma1.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-04",
+      "assetType": "case",
+      "title": "Broad brown patch with an uneven edge",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:0e84160f2b639df23ab799a990658725ff9ba3ad4c6b8fa2d9a1243ef2a748fa",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-05",
+      "assetType": "case",
+      "title": "Brown lesion with a pale center",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:6f556bf77932c3d95e696fa39b724d616aaa553b704246823af0c06b4ca1aa55",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma,_brown_lesion.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma,_brown_lesion.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-06",
+      "assetType": "case",
+      "title": "Red nodule beside a dark macule",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:816d5b8f34256a8b9442ce27625a1a2a6847bf85a323f74d44ea5f565312a524",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma3.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma3.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-07",
+      "assetType": "case",
+      "title": "Flat brown area beside a blue-black papule",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:14ba49b8af079badecefcd9f585cb232ab4f1bc4c7cd5e99c9d6ba5cd539643d",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma4.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma4.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-08",
+      "assetType": "case",
+      "title": "Single dark papule with a brown edge",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:cd00140969723efe3e7156892cfaeb3d31f636068742d14496129768fe1cdfd9",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma_(3).jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma_(3).jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-09",
+      "assetType": "case",
+      "title": "Brown patch beside a skin crease",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:ffc3b04d9270f9ef9397f05b1c8e4ec4beed52b243f12359bfc7ffe35ee77147",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma_with_diameter_change.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma_with_diameter_change.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-10",
+      "assetType": "case",
+      "title": "Pink nodule inside a drape",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:df3ba16523f47ea95e3b4985ada7ed80854a262cda6ed2982b234aec7b92362b",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Amelanotisches,_malignes_Melanom,_%C2%A9wikiderm.de.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dr. Thomas Brinkmeier / WIKIDERM, via Wikimedia Commons",
+          "organization": "Dr. Thomas Brinkmeier, WIKIDERM. CC BY 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Amelanotisches,_malignes_Melanom,_%C2%A9wikiderm.de.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-11",
+      "assetType": "case",
+      "title": "Pink field with more than one vessel shape",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:dfea3b040181f7a272fbf1eba54253baf41252624d77bc6fb8259747e99b8f43",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Dermatoskopie-Bild_eines_amelanotischen,_malignen_Melanoms,_%C2%A9wikiderm.de.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dr. Thomas Brinkmeier / WIKIDERM, via Wikimedia Commons",
+          "organization": "Dr. Thomas Brinkmeier, WIKIDERM. CC BY 4.0.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Dermatoskopie-Bild_eines_amelanotischen,_malignen_Melanoms,_%C2%A9wikiderm.de.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-12",
+      "assetType": "case",
+      "title": "Damaged thumbnail with dark debris",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:58b6683db84f59b50dd80d319d72b7f305d341b7549392e5931dedfddac8f844",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma_of_thumb.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Wawjak, via Wikimedia Commons",
+          "organization": "Wawjak. CC BY 4.0. Via Wikimedia Commons.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma_of_thumb.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-13",
+      "assetType": "case",
+      "title": "Small pink scaly spot",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:46ad1ceb9d09ab79076e63a7dc7a9dadc2232294eb7ec33c3be22535d9e1ff39",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Basal_cell_carcinoma,_superficial.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Basal_cell_carcinoma,_superficial.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-14",
+      "assetType": "case",
+      "title": "Small eroded spot on the ear",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:18a87ce017c959fc298cd4c4c9594196b9ae08fb0c56bce28fc752e7d63d398f",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Basal_cell_carcinoma_(1).jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Basal_cell_carcinoma_(1).jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-15",
+      "assetType": "case",
+      "title": "Shiny red papule on hair-bearing skin",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:2ba7e638f9bb369732bc68058b3e8d392cc2923e4fad5060188d5029d54a2893",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Basal_cell_carcinoma_(2).jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Basal_cell_carcinoma_(2).jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-16",
+      "assetType": "case",
+      "title": "Nodule with a dark plugged center",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:02276b1bacf0039fc1d029388f60ef628a10c4901c5e3d69a0d2feae4853c589",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Keratoacanthoma.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Armed Forces Institute of Pathology Atlas of Tumor Pathology, via Wikimedia Commons",
+          "organization": "Armed Forces Institute of Pathology. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Keratoacanthoma.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
     }
   ]
 });
