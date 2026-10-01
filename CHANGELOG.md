@@ -4,6 +4,11 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
+### Goal 23 — Paired clinical and dermoscopy
+
+- Add an explicit pair-provenance registry: `same_lesion_confirmed`, `source_documented_pair`, or `not_paired`. Same diagnosis is not a pair. The chest case report stays the only true pair, as a source-documented pair, and gains a staged clinical-then-dermoscopy flow. Show dermoscopy does not reveal the diagnosis.
+- No new image was imported. Candidate paired files could not be downloaded after a Wikimedia 429 and one retry, so no findings were invented. Localization stays empty. No clinician review was recorded. No release was published.
+
 ### Goal 22 — Diagnostic signal and dermoscopy depth
 
 - Every reusable feature now has an educational role: diagnostic structure, descriptive morphology, contextual feature, or image mark. Marker ink and a measuring scale stay in the library and no longer increase diagnostic breadth, contrastive coverage, or dermoscopy coverage.

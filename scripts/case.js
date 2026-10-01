@@ -495,6 +495,8 @@ function validateCaseData(caseData = loadCaseData(), diseaseData = loadDiseaseDa
   }
   validateCurriculum(caseData);
   validateContrastiveLayer(caseData);
+  const { validatePairProvenance } = require("./paired-modality");
+  validatePairProvenance(caseData);
   const { validatePatternLibrary } = require("./pattern");
   validatePatternLibrary(undefined, caseData);
   const gate = primaryPathGate(caseData);

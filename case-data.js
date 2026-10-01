@@ -148,6 +148,278 @@
         Object.freeze({ id: "specialist-evaluation", label: "Specialist evaluation" })
       ])
     }),
+    pairProvenance: Object.freeze([
+      Object.freeze({
+        caseId: "case-acral-melanoma-plantar",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-acral-melanoma-plantar"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-bcc-nodular-dermoscopy",
+        provenance: "not_paired",
+        basis: "Only a dermoscopic image is stored. No clinical photograph of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze([]),
+        dermoscopicImageIds: Object.freeze(["img-bcc-nodular-dermoscopy"]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-bcc-pigmented-dermoscopy",
+        provenance: "not_paired",
+        basis: "Only a dermoscopic image is stored. No clinical photograph of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze([]),
+        dermoscopicImageIds: Object.freeze(["img-bcc-pigmented-dermoscopy"]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-ak-field-hand",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-ak-field-hand"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-scc-ak-paraspinal",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-scc-ak-paraspinal"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-01",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g18-01"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-02",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g18-02"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-03",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g18-03"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-04",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g18-04"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-05",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g18-05"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-06",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g18-06"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-07",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g18-07"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-08",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g18-08"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-09",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g18-09"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-10",
+        provenance: "not_paired",
+        basis: "This case stores one clinical photograph. A separate dermoscopic file with a similar diagnosis exists as another case. The Commons pages do not document one lesion, so the two files stay unpaired.",
+        clinicalImageIds: Object.freeze(["img-g18-10"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-11",
+        provenance: "not_paired",
+        basis: "This case stores one dermoscopic image. The clinical photograph with a similar diagnosis is a different Commons file and a different case. The pages do not document one lesion.",
+        clinicalImageIds: Object.freeze([]),
+        dermoscopicImageIds: Object.freeze(["img-g18-11"]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-12",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g18-12"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-13",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g18-13"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-14",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g18-14"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-15",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g18-15"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g18-16",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g18-16"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g21-01",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g21-01"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g21-02",
+        provenance: "not_paired",
+        basis: "This case stores one clinical photograph. The dermoscopic seborrheic keratosis file is a different author and a different case. Same diagnosis is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g21-02"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g21-03",
+        provenance: "not_paired",
+        basis: "This case stores one dermoscopic image. The clinical seborrheic keratosis photograph is a different file and a different case. Same diagnosis is not a pair.",
+        clinicalImageIds: Object.freeze([]),
+        dermoscopicImageIds: Object.freeze(["img-g21-03"]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g21-04",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g21-04"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g21-05",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g21-05"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g21-06",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g21-06"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g21-07",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g21-07"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g21-08",
+        provenance: "source_documented_pair",
+        basis: "Both Wikimedia files cite Sato and Tanaka, Dermatology Practical and Conceptual 2014, DOI 10.5826/dpc.0401a16, one case report of grouped papules on the chest. They are already stored as one case. Neither file page prints the words same lesion, so this is a source-documented pair rather than a same-lesion sentence.",
+        clinicalImageIds: Object.freeze(["img-g21-08a"]),
+        dermoscopicImageIds: Object.freeze(["img-g21-08b"]),
+        informationGain: "dermoscopy_adds_support",
+        informationGainNote: "Educational label only. The dermoscopic frame adds lobules the clinical frame does not name. Not a validated metric and not a probability."
+      }),
+      Object.freeze({
+        caseId: "case-g22-01",
+        provenance: "not_paired",
+        basis: "Only a clinical photograph is stored. No dermoscopic image of this lesion is in the registry, so the case is not a pair.",
+        clinicalImageIds: Object.freeze(["img-g22-01"]),
+        dermoscopicImageIds: Object.freeze([]),
+        informationGain: null,
+        informationGainNote: null
+      })
+    ]),
     comparisons: Object.freeze([
       Object.freeze({
         id: "cmp-nevus-dark-papule",
@@ -4694,11 +4966,13 @@
     {
       "id": "obs-g21-08a",
       "kind": "observation",
+      "modality": "clinical",
       "text": "A group of skin-colored papules sits on the chest in a loose line. A nipple is at the edge of the clinical frame."
     },
     {
       "id": "obs-g21-08b",
       "kind": "observation",
+      "modality": "dermoscopy",
       "text": "The dermoscopic frame shows clustered yellow-white lobules. A gel bubble is at the edge."
     }
   ],
@@ -4775,6 +5049,7 @@
     {
       "id": "pat-g21-08-group",
       "label": "Grouped skin-colored papules",
+      "modality": "clinical",
       "specificityNote": "A group of skin-colored papules is this clinical frame. It is not proof of a benign lesion.",
       "certainty": "clearly_visible",
       "weight": "major"
@@ -4782,6 +5057,7 @@
     {
       "id": "pat-g21-08-lobules",
       "label": "Yellow-white lobules",
+      "modality": "dermoscopy",
       "specificityNote": "Lobules are visible on the dermoscopic frame. Vessels were not counted.",
       "certainty": "clearly_visible",
       "weight": "major"
@@ -4795,6 +5071,22 @@
   "compareWith": [
     "cmp-sebaceous-bcc"
   ],
+  "pairedModality": {
+    "clinicalObservation": "A group of skin-colored papules sits on the chest in a loose line. A nipple is at the edge of the clinical frame.",
+    "dermoscopicObservation": "The dermoscopic frame shows clustered yellow-white lobules. A gel bubble is at the edge.",
+    "addedValue": "The dermoscopic frame adds lobules that the clinical photograph does not show. An added look is not confirmation of the source label.",
+    "reasoningImpact": "The clinical reading stays a group of papules. Lobules support a lobulated look and do not replace the caption. Vessels stay uncounted. The leading comparison does not change, because the extra frame does not name a new competitor.",
+    "limits": "Both files come from one case report. The file pages do not print the words same lesion. Histopathology is not quoted. Linear vessels named in the file caption were not encoded.",
+    "informationGain": "dermoscopy_adds_support",
+    "informationGainNote": "Educational label only. The dermoscopic frame adds lobules the clinical frame does not name. Not a validated metric and not a probability.",
+    "comparison": {
+      "clinicalClue": "Grouped skin-colored papules.",
+      "dermoscopicClue": "Clustered yellow-white lobules.",
+      "addedInformation": "Lobules are on the dermoscopic frame and are not read back onto the clinical photograph.",
+      "diagnosticConflict": null,
+      "teachingRule": "An extra frame can add a look. It does not confirm a label, and it does not make the next papule safe."
+    }
+  },
   "modalityIntegration": "The first frame is the clinical photograph of grouped papules. The second frame is the dermoscopic photograph from the same source and shows yellow-white lobules. Do not read those lobules onto the clinical photograph, and do not add vessels that were not counted.",
   "academy": {
     "level": 3,

@@ -53,6 +53,8 @@ function main() {
   console.log(`Dermoscopy coverage: ${audit.signal.dermoscopyCoverage.join(", ") || "none"}.`);
   console.log(`Histopathology-confirmed melanoma: ${audit.signal.histopathologyConfirmedMelanoma.join(", ") || "none"}.`);
   console.log("Image marks do not count. Clinical review remains deferred. This is not clinician approval and not a score.");
+  const { buildPairedMetrics, formatMetrics } = require("./paired-modality");
+  console.log(formatMetrics(buildPairedMetrics(caseData, audit)));
 }
 
 if (require.main === module) {

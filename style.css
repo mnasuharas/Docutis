@@ -2361,3 +2361,36 @@ footer {
   outline: 3px solid var(--color-text);
   outline-offset: 3px;
 }
+
+.case-modality-status {
+  margin: 0 0 var(--space-3);
+  font-weight: 700;
+}
+
+.case-dermoscopy-toggle:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 3px;
+}
+
+.case-pair-stage {
+  display: grid;
+  gap: var(--space-4);
+  margin: var(--space-4) 0;
+}
+
+.case-pair-stage .case-view {
+  margin: 0;
+}
+
+@media (min-width: 900px) {
+  .case-pair-stage.is-open {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+@media (max-width: 899px) {
+  .case-pair-stage.is-open {
+    grid-template-columns: 1fr;
+  }
+}

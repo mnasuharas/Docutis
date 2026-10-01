@@ -10819,7 +10819,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: A group of papules on the chest (`case-g21-08`)
 
-- **Exact fingerprint:** `sha256-v1:415be0e48d5d00aab30601b7c98d71b70dbfc1b0c6e0bf7560b5a6d7a0bdbcf9`
+- **Exact fingerprint:** `sha256-v1:2f81108925ba5845d375a08a6052a5cd4f548c30c357bf8973990a503d28e8c8`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -10911,11 +10911,13 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
     {
       "id": "obs-g21-08a",
       "kind": "observation",
+      "modality": "clinical",
       "text": "A group of skin-colored papules sits on the chest in a loose line. A nipple is at the edge of the clinical frame."
     },
     {
       "id": "obs-g21-08b",
       "kind": "observation",
+      "modality": "dermoscopy",
       "text": "The dermoscopic frame shows clustered yellow-white lobules. A gel bubble is at the edge."
     }
   ],
@@ -10992,6 +10994,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
     {
       "id": "pat-g21-08-group",
       "label": "Grouped skin-colored papules",
+      "modality": "clinical",
       "specificityNote": "A group of skin-colored papules is this clinical frame. It is not proof of a benign lesion.",
       "certainty": "clearly_visible",
       "weight": "major"
@@ -10999,6 +11002,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
     {
       "id": "pat-g21-08-lobules",
       "label": "Yellow-white lobules",
+      "modality": "dermoscopy",
       "specificityNote": "Lobules are visible on the dermoscopic frame. Vessels were not counted.",
       "certainty": "clearly_visible",
       "weight": "major"
@@ -11012,6 +11016,22 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
   "compareWith": [
     "cmp-sebaceous-bcc"
   ],
+  "pairedModality": {
+    "clinicalObservation": "A group of skin-colored papules sits on the chest in a loose line. A nipple is at the edge of the clinical frame.",
+    "dermoscopicObservation": "The dermoscopic frame shows clustered yellow-white lobules. A gel bubble is at the edge.",
+    "addedValue": "The dermoscopic frame adds lobules that the clinical photograph does not show. An added look is not confirmation of the source label.",
+    "reasoningImpact": "The clinical reading stays a group of papules. Lobules support a lobulated look and do not replace the caption. Vessels stay uncounted. The leading comparison does not change, because the extra frame does not name a new competitor.",
+    "limits": "Both files come from one case report. The file pages do not print the words same lesion. Histopathology is not quoted. Linear vessels named in the file caption were not encoded.",
+    "informationGain": "dermoscopy_adds_support",
+    "informationGainNote": "Educational label only. The dermoscopic frame adds lobules the clinical frame does not name. Not a validated metric and not a probability.",
+    "comparison": {
+      "clinicalClue": "Grouped skin-colored papules.",
+      "dermoscopicClue": "Clustered yellow-white lobules.",
+      "addedInformation": "Lobules are on the dermoscopic frame and are not read back onto the clinical photograph.",
+      "diagnosticConflict": null,
+      "teachingRule": "An extra frame can add a look. It does not confirm a label, and it does not make the next papule safe."
+    }
+  },
   "modalityIntegration": "The first frame is the clinical photograph of grouped papules. The second frame is the dermoscopic photograph from the same source and shows yellow-white lobules. Do not read those lobules onto the clinical photograph, and do not add vessels that were not counted.",
   "academy": {
     "level": 3,

@@ -49,6 +49,8 @@
   const descriptions = Object.create(null);
   const hintsOpen = Object.create(null);
   let lastHintButton = null;
+  const dermoscopyOpen = Object.create(null);
+  let lastDermoscopyButton = null;
   const openPatternKeys = Object.create(null);
   let patternFocusId = null;
   let lastPatternButton = null;
@@ -83,6 +85,17 @@
     descriptive_morphology: "Descriptive morphology, not a dermoscopic structure",
     contextual_feature: "Context, not a diagnostic structure",
     image_artifact_or_annotation: "Image mark, not a skin finding"
+  });
+  const INFORMATION_GAIN_LABELS = Object.freeze({
+    dermoscopy_adds_major_discrimination: "Educational label: dermoscopy adds a major discriminating look. Not a validated metric.",
+    dermoscopy_adds_support: "Educational label: dermoscopy adds support. Not a validated metric.",
+    dermoscopy_changes_leading_differential: "Educational label: dermoscopy changes the leading comparison. Not a validated metric.",
+    dermoscopy_remains_equivocal: "Educational label: dermoscopy stays equivocal. Not a validated metric."
+  });
+  const PAIR_PROVENANCE_LABELS = Object.freeze({
+    same_lesion_confirmed: "Same lesion confirmed by the source",
+    source_documented_pair: "Source-documented paired view",
+    not_paired: "Not a paired lesion"
   });
   const PATTERN_GROUPS = Object.freeze([
     Object.freeze({ id: "clinical-morphology", title: "Clinical morphology", note: "Clinical looks stored on this case. A brown spot, red papule, or other descriptive shape is not a dermoscopic structure." }),
@@ -593,6 +606,127 @@
     return { images, clinical, dermoscopy, paired: clinical.length > 0 && dermoscopy.length > 0 };
   }
 
+  function pairRecord(caseItem) {
+    return asList(registry && registry.pairProvenance).find(row => row && row.caseId === caseItem.id) || null;
+  }
+
+  function isTruePair(caseItem) {
+    const record = pairRecord(caseItem);
+    return !!(record && record.provenance && record.provenance !== "not_paired" && pairedImageViews(caseItem).paired);
+  }
+
+  function dermoscopyContentVisible(caseItem) {
+    if (!isTruePair(caseItem)) return true;
+    if (diagnosisRevealed) return true;
+    return !!dermoscopyOpen[caseItem.id];
+  }
+
+  function modalityStatusText(caseItem) {
+    const views = pairedImageViews(caseItem);
+    if (isTruePair(caseItem)) {
+      if (dermoscopyContentVisible(caseItem) && !diagnosisRevealed) {
+        return "Modality on screen: clinical photograph and dermoscopic image. The diagnosis is still hidden.";
+      }
+      if (!dermoscopyContentVisible(caseItem)) {
+        return "Modality on screen: clinical photograph only. The dermoscopic image is hidden. Showing dermoscopy does not reveal the diagnosis.";
+      }
+      return "Modality on screen: clinical photograph and dermoscopic image. The diagnosis is revealed.";
+    }
+    if (views.dermoscopy.length && !views.clinical.length) return "Modality on screen: dermoscopic image. No clinical photograph of this lesion is stored.";
+    if (views.clinical.length && !views.dermoscopy.length) return "Modality on screen: clinical photograph. No dermoscopic image of this lesion is stored.";
+    return "Modality on screen: the stored images. This case is not a documented pair.";
+  }
+
+  function renderDermoscopyToggle(parent, caseItem) {
+    if (!isTruePair(caseItem) || diagnosisRevealed) return;
+    const open = !!dermoscopyOpen[caseItem.id];
+    const button = element("button", open ? "Hide dermoscopy" : "Show dermoscopy", "case-button case-dermoscopy-toggle");
+    button.type = "button";
+    button.setAttribute("aria-expanded", open ? "true" : "false");
+    button.setAttribute("aria-controls", "caseDermoscopyPanel");
+    button.setAttribute("aria-describedby", "caseModalityStatus");
+    lastDermoscopyButton = button;
+    button.addEventListener("click", () => {
+      dermoscopyOpen[caseItem.id] = !dermoscopyOpen[caseItem.id];
+      renderDetail(caseItem, "dermoscopy");
+    });
+    parent.appendChild(button);
+    parent.appendChild(element("p", open
+      ? "Dermoscopy is open. The clinical photograph stays available. The diagnosis stays hidden."
+      : "Dermoscopy is closed. Only the clinical photograph is on screen.", "case-kind-note"));
+  }
+
+  function renderPairStage(parent, caseItem) {
+    if (!isTruePair(caseItem)) return false;
+    const status = element("p", modalityStatusText(caseItem), "case-modality-status");
+    status.id = "caseModalityStatus";
+    parent.appendChild(status);
+    renderDermoscopyToggle(parent, caseItem);
+    const open = dermoscopyContentVisible(caseItem);
+    const stage = element("div", undefined, open ? "case-pair-stage is-open" : "case-pair-stage");
+    const views = pairedImageViews(caseItem);
+    const clinicalSection = element("section", undefined, "case-view");
+    clinicalSection.appendChild(element("h5", "Clinical view"));
+    clinicalSection.appendChild(element("p", "This frame is a clinical photograph. It is not a dermoscopic structure.", "case-kind-note"));
+    views.clinical.forEach(image => renderZoomableImage(clinicalSection, caseItem, image));
+    stage.appendChild(clinicalSection);
+    const dermoSection = element("section", undefined, "case-view");
+    dermoSection.id = "caseDermoscopyPanel";
+    dermoSection.hidden = !open;
+    dermoSection.appendChild(element("h5", "Dermoscopic view"));
+    dermoSection.appendChild(element("p", open
+      ? "This frame is dermoscopy. Do not read its structures back onto the clinical photograph unless the case says they are there. The diagnosis is not revealed by opening this frame."
+      : "Dermoscopic image hidden.", "case-kind-note"));
+    if (open) views.dermoscopy.forEach(image => renderZoomableImage(dermoSection, caseItem, image));
+    stage.appendChild(dermoSection);
+    parent.appendChild(stage);
+    const block = caseItem.pairedModality;
+    if (block && typeof block.clinicalObservation === "string") {
+      parent.appendChild(element("p", block.clinicalObservation));
+    }
+    if (open && block) {
+      const integration = element("section", undefined, "case-view case-view-integration");
+      integration.appendChild(element("h5", "What the dermoscopic frame adds"));
+      if (block.dermoscopicObservation) integration.appendChild(element("p", block.dermoscopicObservation));
+      if (block.addedValue) integration.appendChild(element("p", block.addedValue));
+      if (block.reasoningImpact) integration.appendChild(element("p", block.reasoningImpact));
+      if (block.limits) integration.appendChild(element("p", block.limits));
+      if (!diagnosisRevealed && block.informationGain && INFORMATION_GAIN_LABELS[block.informationGain]) {
+        integration.appendChild(element("p", INFORMATION_GAIN_LABELS[block.informationGain], "case-kind-note"));
+      }
+      if (typeof caseItem.modalityIntegration === "string" && caseItem.modalityIntegration.trim()) {
+        integration.appendChild(element("p", caseItem.modalityIntegration));
+      }
+      parent.appendChild(integration);
+    }
+    return true;
+  }
+
+  function renderPairComparison(parent, caseItem) {
+    if (!diagnosisRevealed || !isTruePair(caseItem)) return;
+    const block = caseItem.pairedModality;
+    const comparison = block && block.comparison;
+    if (!comparison) return;
+    const section = element("section", undefined, "case-view case-view-integration");
+    section.appendChild(element("h5", "Clinical and dermoscopy, after the diagnosis"));
+    const record = pairRecord(caseItem);
+    if (record) {
+      section.appendChild(element("p", `Pair provenance: ${PAIR_PROVENANCE_LABELS[record.provenance] || record.provenance}.`));
+      if (record.basis) section.appendChild(element("p", record.basis));
+    }
+    if (block.informationGain && INFORMATION_GAIN_LABELS[block.informationGain]) {
+      section.appendChild(element("p", INFORMATION_GAIN_LABELS[block.informationGain], "case-kind-note"));
+    }
+    section.appendChild(element("p", `Clinical clue: ${comparison.clinicalClue}`));
+    section.appendChild(element("p", `Dermoscopic clue: ${comparison.dermoscopicClue}`));
+    section.appendChild(element("p", `Added information: ${comparison.addedInformation}`));
+    section.appendChild(element("p", comparison.diagnosticConflict
+      ? `Diagnostic conflict: ${comparison.diagnosticConflict}`
+      : "Diagnostic conflict: none stored. The two frames do not record different impressions."));
+    section.appendChild(element("p", `Teaching rule: ${comparison.teachingRule}`));
+    parent.appendChild(section);
+  }
+
   function renderInspect(parent, caseItem) {
     parent.appendChild(element("p", "Look at the image, creator, license and attribution. Zoom only changes the view on this page. The diagnosis stays hidden on this step.", "case-step-intro"));
     renderFirstImpression(parent, caseItem);
@@ -601,26 +735,11 @@
       parent.appendChild(element("p", "No image is recorded for this case. None was added.", "case-empty"));
       return;
     }
-    if (!views.paired) {
-      views.images.forEach(image => renderZoomableImage(parent, caseItem, image));
-      return;
-    }
-    const clinicalSection = element("section", undefined, "case-view");
-    clinicalSection.appendChild(element("h5", "Clinical view"));
-    clinicalSection.appendChild(element("p", "This frame is a clinical photograph. It is not a dermoscopic structure.", "case-kind-note"));
-    views.clinical.forEach(image => renderZoomableImage(clinicalSection, caseItem, image));
-    parent.appendChild(clinicalSection);
-    const dermoSection = element("section", undefined, "case-view");
-    dermoSection.appendChild(element("h5", "Dermoscopic view"));
-    dermoSection.appendChild(element("p", "This frame is dermoscopy. Do not read its structures back onto the clinical photograph unless the case says they are there.", "case-kind-note"));
-    views.dermoscopy.forEach(image => renderZoomableImage(dermoSection, caseItem, image));
-    parent.appendChild(dermoSection);
-    if (typeof caseItem.modalityIntegration === "string" && caseItem.modalityIntegration.trim()) {
-      const integration = element("section", undefined, "case-view case-view-integration");
-      integration.appendChild(element("h5", "Integration"));
-      integration.appendChild(element("p", caseItem.modalityIntegration));
-      parent.appendChild(integration);
-    }
+    if (renderPairStage(parent, caseItem)) return;
+    const status = element("p", modalityStatusText(caseItem), "case-modality-status");
+    status.id = "caseModalityStatus";
+    parent.appendChild(status);
+    views.images.forEach(image => renderZoomableImage(parent, caseItem, image));
   }
 
   function renderLabeledList(parent, items, kindLabel, className, textOfItem) {
@@ -696,8 +815,18 @@
     return rows;
   }
 
+  function visiblePatternRows(caseItem) {
+    return patternRows(caseItem).filter(row => {
+      if (dermoscopyContentVisible(caseItem)) return true;
+      if (row.kind === "case-pattern" && row.pattern.modality === "dermoscopy") return false;
+      const canonical = patternRecord(row.canonicalId);
+      if (canonical && (canonical.category === "dermoscopic-structure" || canonical.modality === "dermoscopic")) return false;
+      return true;
+    });
+  }
+
   function renderGroupedPatterns(parent, caseItem, mode) {
-    const rows = patternRows(caseItem);
+    const rows = visiblePatternRows(caseItem);
     if (!rows.length) return;
     const intro = element("section", undefined, mode === "study" ? "case-pattern-study" : "case-kind-section");
     const heading = element("h5", mode === "study" ? "Patterns in this case" : "Patterns");
@@ -706,6 +835,9 @@
     intro.appendChild(element("p", mode === "study"
       ? "Certainty and weight belong to this case. Clinical morphology, dermoscopic structure, and image context are separate. A pattern note does not replace the case weight."
       : "A named look is not a diagnosis. Clinical morphology, dermoscopic structure, and image marks are listed separately.", "case-kind-note"));
+    if (isTruePair(caseItem)) {
+      intro.appendChild(element("p", "Image marks stay in the context section. They are not part of the paired diagnostic comparison.", "case-kind-note"));
+    }
     parent.appendChild(intro);
     PATTERN_GROUPS.forEach(group => {
       const groupRows = rows.filter(row => patternGroupId(patternRecord(row.canonicalId)) === group.id);
@@ -746,8 +878,29 @@
     if (note) parent.appendChild(element("p", note));
   }
 
+  function visibleObservations(caseItem) {
+    return asList(caseItem.observations).filter(item => {
+      if (!item || item.modality !== "dermoscopy") return true;
+      return dermoscopyContentVisible(caseItem);
+    });
+  }
+
+  function visibleInterpretations(caseItem) {
+    return asList(caseItem.interpretations).filter(item => {
+      if (!item || dermoscopyContentVisible(caseItem)) return true;
+      const ids = asList(item.relatedObservationIds);
+      if (!ids.length) return true;
+      const observations = asList(caseItem.observations);
+      return ids.every(id => {
+        const found = observations.find(observation => observation && observation.id === id);
+        return !found || found.modality !== "dermoscopy";
+      });
+    });
+  }
+
   function renderObserve(parent, caseItem) {
     parent.appendChild(element("p", "Observations and dermoscopic features are separate from interpretations. Only items already stored on this case are shown.", "case-step-intro"));
+    if (isTruePair(caseItem)) renderPairStage(parent, caseItem);
     renderObservationPrompts(parent, caseItem);
     const describe = element("label", undefined, "case-filter");
     describe.appendChild(element("span", "Describe what you see before you read a diagnosis"));
@@ -759,9 +912,9 @@
     parent.appendChild(describe);
     parent.appendChild(element("p", "This note stays in the page session. It is not saved and not scored.", "case-kind-note"));
     renderGroupedPatterns(parent, caseItem, "observe");
-    const observations = asList(caseItem.observations);
-    const features = asList(caseItem.dermoscopicFeatures);
-    const interpretations = asList(caseItem.interpretations);
+    const observations = visibleObservations(caseItem);
+    const features = dermoscopyContentVisible(caseItem) ? asList(caseItem.dermoscopicFeatures) : [];
+    const interpretations = visibleInterpretations(caseItem);
 
     const observationSection = element("section", undefined, "case-kind-section case-kind-section-observation");
     observationSection.appendChild(element("h5", "Observations"));
@@ -772,7 +925,11 @@
     const featureSection = element("section", undefined, "case-kind-section");
     featureSection.appendChild(element("h5", "Dermoscopic features"));
     featureSection.appendChild(element("p", "Dermoscopic feature means a recorded structure or vessel finding, not a diagnosis.", "case-kind-note"));
-    appendRecordedOrConcealed(featureSection, features, "Dermoscopic feature", "case-kind-feature", item => item && preRevealDisplay(item.label || item.token), "No dermoscopic features are recorded for this case. None were added.");
+    if (isTruePair(caseItem) && !dermoscopyContentVisible(caseItem)) {
+      featureSection.appendChild(element("p", "Dermoscopic features stay hidden until you show the dermoscopic image. Showing it does not reveal the diagnosis.", "case-kind-note"));
+    } else {
+      appendRecordedOrConcealed(featureSection, features, "Dermoscopic feature", "case-kind-feature", item => item && preRevealDisplay(item.label || item.token), "No dermoscopic features are recorded for this case. None were added.");
+    }
     parent.appendChild(featureSection);
 
     const interpretationSection = element("section", undefined, "case-kind-section case-kind-section-interpretation");
@@ -784,6 +941,14 @@
 
   function renderDifferential(parent, caseItem) {
     parent.appendChild(element("p", "These are differentials already stored for this case. Opening the list is optional. It is not a scored quiz and it does not confirm a diagnosis. Order is a teaching rank, not a probability.", "case-step-intro"));
+    if (isTruePair(caseItem)) {
+      renderPairStage(parent, caseItem);
+      if (!dermoscopyContentVisible(caseItem)) {
+        parent.appendChild(element("p", "This is the initial differential from the clinical photograph. No score is stored. The dermoscopic frame is still hidden.", "case-kind-note"));
+      } else if (!diagnosisRevealed && caseItem.pairedModality && caseItem.pairedModality.reasoningImpact) {
+        parent.appendChild(element("p", caseItem.pairedModality.reasoningImpact));
+      }
+    }
     const differentials = asList(caseItem.differentials);
     if (!differentials.length) {
       parent.appendChild(element("p", "No differentials are recorded for this case. None were added.", "case-empty"));
@@ -1017,6 +1182,21 @@
 
   function appendPatternDetail(panel, canonical, row, caseItem) {
     panel.appendChild(element("p", "Pattern text is review required. It is not clinician reviewed, and it is not a diagnosis.", "case-kind-note"));
+    const modalityName = row.kind === "case-pattern" && row.pattern.modality
+      ? row.pattern.modality
+      : (canonical.modality || "not recorded");
+    const modalitySentence = modalityName === "dermoscopic" || modalityName === "dermoscopy"
+      ? "Modality: dermoscopic image. A clinical photograph cannot supply this structure."
+      : modalityName === "clinical"
+        ? "Modality: clinical photograph. This is not a dermoscopic structure."
+        : modalityName === "both"
+          ? "Modality: clinical or dermoscopic, only when that frame is actually stored."
+          : "Modality: not a skin image. This is context or an image mark.";
+    panel.appendChild(element("p", modalitySentence, "case-kind-note"));
+    panel.appendChild(element("h6", "What is visible in this case?"));
+    panel.appendChild(element("p", row.kind === "case-pattern" && row.pattern.specificityNote
+      ? row.pattern.specificityNote
+      : "This case records the feature and does not add a region."));
     panel.appendChild(element("h6", "What is it?"));
     panel.appendChild(element("p", canonical.definition));
     if (canonical.displayName && canonical.displayName !== (row.kind === "case-pattern" ? row.pattern.label : row.feature.label)) {
@@ -1084,6 +1264,19 @@
     article.appendChild(element("h6", name));
     if (canonical && EDUCATIONAL_ROLE_LABELS[canonical.educationalRole]) {
       article.appendChild(element("p", EDUCATIONAL_ROLE_LABELS[canonical.educationalRole], "case-kind-note"));
+    }
+    if (isTruePair(caseItem)) {
+      const modalityName = row.kind === "case-pattern" && row.pattern.modality
+        ? row.pattern.modality
+        : (canonical && canonical.modality) || "not recorded";
+      const modalitySentence = modalityName === "dermoscopic" || modalityName === "dermoscopy"
+        ? "Modality: dermoscopic image. A clinical photograph cannot supply this structure."
+        : modalityName === "clinical"
+          ? "Modality: clinical photograph. This is not a dermoscopic structure."
+          : modalityName === "both"
+            ? "Modality: clinical or dermoscopic, only when that frame is actually stored."
+            : "Modality: not a skin image. This is context or an image mark.";
+      article.appendChild(element("p", modalitySentence, "case-kind-note"));
     }
     article.appendChild(element("p", `${certaintySentence(certainty)}. ${weightSentence(weight)}.`, "case-feature-weight"));
     if (!canonical) {
@@ -1206,6 +1399,7 @@
       section.appendChild(element("p", caseItem.managementBrief));
     }
     parent.appendChild(section);
+    renderPairComparison(parent, caseItem);
   }
 
   function renderReview(parent, caseItem) {
@@ -1382,6 +1576,7 @@
       root.appendChild(region);
       renderPager(root, caseItem);
       if (focusTarget === "reveal" && revealButton && typeof revealButton.focus === "function") revealButton.focus();
+      else if (focusTarget === "dermoscopy" && lastDermoscopyButton && typeof lastDermoscopyButton.focus === "function") lastDermoscopyButton.focus();
       else if (focusTarget === "hint" && lastHintButton && typeof lastHintButton.focus === "function") lastHintButton.focus();
       else if (focusTarget === "pattern-open" && lastPatternPanel && typeof lastPatternPanel.focus === "function") lastPatternPanel.focus();
       else if (focusTarget === "pattern-close" && lastPatternButton && typeof lastPatternButton.focus === "function") lastPatternButton.focus();

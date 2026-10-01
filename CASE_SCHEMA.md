@@ -112,3 +112,14 @@ Schema version stays 1. Eight new cases use the same case object. Benign labels 
 `comparisons` stores explicit pairs (`caseIdA`, `caseIdB`, shared features, features favouring each side, `discriminator` or null, trap, limits). A case lists pair ids in `compareWith`. The learner UI shows that offer only after the current diagnosis is revealed. `recordedScreeningDecision` may be null. A benign label must not be stored as `routine-benign-impression`. `screening.categories` is vocabulary for a future session and is not a simulation. `proposedProgression.hardCodedPath` stays false.
 
 No new case is clinician reviewed. See [CONTRASTIVE_CURRICULUM.md](CONTRASTIVE_CURRICULUM.md).
+
+
+## Goal 23 paired clinical and dermoscopy
+
+Schema version stays 1. `pairProvenance` is a registry entry for every case, outside the five pilot objects, so those fingerprints stay put. Values are `same_lesion_confirmed`, `source_documented_pair`, and `not_paired`. Two images of the same diagnosis are not a pair. A case with both a clinical image and a dermoscopic image must use one of the first two values and must name the image ids. A single-modality case must stay `not_paired`.
+
+`pairedModality` is required only on a true pair. It stores the clinical observation, the dermoscopic observation, added value that is not confirmation, the reasoning impact, limits, an optional educational information-gain label, and a post-reveal comparison. Information-gain labels are `dermoscopy_adds_major_discrimination`, `dermoscopy_adds_support`, `dermoscopy_changes_leading_differential`, and `dermoscopy_remains_equivocal`. They are descriptions, not a metric. Do not force one. The learner sees the clinical photograph first. Show dermoscopy does not reveal the diagnosis. Localization stays empty.
+
+The only true pair already in the library is `case-g21-08`, recorded as `source_documented_pair` because both files cite one 2014 case report and neither file page prints the words same lesion. No new image was added in Goal 23. Wikimedia returned HTTP 429 for the candidate downloads, including one retry, so those files were not copied and their pixels were not described. See [PAIRED_MODALITY.md](PAIRED_MODALITY.md).
+
+Clinical review remains deferred. All new clinical content remains review required.
