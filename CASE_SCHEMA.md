@@ -123,3 +123,8 @@ Schema version stays 1. `pairProvenance` is a registry entry for every case, out
 The only true pair already in the library is `case-g21-08`, recorded as `source_documented_pair` because both files cite one 2014 case report and neither file page prints the words same lesion. No new image was added in Goal 23. Wikimedia returned HTTP 429 for the candidate downloads, including one retry, so those files were not copied and their pixels were not described. See [PAIRED_MODALITY.md](PAIRED_MODALITY.md).
 
 Clinical review remains deferred. All new clinical content remains review required.
+
+
+## Goal 24 evidence-grade acquisition
+
+Schema version stays 1. Two source-documented pairs were added from Wikimedia Commons files whose descriptions name a dermatoscope view of the same labeled lesion. Confirmation stays `clinical_diagnosis` because the file pages do not report histopathology. `acquisition-ledger.js` is a candidate registry, not a clinical object. Rejected rows are not cases. Clinical review remains deferred. All new clinical content remains review required.

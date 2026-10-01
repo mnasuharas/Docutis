@@ -3297,6 +3297,122 @@
         "safety-notice",
         "provenance"
       ]
+    },
+    {
+      "id": "case-g24-01",
+      "assetType": "case",
+      "title": "A light brown patch on the forehead",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:c5f9d8d522850b55da81c6af37b78fd0a63b594d6b6026032e36db1b00b01a44",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma_in_situ_Right_Forehead.jpg",
+        "https://commons.wikimedia.org/wiki/File:Melanoma_in_situ_Right_Forehead_dermatoscope.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dermanonymous, via Wikimedia Commons",
+          "organization": "Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma_in_situ_Right_Forehead.jpg",
+          "metadataCheckedAt": "2026-10-01"
+        },
+        {
+          "title": "Dermanonymous, via Wikimedia Commons",
+          "organization": "Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma_in_situ_Right_Forehead_dermatoscope.jpg",
+          "metadataCheckedAt": "2026-10-01"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g24-02",
+      "assetType": "case",
+      "title": "A pink-brown patch on the back",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:d9a5a57a4db2b4e7278ea10b4010ff10bdca40f1448e0549ecc3f7c3d79db4f9",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Malignant_Melanoma_Left_Mid_Back.jpg",
+        "https://commons.wikimedia.org/wiki/File:Malignant_Melanoma_Left_Mid_Back_Dermatoscope.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dermanonymous, via Wikimedia Commons",
+          "organization": "Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Malignant_Melanoma_Left_Mid_Back.jpg",
+          "metadataCheckedAt": "2026-10-01"
+        },
+        {
+          "title": "Dermanonymous, via Wikimedia Commons",
+          "organization": "Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Malignant_Melanoma_Left_Mid_Back_Dermatoscope.jpg",
+          "metadataCheckedAt": "2026-10-01"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
     }
   ]
 }

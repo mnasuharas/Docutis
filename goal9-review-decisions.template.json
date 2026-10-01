@@ -703,6 +703,32 @@
       "requiredCorrections": [],
       "approvedReplacementWording": null,
       "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-g24-01",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:c5f9d8d522850b55da81c6af37b78fd0a63b594d6b6026032e36db1b00b01a44",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-g24-02",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:d9a5a57a4db2b4e7278ea10b4010ff10bdca40f1448e0549ecc3f7c3d79db4f9",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
     }
   ]
 }

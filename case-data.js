@@ -124,7 +124,9 @@
         Object.freeze({ caseId: "case-g21-06", order: 25, level: 3, spectrum: "mimic", teachingType: "reasoning", skillIds: Object.freeze(["blue-color"]) }),
         Object.freeze({ caseId: "case-g21-08", order: 26, level: 3, spectrum: "mimic", teachingType: "teaching", skillIds: Object.freeze(["grouped-papules"]) }),
         Object.freeze({ caseId: "case-g21-07", order: 27, level: 4, spectrum: "melanoma", teachingType: "expert-challenge", skillIds: Object.freeze(["marked-cheek-patch"]) }),
-        Object.freeze({ caseId: "case-g22-01", order: 28, level: 4, spectrum: "mimic", teachingType: "reasoning", skillIds: Object.freeze(["subungual-color"]) })
+        Object.freeze({ caseId: "case-g22-01", order: 28, level: 4, spectrum: "mimic", teachingType: "reasoning", skillIds: Object.freeze(["subungual-color"]) }),
+        Object.freeze({ caseId: "case-g24-01", order: 29, level: 4, spectrum: "melanoma", teachingType: "expert-challenge", skillIds: Object.freeze(["evidence-weighting"]) }),
+        Object.freeze({ caseId: "case-g24-02", order: 30, level: 4, spectrum: "melanoma", teachingType: "expert-challenge", skillIds: Object.freeze(["color-variegation", "evidence-weighting"]) })
       ])
     }),
 
@@ -418,6 +420,24 @@
         dermoscopicImageIds: Object.freeze([]),
         informationGain: null,
         informationGainNote: null
+      }),
+      Object.freeze({
+        caseId: "case-g24-01",
+        provenance: "source_documented_pair",
+        basis: "The clinical file description says melanoma in situ, right forehead marked for biopsy, dated 2020-02-11, own work by Dermanonymous. The dermatoscope file description says melanoma in situ, dermatoscope image, right forehead marked for biopsy, same date and author. The second description documents a dermatoscope view of that labeled lesion. Neither page reports histopathology. Same author alone would not have been enough.",
+        clinicalImageIds: Object.freeze(["img-g24-01a"]),
+        dermoscopicImageIds: Object.freeze(["img-g24-01b"]),
+        informationGain: "dermoscopy_remains_equivocal",
+        informationGainNote: "Educational label only. The circular field shows the faint brown area again and does not add a structure clear enough to name. Not a validated metric and not a probability."
+      }),
+      Object.freeze({
+        caseId: "case-g24-02",
+        provenance: "source_documented_pair",
+        basis: "The clinical file description says malignant melanoma, left mid back marked for biopsy, dated 2020-10-16, own work by Dermanonymous. The dermatoscope file says the same words and adds through dermatoscope, same date and author. That sentence documents the dermatoscope view. Neither page reports histopathology or a subtype. Same site alone would not have been enough.",
+        clinicalImageIds: Object.freeze(["img-g24-02a"]),
+        dermoscopicImageIds: Object.freeze(["img-g24-02b"]),
+        informationGain: "dermoscopy_remains_equivocal",
+        informationGainNote: "Educational label only. The circular field shows pink and brown again and does not add a structure clear enough to name. Not a validated metric and not a probability."
       })
     ]),
     comparisons: Object.freeze([
@@ -530,6 +550,28 @@
         discriminator: "An intact nail plate with color under it versus a destroyed plate, in these two frames. That difference is not a proof, and it is not an image mark.",
         commonTrap: "Calling every dark nail a haemorrhage, or every dark nail a melanoma, from one photograph.",
         limits: "No trauma history is stored. No dermoscopy is stored. No histopathology is stored for either caption. One benign caption is not a guarantee. A longitudinal streak was not seen and was not invented."
+      }),
+      Object.freeze({
+        id: "cmp-g24-face-mark",
+        caseIdA: "case-g24-01",
+        caseIdB: "case-g21-07",
+        sharedFeatures: Object.freeze(["A brown patch is on facial skin, and marker ink is in the frame."]),
+        favouringA: Object.freeze(["The patch is on the forehead and is light brown. A second frame is a circular dermoscopic view that does not add a named structure."]),
+        favouringB: Object.freeze(["The other case is one cheek patch. Its caption says lentigo maligna melanoma marked for biopsy. That case has no dermoscopic frame."]),
+        discriminator: "Forehead versus cheek, and a dermoscopic frame that stays equivocal versus a clinical photograph alone. The ink is not the discriminator.",
+        commonTrap: "Using one marked facial patch to name the other, or reading marker dots as pigment.",
+        limits: "The two files are not the same person and not a pair. Neither caption used here reports a histopathology result. Facial pigment is not described with a trunk network word."
+      }),
+      Object.freeze({
+        id: "cmp-g24-back-color",
+        caseIdA: "case-g24-02",
+        caseIdB: "case-g21-02",
+        sharedFeatures: Object.freeze(["Brown color is visible in the lesion."]),
+        favouringA: Object.freeze(["Pink and brown sit in one patch, with marker dots around it. The circular frame does not show a rough plate or ridges."]),
+        favouringB: Object.freeze(["The comparison photograph has a rough surface that looks stuck on the skin. Its caption says seborrheic keratosis and does not cite histopathology."]),
+        discriminator: "A rough stuck-on surface versus a pink-brown patch without that surface, in these frames only. Marker dots are not the discriminator.",
+        commonTrap: "Stopping at the first familiar benign name because brown is in both frames.",
+        limits: "One frame pair is clinical plus dermoscopy. The keratosis comparison is a different clinical photograph, not the same lesion. No histopathology is in either caption used here."
       })
     ]),
     proposedProgression: Object.freeze({
@@ -540,9 +582,9 @@
         Object.freeze({ id: "foundation", title: "Foundation", caseIds: Object.freeze(["case-g21-01", "case-g21-02", "case-g21-05"]) }),
         Object.freeze({ id: "pattern-recognition", title: "Pattern recognition", caseIds: Object.freeze(["case-g21-03", "case-g21-08", "case-g18-03"]) }),
         Object.freeze({ id: "differential", title: "Differential", caseIds: Object.freeze(["case-g21-02", "case-g18-03", "case-g21-04", "case-g18-04"]) }),
-        Object.freeze({ id: "melanoma-spectrum", title: "Melanoma spectrum", caseIds: Object.freeze(["case-g18-06", "case-g18-10", "case-g21-07", "case-acral-melanoma-plantar", "case-g18-12"]) }),
+        Object.freeze({ id: "melanoma-spectrum", title: "Melanoma spectrum", caseIds: Object.freeze(["case-g18-06", "case-g18-10", "case-g21-07", "case-acral-melanoma-plantar", "case-g18-12", "case-g24-01", "case-g24-02"]) }),
         Object.freeze({ id: "difficult-mimics", title: "Difficult mimics", caseIds: Object.freeze(["case-g21-06", "case-g21-08", "case-g21-07", "case-g21-04"]) }),
-        Object.freeze({ id: "special-sites", title: "Special sites", caseIds: Object.freeze(["case-g21-07", "case-g21-04", "case-acral-melanoma-plantar", "case-g18-12", "case-g22-01", "case-g18-14"]) }),
+        Object.freeze({ id: "special-sites", title: "Special sites", caseIds: Object.freeze(["case-g21-07", "case-g21-04", "case-acral-melanoma-plantar", "case-g18-12", "case-g22-01", "case-g18-14", "case-g24-01"]) }),
         Object.freeze({ id: "screening-integration", title: "Screening integration", caseIds: Object.freeze([]), note: "Decision categories exist. No session is built, and no case is assigned a decision." })
       ])
     }),
@@ -5221,6 +5263,388 @@
   "localization": null,
   "clinicalAction": "No condition monograph is stored for this teaching diagnosis. Do not treat from this case.",
   "managementBrief": "No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g24-01",
+  "slug": "g24-forehead-light-brown-patch",
+  "title": "A light brown patch on the forehead",
+  "diagnosisLabel": "Melanoma in situ",
+  "diseaseId": "cutaneous-melanoma",
+  "category": "Melanoma",
+  "educationalLevel": "advanced",
+  "caseType": "clinical_dermoscopic",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Right forehead",
+    "presentationNotes": "The file description says the forehead was marked for biopsy. The mark is not a result. No age or sex is printed on the files."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-10-01",
+      "metadataCheckedAt": "2026-10-01",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g24-01a",
+      "type": "clinical",
+      "src": "assets/media/cases/case-31-clinical.jpg",
+      "dimensions": { "width": 606, "height": 344 },
+      "alt": "Clinical close-up of a light brown patch on forehead skin, ringed by purple and black marker dots. No diagnosis is included.",
+      "caption": "Clinical close-up of a light brown patch on forehead skin. Marker dots are in the frame. The source label stays hidden until reveal.",
+      "source": "Dermanonymous, via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Melanoma_in_situ_Right_Forehead.jpg",
+      "creator": "Dermanonymous",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.",
+      "modificationsNotes": "Embedded metadata segments were removed. Pixel dimensions were not changed. No crop and no annotation.",
+      "consentBasis": "Uploader published this own-work close-up under the file page CC BY-SA 4.0 template. The frame is forehead skin without a face portrait, eyes, or a name."
+    },
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-10-01",
+      "metadataCheckedAt": "2026-10-01",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g24-01b",
+      "type": "dermoscopy",
+      "src": "assets/media/cases/case-31-dermoscopy.jpg",
+      "dimensions": { "width": 982, "height": 706 },
+      "alt": "Circular dermoscopic view of a faint light-brown area, with purple ink at the edge and short tick marks near the center. No diagnosis is included.",
+      "caption": "Dermoscopic view from the matching file description. Ink and tick marks are in the field. No structure beyond the faint brown area was clear enough to name.",
+      "source": "Dermanonymous, via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Melanoma_in_situ_Right_Forehead_dermatoscope.jpg",
+      "creator": "Dermanonymous",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.",
+      "modificationsNotes": "Embedded metadata segments were removed. Pixel dimensions were not changed. No crop and no annotation.",
+      "consentBasis": "Uploader published this own-work dermoscopic frame under the file page CC BY-SA 4.0 template. No face portrait is in the circular field."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Melanoma in situ (Commons file description, right forehead)",
+    "confirmationMethod": "clinical_diagnosis",
+    "confirmationNotes": "Both Commons descriptions, checked 2026-10-01, state melanoma in situ on the right forehead marked for biopsy. The dermatoscope file calls itself a dermatoscope image of that description. Neither description reports histopathology. Marked for biopsy is not a histology result. In situ is the file's own wording, not a Docutis upgrade, and it is not lentigo maligna unless the file had said that.",
+    "confidenceNote": "Uploader file description only. Not a Docutis clinician review. Not histopathology."
+  },
+  "observations": [
+    {
+      "id": "obs-g24-01a",
+      "kind": "observation",
+      "modality": "clinical",
+      "text": "A light brown patch sits on lined forehead skin. Purple and black dots ring the patch."
+    },
+    {
+      "id": "obs-g24-01b",
+      "kind": "observation",
+      "modality": "dermoscopy",
+      "text": "The circular field shows a faint light-brown area. Purple ink sits at the edge, and short tick marks cross the center."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g24-01a",
+      "kind": "interpretation",
+      "relatedObservationIds": ["obs-g24-01a"],
+      "text": "The dots read as marker ink around the patch, not as pigment in the skin. A mark placed for a procedure is not a laboratory result."
+    },
+    {
+      "id": "int-g24-01b",
+      "kind": "interpretation",
+      "relatedObservationIds": ["obs-g24-01a", "obs-g24-01b"],
+      "text": "The circular field shows the faint brown area again. No further structure was sharp enough to name. Ink and tick marks stay marks. Absence of a named structure does not clear the patch."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Melanoma in situ",
+      "supportingFeatures": ["The file description uses those words for this forehead patch.", "The patch is a single light-brown area rather than a field of many macules."],
+      "contradictingFeatures": ["No histopathology sentence is on the file page.", "The dermoscopic frame does not show a structure clear enough to name."],
+      "teachingDistinction": "The source label can be revealed later. The frames do not prove it, and they do not let you invent a subtype the file did not use."
+    },
+    {
+      "diagnosis": "Solar lentigo",
+      "supportingFeatures": ["A flat light-brown patch on facial skin can look like this.", "The color is mostly one light brown."],
+      "contradictingFeatures": ["The stored solar lentigo case is many macules on the hand, not this single forehead patch.", "A benign name is not established by the photograph."],
+      "teachingDistinction": "A faint facial patch is the usual mimic. The hand field does not answer for this forehead."
+    },
+    {
+      "diagnosis": "Pigmented actinic keratosis",
+      "supportingFeatures": ["Facial skin with a brown patch can raise that comparison."],
+      "contradictingFeatures": ["Scale was not clearly seen and was not invented."],
+      "teachingDistinction": "Missing scale does not exclude a keratinocyte patch, and it does not prove the source label."
+    }
+  ],
+  "teachingPoints": [
+    { "id": "tp-g24-01a", "title": "Notice first", "text": "Separate the light brown patch from the marker dots. On the circular frame, say only the brown area, the ink, and the tick marks if those are what you see." },
+    { "id": "tp-g24-01b", "title": "What the source does not say", "text": "The file says melanoma in situ and marked for biopsy. It does not report histopathology, Breslow thickness, or a lentigo maligna label. Those were not added." }
+  ],
+  "observationPrompts": [
+    "What color is the patch, and where are the dots?",
+    "On the circular field, what is ink or a tick mark rather than the brown area?"
+  ],
+  "hints": ["The dots are marker ink. A mark for biopsy is not a result."],
+  "closestMimic": {
+    "name": "Solar lentigo",
+    "whyClosest": "A flat light-brown patch on facial skin is the usual benign look. The stored lentigo photograph is many macules on the hand, not this single forehead patch."
+  },
+  "patterns": [
+    {
+      "id": "pat-g24-01-patch",
+      "label": "Light brown patch",
+      "modality": "clinical",
+      "specificityNote": "A light brown patch is on forehead skin. A trunk network word is not used. The patch is not proof of the source label.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g24-01-ink",
+      "label": "Marker dots around the patch",
+      "modality": "none",
+      "specificityNote": "Purple and black dots ring the clinical patch, and purple ink is at the edge of the circular field. Ink is not skin pigment.",
+      "certainty": "clearly_visible",
+      "weight": "conflicting"
+    },
+    {
+      "id": "pat-g24-01-scale",
+      "label": "Tick marks in the circular field",
+      "modality": "none",
+      "specificityNote": "Short tick marks cross the dermoscopic field. They are a scale, not a skin structure.",
+      "certainty": "clearly_visible",
+      "weight": "conflicting"
+    }
+  ],
+  "synthesis": "The Commons descriptions label these two frames melanoma in situ on the right forehead, marked for biopsy, and call the second a dermatoscope image. The clinical frame is a light brown patch with marker dots. The dermoscopic frame is a faint brown area with ink and tick marks. No histopathology is stated.",
+  "evidenceWeighting": "The patch is clearly visible and is the major clue. Ink and the scale are clearly visible and conflict if you read them as skin. The file label is a clinical description, which is weak confirmation. Histopathology has no weight because it is absent.",
+  "diagnosticTrap": "Calling every faint forehead patch this diagnosis, or calling it harmless because the circular frame did not show a textbook structure.",
+  "mentorNote": "The pair is the file descriptions, not merely the same author. Pixels were inspected. A pigment network, gray dots, and facial rhomboids were not clear and were not added. The cheek case stays a different lesion.",
+  "takeHomeRule": "A faint facial patch plus marker ink is a look. An equivocal dermoscopic frame does not prove or clear the source label.",
+  "whyNot": [
+    { "mimic": "Solar lentigo", "text": "A flat light-brown facial patch can be a solar lentigo. This frame is one patch, not the field of hand macules in the lentigo case. That difference does not prove either label." },
+    { "mimic": "Pigmented actinic keratosis", "text": "Facial pigment can be a keratinocyte patch. Scale was not clearly seen and was not invented. Absence of scale does not exclude it." }
+  ],
+  "compareWith": ["cmp-g24-face-mark"],
+  "pairedModality": {
+    "clinicalObservation": "A light brown patch sits on lined forehead skin. Purple and black dots ring the patch.",
+    "dermoscopicObservation": "The circular field shows a faint light-brown area. Purple ink sits at the edge, and short tick marks cross the center.",
+    "addedValue": "The circular frame shows the brown area again at contact-dermatoscope range. It does not add a structure clear enough to name. An extra look is not confirmation.",
+    "reasoningImpact": "The reading stays a light brown forehead patch with marker ink. The circular frame does not move that reading to a named structure. Absence of a named structure does not clear the patch.",
+    "limits": "The file pages document a dermatoscope view of the described forehead lesion. They do not print a histopathology result. Facial skin is not read with a trunk network word. Resolution is modest.",
+    "informationGain": "dermoscopy_remains_equivocal",
+    "informationGainNote": "Educational label only. The circular field shows the faint brown area again and does not add a structure clear enough to name. Not a validated metric and not a probability.",
+    "comparison": {
+      "clinicalClue": "Light brown patch with marker dots.",
+      "dermoscopicClue": "Faint brown area, ink, and tick marks.",
+      "addedInformation": "The circular frame does not add a named structure.",
+      "diagnosticConflict": "The file description names a diagnosis the frames do not prove.",
+      "teachingRule": "An equivocal second frame is still information. It is not a clearance and not a confirmation."
+    }
+  },
+  "modalityIntegration": "The first frame is the clinical close-up of a light brown forehead patch ringed by marker dots. The second frame is the circular dermoscopic view and shows a faint brown area with ink and tick marks. The second frame does not add a structure clear enough to name.",
+  "academy": { "level": 4, "spectrum": "melanoma", "teachingType": "expert-challenge", "skillIds": ["evidence-weighting"] },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "localization": null,
+  "clinicalAction": "After reveal, open the linked Docutis cutaneous melanoma record for reference context. Do not treat from this case.",
+  "managementBrief": "No management category is stored. A file description, including a melanoma term, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g24-02",
+  "slug": "g24-back-pink-brown-patch",
+  "title": "A pink-brown patch on the back",
+  "diagnosisLabel": "Malignant melanoma",
+  "diseaseId": "cutaneous-melanoma",
+  "category": "Melanoma",
+  "educationalLevel": "advanced",
+  "caseType": "clinical_dermoscopic",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Left mid back",
+    "presentationNotes": "The file description says the back was marked for biopsy. The mark is not a result. No age or sex is printed on the files."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-10-01",
+      "metadataCheckedAt": "2026-10-01",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g24-02a",
+      "type": "clinical",
+      "src": "assets/media/cases/case-32-clinical.jpg",
+      "dimensions": { "width": 550, "height": 360 },
+      "alt": "Clinical close-up of a pink and brown patch on skin, ringed by black marker dots. No diagnosis is included.",
+      "caption": "Clinical close-up of a pink and brown patch. Black marker dots ring it. The source label stays hidden until reveal.",
+      "source": "Dermanonymous, via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Malignant_Melanoma_Left_Mid_Back.jpg",
+      "creator": "Dermanonymous",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.",
+      "modificationsNotes": "Embedded metadata segments were removed. Pixel dimensions were not changed. No crop and no annotation.",
+      "consentBasis": "Uploader published this own-work close-up under the file page CC BY-SA 4.0 template. The frame is back skin without a face or a name."
+    },
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-10-01",
+      "metadataCheckedAt": "2026-10-01",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g24-02b",
+      "type": "dermoscopy",
+      "src": "assets/media/cases/case-32-dermoscopy.jpg",
+      "dimensions": { "width": 760, "height": 682 },
+      "alt": "Circular dermoscopic view of a pink field with a brown area, purple ink at the edge, and tick marks along the top. No diagnosis is included.",
+      "caption": "Dermoscopic view from the matching file description. Pink, brown, ink, and tick marks are in the field. No further structure was clear enough to name.",
+      "source": "Dermanonymous, via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Malignant_Melanoma_Left_Mid_Back_Dermatoscope.jpg",
+      "creator": "Dermanonymous",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.",
+      "modificationsNotes": "Embedded metadata segments were removed. Pixel dimensions were not changed. No crop and no annotation.",
+      "consentBasis": "Uploader published this own-work dermoscopic frame under the file page CC BY-SA 4.0 template. No face is in the circular field."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Malignant melanoma (Commons file description, left mid back)",
+    "confirmationMethod": "clinical_diagnosis",
+    "confirmationNotes": "Both Commons descriptions, checked 2026-10-01, state malignant melanoma, left mid back, marked for biopsy. The dermatoscope file adds that the view is through a dermatoscope. Neither description reports histopathology, a subtype, Breslow thickness, or a stage. Marked for biopsy is not histology.",
+    "confidenceNote": "Uploader file description only. Not a Docutis clinician review. Not histopathology. No subtype was added."
+  },
+  "observations": [
+    {
+      "id": "obs-g24-02a",
+      "kind": "observation",
+      "modality": "clinical",
+      "text": "A pink and brown patch sits on the skin. Black dots ring the patch."
+    },
+    {
+      "id": "obs-g24-02b",
+      "kind": "observation",
+      "modality": "dermoscopy",
+      "text": "The circular field is mostly pink, with a brown area toward one side. Purple ink is at the edge, and tick marks sit along the top."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g24-02a",
+      "kind": "interpretation",
+      "relatedObservationIds": ["obs-g24-02a"],
+      "text": "Pink and brown are both in the patch. The black dots read as marker ink, not as a border made of skin."
+    },
+    {
+      "id": "int-g24-02b",
+      "kind": "interpretation",
+      "relatedObservationIds": ["obs-g24-02a", "obs-g24-02b"],
+      "text": "The circular field shows pink and brown again. No network, streak, or vessel pattern was sharp enough to name. Ink and tick marks stay marks. Absence of those structures does not clear the patch."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Malignant melanoma",
+      "supportingFeatures": ["The file description uses those words for this back patch.", "More than one color, pink and brown, is in the patch."],
+      "contradictingFeatures": ["No histopathology sentence is on the file page.", "The dermoscopic frame does not show a structure clear enough to name."],
+      "teachingDistinction": "The source label is not a subtype, a thickness, or a stage. The frames do not add those."
+    },
+    {
+      "diagnosis": "Melanocytic nevus",
+      "supportingFeatures": ["A pink-brown patch can be a mole."],
+      "contradictingFeatures": ["No regular network was clear enough to name, and one was not inferred from the label."],
+      "teachingDistinction": "A mole remains possible on the look alone. The file label does not settle it."
+    },
+    {
+      "diagnosis": "Seborrheic keratosis",
+      "supportingFeatures": ["Brown color also appears in the stuck-on keratosis photograph."],
+      "contradictingFeatures": ["This frame does not show a rough stuck-on plate or dermoscopic ridges."],
+      "teachingDistinction": "Shared brown color is not the keratosis surface. Missing ridges do not prove the source label."
+    }
+  ],
+  "teachingPoints": [
+    { "id": "tp-g24-02a", "title": "Notice first", "text": "Name the pink and the brown. Then separate the black dots and, on the circular frame, the purple ink and the tick marks." },
+    { "id": "tp-g24-02b", "title": "What the source does not say", "text": "The file says malignant melanoma and marked for biopsy. It does not report histopathology, a subtype, Breslow thickness, or a stage. Those were not added." }
+  ],
+  "observationPrompts": [
+    "Which colors are in the patch?",
+    "Which marks are ink or ticks rather than skin?"
+  ],
+  "hints": ["Black dots and purple ink are marks. Tick marks are a scale."],
+  "closestMimic": {
+    "name": "Melanocytic nevus",
+    "whyClosest": "A pink-brown patch can be a mole. No network was clear on the circular frame, and a network was not inferred."
+  },
+  "patterns": [
+    {
+      "id": "pat-g24-02-colors",
+      "label": "Pink and brown in one patch",
+      "modality": "clinical",
+      "specificityNote": "Pink and brown are both visible. That is not the stored pattern of more than one dark color, so this look stays case-specific.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g24-02-ink",
+      "label": "Marker dots around the patch",
+      "modality": "none",
+      "specificityNote": "Black dots ring the clinical patch, and purple ink is at the edge of the circular field. Ink is not a skin border.",
+      "certainty": "clearly_visible",
+      "weight": "conflicting"
+    },
+    {
+      "id": "pat-g24-02-scale",
+      "label": "Tick marks along the circular field",
+      "modality": "none",
+      "specificityNote": "Tick marks sit along the top of the dermoscopic field. They are a scale, not vessels and not a network.",
+      "certainty": "clearly_visible",
+      "weight": "conflicting"
+    }
+  ],
+  "synthesis": "The Commons descriptions label these two frames malignant melanoma on the left mid back, marked for biopsy, and say the second is through a dermatoscope. The clinical frame is a pink and brown patch with black dots. The dermoscopic frame is pink and brown with ink and tick marks. No subtype and no histopathology are stated.",
+  "evidenceWeighting": "Pink and brown are clearly visible and are the major clue. Ink and the scale are clearly visible and conflict if you read them as skin. The file label is a clinical description, which is weak confirmation. Histopathology has no weight because it is absent.",
+  "diagnosticTrap": "Inventing a network or a vessel pattern because the file uses a melanoma term, or dismissing the patch because those structures were not clear.",
+  "mentorNote": "The pair is the through-dermatoscope sentence plus the matching date, author, and site wording. Pixels were inspected. Structures that were not sharp were not added. The seborrheic keratosis photograph is a different case.",
+  "takeHomeRule": "Pink and brown plus marker ink are a look. An equivocal dermoscopic frame does not prove the file label and does not make the patch safe.",
+  "whyNot": [
+    { "mimic": "Melanocytic nevus", "text": "A pink-brown patch can be a mole. No network was clear enough to name. That absence does not prove a mole and does not prove the file label." },
+    { "mimic": "Seborrheic keratosis", "text": "The keratosis photograph has a rough stuck-on surface. This patch does not. Missing that surface does not prove either caption." }
+  ],
+  "compareWith": ["cmp-g24-back-color"],
+  "pairedModality": {
+    "clinicalObservation": "A pink and brown patch sits on the skin. Black dots ring the patch.",
+    "dermoscopicObservation": "The circular field is mostly pink, with a brown area toward one side. Purple ink is at the edge, and tick marks sit along the top.",
+    "addedValue": "The circular frame shows the pink and brown area at contact-dermatoscope range. It does not add a network, streak, or vessel pattern clear enough to name.",
+    "reasoningImpact": "The reading stays a pink and brown patch with marker ink. The circular frame does not move that reading to a named structure. Absence of a named structure does not clear the patch.",
+    "limits": "The file pages document a dermatoscope view of the described back lesion. They do not report histopathology, a subtype, or a stage. Resolution of the clinical frame is modest. Ridges were not seen and were not inferred from another keratosis file.",
+    "informationGain": "dermoscopy_remains_equivocal",
+    "informationGainNote": "Educational label only. The circular field shows pink and brown again and does not add a structure clear enough to name. Not a validated metric and not a probability.",
+    "comparison": {
+      "clinicalClue": "Pink and brown patch with marker dots.",
+      "dermoscopicClue": "Pink field, brown area, ink, and tick marks.",
+      "addedInformation": "The circular frame does not add a named structure.",
+      "diagnosticConflict": "The file description names a diagnosis the frames do not prove.",
+      "teachingRule": "Do not invent a structure to match a file label. Do not treat a missing structure as safety."
+    }
+  },
+  "modalityIntegration": "The first frame is the clinical close-up of a pink and brown patch ringed by black dots. The second frame is the circular dermoscopic view and shows pink and brown with ink and tick marks. The second frame does not add a structure clear enough to name.",
+  "academy": { "level": 4, "spectrum": "melanoma", "teachingType": "expert-challenge", "skillIds": ["color-variegation", "evidence-weighting"] },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "localization": null,
+  "clinicalAction": "After reveal, open the linked Docutis cutaneous melanoma record for reference context. Do not treat from this case.",
+  "managementBrief": "No management category is stored. A file description, including a melanoma term, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.",
   "reviewStatus": "clinician review required",
   "clinicalReview": null
 })

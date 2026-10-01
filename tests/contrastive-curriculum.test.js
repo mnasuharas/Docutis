@@ -21,7 +21,7 @@ test("Goal 21 cases resolve, stay review required, and do not auto-approve", () 
   assert.doesNotThrow(() => validateCaseData(data));
   const added = data.cases.filter(item => item.id.startsWith("case-g21-"));
   assert.equal(added.length, 8);
-  assert.equal(data.cases.length, 30);
+  assert.equal(data.cases.length, 32);
   const patterns = loadPatternData();
   const canonical = new Set(patterns.patterns.map(item => item.id));
   const links = new Map(patterns.links.map(item => [item.casePatternId, item.canonicalId]));

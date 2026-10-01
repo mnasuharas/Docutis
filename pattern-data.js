@@ -917,6 +917,11 @@
       Object.freeze({ casePatternId: "pat-g21-08-group", canonicalId: "grouped-skin-colored-papules" }),
       Object.freeze({ casePatternId: "pat-g21-08-lobules", canonicalId: "yellow-white-lobules" }),
       Object.freeze({ casePatternId: "pat-g22-01-plate", canonicalId: "nail-plate-destruction" }),
+      Object.freeze({ casePatternId: "pat-g24-01-patch", canonicalId: "flat-brown-macule" }),
+      Object.freeze({ casePatternId: "pat-g24-01-ink", canonicalId: "marker-ink" }),
+      Object.freeze({ casePatternId: "pat-g24-01-scale", canonicalId: "measuring-scale-in-frame" }),
+      Object.freeze({ casePatternId: "pat-g24-02-ink", canonicalId: "marker-ink" }),
+      Object.freeze({ casePatternId: "pat-g24-02-scale", canonicalId: "measuring-scale-in-frame" }),
     ]),
     dermoscopicTokenLinks: Object.freeze({
       arborizing_vessels: "arborizing-vessels",
@@ -941,6 +946,10 @@
       Object.freeze({
         casePatternId: "pat-g22-01-color",
         reason: "A purple patch under an intact nail plate is not the destroyed-plate pattern and not a longitudinal streak. It stays case-specific rather than a new pattern id."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g24-02-colors",
+        reason: "Pink and brown are both visible in one patch. That is not the stored pattern of more than one dark color, so it stays case-specific rather than a new pattern id."
       })
     ])
   });

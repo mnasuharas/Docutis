@@ -21,10 +21,10 @@
   <h1>Learn Melanoma reviewer workspace</h1>
   <p>Generated from <code>case-data.js</code> by <code>node scripts/academy-review.js --write</code>. Do not hand-edit. If the cases change, regenerate this file.</p>
   <p>Learn Melanoma is a teaching sequence. It does not certify competence, estimate a probability, or act as a diagnostic device. New cases stay review required. Teaching type is a lesson shape, not a diagnosis and not a score.</p>
-  <p>Primary path: 28 cases. Registry: 30. Teaching 16, reasoning 8, expert-challenge 4. 1. Recognition: 4; 2. Differentiation: 9; 3. Pattern integration: 7; 4. Diagnostic traps: 7; 5. Advanced reasoning: 1.</p>
+  <p>Primary path: 30 cases. Registry: 32. Teaching 16, reasoning 8, expert-challenge 6. 1. Recognition: 4; 2. Differentiation: 9; 3. Pattern integration: 7; 4. Diagnostic traps: 9; 5. Advanced reasoning: 1.</p>
   <p>A primary-path case needs a source, a local image, a differential, a distinct skill assignment, and honest review status. Academy cases also need observation prompts, feature certainty and weight, a closest mimic, and a non-trivial trap or take-home rule. Legacy pilots stay on the path without new clinical fields. This is not a numeric score and not a pass mark.</p>
   <h2>Verification, not a total</h2>
-  <p>Melanoma labels by stored confirmation method: clinical_diagnosis: case-g18-12; expert_diagnosis: case-g18-10, case-g18-11, case-g21-07; histopathology: case-acral-melanoma-plantar; source_dataset_diagnosis: case-g18-01, case-g18-02, case-g18-03, case-g18-04, case-g18-05, case-g18-06, case-g18-07, case-g18-08, case-g18-09. Histopathology-confirmed melanoma: case-acral-melanoma-plantar. A larger total does not make the other methods histopathology. Clinical review remains deferred.</p>
+  <p>Melanoma labels by stored confirmation method: clinical_diagnosis: case-g18-12, case-g24-01, case-g24-02; expert_diagnosis: case-g18-10, case-g18-11, case-g21-07; histopathology: case-acral-melanoma-plantar; source_dataset_diagnosis: case-g18-01, case-g18-02, case-g18-03, case-g18-04, case-g18-05, case-g18-06, case-g18-07, case-g18-08, case-g18-09. Histopathology-confirmed melanoma: case-acral-melanoma-plantar. A larger total does not make the other methods histopathology. Clinical review remains deferred.</p>
   <h2>Outside the primary path</h2>
   <ul><li>Field change on the dorsum of the hand (case-ak-field-hand) stays in the library and outside Learn Melanoma. Default reason: it is not a melanoma-pathway skill case.</li><li>Two neighboring lesions on the upper back (case-scc-ak-paraspinal) stays in the library and outside Learn Melanoma. Default reason: it is not a melanoma-pathway skill case.</li></ul>
   
@@ -2076,6 +2076,182 @@
     <h3>Management brief</h3>
     <p class="banner">Review required. Not a protocol.</p>
     <p>No management category is stored. A source label, including a benign label, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g24-01">
+    <h2>A light brown patch on the forehead <span class="meta">(case-g24-01)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Expert-challenge case</dd></div>
+      <div><dt>Curriculum level</dt><dd>4 · melanoma</dd></div>
+      <div><dt>Skills</dt><dd>Evidence weighting</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Melanoma in situ</dd></div>
+      <div><dt>Disease record</dt><dd>cutaneous-melanoma</dd></div>
+      <div><dt>Confirmation</dt><dd>clinical_diagnosis — Both Commons descriptions, checked 2026-10-01, state melanoma in situ on the right forehead marked for biopsy. The dermatoscope file calls itself a dermatoscope image of that description. Neither description reports histopathology. Marked for biopsy is not a histology result. In situ is the file's own wording, not a Docutis upgrade, and it is not lentigo maligna unless the file had said that.</dd></div>
+      <div><dt>Site</dt><dd>Right forehead</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · CC BY-SA 4.0 · Dermanonymous</p>
+      <p>File: assets/media/cases/case-31-clinical.jpg</p>
+      <p>Source: <a href="https://commons.wikimedia.org/wiki/File:Melanoma_in_situ_Right_Forehead.jpg">Dermanonymous, via Wikimedia Commons</a></p>
+      <p>Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.</p>
+      <p>Modification: other-described — Embedded metadata segments were removed. Pixel dimensions were not changed. No crop and no annotation.</p>
+    </li>
+    <li>
+      <p><strong>dermoscopy</strong> · CC BY-SA 4.0 · Dermanonymous</p>
+      <p>File: assets/media/cases/case-31-dermoscopy.jpg</p>
+      <p>Source: <a href="https://commons.wikimedia.org/wiki/File:Melanoma_in_situ_Right_Forehead_dermatoscope.jpg">Dermanonymous, via Wikimedia Commons</a></p>
+      <p>Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.</p>
+      <p>Modification: other-described — Embedded metadata segments were removed. Pixel dimensions were not changed. No crop and no annotation.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>A light brown patch sits on lined forehead skin. Purple and black dots ring the patch.</li><li>The circular field shows a faint light-brown area. Purple ink sits at the edge, and short tick marks cross the center.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>What color is the patch, and where are the dots?</li><li>On the circular field, what is ink or a tick mark rather than the brown area?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
+    <li>
+      <p><strong>Light brown patch</strong> — Clearly visible; Major clue</p>
+      <p>A light brown patch is on forehead skin. A trunk network word is not used. The patch is not proof of the source label.</p>
+      <p>Canonical pattern: flat-brown-macule. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><ul>
+    <li>
+      <p><strong>Marker dots around the patch</strong> — Clearly visible; Conflicts with a simple reading</p>
+      <p>Purple and black dots ring the clinical patch, and purple ink is at the edge of the circular field. Ink is not skin pigment.</p>
+      <p>Canonical pattern: marker-ink. Educational role: Image mark, not a skin finding. Case certainty and weight stay on this case.</p>
+    </li>
+    <li>
+      <p><strong>Tick marks in the circular field</strong> — Clearly visible; Conflicts with a simple reading</p>
+      <p>Short tick marks cross the dermoscopic field. They are a scale, not a skin structure.</p>
+      <p>Canonical pattern: measuring-scale-in-frame. Educational role: Image mark, not a skin finding. Case certainty and weight stay on this case.</p>
+    </li></ul>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Melanoma in situ</strong></p>
+      <p>Why it fits: The file description uses those words for this forehead patch.; The patch is a single light-brown area rather than a field of many macules.</p>
+      <p>Why not: No histopathology sentence is on the file page.; The dermoscopic frame does not show a structure clear enough to name.</p>
+      <p>The source label can be revealed later. The frames do not prove it, and they do not let you invent a subtype the file did not use.</p>
+    </li>
+    <li>
+      <p><strong>Solar lentigo</strong></p>
+      <p>Why it fits: A flat light-brown patch on facial skin can look like this.; The color is mostly one light brown.</p>
+      <p>Why not: The stored solar lentigo case is many macules on the hand, not this single forehead patch.; A benign name is not established by the photograph.</p>
+      <p>A faint facial patch is the usual mimic. The hand field does not answer for this forehead.</p>
+    </li>
+    <li>
+      <p><strong>Pigmented actinic keratosis</strong></p>
+      <p>Why it fits: Facial skin with a brown patch can raise that comparison.</p>
+      <p>Why not: Scale was not clearly seen and was not invented.</p>
+      <p>Missing scale does not exclude a keratinocyte patch, and it does not prove the source label.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Solar lentigo</p><p>A flat light-brown patch on facial skin is the usual benign look. The stored lentigo photograph is many macules on the hand, not this single forehead patch.</p>
+    <h3>Why not</h3>
+    <ul><li><strong>Solar lentigo</strong> — A flat light-brown facial patch can be a solar lentigo. This frame is one patch, not the field of hand macules in the lentigo case. That difference does not prove either label.</li><li><strong>Pigmented actinic keratosis</strong> — Facial pigment can be a keratinocyte patch. Scale was not clearly seen and was not invented. Absence of scale does not exclude it.</li></ul>
+    <h3>Reasoning</h3>
+    <p>The Commons descriptions label these two frames melanoma in situ on the right forehead, marked for biopsy, and call the second a dermatoscope image. The clinical frame is a light brown patch with marker dots. The dermoscopic frame is a faint brown area with ink and tick marks. No histopathology is stated.</p>
+    <p>The patch is clearly visible and is the major clue. Ink and the scale are clearly visible and conflict if you read them as skin. The file label is a clinical description, which is weak confirmation. Histopathology has no weight because it is absent.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Calling every faint forehead patch this diagnosis, or calling it harmless because the circular frame did not show a textbook structure.</p>
+    <h3>Mentor note</h3>
+    <p>The pair is the file descriptions, not merely the same author. Pixels were inspected. A pigment network, gray dots, and facial rhomboids were not clear and were not added. The cheek case stays a different lesion.</p>
+    <h3>Take-home rule</h3>
+    <p>A faint facial patch plus marker ink is a look. An equivocal dermoscopic frame does not prove or clear the source label.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. A file description, including a melanoma term, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g24-02">
+    <h2>A pink-brown patch on the back <span class="meta">(case-g24-02)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Expert-challenge case</dd></div>
+      <div><dt>Curriculum level</dt><dd>4 · melanoma</dd></div>
+      <div><dt>Skills</dt><dd>Color variegation, Evidence weighting</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Malignant melanoma</dd></div>
+      <div><dt>Disease record</dt><dd>cutaneous-melanoma</dd></div>
+      <div><dt>Confirmation</dt><dd>clinical_diagnosis — Both Commons descriptions, checked 2026-10-01, state malignant melanoma, left mid back, marked for biopsy. The dermatoscope file adds that the view is through a dermatoscope. Neither description reports histopathology, a subtype, Breslow thickness, or a stage. Marked for biopsy is not histology.</dd></div>
+      <div><dt>Site</dt><dd>Left mid back</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · CC BY-SA 4.0 · Dermanonymous</p>
+      <p>File: assets/media/cases/case-32-clinical.jpg</p>
+      <p>Source: <a href="https://commons.wikimedia.org/wiki/File:Malignant_Melanoma_Left_Mid_Back.jpg">Dermanonymous, via Wikimedia Commons</a></p>
+      <p>Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.</p>
+      <p>Modification: other-described — Embedded metadata segments were removed. Pixel dimensions were not changed. No crop and no annotation.</p>
+    </li>
+    <li>
+      <p><strong>dermoscopy</strong> · CC BY-SA 4.0 · Dermanonymous</p>
+      <p>File: assets/media/cases/case-32-dermoscopy.jpg</p>
+      <p>Source: <a href="https://commons.wikimedia.org/wiki/File:Malignant_Melanoma_Left_Mid_Back_Dermatoscope.jpg">Dermanonymous, via Wikimedia Commons</a></p>
+      <p>Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.</p>
+      <p>Modification: other-described — Embedded metadata segments were removed. Pixel dimensions were not changed. No crop and no annotation.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>A pink and brown patch sits on the skin. Black dots ring the patch.</li><li>The circular field is mostly pink, with a brown area toward one side. Purple ink is at the edge, and tick marks sit along the top.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>Which colors are in the patch?</li><li>Which marks are ink or ticks rather than skin?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><p>None stored on this case.</p><h4>Dermoscopic structure</h4><p>None stored on this case.</p><h4>Case-specific observation</h4><ul>
+    <li>
+      <p><strong>Pink and brown in one patch</strong> — Clearly visible; Major clue</p>
+      <p>Pink and brown are both visible. That is not the stored pattern of more than one dark color, so this look stays case-specific.</p>
+      <p>Canonical pattern: not linked. Pink and brown are both visible in one patch. That is not the stored pattern of more than one dark color, so it stays case-specific rather than a new pattern id.</p>
+    </li></ul><h4>Context and image information</h4><ul>
+    <li>
+      <p><strong>Marker dots around the patch</strong> — Clearly visible; Conflicts with a simple reading</p>
+      <p>Black dots ring the clinical patch, and purple ink is at the edge of the circular field. Ink is not a skin border.</p>
+      <p>Canonical pattern: marker-ink. Educational role: Image mark, not a skin finding. Case certainty and weight stay on this case.</p>
+    </li>
+    <li>
+      <p><strong>Tick marks along the circular field</strong> — Clearly visible; Conflicts with a simple reading</p>
+      <p>Tick marks sit along the top of the dermoscopic field. They are a scale, not vessels and not a network.</p>
+      <p>Canonical pattern: measuring-scale-in-frame. Educational role: Image mark, not a skin finding. Case certainty and weight stay on this case.</p>
+    </li></ul>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Malignant melanoma</strong></p>
+      <p>Why it fits: The file description uses those words for this back patch.; More than one color, pink and brown, is in the patch.</p>
+      <p>Why not: No histopathology sentence is on the file page.; The dermoscopic frame does not show a structure clear enough to name.</p>
+      <p>The source label is not a subtype, a thickness, or a stage. The frames do not add those.</p>
+    </li>
+    <li>
+      <p><strong>Melanocytic nevus</strong></p>
+      <p>Why it fits: A pink-brown patch can be a mole.</p>
+      <p>Why not: No regular network was clear enough to name, and one was not inferred from the label.</p>
+      <p>A mole remains possible on the look alone. The file label does not settle it.</p>
+    </li>
+    <li>
+      <p><strong>Seborrheic keratosis</strong></p>
+      <p>Why it fits: Brown color also appears in the stuck-on keratosis photograph.</p>
+      <p>Why not: This frame does not show a rough stuck-on plate or dermoscopic ridges.</p>
+      <p>Shared brown color is not the keratosis surface. Missing ridges do not prove the source label.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Melanocytic nevus</p><p>A pink-brown patch can be a mole. No network was clear on the circular frame, and a network was not inferred.</p>
+    <h3>Why not</h3>
+    <ul><li><strong>Melanocytic nevus</strong> — A pink-brown patch can be a mole. No network was clear enough to name. That absence does not prove a mole and does not prove the file label.</li><li><strong>Seborrheic keratosis</strong> — The keratosis photograph has a rough stuck-on surface. This patch does not. Missing that surface does not prove either caption.</li></ul>
+    <h3>Reasoning</h3>
+    <p>The Commons descriptions label these two frames malignant melanoma on the left mid back, marked for biopsy, and say the second is through a dermatoscope. The clinical frame is a pink and brown patch with black dots. The dermoscopic frame is pink and brown with ink and tick marks. No subtype and no histopathology are stated.</p>
+    <p>Pink and brown are clearly visible and are the major clue. Ink and the scale are clearly visible and conflict if you read them as skin. The file label is a clinical description, which is weak confirmation. Histopathology has no weight because it is absent.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Inventing a network or a vessel pattern because the file uses a melanoma term, or dismissing the patch because those structures were not clear.</p>
+    <h3>Mentor note</h3>
+    <p>The pair is the through-dermatoscope sentence plus the matching date, author, and site wording. Pixels were inspected. Structures that were not sharp were not added. The seborrheic keratosis photograph is a different case.</p>
+    <h3>Take-home rule</h3>
+    <p>Pink and brown plus marker ink are a look. An equivocal dermoscopic frame does not prove the file label and does not make the patch safe.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. A file description, including a melanoma term, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.</p>
   </article>
 </main>
 </body>

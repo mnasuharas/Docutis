@@ -31,8 +31,9 @@ Modality is written in text. Image marks stay in the context section. Optional l
 
 Wikimedia Commons returned HTTP 429 on download, including one later retry. The files below were not copied. No pixel finding was written from a caption.
 
-- `File:Melanoma_in_situ_Right_Forehead.jpg` and `File:Melanoma_in_situ_Right_Forehead_dermatoscope.jpg`. Dermanonymous, 11 February 2020, CC BY-SA 4.0. Matching site, date, author, and "marked for biopsy". The caption does not report histopathology. Not imported.
-- `File:Malignant_Melanoma_Left_Mid_Back.jpg` and `File:Malignant_Melanoma_Left_Mid_Back_Dermatoscope.jpg`. Dermanonymous, 16 October 2020, CC BY-SA 4.0. Same limitation. Not imported. The caption says malignant melanoma and does not name a subtype, Breslow thickness, or stage.
+- `File:Melanoma_in_situ_Right_Forehead.jpg` and `File:Melanoma_in_situ_Right_Forehead_dermatoscope.jpg` were downloaded on 2026-10-01 after the earlier HTTP 429. CC BY-SA 4.0. The dermatoscope file description documents that view of the forehead lesion. Pixels were inspected. No histopathology sentence was on the page. Integrated as `case-g24-01` with information gain `dermoscopy_remains_equivocal`. Marker ink and tick marks were recorded. A facial network was not named.
+- `File:Malignant_Melanoma_Left_Mid_Back.jpg` and `File:Malignant_Melanoma_Left_Mid_Back_Dermatoscope.jpg` were downloaded on 2026-10-01. CC BY-SA 4.0. The dermatoscope description says the view is through a dermatoscope. Pixels were inspected. No subtype, thickness, stage, or histopathology was copied. Integrated as `case-g24-02`, also equivocal.
+
 
 Also rejected, without a download:
 
@@ -48,3 +49,7 @@ No facial, acral, or nail clinical–dermoscopy pair was imported. Parallel ridg
 ## Metrics
 
 `node scripts/paired-modality.js` prints the counts from the registry. Artifacts (ruler, marker, printed arrow, printed circle and scale) do not count as diagnostic structures.
+
+## Goal 24
+
+Clinical review remains deferred. All new clinical content remains review required. `acquisition-ledger.js` records accepted and rejected candidates. It is not a case and it does not change a clinical fingerprint. Rejected candidates are not in the curriculum.
