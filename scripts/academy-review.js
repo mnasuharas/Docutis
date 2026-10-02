@@ -214,7 +214,7 @@ function renderDocument(caseData) {
 </main>
 </body>
 </html>
-`;
+`.replace(/[ \t]+$/gm, ""); // empty optional fields leave indent-only lines; keep git diff --check clean
 }
 
 function main() {
