@@ -4,8 +4,16 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ## Current baseline
 
+### Development branch versus `main`
+
+The Goal 18 to 25 items below are on a stacked development branch (pull requests #24 to #30 and the Goal 25 pull request). They are not yet merged to `main` and are not on the live site. Current `main` and the live site match tag `v0.2.0-preview.1` (commit `c28f1de`): 50 condition records, five pilot cases, and 28 review units (5 clinician reviewed, 23 review required). The development branch has 38 cases, 9 true clinical-dermoscopic pairs, and 61 review units (5 clinician reviewed, 56 review required). Clinical review is deferred for all Goal 18 to 25 content: no case or pattern from those Goals is clinician reviewed, and a consolidated physician review is planned after the curriculum matures.
+
 ### Implemented
 
+- Goal 25 gold-standard dermoscopy curriculum (development branch): six clinical and dermoscopic pairs from CC BY 4.0 open-access articles with a histopathology statement, cropped from composite figures with recorded pixel boxes and hashes. They add the first histopathology-confirmed true paired melanoma cases (4), the first acral dermoscopic case, a facial lentigo maligna and solar lentigo contrast, and a nevus with cytologic atypia that shares an atypical network with a melanoma in situ from the same figure. Four reusable dermoscopic structures were added and an existing one (mixed vessels) gained its second example. The acquisition ledger records 31 Goal 25 candidates. No nail dermoscopy case was accepted. All new content is review required. No release tag was created.
+- Goal 24 evidence-grade case acquisition (development branch): two source-documented clinical and dermoscopic melanoma pairs whose confirmation stays at the file label, and the first source-candidate ledger with accepted and rejected rows. No histopathology was claimed. Review required.
+- Goal 22 diagnostic signal and dermoscopy depth (development branch): educational roles that keep marker ink and measuring scales out of diagnostic coverage, and one subungual haemorrhage case. Review required.
+- Goal 21 contrastive curriculum expansion (development branch): sourced benign mimics, one lentigo maligna melanoma case, and stored compare-with pairs. Review required.
 - Goal 23 paired clinical and dermoscopy: every case has pair provenance, the one source-documented chest pair uses a staged clinical-then-dermoscopy flow, and coverage metrics separate true pairs from same-diagnosis images. No new image was added. Clinical review remains deferred. No release tag was created.
 - Goal 20 case-first pattern learning: reusable pattern objects, post-reveal in-case teaching, links derived from structured case patterns and dermoscopic tokens, and a qualitative coverage audit. No new cases or images. Pattern text stays review required and is not clinician reviewed. Case fingerprints were not rewritten. No efficacy claim. No release tag was created.
 - Goal 19 professional case teaching system: teaching, reasoning, and expert-challenge labels on the existing Learn Melanoma path; observation prompts and qualitative feature weights on the 16 academy cases; a qualitative primary-path gate that is not a score; and a generated reviewer workspace. No new cases. No efficacy claim. Level 5 stays one nail-unit case because no honest second case was available. Pilot fingerprints were not edited. Pull request #21 was not the base. Goal 18 pull request #24 was not merged. No release tag was created.
@@ -39,6 +47,8 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 - Machine-readable ICD-O applicability that distinguishes existing oncology coding from non-neoplastic records where ICD-O is not applicable
 
 ### Known engineering and usability gaps
+
+- Curriculum gaps after Goal 25 (development branch): no nail-unit dermoscopy case, no benign acral case with dermoscopy, one example each of the parallel ridge pattern and of gray dots around facial follicles, and no dermatofibroma, LPLK, or pigmented actinic keratosis case. Licensed candidates for several of these are recorded in `acquisition-ledger.js` as `candidate`.
 
 - Obtain physician review of the remaining German follow-up protocols (melanoma-de and cSCC-de; BCC-de is already clinician reviewed) and reconcile any interpretive questions in the cSCC modality table before a broader reviewed Nachsorge release.
 - Obtain dermatologist sign-off on the melanoma in situ statement, the absence of a German S3 structured interval, at least annual full-skin examination, risk-factor qualifier, monthly self-examination, non-routine ultrasound/S100B/imaging wording and separation of AAD international context.
@@ -101,7 +111,7 @@ Potential next records, only after adequate sourcing and clinician prioritizatio
 2. Automated validation confirms the complete schema, unique identifiers, valid category/subcategory mapping, separated ICD-O fields, structured HTTPS references, and the required review state.
 3. A qualified clinician checks every clinical claim against the cited source and records the guideline version/date, jurisdiction, and review date in the pull request.
 4. A second reviewer checks language, uncertainty, duplication, category placement, link behavior, and preservation of the medical disclaimer.
-5. Follow [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md): a maintainer may record `clinician reviewed` only after a physician attests to the specific version, with date, role, specialty and matching fingerprint. Infrastructure is implemented. Five public assets are clinician reviewed, as listed in the Goal 9 baseline bullet. Every other review unit, including all 29 cases, remains review required. A software release would not clinically validate the remaining content.
+5. Follow [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md): a maintainer may record `clinician reviewed` only after a physician attests to the specific version, with date, role, specialty and matching fingerprint. Infrastructure is implemented. Five public assets are clinician reviewed, as listed in the Goal 9 baseline bullet. Every other review unit, including all 38 development-branch cases, remains review required. A software release would not clinically validate the remaining content.
 6. Records are re-reviewed when a source is replaced, a recommendation changes, or the agreed review interval expires.
 
 ## Data-schema evolution
@@ -162,7 +172,7 @@ The optional media data model, independent review fingerprint, renderer, load-fa
 
 ## Release direction
 
-The version headings below are direction, not shipped releases. The only existing tag is the historical pre-release `v0.1.0-preview.1`. Adding this roadmap does not publish a release. See [RELEASES.md](RELEASES.md).
+The version headings below are direction, not shipped releases. The existing tags are the pre-releases `v0.1.0-preview.1` and `v0.2.0-preview.1`; neither includes the Goal 18 to 25 development-branch work. Adding this roadmap does not publish a release. See [RELEASES.md](RELEASES.md).
 
 Completed work is the Implemented list above. Pending work is the gaps, content packages and version headings in the rest of this file. Do not read a future heading as delivered.
 

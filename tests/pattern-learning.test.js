@@ -206,8 +206,11 @@ test("pattern links use structured evidence and do not treat uncertain examples 
   const color = grouped.get("color-variegation").map(row => row.caseId).sort();
   assert.deepEqual(color, ["case-g18-02", "case-g18-03", "case-g21-02"]);
   const vessels = grouped.get("polymorphous-vessels");
-  assert.equal(vessels.length, 1);
+  assert.equal(vessels.length, 2);
   assert.equal(vessels[0].caseId, "case-g18-11");
+  assert.equal(vessels[1].caseId, "case-g25-03");
+  assert.equal(vessels[1].certainty, "probably");
+  assert.deepEqual(vessels[1].evidenceTokens, []);
   assert.ok(vessels[0].evidenceTokens.includes("polymorphous_vessels"));
   assert.equal(vessels[0].certainty, "clearly_visible");
   const arborizing = grouped.get("arborizing-vessels");

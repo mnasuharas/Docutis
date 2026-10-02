@@ -150,6 +150,31 @@ function positiveExamples(pattern) {
   return (pattern.occurrences || []).filter(item => item.certainty === "clearly_visible" || item.certainty === "probably");
 }
 
+function patternRichPairIds(caseData = loadCaseData(), patternData = loadPatternData()) {
+  const paired = truePairIds(caseData);
+  const canonical = new Map(patternData.patterns.map(item => [item.id, item]));
+  const links = new Map(patternData.links.map(item => [item.casePatternId, item.canonicalId]));
+  const rows = new Map((caseData.pairProvenance || []).map(row => [row.caseId, row]));
+  const ids = [];
+  for (const caseItem of caseData.cases) {
+    if (!paired.has(caseItem.id)) continue;
+    if (rows.get(caseItem.id).informationGain === "dermoscopy_remains_equivocal") continue;
+    const hasDermoscopy = caseItem.images.some(image => image.type === "dermoscopy");
+    const structure = (caseItem.patterns || []).some(pattern => {
+      const target = canonical.get(links.get(pattern.id));
+      return hasDermoscopy && target && target.educationalRole === "diagnostic_structure" && target.category === "dermoscopic-structure" &&
+        !artifactIds.has(target.id) && pattern.modality === "dermoscopy" && (pattern.certainty === "clearly_visible" || pattern.certainty === "probably");
+    });
+    if (structure) ids.push(caseItem.id);
+  }
+  return ids;
+}
+
+function equivocalPairIds(caseData = loadCaseData()) {
+  const paired = truePairIds(caseData);
+  return (caseData.pairProvenance || []).filter(row => paired.has(row.caseId) && row.informationGain === "dermoscopy_remains_equivocal").map(row => row.caseId);
+}
+
 function buildPairedMetrics(caseData = loadCaseData(), audit = null) {
   validatePairProvenance(caseData);
   const report = audit || buildAudit(loadPatternData(), caseData);
@@ -174,7 +199,16 @@ function buildPairedMetrics(caseData = loadCaseData(), audit = null) {
   });
   const specialSiteWithDermoscopy = withDermoscopy.filter(item => ["face", "acral", "nail", "ear"].includes(item.specialSite));
   const pairedContrastive = (caseData.comparisons || []).filter(item => paired.has(item.caseIdA) && paired.has(item.caseIdB));
+  const patternRich = new Set(patternRichPairIds(caseData));
+  const isBenign = item => item.pole === "benign" || item.pole === "benign-or-inflammatory";
   return {
+    patternRichPairs: pairedCases.filter(item => patternRich.has(item.id)).map(item => item.id),
+    equivocalPairs: equivocalPairIds(caseData),
+    patternRichPairedMelanoma: pairedMelanoma.filter(item => patternRich.has(item.id)).map(item => item.id),
+    patternRichPairedMelanomaWithHistopathology: pairedHistoMelanoma.filter(item => patternRich.has(item.id)).map(item => item.id),
+    pairedBenign: pairedCases.filter(isBenign).map(item => item.id),
+    patternRichBenignPairs: pairedCases.filter(item => isBenign(item) && patternRich.has(item.id)).map(item => item.id),
+    specialSiteTruePairs: pairedCases.filter(item => ["face", "acral", "nail"].includes(item.specialSite)).map(item => item.id),
     casesWithDermoscopy: withDermoscopy.map(item => item.id),
     paired: pairedCases.map(item => item.id),
     melanomasWithDermoscopy: melanoma.filter(item => (item.imageTypes || []).includes("dermoscopy")).map(item => item.id),
@@ -224,11 +258,18 @@ function formatMetrics(metrics) {
     "Paired clinical–dermoscopy metrics. Qualitative. Not a score. Artifacts are excluded from diagnostic structure counts.",
     line("Cases with a dermoscopic asset", metrics.casesWithDermoscopy),
     line("True pairs", metrics.paired),
+    line("Pattern-rich true pairs", metrics.patternRichPairs),
+    line("Equivocal true pairs", metrics.equivocalPairs),
     line("Melanoma total", metrics.melanomaTotal),
     line("Melanoma with histopathology", metrics.melanomaWithHistopathology),
     line("Melanoma with dermoscopy", metrics.melanomasWithDermoscopy),
     line("Paired melanoma", metrics.pairedMelanoma),
     line("Paired melanoma with histopathology", metrics.pairedMelanomaWithHistopathology),
+    line("Pattern-rich paired melanoma", metrics.patternRichPairedMelanoma),
+    line("Pattern-rich paired melanoma with histopathology", metrics.patternRichPairedMelanomaWithHistopathology),
+    line("True paired benign cases", metrics.pairedBenign),
+    line("Pattern-rich benign pairs", metrics.patternRichBenignPairs),
+    line("Special-site true pairs (face, acral, nail)", metrics.specialSiteTruePairs),
     line("Benign mimics with dermoscopy", metrics.benignMimicsWithDermoscopy),
     line("Diagnostic structures with more than one positive example", metrics.diagnosticStructuresWithMoreThanOnePositiveExample),
     line("Diagnostic structures in both benign and malignant contexts", metrics.structuresInBenignAndMalignantContexts),
@@ -254,5 +295,5 @@ if (require.main === module) {
 
 module.exports = {
   pairProvenanceValues, informationGainValues, artifactIds,
-  validatePairProvenance, validatePairedModality, buildPairedMetrics, auditFeatureTaxonomy, formatMetrics, truePairIds, main
+  validatePairProvenance, validatePairedModality, buildPairedMetrics, patternRichPairIds, equivocalPairIds, auditFeatureTaxonomy, formatMetrics, truePairIds, main
 };

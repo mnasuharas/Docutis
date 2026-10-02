@@ -53,3 +53,15 @@ No facial, acral, or nail clinical–dermoscopy pair was imported. Parallel ridg
 ## Goal 24
 
 Clinical review remains deferred. All new clinical content remains review required. `acquisition-ledger.js` records accepted and rejected candidates. It is not a case and it does not change a clinical fingerprint. Rejected candidates are not in the curriculum.
+
+## Goal 25
+
+Six true pairs were added from CC BY 4.0 open-access articles. Four are `same_lesion_confirmed`: the caption groups the clinical and dermoscopic panels as one case or calls the dermoscopic panel the image of the lesion. Two facial cases are `source_documented_pair`: the caption pairs clinical and dermoscopic images by corresponding letters without repeating the clinical letter for each lesion.
+
+`node scripts/paired-modality.js` now also reports:
+
+- Pattern-rich true pairs: a true pair, not labelled `dermoscopy_remains_equivocal`, with at least one case pattern linked to a dermoscopic diagnostic structure at `clearly_visible` or `probably`, recorded on the dermoscopic frame. Image marks, descriptive morphology, and clinical-only looks never qualify.
+- Equivocal true pairs: pairs labelled `dermoscopy_remains_equivocal`. The two Goal 24 pairs stay here and are kept because they teach that dermoscopy is not always decisive.
+- Pattern-rich and histopathology-confirmed paired melanoma, true paired benign cases, pattern-rich benign pairs, and special-site true pairs (face, acral, nail). Scalp is its own site value and is not counted as face.
+
+These are qualitative curriculum counts, not a score and not mastery. Clinical review remains deferred.

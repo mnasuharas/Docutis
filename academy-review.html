@@ -21,10 +21,10 @@
   <h1>Learn Melanoma reviewer workspace</h1>
   <p>Generated from <code>case-data.js</code> by <code>node scripts/academy-review.js --write</code>. Do not hand-edit. If the cases change, regenerate this file.</p>
   <p>Learn Melanoma is a teaching sequence. It does not certify competence, estimate a probability, or act as a diagnostic device. New cases stay review required. Teaching type is a lesson shape, not a diagnosis and not a score.</p>
-  <p>Primary path: 30 cases. Registry: 32. Teaching 16, reasoning 8, expert-challenge 6. 1. Recognition: 4; 2. Differentiation: 9; 3. Pattern integration: 7; 4. Diagnostic traps: 9; 5. Advanced reasoning: 1.</p>
+  <p>Primary path: 36 cases. Registry: 38. Teaching 18, reasoning 12, expert-challenge 6. 1. Recognition: 4; 2. Differentiation: 9; 3. Pattern integration: 10; 4. Diagnostic traps: 12; 5. Advanced reasoning: 1.</p>
   <p>A primary-path case needs a source, a local image, a differential, a distinct skill assignment, and honest review status. Academy cases also need observation prompts, feature certainty and weight, a closest mimic, and a non-trivial trap or take-home rule. Legacy pilots stay on the path without new clinical fields. This is not a numeric score and not a pass mark.</p>
   <h2>Verification, not a total</h2>
-  <p>Melanoma labels by stored confirmation method: clinical_diagnosis: case-g18-12, case-g24-01, case-g24-02; expert_diagnosis: case-g18-10, case-g18-11, case-g21-07; histopathology: case-acral-melanoma-plantar; source_dataset_diagnosis: case-g18-01, case-g18-02, case-g18-03, case-g18-04, case-g18-05, case-g18-06, case-g18-07, case-g18-08, case-g18-09. Histopathology-confirmed melanoma: case-acral-melanoma-plantar. A larger total does not make the other methods histopathology. Clinical review remains deferred.</p>
+  <p>Melanoma labels by stored confirmation method: clinical_diagnosis: case-g18-12, case-g24-01, case-g24-02; expert_diagnosis: case-g18-10, case-g18-11, case-g21-07; histopathology: case-acral-melanoma-plantar, case-g25-01, case-g25-03, case-g25-04, case-g25-05; source_dataset_diagnosis: case-g18-01, case-g18-02, case-g18-03, case-g18-04, case-g18-05, case-g18-06, case-g18-07, case-g18-08, case-g18-09. Histopathology-confirmed melanoma: case-acral-melanoma-plantar, case-g25-01, case-g25-03, case-g25-04, case-g25-05. A larger total does not make the other methods histopathology. Clinical review remains deferred.</p>
   <h2>Outside the primary path</h2>
   <ul><li>Field change on the dorsum of the hand (case-ak-field-hand) stays in the library and outside Learn Melanoma. Default reason: it is not a melanoma-pathway skill case.</li><li>Two neighboring lesions on the upper back (case-scc-ak-paraspinal) stays in the library and outside Learn Melanoma. Default reason: it is not a melanoma-pathway skill case.</li></ul>
   
@@ -2252,6 +2252,534 @@
     <h3>Management brief</h3>
     <p class="banner">Review required. Not a protocol.</p>
     <p>No management category is stored. A file description, including a melanoma term, is not a decision to reassure, monitor, perform dermoscopy, biopsy, or refer. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g25-01">
+    <h2>A small brown macule on the thigh <span class="meta">(case-g25-01)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Reasoning case</dd></div>
+      <div><dt>Curriculum level</dt><dd>3 · melanoma</dd></div>
+      <div><dt>Skills</dt><dd>Pigment network, Evidence weighting</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Melanoma in situ</dd></div>
+      <div><dt>Disease record</dt><dd>cutaneous-melanoma</dd></div>
+      <div><dt>Confirmation</dt><dd>histopathology — The Figure 2 caption of De Giorgi and coauthors (Cancers 2026, doi:10.3390/cancers18142183), checked 2026-10-02, labels panels A and B as Case 1 and states: Histopathology confirmed melanoma in situ. No subtype, Breslow thickness, or stage is given for this lesion, and none was added.</dd></div>
+      <div><dt>Site</dt><dd>Right thigh</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · CC BY 4.0 · Vincenzo De Giorgi and coauthors</p>
+      <p>File: assets/media/cases/case-33-clinical.jpg</p>
+      <p>Source: <a href="https://doi.org/10.3390/cancers18142183">De Giorgi V, Cecchi G, Marabini V, Gurioli G, Perillo G, Fazzari F, Zuccaro B, et al. Cancers 2026, via PubMed Central (PMC13406897)</a></p>
+      <p>De Giorgi and coauthors, Cancers 2026, Figure 2 panel A, doi:10.3390/cancers18142183. CC BY 4.0. Cropped from the composite figure by Docutis.</p>
+      <p>Modification: cropped — Panel A of Figure 2 was cropped from the PMC figure file cancers-18-02183-g002.jpg (PMC open-access package PMC13406897.1), source sha256 7c4b404f062fccda702d716a8312c3335af1c88158c7def83ff9d0128608f942, at pixel box left 0, top 0, right 361, bottom 268 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 20bca7e242ef77be6e22a617900f047e7efae449bf75105895b14c4567e1e38c. No color change, no annotation, and no other edit.</p>
+    </li>
+    <li>
+      <p><strong>dermoscopy</strong> · CC BY 4.0 · Vincenzo De Giorgi and coauthors</p>
+      <p>File: assets/media/cases/case-33-dermoscopy.jpg</p>
+      <p>Source: <a href="https://doi.org/10.3390/cancers18142183">De Giorgi V, Cecchi G, Marabini V, Gurioli G, Perillo G, Fazzari F, Zuccaro B, et al. Cancers 2026, via PubMed Central (PMC13406897)</a></p>
+      <p>De Giorgi and coauthors, Cancers 2026, Figure 2 panel B, doi:10.3390/cancers18142183. CC BY 4.0. Cropped from the composite figure by Docutis.</p>
+      <p>Modification: cropped — Panel B of Figure 2 was cropped from the PMC figure file cancers-18-02183-g002.jpg (PMC open-access package PMC13406897.1), source sha256 7c4b404f062fccda702d716a8312c3335af1c88158c7def83ff9d0128608f942, at pixel box left 363, top 0, right 723, bottom 268 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 1e2091ed0c5d825d8b3dfa675ec932fd77ed9d8c491d7b54e4aa3040ad3704a3. No color change, no annotation, and no other edit.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>A small brown macule with a darker center and a lighter brown rim sits beside a ruler. A small lighter lobe touches one edge.</li><li>A net of brown lines covers most of the lesion. The lines are thicker and darker in the center and fainter toward the edge. A few small dark dots sit in the darker center. A separate brown lobe sits at one side, and tick marks lie along the edge of the field.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>Is the brown net the same in every part of the lesion?</li><li>Which marks are scale ticks rather than skin?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
+    <li>
+      <p><strong>Two browns and an uneven outline</strong> — Clearly visible; Supportive</p>
+      <p>The clinical macule has a darker center, a lighter rim, and a small side lobe. This is a look, not a structure.</p>
+      <p>Canonical pattern: irregular-brown-patch. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><ul>
+    <li>
+      <p><strong>Uneven brown net</strong> — Clearly visible; Major clue</p>
+      <p>Thicker, darker central lines and fainter edge lines are visible in the frame. The source caption calls the network atypical. The same look appears on a benign case in the same figure.</p>
+      <p>Canonical pattern: atypical-pigment-network. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Case-specific observation</h4><ul>
+    <li>
+      <p><strong>A few small dark central dots</strong> — Probably present; Supportive</p>
+      <p>A few small dark dots sit in the darker center. They are too few and small to anchor a reusable dots-and-globules pattern from this frame.</p>
+      <p>Canonical pattern: not linked. A few small dark dots are probable in one frame. A reusable dots-and-globules pattern is deferred until a clearer example exists, rather than created from one weak example.</p>
+    </li></ul><h4>Context and image information</h4><ul>
+    <li>
+      <p><strong>Ruler and tick marks</strong> — Clearly visible; Conflicts with a simple reading</p>
+      <p>A ruler sits beside the clinical macule and tick marks lie along the dermoscopic field. They are scales, not skin.</p>
+      <p>Canonical pattern: measuring-scale-in-frame. Educational role: Image mark, not a skin finding. Case certainty and weight stay on this case.</p>
+    </li></ul>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Melanoma in situ</strong></p>
+      <p>Why it fits: The net is uneven across the lesion.; A few dark dots sit in the darker center.; The figure caption reports histopathology for this lesion.</p>
+      <p>Why not: The lesion is small.; No blue-white or vessel structure is visible.</p>
+      <p>The caption's histopathology sentence is the confirmation. The frames justify concern; they do not confirm.</p>
+    </li>
+    <li>
+      <p><strong>Melanocytic nevus with cytologic atypia</strong></p>
+      <p>Why it fits: A nevus with cytologic atypia in the same source figure shows a similar uneven net.</p>
+      <p>Why not: The caption gives a different histopathology result for this lesion.</p>
+      <p>Dermoscopy did not separate this lesion from the nevus in the same figure. Histopathology did.</p>
+    </li>
+    <li>
+      <p><strong>Solar lentigo</strong></p>
+      <p>Why it fits: Flat brown pigment.</p>
+      <p>Why not: The pigment forms a net of lines, not an even brown area with a moth-eaten edge.</p>
+      <p>A net of uneven lines is a melanocytic look. A lentigo is not the closest mimic here.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Melanocytic nevus with cytologic atypia</p><p>A histopathology-confirmed nevus with cytologic atypia in the same source figure shows a similar uneven net.</p>
+    <h3>Why not</h3>
+    <ul><li><strong>Melanocytic nevus with cytologic atypia</strong> — A nevus in the same figure shows a similar uneven net. Its caption gives a different histopathology result. The frames alone do not separate them.</li><li><strong>Solar lentigo</strong> — The pigment forms a net of lines, not an even brown area. A lentigo is not the closest look here.</li></ul>
+    <h3>Reasoning</h3>
+    <p>The source labels these two frames as one case and states that histopathology confirmed melanoma in situ. The clinical frame shows a small brown macule with two browns. The dermoscopic frame shows an uneven brown net with a few dark central dots.</p>
+    <p>The uneven net is clearly visible and is the major clue. The dark dots are probably visible and supportive. The uneven clinical outline is supportive. The ruler and ticks conflict only if read as skin. The histopathology sentence is the confirmation; the dermoscopic look alone did not separate this lesion from a nevus in the same figure.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Treating an atypical net as a diagnosis, or treating a small diameter as reassurance.</p>
+    <h3>Mentor note</h3>
+    <p>The source figure holds this case and a nevus with cytologic atypia side by side. Both show an uneven net. Use them together: dermoscopy justified excision of both, and histopathology separated them.</p>
+    <h3>Take-home rule</h3>
+    <p>An uneven net on a small macule is a reason for concern and a reason for histopathology. It is not the diagnosis.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. The source reports excision and histopathology; that history is not a Docutis recommendation. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g25-02">
+    <h2>A dark brown macule on the lower leg <span class="meta">(case-g25-02)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Reasoning case</dd></div>
+      <div><dt>Curriculum level</dt><dd>4 · mimic</dd></div>
+      <div><dt>Skills</dt><dd>Pigment network</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Lentiginous melanocytic nevus with cytologic atypia</dd></div>
+      <div><dt>Disease record</dt><dd>melanocytic-nevus</dd></div>
+      <div><dt>Confirmation</dt><dd>histopathology — The Figure 2 caption of De Giorgi and coauthors (Cancers 2026, doi:10.3390/cancers18142183), checked 2026-10-02, labels panels C and D as Case 2 and states: Histopathology confirmed a lentiginous melanocytic nevus with cytologic atypia. The source term was kept. No grade beyond that wording was added.</dd></div>
+      <div><dt>Site</dt><dd>Right lower leg</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · CC BY 4.0 · Vincenzo De Giorgi and coauthors</p>
+      <p>File: assets/media/cases/case-34-clinical.jpg</p>
+      <p>Source: <a href="https://doi.org/10.3390/cancers18142183">De Giorgi V, Cecchi G, Marabini V, Gurioli G, Perillo G, Fazzari F, Zuccaro B, et al. Cancers 2026, via PubMed Central (PMC13406897)</a></p>
+      <p>De Giorgi and coauthors, Cancers 2026, Figure 2 panel C, doi:10.3390/cancers18142183. CC BY 4.0. Cropped from the composite figure by Docutis.</p>
+      <p>Modification: cropped — Panel C of Figure 2 was cropped from the PMC figure file cancers-18-02183-g002.jpg (PMC open-access package PMC13406897.1), source sha256 7c4b404f062fccda702d716a8312c3335af1c88158c7def83ff9d0128608f942, at pixel box left 0, top 270, right 361, bottom 538 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 3cb08364c5e0eb24b16ec701ed82676974ee93e0bb661339ef05bfa09610d34a. No color change, no annotation, and no other edit.</p>
+    </li>
+    <li>
+      <p><strong>dermoscopy</strong> · CC BY 4.0 · Vincenzo De Giorgi and coauthors</p>
+      <p>File: assets/media/cases/case-34-dermoscopy.jpg</p>
+      <p>Source: <a href="https://doi.org/10.3390/cancers18142183">De Giorgi V, Cecchi G, Marabini V, Gurioli G, Perillo G, Fazzari F, Zuccaro B, et al. Cancers 2026, via PubMed Central (PMC13406897)</a></p>
+      <p>De Giorgi and coauthors, Cancers 2026, Figure 2 panel D, doi:10.3390/cancers18142183. CC BY 4.0. Cropped from the composite figure by Docutis.</p>
+      <p>Modification: cropped — Panel D of Figure 2 was cropped from the PMC figure file cancers-18-02183-g002.jpg (PMC open-access package PMC13406897.1), source sha256 7c4b404f062fccda702d716a8312c3335af1c88158c7def83ff9d0128608f942, at pixel box left 363, top 270, right 723, bottom 538 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 781637b095f84a09fef8566498537db9493d43d0193c888ee6654af3cc8f0af0. No color change, no annotation, and no other edit.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>A small dark brown macule with an uneven outline sits on hair-bearing skin beside a ruler.</li><li>A net of brown lines covers an irregular brown area. The lines are darker and thicker toward the center. Round clear air bubbles, hairs, and black tick marks cross the field.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>Where is the net darkest and thickest?</li><li>Which round shapes are air bubbles rather than skin structures?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><p>None stored on this case.</p><h4>Dermoscopic structure</h4><ul>
+    <li>
+      <p><strong>Uneven brown net</strong> — Clearly visible; Major clue</p>
+      <p>The net is darker and thicker toward the center and fainter at the edge. The source caption calls it atypical. The same look appears on a melanoma in situ in the same figure.</p>
+      <p>Canonical pattern: atypical-pigment-network. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Case-specific observation</h4><ul>
+    <li>
+      <p><strong>Air bubbles and hairs in the field</strong> — Clearly visible; Conflicts with a simple reading</p>
+      <p>Clear round rings are air bubbles in contact fluid, and hairs cross the field. They hide parts of the net and are not structures.</p>
+      <p>Canonical pattern: not linked. Air bubbles and hairs are contact-fluid and occlusion marks. They are not a skin pattern and are not added to the artifact library from one case.</p>
+    </li></ul><h4>Context and image information</h4><ul>
+    <li>
+      <p><strong>Ruler and tick marks</strong> — Clearly visible; Conflicts with a simple reading</p>
+      <p>A ruler sits beside the clinical macule and black tick marks cross the dermoscopic field. They are scales, not skin.</p>
+      <p>Canonical pattern: measuring-scale-in-frame. Educational role: Image mark, not a skin finding. Case certainty and weight stay on this case.</p>
+    </li></ul>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Melanoma in situ</strong></p>
+      <p>Why it fits: The net is uneven, with thicker central lines.; The outline is irregular.</p>
+      <p>Why not: The caption reports a nevus with cytologic atypia on histopathology.</p>
+      <p>Melanoma was a fair concern from the frames. Histopathology answered it for this lesion only.</p>
+    </li>
+    <li>
+      <p><strong>Lentiginous melanocytic nevus with cytologic atypia</strong></p>
+      <p>Why it fits: A brown net is present, which is a melanocytic look.; The caption reports this histopathology result.</p>
+      <p>Why not: Nothing in the frames proves a benign lesion.</p>
+      <p>The benign name comes from histopathology, not from a dermoscopic feature.</p>
+    </li>
+    <li>
+      <p><strong>Common acquired nevus</strong></p>
+      <p>Why it fits: A small brown macule with a net.</p>
+      <p>Why not: The net is uneven and the outline is irregular.</p>
+      <p>An ordinary-looking mole would not usually be excised for this net. This one was.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Melanoma in situ</p><p>A histopathology-confirmed melanoma in situ in the same source figure shows a similar uneven net.</p>
+    <h3>Why not</h3>
+    <ul><li><strong>Melanoma in situ</strong> — The melanoma in situ in the same figure has a similar uneven net. These frames do not hold a feature that separates them; the caption's histopathology does.</li><li><strong>Common acquired nevus</strong> — The net is uneven and the outline is irregular. That is why the lesion was excised rather than called ordinary.</li></ul>
+    <h3>Reasoning</h3>
+    <p>The source labels these two frames as one case and reports a lentiginous melanocytic nevus with cytologic atypia on histopathology. The dermoscopic frame shows an uneven brown net like the melanoma in situ case in the same figure.</p>
+    <p>The uneven net is clearly visible and is the major reason melanoma was plausible. Bubbles, hairs, and ticks conflict if read as skin. The histopathology sentence is the confirmation. No dermoscopic feature in these frames argues strongly toward the benign result.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Assuming that an excised lesion with an atypical net must be melanoma, or using this benign result to dismiss the next atypical net.</p>
+    <h3>Mentor note</h3>
+    <p>This is the benign half of a matched teaching pair from one figure. It teaches why melanoma was plausible and that histopathology, not a dermoscopic discriminator, answered the question.</p>
+    <h3>Take-home rule</h3>
+    <p>A benign histopathology result after an atypical net is an answer for that lesion. It is not a rule that atypical nets are benign.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. The source reports excision and histopathology; that history is not a Docutis recommendation and is not reassurance for another lesion. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g25-03">
+    <h2>A pink papule in the scalp <span class="meta">(case-g25-03)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Reasoning case</dd></div>
+      <div><dt>Curriculum level</dt><dd>4 · melanoma</dd></div>
+      <div><dt>Skills</dt><dd>Pink nodule, More than one vessel shape</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Nodular melanoma, amelanotic</dd></div>
+      <div><dt>Disease record</dt><dd>nodular-melanoma</dd></div>
+      <div><dt>Confirmation</dt><dd>histopathology — The Figure 5 caption of Porto and coauthors (Scientific Reports 2022, doi:10.1038/s41598-022-17108-z), checked 2026-10-02, describes an amelanotic papule in the scalp vertex, says panel B is the dermoscopic image of the lesion, and states: Histopathological examination showed a nodular melanoma with a Breslow thickness of 5.5 mm. The subtype and thickness are the source's. No stage was added.</dd></div>
+      <div><dt>Site</dt><dd>Scalp vertex</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · CC BY 4.0 · Ana Carolina Porto and coauthors</p>
+      <p>File: assets/media/cases/case-35-clinical.jpg</p>
+      <p>Source: <a href="https://doi.org/10.1038/s41598-022-17108-z">Porto AC, Blumetti TP, Calsavara VF, Torrezan GT, de Paula CAA, Lellis R, Duprat Neto JP, Carraro DM, Braga JCT. Scientific Reports 2022, via PubMed Central (PMC9445057)</a></p>
+      <p>Porto and coauthors, Scientific Reports 2022, Figure 5 panel A, doi:10.1038/s41598-022-17108-z. CC BY 4.0. Cropped from the composite figure by Docutis.</p>
+      <p>Modification: cropped — Panel A of Figure 5 was cropped from the figure image embedded on page 8 of the article PDF in the PMC open-access package PMC9445057.1 (PDF image object 173, 1535 x 1003 pixels), source sha256 1ebeefcf60dd7388981435d264d7d913a2b09f4c3b69f8274b88a06273c42c7f, at pixel box left 0, top 0, right 832, bottom 1003 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 7c9e4b1d0ea2267c1081236b03baae270bb59208844324eb401cd961e1d0c9f0. No color change, no annotation, and no other edit.</p>
+    </li>
+    <li>
+      <p><strong>dermoscopy</strong> · CC BY 4.0 · Ana Carolina Porto and coauthors</p>
+      <p>File: assets/media/cases/case-35-dermoscopy.jpg</p>
+      <p>Source: <a href="https://doi.org/10.1038/s41598-022-17108-z">Porto AC, Blumetti TP, Calsavara VF, Torrezan GT, de Paula CAA, Lellis R, Duprat Neto JP, Carraro DM, Braga JCT. Scientific Reports 2022, via PubMed Central (PMC9445057)</a></p>
+      <p>Porto and coauthors, Scientific Reports 2022, Figure 5 panel B, doi:10.1038/s41598-022-17108-z. CC BY 4.0. Cropped from the composite figure by Docutis.</p>
+      <p>Modification: cropped — Panel B of Figure 5 was cropped from the figure image embedded on page 8 of the article PDF in the PMC open-access package PMC9445057.1 (PDF image object 173, 1535 x 1003 pixels), source sha256 1ebeefcf60dd7388981435d264d7d913a2b09f4c3b69f8274b88a06273c42c7f, at pixel box left 835, top 0, right 1535, bottom 1003 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 2ca1bc48d2f279b7c51a26dcd5fb31a40ce3f15baa14c82af8e4a053da6e2146. No color change, no annotation, and no other edit.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>A pink dome-shaped papule sits in hair-bearing scalp. A small dark crust touches one side, and grey and white hairs cross the frame.</li><li>The field is pink. Fine purple-red lines run in short irregular curves in the center, and small red dots are scattered around them. A small orange-brown crust sits to one side. White hairs cross the field.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>How many different vessel shapes can you name?</li><li>Which parts of the dermoscopic field are hair or crust rather than vessels?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><ul>
+    <li>
+      <p><strong>Pink papule without brown pigment</strong> — Clearly visible; Major clue</p>
+      <p>The papule is pink and dome-shaped, with no brown pigment in it. Missing pigment does not lower concern.</p>
+      <p>Canonical pattern: pink-nodule-without-pigment. Educational role: Descriptive morphology, not a dermoscopic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Dermoscopic structure</h4><ul>
+    <li>
+      <p><strong>Dotted and short linear vessels together</strong> — Probably present; Major clue</p>
+      <p>Fine irregular linear vessels and scattered red dots share one pink field. They are fine at this resolution, so the certainty is probable.</p>
+      <p>Canonical pattern: polymorphous-vessels. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Case-specific observation</h4><ul>
+    <li>
+      <p><strong>Small orange-brown crust</strong> — Clearly visible; Supportive</p>
+      <p>A small orange-brown crust sits to one side. The caption calls the finding ulceration. No ulceration pattern was encoded from the caption.</p>
+      <p>Canonical pattern: not linked. A small orange-brown crust is visible. The caption calls it ulceration, and no ulceration pattern is created from a caption word and one frame.</p>
+    </li></ul><h4>Context and image information</h4><p>None stored on this case.</p>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Amelanotic nodular melanoma</strong></p>
+      <p>Why it fits: A pink papule without brown pigment.; Dotted and short linear vessels together.; The caption reports histopathology.</p>
+      <p>Why not: Nothing in the frames proves a melanocytic tumor.</p>
+      <p>The vessel mix raises concern. The histopathology sentence names the tumor.</p>
+    </li>
+    <li>
+      <p><strong>Nodular basal cell carcinoma</strong></p>
+      <p>Why it fits: A pink papule on sun-exposed skin of an older adult.; Visible vessels on a pink field.</p>
+      <p>Why not: The vessels are short and mixed, not long sharp branching vessels.</p>
+      <p>Vessel shape is the comparison you can make in these frames. It is not proof.</p>
+    </li>
+    <li>
+      <p><strong>Inflamed or traumatized benign papule</strong></p>
+      <p>Why it fits: A crust is present.</p>
+      <p>Why not: Mixed vessels across a pink papule are not explained by a crust.</p>
+      <p>A crust is a reason to look again, not a reason to stop.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Nodular basal cell carcinoma</p><p>A pink papule with visible vessels on sun-exposed skin is a common basal cell carcinoma look. The stored basal cell carcinoma dermoscopy case shows long branching vessels instead.</p>
+    <h3>Why not</h3>
+    <ul><li><strong>Nodular basal cell carcinoma</strong> — The stored basal cell carcinoma dermoscopy case shows long sharp branching vessels. This field shows short mixed vessels and dots. That difference raises concern; it does not exclude a basal cell carcinoma by itself.</li><li><strong>Inflamed or traumatized benign papule</strong> — The crust is real, but it does not explain a mixed vessel pattern across the papule.</li></ul>
+    <h3>Reasoning</h3>
+    <p>The source reports this scalp papule as a nodular melanoma on histopathology and says the dermoscopic frame is the same lesion. The clinical frame is a pink papule without pigment. The dermoscopic frame shows dotted and short linear vessels together and a small crust.</p>
+    <p>The pink papule is clearly visible and is the major clinical look. The vessel mix is probably visible and is the major dermoscopic clue. The crust is supportive. The histopathology sentence is the confirmation.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Feeling reassured because there is no brown pigment, or calling every pink papule with vessels a basal cell carcinoma.</p>
+    <h3>Mentor note</h3>
+    <p>This is the second stored example of mixed vessels in Docutis and the first one paired with its clinical frame. Compare it with the basal cell carcinoma dermoscopy case: the vessel shapes, not the pink color, carry the comparison.</p>
+    <h3>Take-home rule</h3>
+    <p>A pink papule with more than one vessel shape needs a differential that includes amelanotic melanoma.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. The source reports histopathology; that history is not a Docutis recommendation. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g25-04">
+    <h2>A brown macule on the heel <span class="meta">(case-g25-04)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Teaching case</dd></div>
+      <div><dt>Curriculum level</dt><dd>3 · melanoma</dd></div>
+      <div><dt>Skills</dt><dd>Acral pigment, Parallel lines on palms and soles</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Acral melanoma in situ</dd></div>
+      <div><dt>Disease record</dt><dd>acral-melanoma</dd></div>
+      <div><dt>Confirmation</dt><dd>histopathology — Figure 2 of Erol Mart and coauthors (International Journal of Dermatology 2026, doi:10.1111/ijd.70384), checked 2026-10-02, is titled melanoma in situ on the left heel. The methods state that for melanomas only pathology confirmed cases were included. The histopathology statement is study-level, not a sentence about this figure alone.</dd></div>
+      <div><dt>Site</dt><dd>Left heel, plantar sole</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · CC BY 4.0 · Handan Merve Erol Mart and coauthors</p>
+      <p>File: assets/media/cases/case-36-clinical.jpg</p>
+      <p>Source: <a href="https://doi.org/10.1111/ijd.70384">Erol Mart HM, Aydemir AT, Pietkiewicz P, Akay BN. International Journal of Dermatology 2026, via PubMed Central (PMC13342755)</a></p>
+      <p>Erol Mart and coauthors, International Journal of Dermatology 2026, Figure 2 panel a, doi:10.1111/ijd.70384. CC BY 4.0. Cropped from the composite figure by Docutis.</p>
+      <p>Modification: cropped — Panel a of Figure 2 was cropped from the figure image embedded on page 4 of the article PDF in the PMC open-access package PMC13342755.1 (PDF image object 8, 2081 x 1125 pixels), source sha256 d1f0bb44313b192ef232ff3ed21920d3d04c6b51265e97541d7927ad4a3a1207, at pixel box left 0, top 0, right 590, bottom 1125 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 f4104b35a6c946f1d3bcd99b4aab84fcdcabb9ce12ce7b75bc135d4ebff2b184. No color change, no annotation, and no other edit.</p>
+    </li>
+    <li>
+      <p><strong>dermoscopy</strong> · CC BY 4.0 · Handan Merve Erol Mart and coauthors</p>
+      <p>File: assets/media/cases/case-36-dermoscopy.jpg</p>
+      <p>Source: <a href="https://doi.org/10.1111/ijd.70384">Erol Mart HM, Aydemir AT, Pietkiewicz P, Akay BN. International Journal of Dermatology 2026, via PubMed Central (PMC13342755)</a></p>
+      <p>Erol Mart and coauthors, International Journal of Dermatology 2026, Figure 2 panel b, doi:10.1111/ijd.70384. CC BY 4.0. Cropped from the composite figure by Docutis.</p>
+      <p>Modification: cropped — Panel b of Figure 2 was cropped from the figure image embedded on page 4 of the article PDF in the PMC open-access package PMC13342755.1 (PDF image object 8, 2081 x 1125 pixels), source sha256 d1f0bb44313b192ef232ff3ed21920d3d04c6b51265e97541d7927ad4a3a1207, at pixel box left 593, top 0, right 1325, bottom 555 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 9daffc8492ea5c70b6a70c79ebac122ff5b35f07d35ef6af5a9fcf760406d7b4. No color change, no annotation, and no other edit.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>A brown macule with an uneven edge sits on the heel of the sole. A fainter grey-brown smudge is elsewhere on the sole.</li><li>Brown pigment runs in many parallel bands across the lesion. The brown bands are broad and the pale lines between them are thin. A darker focus sits near the center, and the outer edge is uneven.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>Are the brown bands wider or narrower than the pale lines between them?</li><li>Is the site palm or sole skin?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><p>None stored on this case.</p><h4>Dermoscopic structure</h4><ul>
+    <li>
+      <p><strong>Broad parallel pigmented bands on the sole</strong> — Probably present; Major clue</p>
+      <p>The pigmented bands are broad and the pale lines between them are thin, which favors pigment on the ridges. Sweat-duct openings are not resolved, so the certainty stays probable.</p>
+      <p>Canonical pattern: parallel-ridge-pattern. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Case-specific observation</h4><ul>
+    <li>
+      <p><strong>Darker central focus</strong> — Clearly visible; Supportive</p>
+      <p>A darker brown focus sits near the center of the lesion. It is a case-specific observation.</p>
+      <p>Canonical pattern: not linked. A darker central focus is a case-specific observation, not a named acral structure.</p>
+    </li></ul><h4>Context and image information</h4><p>None stored on this case.</p>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Acral melanoma in situ</strong></p>
+      <p>Why it fits: Pigment is in broad parallel bands, a ridge-type look.; The edge is uneven and a darker central focus is present.; The source states pathology confirmation for melanomas in the study.</p>
+      <p>Why not: No blue-white or vessel structure is visible.</p>
+      <p>The ridge-type bands are the clue. The source's pathology statement is the confirmation.</p>
+    </li>
+    <li>
+      <p><strong>Acral melanocytic nevus</strong></p>
+      <p>Why it fits: A flat brown macule on the sole.; Parallel lines are common in acral nevi.</p>
+      <p>Why not: In a typical acral nevus pattern the pigmented lines are thin and lie in the furrows; here the pigmented bands are broad.</p>
+      <p>Compare band widths before calling a parallel pattern benign.</p>
+    </li>
+    <li>
+      <p><strong>Subcorneal haemorrhage</strong></p>
+      <p>Why it fits: Pigment on the heel can be blood after friction.</p>
+      <p>Why not: The color is brown, not red-black, and it forms regular bands across the lesion.</p>
+      <p>Blood on the heel is a separate trap. No blood color is seen here.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Acral melanocytic nevus</p><p>A flat brown macule with parallel lines on the sole is a common nevus look. No benign acral case with dermoscopy is stored yet in Docutis.</p>
+    <h3>Why not</h3>
+    <ul><li><strong>Acral melanocytic nevus</strong> — A typical acral nevus pattern places thin pigmented lines in the furrows. Here the pigmented bands are broad. That raises concern; it is not proof on its own.</li><li><strong>Subcorneal haemorrhage</strong> — The color is brown and banded, not red-black. Blood is a separate heel trap.</li></ul>
+    <h3>Reasoning</h3>
+    <p>The source titles this heel lesion melanoma in situ and states that melanomas in the study were pathology confirmed. The clinical frame shows a brown macule on the heel. The dermoscopic frame shows broad parallel brown bands with thin pale lines between them.</p>
+    <p>The parallel bands are clearly visible; their ridge assignment is probable and is the major clue. The darker focus is supportive. The study-level pathology statement is the confirmation and is weaker than a sentence about this lesion alone.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Calling every parallel pattern on the sole a benign acral nevus, or deciding ridge versus furrow from the diagnosis rather than from the band widths.</p>
+    <h3>Mentor note</h3>
+    <p>This is the first acral dermoscopic case in Docutis. It joins the clinical-only plantar case. A benign acral comparison is still missing; do not treat this one case as the whole acral lesson.</p>
+    <h3>Take-home rule</h3>
+    <p>On the sole, compare band widths. Broad pigmented bands with thin pale lines are a ridge-type pattern and need a melanoma differential.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. A ridge-type pattern in a teaching frame is not a decision to biopsy or refer for a real patient. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g25-05">
+    <h2>A faint brown patch near the eye <span class="meta">(case-g25-05)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Reasoning case</dd></div>
+      <div><dt>Curriculum level</dt><dd>4 · melanoma</dd></div>
+      <div><dt>Skills</dt><dd>Pigment around facial follicles, Evidence weighting</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Lentigo maligna (melanoma in situ)</dd></div>
+      <div><dt>Disease record</dt><dd>lentigo-maligna</dd></div>
+      <div><dt>Confirmation</dt><dd>histopathology — The Figure 1 caption of Rubegni and coauthors (Diagnostics 2024, doi:10.3390/diagnostics14222571), checked 2026-10-02, names this lesion a lentigo maligna in a 66-year-old male. The methods say the figure lesions come from the 80 study lesions and that the histological diagnosis was blinded until after the evaluation. The histopathology statement is study-level. The article calls lentigo maligna an in situ cutaneous melanoma.</dd></div>
+      <div><dt>Site</dt><dd>Face, periorbital region</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · CC BY 4.0 · Giovanni Rubegni and coauthors</p>
+      <p>File: assets/media/cases/case-37-clinical.jpg</p>
+      <p>Source: <a href="https://doi.org/10.3390/diagnostics14222571">Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via PubMed Central (PMC11593280)</a></p>
+      <p>Rubegni and coauthors, Diagnostics 2024, Figure 1 panel e, doi:10.3390/diagnostics14222571. CC BY 4.0. Cropped from the composite figure by Docutis.</p>
+      <p>Modification: cropped — Panel e of Figure 1 was cropped from the PMC figure file diagnostics-14-02571-g001b.jpg (second part of Figure 1, PMC open-access package PMC11593280.1), source sha256 4d45ed4504f7467436a184fc4a6730c17a3a756d2ced5bb4ff9a309a137c05fb, at pixel box left 5, top 337, right 385, bottom 624 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 87b65469afd3018110af5c11bfa0e68567566deab12ac4ffd5890b880ea4489b. No color change, no annotation, and no other edit.</p>
+    </li>
+    <li>
+      <p><strong>dermoscopy</strong> · CC BY 4.0 · Giovanni Rubegni and coauthors</p>
+      <p>File: assets/media/cases/case-37-dermoscopy.jpg</p>
+      <p>Source: <a href="https://doi.org/10.3390/diagnostics14222571">Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via PubMed Central (PMC11593280)</a></p>
+      <p>Rubegni and coauthors, Diagnostics 2024, Figure 1 panel f, doi:10.3390/diagnostics14222571. CC BY 4.0. Cropped from the composite figure by Docutis.</p>
+      <p>Modification: cropped — Panel f of Figure 1 was cropped from the PMC figure file diagnostics-14-02571-g001b.jpg (second part of Figure 1, PMC open-access package PMC11593280.1), source sha256 4d45ed4504f7467436a184fc4a6730c17a3a756d2ced5bb4ff9a309a137c05fb, at pixel box left 392, top 337, right 774, bottom 624 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 fef0a8958681e289991c09c06590f58c493974aa1264101aa7b54441f5ded070. No color change, no annotation, and no other edit.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>A faint brown patch sits on sun-damaged skin of the side of the face near the hairline and the outer corner of the eye. Redness and fine vessels are around it.</li><li>Brown pigment is broken by many pale round follicular openings. Gray and gray-brown dots cluster around several openings, and the pigment is darker and denser on one side. Hairs cross the field.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>What sits around the pale round openings?</li><li>Is the pigment even, or darker on one side?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><p>None stored on this case.</p><h4>Dermoscopic structure</h4><ul>
+    <li>
+      <p><strong>Gray dots around follicular openings</strong> — Probably present; Major clue</p>
+      <p>Gray and gray-brown dots cluster around several pale openings. Their arrangement around the openings is clear in parts of the field and less clear elsewhere, so the certainty is probable.</p>
+      <p>Canonical pattern: perifollicular-gray-dots. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li>
+    <li>
+      <p><strong>Brown pigment broken by pale openings</strong> — Clearly visible; Weak</p>
+      <p>Pale round follicular openings break the brown pigment into a net-like look. The same background is on the benign facial case.</p>
+      <p>Canonical pattern: facial-pseudonetwork. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Case-specific observation</h4><ul>
+    <li>
+      <p><strong>Pigment darker on one side</strong> — Clearly visible; Supportive</p>
+      <p>The pigment is denser and darker on one side of the field. This is a case-specific asymmetry, not a named structure.</p>
+      <p>Canonical pattern: not linked. Pigment darker on one side is case-specific asymmetry. Asymmetric pigmented follicular openings were not claimed as a separate structure at this resolution.</p>
+    </li></ul><h4>Context and image information</h4><p>None stored on this case.</p>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Lentigo maligna</strong></p>
+      <p>Why it fits: Gray dots cluster around follicular openings.; Pigment is darker and denser on one side.; The source names this lesion and reports study-level histology.</p>
+      <p>Why not: Rhomboidal structures are not clear.</p>
+      <p>Gray around the follicles is the clue. The source's histology statement is the confirmation.</p>
+    </li>
+    <li>
+      <p><strong>Solar lentigo</strong></p>
+      <p>Why it fits: Brown facial pigment with a pseudo-network.</p>
+      <p>Why not: Gray dots around follicles are visible here and are not seen on the stored solar lentigo frame.</p>
+      <p>Both show a pseudo-network. What surrounds the openings differs in these two frames.</p>
+    </li>
+    <li>
+      <p><strong>Pigmented actinic keratosis</strong></p>
+      <p>Why it fits: Sun-damaged facial skin with brown pigment and redness.</p>
+      <p>Why not: No scale is clear on the dermoscopic frame.</p>
+      <p>Pigmented actinic keratosis is a real facial mimic. It is not stored as a Docutis case yet.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Solar lentigo</p><p>A flat brown facial patch with a pseudo-network is also the look of a solar lentigo. The stored facial solar lentigo case shows no gray dots around follicles.</p>
+    <h3>Why not</h3>
+    <ul><li><strong>Solar lentigo</strong> — The stored facial solar lentigo has a pseudo-network without gray dots around the openings. This frame has gray dots. That difference raises concern; it is not proof.</li><li><strong>Pigmented actinic keratosis</strong> — Pigmented actinic keratosis is a facial mimic, but scale is not clear here. It stays in the differential and is not stored as a case.</li></ul>
+    <h3>Reasoning</h3>
+    <p>The source names this periorbital lesion a lentigo maligna and reports study-level histology. The clinical frame is a faint brown patch on sun-damaged skin. The dermoscopic frame shows a pseudo-network with gray dots around follicular openings and lopsided darker pigment.</p>
+    <p>Gray dots around follicles are probably visible and are the major clue. Lopsided darker pigment is supportive. The pseudo-network is clearly visible but weak, because the benign facial case has it too. The study-level histology statement is the confirmation.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Treating the pseudo-network as the clue, or calling every faint brown facial patch a solar lentigo.</p>
+    <h3>Mentor note</h3>
+    <p>Read this case beside the facial solar lentigo from the same figure. Both have a pseudo-network. Only this one has gray dots around the openings.</p>
+    <h3>Take-home rule</h3>
+    <p>On facial skin, look at the follicular openings. Gray around them is a reason for concern; a pseudo-network alone is not.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. Gray dots around follicles in a teaching frame are not a decision to biopsy or refer for a real patient. This brief is not a protocol and remains review required.</p>
+  </article>
+
+  <article id="case-g25-06">
+    <h2>A light brown patch on the eyelid <span class="meta">(case-g25-06)</span></h2>
+    <p class="banner">Review required. Not clinician reviewed. clinicalReview is null.</p>
+    <dl>
+      <div><dt>Teaching type</dt><dd>Teaching case</dd></div>
+      <div><dt>Curriculum level</dt><dd>3 · mimic</dd></div>
+      <div><dt>Skills</dt><dd>Pigment around facial follicles</dd></div>
+      <div><dt>Recorded diagnosis</dt><dd>Solar lentigo</dd></div>
+      <div><dt>Disease record</dt><dd>solar-lentigo</dd></div>
+      <div><dt>Confirmation</dt><dd>histopathology — The Figure 1 caption of Rubegni and coauthors (Diagnostics 2024, doi:10.3390/diagnostics14222571), checked 2026-10-02, names this lesion a solar lentigo in a 71-year-old woman. The methods say the figure lesions come from the 80 study lesions and that the histological diagnosis was blinded until after the evaluation. The histopathology statement is study-level.</dd></div>
+      <div><dt>Site</dt><dd>Face, periorbital region, upper eyelid</dd></div>
+    </dl>
+    <h3>Provenance</h3>
+    <ul>
+    <li>
+      <p><strong>clinical</strong> · CC BY 4.0 · Giovanni Rubegni and coauthors</p>
+      <p>File: assets/media/cases/case-38-clinical.jpg</p>
+      <p>Source: <a href="https://doi.org/10.3390/diagnostics14222571">Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via PubMed Central (PMC11593280)</a></p>
+      <p>Rubegni and coauthors, Diagnostics 2024, Figure 1 panel c, doi:10.3390/diagnostics14222571. CC BY 4.0. Cropped from the composite figure by Docutis.</p>
+      <p>Modification: cropped — Panel c of Figure 1 was cropped from the PMC figure file diagnostics-14-02571-g001b.jpg (second part of Figure 1, PMC open-access package PMC11593280.1), source sha256 4d45ed4504f7467436a184fc4a6730c17a3a756d2ced5bb4ff9a309a137c05fb, at pixel box left 5, top 3, right 385, bottom 290 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 236d7086e2495282b237cf06cc1c5a0def14f5b04a8b7f0487c6eb909f9cfc66. No color change, no annotation, and no other edit.</p>
+    </li>
+    <li>
+      <p><strong>dermoscopy</strong> · CC BY 4.0 · Giovanni Rubegni and coauthors</p>
+      <p>File: assets/media/cases/case-38-dermoscopy.jpg</p>
+      <p>Source: <a href="https://doi.org/10.3390/diagnostics14222571">Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via PubMed Central (PMC11593280)</a></p>
+      <p>Rubegni and coauthors, Diagnostics 2024, Figure 1 panel d, doi:10.3390/diagnostics14222571. CC BY 4.0. Cropped from the composite figure by Docutis.</p>
+      <p>Modification: cropped — Panel d of Figure 1 was cropped from the PMC figure file diagnostics-14-02571-g001b.jpg (second part of Figure 1, PMC open-access package PMC11593280.1), source sha256 4d45ed4504f7467436a184fc4a6730c17a3a756d2ced5bb4ff9a309a137c05fb, at pixel box left 392, top 3, right 774, bottom 290 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 bddac1356b8dbf0db117bbbad53323366b139536d44d2f290c2ecf822a4012f6. No color change, no annotation, and no other edit.</p>
+    </li></ul>
+    <h3>Observations</h3>
+    <ul><li>A light brown patch with darker brown parts sits on the upper eyelid fold of a closed eye. Fine wrinkles cross the skin.</li><li>Orange-brown pigment is broken by pale round follicular openings. Thin red vessels and white scale lie at the edges. Gray dots around the openings are not seen. Tick marks run along the lower edge.</li></ul>
+    <h3>Observation prompts</h3>
+    <ul><li>What color surrounds the pale openings?</li><li>Which lines along the edge are scale ticks rather than skin?</li></ul>
+    <h3>Features, certainty, and weight</h3>
+    <p>Clinical morphology, dermoscopic structure, and image context are separate. An image mark does not compete with a diagnostic structure.</p>
+    <h4>Clinical morphology</h4><p>None stored on this case.</p><h4>Dermoscopic structure</h4><ul>
+    <li>
+      <p><strong>Orange-brown pigment broken by pale openings</strong> — Clearly visible; Supportive</p>
+      <p>Pale round openings break orange-brown pigment into a net-like look. The same background appears on the facial lentigo maligna case, so it does not separate them.</p>
+      <p>Canonical pattern: facial-pseudonetwork. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li>
+    <li>
+      <p><strong>Gray dots around follicles not seen</strong> — Not visible in this image; Supportive</p>
+      <p>No gray dots cluster around the openings in this frame. That absence is consistent with the source diagnosis and is not a clearance.</p>
+      <p>Canonical pattern: perifollicular-gray-dots. Educational role: Diagnostic structure. Case certainty and weight stay on this case.</p>
+    </li></ul><h4>Case-specific observation</h4><p>None stored on this case.</p><h4>Context and image information</h4><ul>
+    <li>
+      <p><strong>Tick marks along the edge</strong> — Clearly visible; Conflicts with a simple reading</p>
+      <p>Tick marks run along the lower edge of the dermoscopic field. They are a scale, not skin.</p>
+      <p>Canonical pattern: measuring-scale-in-frame. Educational role: Image mark, not a skin finding. Case certainty and weight stay on this case.</p>
+    </li></ul>
+    <h3>Differential</h3>
+    <ul>
+    <li>
+      <p><strong>Solar lentigo</strong></p>
+      <p>Why it fits: Orange-brown pseudo-network.; No gray dots around follicles in this frame.; The source names this lesion and reports study-level histology.</p>
+      <p>Why not: Darker parts in the clinical patch.</p>
+      <p>The benign name comes from the source's histology statement. The missing gray supports it in this frame.</p>
+    </li>
+    <li>
+      <p><strong>Lentigo maligna</strong></p>
+      <p>Why it fits: A brown patch on sun-damaged periorbital skin with a pseudo-network.; The source figure shows lentigo maligna with a similar clinical look.</p>
+      <p>Why not: Gray dots around follicles are not seen.</p>
+      <p>Lentigo maligna was a fair concern. Missing gray in one frame is not a clearance.</p>
+    </li>
+    <li>
+      <p><strong>Seborrheic keratosis</strong></p>
+      <p>Why it fits: Brown facial pigment in an older adult.</p>
+      <p>Why not: No ridges, comedo-like openings, or thick rough surface are seen.</p>
+      <p>A keratosis is in the facial differential; this frame lacks its surface.</p>
+    </li></ul>
+    <h3>Closest mimic</h3>
+    <p>Lentigo maligna</p><p>A flat brown periorbital patch with a pseudo-network is also the look of lentigo maligna. The stored facial lentigo maligna case shows gray dots around follicles.</p>
+    <h3>Why not</h3>
+    <ul><li><strong>Lentigo maligna</strong> — The facial lentigo maligna case shows gray dots around follicles. This frame does not. That difference supports the source diagnosis here and is not a rule.</li><li><strong>Seborrheic keratosis</strong> — No ridges, comedo-like openings, or rough surface are seen.</li></ul>
+    <h3>Reasoning</h3>
+    <p>The source names this periorbital lesion a solar lentigo and reports study-level histology. The clinical frame is a light brown eyelid patch with darker parts. The dermoscopic frame shows an orange-brown pseudo-network without gray dots around the openings.</p>
+    <p>The pseudo-network is clearly visible but supportive only, because the facial lentigo maligna case has it too. The absence of gray dots around follicles is supportive for the source diagnosis in this frame. The study-level histology statement is the confirmation.</p>
+    <h3>Diagnostic trap</h3>
+    <p>Taking reassurance from a pseudo-network, or treating one benign periorbital result as a rule for the next patch.</p>
+    <h3>Mentor note</h3>
+    <p>This is the benign half of a facial pair from one figure. It teaches why lentigo maligna was plausible and what in this frame argues toward the benign result: no gray around the follicles.</p>
+    <h3>Take-home rule</h3>
+    <p>On facial skin, a pseudo-network is a background. Check the follicles for gray before you accept a benign name, and keep histopathology in mind when in doubt.</p>
+    <h3>Management brief</h3>
+    <p class="banner">Review required. Not a protocol.</p>
+    <p>No management category is stored. A benign source label is not reassurance for another facial patch. This brief is not a protocol and remains review required.</p>
   </article>
 </main>
 </body>

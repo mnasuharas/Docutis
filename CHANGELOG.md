@@ -4,6 +4,20 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
+These entries are on the stacked development branch and are not merged to `main`.
+
+### Goal 25 — Gold-standard dermoscopy curriculum
+
+- Add six clinical and dermoscopic pairs from CC BY 4.0 open-access articles, each with a histopathology statement: melanoma in situ and a nevus with cytologic atypia from one figure, an amelanotic nodular melanoma of the scalp, an acral melanoma in situ of the heel, and a periorbital lentigo maligna and solar lentigo from one figure. Panels were cropped from composite figures; the pixel box and hashes are recorded and rechecked.
+- Add `histopathologySource` (`figure_caption` or `article_methods`) so a study-level statement is not presented as a per-lesion report.
+- Add four dermoscopic structures (atypical pigment network, parallel ridge pattern, gray dots around follicular openings, facial pseudo-network) after checking the existing library and aliases. Mixed vessels gain a second example. Rhomboidal structures, ulceration, and dots-and-globules were not created from captions or single weak examples.
+- Extend the acquisition ledger with 31 Goal 25 candidates, two new statuses, and pattern-rich and equivocal pair metrics. Scalp is no longer counted as face.
+- All new content stays review required. No clinician review was recorded. No release was published.
+
+### Goal 24 — Evidence-grade case acquisition
+
+- Add two source-documented clinical and dermoscopic melanoma pairs whose confirmation stays at the Commons file label, and the first acquisition ledger. No histopathology was claimed. No release was published.
+
 ### Goal 23 — Paired clinical and dermoscopy
 
 - Add an explicit pair-provenance registry: `same_lesion_confirmed`, `source_documented_pair`, or `not_paired`. Same diagnosis is not a pair. The chest case report stays the only true pair, as a source-documented pair, and gains a staged clinical-then-dermoscopy flow. Show dermoscopy does not reveal the diagnosis.

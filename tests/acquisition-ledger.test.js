@@ -21,7 +21,8 @@ test("the acquisition ledger is valid and separate from clinical cases", () => {
   const ledger = loadLedger();
   const data = loadCaseData();
   const report = validateLedger(ledger, data);
-  assert.equal(report.counts.accepted, 2);
+  assert.equal(report.counts.accepted, 8);
+  assert.equal(ledger.candidates.filter(row => row.goal !== 25 && row.status === "accepted").length, 2);
   assert.ok(report.counts.rejected_license >= 1);
   assert.ok(report.counts.rejected_not_true_pair >= 1);
   assert.equal(ledger.candidates.some(row => row.status === "accepted" && row.integrated !== true), false);
@@ -57,9 +58,9 @@ test("accepted cases keep explicit licenses, distinct paired assets, and review 
     assert.equal(clinical.length, 1);
     assert.equal(dermoscopy.length, 1);
     assert.notEqual(clinical[0].src, dermoscopy[0].src);
-    assert.equal(clinical[0].license, "CC BY-SA 4.0");
-    assert.equal(dermoscopy[0].license, "CC BY-SA 4.0");
-    assert.match(clinical[0].licenseUrl, /by-sa\/4\.0/);
+    assert.equal(clinical[0].license, row.license);
+    assert.equal(dermoscopy[0].license, row.license);
+    assert.match(clinical[0].licenseUrl, row.license === "CC BY-SA 4.0" ? /by-sa\/4\.0/ : /\/by\/4\.0\/$/);
     assert.equal(clinical[0].sourceVerificationStatus, "verified");
     assert.ok(caseItem.observations.some(item => item.modality === "dermoscopy"));
     assert.ok(caseItem.observations.some(item => item.modality === "clinical"));
@@ -74,8 +75,13 @@ test("accepted cases keep explicit licenses, distinct paired assets, and review 
       assert.ok(comparison, id);
       assert.ok(comparison.caseIdA === caseItem.id || comparison.caseIdB === caseItem.id);
     }
-    assert.equal(caseItem.diagnosticGroundTruth.confirmationMethod === "histopathology", false);
-    assert.match(caseItem.diagnosticGroundTruth.confirmationNotes, /not|does not report histopathology|Neither description reports histopathology/i);
+    if (row.goal === 25) {
+      assert.equal(caseItem.diagnosticGroundTruth.confirmationMethod, "histopathology", row.id);
+      assert.match(caseItem.diagnosticGroundTruth.confirmationNotes, /histopatholog|histolog/i);
+    } else {
+      assert.equal(caseItem.diagnosticGroundTruth.confirmationMethod === "histopathology", false);
+      assert.match(caseItem.diagnosticGroundTruth.confirmationNotes, /not|does not report histopathology|Neither description reports histopathology/i);
+    }
   }
   const prior = data.cases.find(item => item.id === "case-g21-08");
   assert.equal(prior.pairedModality.informationGain, "dermoscopy_adds_support");
@@ -107,6 +113,7 @@ test("the ledger does not change reviewed fingerprints or pilot case fingerprint
     assert.equal(data.cases.find(item => item.id === id).clinicalReview, null);
   }
   const metrics = buildPairedMetrics(data);
-  assert.equal(metrics.pairedMelanomaWithHistopathology.length, 0);
+  assert.equal(metrics.pairedMelanomaWithHistopathology.some(id => id.startsWith("case-g24-")), false);
+  assert.equal(metrics.pairedMelanomaWithHistopathology.length, 4);
   assert.ok(metrics.paired.includes("case-g21-08"));
 });

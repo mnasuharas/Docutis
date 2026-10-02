@@ -3414,6 +3414,348 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
         "safety-notice",
         "provenance"
       ]
+    },
+    {
+      "id": "case-g25-01",
+      "assetType": "case",
+      "title": "A small brown macule on the thigh",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:81f38f0d9243a5a103955de5910e33949d31e8f3040352b7517ccace323975b9",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/cancers18142183"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "De Giorgi V, Cecchi G, Marabini V, Gurioli G, Perillo G, Fazzari F, Zuccaro B, et al. Cancers 2026, via PubMed Central (PMC13406897)",
+          "organization": "De Giorgi and coauthors, Cancers 2026, Figure 2 panel A, doi:10.3390/cancers18142183. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/cancers18142183",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "De Giorgi V, Cecchi G, Marabini V, Gurioli G, Perillo G, Fazzari F, Zuccaro B, et al. Cancers 2026, via PubMed Central (PMC13406897)",
+          "organization": "De Giorgi and coauthors, Cancers 2026, Figure 2 panel B, doi:10.3390/cancers18142183. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/cancers18142183",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g25-02",
+      "assetType": "case",
+      "title": "A dark brown macule on the lower leg",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:628bf8a97c0aebfcfa8d8c72dbfdd0b0417a76bc9d1aafe7e889ca944abdb65a",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/cancers18142183"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "De Giorgi V, Cecchi G, Marabini V, Gurioli G, Perillo G, Fazzari F, Zuccaro B, et al. Cancers 2026, via PubMed Central (PMC13406897)",
+          "organization": "De Giorgi and coauthors, Cancers 2026, Figure 2 panel C, doi:10.3390/cancers18142183. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/cancers18142183",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "De Giorgi V, Cecchi G, Marabini V, Gurioli G, Perillo G, Fazzari F, Zuccaro B, et al. Cancers 2026, via PubMed Central (PMC13406897)",
+          "organization": "De Giorgi and coauthors, Cancers 2026, Figure 2 panel D, doi:10.3390/cancers18142183. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/cancers18142183",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g25-03",
+      "assetType": "case",
+      "title": "A pink papule in the scalp",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:826adbe5821179be6fa4b3e969bf5675edee1c45ca6ef21238a4b0a866173c39",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1038/s41598-022-17108-z"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Porto AC, Blumetti TP, Calsavara VF, Torrezan GT, de Paula CAA, Lellis R, Duprat Neto JP, Carraro DM, Braga JCT. Scientific Reports 2022, via PubMed Central (PMC9445057)",
+          "organization": "Porto and coauthors, Scientific Reports 2022, Figure 5 panel A, doi:10.1038/s41598-022-17108-z. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1038/s41598-022-17108-z",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Porto AC, Blumetti TP, Calsavara VF, Torrezan GT, de Paula CAA, Lellis R, Duprat Neto JP, Carraro DM, Braga JCT. Scientific Reports 2022, via PubMed Central (PMC9445057)",
+          "organization": "Porto and coauthors, Scientific Reports 2022, Figure 5 panel B, doi:10.1038/s41598-022-17108-z. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1038/s41598-022-17108-z",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g25-04",
+      "assetType": "case",
+      "title": "A brown macule on the heel",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:96b097a57030901652b6e4cf415540bc1a6b04da638fa358d65225b1b5ba2a1d",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1111/ijd.70384"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Erol Mart HM, Aydemir AT, Pietkiewicz P, Akay BN. International Journal of Dermatology 2026, via PubMed Central (PMC13342755)",
+          "organization": "Erol Mart and coauthors, International Journal of Dermatology 2026, Figure 2 panel a, doi:10.1111/ijd.70384. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1111/ijd.70384",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Erol Mart HM, Aydemir AT, Pietkiewicz P, Akay BN. International Journal of Dermatology 2026, via PubMed Central (PMC13342755)",
+          "organization": "Erol Mart and coauthors, International Journal of Dermatology 2026, Figure 2 panel b, doi:10.1111/ijd.70384. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1111/ijd.70384",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g25-05",
+      "assetType": "case",
+      "title": "A faint brown patch near the eye",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:1566a31603b6cf3eb0bf3637f21ab6340885d6beaa536446a60d116e349070da",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/diagnostics14222571"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via PubMed Central (PMC11593280)",
+          "organization": "Rubegni and coauthors, Diagnostics 2024, Figure 1 panel e, doi:10.3390/diagnostics14222571. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/diagnostics14222571",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via PubMed Central (PMC11593280)",
+          "organization": "Rubegni and coauthors, Diagnostics 2024, Figure 1 panel f, doi:10.3390/diagnostics14222571. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/diagnostics14222571",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g25-06",
+      "assetType": "case",
+      "title": "A light brown patch on the eyelid",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:2682865485b7f900120e26aace5881d09ac8d2f8f8b90ff794ea374debd02700",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/diagnostics14222571"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via PubMed Central (PMC11593280)",
+          "organization": "Rubegni and coauthors, Diagnostics 2024, Figure 1 panel c, doi:10.3390/diagnostics14222571. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/diagnostics14222571",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via PubMed Central (PMC11593280)",
+          "organization": "Rubegni and coauthors, Diagnostics 2024, Figure 1 panel d, doi:10.3390/diagnostics14222571. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/diagnostics14222571",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
     }
   ]
 });

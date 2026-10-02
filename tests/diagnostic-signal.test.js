@@ -82,7 +82,7 @@ test("clinical-only cases do not claim dermoscopic structures, and paired cases 
     assert.equal(item.clinicalReview, null);
   }
   const audit = buildAudit();
-  assert.deepEqual(audit.signal.histopathologyConfirmedMelanoma, ["case-acral-melanoma-plantar"]);
+  assert.deepEqual(audit.signal.histopathologyConfirmedMelanoma, ["case-acral-melanoma-plantar", "case-g25-01", "case-g25-03", "case-g25-04", "case-g25-05"]);
   const nail = audit.signal.specialSites.find(item => item.site === "nail");
   assert.equal(nail.completesSiteCurriculum, false);
   assert.equal(nail.meaningfulContrast, true);

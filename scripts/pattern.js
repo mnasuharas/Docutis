@@ -13,7 +13,7 @@ const educationalRoles = new Set(["diagnostic_structure", "descriptive_morpholog
 const usualRoles = new Set(["characteristic", "supportive", "weak", "conflicting", "nonspecific", "context-dependent"]);
 const clearCertainties = new Set(["clearly_visible", "probably"]);
 const numericClaim = /\b(?:sensitivity|specificity)\b|\blikelihood ratio\b|\bpredictive value\b|\d+(?:\.\d+)?\s*%/i;
-const sourceTypes = new Set(["guideline", "consensus", "systematic review", "peer-reviewed review", "clinical reference", "official classification", "project-teaching-note"]);
+const sourceTypes = new Set(["guideline", "consensus", "systematic review", "peer-reviewed review", "clinical reference", "official classification", "peer-reviewed study", "project-teaching-note"]);
 const coverageStatuses = new Set(["missing", "single_example", "limited_variation", "multi_context", "contrastive_coverage"]);
 
 const REASONING_STEPS = Object.freeze([
@@ -77,7 +77,8 @@ function specialSite(site) {
   if (/nail/.test(value)) return "nail";
   if (/plantar|palm|sole|\bacral\b/.test(value)) return "acral";
   if (/\bear\b/.test(value)) return "ear";
-  if (/face|cheek|nose|lip|eyelid|forehead|scalp/.test(value)) return "face";
+  if (/scalp/.test(value)) return "scalp";
+  if (/face|cheek|nose|lip|eyelid|forehead/.test(value)) return "face";
   return "not-special";
 }
 

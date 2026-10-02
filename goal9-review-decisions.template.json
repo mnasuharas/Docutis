@@ -729,6 +729,84 @@
       "requiredCorrections": [],
       "approvedReplacementWording": null,
       "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-g25-01",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:81f38f0d9243a5a103955de5910e33949d31e8f3040352b7517ccace323975b9",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-g25-02",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:628bf8a97c0aebfcfa8d8c72dbfdd0b0417a76bc9d1aafe7e889ca944abdb65a",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-g25-03",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:826adbe5821179be6fa4b3e969bf5675edee1c45ca6ef21238a4b0a866173c39",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-g25-04",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:96b097a57030901652b6e4cf415540bc1a6b04da638fa358d65225b1b5ba2a1d",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-g25-05",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:1566a31603b6cf3eb0bf3637f21ab6340885d6beaa536446a60d116e349070da",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-g25-06",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:2682865485b7f900120e26aace5881d09ac8d2f8f8b90ff794ea374debd02700",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
     }
   ]
 }

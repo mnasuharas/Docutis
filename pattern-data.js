@@ -39,6 +39,36 @@
       doi: "10.1097/DAD.0000000000001872",
       metadataCheckedAt: "2026-09-15"
     }),
+    "isd-dermoscopy-terminology-2016": source({
+      id: "isd-dermoscopy-terminology-2016",
+      title: "Standardization of terminology in dermoscopy/dermatoscopy: Results of the third consensus conference of the International Society of Dermoscopy",
+      organization: "International Society of Dermoscopy; Journal of the American Academy of Dermatology",
+      type: "consensus",
+      year: 2016,
+      url: "https://pubmed.ncbi.nlm.nih.gov/26896294/",
+      doi: "10.1016/j.jaad.2015.12.038",
+      metadataCheckedAt: "2026-10-02"
+    }),
+    "saida-acral-dermoscopy-2004": source({
+      id: "saida-acral-dermoscopy-2004",
+      title: "Significance of dermoscopic patterns in detecting malignant melanoma on acral volar skin: results of a multicenter study in Japan",
+      organization: "Archives of Dermatology",
+      type: "peer-reviewed study",
+      year: 2004,
+      url: "https://pubmed.ncbi.nlm.nih.gov/15492186/",
+      doi: "10.1001/archderm.140.10.1233",
+      metadataCheckedAt: "2026-10-02"
+    }),
+    "schiffner-lentigo-maligna-2000": source({
+      id: "schiffner-lentigo-maligna-2000",
+      title: "Improvement of early recognition of lentigo maligna using dermatoscopy",
+      organization: "Journal of the American Academy of Dermatology",
+      type: "peer-reviewed study",
+      year: 2000,
+      url: "https://pubmed.ncbi.nlm.nih.gov/10607316/",
+      doi: "10.1016/s0190-9622(00)90005-7",
+      metadataCheckedAt: "2026-10-02"
+    }),
     "docutis-case-constraint-2026": source({
       id: "docutis-case-constraint-2026",
       title: "Docutis case observation already stored on the linked case",
@@ -71,6 +101,10 @@
     "stuck-on-rough-surface": "diagnostic_structure",
     "cerebriform-surface": "diagnostic_structure",
     "yellow-white-lobules": "diagnostic_structure",
+    "atypical-pigment-network": "diagnostic_structure",
+    "parallel-ridge-pattern": "diagnostic_structure",
+    "perifollicular-gray-dots": "diagnostic_structure",
+    "facial-pseudonetwork": "diagnostic_structure",
     "broad-brown-patch": "descriptive_morphology",
     "solitary-dark-papule": "descriptive_morphology",
     "irregular-brown-patch": "descriptive_morphology",
@@ -846,6 +880,98 @@
       relatedPatternIds: ["grouped-skin-colored-papules"]
     }),
     pat({
+      id: "atypical-pigment-network",
+      displayName: "Atypical pigment network",
+      displayNameDe: "Atypisches Pigmentnetz",
+      internationalTerm: "Atypical pigment network",
+      aliases: ["Irregular pigment network"],
+      modality: "dermoscopic",
+      category: "dermoscopic-structure",
+      definition: "Brown lines form a net, and the net is uneven: lines change in thickness or darkness from one part of the lesion to another, or the net ends abruptly. The ISD terminology consensus names the network as a basic structure. Atypia is a judgement about this net, not a diagnosis.",
+      lookFor: "Find the brown net first. Then compare its lines across the lesion. Say where they are thicker, darker, or missing.",
+      morphologyClues: ["A brown net whose lines are not the same everywhere", "Darker, thicker lines in one area and fainter lines elsewhere"],
+      commonContexts: ["A flat brown lesion on the trunk or limbs examined with a dermatoscope"],
+      malignantAssociations: ["A melanoma in situ case in this library shows this net and has a histopathology sentence in its figure caption."],
+      benignAssociations: ["A histopathology-confirmed nevus with cytologic atypia in this library shows the same kind of net. The net did not separate the two."],
+      mimics: ["Melanocytic nevus with cytologic atypia"],
+      traps: ["Reading an atypical net as a melanoma diagnosis, or reading a regular-looking part of the net as reassurance for the whole lesion."],
+      doesNotProve: ["It does not prove melanoma.", "It does not prove a benign nevus.", "It does not replace histopathology."],
+      usualRole: "context-dependent",
+      sourceIds: ["isd-dermoscopy-terminology-2016", "eado-melanoma-diagnostics-2024"],
+      supports: "The ISD terminology consensus standardizes dermoscopic structure names, including the pigment network. The two linked Goal 25 cases come from one figure whose caption calls both networks atypical and gives a histopathology result for each.",
+      limitsOfClaim: "No threshold for atypia and no performance figure are added. Two examples from one figure are not a rule.",
+      relatedPatternIds: ["color-variegation", "irregular-brown-patch"]
+    }),
+    pat({
+      id: "parallel-ridge-pattern",
+      displayName: "Parallel ridge pattern",
+      displayNameDe: "Parallel-Leisten-Muster",
+      internationalTerm: "Parallel ridge pattern",
+      aliases: ["Pigment along the ridges of acral skin"],
+      modality: "dermoscopic",
+      category: "dermoscopic-structure",
+      definition: "On palm or sole skin, pigment runs in parallel bands that follow the skin markings, and the pigmented bands are broad while the pale lines between them are thin. Saida and coauthors studied this pattern in histopathologically diagnosed acral lesions.",
+      lookFor: "Confirm the site is palm or sole. Compare the width of the pigmented bands with the pale lines between them. Look for white dots of sweat-duct openings on the bands when the resolution allows it.",
+      morphologyClues: ["Broad parallel pigmented bands with thin pale lines between them", "Bands that follow the skin markings of the sole or palm"],
+      commonContexts: ["A flat brown macule on the sole or palm"],
+      malignantAssociations: ["Saida and coauthors report the parallel ridge pattern as a melanoma pattern on acral volar skin, including in situ lesions."],
+      benignAssociations: ["The same study reports parallel furrow and lattice-like patterns in acral nevi. No benign acral case in this library is stored yet."],
+      mimics: ["Acral melanocytic nevus with a parallel furrow pattern"],
+      traps: ["Calling ridge versus furrow from the diagnosis rather than from the band widths, or forgetting that the pattern is read only on palm or sole skin."],
+      doesNotProve: ["It does not prove melanoma by itself.", "It does not prove invasion or thickness.", "It does not apply outside acral volar skin."],
+      usualRole: "characteristic",
+      sourceIds: ["saida-acral-dermoscopy-2004", "isd-dermoscopy-terminology-2016"],
+      supports: "Saida and coauthors describe the parallel ridge pattern in a multicenter study of histopathologically diagnosed acral melanocytic lesions. The ISD consensus standardizes the term.",
+      limitsOfClaim: "Sweat-duct openings are not resolved in the linked frame, so the ridge assignment rests on band width and stays probable. No performance figure is copied.",
+      relatedPatternIds: ["irregular-brown-patch"]
+    }),
+    pat({
+      id: "perifollicular-gray-dots",
+      displayName: "Gray dots around follicular openings",
+      displayNameDe: "Graue Punkte um Follikelöffnungen",
+      internationalTerm: "Slate-gray dots around follicles; annular-granular pattern",
+      aliases: ["Annular-granular structures", "Peppering around follicles"],
+      modality: "dermoscopic",
+      category: "dermoscopic-structure",
+      definition: "On facial skin, small gray or gray-brown dots cluster around the pale round follicular openings. Schiffner and coauthors list slate-gray dots and asymmetric pigmented follicular openings among features of lentigo maligna.",
+      lookFor: "Find the pale round follicular openings first. Then ask whether gray dots sit around them, and whether the rim is even or lopsided.",
+      morphologyClues: ["Gray or gray-brown dots ringing follicular openings", "Gray color mixed into brown facial pigment"],
+      commonContexts: ["A flat brown patch on sun-damaged facial skin"],
+      malignantAssociations: ["Schiffner and coauthors report slate-gray dots and asymmetric pigmented follicular openings as features of lentigo maligna on the face."],
+      benignAssociations: ["Gray dots can also be seen in regressing or lichenoid benign facial lesions. The linked benign facial case does not show them, and that absence is not a clearance."],
+      mimics: ["Lichen planus-like keratosis", "Pigmented actinic keratosis"],
+      traps: ["Counting hair shafts or comedo-like openings as gray dots, or treating their absence as proof of a benign lesion."],
+      doesNotProve: ["It does not prove melanoma in situ.", "It does not prove invasion.", "Its absence does not prove a benign lesion."],
+      usualRole: "supportive",
+      sourceIds: ["schiffner-lentigo-maligna-2000", "isd-dermoscopy-terminology-2016"],
+      supports: "Schiffner and coauthors analyzed dermatoscopic criteria in malignant and benign pigmented facial lesions and list slate-gray dots among the most important features of lentigo maligna.",
+      limitsOfClaim: "Rhomboidal structures were not encoded because they are not clear in the linked frame. No accuracy figure is copied.",
+      relatedPatternIds: ["facial-pseudonetwork"]
+    }),
+    pat({
+      id: "facial-pseudonetwork",
+      displayName: "Facial pseudo-network",
+      displayNameDe: "Pseudonetz im Gesicht",
+      internationalTerm: "Pseudo-network",
+      aliases: ["Brown pigment interrupted by follicular openings"],
+      modality: "dermoscopic",
+      category: "dermoscopic-structure",
+      definition: "On facial skin, flat brown pigment is interrupted by many pale round follicular openings, so the pigment looks like a net. It is a site feature of facial skin, not a melanocytic network.",
+      lookFor: "Notice the pale round holes in the brown pigment. Then look at what surrounds the holes: an even brown rim, or gray dots and thickened lopsided rims.",
+      morphologyClues: ["Brown pigment with many pale round holes", "Holes spaced like facial follicles"],
+      commonContexts: ["Flat brown facial lesions, benign and malignant"],
+      malignantAssociations: ["The linked lentigo maligna case shows a pseudo-network together with gray dots around follicles."],
+      benignAssociations: ["The linked solar lentigo case shows a pseudo-network without gray dots around follicles."],
+      mimics: ["Pigment network on non-facial skin"],
+      traps: ["Calling a facial pseudo-network an atypical pigment network, or treating the pseudo-network itself as a discriminator."],
+      doesNotProve: ["It does not separate a benign from a malignant facial lesion by itself.", "It does not prove a melanocytic lesion."],
+      usualRole: "nonspecific",
+      sourceIds: ["isd-dermoscopy-terminology-2016", "schiffner-lentigo-maligna-2000"],
+      supports: "The ISD consensus standardizes dermoscopic terms. Schiffner and coauthors studied facial lesions, where follicular openings shape the pigment, and separated benign from malignant lesions by what happens around the follicles.",
+      limitsOfClaim: "Shared by both linked facial cases. It is taught as a background to read, not as a clue in either direction.",
+      relatedPatternIds: ["perifollicular-gray-dots", "atypical-pigment-network"]
+    }),
+    pat({
       id: "printed-circle-and-scale",
       displayName: "Printed circle and scale",
       modality: "none",
@@ -922,6 +1048,19 @@
       Object.freeze({ casePatternId: "pat-g24-01-scale", canonicalId: "measuring-scale-in-frame" }),
       Object.freeze({ casePatternId: "pat-g24-02-ink", canonicalId: "marker-ink" }),
       Object.freeze({ casePatternId: "pat-g24-02-scale", canonicalId: "measuring-scale-in-frame" }),
+      Object.freeze({ casePatternId: "pat-g25-01-network", canonicalId: "atypical-pigment-network" }),
+      Object.freeze({ casePatternId: "pat-g25-01-outline", canonicalId: "irregular-brown-patch" }),
+      Object.freeze({ casePatternId: "pat-g25-01-scale", canonicalId: "measuring-scale-in-frame" }),
+      Object.freeze({ casePatternId: "pat-g25-02-network", canonicalId: "atypical-pigment-network" }),
+      Object.freeze({ casePatternId: "pat-g25-02-scale", canonicalId: "measuring-scale-in-frame" }),
+      Object.freeze({ casePatternId: "pat-g25-03-papule", canonicalId: "pink-nodule-without-pigment" }),
+      Object.freeze({ casePatternId: "pat-g25-03-vessels", canonicalId: "polymorphous-vessels" }),
+      Object.freeze({ casePatternId: "pat-g25-04-ridges", canonicalId: "parallel-ridge-pattern" }),
+      Object.freeze({ casePatternId: "pat-g25-05-gray", canonicalId: "perifollicular-gray-dots" }),
+      Object.freeze({ casePatternId: "pat-g25-05-pseudo", canonicalId: "facial-pseudonetwork" }),
+      Object.freeze({ casePatternId: "pat-g25-06-pseudo", canonicalId: "facial-pseudonetwork" }),
+      Object.freeze({ casePatternId: "pat-g25-06-gray", canonicalId: "perifollicular-gray-dots" }),
+      Object.freeze({ casePatternId: "pat-g25-06-scale", canonicalId: "measuring-scale-in-frame" }),
     ]),
     dermoscopicTokenLinks: Object.freeze({
       arborizing_vessels: "arborizing-vessels",
@@ -950,6 +1089,26 @@
       Object.freeze({
         casePatternId: "pat-g24-02-colors",
         reason: "Pink and brown are both visible in one patch. That is not the stored pattern of more than one dark color, so it stays case-specific rather than a new pattern id."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g25-01-dots",
+        reason: "A few small dark dots are probable in one frame. A reusable dots-and-globules pattern is deferred until a clearer example exists, rather than created from one weak example."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g25-02-bubbles",
+        reason: "Air bubbles and hairs are contact-fluid and occlusion marks. They are not a skin pattern and are not added to the artifact library from one case."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g25-03-crust",
+        reason: "A small orange-brown crust is visible. The caption calls it ulceration, and no ulceration pattern is created from a caption word and one frame."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g25-04-focus",
+        reason: "A darker central focus is a case-specific observation, not a named acral structure."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g25-05-side",
+        reason: "Pigment darker on one side is case-specific asymmetry. Asymmetric pigmented follicular openings were not claimed as a separate structure at this resolution."
       })
     ])
   });

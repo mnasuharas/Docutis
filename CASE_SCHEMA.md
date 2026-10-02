@@ -128,3 +128,9 @@ Clinical review remains deferred. All new clinical content remains review requir
 ## Goal 24 evidence-grade acquisition
 
 Schema version stays 1. Two source-documented pairs were added from Wikimedia Commons files whose descriptions name a dermatoscope view of the same labeled lesion. Confirmation stays `clinical_diagnosis` because the file pages do not report histopathology. `acquisition-ledger.js` is a candidate registry, not a clinical object. Rejected rows are not cases. Clinical review remains deferred. All new clinical content remains review required.
+
+## Goal 25 histopathology source and composite panels
+
+Schema version stays 1. `diagnosticGroundTruth.histopathologySource` is optional and allowed only with `confirmationMethod: "histopathology"`. Its values are `figure_caption` (a caption sentence about that lesion) and `article_methods` (a study-level methods statement that every lesion of that class was histologically confirmed). A study-level statement is weaker and the case says so. `marked for biopsy` is never histopathology, and a pathology panel in the same paper is not proof unless the figure ties it to the same lesion.
+
+Panels cropped from a composite figure use `modificationStatus: "cropped"`. `modificationsNotes` records the figure, panel, source file, source sha256, pixel box, method, and output sha256. The matching `acquisition-ledger.js` row repeats them, and `node scripts/acquisition.js` recomputes the output hash. A composite is split only when the license allows adaptation, no third-party exclusion applies, and the caption ties the clinical and dermoscopic panels to one lesion or one case. Clinical review remains deferred. All new clinical content remains review required.
