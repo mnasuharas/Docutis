@@ -47,12 +47,14 @@ test("ridge, furrow, and fibrillar claims are not inferred from the diagnosis", 
   const audit = buildAudit();
   const ridge = audit.patterns.find(item => item.id === "parallel-ridge-pattern");
   const positives = ridge.occurrences.filter(row => positive(row.certainty)).map(row => row.caseId);
-  assert.equal(JSON.stringify(positives), JSON.stringify(["case-g25-04"]));
+  assert.equal(positives.some(id => id.startsWith("case-g26-")), false);
+  assert.equal(JSON.stringify(positives), JSON.stringify(["case-g25-04", "case-g27-03"]));
   const melanoma = data.cases.find(item => item.id === "case-g26-01");
   const ridgeOnMelanoma = melanoma.patterns.find(pattern => map.get(pattern.id) === "parallel-ridge-pattern");
   assert.equal(ridgeOnMelanoma.certainty, "not_visible");
   assert.equal(data.cases.find(item => item.id === "case-g26-03").patterns.find(pattern => map.get(pattern.id) === "parallel-ridge-pattern").certainty, "uncertain");
-  assert.equal(loadPatternData().patterns.some(item => /furrow/.test(item.id)), false);
+  const furrow = audit.patterns.find(item => item.id === "parallel-furrow-pattern");
+  assert.equal(furrow.occurrences.some(row => row.caseId.startsWith("case-g26-")), false);
   for (const id of goal26) {
     const item = data.cases.find(entry => entry.id === id);
     for (const pattern of item.patterns) {

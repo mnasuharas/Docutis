@@ -104,7 +104,7 @@ test("pattern-rich needs a visible dermoscopic diagnostic structure and equivoca
   const data = loadCaseData();
   const patterns = loadPatternData();
   const rich = patternRichPairIds(data, patterns);
-  assert.equal(JSON.stringify(rich.filter(id => !id.startsWith("case-g26-"))), JSON.stringify(["case-g21-08", ...goal25]));
+  assert.equal(JSON.stringify(rich.filter(id => !/^case-g2[67]-/.test(id))), JSON.stringify(["case-g21-08", ...goal25]));
   assert.equal(JSON.stringify(equivocalPairIds(data)), JSON.stringify(["case-g24-01", "case-g24-02"]));
   for (const id of equivocalPairIds(data)) assert.equal(rich.includes(id), false);
   const weakened = clone(data);
@@ -175,7 +175,7 @@ test("scalp is not counted as face, and special-site pairs are named honestly", 
   assert.equal(specialSite("Face, periorbital region"), "face");
   assert.equal(specialSite("Left heel, plantar sole"), "acral");
   const metrics = buildPairedMetrics();
-  assert.equal(JSON.stringify(metrics.specialSiteTruePairs.filter(id => !id.startsWith("case-g26-"))), JSON.stringify(["case-g24-01", "case-g25-04", "case-g25-05", "case-g25-06"]));
+  assert.equal(JSON.stringify(metrics.specialSiteTruePairs.filter(id => !/^case-g2[67]-/.test(id))), JSON.stringify(["case-g24-01", "case-g25-04", "case-g25-05", "case-g25-06"]));
   assert.equal(metrics.specialSiteTruePairs.includes("case-g25-03"), false);
 });
 
@@ -221,7 +221,7 @@ test("new content stays review required and earlier reviewed units are unchanged
     assert.equal(item.recordedScreeningDecision, null);
     assert.equal(status.assets.find(asset => asset.assetType === "case" && asset.id === id).status, "review required");
   }
-  for (const item of data.cases.filter(entry => !goal25.includes(entry.id) && !entry.id.startsWith("case-g26-"))) {
+  for (const item of data.cases.filter(entry => !goal25.includes(entry.id) && !/^case-g2[67]-/.test(entry.id))) {
     const asset = published.assets.find(row => row.assetType === "case" && row.id === item.id);
     assert.equal(caseFingerprint(item), asset.currentFingerprint, item.id);
   }

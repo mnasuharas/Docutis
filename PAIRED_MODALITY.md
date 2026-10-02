@@ -69,3 +69,9 @@ These are qualitative curriculum counts, not a score and not mastery. Clinical r
 ## Goal 26
 
 Seven special-site true pairs were added: four acral and three nail. Five are `same_lesion_confirmed`. The heel melanoma and heel nevus are `source_documented_pair`, because the caption names them by dermoscopic panel letters and pairs the clinical panels by letter order. The paired-metric output now lists 16 true pairs, 14 pattern-rich and 2 equivocal. Absence matters too: the heel melanoma and the heel nevus both record the parallel ridge pattern as not visible, so the curriculum shows that the pattern is a weighted clue rather than an equation.
+
+## Goal 27
+
+Six special-site true pairs were added: four acral and two nail. Four are `same_lesion_confirmed`. The sole nevus cluster is a `source_documented_pair` because its dermoscopic field is not mapped to individual clinical spots, and the nail haemorrhage is one because its caption pairs panels by letter order. The paired-metric output now lists 22 true pairs, 20 pattern-rich and 2 equivocal.
+
+The metric output also prints a per-structure repetition table. A positive observation is a case pattern recorded as clearly visible or probable. An independent positive case is a distinct case id, so two panels or two patterns of one lesion count once. Certainty, benign and malignant poles, true pairs, and histopathology-confirmed cases are listed per structure. These are qualitative counts, not mastery and not a score.

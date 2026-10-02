@@ -123,6 +123,7 @@
     "yellow-white-lobules": "diagnostic_structure",
     "atypical-pigment-network": "diagnostic_structure",
     "parallel-ridge-pattern": "diagnostic_structure",
+    "parallel-furrow-pattern": "diagnostic_structure",
     "perifollicular-gray-dots": "diagnostic_structure",
     "facial-pseudonetwork": "diagnostic_structure",
     "fibrillar-pattern": "diagnostic_structure",
@@ -939,15 +940,38 @@
       morphologyClues: ["Broad parallel pigmented bands with thin pale lines between them", "Bands that follow the skin markings of the sole or palm"],
       commonContexts: ["A flat brown macule on the sole or palm"],
       malignantAssociations: ["Saida and coauthors report the parallel ridge pattern as a melanoma pattern on acral volar skin, including in situ lesions."],
-      benignAssociations: ["The same study reports parallel furrow and lattice-like patterns in acral nevi. No benign acral case in this library is stored yet."],
+      benignAssociations: ["The same study reports parallel furrow and lattice-like patterns in acral nevi. The linked benign acral cases show thin furrow lines or regular fibrillar rows, not broad ridge bands."],
       mimics: ["Acral melanocytic nevus with a parallel furrow pattern"],
       traps: ["Calling ridge versus furrow from the diagnosis rather than from the band widths, or forgetting that the pattern is read only on palm or sole skin."],
       doesNotProve: ["It does not prove melanoma by itself.", "It does not prove invasion or thickness.", "It does not apply outside acral volar skin."],
       usualRole: "characteristic",
       sourceIds: ["saida-acral-dermoscopy-2004", "isd-dermoscopy-terminology-2016"],
       supports: "Saida and coauthors describe the parallel ridge pattern in a multicenter study of histopathologically diagnosed acral melanocytic lesions. The ISD consensus standardizes the term.",
-      limitsOfClaim: "Sweat-duct openings are not resolved in the linked frame, so the ridge assignment rests on band width and stays probable. No performance figure is copied.",
-      relatedPatternIds: ["irregular-brown-patch"]
+      limitsOfClaim: "Sweat-duct openings are not resolved in the linked positive frames. One assignment rests on band width; the other also uses white scale in the furrows. Both stay probable. No performance figure is copied.",
+      relatedPatternIds: ["irregular-brown-patch", "parallel-furrow-pattern"]
+    }),
+    pat({
+      id: "parallel-furrow-pattern",
+      displayName: "Parallel furrow pattern",
+      displayNameDe: "Parallel-Furchen-Muster",
+      internationalTerm: "Parallel furrow pattern",
+      aliases: ["Pigment along the furrows of acral skin"],
+      modality: "dermoscopic",
+      category: "dermoscopic-structure",
+      definition: "On palm or sole skin, thin pigmented lines follow the furrows of the skin markings, with broader pale ridges between them. The lines may be single, doubled, or dotted. Saida and coauthors report it as the commonest pattern of acral nevi.",
+      lookFor: "Confirm the site is palm or sole. Find a furrow or ridge marker first: white pore dots sit on the ridges, and scale collects in the furrows. Then ask whether the thin pigmented lines sit in the furrows. Without a marker, compare line width with the pale bands and keep the call probable.",
+      morphologyClues: ["Thin pigmented lines with broader pale bands between them", "White pore dots on the pale bands, when resolved"],
+      commonContexts: ["Small brown macules on the sole or palm"],
+      malignantAssociations: ["The linked palm melanoma in situ shows a diffuse furrow pattern together with an eccentric blotch and several browns. A furrow pattern does not exclude melanoma."],
+      benignAssociations: ["Saida and coauthors report the parallel furrow pattern as the typical acral nevus pattern. The linked benign sole cases show it, one with lesion-cluster histopathology and one with follow-up stability."],
+      mimics: ["Parallel ridge pattern when the white scale lines are mistaken for pigment", "Fibrillar pattern seen at an angle"],
+      traps: ["Treating a furrow pattern as a clearance, or calling furrow versus ridge from the diagnosis rather than from where the pigment sits."],
+      doesNotProve: ["It does not prove a nevus.", "It does not outrank a blotch, several browns, or reported change.", "It does not apply outside acral volar skin."],
+      usualRole: "context-dependent",
+      sourceIds: ["saida-acral-dermoscopy-2004", "isd-dermoscopy-terminology-2016"],
+      supports: "Saida and coauthors describe the parallel furrow pattern in a multicenter study of histopathologically diagnosed acral melanocytic lesions. The ISD consensus standardizes the term.",
+      limitsOfClaim: "Pores are resolved only in the linked palm frame; the sole frames rest on width and stay probable. Linked positives sit in both benign and malignant cases. No performance figure is copied.",
+      relatedPatternIds: ["parallel-ridge-pattern", "fibrillar-pattern"]
     }),
     pat({
       id: "perifollicular-gray-dots",
@@ -1016,7 +1040,7 @@
       sourceIds: ["saida-acral-dermoscopy-2004", "isd-dermoscopy-terminology-2016"],
       supports: "Saida and coauthors studied dermoscopic patterns of histopathologically diagnosed acral melanocytic lesions. The ISD consensus standardizes the terms. The two linked Goal 25 and 26 frames show the regular and the irregular form.",
       limitsOfClaim: "Furrow orientation and sweat-duct openings are not resolved in the linked frames, so certainty stays probable. No performance figure is copied.",
-      relatedPatternIds: ["parallel-ridge-pattern", "irregular-acral-pigmentation"]
+      relatedPatternIds: ["parallel-ridge-pattern", "irregular-acral-pigmentation", "parallel-furrow-pattern"]
     }),
     pat({
       id: "irregular-acral-pigmentation",
@@ -1038,7 +1062,7 @@
       usualRole: "context-dependent",
       sourceIds: ["saida-acral-dermoscopy-2004", "isd-dermoscopy-terminology-2016"],
       supports: "Saida and coauthors describe irregular diffuse pigmentation in histopathologically diagnosed acral melanoma.",
-      limitsOfClaim: "One linked example at modest resolution; certainty stays probable. No performance figure is copied.",
+      limitsOfClaim: "Linked examples are a heel melanoma at modest resolution, an outer-heel melanoma in situ, and an eccentric blotch on a palm melanoma in situ. Certainty is recorded per case. No performance figure is copied.",
       relatedPatternIds: ["parallel-ridge-pattern", "fibrillar-pattern"]
     }),
     pat({
@@ -1054,7 +1078,7 @@
       morphologyClues: ["Brown or black lines along the length of the plate", "Lines that vary in colour or thickness"],
       commonContexts: ["Longitudinal melanonychia in children and adults"],
       malignantAssociations: ["Ronger and coauthors associate irregular longitudinal lines on a brown background with nail-apparatus melanoma. The linked great-toenail melanoma shows irregular lines with plate damage."],
-      benignAssociations: ["The linked childhood nevi show irregular lines too. The source article says such findings are common in benign childhood melanonychia."],
+      benignAssociations: ["The linked childhood nevi show irregular lines too. The source article says such findings are common in benign childhood melanonychia. The linked adult nail matrix nevus shows regular thin lines of one colour."],
       mimics: ["Nail-matrix nevus", "Pigmented squamous cell carcinoma in situ of the nail", "Subungual haemorrhage"],
       traps: ["Using line irregularity alone to separate a childhood nevus from melanoma, or calling a fold or cuticle shadow a Hutchinson sign."],
       doesNotProve: ["It does not prove melanoma.", "It does not prove matrix origin.", "One frame does not show change over time."],
@@ -1077,14 +1101,14 @@
       morphologyClues: ["Red to maroon homogeneous colour", "No lines, network, or dots of melanin"],
       commonContexts: ["Heel, toe, finger, or nail after friction or trauma, often without a remembered injury"],
       malignantAssociations: ["Ronger and coauthors note that blood spots in a nail do not rule out melanoma."],
-      benignAssociations: ["Elmas and Akdeniz describe homogeneous red to black pigmentation in subcorneal haematoma. The linked acral case resolved at follow-up."],
+      benignAssociations: ["Elmas and Akdeniz describe homogeneous red to black pigmentation in subcorneal haematoma. The linked acral case resolved at follow-up. The linked nail case shows a red-black blot with red border globules."],
       mimics: ["Acral melanoma", "Nail-unit melanoma"],
       traps: ["Reassuring because blood is present, or calling dark blood brown melanin."],
       doesNotProve: ["It does not prove a benign lesion.", "It does not exclude a tumour beside or under the blood."],
       usualRole: "supportive",
       sourceIds: ["elmas-subcorneal-hematoma-2019", "ronger-nail-pigmentation-2002"],
       supports: "Elmas and Akdeniz studied the dermoscopy of subcorneal haematoma; Ronger and coauthors report blood spots in subungual haemorrhage and caution that they do not exclude melanoma.",
-      limitsOfClaim: "One linked acral example with clinical follow-up and no histopathology. No nail haemorrhage with dermoscopy is stored yet.",
+      limitsOfClaim: "One linked acral example with clinical follow-up and one linked nail example with caption-only verification. Neither has histopathology. No migration is claimed from a single frame.",
       relatedPatternIds: ["irregular-acral-pigmentation"]
     }),
     pat({
@@ -1193,6 +1217,25 @@
       Object.freeze({ casePatternId: "pat-g26-06-plate", canonicalId: "nail-plate-destruction" }),
       Object.freeze({ casePatternId: "pat-g26-07-lines", canonicalId: "longitudinal-nail-plate-lines" }),
       Object.freeze({ casePatternId: "pat-g26-07-plate", canonicalId: "nail-plate-destruction" }),
+      Object.freeze({ casePatternId: "pat-g27-01-furrow", canonicalId: "parallel-furrow-pattern" }),
+      Object.freeze({ casePatternId: "pat-g27-01-ridge", canonicalId: "parallel-ridge-pattern" }),
+      Object.freeze({ casePatternId: "pat-g27-01-macules", canonicalId: "flat-brown-macule" }),
+      Object.freeze({ casePatternId: "pat-g27-02-furrow", canonicalId: "parallel-furrow-pattern" }),
+      Object.freeze({ casePatternId: "pat-g27-02-ridge", canonicalId: "parallel-ridge-pattern" }),
+      Object.freeze({ casePatternId: "pat-g27-03-ridge", canonicalId: "parallel-ridge-pattern" }),
+      Object.freeze({ casePatternId: "pat-g27-03-furrow", canonicalId: "parallel-furrow-pattern" }),
+      Object.freeze({ casePatternId: "pat-g27-03-uneven", canonicalId: "irregular-acral-pigmentation" }),
+      Object.freeze({ casePatternId: "pat-g27-03-patch", canonicalId: "irregular-brown-patch" }),
+      Object.freeze({ casePatternId: "pat-g27-03-scale", canonicalId: "measuring-scale-in-frame" }),
+      Object.freeze({ casePatternId: "pat-g27-04-furrow", canonicalId: "parallel-furrow-pattern" }),
+      Object.freeze({ casePatternId: "pat-g27-04-ridge", canonicalId: "parallel-ridge-pattern" }),
+      Object.freeze({ casePatternId: "pat-g27-04-blotch", canonicalId: "irregular-acral-pigmentation" }),
+      Object.freeze({ casePatternId: "pat-g27-04-arrows", canonicalId: "printed-pointer" }),
+      Object.freeze({ casePatternId: "pat-g27-04-scale", canonicalId: "measuring-scale-in-frame" }),
+      Object.freeze({ casePatternId: "pat-g27-05-lines", canonicalId: "longitudinal-nail-plate-lines" }),
+      Object.freeze({ casePatternId: "pat-g27-05-plate", canonicalId: "nail-plate-destruction" }),
+      Object.freeze({ casePatternId: "pat-g27-06-blood", canonicalId: "hemorrhagic-structureless-area" }),
+      Object.freeze({ casePatternId: "pat-g27-06-lines", canonicalId: "longitudinal-nail-plate-lines" }),
     ]),
     dermoscopicTokenLinks: Object.freeze({
       arborizing_vessels: "arborizing-vessels",
@@ -1249,6 +1292,30 @@
       Object.freeze({
         casePatternId: "pat-g26-07-hypo",
         reason: "Faint colour below the free edge is not clear enough to call periungual pigment. The caption's Hutchinson sign is not encoded."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g27-02-globules",
+        reason: "Small dark dots and globules are clearly visible along the lines. A reusable dots-and-globules pattern stays deferred, as in Goal 25, rather than created from case-specific dots."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g27-03-line",
+        reason: "A thin straight line in the source figure crosses both panels. It is a one-off figure mark, so it stays case-specific rather than a new artifact id."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g27-05-fold",
+        reason: "No fold pigment is visible. An absent fold finding is recorded on the case only; no Hutchinson or periungual pattern is created or linked."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g27-06-globules",
+        reason: "Rounded red border globules are clearly visible on the first nail haemorrhage with dermoscopy. A separate pattern id is deferred until a second independent nail blood example exists."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g27-06-edge",
+        reason: "A broken free edge with debris is visible only on the clinical frame and its cause is not stated. Nail-plate links are counted from dermoscopic frames, so it stays case-specific."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g27-06-streak",
+        reason: "A thin dark streak toward the free edge is seen in one frame. No migration or growth-out is claimed, so it stays case-specific."
       })
     ])
   });

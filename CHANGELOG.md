@@ -6,6 +6,14 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 These entries are on the stacked development branch and are not merged to `main`.
 
+### Goal 27 — Acral and nail pattern repetition
+
+- Add six clinical and dermoscopic pairs from CC BY 4.0 open-access articles: a cluster of sole nevi with a furrow pattern (histopathology from a later biopsy, timing recorded), a sole nevus with a furrow pattern verified by five years of stability, a palm melanoma in situ with a furrow pattern and an eccentric blotch, a heel melanoma in situ with a ridge pattern (histopathology in the figure caption), an adult nail matrix nevus with regular lines (histopathology in the figure caption), and a subungual haemorrhage with onychoscopy labelled by a review caption. Panels were cropped from composite figures with recorded boxes and hashes; for lossless PDF images the source hash is taken over the decoded pixel buffer.
+- Add the parallel furrow pattern as a dermoscopic structure, linked in benign and malignant cases. The parallel ridge pattern gains an independent second positive case. Ridge and furrow stay probable unless pores or scale resolve the anatomy; only the palm frame resolves pores.
+- Report positive observations and independent positive cases separately per structure in `node scripts/paired-modality.js`.
+- Record 40 Goal 27 ledger candidates, including two revisits of earlier rows. No histopathology-confirmed nail melanoma with onychoscopy was found under an allowed license.
+- All new content stays review required. No clinician review was recorded. No release was published.
+
 ### Goal 26 — Acral and nail contrastive dermoscopy
 
 - Add seven clinical and dermoscopic pairs from CC BY 4.0 open-access articles: a heel melanoma and a heel nevus from one figure (study-level histopathology), an acral lentiginous melanoma in situ with an irregular stroke pattern, an acral subcorneal haematoma confirmed by resolution at follow-up, two childhood nail-band nevi with histopathology in the case text, and an adult great-toenail melanoma labelled by a peer-reviewed caption. Panels were cropped from composite figures with recorded boxes and hashes.

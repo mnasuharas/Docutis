@@ -138,3 +138,7 @@ Panels cropped from a composite figure use `modificationStatus: "cropped"`. `mod
 ## Goal 26 case-text histopathology
 
 `histopathologySource` also accepts `case_text`: a histopathology sentence about that lesion in the article's case narrative, outside the figure caption. It sits between `figure_caption` and `article_methods`. When a biopsy predates the photographs, the case says so. A peer-reviewed caption without a histopathology sentence stays `clinical_diagnosis`. Clinical review remains deferred. All new clinical content remains review required.
+
+## Goal 27 crop provenance and timing
+
+Schema version stays 1. When a PDF stores a figure losslessly, PDF extractors re-encode it differently, so `sourceSha256` is taken over the decoded RGB pixel buffer and the notes and ledger method say so; the article PDF hash is recorded beside it. JPEG figures keep the hash of the embedded bytes. When histopathology comes from a biopsy taken after the photographs, or from one spot of a cluster, the confirmation notes say so; it is not treated as same-day verification of the photographed lesion. A nevus verified only by follow-up stability stays `clinical_diagnosis`. Clinical review remains deferred. All new clinical content remains review required.

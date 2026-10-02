@@ -21,7 +21,7 @@ test("the acquisition ledger is valid and separate from clinical cases", () => {
   const ledger = loadLedger();
   const data = loadCaseData();
   const report = validateLedger(ledger, data);
-  assert.equal(report.counts.accepted, 15);
+  assert.equal(report.counts.accepted, 21);
   assert.equal(ledger.candidates.filter(row => row.goal == null && row.status === "accepted").length, 2);
   assert.ok(report.counts.rejected_license >= 1);
   assert.ok(report.counts.rejected_not_true_pair >= 1);
@@ -114,6 +114,6 @@ test("the ledger does not change reviewed fingerprints or pilot case fingerprint
   }
   const metrics = buildPairedMetrics(data);
   assert.equal(metrics.pairedMelanomaWithHistopathology.some(id => id.startsWith("case-g24-")), false);
-  assert.equal(metrics.pairedMelanomaWithHistopathology.length, 6);
+  assert.equal(metrics.pairedMelanomaWithHistopathology.length, 8);
   assert.ok(metrics.paired.includes("case-g21-08"));
 });

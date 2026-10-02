@@ -175,6 +175,37 @@ function equivocalPairIds(caseData = loadCaseData()) {
   return (caseData.pairProvenance || []).filter(row => paired.has(row.caseId) && row.informationGain === "dermoscopy_remains_equivocal").map(row => row.caseId);
 }
 
+/* Per-structure repetition. Observations are positive case patterns; independent cases are distinct case ids, so two panels or two patterns from one lesion count once. */
+function buildStructureRepetition(caseData = loadCaseData(), audit = null) {
+  const report = audit || buildAudit(loadPatternData(), caseData);
+  const paired = truePairIds(caseData);
+  const isBenign = pole => pole === "benign" || pole === "benign-or-inflammatory";
+  const rows = [];
+  for (const pattern of report.patterns) {
+    if (pattern.educationalRole !== "diagnostic_structure" || artifactIds.has(pattern.id)) continue;
+    const occurrences = (pattern.occurrences || []).filter(row => row.evidence === "case-pattern");
+    const positives = positiveExamples({ occurrences });
+    const cases = new Map();
+    for (const row of positives) if (!cases.has(row.caseId)) cases.set(row.caseId, row);
+    const independent = [...cases.values()];
+    const count = certainty => occurrences.filter(row => row.certainty === certainty).length;
+    rows.push({
+      id: pattern.id,
+      positiveObservations: positives.length,
+      independentPositiveCases: independent.map(row => row.caseId),
+      clearlyVisible: count("clearly_visible"),
+      probablyVisible: count("probably"),
+      uncertain: count("uncertain"),
+      notVisible: count("not_visible"),
+      benignCases: independent.filter(row => isBenign(row.pole)).map(row => row.caseId),
+      malignantCases: independent.filter(row => row.pole === "malignant").map(row => row.caseId),
+      truePairCases: independent.filter(row => paired.has(row.caseId)).map(row => row.caseId),
+      histopathologyCases: independent.filter(row => row.confirmationMethod === "histopathology").map(row => row.caseId)
+    });
+  }
+  return rows;
+}
+
 function buildPairedMetrics(caseData = loadCaseData(), audit = null) {
   validatePairProvenance(caseData);
   const report = audit || buildAudit(loadPatternData(), caseData);
@@ -201,7 +232,10 @@ function buildPairedMetrics(caseData = loadCaseData(), audit = null) {
   const pairedContrastive = (caseData.comparisons || []).filter(item => paired.has(item.caseIdA) && paired.has(item.caseIdB));
   const patternRich = new Set(patternRichPairIds(caseData));
   const isBenign = item => item.pole === "benign" || item.pole === "benign-or-inflammatory";
+  const repetition = buildStructureRepetition(caseData, report);
   return {
+    structureRepetition: repetition,
+    diagnosticStructuresWithMoreThanOneIndependentPositiveCase: repetition.filter(row => row.independentPositiveCases.length > 1).map(row => row.id),
     patternRichPairs: pairedCases.filter(item => patternRich.has(item.id)).map(item => item.id),
     equivocalPairs: equivocalPairIds(caseData),
     patternRichPairedMelanoma: pairedMelanoma.filter(item => patternRich.has(item.id)).map(item => item.id),
@@ -272,7 +306,10 @@ function formatMetrics(metrics) {
     line("Special-site true pairs (face, acral, nail)", metrics.specialSiteTruePairs),
     line("Benign mimics with dermoscopy", metrics.benignMimicsWithDermoscopy),
     line("Diagnostic structures with more than one positive example", metrics.diagnosticStructuresWithMoreThanOnePositiveExample),
+    line("Diagnostic structures with more than one independent positive case", metrics.diagnosticStructuresWithMoreThanOneIndependentPositiveCase),
     line("Diagnostic structures in both benign and malignant contexts", metrics.structuresInBenignAndMalignantContexts),
+    "Structure repetition (observations / independent cases; clear, probable, uncertain, not visible; benign, malignant, true-pair, histopathology cases):",
+    ...metrics.structureRepetition.filter(row => row.positiveObservations || row.uncertain || row.notVisible).map(row => `  - ${row.id}: ${row.positiveObservations} / ${row.independentPositiveCases.length}; ${row.clearlyVisible}, ${row.probablyVisible}, ${row.uncertain}, ${row.notVisible}; ${row.benignCases.length}, ${row.malignantCases.length}, ${row.truePairCases.length}, ${row.histopathologyCases.length}`),
     line("Special-site cases with dermoscopy", metrics.specialSiteCasesWithDermoscopy),
     line("True paired contrastive relationships", metrics.truePairedContrastiveRelationships),
     "Clinical review remains deferred. All new clinical content remains review required."
@@ -295,5 +332,5 @@ if (require.main === module) {
 
 module.exports = {
   pairProvenanceValues, informationGainValues, artifactIds,
-  validatePairProvenance, validatePairedModality, buildPairedMetrics, patternRichPairIds, equivocalPairIds, auditFeatureTaxonomy, formatMetrics, truePairIds, main
+  validatePairProvenance, validatePairedModality, buildPairedMetrics, buildStructureRepetition, patternRichPairIds, equivocalPairIds, auditFeatureTaxonomy, formatMetrics, truePairIds, main
 };

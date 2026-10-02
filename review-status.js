@@ -4155,6 +4155,348 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
         "safety-notice",
         "provenance"
       ]
+    },
+    {
+      "id": "case-g27-01",
+      "assetType": "case",
+      "title": "A cluster of small brown spots on the sole",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:ebca82c6130e14a69500d5af5e11d2b816498524aab1199c0e92af84dbf320e9",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1016/j.jdcr.2026.05.048"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Terada A, Rokunohe D, Sawamura D, Akasaka E. JAAD Case Reports 2026, via PubMed Central (PMC13319713)",
+          "organization": "Terada and coauthors, JAAD Case Reports 2026, Figure 1 panel B, doi:10.1016/j.jdcr.2026.05.048. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.jdcr.2026.05.048",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Terada A, Rokunohe D, Sawamura D, Akasaka E. JAAD Case Reports 2026, via PubMed Central (PMC13319713)",
+          "organization": "Terada and coauthors, JAAD Case Reports 2026, Figure 2 panel A, doi:10.1016/j.jdcr.2026.05.048. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.jdcr.2026.05.048",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g27-02",
+      "assetType": "case",
+      "title": "A small dark spot on the sole",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:5747f0c781692afee836703424105587c752a4c39f4594032ad58e56806a59f4",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1111/ijd.70384"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Erol Mart HM, Aydemir AT, Pietkiewicz P, Akay BN. International Journal of Dermatology 2026, via PubMed Central (PMC13342755)",
+          "organization": "Erol Mart and coauthors, International Journal of Dermatology 2026, Figure 1 panel a, doi:10.1111/ijd.70384. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1111/ijd.70384",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Erol Mart HM, Aydemir AT, Pietkiewicz P, Akay BN. International Journal of Dermatology 2026, via PubMed Central (PMC13342755)",
+          "organization": "Erol Mart and coauthors, International Journal of Dermatology 2026, Figure 1 panel b, doi:10.1111/ijd.70384. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1111/ijd.70384",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g27-03",
+      "assetType": "case",
+      "title": "A large dark patch on the outer heel",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:7611d0c5555b0b0dc247b81813061d06c2f7af8e63cfd2f9daa08c9682c4deda",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/dermatopathology9030035"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Park S, Yun SJ. Dermatopathology 2022, via PubMed Central (PMC9397077)",
+          "organization": "Park and Yun, Dermatopathology 2022, Figure 5 panel A, doi:10.3390/dermatopathology9030035. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/dermatopathology9030035",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Park S, Yun SJ. Dermatopathology 2022, via PubMed Central (PMC9397077)",
+          "organization": "Park and Yun, Dermatopathology 2022, Figure 5 panel B, doi:10.3390/dermatopathology9030035. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/dermatopathology9030035",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g27-04",
+      "assetType": "case",
+      "title": "A brown oval patch at the base of a finger",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:56903bf1f4707b2ab9cb339a509b5cf8d8bce5e9cdb2ed77bd896852350a2830",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1016/j.jdcr.2024.09.025"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Money SM, Davis LS, Rabinovitz HS, Powell MR, Buchanan KL. JAAD Case Reports 2024, via PubMed Central (PMC11626072)",
+          "organization": "Money and coauthors, JAAD Case Reports 2024, Figure 1 panel B, doi:10.1016/j.jdcr.2024.09.025. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.jdcr.2024.09.025",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Money SM, Davis LS, Rabinovitz HS, Powell MR, Buchanan KL. JAAD Case Reports 2024, via PubMed Central (PMC11626072)",
+          "organization": "Money and coauthors, JAAD Case Reports 2024, Figure 2 panel A, doi:10.1016/j.jdcr.2024.09.025. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.jdcr.2024.09.025",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g27-05",
+      "assetType": "case",
+      "title": "A narrow brown band in an adult's fingernail",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:f23b3362a3be18a93d1c3a1852f3e5ffbfc363794571fa16336e63eef925d229",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/dermatopathology9030035"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Park S, Yun SJ. Dermatopathology 2022, via PubMed Central (PMC9397077)",
+          "organization": "Park and Yun, Dermatopathology 2022, Figure 2 panel A, doi:10.3390/dermatopathology9030035. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/dermatopathology9030035",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Park S, Yun SJ. Dermatopathology 2022, via PubMed Central (PMC9397077)",
+          "organization": "Park and Yun, Dermatopathology 2022, Figure 2 panel B, doi:10.3390/dermatopathology9030035. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/dermatopathology9030035",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g27-06",
+      "assetType": "case",
+      "title": "A dark blot under a nail",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:e556c82ed133b42fb763bb57190e661554540a5cf0b90814808340f72b68cb47",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1016/j.abd.2024.01.005"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Bertanha L, Noriega LF, Di Chiacchio NG, Matter A, Di Chiacchio N. Anais Brasileiros de Dermatologia 2024, via PubMed Central (PMC11551238)",
+          "organization": "Bertanha and coauthors, Anais Brasileiros de Dermatologia 2024, Figure 1 panel A, doi:10.1016/j.abd.2024.01.005. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.abd.2024.01.005",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Bertanha L, Noriega LF, Di Chiacchio NG, Matter A, Di Chiacchio N. Anais Brasileiros de Dermatologia 2024, via PubMed Central (PMC11551238)",
+          "organization": "Bertanha and coauthors, Anais Brasileiros de Dermatologia 2024, Figure 1 panel B, doi:10.1016/j.abd.2024.01.005. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.abd.2024.01.005",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
     }
   ]
 });
