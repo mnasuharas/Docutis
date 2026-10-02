@@ -6,6 +6,13 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 These entries are on the stacked development branch and are not merged to `main`.
 
+### Goal 26 — Acral and nail contrastive dermoscopy
+
+- Add seven clinical and dermoscopic pairs from CC BY 4.0 open-access articles: a heel melanoma and a heel nevus from one figure (study-level histopathology), an acral lentiginous melanoma in situ with an irregular stroke pattern, an acral subcorneal haematoma confirmed by resolution at follow-up, two childhood nail-band nevi with histopathology in the case text, and an adult great-toenail melanoma labelled by a peer-reviewed caption. Panels were cropped from composite figures with recorded boxes and hashes.
+- Add `histopathologySource: "case_text"` for a lesion-specific histopathology sentence in the article body, and a `revisitsCandidateId` link so ledger rows show why a deferred candidate became accepted or stayed deferred.
+- Add four dermoscopic structures (fibrillar pattern, irregular acral pigmentation, longitudinal pigmented lines in the nail plate, red to black structureless blood area). Nail-plate destruction gains a second example. The parallel ridge pattern is recorded as not visible or uncertain where it cannot be seen, and no Hutchinson sign, migration, or change is claimed from a single frame.
+- All new content stays review required. No clinician review was recorded. No release was published.
+
 ### Goal 25 — Gold-standard dermoscopy curriculum
 
 - Add six clinical and dermoscopic pairs from CC BY 4.0 open-access articles, each with a histopathology statement: melanoma in situ and a nevus with cytologic atypia from one figure, an amelanotic nodular melanoma of the scalp, an acral melanoma in situ of the heel, and a periorbital lentigo maligna and solar lentigo from one figure. Panels were cropped from composite figures; the pixel box and hashes are recorded and rechecked.

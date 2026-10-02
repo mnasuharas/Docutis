@@ -13,7 +13,7 @@ const allowedLicenses = new Set(["CC BY 4.0", "CC BY-SA 4.0", "CC0 1.0", "Public
 const allowedModification = new Set(["unmodified", "cropped", "annotated", "other-described"]);
 const allowedConfirm = new Set(["histopathology", "expert_diagnosis", "source_dataset_diagnosis", "clinical_diagnosis", "other"]);
 const allowedVerification = new Set(["verified", "rejected"]);
-const histopathologySources = new Set(["figure_caption", "article_methods"]);
+const histopathologySources = new Set(["figure_caption", "case_text", "article_methods"]);
 const reviewStatuses = new Set(["clinician review required", "clinician reviewed"]);
 
 function canonicalize(value) {
@@ -138,7 +138,7 @@ function validateCase(caseItem, diseaseIds) {
     if (!/histo/i.test(gt.confirmationNotes)) throw new Error(`${id}: histopathology confirmationMethod requires confirmationNotes that state histopathology`);
   }
   if (gt.histopathologySource !== undefined) {
-    if (!histopathologySources.has(gt.histopathologySource)) throw new Error(`${id}: histopathologySource must be figure_caption or article_methods`);
+    if (!histopathologySources.has(gt.histopathologySource)) throw new Error(`${id}: histopathologySource must be figure_caption, case_text, or article_methods`);
     if (gt.confirmationMethod !== "histopathology") throw new Error(`${id}: histopathologySource is only for a histopathology confirmation`);
   }
   if (!Array.isArray(caseItem.observations) || caseItem.observations.length < 2) throw new Error(`${id}: at least two observations are required`);

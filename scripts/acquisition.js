@@ -23,6 +23,7 @@ const adaptableLicenses = new Set(["CC BY 4.0", "CC BY-SA 4.0", "CC0 1.0", "Publ
 const verificationMethods = new Set(["histopathology", "expert_diagnosis", "source_dataset_diagnosis", "clinical_diagnosis", "unknown"]);
 const histopathologyValues = new Map([
   ["present_figure_caption", "figure_caption"],
+  ["present_case_text", "case_text"],
   ["present_article_methods", "article_methods"],
   ["absent", null],
   ["not_checked", null]
@@ -134,7 +135,7 @@ function validateLedger(ledger = loadLedger(), caseData = loadCaseData()) {
     if (row.partnerUrl != null && !/^https:\/\//.test(row.partnerUrl)) throw new Error(`${row.id}: partnerUrl must use HTTPS`);
     if (!pairValues.has(row.pairedStatus)) throw new Error(`${row.id}: unsupported pairedStatus`);
     if (typeof row.integrated !== "boolean") throw new Error(`${row.id}: integrated must be boolean`);
-    if (row.goal === 25) validateGoal25Row(row, cases);
+    if (row.goal >= 25) validateGoal25Row(row, cases);
     if (row.status === "accepted") {
       if (row.integrated !== true || !cases.has(row.caseId)) throw new Error(`${row.id}: an accepted candidate must point at a real case`);
       if (!allowedAcceptedLicenses.has(row.license)) throw new Error(`${row.id}: accepted license must name an allowed version`);
@@ -168,6 +169,13 @@ function validateLedger(ledger = loadLedger(), caseData = loadCaseData()) {
       if (cases.has(row.id)) throw new Error(`${row.id}: a rejected candidate id collided with a case`);
       const curriculumIds = new Set((caseData.curriculum.entries || []).map(entry => entry.caseId));
       if (curriculumIds.has(row.id)) throw new Error(`${row.id}: a rejected candidate is in the curriculum`);
+    }
+  }
+  for (const row of ledger.candidates) {
+    if (row.revisitsCandidateId == null) continue;
+    const earlier = ledger.candidates.find(item => item.id === row.revisitsCandidateId);
+    if (!earlier || earlier === row || !(earlier.goal == null || earlier.goal < row.goal)) {
+      throw new Error(`${row.id}: revisitsCandidateId must name an earlier ledger row`);
     }
   }
   const caseBlob = JSON.stringify(caseData.cases);

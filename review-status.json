@@ -3755,6 +3755,405 @@
         "safety-notice",
         "provenance"
       ]
+    },
+    {
+      "id": "case-g26-01",
+      "assetType": "case",
+      "title": "A small brown macule on the heel with a dark centre",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:93115efe26d4df6f13a9d284b290bef481d0f1eb94914c3230b6ff959805ef34",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/life14060659"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Tognetti L, Cartocci A, Moscarella E, Lallas A, Dika E, Fargnoli MC, Longo C, Nazzaro G, et al. Life 2024, via PubMed Central (PMC11205239)",
+          "organization": "Tognetti and coauthors, Life 2024, Figure 2 panel a, doi:10.3390/life14060659. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/life14060659",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Tognetti L, Cartocci A, Moscarella E, Lallas A, Dika E, Fargnoli MC, Longo C, Nazzaro G, et al. Life 2024, via PubMed Central (PMC11205239)",
+          "organization": "Tognetti and coauthors, Life 2024, Figure 2 panel b, doi:10.3390/life14060659. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/life14060659",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g26-02",
+      "assetType": "case",
+      "title": "A faint brown spot on the heel",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:ddf914e6c9b82539973baaf747a5de2e8dd04216d31fc1e680ee12b2ec8130be",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/life14060659"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Tognetti L, Cartocci A, Moscarella E, Lallas A, Dika E, Fargnoli MC, Longo C, Nazzaro G, et al. Life 2024, via PubMed Central (PMC11205239)",
+          "organization": "Tognetti and coauthors, Life 2024, Figure 2 panel c, doi:10.3390/life14060659. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/life14060659",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Tognetti L, Cartocci A, Moscarella E, Lallas A, Dika E, Fargnoli MC, Longo C, Nazzaro G, et al. Life 2024, via PubMed Central (PMC11205239)",
+          "organization": "Tognetti and coauthors, Life 2024, Figure 2 panel d, doi:10.3390/life14060659. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/life14060659",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g26-03",
+      "assetType": "case",
+      "title": "A dark brown macule on the sole",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:fcae62632830e8ae39e4d98735f8ef7ee375127c704f13a023fdbb9319105e23",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1038/s41598-020-77425-z"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Han B, Hur K, Ohn J, Lim SS, Mun JH. Scientific Reports 2020, via PubMed Central (PMC7688656)",
+          "organization": "Han and coauthors, Scientific Reports 2020, Figure 1 panel A, doi:10.1038/s41598-020-77425-z. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1038/s41598-020-77425-z",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Han B, Hur K, Ohn J, Lim SS, Mun JH. Scientific Reports 2020, via PubMed Central (PMC7688656)",
+          "organization": "Han and coauthors, Scientific Reports 2020, Figure 1 panel B, doi:10.1038/s41598-020-77425-z. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1038/s41598-020-77425-z",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g26-04",
+      "assetType": "case",
+      "title": "A dark spot on a fingertip",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:02fd088cd759f176625018f7b34e5bda1e0b540ebc23445375f39154d0f17c3b",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.7759/cureus.109272"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Martinez-Ortega JI, Naidnur S, et al. Cureus 2026, via PubMed Central (PMC13282028)",
+          "organization": "Martinez-Ortega and coauthors, Cureus 2026, Figure 1 panel A, doi:10.7759/cureus.109272. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.7759/cureus.109272",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Martinez-Ortega JI, Naidnur S, et al. Cureus 2026, via PubMed Central (PMC13282028)",
+          "organization": "Martinez-Ortega and coauthors, Cureus 2026, Figure 1 panel B, doi:10.7759/cureus.109272. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.7759/cureus.109272",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g26-05",
+      "assetType": "case",
+      "title": "A brown band on a child's toenail",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:b3b3a6146a9f6b7c8276fe371d43f225849d3b0ac9e77f0c9dbc07a47f836395",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1016/j.abd.2021.02.012"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Morato IB, Gontijo JRV, Tavares GT, Bittencourt FV. Anais Brasileiros de Dermatologia 2022, via PubMed Central (PMC9263629)",
+          "organization": "Morato and coauthors, Anais Brasileiros de Dermatologia 2022, Figure 2 panel A, doi:10.1016/j.abd.2021.02.012. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.abd.2021.02.012",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Morato IB, Gontijo JRV, Tavares GT, Bittencourt FV. Anais Brasileiros de Dermatologia 2022, via PubMed Central (PMC9263629)",
+          "organization": "Morato and coauthors, Anais Brasileiros de Dermatologia 2022, Figure 2 panel B, doi:10.1016/j.abd.2021.02.012. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.abd.2021.02.012",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g26-06",
+      "assetType": "case",
+      "title": "A broad dark band on a child's fingernail",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:f824314116981578c95d1560bcb5d885cac1f5cf6513c0894a4f89b269ee5589",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1016/j.abd.2021.02.012"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Morato IB, Gontijo JRV, Tavares GT, Bittencourt FV. Anais Brasileiros de Dermatologia 2022, via PubMed Central (PMC9263629)",
+          "organization": "Morato and coauthors, Anais Brasileiros de Dermatologia 2022, Figure 3 panel A, doi:10.1016/j.abd.2021.02.012. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.abd.2021.02.012",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Morato IB, Gontijo JRV, Tavares GT, Bittencourt FV. Anais Brasileiros de Dermatologia 2022, via PubMed Central (PMC9263629)",
+          "organization": "Morato and coauthors, Anais Brasileiros de Dermatologia 2022, Figure 3 panel B, doi:10.1016/j.abd.2021.02.012. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.abd.2021.02.012",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g26-07",
+      "assetType": "case",
+      "title": "A discoloured great toenail with a split",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:b2036d50f58f11017359f6bb7ac4d2293e035cce589b5b3f17d97497f270b696",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/jcm10030478"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dika E, Lambertini M, Pellegrini C, Veronesi G, Melotti B, Riefolo M, Sperandi F, Patrizi A, et al. Journal of Clinical Medicine 2021, via PubMed Central (PMC7866093)",
+          "organization": "Dika and coauthors, Journal of Clinical Medicine 2021, Figure 1 panel a, doi:10.3390/jcm10030478. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/jcm10030478",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Dika E, Lambertini M, Pellegrini C, Veronesi G, Melotti B, Riefolo M, Sperandi F, Patrizi A, et al. Journal of Clinical Medicine 2021, via PubMed Central (PMC7866093)",
+          "organization": "Dika and coauthors, Journal of Clinical Medicine 2021, Figure 1 panel b, doi:10.3390/jcm10030478. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/jcm10030478",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
     }
   ]
 }

@@ -807,6 +807,97 @@
       "requiredCorrections": [],
       "approvedReplacementWording": null,
       "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-g26-01",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:93115efe26d4df6f13a9d284b290bef481d0f1eb94914c3230b6ff959805ef34",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-g26-02",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:ddf914e6c9b82539973baaf747a5de2e8dd04216d31fc1e680ee12b2ec8130be",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-g26-03",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:fcae62632830e8ae39e4d98735f8ef7ee375127c704f13a023fdbb9319105e23",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-g26-04",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:02fd088cd759f176625018f7b34e5bda1e0b540ebc23445375f39154d0f17c3b",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-g26-05",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:b3b3a6146a9f6b7c8276fe371d43f225849d3b0ac9e77f0c9dbc07a47f836395",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-g26-06",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:f824314116981578c95d1560bcb5d885cac1f5cf6513c0894a4f89b269ee5589",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
+    },
+    {
+      "id": null,
+      "assetId": "case-g26-07",
+      "assetType": "case",
+      "contentFingerprint": "sha256-v1:b2036d50f58f11017359f6bb7ac4d2293e035cce589b5b3f17d97497f270b696",
+      "schemaVersion": 1,
+      "reviewedSections": [],
+      "evidenceSourcesChecked": [],
+      "verdict": null,
+      "requiredCorrections": [],
+      "approvedReplacementWording": null,
+      "reviewerNotes": null
     }
   ]
 }

@@ -97,7 +97,9 @@
         Object.freeze({ id: "subungual-color", title: "Color under a nail", summary: "A patch under a nail plate is not the same frame as a destroyed plate, and it is not a longitudinal streak unless you can see one." }),
         Object.freeze({ id: "pigment-network", title: "Pigment network", summary: "Find the brown net and compare its lines across the lesion. An uneven net is a reason for histopathology, not a diagnosis." }),
         Object.freeze({ id: "parallel-pigment-lines", title: "Parallel lines on palms and soles", summary: "On acral skin, compare the width of the pigmented bands with the pale lines before naming ridge or furrow." }),
-        Object.freeze({ id: "follicular-pigment", title: "Pigment around facial follicles", summary: "On facial skin, look at what surrounds the follicular openings. A pseudo-network alone is a background, not a clue." })
+        Object.freeze({ id: "follicular-pigment", title: "Pigment around facial follicles", summary: "On facial skin, look at what surrounds the follicular openings. A pseudo-network alone is a background, not a clue." }),
+        Object.freeze({ id: "nail-band", title: "Pigmented nail band", summary: "Describe the band's colour, width, line regularity, edges, and the plate before naming it. Weigh irregular lines with age and plate integrity." }),
+        Object.freeze({ id: "blood-color", title: "Blood colour on acral skin", summary: "Red to maroon structureless colour suggests blood. Confirm with follow-up or scraping; blood does not exclude a tumour." })
       ]),
       entries: Object.freeze([
         Object.freeze({ caseId: "case-g18-01", order: 1, level: 1, spectrum: "melanoma", teachingType: "teaching", skillIds: Object.freeze(["asymmetry", "evidence-weighting"]) }),
@@ -135,7 +137,14 @@
         Object.freeze({ caseId: "case-g25-03", order: 33, level: 4, spectrum: "melanoma", teachingType: "reasoning", skillIds: Object.freeze(["pink-nodule", "polymorphous-vessels"]) }),
         Object.freeze({ caseId: "case-g25-04", order: 34, level: 3, spectrum: "melanoma", teachingType: "teaching", skillIds: Object.freeze(["acral-pigment", "parallel-pigment-lines"]) }),
         Object.freeze({ caseId: "case-g25-05", order: 35, level: 4, spectrum: "melanoma", teachingType: "reasoning", skillIds: Object.freeze(["follicular-pigment", "evidence-weighting"]) }),
-        Object.freeze({ caseId: "case-g25-06", order: 36, level: 3, spectrum: "mimic", teachingType: "teaching", skillIds: Object.freeze(["follicular-pigment"]) })
+        Object.freeze({ caseId: "case-g25-06", order: 36, level: 3, spectrum: "mimic", teachingType: "teaching", skillIds: Object.freeze(["follicular-pigment"]) }),
+        Object.freeze({ caseId: "case-g26-01", order: 37, level: 4, spectrum: "melanoma", teachingType: "reasoning", skillIds: Object.freeze(["parallel-pigment-lines",  "asymmetry"]) }),
+        Object.freeze({ caseId: "case-g26-02", order: 38, level: 3, spectrum: "mimic", teachingType: "teaching", skillIds: Object.freeze(["parallel-pigment-lines"]) }),
+        Object.freeze({ caseId: "case-g26-03", order: 39, level: 4, spectrum: "melanoma", teachingType: "reasoning", skillIds: Object.freeze(["parallel-pigment-lines",  "evidence-weighting"]) }),
+        Object.freeze({ caseId: "case-g26-04", order: 40, level: 3, spectrum: "mimic", teachingType: "teaching", skillIds: Object.freeze(["acral-pigment",  "blood-color"]) }),
+        Object.freeze({ caseId: "case-g26-05", order: 41, level: 3, spectrum: "mimic", teachingType: "teaching", skillIds: Object.freeze(["nail-band"]) }),
+        Object.freeze({ caseId: "case-g26-06", order: 42, level: 4, spectrum: "mimic", teachingType: "reasoning", skillIds: Object.freeze(["nail-band",  "evidence-weighting"]) }),
+        Object.freeze({ caseId: "case-g26-07", order: 43, level: 4, spectrum: "melanoma", teachingType: "reasoning", skillIds: Object.freeze(["nail-band",  "nail-unit-damage"]) })
       ])
     }),
 
@@ -146,7 +155,8 @@
       Object.freeze({ id: "cherry-angioma", name: "Cherry angioma", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record." }),
       Object.freeze({ id: "blue-nevus", name: "Blue nevus", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record." }),
       Object.freeze({ id: "sebaceous-hyperplasia", name: "Sebaceous hyperplasia", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record." }),
-      Object.freeze({ id: "subungual-haemorrhage", name: "Subungual haemorrhage", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record. The source caption says hematoma. Histopathology is not claimed." })
+      Object.freeze({ id: "subungual-haemorrhage", name: "Subungual haemorrhage", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record. The source caption says hematoma. Histopathology is not claimed." }),
+      Object.freeze({ id: "subcorneal-haemorrhage", name: "Subcorneal haemorrhage", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record. The linked source favoured haematoma clinically and reports resolution at follow-up. Histopathology is not claimed." })
     ]),
     screening: Object.freeze({
       schemaVersion: 1,
@@ -501,7 +511,71 @@
         dermoscopicImageIds: Object.freeze(["img-g25-06b"]),
         informationGain: "dermoscopy_adds_support",
         informationGainNote: "Educational label only. The dermoscopic frame adds a pseudo-network without gray dots around follicles. That supports the benign source diagnosis in this frame; it is not reassurance for another lesion. Not a validated metric and not a probability."
+      }),
+      Object.freeze({
+        caseId: "case-g26-01",
+        provenance: "source_documented_pair",
+        basis: "The Figure 2 caption of Tognetti and coauthors, Life 2024, describes both heel lesions in panels a to d and names the melanoma by panel b and the nevus by panel d. Clinical and dermoscopic panels correspond by letter order; the caption does not repeat letter a for this lesion.",
+        clinicalImageIds: Object.freeze(["img-g26-01a"]),
+        dermoscopicImageIds: Object.freeze(["img-g26-01b"]),
+        informationGain: "dermoscopy_adds_support",
+        informationGainNote: "Educational label only. The dermoscopic frame adds irregular pigment and a blotch. Educational label only. Not a validated metric and not a probability."
+      }),
+      Object.freeze({
+        caseId: "case-g26-02",
+        provenance: "source_documented_pair",
+        basis: "The Figure 2 caption of Tognetti and coauthors, Life 2024, describes both heel lesions in panels a to d and names the nevus by panel d. Clinical and dermoscopic panels correspond by letter order; the caption does not repeat letter c for this lesion.",
+        clinicalImageIds: Object.freeze(["img-g26-02a"]),
+        dermoscopicImageIds: Object.freeze(["img-g26-02b"]),
+        informationGain: "dermoscopy_adds_support",
+        informationGainNote: "Educational label only. The dermoscopic frame adds regular rows of fine strokes. Educational label only. Not a validated metric and not a probability."
+      }),
+      Object.freeze({
+        caseId: "case-g26-03",
+        provenance: "same_lesion_confirmed",
+        basis: "The Figure 1 caption of Han and coauthors, Scientific Reports 2020, describes panels A and B together as one 12 mm acral lentiginous melanoma in situ. Panels C and D are a different lesion and were not used.",
+        clinicalImageIds: Object.freeze(["img-g26-03a"]),
+        dermoscopicImageIds: Object.freeze(["img-g26-03b"]),
+        informationGain: "dermoscopy_adds_support",
+        informationGainNote: "Educational label only. The dermoscopic frame adds an irregular stroke pattern with dots. Educational label only. Not a validated metric and not a probability."
+      }),
+      Object.freeze({
+        caseId: "case-g26-04",
+        provenance: "same_lesion_confirmed",
+        basis: "The Figure 1 caption of Martinez-Ortega and coauthors, Cureus 2026, describes panel A as the clinical image of the acral lesion and panel B as the dermoscopic image of it, in a single-lesion case report.",
+        clinicalImageIds: Object.freeze(["img-g26-04a"]),
+        dermoscopicImageIds: Object.freeze(["img-g26-04b"]),
+        informationGain: "dermoscopy_changes_leading_differential",
+        informationGainNote: "Educational label only. Dermoscopy changes the colour reading from dark to red-maroon. Educational label only. Not a validated metric and not a probability."
+      }),
+      Object.freeze({
+        caseId: "case-g26-05",
+        provenance: "same_lesion_confirmed",
+        basis: "The Figure 2 caption of Morato and coauthors, Anais Brasileiros de Dermatologia 2022, gives the clinical (A) and dermoscopic (B) aspect at the first consultation of Case 2. Panels C and D are five years later and were not used.",
+        clinicalImageIds: Object.freeze(["img-g26-05a"]),
+        dermoscopicImageIds: Object.freeze(["img-g26-05b"]),
+        informationGain: "dermoscopy_adds_support",
+        informationGainNote: "Educational label only. The dermoscopic frame adds the internal line pattern of the band. Educational label only. Not a validated metric and not a probability."
+      }),
+      Object.freeze({
+        caseId: "case-g26-06",
+        provenance: "same_lesion_confirmed",
+        basis: "The Figure 3 caption of Morato and coauthors, Anais Brasileiros de Dermatologia 2022, gives the clinical aspect (A) and dermoscopy (B) of Case 3, one lesion.",
+        clinicalImageIds: Object.freeze(["img-g26-06a"]),
+        dermoscopicImageIds: Object.freeze(["img-g26-06b"]),
+        informationGain: "dermoscopy_adds_support",
+        informationGainNote: "Educational label only. The dermoscopic frame resolves the line pattern of the band. Educational label only. Not a validated metric and not a probability."
+      }),
+      Object.freeze({
+        caseId: "case-g26-07",
+        provenance: "same_lesion_confirmed",
+        basis: "The Figure 1 caption of Dika and coauthors, Journal of Clinical Medicine 2021, describes one great-toenail melanoma clinically in panel a and at onychoscopy in panel b.",
+        clinicalImageIds: Object.freeze(["img-g26-07a"]),
+        dermoscopicImageIds: Object.freeze(["img-g26-07b"]),
+        informationGain: "dermoscopy_adds_support",
+        informationGainNote: "Educational label only. The dermoscopic frame resolves irregular bands and fissure dots. Educational label only. Not a validated metric and not a probability."
       })
+
     ]),
     comparisons: Object.freeze([
       Object.freeze({
@@ -668,6 +742,72 @@
         discriminator: "In these two frames, gray dots around the follicular openings are present on the lentigo maligna and not seen on the solar lentigo. The shared pseudo-network is not the discriminator.",
         commonTrap: "Taking reassurance from a facial pseudo-network, or treating one missing clue as a clearance.",
         limits: "Both come from one teaching figure. The histopathology statement is study-level, not a sentence about each panel. A missing clue is weaker than a present one. Rhomboidal structures were not seen and were not invented."
+      }),
+      Object.freeze({
+        id: "cmp-g26-heel",
+        caseIdA: "case-g26-02",
+        caseIdB: "case-g26-01",
+        sharedFeatures: Object.freeze(["Both are small brownish macules on the heel of a 44-year-old woman, from one figure. Neither dermoscopic frame shows broad parallel ridge bands."]),
+        favouringA: Object.freeze(["Fine oblique strokes in evenly spaced regular rows, one light brown colour, no blotch. The source names a nevus; study-level histopathology."]),
+        favouringB: Object.freeze(["Uneven browns with a dark off-centre blotch and no regular rows. The source names a melanoma; study-level histopathology."]),
+        discriminator: "In these two frames, regular organization of fine strokes versus irregular pigment with a blotch is the difference you can point to. It is not a rule for the next heel.",
+        commonTrap: "Waiting for a parallel ridge pattern before taking an acral lesion seriously, or treating any organized acral pattern as benign.",
+        limits: "Both panels are small. The histopathology statement is study-level. Clinical frames are similar and the nevus is found by a printed arrow."
+      }),
+      Object.freeze({
+        id: "cmp-g26-fibrillar",
+        caseIdA: "case-g26-02",
+        caseIdB: "case-g26-03",
+        sharedFeatures: Object.freeze(["Both show short oblique brown strokes on weight-bearing acral skin."]),
+        favouringA: Object.freeze(["Strokes in evenly spaced regular rows across the whole lesion, one colour. Study-level histopathology of a nevus."]),
+        favouringB: Object.freeze(["Strokes uneven in density and colour, mixed with dots, spread asymmetrically. Study-level histopathology of melanoma in situ."]),
+        discriminator: "In these two frames, regular versus irregular spacing and the presence of dots separate the same stroke type.",
+        commonTrap: "Calling a stroke pattern benign because of its shape, without judging its regularity.",
+        limits: "Furrow orientation and sweat-duct openings are not resolved in either frame. Two lesions from two studies."
+      }),
+      Object.freeze({
+        id: "cmp-g26-ridge",
+        caseIdA: "case-g26-02",
+        caseIdB: "case-g25-04",
+        sharedFeatures: Object.freeze(["Both are flat brown heel macules with parallel brown lines on dermoscopy."]),
+        favouringA: Object.freeze(["Thin brown strokes with pale spaces at least as wide; no broad bands. Study-level histopathology of a nevus."]),
+        favouringB: Object.freeze(["Broad brown bands with thin pale lines between them, a ridge-type geometry. Study-level histopathology of melanoma in situ."]),
+        discriminator: "In these two frames, the width of the brown lines relative to the pale spaces is the difference you can point to. Broad bands are a weighted clue, not an equation.",
+        commonTrap: "Treating every parallel acral pattern alike, or reading a parallel ridge pattern as a diagnosis by itself.",
+        limits: "Sweat-duct openings are not resolved in either frame, so ridge and furrow positions rest on band width. The two images come from different studies and devices."
+      }),
+      Object.freeze({
+        id: "cmp-g26-blood",
+        caseIdA: "case-g26-04",
+        caseIdB: "case-g26-01",
+        sharedFeatures: Object.freeze(["Both are small dark acral spots that raise the same first worry."]),
+        favouringA: Object.freeze(["Homogeneous red to maroon colour without lines; resolved at one month. Clinical diagnosis, no histopathology."]),
+        favouringB: Object.freeze(["Uneven brown and violet pigment with a dark blotch. Study-level histopathology of melanoma."]),
+        discriminator: "In these two frames, red to maroon structureless colour versus irregular brown pigment with a blotch is the difference. Colour needs follow-up confirmation.",
+        commonTrap: "Reassuring from a blood colour without follow-up, or treating every dark acral spot as melanoma.",
+        limits: "The haematoma has no histopathology and is on a fingertip; the melanoma is on a heel. Blood can coexist with a tumour."
+      }),
+      Object.freeze({
+        id: "cmp-g26-nail-broad",
+        caseIdA: "case-g26-06",
+        caseIdB: "case-g26-07",
+        sharedFeatures: Object.freeze(["Both are pigmented nail bands whose longitudinal lines differ in darkness and thickness."]),
+        favouringA: Object.freeze(["A broad band of dark lines on an intact plate in a three-year-old. Histopathology of an earlier biopsy of the same band: junctional nevus, re-reviewed."]),
+        favouringB: Object.freeze(["Bands of differing width and colour across the whole plate with a fissure containing dark dots, in an adult toenail. Peer-reviewed caption names melanoma; histopathology not stated."]),
+        discriminator: "In these two frames, an intact plate in a small child versus a fissured plate with dark dots in an adult is the difference you can point to. Line irregularity alone does not separate them.",
+        commonTrap: "Using line irregularity alone, or claiming a Hutchinson sign from a shadow at the cuticle or free edge.",
+        limits: "The childhood histopathology predates its photographs; the adult case has no histopathology statement. One example each. Age is a context weight, not a rule."
+      }),
+      Object.freeze({
+        id: "cmp-g26-nail-narrow",
+        caseIdA: "case-g26-05",
+        caseIdB: "case-g26-07",
+        sharedFeatures: Object.freeze(["Both show longitudinal brown lines that vary in shade within a nail band."]),
+        favouringA: Object.freeze(["A one-sided band with uneven lines and a blurred inner edge on an intact plate in a 13-year-old. Biopsy after the photographs: junctional nevus."]),
+        favouringB: Object.freeze(["Whole-plate bands of differing width and colour with a fissure and dark dots in an adult. Peer-reviewed caption; histopathology not stated."]),
+        discriminator: "In these two frames, the extent across the plate and the fissured plate separate them more than the lines do.",
+        commonTrap: "Applying adult band rules unchanged to a child, or calling plate damage trauma without considering a tumour.",
+        limits: "Different digits, ages, and sources. The adult case has no histopathology statement. Proximal pigment in the childhood frame is uncertain."
       })
     ]),
     proposedProgression: Object.freeze({
@@ -676,11 +816,11 @@
       note: "Not the learner path and not a score. A track is named only where a case already exists. Screening integration has the vocabulary and no session.",
       tracks: Object.freeze([
         Object.freeze({ id: "foundation", title: "Foundation", caseIds: Object.freeze(["case-g21-01", "case-g21-02", "case-g21-05"]) }),
-        Object.freeze({ id: "pattern-recognition", title: "Pattern recognition", caseIds: Object.freeze(["case-g21-03", "case-g21-08", "case-g18-03", "case-g25-01", "case-g25-04"]) }),
+        Object.freeze({ id: "pattern-recognition", title: "Pattern recognition", caseIds: Object.freeze(["case-g21-03", "case-g21-08", "case-g18-03", "case-g25-01", "case-g25-04", "case-g26-02", "case-g26-03"]) }),
         Object.freeze({ id: "differential", title: "Differential", caseIds: Object.freeze(["case-g21-02", "case-g18-03", "case-g21-04", "case-g18-04"]) }),
-        Object.freeze({ id: "melanoma-spectrum", title: "Melanoma spectrum", caseIds: Object.freeze(["case-g18-06", "case-g18-10", "case-g21-07", "case-acral-melanoma-plantar", "case-g18-12", "case-g24-01", "case-g24-02", "case-g25-01", "case-g25-03", "case-g25-04", "case-g25-05"]) }),
-        Object.freeze({ id: "difficult-mimics", title: "Difficult mimics", caseIds: Object.freeze(["case-g21-06", "case-g21-08", "case-g21-07", "case-g21-04", "case-g25-02", "case-g25-06"]) }),
-        Object.freeze({ id: "special-sites", title: "Special sites", caseIds: Object.freeze(["case-g21-07", "case-g21-04", "case-acral-melanoma-plantar", "case-g18-12", "case-g22-01", "case-g18-14", "case-g24-01", "case-g25-04", "case-g25-05", "case-g25-06"]) }),
+        Object.freeze({ id: "melanoma-spectrum", title: "Melanoma spectrum", caseIds: Object.freeze(["case-g18-06", "case-g18-10", "case-g21-07", "case-acral-melanoma-plantar", "case-g18-12", "case-g24-01", "case-g24-02", "case-g25-01", "case-g25-03", "case-g25-04", "case-g25-05", "case-g26-01", "case-g26-03", "case-g26-07"]) }),
+        Object.freeze({ id: "difficult-mimics", title: "Difficult mimics", caseIds: Object.freeze(["case-g21-06", "case-g21-08", "case-g21-07", "case-g21-04", "case-g25-02", "case-g25-06", "case-g26-02", "case-g26-04", "case-g26-06"]) }),
+        Object.freeze({ id: "special-sites", title: "Special sites", caseIds: Object.freeze(["case-g21-07", "case-g21-04", "case-acral-melanoma-plantar", "case-g18-12", "case-g22-01", "case-g18-14", "case-g24-01", "case-g25-04", "case-g25-05", "case-g25-06", "case-g26-01", "case-g26-02", "case-g26-04", "case-g26-05", "case-g26-06", "case-g26-07"]) }),
         Object.freeze({ id: "screening-integration", title: "Screening integration", caseIds: Object.freeze([]), note: "Decision categories exist. No session is built, and no case is assigned a decision." })
       ])
     }),
@@ -7199,6 +7339,1684 @@
   "localization": null,
   "clinicalAction": "After reveal, compare with the facial lentigo maligna case from the same figure. Do not treat from this case.",
   "managementBrief": "No management category is stored. A benign source label is not reassurance for another facial patch. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g26-01",
+  "slug": "g26-heel-macule-dark-blotch",
+  "title": "A small brown macule on the heel with a dark centre",
+  "diagnosisLabel": "Acral melanoma",
+  "diseaseId": "acral-melanoma",
+  "category": "Melanoma",
+  "educationalLevel": "advanced",
+  "caseType": "clinical_dermoscopic",
+  "patientContext": {
+    "ageBand": "44 years, per the figure caption",
+    "sex": "Female, per the figure caption",
+    "anatomicalSite": "Heel, plantar sole",
+    "presentationNotes": "The source describes a 10 mm brownish lesion on the heel. A second heel lesion in the same figure, in a woman of the same age, had a similar clinical look. No history of change is given."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-10-02",
+      "metadataCheckedAt": "2026-10-02",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g26-01a",
+      "type": "clinical",
+      "src": "assets/media/cases/case-39-clinical.jpg",
+      "dimensions": {
+        "width": 336,
+        "height": 233
+      },
+      "alt": "Clinical photograph of the heel with a small brown macule that has a darker elongated centre. No diagnosis is included.",
+      "caption": "Clinical photograph of the heel. The source panel letter a is kept. The source label stays hidden until reveal.",
+      "source": "Tognetti L, Cartocci A, Moscarella E, Lallas A, Dika E, Fargnoli MC, Longo C, Nazzaro G, et al. Life 2024, via PubMed Central (PMC11205239)",
+      "sourceUrl": "https://doi.org/10.3390/life14060659",
+      "creator": "Linda Tognetti and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Tognetti and coauthors, Life 2024, Figure 2 panel a, doi:10.3390/life14060659. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel a of Figure 2 was cropped from the PMC figure file life-14-00659-g002.jpg (PMC open-access package PMC11205239.1), source sha256 d88de7a2b4710b95ee18d53a4cd3da553e36ce7d589188352e7a4f6e78aec811, at pixel box left 3, top 5, right 339, bottom 238 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 660e673113fce96e8d57d47b4619f58a2e4cbe3ec90e79e2955a8b24dba763da. No color change, no annotation, and no other edit.",
+      "consentBasis": "The article states that informed consent was obtained from all subjects. The article is distributed under CC BY 4.0, with no third-party credit on the figure. The frame shows a heel only."
+    },
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-10-02",
+      "metadataCheckedAt": "2026-10-02",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g26-01b",
+      "type": "dermoscopy",
+      "src": "assets/media/cases/case-39-dermoscopy.jpg",
+      "dimensions": {
+        "width": 335,
+        "height": 233
+      },
+      "alt": "Polarized dermoscopic view of uneven brown pigment with a darker irregular central blotch and no regular line pattern. No diagnosis is included.",
+      "caption": "Polarized dermoscopic view. The source pairs it with the clinical frame by panel letters. The panel letter b is kept.",
+      "source": "Tognetti L, Cartocci A, Moscarella E, Lallas A, Dika E, Fargnoli MC, Longo C, Nazzaro G, et al. Life 2024, via PubMed Central (PMC11205239)",
+      "sourceUrl": "https://doi.org/10.3390/life14060659",
+      "creator": "Linda Tognetti and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Tognetti and coauthors, Life 2024, Figure 2 panel b, doi:10.3390/life14060659. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel b of Figure 2 was cropped from the PMC figure file life-14-00659-g002.jpg (PMC open-access package PMC11205239.1), source sha256 d88de7a2b4710b95ee18d53a4cd3da553e36ce7d589188352e7a4f6e78aec811, at pixel box left 345, top 5, right 680, bottom 238 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 8b62dacad21b96b5b2c36538df8e9176ed29a0eb5b081814ad008f385434b698. No color change, no annotation, and no other edit.",
+      "consentBasis": "The article states that informed consent was obtained from all subjects. The article is distributed under CC BY 4.0, with no third-party credit on the figure. The field shows skin only."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Acral melanoma (histopathology stated in the article methods)",
+    "confirmationMethod": "histopathology",
+    "histopathologySource": "article_methods",
+    "confirmationNotes": "The Figure 2 caption of Tognetti and coauthors (Life 2024, doi:10.3390/life14060659), checked 2026-10-02, names this heel lesion a melanoma. The methods state that every lesion in the dataset was excised for histopathology and that a definitive histopathological diagnosis was mandatory. The subtype, thickness, and stage of this lesion are not given and were not added.",
+    "confidenceNote": "Study-level histopathology statement. Docutis did not see a slide. Not a Docutis clinician review."
+  },
+  "observations": [
+    {
+      "id": "obs-g26-01a",
+      "kind": "observation",
+      "modality": "clinical",
+      "text": "A small brown macule on the heel. Its centre is darker and elongated, and lighter brown extends to one side."
+    },
+    {
+      "id": "obs-g26-01b",
+      "kind": "observation",
+      "modality": "dermoscopy",
+      "text": "Brown pigment of several shades spreads unevenly. A darker brown-violet irregular blotch sits near the centre, and lighter brown areas lie at the edges. No regular rows of lines or broad parallel bands organize the pigment."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g26-01a",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g26-01a"
+      ],
+      "text": "A small acral macule with two browns and a darker centre. Acral location is not reassuring."
+    },
+    {
+      "id": "int-g26-01b",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g26-01a",
+        "obs-g26-01b"
+      ],
+      "text": "The pigment is irregular in colour and distribution, with an off-centre dark blotch. No parallel ridge bands are visible. Their absence does not lower concern."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Acral melanoma",
+      "supportingFeatures": [
+        "Irregular pigment with a dark blotch.",
+        "The source reports study-level histopathology."
+      ],
+      "contradictingFeatures": [
+        "No parallel ridge pattern is visible."
+      ],
+      "teachingDistinction": "Irregular pigment carries the concern here, not a ridge pattern."
+    },
+    {
+      "diagnosis": "Acral melanocytic nevus",
+      "supportingFeatures": [
+        "A small brown heel macule.",
+        "A heel nevus of the same size in the same figure looks similar clinically."
+      ],
+      "contradictingFeatures": [
+        "The pigment is not arranged in regular rows."
+      ],
+      "teachingDistinction": "The nevus in the same figure shows regular fine rows. This frame does not."
+    },
+    {
+      "diagnosis": "Subcorneal haematoma",
+      "supportingFeatures": [
+        "Dark colour on a heel."
+      ],
+      "contradictingFeatures": [
+        "The colour is brown and violet rather than red to maroon."
+      ],
+      "teachingDistinction": "Blood on the heel is a separate trap; the colour here is not the blood colour."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g26-01a",
+      "title": "Notice first",
+      "text": "Name the colours and where the darkest part sits. Then ask whether any regular line pattern organizes the pigment."
+    },
+    {
+      "id": "tp-g26-01b",
+      "title": "What absence means",
+      "text": "No parallel ridge pattern is visible. That does not argue against the source diagnosis."
+    }
+  ],
+  "observationPrompts": [
+    "Is the pigment arranged in regular rows or bands?",
+    "Where is the darkest area, and is it centred?"
+  ],
+  "hints": [
+    "Compare this frame with the heel lesion that shows fine regular rows."
+  ],
+  "closestMimic": {
+    "name": "Acral melanocytic nevus",
+    "whyClosest": "A heel nevus of similar size in a woman of the same age, in the same source figure, looks similar clinically."
+  },
+  "patterns": [
+    {
+      "id": "pat-g26-01-irregular",
+      "label": "Uneven brown pigment with a dark off-centre blotch",
+      "modality": "dermoscopy",
+      "specificityNote": "Several browns and a darker violet-brown blotch, without regular rows. The panel is small, so the certainty is probable.",
+      "certainty": "probably",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g26-01-ridge",
+      "label": "Broad parallel pigmented bands",
+      "modality": "dermoscopy",
+      "specificityNote": "Broad bands following the skin markings are not visible here. Their absence does not lower concern.",
+      "certainty": "not_visible",
+      "weight": "weak"
+    }
+  ],
+  "synthesis": "The source names this heel lesion a melanoma and reports that every lesion in the study was excised for histopathology. The dermoscopic frame shows irregular brown pigment with a dark blotch and no parallel ridge pattern.",
+  "evidenceWeighting": "Irregular pigment with a blotch is probably visible and is the major clue. The missing ridge pattern has weak weight and does not argue against the diagnosis. The study-level histopathology statement is the confirmation.",
+  "diagnosticTrap": "Waiting for a parallel ridge pattern before taking an irregular acral lesion seriously.",
+  "mentorNote": "Read this case beside the heel nevus from the same figure: same site, same age, same size, different organization of pigment. Neither frame has a parallel ridge pattern.",
+  "takeHomeRule": "On acral skin, irregular pigment with a blotch is a reason for concern even when no ridge pattern is present.",
+  "whyNot": [
+    {
+      "mimic": "Acral melanocytic nevus",
+      "text": "The nevus in the same figure shows fine strokes in regular rows. This frame shows irregular pigment with a blotch. That difference raises concern; it is not proof."
+    },
+    {
+      "mimic": "Subcorneal haematoma",
+      "text": "Blood is red to maroon. This pigment is brown and violet."
+    }
+  ],
+  "compareWith": [
+    "cmp-g26-heel"
+  ],
+  "pairedModality": {
+    "clinicalObservation": "A small brown macule on the heel. Its centre is darker and elongated, and lighter brown extends to one side.",
+    "dermoscopicObservation": "Brown pigment of several shades spreads unevenly. A darker brown-violet irregular blotch sits near the centre, and lighter brown areas lie at the edges. No regular rows of lines or broad parallel bands organize the pigment.",
+    "addedValue": "The dermoscopic frame shows how the pigment is organized. The clinical frame shows only a small brown macule with a darker centre.",
+    "reasoningImpact": "The reading moves from a small heel macule to an acral lesion with irregular pigment and a blotch, without a ridge pattern.",
+    "limits": "The source pairs clinical and dermoscopic panels by letter. The histopathology statement is study-level. The panels are small.",
+    "informationGain": "dermoscopy_adds_support",
+    "informationGainNote": "Educational label only. The dermoscopic frame adds irregular pigment and a blotch. Educational label only. Not a validated metric and not a probability.",
+    "comparison": {
+      "clinicalClue": "Small brown heel macule with a darker centre.",
+      "dermoscopicClue": "Irregular pigment, dark blotch, no rows.",
+      "addedInformation": "The organization of pigment is only visible on the dermoscopic frame.",
+      "diagnosticConflict": "A heel nevus of the same size looks similar clinically.",
+      "teachingRule": "Absence of a ridge pattern is not reassurance."
+    }
+  },
+  "modalityIntegration": "The first frame is the clinical photograph of a small brown heel macule with a darker centre. The second frame is the corresponding polarized dermoscopic view and shows irregular brown pigment with a dark blotch and no regular line pattern.",
+  "academy": {
+    "level": 4,
+    "spectrum": "melanoma",
+    "teachingType": "reasoning",
+    "skillIds": [
+      "parallel-pigment-lines",
+      "asymmetry"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "localization": null,
+  "clinicalAction": "After reveal, open the linked Docutis acral melanoma record for reference context. Do not treat from this case.",
+  "managementBrief": "No management category is stored. The source history is not a Docutis recommendation. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g26-02",
+  "slug": "g26-heel-fine-regular-rows",
+  "title": "A faint brown spot on the heel",
+  "diagnosisLabel": "Acral melanocytic nevus",
+  "diseaseId": "melanocytic-nevus",
+  "category": "Benign melanocytic",
+  "educationalLevel": "intermediate",
+  "caseType": "clinical_dermoscopic",
+  "patientContext": {
+    "ageBand": "44 years, per the figure caption",
+    "sex": "Female, per the figure caption",
+    "anatomicalSite": "Heel, plantar sole",
+    "presentationNotes": "The source describes an 8 mm brownish lesion on the heel, excised in the study. A printed arrow in the clinical frame points to it. No history of change is given."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-10-02",
+      "metadataCheckedAt": "2026-10-02",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g26-02a",
+      "type": "clinical",
+      "src": "assets/media/cases/case-40-clinical.jpg",
+      "dimensions": {
+        "width": 336,
+        "height": 235
+      },
+      "alt": "Clinical photograph of a heel with scale and a faint small brown spot marked by a printed cyan arrow. No diagnosis is included.",
+      "caption": "Clinical photograph of the heel. The printed arrow is from the source. The panel letter c is kept.",
+      "source": "Tognetti L, Cartocci A, Moscarella E, Lallas A, Dika E, Fargnoli MC, Longo C, Nazzaro G, et al. Life 2024, via PubMed Central (PMC11205239)",
+      "sourceUrl": "https://doi.org/10.3390/life14060659",
+      "creator": "Linda Tognetti and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Tognetti and coauthors, Life 2024, Figure 2 panel c, doi:10.3390/life14060659. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel c of Figure 2 was cropped from the PMC figure file life-14-00659-g002.jpg (PMC open-access package PMC11205239.1), source sha256 d88de7a2b4710b95ee18d53a4cd3da553e36ce7d589188352e7a4f6e78aec811, at pixel box left 3, top 242, right 339, bottom 477 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 c41f67584104b83870cf69a30960c5a56ddeb81b64fd914e45b27af09ef1f7c0. No color change, no annotation, and no other edit.",
+      "consentBasis": "The article states that informed consent was obtained from all subjects. The article is distributed under CC BY 4.0, with no third-party credit on the figure. The frame shows a heel only."
+    },
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-10-02",
+      "metadataCheckedAt": "2026-10-02",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g26-02b",
+      "type": "dermoscopy",
+      "src": "assets/media/cases/case-40-dermoscopy.jpg",
+      "dimensions": {
+        "width": 335,
+        "height": 235
+      },
+      "alt": "Polarized dermoscopic view of fine brown oblique strokes arranged in evenly spaced parallel rows. No diagnosis is included.",
+      "caption": "Polarized dermoscopic view. The source pairs it with the clinical frame by panel letters. The panel letter d is kept.",
+      "source": "Tognetti L, Cartocci A, Moscarella E, Lallas A, Dika E, Fargnoli MC, Longo C, Nazzaro G, et al. Life 2024, via PubMed Central (PMC11205239)",
+      "sourceUrl": "https://doi.org/10.3390/life14060659",
+      "creator": "Linda Tognetti and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Tognetti and coauthors, Life 2024, Figure 2 panel d, doi:10.3390/life14060659. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel d of Figure 2 was cropped from the PMC figure file life-14-00659-g002.jpg (PMC open-access package PMC11205239.1), source sha256 d88de7a2b4710b95ee18d53a4cd3da553e36ce7d589188352e7a4f6e78aec811, at pixel box left 345, top 242, right 680, bottom 477 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 d6dd02fb146cd163dec44e15e2d4953be1526fa721e67143805f08fd8c4eacdb. No color change, no annotation, and no other edit.",
+      "consentBasis": "The article states that informed consent was obtained from all subjects. The article is distributed under CC BY 4.0, with no third-party credit on the figure. The field shows skin only."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Acral melanocytic nevus (histopathology stated in the article methods)",
+    "confirmationMethod": "histopathology",
+    "histopathologySource": "article_methods",
+    "confirmationNotes": "The Figure 2 caption of Tognetti and coauthors (Life 2024, doi:10.3390/life14060659), checked 2026-10-02, names this heel lesion a nevus with a regular fibrillar pattern. The methods state that every lesion was excised for histopathology. The accepted benign histopathologic diagnoses in the study range from nevus with mild atypia to SAMPUS; the grade for this lesion is not given and was not added.",
+    "confidenceNote": "Study-level histopathology statement. Docutis did not see a slide. A benign result for this lesion does not clear another acral macule."
+  },
+  "observations": [
+    {
+      "id": "obs-g26-02a",
+      "kind": "observation",
+      "modality": "clinical",
+      "text": "A heel with scale and creases. A faint small brown spot sits where a printed cyan arrow points."
+    },
+    {
+      "id": "obs-g26-02b",
+      "kind": "observation",
+      "modality": "dermoscopy",
+      "text": "Fine short brown strokes lie obliquely in evenly spaced parallel rows across the whole lesion. The pale spaces between rows are as wide as or wider than the brown strokes. The colour is a single light brown, and no blotch is present."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g26-02a",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g26-02a"
+      ],
+      "text": "The lesion is faint clinically and hard to find without the printed arrow. The arrow is a mark, not skin."
+    },
+    {
+      "id": "int-g26-02b",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g26-02a",
+        "obs-g26-02b"
+      ],
+      "text": "Fine oblique strokes in regular rows across the whole lesion fit a regular fibrillar pattern. No broad pigmented bands and no blotch are seen. Furrow orientation and sweat-duct openings are not resolved."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Acral melanocytic nevus",
+      "supportingFeatures": [
+        "Fine strokes in regular, evenly spaced rows.",
+        "One colour, no blotch.",
+        "The source reports study-level histopathology."
+      ],
+      "contradictingFeatures": [
+        "The lesion was excised, so it was not obviously benign to the clinicians."
+      ],
+      "teachingDistinction": "Regular organization supports the benign source diagnosis in this frame."
+    },
+    {
+      "diagnosis": "Acral melanoma",
+      "supportingFeatures": [
+        "A brown acral macule in an adult.",
+        "A heel melanoma of similar size in the same figure looked similar clinically."
+      ],
+      "contradictingFeatures": [
+        "No irregular blotch and no broad ridge bands are seen."
+      ],
+      "teachingDistinction": "Melanoma was a fair concern on the clinical look."
+    },
+    {
+      "diagnosis": "Subcorneal haematoma",
+      "supportingFeatures": [
+        "A spot on a pressure-bearing heel."
+      ],
+      "contradictingFeatures": [
+        "The colour is light brown and organized in rows, not red to maroon and structureless."
+      ],
+      "teachingDistinction": "A heel spot is not automatically blood."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g26-02a",
+      "title": "Notice first",
+      "text": "Separate the printed arrow from the skin, then describe how the brown strokes are arranged."
+    },
+    {
+      "id": "tp-g26-02b",
+      "title": "What the source says",
+      "text": "The figure names this lesion a nevus, and the study excised every lesion for histopathology. The atypia grade is not given."
+    }
+  ],
+  "observationPrompts": [
+    "Are the brown strokes evenly spaced in rows?",
+    "Is there a darker blotch anywhere in the lesion?"
+  ],
+  "hints": [
+    "The cyan arrow is printed on the photograph."
+  ],
+  "closestMimic": {
+    "name": "Acral melanoma",
+    "whyClosest": "A heel melanoma of similar size in a woman of the same age, in the same source figure, looks similar clinically."
+  },
+  "patterns": [
+    {
+      "id": "pat-g26-02-fibrillar",
+      "label": "Fine oblique strokes in regular rows",
+      "modality": "dermoscopy",
+      "specificityNote": "Evenly spaced rows of fine oblique strokes across the whole lesion. Furrow orientation is not resolved, so the certainty is probable.",
+      "certainty": "probably",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g26-02-ridge",
+      "label": "Broad parallel pigmented bands",
+      "modality": "dermoscopy",
+      "specificityNote": "The brown lines are thin, with pale spaces at least as wide. Broad ridge-type bands are not visible.",
+      "certainty": "not_visible",
+      "weight": "supportive"
+    },
+    {
+      "id": "pat-g26-02-arrow",
+      "label": "Printed arrow in the clinical frame",
+      "modality": "none",
+      "specificityNote": "A cyan arrow printed on the photograph points to the spot. It is a mark, not skin.",
+      "certainty": "clearly_visible",
+      "weight": "conflicting"
+    }
+  ],
+  "synthesis": "The source names this heel lesion a nevus and reports that every lesion in the study was excised for histopathology. The dermoscopic frame shows fine oblique strokes in regular rows, without broad ridge bands or a blotch.",
+  "evidenceWeighting": "Regular rows are probably visible and are the major clue toward the source diagnosis. The missing ridge bands support it. The arrow conflicts only if read as skin. The study-level histopathology statement is the confirmation.",
+  "diagnosticTrap": "Treating any parallel acral pattern as benign, or treating one benign heel result as a rule.",
+  "mentorNote": "This is the benign half of a heel pair from one figure. It teaches why melanoma was plausible and what in this frame argues toward the benign result: regular organization.",
+  "takeHomeRule": "On acral skin, regular evenly spaced fine lines without a blotch support a benign reading in this frame. Irregularity anywhere changes the weighting.",
+  "whyNot": [
+    {
+      "mimic": "Acral melanoma",
+      "text": "The heel melanoma in the same figure shows irregular pigment with a blotch. This frame shows regular rows. That difference supports the source diagnosis here; it is not a rule."
+    },
+    {
+      "mimic": "Subcorneal haematoma",
+      "text": "The colour is light brown and organized in rows, not red to maroon and structureless."
+    }
+  ],
+  "compareWith": [
+    "cmp-g26-heel",
+    "cmp-g26-fibrillar",
+    "cmp-g26-ridge"
+  ],
+  "pairedModality": {
+    "clinicalObservation": "A heel with scale and creases. A faint small brown spot sits where a printed cyan arrow points.",
+    "dermoscopicObservation": "Fine short brown strokes lie obliquely in evenly spaced parallel rows across the whole lesion. The pale spaces between rows are as wide as or wider than the brown strokes. The colour is a single light brown, and no blotch is present.",
+    "addedValue": "The dermoscopic frame shows the regular rows that the faint clinical spot cannot show.",
+    "reasoningImpact": "The reading moves from a faint heel spot to an organized regular pattern. That supports the source diagnosis in this frame.",
+    "limits": "The source pairs clinical and dermoscopic panels by letter. The histopathology statement is study-level. The clinical lesion is faint and found by a printed arrow.",
+    "informationGain": "dermoscopy_adds_support",
+    "informationGainNote": "Educational label only. The dermoscopic frame adds regular rows of fine strokes. Educational label only. Not a validated metric and not a probability.",
+    "comparison": {
+      "clinicalClue": "Faint brown heel spot marked by an arrow.",
+      "dermoscopicClue": "Fine oblique strokes in regular rows.",
+      "addedInformation": "The regular organization is only visible on the dermoscopic frame.",
+      "diagnosticConflict": "A heel melanoma of similar size looks similar clinically.",
+      "teachingRule": "Regularity is evidence, not a guarantee."
+    }
+  },
+  "modalityIntegration": "The first frame is the clinical photograph of a heel with a faint brown spot marked by a printed arrow. The second frame is the corresponding polarized dermoscopic view and shows fine oblique brown strokes in evenly spaced rows.",
+  "academy": {
+    "level": 3,
+    "spectrum": "mimic",
+    "teachingType": "teaching",
+    "skillIds": [
+      "parallel-pigment-lines"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "localization": null,
+  "clinicalAction": "After reveal, compare with the heel melanoma from the same figure. Do not treat from this case.",
+  "managementBrief": "No management category is stored. The source history is not a Docutis recommendation. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g26-03",
+  "slug": "g26-sole-uneven-strokes-dots",
+  "title": "A dark brown macule on the sole",
+  "diagnosisLabel": "Acral lentiginous melanoma in situ",
+  "diseaseId": "acral-melanoma",
+  "category": "Melanoma",
+  "educationalLevel": "advanced",
+  "caseType": "clinical_dermoscopic",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Sole of the foot, plantar",
+    "presentationNotes": "The source describes a 12 mm lesion. Age and sex are not given for this lesion. No history of change is given for this figure."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-10-02",
+      "metadataCheckedAt": "2026-10-02",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g26-03a",
+      "type": "clinical",
+      "src": "assets/media/cases/case-41-clinical.jpg",
+      "dimensions": {
+        "width": 708,
+        "height": 512
+      },
+      "alt": "Clinical photograph of the sole of a foot with a small dark brown irregular macule. No diagnosis is included.",
+      "caption": "Clinical photograph of the sole. The source panel letter A is kept. The source label stays hidden until reveal.",
+      "source": "Han B, Hur K, Ohn J, Lim SS, Mun JH. Scientific Reports 2020, via PubMed Central (PMC7688656)",
+      "sourceUrl": "https://doi.org/10.1038/s41598-020-77425-z",
+      "creator": "Byeol Han and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Han and coauthors, Scientific Reports 2020, Figure 1 panel A, doi:10.1038/s41598-020-77425-z. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel A of Figure 1 was cropped from the figure image embedded on page 3 of the article PDF in the PMC open-access package PMC7688656 (PDF image object 49, 1417 x 1027 pixels), source sha256 69162dde8e946e84fcad28de0a0214b10f1816c9af963129b9e31c1fd73de5f6, at pixel box left 0, top 0, right 708, bottom 512 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 a8ae418a4ed636e57a6668f2581248a1ecc699eb429e57df81970167342b97ca. No color change, no annotation, and no other edit.",
+      "consentBasis": "The article states that informed consent was obtained from all patients. The article is distributed under CC BY 4.0, with no third-party credit on the figure. The frame shows a sole only."
+    },
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-10-02",
+      "metadataCheckedAt": "2026-10-02",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g26-03b",
+      "type": "dermoscopy",
+      "src": "assets/media/cases/case-41-dermoscopy.jpg",
+      "dimensions": {
+        "width": 708,
+        "height": 512
+      },
+      "alt": "Dermoscopic view of short brown strokes and dots spread unevenly, with a printed scale at the edge. No diagnosis is included.",
+      "caption": "Dermoscopic view of the same lesion, per the source caption. The panel letter B is kept. The printed scale is not skin.",
+      "source": "Han B, Hur K, Ohn J, Lim SS, Mun JH. Scientific Reports 2020, via PubMed Central (PMC7688656)",
+      "sourceUrl": "https://doi.org/10.1038/s41598-020-77425-z",
+      "creator": "Byeol Han and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Han and coauthors, Scientific Reports 2020, Figure 1 panel B, doi:10.1038/s41598-020-77425-z. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel B of Figure 1 was cropped from the figure image embedded on page 3 of the article PDF in the PMC open-access package PMC7688656 (PDF image object 49, 1417 x 1027 pixels), source sha256 69162dde8e946e84fcad28de0a0214b10f1816c9af963129b9e31c1fd73de5f6, at pixel box left 709, top 0, right 1417, bottom 512 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 5f821c919e73195a82d55547398349bf0ada93267aad05eb2530fe009e137f6b. No color change, no annotation, and no other edit.",
+      "consentBasis": "The article states that informed consent was obtained from all patients. The article is distributed under CC BY 4.0, with no third-party credit on the figure. The field shows skin only."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Acral lentiginous melanoma in situ (histopathology stated in the article methods)",
+    "confirmationMethod": "histopathology",
+    "histopathologySource": "article_methods",
+    "confirmationNotes": "The Figure 1 caption of Han and coauthors (Scientific Reports 2020, doi:10.1038/s41598-020-77425-z), checked 2026-10-02, describes panels A and B as a 12 mm acral lentiginous melanoma in situ with asymmetry, irregular dots and globules, and an irregular fibrillar pattern. The methods state that all cases were diagnosed on clinical, dermoscopic, and histopathologic criteria after biopsy.",
+    "confidenceNote": "Study-level histopathology statement. Docutis did not see a slide. Not a Docutis clinician review."
+  },
+  "observations": [
+    {
+      "id": "obs-g26-03a",
+      "kind": "observation",
+      "modality": "clinical",
+      "text": "A dark brown irregular macule sits on the sole of the foot, between the heel and the forefoot."
+    },
+    {
+      "id": "obs-g26-03b",
+      "kind": "observation",
+      "modality": "dermoscopy",
+      "text": "Short brown strokes and small brown dots spread unevenly across the lesion. Some areas are dense and dark and others sparse and pale. Many strokes lie obliquely along the skin markings. A printed millimetre scale and the label 3cm sit at the left edge."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g26-03a",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g26-03a"
+      ],
+      "text": "A dark irregular macule on the sole is acral pigment and is read on its own site."
+    },
+    {
+      "id": "int-g26-03b",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g26-03a",
+        "obs-g26-03b"
+      ],
+      "text": "The strokes look like fibrillar strokes, but they are uneven in density and colour and mixed with dots. Whether the strokes sit on ridges or furrows cannot be resolved, so no ridge claim is made."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Acral lentiginous melanoma in situ",
+      "supportingFeatures": [
+        "Uneven strokes and dots.",
+        "Asymmetric distribution of pigment.",
+        "The source reports study-level histopathology."
+      ],
+      "contradictingFeatures": [
+        "No broad ridge bands are claimed."
+      ],
+      "teachingDistinction": "Irregularity of a fibrillar-type pattern carries the concern here."
+    },
+    {
+      "diagnosis": "Acral melanocytic nevus",
+      "supportingFeatures": [
+        "Oblique strokes on a sole can be a nevus pattern."
+      ],
+      "contradictingFeatures": [
+        "The strokes are uneven and mixed with dots, not regular rows."
+      ],
+      "teachingDistinction": "The regular heel nevus is the comparison: same stroke type, different regularity."
+    },
+    {
+      "diagnosis": "Subcorneal haematoma",
+      "supportingFeatures": [
+        "A dark spot on the sole."
+      ],
+      "contradictingFeatures": [
+        "The colour is brown and structured, not red to maroon and homogeneous."
+      ],
+      "teachingDistinction": "Blood is a separate acral trap."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g26-03a",
+      "title": "Notice first",
+      "text": "Describe the strokes, then ask whether their spacing, darkness, and direction are even."
+    },
+    {
+      "id": "tp-g26-03b",
+      "title": "What the source says",
+      "text": "The caption describes the pattern and the methods report histopathologic criteria. No thickness or stage was added."
+    }
+  ],
+  "observationPrompts": [
+    "Are the strokes evenly spaced, or dense in some areas and sparse in others?",
+    "Which marks at the edge are printed rather than skin?"
+  ],
+  "hints": [
+    "Compare the spacing with the regular heel rows in another case."
+  ],
+  "closestMimic": {
+    "name": "Acral melanocytic nevus",
+    "whyClosest": "Oblique strokes are a common acral nevus look; the regular heel nevus in Docutis shows them in even rows."
+  },
+  "patterns": [
+    {
+      "id": "pat-g26-03-fibrillar",
+      "label": "Uneven oblique strokes mixed with dots",
+      "modality": "dermoscopy",
+      "specificityNote": "Short oblique strokes and dots of varying darkness are spread unevenly. Ridge or furrow position is not resolved, so the certainty is probable.",
+      "certainty": "probably",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g26-03-ridge",
+      "label": "Broad parallel pigmented bands",
+      "modality": "dermoscopy",
+      "specificityNote": "Some strokes follow the skin markings, but broad ridge-type bands cannot be confirmed in this frame.",
+      "certainty": "uncertain",
+      "weight": "weak"
+    },
+    {
+      "id": "pat-g26-03-scale",
+      "label": "Printed scale and label",
+      "modality": "none",
+      "specificityNote": "A millimetre scale and the label 3cm are printed at the left edge. They are not skin.",
+      "certainty": "clearly_visible",
+      "weight": "conflicting"
+    }
+  ],
+  "synthesis": "The source describes this sole lesion as an acral lentiginous melanoma in situ diagnosed on histopathologic criteria. The dermoscopic frame shows oblique strokes and dots spread unevenly, an irregular version of the stroke pattern that the heel nevus shows in regular rows.",
+  "evidenceWeighting": "Uneven strokes with dots are probably visible and are the major clue. A ridge pattern is uncertain and has weak weight. The printed scale conflicts if read as skin. The study-level histopathology statement is the confirmation.",
+  "diagnosticTrap": "Calling every oblique stroke pattern benign because the strokes look like a nevus pattern.",
+  "mentorNote": "This case and the heel nevus share a stroke type. Regularity, not the stroke itself, separates them in these two frames.",
+  "takeHomeRule": "The same acral stroke pattern can be regular or irregular. Irregular spacing, colour, and dots raise concern.",
+  "whyNot": [
+    {
+      "mimic": "Acral melanocytic nevus",
+      "text": "The heel nevus shows the same stroke type in regular rows. Here the strokes are uneven and mixed with dots."
+    },
+    {
+      "mimic": "Subcorneal haematoma",
+      "text": "The colour is brown and structured, not red to maroon and homogeneous."
+    }
+  ],
+  "compareWith": [
+    "cmp-g26-fibrillar"
+  ],
+  "pairedModality": {
+    "clinicalObservation": "A dark brown irregular macule sits on the sole of the foot, between the heel and the forefoot.",
+    "dermoscopicObservation": "Short brown strokes and small brown dots spread unevenly across the lesion. Some areas are dense and dark and others sparse and pale. Many strokes lie obliquely along the skin markings. A printed millimetre scale and the label 3cm sit at the left edge.",
+    "addedValue": "The dermoscopic frame shows uneven strokes and dots; the clinical frame shows only a dark irregular macule.",
+    "reasoningImpact": "The reading moves from a dark sole macule to an irregular stroke pattern with dots. That keeps a malignant melanocytic lesion high in the differential.",
+    "limits": "The caption labels panels A and B as one lesion. The histopathology statement is study-level. Ridge or furrow position is not resolved.",
+    "informationGain": "dermoscopy_adds_support",
+    "informationGainNote": "Educational label only. The dermoscopic frame adds an irregular stroke pattern with dots. Educational label only. Not a validated metric and not a probability.",
+    "comparison": {
+      "clinicalClue": "Dark irregular macule on the sole.",
+      "dermoscopicClue": "Uneven oblique strokes with dots.",
+      "addedInformation": "The irregularity of the strokes is only visible on the dermoscopic frame.",
+      "diagnosticConflict": null,
+      "teachingRule": "Judge the regularity of a stroke pattern, not only its presence."
+    }
+  },
+  "modalityIntegration": "The first frame is the clinical photograph of a dark brown irregular macule on the sole. The second frame is the dermoscopic view of the same lesion and shows short oblique strokes and dots spread unevenly.",
+  "academy": {
+    "level": 4,
+    "spectrum": "melanoma",
+    "teachingType": "reasoning",
+    "skillIds": [
+      "parallel-pigment-lines",
+      "evidence-weighting"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "localization": null,
+  "clinicalAction": "After reveal, open the linked Docutis acral melanoma record for reference context. Do not treat from this case.",
+  "managementBrief": "No management category is stored. The source history is not a Docutis recommendation. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g26-04",
+  "slug": "g26-fingertip-red-maroon-spot",
+  "title": "A dark spot on a fingertip",
+  "diagnosisLabel": "Subcorneal haematoma",
+  "diseaseId": "subcorneal-haemorrhage",
+  "category": "Benign vascular",
+  "educationalLevel": "intermediate",
+  "caseType": "clinical_dermoscopic",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Volar fingertip, acral skin",
+    "presentationNotes": "The source describes a dark reddish-brown macule on the volar aspect of a finger. The source reports that it resolved completely at one month."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-10-02",
+      "metadataCheckedAt": "2026-10-02",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g26-04a",
+      "type": "clinical",
+      "src": "assets/media/cases/case-42-clinical.jpg",
+      "dimensions": {
+        "width": 333,
+        "height": 516
+      },
+      "alt": "Clinical photograph of a palm and fingers with a small dark spot on the tip of the index finger. No diagnosis is included.",
+      "caption": "Clinical photograph of the hand. The source panel letter A is kept. The source label stays hidden until reveal.",
+      "source": "Martinez-Ortega JI, Naidnur S, et al. Cureus 2026, via PubMed Central (PMC13282028)",
+      "sourceUrl": "https://doi.org/10.7759/cureus.109272",
+      "creator": "Jesus Ivan Martinez-Ortega and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Martinez-Ortega and coauthors, Cureus 2026, Figure 1 panel A, doi:10.7759/cureus.109272. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel A of Figure 1 was cropped from the PMC figure file cureus-0018-00000109272-i01.jpg (PMC open-access package PMC13282028), source sha256 8911a97db3ca9237d02ef502db910214f75a474d1fb273f3e5e1262546441140, at pixel box left 0, top 0, right 333, bottom 516 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 fee1fd03ba7008eab2912ee334298b501fc5a7de361143e3ccb4c32508c4d957. No color change, no annotation, and no other edit.",
+      "consentBasis": "The article states that informed consent for open access publication was obtained. The article is distributed under CC BY 4.0, with no third-party credit on the figure. The frame shows a palm and fingers only."
+    },
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-10-02",
+      "metadataCheckedAt": "2026-10-02",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g26-04b",
+      "type": "dermoscopy",
+      "src": "assets/media/cases/case-42-dermoscopy.jpg",
+      "dimensions": {
+        "width": 413,
+        "height": 516
+      },
+      "alt": "Dermoscopic view of a sharply bordered homogeneous red to maroon area with white cracks and a printed scale. No diagnosis is included.",
+      "caption": "Dermoscopic view of the same lesion, per the source caption. The printed scale is not skin.",
+      "source": "Martinez-Ortega JI, Naidnur S, et al. Cureus 2026, via PubMed Central (PMC13282028)",
+      "sourceUrl": "https://doi.org/10.7759/cureus.109272",
+      "creator": "Jesus Ivan Martinez-Ortega and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Martinez-Ortega and coauthors, Cureus 2026, Figure 1 panel B, doi:10.7759/cureus.109272. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel B of Figure 1 was cropped from the PMC figure file cureus-0018-00000109272-i01.jpg (PMC open-access package PMC13282028), source sha256 8911a97db3ca9237d02ef502db910214f75a474d1fb273f3e5e1262546441140, at pixel box left 336, top 0, right 749, bottom 516 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 954b3275dc826e5e85c24350fc57391992caecaf5d7ee9fb77b9bb841250fb9c. No color change, no annotation, and no other edit.",
+      "consentBasis": "The article states that informed consent for open access publication was obtained. The article is distributed under CC BY 4.0, with no third-party credit on the figure. The field shows skin only."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Subcorneal haematoma (clinical and dermoscopic diagnosis with resolution at follow-up)",
+    "confirmationMethod": "clinical_diagnosis",
+    "confirmationNotes": "Martinez-Ortega and coauthors (Cureus 2026, doi:10.7759/cureus.109272), checked 2026-10-02, favoured subcorneal haematoma on clinical and dermoscopic grounds and report complete spontaneous resolution at one-month follow-up. The article states that histopathologic confirmation was not obtained.",
+    "confidenceNote": "Clinical diagnosis supported by follow-up. Not histopathology. Not a Docutis clinician review."
+  },
+  "observations": [
+    {
+      "id": "obs-g26-04a",
+      "kind": "observation",
+      "modality": "clinical",
+      "text": "A palm and fingers. A small dark spot sits on the volar tip of the index finger."
+    },
+    {
+      "id": "obs-g26-04b",
+      "kind": "observation",
+      "modality": "dermoscopy",
+      "text": "A sharply bordered homogeneous red to maroon area with fine white cracks and white scale at one side. No lines, network, or brown dots are present. A printed millimetre scale lies below."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g26-04a",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g26-04a"
+      ],
+      "text": "A dark acral spot on a fingertip is a classic look that must be taken seriously."
+    },
+    {
+      "id": "int-g26-04b",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g26-04a",
+        "obs-g26-04b"
+      ],
+      "text": "The colour is red to maroon and homogeneous, without lines or a network. That fits blood under the stratum corneum in this frame. It does not exclude a tumour beside or under the blood."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Subcorneal haematoma",
+      "supportingFeatures": [
+        "Homogeneous red to maroon colour.",
+        "No melanocytic lines or network.",
+        "The source reports resolution at follow-up."
+      ],
+      "contradictingFeatures": [
+        "The patient history of trauma is not stored."
+      ],
+      "teachingDistinction": "The colour and the follow-up carry this diagnosis, not histopathology."
+    },
+    {
+      "diagnosis": "Acral melanoma",
+      "supportingFeatures": [
+        "A dark acral spot on a finger."
+      ],
+      "contradictingFeatures": [
+        "No brown lines, blotch, or irregular pigmentation is visible."
+      ],
+      "teachingDistinction": "Blood can hide pigment. Follow-up or a scraping test is how the source settled it."
+    },
+    {
+      "diagnosis": "Acral melanocytic nevus",
+      "supportingFeatures": [
+        "A small acral macule."
+      ],
+      "contradictingFeatures": [
+        "No brown lines or rows are visible."
+      ],
+      "teachingDistinction": "A nevus would show brown lines on acral skin."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g26-04a",
+      "title": "Notice first",
+      "text": "Name the colour honestly: red to maroon, not brown. Then look for lines; none are present."
+    },
+    {
+      "id": "tp-g26-04b",
+      "title": "What confirmed it",
+      "text": "Resolution at one month, not a biopsy. A blood colour without follow-up is not a clearance."
+    }
+  ],
+  "observationPrompts": [
+    "Is the colour brown, or red to maroon?",
+    "Are any lines or a network visible inside the spot?"
+  ],
+  "hints": [
+    "Look at colour before shape."
+  ],
+  "closestMimic": {
+    "name": "Acral melanoma",
+    "whyClosest": "A dark spot on acral skin is the classic acral melanoma worry, and blood can mimic or hide pigment."
+  },
+  "patterns": [
+    {
+      "id": "pat-g26-04-blood",
+      "label": "Homogeneous red to maroon area",
+      "modality": "dermoscopy",
+      "specificityNote": "A sharply bordered red to maroon structureless area without lines. It fits blood in this frame and does not exclude a lesion under it.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g26-04-ridge",
+      "label": "Broad parallel pigmented bands",
+      "modality": "dermoscopy",
+      "specificityNote": "No bands or lines of any kind are visible.",
+      "certainty": "not_visible",
+      "weight": "supportive"
+    },
+    {
+      "id": "pat-g26-04-scale",
+      "label": "Printed millimetre scale",
+      "modality": "none",
+      "specificityNote": "A printed scale lies below the spot. It is not skin.",
+      "certainty": "clearly_visible",
+      "weight": "conflicting"
+    }
+  ],
+  "synthesis": "The source favoured subcorneal haematoma and reports complete resolution at one month without histopathology. The dermoscopic frame shows a homogeneous red to maroon area without lines.",
+  "evidenceWeighting": "The blood colour is clearly visible and is the major clue. The missing line pattern supports it. Resolution at follow-up is the confirmation, which is weaker than histopathology.",
+  "diagnosticTrap": "Reassuring from colour alone without follow-up or a scraping test, or calling dark blood brown melanin.",
+  "mentorNote": "This is the blood pole of the acral cluster. Compare its colour and lack of structure with the heel melanoma that shows irregular brown pigment.",
+  "takeHomeRule": "Red to maroon structureless acral colour suggests blood. Confirm with follow-up or scraping before you let it go.",
+  "whyNot": [
+    {
+      "mimic": "Acral melanoma",
+      "text": "No brown lines, blotch, or irregular pigmentation is visible, and the spot resolved. A spot that persists needs reassessment."
+    },
+    {
+      "mimic": "Acral melanocytic nevus",
+      "text": "No brown lines or rows are visible."
+    }
+  ],
+  "compareWith": [
+    "cmp-g26-blood"
+  ],
+  "pairedModality": {
+    "clinicalObservation": "A palm and fingers. A small dark spot sits on the volar tip of the index finger.",
+    "dermoscopicObservation": "A sharply bordered homogeneous red to maroon area with fine white cracks and white scale at one side. No lines, network, or brown dots are present. A printed millimetre scale lies below.",
+    "addedValue": "The dermoscopic frame shows the red to maroon colour and the absence of lines; clinically the spot looks only dark.",
+    "reasoningImpact": "The reading moves from a dark fingertip spot to a structureless blood-coloured area. That favours blood in this frame and calls for follow-up.",
+    "limits": "The caption labels panels A and B as one lesion. No histopathology was obtained. The clinical spot is small in a whole-hand photograph.",
+    "informationGain": "dermoscopy_changes_leading_differential",
+    "informationGainNote": "Educational label only. Dermoscopy changes the colour reading from dark to red-maroon. Educational label only. Not a validated metric and not a probability.",
+    "comparison": {
+      "clinicalClue": "Small dark spot on a fingertip.",
+      "dermoscopicClue": "Homogeneous red to maroon, no lines.",
+      "addedInformation": "The true colour and the missing lines are only visible on the dermoscopic frame.",
+      "diagnosticConflict": "Clinically the spot looks like dark pigment.",
+      "teachingRule": "Read colour under the dermatoscope before naming a dark acral spot."
+    }
+  },
+  "modalityIntegration": "The first frame is the clinical photograph of a hand with a small dark spot on the index fingertip. The second frame is the dermoscopic view of the same lesion and shows a homogeneous red to maroon area without lines.",
+  "academy": {
+    "level": 3,
+    "spectrum": "mimic",
+    "teachingType": "teaching",
+    "skillIds": [
+      "acral-pigment",
+      "blood-color"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "localization": null,
+  "clinicalAction": "After reveal, compare with the heel melanoma case. Do not treat from this case.",
+  "managementBrief": "No management category is stored. The source history is not a Docutis recommendation. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g26-05",
+  "slug": "g26-toenail-side-band-child",
+  "title": "A brown band on a child's toenail",
+  "diagnosisLabel": "Junctional melanocytic nevus of the nail unit",
+  "diseaseId": "melanocytic-nevus",
+  "category": "Benign melanocytic",
+  "educationalLevel": "intermediate",
+  "caseType": "clinical_dermoscopic",
+  "patientContext": {
+    "ageBand": "13 years, per the source case text",
+    "sex": "Female, per the source case text",
+    "anatomicalSite": "Second left toe, nail unit",
+    "presentationNotes": "The source reports a band present from birth with progressive growth. The images are from the first consultation. Growth is the source's history; one frame cannot show it."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-10-02",
+      "metadataCheckedAt": "2026-10-02",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g26-05a",
+      "type": "clinical",
+      "src": "assets/media/cases/case-43-clinical.jpg",
+      "dimensions": {
+        "width": 760,
+        "height": 615
+      },
+      "alt": "Clinical photograph of a child's toes with a faint brown band along one side of a toenail. No diagnosis is included.",
+      "caption": "Clinical photograph at the first consultation. The source panel letter A is kept. The source label stays hidden until reveal.",
+      "source": "Morato IB, Gontijo JRV, Tavares GT, Bittencourt FV. Anais Brasileiros de Dermatologia 2022, via PubMed Central (PMC9263629)",
+      "sourceUrl": "https://doi.org/10.1016/j.abd.2021.02.012",
+      "creator": "Isabela Boechat Morato and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Morato and coauthors, Anais Brasileiros de Dermatologia 2022, Figure 2 panel A, doi:10.1016/j.abd.2021.02.012. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel A of Figure 2 was cropped from the figure image embedded on page 2 of the article PDF in the PMC open-access package PMC9263629 (PDF image object 5, 1505 x 1312 pixels), source sha256 dcdbf421339af5fedce5254f23551450d07a3b4df57f9d1ce3d4f235680c3bec, at pixel box left 2, top 2, right 762, bottom 617 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 c277f4fe08c0a4efa3305ad39ea5d8bedbdb4735adac116924280e27b3c9206a. No color change, no annotation, and no other edit.",
+      "consentBasis": "The article is distributed under CC BY 4.0, with no third-party credit on the figure. A consent sentence is not printed in this letter; the frame shows a toe and nail only."
+    },
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-10-02",
+      "metadataCheckedAt": "2026-10-02",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g26-05b",
+      "type": "dermoscopy",
+      "src": "assets/media/cases/case-43-dermoscopy.jpg",
+      "dimensions": {
+        "width": 720,
+        "height": 615
+      },
+      "alt": "Dermoscopic view of a toenail with a brown band of longitudinal lines along one side and dark pigment along the proximal edge. No diagnosis is included.",
+      "caption": "Dermoscopic view at the same consultation, per the source caption. The panel letter B is kept.",
+      "source": "Morato IB, Gontijo JRV, Tavares GT, Bittencourt FV. Anais Brasileiros de Dermatologia 2022, via PubMed Central (PMC9263629)",
+      "sourceUrl": "https://doi.org/10.1016/j.abd.2021.02.012",
+      "creator": "Isabela Boechat Morato and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Morato and coauthors, Anais Brasileiros de Dermatologia 2022, Figure 2 panel B, doi:10.1016/j.abd.2021.02.012. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel B of Figure 2 was cropped from the figure image embedded on page 2 of the article PDF in the PMC open-access package PMC9263629 (PDF image object 5, 1505 x 1312 pixels), source sha256 dcdbf421339af5fedce5254f23551450d07a3b4df57f9d1ce3d4f235680c3bec, at pixel box left 783, top 2, right 1503, bottom 617 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 c047e868ca0c602391acbfe16b9c07939d5d1927265c260f509ac743273ac89e. No color change, no annotation, and no other edit.",
+      "consentBasis": "The article is distributed under CC BY 4.0, with no third-party credit on the figure. A consent sentence is not printed in this letter; the frame shows a toe and nail only."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Junctional melanocytic nevus of the nail unit (histopathology stated in the case text)",
+    "confirmationMethod": "histopathology",
+    "histopathologySource": "case_text",
+    "confirmationNotes": "Morato and coauthors (Anais Brasileiros de Dermatologia 2022, doi:10.1016/j.abd.2021.02.012), checked 2026-10-02, report for Case 2 that the histopathology of a tangential biopsy was compatible with a junctional melanocytic nevus. The biopsy followed the first-consultation images in Figure 2 A and B. The band then stayed stable for five years.",
+    "confidenceNote": "Lesion-specific histopathology sentence in the case text. Docutis did not see a slide. A benign result in a child does not clear an adult band."
+  },
+  "observations": [
+    {
+      "id": "obs-g26-05a",
+      "kind": "observation",
+      "modality": "clinical",
+      "text": "A child's toes. A faint brown band runs along one side of the nail of the second toe."
+    },
+    {
+      "id": "obs-g26-05b",
+      "kind": "observation",
+      "modality": "dermoscopy",
+      "text": "A brown band occupies one side of the nail plate. Inside it, longitudinal lines of light and dark brown vary in shade and thickness, and the band edge facing the plate centre is blurred. Dark pigment runs along the proximal edge of the plate. Air bubbles and a fluid edge cross the field."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g26-05a",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g26-05a"
+      ],
+      "text": "A pigmented band in one nail of a child is described before it is named."
+    },
+    {
+      "id": "int-g26-05b",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g26-05a",
+        "obs-g26-05b"
+      ],
+      "text": "The lines vary in shade and thickness and one edge is blurred. The source reports Hutchinson's sign; whether the proximal dark pigment sits on fold skin or shows through the cuticle cannot be resolved here, so it is not claimed."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Junctional melanocytic nevus of the nail unit",
+      "supportingFeatures": [
+        "Brown band with longitudinal lines.",
+        "A child.",
+        "The case text reports histopathology."
+      ],
+      "contradictingFeatures": [
+        "Line irregularity and a blurred edge."
+      ],
+      "teachingDistinction": "The source states that irregular features are common in benign childhood bands."
+    },
+    {
+      "diagnosis": "Nail-unit melanoma",
+      "supportingFeatures": [
+        "Irregular line shade and thickness, blurred edge."
+      ],
+      "contradictingFeatures": [
+        "Melanoma is extremely rare in children according to the source.",
+        "The plate is intact."
+      ],
+      "teachingDistinction": "The same features would weigh more in an adult."
+    },
+    {
+      "diagnosis": "Subungual haemorrhage",
+      "supportingFeatures": [
+        "Dark colour in a nail."
+      ],
+      "contradictingFeatures": [
+        "The colour is brown in longitudinal lines, not red to black spots."
+      ],
+      "teachingDistinction": "Blood does not form a longitudinal brown band."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g26-05a",
+      "title": "Notice first",
+      "text": "Describe the band: colour, width, line regularity, and edges. Then look at the folds."
+    },
+    {
+      "id": "tp-g26-05b",
+      "title": "Age changes the weight",
+      "text": "The source says irregular lines are common in benign childhood bands. The same frame in an adult would weigh differently."
+    }
+  ],
+  "observationPrompts": [
+    "Do the lines inside the band have the same shade and thickness?",
+    "Is pigment visible on the skin around the nail, or only at the plate edge?"
+  ],
+  "hints": [
+    "Bubbles and the fluid edge are from the contact fluid."
+  ],
+  "closestMimic": {
+    "name": "Nail-unit melanoma",
+    "whyClosest": "Irregular longitudinal lines and a blurred edge are warning features in adults."
+  },
+  "patterns": [
+    {
+      "id": "pat-g26-05-lines",
+      "label": "Brown longitudinal lines of uneven shade",
+      "modality": "dermoscopy",
+      "specificityNote": "Lines of light and dark brown vary in shade and thickness inside a one-sided band. Their irregularity is clear in parts and soft in others, so the certainty is probable.",
+      "certainty": "probably",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g26-05-fold",
+      "label": "Dark pigment at the proximal plate edge",
+      "modality": "dermoscopy",
+      "specificityNote": "Dark pigment lines the proximal edge. Fold skin and cuticle cannot be separated here, so no Hutchinson sign is claimed.",
+      "certainty": "uncertain",
+      "weight": "weak"
+    }
+  ],
+  "synthesis": "The case text reports a junctional melanocytic nevus on biopsy after these first-consultation images. The dermoscopic frame shows a one-sided brown band with lines of uneven shade and a blurred edge.",
+  "evidenceWeighting": "Uneven lines are probably visible and are the major finding; in a child the source says they are common in benign bands. The proximal pigment is uncertain and weak. The lesion-specific histopathology sentence is the confirmation.",
+  "diagnosticTrap": "Applying adult melanonychia warning rules unchanged to a child, or claiming a Hutchinson sign from pigment at the plate edge.",
+  "mentorNote": "This is the narrower benign childhood band. Compare it with the adult great-toenail case, where irregular lines come with a broken plate.",
+  "takeHomeRule": "In a child, irregular band features are common and are weighed with age. The decision to biopsy remains individual.",
+  "whyNot": [
+    {
+      "mimic": "Nail-unit melanoma",
+      "text": "The adult nail melanoma also shows irregular lines but with a fissured plate. Here the plate is intact and the patient is a child."
+    },
+    {
+      "mimic": "Subungual haemorrhage",
+      "text": "Blood forms red to black spots, not a longitudinal brown band."
+    }
+  ],
+  "compareWith": [
+    "cmp-g26-nail-narrow"
+  ],
+  "pairedModality": {
+    "clinicalObservation": "A child's toes. A faint brown band runs along one side of the nail of the second toe.",
+    "dermoscopicObservation": "A brown band occupies one side of the nail plate. Inside it, longitudinal lines of light and dark brown vary in shade and thickness, and the band edge facing the plate centre is blurred. Dark pigment runs along the proximal edge of the plate. Air bubbles and a fluid edge cross the field.",
+    "addedValue": "The dermoscopic frame resolves the lines inside the band; clinically only a faint band is seen.",
+    "reasoningImpact": "The reading moves from a faint toenail band to a band with uneven lines. In a child that is a common benign look per the source.",
+    "limits": "Figure 2 A and B are both from the first consultation, before the biopsy. The source's growth history is not visible in one frame.",
+    "informationGain": "dermoscopy_adds_support",
+    "informationGainNote": "Educational label only. The dermoscopic frame adds the internal line pattern of the band. Educational label only. Not a validated metric and not a probability.",
+    "comparison": {
+      "clinicalClue": "Faint brown band on one side of a toenail.",
+      "dermoscopicClue": "Uneven brown lines, blurred inner edge.",
+      "addedInformation": "The internal line pattern is only visible on the dermoscopic frame.",
+      "diagnosticConflict": "Uneven lines are an adult warning feature.",
+      "teachingRule": "Weigh nail band features with age."
+    }
+  },
+  "modalityIntegration": "The first frame is the clinical photograph of a child's toes with a faint brown band on one toenail. The second frame is the dermoscopic view at the same consultation and shows a one-sided brown band with uneven longitudinal lines.",
+  "academy": {
+    "level": 3,
+    "spectrum": "mimic",
+    "teachingType": "teaching",
+    "skillIds": [
+      "nail-band"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "localization": null,
+  "clinicalAction": "After reveal, compare with the adult great-toenail case. Do not treat from this case.",
+  "managementBrief": "No management category is stored. The source history is not a Docutis recommendation. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g26-06",
+  "slug": "g26-fingernail-broad-dark-band-child",
+  "title": "A broad dark band on a child's fingernail",
+  "diagnosisLabel": "Recurrent junctional melanocytic nevus of the nail unit",
+  "diseaseId": "melanocytic-nevus",
+  "category": "Benign melanocytic",
+  "educationalLevel": "advanced",
+  "caseType": "clinical_dermoscopic",
+  "patientContext": {
+    "ageBand": "3 years, per the source case text",
+    "sex": "Female, per the source case text",
+    "anatomicalSite": "Fifth left finger, nail unit",
+    "presentationNotes": "The source reports a band for two years that recurred and grew after an earlier biopsy. Growth and recurrence are the source's history; one frame cannot show them."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-10-02",
+      "metadataCheckedAt": "2026-10-02",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g26-06a",
+      "type": "clinical",
+      "src": "assets/media/cases/case-44-clinical.jpg",
+      "dimensions": {
+        "width": 787,
+        "height": 832
+      },
+      "alt": "Clinical photograph of a child's finger with a broad black-brown band along the nail. No diagnosis is included.",
+      "caption": "Clinical photograph. The source panel letter A is kept. The source label stays hidden until reveal.",
+      "source": "Morato IB, Gontijo JRV, Tavares GT, Bittencourt FV. Anais Brasileiros de Dermatologia 2022, via PubMed Central (PMC9263629)",
+      "sourceUrl": "https://doi.org/10.1016/j.abd.2021.02.012",
+      "creator": "Isabela Boechat Morato and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Morato and coauthors, Anais Brasileiros de Dermatologia 2022, Figure 3 panel A, doi:10.1016/j.abd.2021.02.012. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel A of Figure 3 was cropped from the figure image embedded on page 2 of the article PDF in the PMC open-access package PMC9263629 (PDF image object 6, 1505 x 834 pixels), source sha256 ce36b982a3dd2acaad68a6481a6453b3a1ed430c017994b63d3f23476d7391ae, at pixel box left 2, top 0, right 789, bottom 832 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 c41e90570e8a40bf952b9d1745e051ab5027a3d9103539636da72d121117a787. No color change, no annotation, and no other edit.",
+      "consentBasis": "The article is distributed under CC BY 4.0, with no third-party credit on the figure. A consent sentence is not printed in this letter; the frame shows a finger and nail only."
+    },
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-10-02",
+      "metadataCheckedAt": "2026-10-02",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g26-06b",
+      "type": "dermoscopy",
+      "src": "assets/media/cases/case-44-dermoscopy.jpg",
+      "dimensions": {
+        "width": 706,
+        "height": 832
+      },
+      "alt": "Dermoscopic view of a fingernail with a broad band of dark brown to black longitudinal lines of differing thickness. No diagnosis is included.",
+      "caption": "Dermoscopic view of the same lesion, per the source caption. The panel letter B is kept.",
+      "source": "Morato IB, Gontijo JRV, Tavares GT, Bittencourt FV. Anais Brasileiros de Dermatologia 2022, via PubMed Central (PMC9263629)",
+      "sourceUrl": "https://doi.org/10.1016/j.abd.2021.02.012",
+      "creator": "Isabela Boechat Morato and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Morato and coauthors, Anais Brasileiros de Dermatologia 2022, Figure 3 panel B, doi:10.1016/j.abd.2021.02.012. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel B of Figure 3 was cropped from the figure image embedded on page 2 of the article PDF in the PMC open-access package PMC9263629 (PDF image object 6, 1505 x 834 pixels), source sha256 ce36b982a3dd2acaad68a6481a6453b3a1ed430c017994b63d3f23476d7391ae, at pixel box left 797, top 0, right 1503, bottom 832 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 edb7f2858a90556950d1415093dc862990d355223cfa00c771eec3ffc72b1c7d. No color change, no annotation, and no other edit.",
+      "consentBasis": "The article is distributed under CC BY 4.0, with no third-party credit on the figure. A consent sentence is not printed in this letter; the frame shows a finger and nail only."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Recurrent junctional melanocytic nevus of the nail unit (histopathology stated in the case text)",
+    "confirmationMethod": "histopathology",
+    "histopathologySource": "case_text",
+    "confirmationNotes": "Morato and coauthors (Anais Brasileiros de Dermatologia 2022, doi:10.1016/j.abd.2021.02.012), checked 2026-10-02, report for Case 3 a biopsy one year earlier compatible with a junctional melanocytic nevus, regrowth since then, and a second evaluation of the histopathology without signs of malignancy. The photographs show the regrown band, so the histopathology predates these frames. The band stayed stable for two years.",
+    "confidenceNote": "Lesion-specific histopathology sentence, from a biopsy taken before these photographs. Docutis did not see a slide. A benign result in a child does not clear an adult band."
+  },
+  "observations": [
+    {
+      "id": "obs-g26-06a",
+      "kind": "observation",
+      "modality": "clinical",
+      "text": "A child's finger with a broad black-brown band running the full length of the nail."
+    },
+    {
+      "id": "obs-g26-06b",
+      "kind": "observation",
+      "modality": "dermoscopy",
+      "text": "A broad band of dark brown to black longitudinal lines fills the central part of the plate. The lines differ in darkness and thickness, and the band edges are slightly blurred. The plate surface is intact. Grey shading lies at the proximal edge under the cuticle."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g26-06a",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g26-06a"
+      ],
+      "text": "A broad dark band in a child's nail is a dramatic look, described before it is named."
+    },
+    {
+      "id": "int-g26-06b",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g26-06a",
+        "obs-g26-06b"
+      ],
+      "text": "The lines differ in darkness and thickness. Those are adult warning features; the source says they are common in benign childhood bands. The plate is intact. Grey shading at the cuticle is not claimed as a Hutchinson sign."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Recurrent junctional melanocytic nevus of the nail unit",
+      "supportingFeatures": [
+        "Broad band of longitudinal lines in a child.",
+        "The case text reports histopathology and a second review."
+      ],
+      "contradictingFeatures": [
+        "The histopathology predates these photographs."
+      ],
+      "teachingDistinction": "The diagnosis rests on an earlier biopsy of the same band and its re-review."
+    },
+    {
+      "diagnosis": "Nail-unit melanoma",
+      "supportingFeatures": [
+        "Broad dark band with lines of differing thickness."
+      ],
+      "contradictingFeatures": [
+        "A small child.",
+        "Intact plate.",
+        "Re-reviewed histopathology without malignancy."
+      ],
+      "teachingDistinction": "In an adult this frame would weigh much more heavily."
+    },
+    {
+      "diagnosis": "Subungual haemorrhage",
+      "supportingFeatures": [
+        "Dark colour under a nail."
+      ],
+      "contradictingFeatures": [
+        "Regular longitudinal lines, not red to black spots."
+      ],
+      "teachingDistinction": "Blood does not make a broad band of lines."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g26-06a",
+      "title": "Notice first",
+      "text": "Name the width, the colours, and how the lines differ. Then check the plate surface and the folds."
+    },
+    {
+      "id": "tp-g26-06b",
+      "title": "Read the timing",
+      "text": "The biopsy came before these photographs. That makes the confirmation weaker than a biopsy of the photographed band."
+    }
+  ],
+  "observationPrompts": [
+    "How do the lines differ in darkness and thickness?",
+    "Is the nail plate surface intact or broken?"
+  ],
+  "hints": [
+    "Grey shading under the cuticle is not the same as pigment on the fold skin."
+  ],
+  "closestMimic": {
+    "name": "Nail-unit melanoma",
+    "whyClosest": "A broad dark band with lines of differing thickness is an adult warning look."
+  },
+  "patterns": [
+    {
+      "id": "pat-g26-06-lines",
+      "label": "Broad band of dark lines of differing thickness",
+      "modality": "dermoscopy",
+      "specificityNote": "Dark brown to black longitudinal lines differ clearly in darkness and thickness across a broad band.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g26-06-plate",
+      "label": "Broken or missing nail plate",
+      "modality": "dermoscopy",
+      "specificityNote": "The plate surface is intact. No break or debris is visible.",
+      "certainty": "not_visible",
+      "weight": "supportive"
+    }
+  ],
+  "synthesis": "The case text reports a junctional melanocytic nevus on an earlier biopsy of this band, with regrowth and a re-review without malignancy. The dermoscopic frame shows a broad band of dark lines of differing thickness on an intact plate.",
+  "evidenceWeighting": "The irregular lines are clearly visible and are the major finding; the source says they are common in benign childhood bands. The intact plate supports the benign reading. The histopathology predates the photographs, which weakens the confirmation.",
+  "diagnosticTrap": "Using line irregularity alone to call a childhood band malignant, or using this benign result to dismiss an adult band.",
+  "mentorNote": "This dramatic childhood band shares irregular lines with the adult nail melanoma. The plate damage and the age differ.",
+  "takeHomeRule": "Irregular nail lines are weighed with age and plate integrity. In children they are common in benign bands, and the decision remains individual.",
+  "whyNot": [
+    {
+      "mimic": "Nail-unit melanoma",
+      "text": "The adult nail melanoma shows irregular lines with a fissured plate and debris. Here the plate is intact and the patient is three years old."
+    },
+    {
+      "mimic": "Subungual haemorrhage",
+      "text": "Blood forms red to black spots, not a broad band of longitudinal lines."
+    }
+  ],
+  "compareWith": [
+    "cmp-g26-nail-broad"
+  ],
+  "pairedModality": {
+    "clinicalObservation": "A child's finger with a broad black-brown band running the full length of the nail.",
+    "dermoscopicObservation": "A broad band of dark brown to black longitudinal lines fills the central part of the plate. The lines differ in darkness and thickness, and the band edges are slightly blurred. The plate surface is intact. Grey shading lies at the proximal edge under the cuticle.",
+    "addedValue": "The dermoscopic frame resolves the individual lines and their differences; clinically the band looks uniformly dark.",
+    "reasoningImpact": "The reading moves from a broad dark band to a band of irregular lines on an intact plate. In a child the source treats that as a common benign look.",
+    "limits": "The caption labels panels A and B as one lesion. The histopathology is from a biopsy before these frames. Growth and recurrence are history, not visible in one frame.",
+    "informationGain": "dermoscopy_adds_support",
+    "informationGainNote": "Educational label only. The dermoscopic frame resolves the line pattern of the band. Educational label only. Not a validated metric and not a probability.",
+    "comparison": {
+      "clinicalClue": "Broad black-brown band in a child's nail.",
+      "dermoscopicClue": "Dark lines of differing thickness, intact plate.",
+      "addedInformation": "Line-level irregularity is only visible on the dermoscopic frame.",
+      "diagnosticConflict": "Irregular lines are an adult warning feature.",
+      "teachingRule": "Weigh irregularity with age and plate integrity."
+    }
+  },
+  "modalityIntegration": "The first frame is the clinical photograph of a child's finger with a broad black-brown nail band. The second frame is the dermoscopic view of the same band and shows dark longitudinal lines of differing thickness on an intact plate.",
+  "academy": {
+    "level": 4,
+    "spectrum": "mimic",
+    "teachingType": "reasoning",
+    "skillIds": [
+      "nail-band",
+      "evidence-weighting"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "localization": null,
+  "clinicalAction": "After reveal, compare with the adult great-toenail case. Do not treat from this case.",
+  "managementBrief": "No management category is stored. The source history is not a Docutis recommendation. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}),
+      freezeCase({
+  "id": "case-g26-07",
+  "slug": "g26-great-toenail-bands-split",
+  "title": "A discoloured great toenail with a split",
+  "diagnosisLabel": "Nail-unit melanoma",
+  "diseaseId": "acral-melanoma",
+  "category": "Melanoma",
+  "educationalLevel": "advanced",
+  "caseType": "clinical_dermoscopic",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Great toe, nail unit",
+    "presentationNotes": "The source figure is in a review of melanomas of uncommon sites. Age, sex, and history are not given."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-10-02",
+      "metadataCheckedAt": "2026-10-02",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g26-07a",
+      "type": "clinical",
+      "src": "assets/media/cases/case-45-clinical.jpg",
+      "dimensions": {
+        "width": 827,
+        "height": 735
+      },
+      "alt": "Clinical photograph of a great toe with a brown-grey discoloured nail split lengthwise. No diagnosis is included.",
+      "caption": "Clinical photograph. The source panel letter a is kept. The source label stays hidden until reveal.",
+      "source": "Dika E, Lambertini M, Pellegrini C, Veronesi G, Melotti B, Riefolo M, Sperandi F, Patrizi A, et al. Journal of Clinical Medicine 2021, via PubMed Central (PMC7866093)",
+      "sourceUrl": "https://doi.org/10.3390/jcm10030478",
+      "creator": "Emi Dika and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Dika and coauthors, Journal of Clinical Medicine 2021, Figure 1 panel a, doi:10.3390/jcm10030478. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel a of Figure 1 was cropped from the figure image embedded on page 2 of the article PDF in the PMC open-access package PMC7866093 (PDF image object 88, 1662 x 735 pixels), source sha256 32fb60b69752b797857247679fa56971e7142a7d64cf1d41d9a499534d2a27f0, at pixel box left 0, top 0, right 827, bottom 735 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 79a3a39aaa1ee4db981955dd01c77777dd3158270fe265e24d3122bf2d77f9a6. No color change, no annotation, and no other edit.",
+      "consentBasis": "The article states that written informed consent was obtained from the patients. The article is distributed under CC BY 4.0, with no third-party credit on the figure. The frame shows a toe only."
+    },
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-10-02",
+      "metadataCheckedAt": "2026-10-02",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g26-07b",
+      "type": "dermoscopy",
+      "src": "assets/media/cases/case-45-dermoscopy.jpg",
+      "dimensions": {
+        "width": 833,
+        "height": 735
+      },
+      "alt": "Dermoscopic view of a toenail with bands of yellow, orange, and dark brown of differing width and a central fissure with dark dots. No diagnosis is included.",
+      "caption": "Dermoscopic view of the same nail, per the source caption. The panel letter b is kept.",
+      "source": "Dika E, Lambertini M, Pellegrini C, Veronesi G, Melotti B, Riefolo M, Sperandi F, Patrizi A, et al. Journal of Clinical Medicine 2021, via PubMed Central (PMC7866093)",
+      "sourceUrl": "https://doi.org/10.3390/jcm10030478",
+      "creator": "Emi Dika and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Dika and coauthors, Journal of Clinical Medicine 2021, Figure 1 panel b, doi:10.3390/jcm10030478. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel b of Figure 1 was cropped from the figure image embedded on page 2 of the article PDF in the PMC open-access package PMC7866093 (PDF image object 88, 1662 x 735 pixels), source sha256 32fb60b69752b797857247679fa56971e7142a7d64cf1d41d9a499534d2a27f0, at pixel box left 829, top 0, right 1662, bottom 735 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 92921d5333fe94744054c4328107676cf4c319d66ead5caf98505ed1a66a23cf. No color change, no annotation, and no other edit.",
+      "consentBasis": "The article states that written informed consent was obtained from the patients. The article is distributed under CC BY 4.0, with no third-party credit on the figure. The field shows a nail and skin only."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Nail-unit melanoma (peer-reviewed figure caption, histopathology not stated)",
+    "confirmationMethod": "clinical_diagnosis",
+    "confirmationNotes": "The Figure 1 caption of Dika and coauthors (Journal of Clinical Medicine 2021, doi:10.3390/jcm10030478), checked 2026-10-02, names a nail melanoma of the great toenail with irregular longitudinal bands, plate dystrophy, and pigmentation reaching the hyponychium. The article does not state histopathology for this figure, so confirmation stays at the caption.",
+    "confidenceNote": "Peer-reviewed caption by the article authors. Not a histopathology statement. Not a Docutis clinician review."
+  },
+  "observations": [
+    {
+      "id": "obs-g26-07a",
+      "kind": "observation",
+      "modality": "clinical",
+      "text": "A great toenail with brown-grey discolouration across the plate and a longitudinal split through its middle."
+    },
+    {
+      "id": "obs-g26-07b",
+      "kind": "observation",
+      "modality": "dermoscopy",
+      "text": "Longitudinal bands of yellow-brown, orange-brown, and dark brown cross the whole plate and differ in width and colour. A central longitudinal fissure contains white scale and black-brown dots. Faint brownish colour lies on the skin below the free edge."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g26-07a",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g26-07a"
+      ],
+      "text": "A whole-plate discolouration with a split in an adult toenail is described before it is named."
+    },
+    {
+      "id": "int-g26-07b",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g26-07a",
+        "obs-g26-07b"
+      ],
+      "text": "Longitudinal bands differ in width and colour, and the plate is fissured with dark dots inside the fissure. The faint colour below the free edge is not clear enough to call a Hutchinson sign."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Nail-unit melanoma",
+      "supportingFeatures": [
+        "Irregular longitudinal bands across the plate.",
+        "Fissured plate with dark dots."
+      ],
+      "contradictingFeatures": [
+        "No histopathology statement in the source."
+      ],
+      "teachingDistinction": "Irregular bands plus plate damage carry the concern; the caption is the label."
+    },
+    {
+      "diagnosis": "Subungual haemorrhage",
+      "supportingFeatures": [
+        "Dark dots in the plate."
+      ],
+      "contradictingFeatures": [
+        "Most of the colour is brown and banded lengthwise, not red to black spots."
+      ],
+      "teachingDistinction": "Ronger and coauthors caution that blood spots do not exclude melanoma."
+    },
+    {
+      "diagnosis": "Onychomycosis",
+      "supportingFeatures": [
+        "Yellow discolouration and a split plate."
+      ],
+      "contradictingFeatures": [
+        "Dark brown longitudinal bands are present."
+      ],
+      "teachingDistinction": "Fungus can coexist and can mimic; it does not explain the bands."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g26-07a",
+      "title": "Notice first",
+      "text": "Name every band colour and its width. Then describe the plate: intact, split, or broken."
+    },
+    {
+      "id": "tp-g26-07b",
+      "title": "What the source says",
+      "text": "The caption names the diagnosis and a Hutchinson sign. No histopathology sentence is given, and the Hutchinson sign was not claimed from this frame."
+    }
+  ],
+  "observationPrompts": [
+    "Do the bands differ in width and colour?",
+    "Is the nail plate intact, or split?"
+  ],
+  "hints": [
+    "Look inside the split before you name the colours."
+  ],
+  "closestMimic": {
+    "name": "Subungual haemorrhage",
+    "whyClosest": "Dark dots in a damaged toenail can be blood."
+  },
+  "patterns": [
+    {
+      "id": "pat-g26-07-lines",
+      "label": "Bands of differing width and colour across the plate",
+      "modality": "dermoscopy",
+      "specificityNote": "Yellow-brown, orange-brown, and dark brown bands run lengthwise and differ clearly in width and colour.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g26-07-plate",
+      "label": "Fissured plate with dark dots",
+      "modality": "dermoscopy",
+      "specificityNote": "A central longitudinal fissure with white scale and black-brown dots breaks the plate.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g26-07-hypo",
+      "label": "Colour on the skin below the free edge",
+      "modality": "dermoscopy",
+      "specificityNote": "Faint brownish colour lies below the free edge. It is not clear enough to call periungual pigment.",
+      "certainty": "uncertain",
+      "weight": "weak"
+    }
+  ],
+  "synthesis": "The source caption names this great-toenail lesion a nail melanoma. The dermoscopic frame shows irregular longitudinal bands across the plate and a fissure with dark dots. No histopathology is stated.",
+  "evidenceWeighting": "Irregular bands and the fissured plate are clearly visible and are the major clues. Colour below the free edge is uncertain and weak. The confirmation is a peer-reviewed caption, not histopathology.",
+  "diagnosticTrap": "Blaming fungus or trauma for a banded damaged toenail, or claiming a Hutchinson sign from a faint shadow.",
+  "mentorNote": "This adult nail shares irregular lines with the childhood bands. Plate damage, whole-plate involvement, and age differ.",
+  "takeHomeRule": "In an adult, irregular longitudinal bands with plate damage need a melanoma differential and usually histopathology.",
+  "whyNot": [
+    {
+      "mimic": "Subungual haemorrhage",
+      "text": "Most of the colour is brown and banded lengthwise. Blood spots in a nail do not exclude melanoma."
+    },
+    {
+      "mimic": "Junctional melanocytic nevus of the nail unit",
+      "text": "The childhood bands share irregular lines but have an intact plate. This adult plate is fissured."
+    }
+  ],
+  "compareWith": [
+    "cmp-g26-nail-broad",
+    "cmp-g26-nail-narrow"
+  ],
+  "pairedModality": {
+    "clinicalObservation": "A great toenail with brown-grey discolouration across the plate and a longitudinal split through its middle.",
+    "dermoscopicObservation": "Longitudinal bands of yellow-brown, orange-brown, and dark brown cross the whole plate and differ in width and colour. A central longitudinal fissure contains white scale and black-brown dots. Faint brownish colour lies on the skin below the free edge.",
+    "addedValue": "The dermoscopic frame separates the bands and shows dots in the fissure; clinically the plate is diffusely brown-grey.",
+    "reasoningImpact": "The reading moves from a discoloured split toenail to irregular longitudinal bands with plate damage. That keeps a malignant melanocytic lesion high in the differential.",
+    "limits": "The caption labels panels a and b as one nail. No histopathology is stated. The colour below the free edge is uncertain.",
+    "informationGain": "dermoscopy_adds_support",
+    "informationGainNote": "Educational label only. The dermoscopic frame resolves irregular bands and fissure dots. Educational label only. Not a validated metric and not a probability.",
+    "comparison": {
+      "clinicalClue": "Brown-grey toenail with a lengthwise split.",
+      "dermoscopicClue": "Irregular bands, fissure with dark dots.",
+      "addedInformation": "Band irregularity and fissure dots are only visible on the dermoscopic frame.",
+      "diagnosticConflict": null,
+      "teachingRule": "In an adult, irregular bands with plate damage are not explained by trauma alone."
+    }
+  },
+  "modalityIntegration": "The first frame is the clinical photograph of a great toenail with brown-grey discolouration and a lengthwise split. The second frame is the dermoscopic view of the same nail and shows bands of differing width and colour with a fissure containing dark dots.",
+  "academy": {
+    "level": 4,
+    "spectrum": "melanoma",
+    "teachingType": "reasoning",
+    "skillIds": [
+      "nail-band",
+      "nail-unit-damage"
+    ]
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "localization": null,
+  "clinicalAction": "After reveal, open the linked Docutis acral melanoma record for reference context. Do not treat from this case.",
+  "managementBrief": "No management category is stored. The source history is not a Docutis recommendation. This brief is not a protocol and remains review required.",
   "reviewStatus": "clinician review required",
   "clinicalReview": null
 })

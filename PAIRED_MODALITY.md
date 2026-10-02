@@ -65,3 +65,7 @@ Six true pairs were added from CC BY 4.0 open-access articles. Four are `same_le
 - Pattern-rich and histopathology-confirmed paired melanoma, true paired benign cases, pattern-rich benign pairs, and special-site true pairs (face, acral, nail). Scalp is its own site value and is not counted as face.
 
 These are qualitative curriculum counts, not a score and not mastery. Clinical review remains deferred.
+
+## Goal 26
+
+Seven special-site true pairs were added: four acral and three nail. Five are `same_lesion_confirmed`. The heel melanoma and heel nevus are `source_documented_pair`, because the caption names them by dermoscopic panel letters and pairs the clinical panels by letter order. The paired-metric output now lists 16 true pairs, 14 pattern-rich and 2 equivocal. Absence matters too: the heel melanoma and the heel nevus both record the parallel ridge pattern as not visible, so the curriculum shows that the pattern is a weighted clue rather than an equation.

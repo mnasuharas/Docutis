@@ -21,8 +21,8 @@ test("the acquisition ledger is valid and separate from clinical cases", () => {
   const ledger = loadLedger();
   const data = loadCaseData();
   const report = validateLedger(ledger, data);
-  assert.equal(report.counts.accepted, 8);
-  assert.equal(ledger.candidates.filter(row => row.goal !== 25 && row.status === "accepted").length, 2);
+  assert.equal(report.counts.accepted, 15);
+  assert.equal(ledger.candidates.filter(row => row.goal == null && row.status === "accepted").length, 2);
   assert.ok(report.counts.rejected_license >= 1);
   assert.ok(report.counts.rejected_not_true_pair >= 1);
   assert.equal(ledger.candidates.some(row => row.status === "accepted" && row.integrated !== true), false);
@@ -75,8 +75,8 @@ test("accepted cases keep explicit licenses, distinct paired assets, and review 
       assert.ok(comparison, id);
       assert.ok(comparison.caseIdA === caseItem.id || comparison.caseIdB === caseItem.id);
     }
-    if (row.goal === 25) {
-      assert.equal(caseItem.diagnosticGroundTruth.confirmationMethod, "histopathology", row.id);
+    if (row.goal >= 25) {
+      assert.equal(caseItem.diagnosticGroundTruth.confirmationMethod === "histopathology", row.verificationMethod === "histopathology", row.id);
       assert.match(caseItem.diagnosticGroundTruth.confirmationNotes, /histopatholog|histolog/i);
     } else {
       assert.equal(caseItem.diagnosticGroundTruth.confirmationMethod === "histopathology", false);
@@ -114,6 +114,6 @@ test("the ledger does not change reviewed fingerprints or pilot case fingerprint
   }
   const metrics = buildPairedMetrics(data);
   assert.equal(metrics.pairedMelanomaWithHistopathology.some(id => id.startsWith("case-g24-")), false);
-  assert.equal(metrics.pairedMelanomaWithHistopathology.length, 4);
+  assert.equal(metrics.pairedMelanomaWithHistopathology.length, 6);
   assert.ok(metrics.paired.includes("case-g21-08"));
 });
