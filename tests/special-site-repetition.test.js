@@ -262,7 +262,7 @@ test("Goal 27 content stays review required and earlier reviewed units are uncha
   assert.equal(furrow.clinicalReview, null);
 });
 
-test("documentation counts match the development branch", () => {
+test("documentation counts match the released curriculum", () => {
   const data = loadCaseData();
   const metrics = buildPairedMetrics(data);
   const status = buildPublicStatus();
@@ -277,7 +277,7 @@ test("documentation counts match the development branch", () => {
     assert.match(text, new RegExp(`${status.assets.length} review units`));
     assert.match(text, new RegExp(`${required} (?:are )?review required`));
     assert.match(text, /Goal 18 to 27/);
-    assert.match(text, /not (?:yet )?merged to `?main`?/i);
+    assert.match(text, /publication is not clinical approval/i);
   }
   assert.match(readme, new RegExp(`${metrics.patternRichPairs.length} pattern-rich`));
   assert.match(readme, new RegExp(`${loadPatternData().patterns.length} reusable pattern objects`));

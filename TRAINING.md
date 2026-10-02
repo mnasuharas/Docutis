@@ -1,6 +1,6 @@
 # Mixed-case screening training (Goal 28)
 
-Status: **development curriculum**. This mode is on the stacked Goal 18 to 28 development branch. It is not on `main` and not part of the live site. Clinical review remains deferred, and all of its teaching text remains review required.
+Status: **preview curriculum, review required**. This mode was developed in the stacked Goal 18 to 28 pull requests and is published on `main` and the live site for education only. Publication is not clinical approval or validation. Clinical review remains deferred, and all of its teaching text remains review required.
 
 ## What it does
 

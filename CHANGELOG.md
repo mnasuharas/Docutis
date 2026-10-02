@@ -4,7 +4,7 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
-These entries are on the stacked development branch and are not merged to `main`.
+These entries were developed in stacked pull requests #24 to #30 and #32 to #35 and released to `main` through one integration pull request (#36). No new version tag was created. Publication is not clinical review.
 
 ### Goal 28 — Integrated Hautkrebsscreening training
 

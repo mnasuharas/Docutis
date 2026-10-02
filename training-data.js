@@ -21,7 +21,7 @@
     disclaimer: "Training, not a diagnostic device, an exam, or a certificate. Every lesion comes from the existing Docutis case library. The app does not diagnose your choices or grade them. Clinical review of this teaching material is still required.",
     compositionNotice: "Curated for education. Cases are chosen for teaching coverage, not for how often lesions occur. The mix of benign and malignant lesions in a session says nothing about prevalence, screening yield, or predictive value.",
     stateNotice: "Your notes and choices stay in this browser tab. They are not scored, saved, or sent anywhere, and they are cleared when you restart or leave the page.",
-    developmentNotice: "Development curriculum. This mode is on a development branch and is not part of the published live site.",
+    developmentNotice: "Preview curriculum, published for education only. It is not clinically validated, and its teaching text remains clinician review required.",
     impressionNote: "This is your working impression, not the app's diagnosis. It is not scored.",
     impressions: [
       { id: "benign-leaning", label: "Benign-leaning" },

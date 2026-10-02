@@ -230,7 +230,7 @@ test("new content stays review required and earlier reviewed units are unchanged
   assert.ok(patterns.patterns.every(item => item.clinicalReview === null));
 });
 
-test("README and ROADMAP report the development-branch counts and keep main separate", () => {
+test("README and ROADMAP report the released counts and keep review deferred", () => {
   const data = loadCaseData();
   const metrics = buildPairedMetrics(data);
   const status = buildPublicStatus();
@@ -240,7 +240,7 @@ test("README and ROADMAP report the development-branch counts and keep main sepa
     assert.match(text, new RegExp(`${data.cases.length} cases`));
     assert.match(text, new RegExp(`${metrics.paired.length} true clinical.dermoscopic pairs`));
     assert.match(text, new RegExp(`${status.assets.length} review units`));
-    assert.match(text, /not (?:yet )?merged to `?main`?/i);
+    assert.match(text, /publication is not clinical approval/i);
     assert.match(text, /clinical review (?:remains |is )?deferred/i);
   }
   assert.match(readme, new RegExp(`${metrics.pairedMelanomaWithHistopathology.length} histopathology-confirmed true paired melanoma`));

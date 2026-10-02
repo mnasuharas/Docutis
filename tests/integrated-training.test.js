@@ -502,11 +502,11 @@ test("the eligibility report is current and makes no score claim", () => {
   assert.doesNotMatch(output, /\d+(?:\.\d+)?\s*%/);
 });
 
-test("documentation separates the development curriculum from main and the live site", () => {
+test("documentation describes the published training as review required, not clinical approval", () => {
   const readme = fs.readFileSync(path.join(root, "README.md"), "utf8");
   const training = fs.readFileSync(path.join(root, "TRAINING.md"), "utf8");
-  assert.match(training, /development/i);
-  assert.match(training, /not (?:on|part of) (?:`main`|main|the live site)/i);
+  assert.match(training, /preview curriculum/i);
+  assert.match(training, /not clinical approval/i);
   assert.match(training, /clinical review remains deferred/i);
   assert.match(training, /review required/i);
   assert.match(readme, /Goal 28/);
