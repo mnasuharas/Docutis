@@ -63,13 +63,14 @@ test("interactive modules explain a disabled JavaScript environment without medi
     'id="categoryFilters" class="category-filters js-only"',
     'id="quizApp" class="quiz-app js-only"',
     'id="caseApp" class="case-app js-only"',
+    'id="trainingApp" class="training-app js-only"',
     'class="follow-up-controls js-only"',
     'id="cards" class="cards js-only"'
   ]) {
     assert.ok(html.includes(idClass), `missing ${idClass}`);
   }
   const blocks = [...html.matchAll(/<noscript>([\s\S]*?)<\/noscript>/g)].map(match => match[1].trim());
-  assert.equal(blocks.length, 6);
+  assert.equal(blocks.length, 7);
   const generic = blocks.filter(block => block.includes("This interactive section requires JavaScript."));
   assert.equal(generic.length, 5);
   for (const block of generic) {
@@ -77,6 +78,7 @@ test("interactive modules explain a disabled JavaScript environment without medi
     assert.doesNotMatch(block, /melanoma|basal cell|actinic|diagnosis|ICD/i);
   }
   assert.ok(blocks.some(block => /Cases cannot be shown because JavaScript is unavailable/.test(block)));
+  assert.ok(blocks.some(block => /Training cannot run because JavaScript is unavailable/.test(block)));
 });
 
 test("condition scrolling can choose auto motion and legacy focus does not abort", () => {

@@ -142,3 +142,7 @@ Panels cropped from a composite figure use `modificationStatus: "cropped"`. `mod
 ## Goal 27 crop provenance and timing
 
 Schema version stays 1. When a PDF stores a figure losslessly, PDF extractors re-encode it differently, so `sourceSha256` is taken over the decoded RGB pixel buffer and the notes and ledger method say so; the article PDF hash is recorded beside it. JPEG figures keep the hash of the embedded bytes. When histopathology comes from a biopsy taken after the photographs, or from one spot of a cluster, the confirmation notes say so; it is not treated as same-day verification of the photographed lesion. A nevus verified only by follow-up stability stays `clinical_diagnosis`. Clinical review remains deferred. All new clinical content remains review required.
+
+## Goal 28 training eligibility
+
+Schema version stays 1. No case field was added or changed, so every case fingerprint stays put. Training eligibility is computed in `training-engine.js` from stored fields (images and public paths, provenance, ground truth and confirmation method, review status, differentials, closest mimic and pattern links, pre-reveal prompts, image size, pair provenance and information gain) plus one curated entry in `training-data.js`. It is `core_training`, `context_only`, or `excluded`, always with reasons. It is a curriculum call, not a clinical approval status. See [TRAINING.md](TRAINING.md). Clinical review remains deferred. All new clinical content remains review required.

@@ -28,6 +28,7 @@
       <a href="#followUpModule">Follow-up</a>
       <a href="#quizModule">Quiz</a>
       <a href="#caseModule">Cases</a>
+      <a href="#trainingModule">Training</a>
       <a href="#conditionsTitle">Conditions</a>
     </div>
     <div class="nav-oss" aria-label="Open-source project links">
@@ -139,6 +140,21 @@
       <p class="case-empty">Cases cannot be shown because JavaScript is unavailable. No diagnosis, observation or teaching text is substituted. The published pilot cases remain clinician review required.</p>
     </noscript>
     <div id="caseApp" class="case-app js-only" tabindex="-1"></div>
+  </section>
+
+  <section id="trainingModule" class="training-module" aria-labelledby="trainingTitle">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Case-based screening practice</p>
+        <h2 id="trainingTitle">Mixed-case screening training</h2>
+      </div>
+      <span class="module-badge">Clinician review required</span>
+    </div>
+    <p class="case-disclaimer">Unknown lesions from the case library, one at a time: look, commit to a working impression, open dermoscopy where it is stored, then reveal the source diagnosis and its verification. Training only. It is not a diagnostic device, an exam, or a certificate, and it gives no score. Sessions are curated for teaching coverage and do not reflect how often lesions occur.</p>
+    <noscript>
+      <p class="case-empty">Training cannot run because JavaScript is unavailable. No diagnosis or teaching text is substituted.</p>
+    </noscript>
+    <div id="trainingApp" class="training-app js-only" tabindex="-1"></div>
   </section>
 
   <section id="followUpModule" class="follow-up-module" aria-labelledby="followUpTitle">
@@ -267,6 +283,9 @@
 <script src="followup-app.js"></script>
 <script src="quiz-app.js"></script>
 <script src="case-app.js"></script>
+<script src="training-data.js"></script>
+<script src="training-engine.js"></script>
+<script src="training-app.js"></script>
 
 </body>
 </html>

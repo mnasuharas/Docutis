@@ -6,6 +6,14 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 These entries are on the stacked development branch and are not merged to `main`.
 
+### Goal 28 — Integrated Hautkrebsscreening training
+
+- Add mixed-case screening training (`training-data.js`, `training-engine.js`, `training-app.js`, `#trainingModule`): unknown lesions one at a time, observation prompts, a working impression (benign-leaning, suspicious, uncertain), optional lesion family and working diagnosis from one fixed list, staged dermoscopy with an optional updated impression, a deliberate reveal of the source diagnosis, verification method and histopathology status, stored patterns, mimic and comparison teaching, limitations, and a qualitative debrief.
+- Add a machine-readable eligibility audit: 39 core training, 12 context-only, 0 excluded of 51 cases. The caption-only nail melanoma, the thumb melanoma, both nail haemorrhages, the two equivocal clinical-diagnosis pairs, the five legacy pilots, and the five-photograph plate are context only, with reasons.
+- Add three blueprints and a constrained composer that takes at most one case per source group and is not prevalence-based. Comparisons with a lesion still ahead in the session are withheld until the debrief.
+- Add `node scripts/training.js` (validator, `--write`, `--check`, `--json`), the generated `TRAINING_ELIGIBILITY.md`, `TRAINING.md`, and focused tests.
+- No score, probability, disposition, or pass mark. Choices stay in memory for the open tab. No case, image, or clinical claim was added. Clinical review remains deferred. No release was published.
+
 ### Goal 27 — Acral and nail pattern repetition
 
 - Add six clinical and dermoscopic pairs from CC BY 4.0 open-access articles: a cluster of sole nevi with a furrow pattern (histopathology from a later biopsy, timing recorded), a sole nevus with a furrow pattern verified by five years of stability, a palm melanoma in situ with a furrow pattern and an eccentric blotch, a heel melanoma in situ with a ridge pattern (histopathology in the figure caption), an adult nail matrix nevus with regular lines (histopathology in the figure caption), and a subungual haemorrhage with onychoscopy labelled by a review caption. Panels were cropped from composite figures with recorded boxes and hashes; for lossless PDF images the source hash is taken over the decoded pixel buffer.

@@ -2395,3 +2395,296 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* Goal 28 mixed-case screening training */
+.training-module {
+  margin-top: var(--space-10);
+  padding: var(--space-8);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.training-app {
+  max-width: 880px;
+  overflow-wrap: anywhere;
+}
+
+.training-app h3,
+.training-app h4,
+.training-app h5 {
+  margin: var(--space-4) 0 var(--space-2);
+  line-height: 1.3;
+}
+
+.training-app p,
+.training-app li {
+  line-height: 1.6;
+}
+
+.training-lede {
+  color: var(--color-text-secondary);
+}
+
+.training-notices {
+  margin: var(--space-3) 0;
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--color-border-strong);
+  background: var(--color-surface-subtle);
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.training-notices p {
+  margin: var(--space-1) 0;
+}
+
+.training-status-line {
+  font-weight: 700;
+  color: #74470a;
+}
+
+.training-hint,
+.training-small {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.training-choice {
+  margin: var(--space-3) 0;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.training-choice legend {
+  padding: 0 var(--space-1);
+  font-weight: 700;
+}
+
+.training-choice-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+}
+
+.training-option {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  flex: 1 1 220px;
+}
+
+.training-option input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+
+.training-option label {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.training-option-summary {
+  flex-basis: 100%;
+  margin: 0 0 var(--space-2) 28px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.training-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin: var(--space-2) var(--space-2) var(--space-2) 0;
+  padding: 8px 16px;
+  border: 1px solid var(--color-accent-strong);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-accent-strong);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.training-primary {
+  background: var(--color-accent-strong);
+  color: #fff;
+}
+
+.training-quiet {
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+.training-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.training-app :focus-visible,
+.training-app [tabindex="-1"]:focus {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.training-session-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.training-progress {
+  margin: 0;
+  font-weight: 700;
+}
+
+.training-case {
+  margin-top: var(--space-2);
+}
+
+.training-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.training-figure {
+  flex: 1 1 280px;
+  min-width: 0;
+  max-width: 560px;
+  margin: 0;
+}
+
+.training-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+}
+
+.training-figure figcaption {
+  margin-top: var(--space-1);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.training-facts {
+  margin: var(--space-2) 0;
+  padding-left: 1.2em;
+}
+
+.training-section {
+  margin-top: var(--space-4);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.training-app textarea,
+.training-app select {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-height: 44px;
+  margin: var(--space-2) 0;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  font: inherit;
+  background: var(--color-surface);
+  box-sizing: border-box;
+}
+
+.training-app label {
+  display: inline-block;
+  margin-top: var(--space-2);
+}
+
+.training-derm-panel[hidden],
+.training-hint-panel[hidden] {
+  display: none;
+}
+
+.training-reveal {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-subtle);
+}
+
+.training-reveal .training-section:first-child {
+  margin-top: 0;
+  border-top: 0;
+}
+
+.training-diagnosis {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.training-pull,
+.training-comparison {
+  margin: var(--space-3) 0;
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--color-info);
+  background: var(--color-surface);
+}
+
+.training-pattern-list {
+  padding-left: 1.2em;
+}
+
+.training-pattern-list li {
+  margin-bottom: var(--space-2);
+}
+
+.training-pattern-list p {
+  margin: var(--space-1) 0 0;
+}
+
+.training-details {
+  margin: var(--space-3) 0;
+}
+
+.training-details summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.training-actions {
+  margin-top: var(--space-4);
+}
+
+.training-error {
+  color: var(--color-danger);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .training-module {
+    padding: var(--space-4);
+  }
+
+  .training-button {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .training-figure {
+    flex-basis: 100%;
+  }
+}
