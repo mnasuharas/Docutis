@@ -14,9 +14,22 @@ Docutis is an open-source educational and professional reference. It presents de
 
 Live site: [https://mnasuharas.github.io/Docutis/](https://mnasuharas.github.io/Docutis/)
 
-Clinical review is version-bound and independently tracked for disease records, quiz items, visual assets, follow-up protocols and case-based learning units. The public dashboard and `review-status.json` distinguish human review from automated validation. The Goal 9 public layer currently publishes **5 clinician-reviewed** assets and **18 review-required** assets among the original 23 pilot units; additional case units start as review required. AI interpretation is not clinician review. Release notes for older tags are point-in-time and may not match current `main`.
+Clinical review is version-bound and independently tracked for disease records, quiz items, visual assets, follow-up protocols and case-based learning units. The public dashboard and `review-status.json` distinguish human review from automated validation. AI interpretation is not clinician review. Release notes for older tags are point-in-time and may not match current `main`.
 
-Goal 12 steps through the existing pilot cases (inspect, observe, differential, reveal, review) without new cases or clinician-reviewed status. Goal 10 adds a public OSS surface: About/project-status copy, repository and roadmap/changelog links, and “Suggest a correction” / “Report outdated evidence” CTAs that open the clinical content issue form. Docutis remains a public preview and is not validated clinical decision support.
+### Release state: Goals 18 to 28 on `main` and the live site
+
+- **Previous preview** (tag `v0.2.0-preview.1`, commit `c28f1de`): 50 condition records, the five pilot cases, and 28 public review units, of which 5 are clinician reviewed and 23 are review required.
+- **Current `main` and the live site** (Goals 18 to 28, developed in stacked pull requests #24 to #30 and #32 to #35 and released through one integration pull request, #36; no new version tag): 51 cases, 22 true clinical-dermoscopic pairs, and 74 review units, of which 5 are clinician reviewed and 69 are review required. Publication is not clinical approval. Clinical review is deferred: no Goal 18 to 27 case or pattern is clinician reviewed, and no physician decision was created for them. Goal 28 adds no case and no review unit.
+
+Goal 25 adds six histopathology-labelled clinical and dermoscopic pairs from CC BY 4.0 open-access articles: 4 histopathology-confirmed true paired melanoma cases (melanoma in situ, amelanotic nodular melanoma, acral melanoma in situ, and lentigo maligna) and 2 benign mimics that share a feature with a melanoma case (a nevus with cytologic atypia and a facial solar lentigo). Three confirmations come from a figure-caption sentence about that lesion (melanoma in situ, nevus with cytologic atypia, nodular melanoma) and three from a study-level methods statement (acral melanoma in situ, lentigo maligna, solar lentigo); each case record names its basis in `histopathologySource`. Panels were cropped from composite figures with recorded pixel boxes and hashes. Every candidate checked, including 31 Goal 25 candidates, is in `acquisition-ledger.js`; rejected rows never become cases.
+
+Goal 26 adds an acral and nail-unit contrast set of seven clinical and dermoscopic pairs from CC BY 4.0 open-access articles: a heel melanoma and a heel nevus from one figure, an acral melanoma in situ with an irregular stroke pattern, an acral subcorneal haematoma, two childhood nail-band nevi, and an adult great-toenail melanoma. Five have a histopathology statement (three study-level, two in the case text); the haematoma and the nail melanoma stay at a clinical or caption diagnosis. No Hutchinson sign, migration, or change is claimed from a single frame. The ledger records 24 Goal 26 candidates.
+
+Goal 27 adds six clinical and dermoscopic pairs from CC BY 4.0 open-access articles to repeat the main acral and nail discriminators in new patients: two benign sole cases with a parallel furrow pattern (a cluster of nevi with histopathology from a later biopsy, and a nevus verified by five years of stability), a palm melanoma in situ that shows a furrow pattern beside an eccentric blotch, an independent second parallel ridge example (a heel melanoma in situ), the first adult benign nail band (a nail matrix nevus), and the first nail haemorrhage with onychoscopy. Four have a lesion-specific histopathology statement; the stable nevus and the haemorrhage do not. No histopathology-confirmed nail melanoma with onychoscopy was found under an allowed license. One dermoscopic structure was added (parallel furrow pattern). The ledger records 40 Goal 27 candidates. `node scripts/paired-modality.js` now separates positive observations from independent positive cases for each structure.
+
+Goal 28 adds mixed-case screening training: unknown lesions from the existing library, one at a time, with observation, a working impression, staged dermoscopy, a deliberate reveal of the source diagnosis and its verification, stored mimic and contrast teaching, and a qualitative debrief. It adds no case and no clinical claim. Of 51 cases, 39 are core training, 12 context only (including the caption-only nail melanoma and both nail haemorrhages), and 0 excluded. Sessions are curated for teaching coverage, not prevalence. There is no score, probability, disposition, or pass mark, and choices stay in the open tab. See [TRAINING.md](TRAINING.md) and [TRAINING_ELIGIBILITY.md](TRAINING_ELIGIBILITY.md).
+
+Goal 18 adds a Learn Melanoma pathway on top of that flow. It is a teaching sequence, not a certificate and not evidence that the cases improve diagnostic skill. No case is clinician reviewed. Goal 19 adds teaching types, observation prompts, qualitative feature weights, and a closest mimic on the academy cases only. It does not add cases, does not claim that learners improve, and does not review any case. The five pilot payloads were not edited. Pull request #21 was not the base, and Goal 18 pull request #24 was not merged. Goal 10 adds a public OSS surface: About/project-status copy, repository and roadmap/changelog links, and “Suggest a correction” / “Report outdated evidence” CTAs that open the clinical content issue form. Docutis remains a public preview and is not validated clinical decision support.
 
 The current site contains 50 condition records. It retains the malignant and precancerous collection, the first common-dermatology package, and a new infectious-dermatology package spanning bacterial, dermatophyte, other fungal, parasitic and viral disease. It is intended for physicians, medical trainees and other healthcare professionals seeking a concise educational reference.
 
@@ -44,6 +57,7 @@ Docutis is currently in active early development. Its content, structure and tec
 - Dependency-free automated validation on pull requests and `main` pushes
 - No installation or account required
 - English-language dermato-oncology follow-up UI based on German guidelines for melanoma, BCC and cSCC
+- Mixed-case screening training with staged dermoscopy, reveal, and a qualitative debrief (no score; review required)
 
 ## Current Clinical Focus
 
@@ -110,6 +124,8 @@ Current development priorities include:
 - Preparing multilingual support
 - Developing educational visual content with appropriate licensing
 
+Case-learning capabilities on `main`: a five-step case flow (inspect, observe, differential, reveal, review) in which a true pair shows the clinical frame and an initial differential before the dermoscopic frame, pair provenance for every case, reusable pattern objects with case-level certainty and weight, explicit contrastive comparisons, and a source acquisition ledger. Current metrics: 51 cases, 22 true clinical-dermoscopic pairs (20 pattern-rich, 2 equivocal), 8 histopathology-confirmed true paired melanoma cases, and 74 review units. Run `node scripts/paired-modality.js` for the current list. These are qualitative teaching counts, not a score and not evidence of educational efficacy.
+
 See [ROADMAP.md](ROADMAP.md) for completed foundations, known gaps, the medical review workflow and release direction.
 
 ## Repository structure
@@ -120,7 +136,10 @@ The live site is static HTML, CSS and JavaScript. No build step and no package i
 - `data.js` — 50 condition records
 - `followup-data.js`, `followup-app.js` — German dermato-oncology follow-up UI
 - `quiz-data.js`, `quiz-app.js` — eight-question educational quiz
-- `case-data.js`, `case-app.js` — five pilot cases (diagnosis stays hidden until reveal)
+- `case-data.js`, `case-app.js` — 51 cases: five pilots, 16 Goal 18 cases, 8 Goal 21 cases, 1 Goal 22 case, 2 Goal 24 cases, 6 Goal 25 cases, 7 Goal 26 cases and 6 Goal 27 cases (diagnosis stays hidden until reveal). `academy-review.html` is the generated reviewer workspace, not a learner step.
+- `training-data.js`, `training-engine.js`, `training-app.js` — mixed-case screening training. `scripts/training.js` validates it and writes `TRAINING_ELIGIBILITY.md`.
+- `pattern-data.js` — 45 reusable pattern objects. A pattern is not a diagnosis and stays review required.
+- `acquisition-ledger.js` — source candidates checked for case acquisition, with accepted and rejected status. Operational metadata, not clinical content.
 - `media-data.js` and `assets/media/` — four original SVG schematics; case images are separate
 - `review-data.js`, `review-status.json` — published clinical-review decisions
 - `scripts/` and `tests/` — dependency-free checks
@@ -216,4 +235,4 @@ It does not replace professional medical judgment, diagnosis, treatment decision
 
 Source code and the project documentation are under the [MIT License](LICENSE).
 
-The MIT license does not relicense images. Each image keeps the license recorded on that asset. The four SVG schematics in `media-data.js` are `Project-owned`. The five case images in `case-data.js` are recorded as CC BY 4.0 (four) or CC BY-SA 4.0 (one). New media needs its own source URL, license and attribution. See [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md) and [CASE_LICENSING.md](CASE_LICENSING.md).
+The MIT license does not relicense images. Each image keeps the license recorded on that asset. The four SVG schematics in `media-data.js` are `Project-owned`. The five pilot case images remain CC BY 4.0 (four) or CC BY-SA 4.0 (one). Sixteen Goal 18 case images are public domain (13) or CC BY 4.0 (3). Goal 21 adds nine images (five CC BY-SA 4.0, two CC BY 4.0, one CC0 1.0, one public domain), Goal 22 one CC BY-SA 4.0 image, Goal 24 four CC BY-SA 4.0 images, Goal 25 twelve, Goal 26 fourteen, and Goal 27 twelve CC BY 4.0 panels cropped from open-access figures with attribution to the article authors. No image was relicensed. New media needs its own source URL, license and attribution. See [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md) and [CASE_LICENSING.md](CASE_LICENSING.md).

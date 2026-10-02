@@ -56,6 +56,38 @@ jobs:
           node --check scripts/clinical-review.js
           node --check scripts/follow-up.js
 
+      - name: Check case, pattern and training module syntax
+        run: |
+          node --check oss-feedback.js
+          node --check case-data.js
+          node --check case-app.js
+          node --check pattern-data.js
+          node --check acquisition-ledger.js
+          node --check training-data.js
+          node --check training-engine.js
+          node --check training-app.js
+          node --check scripts/case.js
+          node --check scripts/pattern.js
+          node --check scripts/curriculum-coverage.js
+          node --check scripts/contrastive-curriculum.js
+          node --check scripts/diagnostic-signal.js
+          node --check scripts/paired-modality.js
+          node --check scripts/acquisition.js
+          node --check scripts/training.js
+          node --check scripts/academy-review.js
+
+      - name: Validate cases, patterns and training
+        run: |
+          node scripts/case.js
+          node scripts/pattern.js
+          node scripts/curriculum-coverage.js
+          node scripts/contrastive-curriculum.js
+          node scripts/diagnostic-signal.js
+          node scripts/paired-modality.js
+          node scripts/acquisition.js
+          node scripts/training.js --check
+          node scripts/academy-review.js --check
+
       - name: Validate clinical governance and follow-up data
         run: |
           node scripts/clinical-review.js --validate

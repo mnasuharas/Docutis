@@ -167,7 +167,7 @@ const caseUiFiles = ["data.js", "case-data.js", "review-status.js", "oss-feedbac
 test("case learning flow hides diagnosis until reveal and keeps five cases review required", () => {
   const harness = caseHarness(caseUiFiles);
   const cases = harness.window.DOCUTIS_CASES.cases;
-  assert.equal(cases.length, 5);
+  assert.equal(cases.length, 51);
   assert.ok(cases.every(item => item.reviewStatus === "clinician review required" && item.clinicalReview === null));
   const listText = caseText(harness.root);
   for (const item of cases) assert.equal(listText.includes(item.diagnosisLabel), false);
@@ -175,7 +175,7 @@ test("case learning flow hides diagnosis until reveal and keeps five cases revie
   for (const name of diseaseNames) assert.equal(listText.includes(name), false, `case list leaked disease name: ${name}`);
   assert.doesNotMatch(listText, /Linked condition/);
   assert.match(listText, /Review required/);
-  assert.match(listText, /5 cases shown/);
+  assert.match(listText, /51 cases shown/);
 
   const start = caseFind(harness.root, node => node.tagName === "BUTTON" && node.getAttribute("aria-label") === "Start case: Large plantar pigmented macule")[0];
   start.dispatch("click");
@@ -286,7 +286,7 @@ test("case UI keeps zoom, reveal and noscript guards without a scored quiz", () 
     assert.equal(current.activeDecisionId, published.activeDecisionId);
   }
   const caseAssets = built.assets.filter(item => item.assetType === "case");
-  assert.equal(caseAssets.length, 5);
+  assert.equal(caseAssets.length, 51);
   assert.ok(caseAssets.every(item => item.status === "review required"));
   assert.ok(caseAssets.every(item => {
     const published = statusFile.assets.find(asset => asset.assetType === "case" && asset.id === item.id);
@@ -415,8 +415,9 @@ test("site filter keeps focus and typed characters across list refresh", () => {
   filter.dispatch("input");
   filter = siteFilter();
   assert.equal(filter.value, "hand");
-  assert.match(caseText(harness.root), /1 case shown/);
+  assert.match(caseText(harness.root), /2 cases shown/);
   assert.match(caseText(harness.root), /Field change on the dorsum of the hand/);
+  assert.match(caseText(harness.root), /Many brown spots on the back of a hand/);
   const diseaseNames = harness.window.DOCUTIS_DATA.diseases.map(item => item.name).filter(Boolean);
   const listText = caseText(harness.root);
   for (const name of diseaseNames) assert.equal(listText.includes(name), false, name);
@@ -434,7 +435,7 @@ test("site filter keeps focus and typed characters across list refresh", () => {
   assert.equal(harness.document.activeElement, select);
   assert.equal(select.getAttribute("data-filter-key"), "caseType");
   assert.equal(select.value, "dermoscopic");
-  assert.match(caseText(harness.root), /2 cases shown/);
+  assert.match(caseText(harness.root), /4 cases shown/);
   assert.doesNotMatch(caseText(harness.root), /Linked condition|Actinic Keratosis|Basal Cell Carcinoma|Squamous Cell Carcinoma|Acral Melanoma/);
 });
 
@@ -583,7 +584,7 @@ function controlLeakSurface(node) {
 test("diagnosis-bearing source links stay off interactive controls until reveal", () => {
   const harness = caseHarness(caseUiFiles);
   const cases = harness.window.DOCUTIS_CASES.cases;
-  assert.equal(cases.length, 5);
+  assert.equal(cases.length, 51);
   const filenameFragments = [
     "Photography_of_a_large_acral_lentiginous_melanoma",
     "Dermatoskopie_eines_nodulären_Basalzellkarzinoms",
@@ -705,9 +706,11 @@ test("pre-reveal case images use diagnosis-neutral public paths", () => {
     tab.dispatch("click");
   }
 
-  assert.equal(cases.length, 5);
+  assert.equal(cases.length, 51);
+  const pairedImageCases = new Set(["case-g21-08", "case-g24-01", "case-g24-02", "case-g25-01", "case-g25-02", "case-g25-03", "case-g25-04", "case-g25-05", "case-g25-06", "case-g26-01", "case-g26-02", "case-g26-03", "case-g26-04", "case-g26-05", "case-g26-06", "case-g26-07", "case-g27-01", "case-g27-02", "case-g27-03", "case-g27-04", "case-g27-05", "case-g27-06"]);
   for (const item of cases) {
-    assert.equal(item.images.length, 1, item.id);
+    assert.equal(item.images.length, pairedImageCases.has(item.id) ? 2 : 1, item.id);
+    if (!governedSrc[item.id]) continue;
     assert.equal(item.images[0].src, governedSrc[item.id], item.id);
     assert.equal(item.reviewStatus, "clinician review required");
     assert.equal(item.clinicalReview, null);
@@ -750,5 +753,43 @@ test("pre-reveal case images use diagnosis-neutral public paths", () => {
       caseFind(harness.root, node => node.tagName === "A" && node.href === item.images[0].sourceUrl)[0],
       `${item.id} source link missing when inspect is reopened after reveal`
     );
+  }
+});
+
+test("new academy images use diagnosis-neutral paths before and after reveal", () => {
+  const harness = caseHarness(caseUiFiles);
+  const cases = harness.window.DOCUTIS_CASES.cases.filter(item => item.id.startsWith("case-g18-"));
+  const answerBearing = /(?:^|[\/_.-])(?:melanoma|bcc|scc|ak|actinic|basal-cell|squamous-cell|keratoacanthoma|nevus|lentigo)(?=$|[\/_.-])/i;
+  assert.equal(cases.length, 16);
+  function openCase(item) {
+    const back = caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Back to case list")[0];
+    if (back) back.dispatch("click");
+    const start = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === `Start case: ${item.title}`)[0];
+    assert.ok(start, item.id);
+    start.dispatch("click");
+  }
+  for (const item of cases) {
+    assert.match(item.images[0].src, /^assets\/media\/cases\/case-(?:0[6-9]|1\d|2[01])-(?:clinical|dermoscopy)\.jpg$/);
+    assert.doesNotMatch(item.id, answerBearing);
+    assert.doesNotMatch(item.slug, answerBearing);
+    assert.doesNotMatch(item.images[0].src, answerBearing);
+    assert.equal(item.reviewStatus, "clinician review required");
+    assert.equal(item.clinicalReview, null);
+    openCase(item);
+    const img = caseFind(harness.root, node => node.tagName === "IMG")[0];
+    assert.equal(img.src, item.images[0].src);
+    assert.equal(img.loading, "lazy");
+    assert.equal(img.alt.includes(item.diagnosisLabel), false);
+    assert.doesNotMatch(img.alt, /\bmelanoma\b|\bcarcinoma\b|\bkeratoacanthoma\b/i);
+    const revealTab = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === "Step 4 of 5: Reveal")[0];
+    revealTab.dispatch("click");
+    caseFind(harness.root, node => node.tagName === "BUTTON" && node.textContent === "Reveal diagnosis")[0].dispatch("click");
+    const after = caseFind(harness.root, node => node.tagName === "IMG");
+    assert.equal(after.length, 0);
+    const backInspect = caseFind(harness.root, node => node.getAttribute && node.getAttribute("aria-label") === "Step 1 of 5: Inspect")[0];
+    backInspect.dispatch("click");
+    const still = caseFind(harness.root, node => node.tagName === "IMG")[0];
+    assert.equal(still.src, item.images[0].src);
+    assert.equal(still.alt.includes(item.diagnosisLabel), false);
   }
 });

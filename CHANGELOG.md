@@ -2,6 +2,65 @@
 
 All notable project changes are documented here. Docutis is in active pre-1.0 development; entries describe repository milestones rather than clinically reviewed releases.
 
+## [Unreleased]
+
+These entries were developed in stacked pull requests #24 to #30 and #32 to #35 and released to `main` through one integration pull request (#36). No new version tag was created. Publication is not clinical review.
+
+### Goal 28 — Integrated Hautkrebsscreening training
+
+- Add mixed-case screening training (`training-data.js`, `training-engine.js`, `training-app.js`, `#trainingModule`): unknown lesions one at a time, observation prompts, a working impression (benign-leaning, suspicious, uncertain), optional lesion family and working diagnosis from one fixed list, staged dermoscopy with an optional updated impression, a deliberate reveal of the source diagnosis, verification method and histopathology status, stored patterns, mimic and comparison teaching, limitations, and a qualitative debrief.
+- Add a machine-readable eligibility audit: 39 core training, 12 context-only, 0 excluded of 51 cases. The caption-only nail melanoma, the thumb melanoma, both nail haemorrhages, the two equivocal clinical-diagnosis pairs, the five legacy pilots, and the five-photograph plate are context only, with reasons.
+- Add three blueprints and a constrained composer that takes at most one case per source group and is not prevalence-based. Comparisons with a lesion still ahead in the session are withheld until the debrief.
+- Add `node scripts/training.js` (validator, `--write`, `--check`, `--json`), the generated `TRAINING_ELIGIBILITY.md`, `TRAINING.md`, and focused tests.
+- No score, probability, disposition, or pass mark. Choices stay in memory for the open tab. No case, image, or clinical claim was added. Clinical review remains deferred. No release was published.
+
+### Goal 27 — Acral and nail pattern repetition
+
+- Add six clinical and dermoscopic pairs from CC BY 4.0 open-access articles: a cluster of sole nevi with a furrow pattern (histopathology from a later biopsy, timing recorded), a sole nevus with a furrow pattern verified by five years of stability, a palm melanoma in situ with a furrow pattern and an eccentric blotch, a heel melanoma in situ with a ridge pattern (histopathology in the figure caption), an adult nail matrix nevus with regular lines (histopathology in the figure caption), and a subungual haemorrhage with onychoscopy labelled by a review caption. Panels were cropped from composite figures with recorded boxes and hashes; for lossless PDF images the source hash is taken over the decoded pixel buffer.
+- Add the parallel furrow pattern as a dermoscopic structure, linked in benign and malignant cases. The parallel ridge pattern gains an independent second positive case. Ridge and furrow stay probable unless pores or scale resolve the anatomy; only the palm frame resolves pores.
+- Report positive observations and independent positive cases separately per structure in `node scripts/paired-modality.js`.
+- Record 40 Goal 27 ledger candidates, including two revisits of earlier rows. No histopathology-confirmed nail melanoma with onychoscopy was found under an allowed license.
+- All new content stays review required. No clinician review was recorded. No release was published.
+
+### Goal 26 — Acral and nail contrastive dermoscopy
+
+- Add seven clinical and dermoscopic pairs from CC BY 4.0 open-access articles: a heel melanoma and a heel nevus from one figure (study-level histopathology), an acral lentiginous melanoma in situ with an irregular stroke pattern, an acral subcorneal haematoma confirmed by resolution at follow-up, two childhood nail-band nevi with histopathology in the case text, and an adult great-toenail melanoma labelled by a peer-reviewed caption. Panels were cropped from composite figures with recorded boxes and hashes.
+- Add `histopathologySource: "case_text"` for a lesion-specific histopathology sentence in the article body, and a `revisitsCandidateId` link so ledger rows show why a deferred candidate became accepted or stayed deferred.
+- Add four dermoscopic structures (fibrillar pattern, irregular acral pigmentation, longitudinal pigmented lines in the nail plate, red to black structureless blood area). Nail-plate destruction gains a second example. The parallel ridge pattern is recorded as not visible or uncertain where it cannot be seen, and no Hutchinson sign, migration, or change is claimed from a single frame.
+- All new content stays review required. No clinician review was recorded. No release was published.
+
+### Goal 25 — Gold-standard dermoscopy curriculum
+
+- Add six clinical and dermoscopic pairs from CC BY 4.0 open-access articles, each with a histopathology statement: melanoma in situ and a nevus with cytologic atypia from one figure, an amelanotic nodular melanoma of the scalp, an acral melanoma in situ of the heel, and a periorbital lentigo maligna and solar lentigo from one figure. Panels were cropped from composite figures; the pixel box and hashes are recorded and rechecked.
+- Add `histopathologySource` (`figure_caption` or `article_methods`) so a study-level statement is not presented as a per-lesion report.
+- Add four dermoscopic structures (atypical pigment network, parallel ridge pattern, gray dots around follicular openings, facial pseudo-network) after checking the existing library and aliases. Mixed vessels gain a second example. Rhomboidal structures, ulceration, and dots-and-globules were not created from captions or single weak examples.
+- Extend the acquisition ledger with 31 Goal 25 candidates, two new statuses, and pattern-rich and equivocal pair metrics. Scalp is no longer counted as face.
+- All new content stays review required. No clinician review was recorded. No release was published.
+
+### Goal 24 — Evidence-grade case acquisition
+
+- Add two source-documented clinical and dermoscopic melanoma pairs whose confirmation stays at the Commons file label, and the first acquisition ledger. No histopathology was claimed. No release was published.
+
+### Goal 23 — Paired clinical and dermoscopy
+
+- Add an explicit pair-provenance registry: `same_lesion_confirmed`, `source_documented_pair`, or `not_paired`. Same diagnosis is not a pair. The chest case report stays the only true pair, as a source-documented pair, and gains a staged clinical-then-dermoscopy flow. Show dermoscopy does not reveal the diagnosis.
+- No new image was imported. Candidate paired files could not be downloaded after a Wikimedia 429 and one retry, so no findings were invented. Localization stays empty. No clinician review was recorded. No release was published.
+
+### Goal 22 — Diagnostic signal and dermoscopy depth
+
+- Every reusable feature now has an educational role: diagnostic structure, descriptive morphology, contextual feature, or image mark. Marker ink and a measuring scale stay in the library and no longer increase diagnostic breadth, contrastive coverage, or dermoscopy coverage.
+- Learner and reviewer views separate clinical morphology, dermoscopic structure, and context or image information. Paired cases name a clinical view, a dermoscopic view, and an integration sentence. Localization fields stay empty.
+- One new case: subungual haemorrhage, clinical photograph, CC BY-SA 4.0, uploader clinical label, review required. Histopathology-confirmed melanoma remains the plantar case only. No clinician review was recorded. No release was published.
+
+### Goal 19 — Professional case teaching system
+
+- Label each Learn Melanoma case as a teaching case, a reasoning case, or an expert-challenge case. The label is not a diagnosis and is not a score.
+- Add observation prompts, optional hints, feature certainty and qualitative weight, and a closest mimic to the 16 academy cases. The five pilot clinical payloads were not edited.
+- Add a qualitative primary-path gate and `ACADEMY_AUTHORING.md`. The gate is not a numeric score and does not claim educational efficacy.
+- Add `academy-review.html`, generated from case data, labeled review required. No clinician review was recorded. Management briefs were not rewritten. Confirmation methods were not upgraded.
+- Reorder level 4 so the pink nodule is practiced before its dermoscopic counterpart. Case count, spectrum mix, and level sizes are unchanged. Level 5 remains one case.
+- No release tag was created. Pull request #21 was not the base. Goal 18 pull request #24 was not merged.
+
 ## [0.2.0-preview.1] — 2026-09-30
 
 Entries under this heading are repository changes after the historical tag `v0.1.0-preview.1` (2026-09-23), unless a bullet says the work is still pending. This heading is pre-release `v0.2.0-preview.1`. It is not a GitHub Release by itself and it is not clinical validation.
@@ -28,6 +87,13 @@ Entries under this heading are repository changes after the historical tag `v0.1
 
 - Public review state remains 28 units: 5 `clinician reviewed` (actinic keratosis disease, basal cell carcinoma disease, BCC German follow-up, BCC dermoscopy quiz item, BCC clues schematic) and 23 `review required`, with latest valid human review date 2026-09-23. This changelog does not add a decision.
 - Goal 14 pilot-case clinician review is pending and deferred. It is not merged, not imported into this branch, and not an approval. Do not read any bullet here as Goal 14 sign-off.
+
+### Goal 18 — Melanoma clinical case academy
+
+- Add a Learn Melanoma pathway with five levels, a skills taxonomy, and curriculum order. It is not a certificate, not a score, and not a diagnostic device.
+- Add 16 source-labeled cases (public domain or CC BY 4.0) on diagnosis-neutral filenames. Thirteen pathway entries are melanoma-spectrum and six are mimics, including three existing pilots. Two existing pilots stay outside the pathway.
+- No new case is clinician reviewed. The five pilot clinical payloads and fingerprints were not edited. Histopathology was not claimed for the new cases because the reused captions did not state it. No educational-efficacy claim is made.
+- No GitHub release or tag was created. Pull request #21 was not merged and was not the base of this work.
 
 ### Earlier unreleased milestone notes
 

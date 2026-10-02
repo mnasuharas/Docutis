@@ -2111,6 +2111,2391 @@
         "safety-notice",
         "provenance"
       ]
+    },
+    {
+      "id": "case-g18-01",
+      "assetType": "case",
+      "title": "Dark lesion thicker on one side",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:1fe2a3b9f4f99fd64877d40941fd8ed826e433d1a90e3a2558a5662507798ce4",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Asymmetrical_melanoma.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Asymmetrical_melanoma.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-02",
+      "assetType": "case",
+      "title": "Dark lesion with an uneven edge",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:7a2ad423eabf7ce92f89db4ebca8df560e37dbe968fbc5eef9d0919284396a1b",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma_border.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma_border.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-03",
+      "assetType": "case",
+      "title": "Lesion with several dark colors",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:a9faefe1881adcd0c57b927835f67dcc6ba9ea45a03cb51520f88a82715656f1",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma1.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma1.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-04",
+      "assetType": "case",
+      "title": "Broad brown patch with an uneven edge",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:61c244cc5230ced6f74ce29486f95e0ebbbbe94a568710e0bf6dc31ee198eb9f",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-05",
+      "assetType": "case",
+      "title": "Brown lesion with a pale center",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:b40305fba9fd0934c3233e7be7c7c6a52bd83ae30a5cffe530a3316557b193d8",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma,_brown_lesion.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma,_brown_lesion.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-06",
+      "assetType": "case",
+      "title": "Red nodule beside a dark macule",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:e5e1ba1b65fc346eb35338d712e0a13ce817ffe059cbb789414dd93738ffd66c",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma3.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma3.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-07",
+      "assetType": "case",
+      "title": "Flat brown area beside a blue-black papule",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:968c9e81909a0354460b487c007bbfffc03c792a0c054d6743bc1e03812ffa17",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma4.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma4.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-08",
+      "assetType": "case",
+      "title": "Single dark papule with a brown edge",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:468c697b17544f0144e7fced84efad033868ddd8770f41e5d685c62311184902",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma_(3).jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma_(3).jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-09",
+      "assetType": "case",
+      "title": "Brown patch beside a skin crease",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:0cf6bdae97039df86713c8ba1e4811b9efffcaf4bfae8a1a50561e7497c20ffc",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma_with_diameter_change.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma_with_diameter_change.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-10",
+      "assetType": "case",
+      "title": "Pink nodule inside a drape",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:fa6449e9d81d83a1884fa7d142eb5f774ac9862773c27e4ef9e76fe93a4062e8",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Amelanotisches,_malignes_Melanom,_%C2%A9wikiderm.de.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dr. Thomas Brinkmeier / WIKIDERM, via Wikimedia Commons",
+          "organization": "Dr. Thomas Brinkmeier, WIKIDERM. CC BY 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Amelanotisches,_malignes_Melanom,_%C2%A9wikiderm.de.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-11",
+      "assetType": "case",
+      "title": "Pink field with more than one vessel shape",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:dd9d39cd1e7acbe3044879a74d5a6f40c38f7243217d38f68e00001c09cc7b3e",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Dermatoskopie-Bild_eines_amelanotischen,_malignen_Melanoms,_%C2%A9wikiderm.de.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dr. Thomas Brinkmeier / WIKIDERM, via Wikimedia Commons",
+          "organization": "Dr. Thomas Brinkmeier, WIKIDERM. CC BY 4.0.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Dermatoskopie-Bild_eines_amelanotischen,_malignen_Melanoms,_%C2%A9wikiderm.de.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-12",
+      "assetType": "case",
+      "title": "Damaged thumbnail with dark debris",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:df5e8c0f8b00d121650b1ebeca113eb07f6f8db2562bb13c1846eab19b5135a9",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma_of_thumb.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Wawjak, via Wikimedia Commons",
+          "organization": "Wawjak. CC BY 4.0. Via Wikimedia Commons.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma_of_thumb.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-13",
+      "assetType": "case",
+      "title": "Small pink scaly spot",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:0a21243a0e214db5f15f1ae45c5b9a4991cd4a02dffa28d06c91b810708e2b5e",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Basal_cell_carcinoma,_superficial.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Basal_cell_carcinoma,_superficial.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-14",
+      "assetType": "case",
+      "title": "Small eroded spot on the ear",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:544b35891d3f38761e46fe53fe02161be1e89df9afaed0b61923ce370307d438",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Basal_cell_carcinoma_(1).jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Basal_cell_carcinoma_(1).jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-15",
+      "assetType": "case",
+      "title": "Shiny red papule on hair-bearing skin",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:ccaec047bb43b9623742354d0a039a6e1b32ae3ab116d81eb8fea09785ca8290",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Basal_cell_carcinoma_(2).jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Basal_cell_carcinoma_(2).jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g18-16",
+      "assetType": "case",
+      "title": "Nodule with a dark plugged center",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:ecfaa33bc932608d32ee6c9e23dd9a8d4fc06d064c22d8d4d277c64a29541004",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Keratoacanthoma.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Armed Forces Institute of Pathology Atlas of Tumor Pathology, via Wikimedia Commons",
+          "organization": "Armed Forces Institute of Pathology. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Keratoacanthoma.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g21-01",
+      "assetType": "case",
+      "title": "Five looks in one teaching plate",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:bd05c875530fbd07fac02f6569c57a0fe13e9abd2e123a51370e0676dfa09e36",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Normal_mole_(1).jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "National Cancer Institute, via Wikimedia Commons",
+          "organization": "National Cancer Institute. Public domain.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Normal_mole_(1).jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g21-02",
+      "assetType": "case",
+      "title": "Rough brown papule",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:4a3e66f08339888dab9b6f878837e044b5a6232873e2db5288266a731fcd3126",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Seborrheic_keratosis_closup.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Assafn, via Wikimedia Commons",
+          "organization": "Assafn, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Seborrheic_keratosis_closup.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g21-03",
+      "assetType": "case",
+      "title": "Ridged surface under a dermatoscope",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:891b582114730b0e673b6db39d829d793556c5fac43a53e30b99ec8faf67e84c",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Dermatoscopy_SebK.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Philipp Tschandl, via Wikimedia Commons",
+          "organization": "Philipp Tschandl, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Dermatoscopy_SebK.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g21-04",
+      "assetType": "case",
+      "title": "Many brown spots on the back of a hand",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:45eaceabe1ef31fde0f886ad791eed7c1914435c9a6031c6d41ab474e6cef0c2",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Lentigo_s%C3%A9nile.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Alain Gérard, via Wikimedia Commons",
+          "organization": "Alain Gérard, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Lentigo_s%C3%A9nile.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g21-05",
+      "assetType": "case",
+      "title": "Two bright red papules",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:7457b2b9f63bd49cdb5625c30a840ee01fb3fb93da5833e5a977eb553545a596",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Cherry_angioma_closeup.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Assafn, via Wikimedia Commons",
+          "organization": "Assafn, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Cherry_angioma_closeup.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g21-06",
+      "assetType": "case",
+      "title": "Small blue spot under hair",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:fbe26b6a1bc5f7878de1fd6eea35336a1db68b28f3bb701766ed9d0d4a191380",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Blue_nevus.png"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Nictitate, via Wikimedia Commons",
+          "organization": "Nictitate, via Wikimedia Commons. CC0 1.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Blue_nevus.png",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g21-07",
+      "assetType": "case",
+      "title": "Brown patch with ink dots",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:5bc1f06bbc0d1180e70534ca23d1cf10a289e8bb66d20a6ea6eb45014508e0cd",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Lentigo_Maligna_Melanoma_Left_Central_Malar_Cheek.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dermanonymous, via Wikimedia Commons",
+          "organization": "Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Lentigo_Maligna_Melanoma_Left_Central_Malar_Cheek.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g21-08",
+      "assetType": "case",
+      "title": "A group of papules on the chest",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:2f81108925ba5845d375a08a6052a5cd4f548c30c357bf8973990a503d28e8c8",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Photography_of_sebaceous_hyperplasia.jpg",
+        "https://commons.wikimedia.org/wiki/File:Dermoscopy_of_sebaceous_hyperplasia.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Sato and Tanaka, Dermatology Practical & Conceptual (2014), via Wikimedia Commons",
+          "organization": "Sato T, Tanaka M. Dermatology Practical & Conceptual. 2014. Via Wikimedia Commons. CC BY 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Photography_of_sebaceous_hyperplasia.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        },
+        {
+          "title": "Sato and Tanaka, Dermatology Practical & Conceptual (2014), via Wikimedia Commons",
+          "organization": "Sato T, Tanaka M. Dermatology Practical & Conceptual. 2014. Via Wikimedia Commons. CC BY 4.0.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Dermoscopy_of_sebaceous_hyperplasia.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g22-01",
+      "assetType": "case",
+      "title": "Dark patch under a fingernail",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:db1ecca0441280b9ba9b33d319d4e1b61f3c0104729334921c07c2e5799f5351",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Subungal_hematoma_of_the_finger.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Callaleo, via Wikimedia Commons",
+          "organization": "Callaleo, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Subungal_hematoma_of_the_finger.jpg",
+          "metadataCheckedAt": "2026-09-30"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g24-01",
+      "assetType": "case",
+      "title": "A light brown patch on the forehead",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:c5f9d8d522850b55da81c6af37b78fd0a63b594d6b6026032e36db1b00b01a44",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Melanoma_in_situ_Right_Forehead.jpg",
+        "https://commons.wikimedia.org/wiki/File:Melanoma_in_situ_Right_Forehead_dermatoscope.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dermanonymous, via Wikimedia Commons",
+          "organization": "Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma_in_situ_Right_Forehead.jpg",
+          "metadataCheckedAt": "2026-10-01"
+        },
+        {
+          "title": "Dermanonymous, via Wikimedia Commons",
+          "organization": "Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Melanoma_in_situ_Right_Forehead_dermatoscope.jpg",
+          "metadataCheckedAt": "2026-10-01"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g24-02",
+      "assetType": "case",
+      "title": "A pink-brown patch on the back",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:d9a5a57a4db2b4e7278ea10b4010ff10bdca40f1448e0549ecc3f7c3d79db4f9",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Malignant_Melanoma_Left_Mid_Back.jpg",
+        "https://commons.wikimedia.org/wiki/File:Malignant_Melanoma_Left_Mid_Back_Dermatoscope.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dermanonymous, via Wikimedia Commons",
+          "organization": "Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Malignant_Melanoma_Left_Mid_Back.jpg",
+          "metadataCheckedAt": "2026-10-01"
+        },
+        {
+          "title": "Dermanonymous, via Wikimedia Commons",
+          "organization": "Dermanonymous, via Wikimedia Commons. CC BY-SA 4.0.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Malignant_Melanoma_Left_Mid_Back_Dermatoscope.jpg",
+          "metadataCheckedAt": "2026-10-01"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g25-01",
+      "assetType": "case",
+      "title": "A small brown macule on the thigh",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:81f38f0d9243a5a103955de5910e33949d31e8f3040352b7517ccace323975b9",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/cancers18142183"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "De Giorgi V, Cecchi G, Marabini V, Gurioli G, Perillo G, Fazzari F, Zuccaro B, et al. Cancers 2026, via PubMed Central (PMC13406897)",
+          "organization": "De Giorgi and coauthors, Cancers 2026, Figure 2 panel A, doi:10.3390/cancers18142183. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/cancers18142183",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "De Giorgi V, Cecchi G, Marabini V, Gurioli G, Perillo G, Fazzari F, Zuccaro B, et al. Cancers 2026, via PubMed Central (PMC13406897)",
+          "organization": "De Giorgi and coauthors, Cancers 2026, Figure 2 panel B, doi:10.3390/cancers18142183. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/cancers18142183",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g25-02",
+      "assetType": "case",
+      "title": "A dark brown macule on the lower leg",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:628bf8a97c0aebfcfa8d8c72dbfdd0b0417a76bc9d1aafe7e889ca944abdb65a",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/cancers18142183"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "De Giorgi V, Cecchi G, Marabini V, Gurioli G, Perillo G, Fazzari F, Zuccaro B, et al. Cancers 2026, via PubMed Central (PMC13406897)",
+          "organization": "De Giorgi and coauthors, Cancers 2026, Figure 2 panel C, doi:10.3390/cancers18142183. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/cancers18142183",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "De Giorgi V, Cecchi G, Marabini V, Gurioli G, Perillo G, Fazzari F, Zuccaro B, et al. Cancers 2026, via PubMed Central (PMC13406897)",
+          "organization": "De Giorgi and coauthors, Cancers 2026, Figure 2 panel D, doi:10.3390/cancers18142183. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/cancers18142183",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g25-03",
+      "assetType": "case",
+      "title": "A pink papule in the scalp",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:826adbe5821179be6fa4b3e969bf5675edee1c45ca6ef21238a4b0a866173c39",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1038/s41598-022-17108-z"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Porto AC, Blumetti TP, Calsavara VF, Torrezan GT, de Paula CAA, Lellis R, Duprat Neto JP, Carraro DM, Braga JCT. Scientific Reports 2022, via PubMed Central (PMC9445057)",
+          "organization": "Porto and coauthors, Scientific Reports 2022, Figure 5 panel A, doi:10.1038/s41598-022-17108-z. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1038/s41598-022-17108-z",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Porto AC, Blumetti TP, Calsavara VF, Torrezan GT, de Paula CAA, Lellis R, Duprat Neto JP, Carraro DM, Braga JCT. Scientific Reports 2022, via PubMed Central (PMC9445057)",
+          "organization": "Porto and coauthors, Scientific Reports 2022, Figure 5 panel B, doi:10.1038/s41598-022-17108-z. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1038/s41598-022-17108-z",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g25-04",
+      "assetType": "case",
+      "title": "A brown macule on the heel",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:96b097a57030901652b6e4cf415540bc1a6b04da638fa358d65225b1b5ba2a1d",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1111/ijd.70384"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Erol Mart HM, Aydemir AT, Pietkiewicz P, Akay BN. International Journal of Dermatology 2026, via PubMed Central (PMC13342755)",
+          "organization": "Erol Mart and coauthors, International Journal of Dermatology 2026, Figure 2 panel a, doi:10.1111/ijd.70384. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1111/ijd.70384",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Erol Mart HM, Aydemir AT, Pietkiewicz P, Akay BN. International Journal of Dermatology 2026, via PubMed Central (PMC13342755)",
+          "organization": "Erol Mart and coauthors, International Journal of Dermatology 2026, Figure 2 panel b, doi:10.1111/ijd.70384. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1111/ijd.70384",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g25-05",
+      "assetType": "case",
+      "title": "A faint brown patch near the eye",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:1566a31603b6cf3eb0bf3637f21ab6340885d6beaa536446a60d116e349070da",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/diagnostics14222571"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via PubMed Central (PMC11593280)",
+          "organization": "Rubegni and coauthors, Diagnostics 2024, Figure 1 panel e, doi:10.3390/diagnostics14222571. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/diagnostics14222571",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via PubMed Central (PMC11593280)",
+          "organization": "Rubegni and coauthors, Diagnostics 2024, Figure 1 panel f, doi:10.3390/diagnostics14222571. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/diagnostics14222571",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g25-06",
+      "assetType": "case",
+      "title": "A light brown patch on the eyelid",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:2682865485b7f900120e26aace5881d09ac8d2f8f8b90ff794ea374debd02700",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/diagnostics14222571"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via PubMed Central (PMC11593280)",
+          "organization": "Rubegni and coauthors, Diagnostics 2024, Figure 1 panel c, doi:10.3390/diagnostics14222571. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/diagnostics14222571",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via PubMed Central (PMC11593280)",
+          "organization": "Rubegni and coauthors, Diagnostics 2024, Figure 1 panel d, doi:10.3390/diagnostics14222571. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/diagnostics14222571",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g26-01",
+      "assetType": "case",
+      "title": "A small brown macule on the heel with a dark centre",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:93115efe26d4df6f13a9d284b290bef481d0f1eb94914c3230b6ff959805ef34",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/life14060659"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Tognetti L, Cartocci A, Moscarella E, Lallas A, Dika E, Fargnoli MC, Longo C, Nazzaro G, et al. Life 2024, via PubMed Central (PMC11205239)",
+          "organization": "Tognetti and coauthors, Life 2024, Figure 2 panel a, doi:10.3390/life14060659. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/life14060659",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Tognetti L, Cartocci A, Moscarella E, Lallas A, Dika E, Fargnoli MC, Longo C, Nazzaro G, et al. Life 2024, via PubMed Central (PMC11205239)",
+          "organization": "Tognetti and coauthors, Life 2024, Figure 2 panel b, doi:10.3390/life14060659. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/life14060659",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g26-02",
+      "assetType": "case",
+      "title": "A faint brown spot on the heel",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:ddf914e6c9b82539973baaf747a5de2e8dd04216d31fc1e680ee12b2ec8130be",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/life14060659"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Tognetti L, Cartocci A, Moscarella E, Lallas A, Dika E, Fargnoli MC, Longo C, Nazzaro G, et al. Life 2024, via PubMed Central (PMC11205239)",
+          "organization": "Tognetti and coauthors, Life 2024, Figure 2 panel c, doi:10.3390/life14060659. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/life14060659",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Tognetti L, Cartocci A, Moscarella E, Lallas A, Dika E, Fargnoli MC, Longo C, Nazzaro G, et al. Life 2024, via PubMed Central (PMC11205239)",
+          "organization": "Tognetti and coauthors, Life 2024, Figure 2 panel d, doi:10.3390/life14060659. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/life14060659",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g26-03",
+      "assetType": "case",
+      "title": "A dark brown macule on the sole",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:fcae62632830e8ae39e4d98735f8ef7ee375127c704f13a023fdbb9319105e23",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1038/s41598-020-77425-z"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Han B, Hur K, Ohn J, Lim SS, Mun JH. Scientific Reports 2020, via PubMed Central (PMC7688656)",
+          "organization": "Han and coauthors, Scientific Reports 2020, Figure 1 panel A, doi:10.1038/s41598-020-77425-z. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1038/s41598-020-77425-z",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Han B, Hur K, Ohn J, Lim SS, Mun JH. Scientific Reports 2020, via PubMed Central (PMC7688656)",
+          "organization": "Han and coauthors, Scientific Reports 2020, Figure 1 panel B, doi:10.1038/s41598-020-77425-z. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1038/s41598-020-77425-z",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g26-04",
+      "assetType": "case",
+      "title": "A dark spot on a fingertip",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:02fd088cd759f176625018f7b34e5bda1e0b540ebc23445375f39154d0f17c3b",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.7759/cureus.109272"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Martinez-Ortega JI, Naidnur S, et al. Cureus 2026, via PubMed Central (PMC13282028)",
+          "organization": "Martinez-Ortega and coauthors, Cureus 2026, Figure 1 panel A, doi:10.7759/cureus.109272. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.7759/cureus.109272",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Martinez-Ortega JI, Naidnur S, et al. Cureus 2026, via PubMed Central (PMC13282028)",
+          "organization": "Martinez-Ortega and coauthors, Cureus 2026, Figure 1 panel B, doi:10.7759/cureus.109272. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.7759/cureus.109272",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g26-05",
+      "assetType": "case",
+      "title": "A brown band on a child's toenail",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:b3b3a6146a9f6b7c8276fe371d43f225849d3b0ac9e77f0c9dbc07a47f836395",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1016/j.abd.2021.02.012"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Morato IB, Gontijo JRV, Tavares GT, Bittencourt FV. Anais Brasileiros de Dermatologia 2022, via PubMed Central (PMC9263629)",
+          "organization": "Morato and coauthors, Anais Brasileiros de Dermatologia 2022, Figure 2 panel A, doi:10.1016/j.abd.2021.02.012. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.abd.2021.02.012",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Morato IB, Gontijo JRV, Tavares GT, Bittencourt FV. Anais Brasileiros de Dermatologia 2022, via PubMed Central (PMC9263629)",
+          "organization": "Morato and coauthors, Anais Brasileiros de Dermatologia 2022, Figure 2 panel B, doi:10.1016/j.abd.2021.02.012. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.abd.2021.02.012",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g26-06",
+      "assetType": "case",
+      "title": "A broad dark band on a child's fingernail",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:f824314116981578c95d1560bcb5d885cac1f5cf6513c0894a4f89b269ee5589",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1016/j.abd.2021.02.012"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Morato IB, Gontijo JRV, Tavares GT, Bittencourt FV. Anais Brasileiros de Dermatologia 2022, via PubMed Central (PMC9263629)",
+          "organization": "Morato and coauthors, Anais Brasileiros de Dermatologia 2022, Figure 3 panel A, doi:10.1016/j.abd.2021.02.012. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.abd.2021.02.012",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Morato IB, Gontijo JRV, Tavares GT, Bittencourt FV. Anais Brasileiros de Dermatologia 2022, via PubMed Central (PMC9263629)",
+          "organization": "Morato and coauthors, Anais Brasileiros de Dermatologia 2022, Figure 3 panel B, doi:10.1016/j.abd.2021.02.012. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.abd.2021.02.012",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g26-07",
+      "assetType": "case",
+      "title": "A discoloured great toenail with a split",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:b2036d50f58f11017359f6bb7ac4d2293e035cce589b5b3f17d97497f270b696",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/jcm10030478"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dika E, Lambertini M, Pellegrini C, Veronesi G, Melotti B, Riefolo M, Sperandi F, Patrizi A, et al. Journal of Clinical Medicine 2021, via PubMed Central (PMC7866093)",
+          "organization": "Dika and coauthors, Journal of Clinical Medicine 2021, Figure 1 panel a, doi:10.3390/jcm10030478. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/jcm10030478",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Dika E, Lambertini M, Pellegrini C, Veronesi G, Melotti B, Riefolo M, Sperandi F, Patrizi A, et al. Journal of Clinical Medicine 2021, via PubMed Central (PMC7866093)",
+          "organization": "Dika and coauthors, Journal of Clinical Medicine 2021, Figure 1 panel b, doi:10.3390/jcm10030478. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/jcm10030478",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g27-01",
+      "assetType": "case",
+      "title": "A cluster of small brown spots on the sole",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:ebca82c6130e14a69500d5af5e11d2b816498524aab1199c0e92af84dbf320e9",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1016/j.jdcr.2026.05.048"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Terada A, Rokunohe D, Sawamura D, Akasaka E. JAAD Case Reports 2026, via PubMed Central (PMC13319713)",
+          "organization": "Terada and coauthors, JAAD Case Reports 2026, Figure 1 panel B, doi:10.1016/j.jdcr.2026.05.048. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.jdcr.2026.05.048",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Terada A, Rokunohe D, Sawamura D, Akasaka E. JAAD Case Reports 2026, via PubMed Central (PMC13319713)",
+          "organization": "Terada and coauthors, JAAD Case Reports 2026, Figure 2 panel A, doi:10.1016/j.jdcr.2026.05.048. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.jdcr.2026.05.048",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g27-02",
+      "assetType": "case",
+      "title": "A small dark spot on the sole",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:5747f0c781692afee836703424105587c752a4c39f4594032ad58e56806a59f4",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1111/ijd.70384"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Erol Mart HM, Aydemir AT, Pietkiewicz P, Akay BN. International Journal of Dermatology 2026, via PubMed Central (PMC13342755)",
+          "organization": "Erol Mart and coauthors, International Journal of Dermatology 2026, Figure 1 panel a, doi:10.1111/ijd.70384. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1111/ijd.70384",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Erol Mart HM, Aydemir AT, Pietkiewicz P, Akay BN. International Journal of Dermatology 2026, via PubMed Central (PMC13342755)",
+          "organization": "Erol Mart and coauthors, International Journal of Dermatology 2026, Figure 1 panel b, doi:10.1111/ijd.70384. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1111/ijd.70384",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g27-03",
+      "assetType": "case",
+      "title": "A large dark patch on the outer heel",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:7611d0c5555b0b0dc247b81813061d06c2f7af8e63cfd2f9daa08c9682c4deda",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/dermatopathology9030035"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Park S, Yun SJ. Dermatopathology 2022, via PubMed Central (PMC9397077)",
+          "organization": "Park and Yun, Dermatopathology 2022, Figure 5 panel A, doi:10.3390/dermatopathology9030035. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/dermatopathology9030035",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Park S, Yun SJ. Dermatopathology 2022, via PubMed Central (PMC9397077)",
+          "organization": "Park and Yun, Dermatopathology 2022, Figure 5 panel B, doi:10.3390/dermatopathology9030035. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/dermatopathology9030035",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g27-04",
+      "assetType": "case",
+      "title": "A brown oval patch at the base of a finger",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:56903bf1f4707b2ab9cb339a509b5cf8d8bce5e9cdb2ed77bd896852350a2830",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1016/j.jdcr.2024.09.025"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Money SM, Davis LS, Rabinovitz HS, Powell MR, Buchanan KL. JAAD Case Reports 2024, via PubMed Central (PMC11626072)",
+          "organization": "Money and coauthors, JAAD Case Reports 2024, Figure 1 panel B, doi:10.1016/j.jdcr.2024.09.025. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.jdcr.2024.09.025",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Money SM, Davis LS, Rabinovitz HS, Powell MR, Buchanan KL. JAAD Case Reports 2024, via PubMed Central (PMC11626072)",
+          "organization": "Money and coauthors, JAAD Case Reports 2024, Figure 2 panel A, doi:10.1016/j.jdcr.2024.09.025. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.jdcr.2024.09.025",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g27-05",
+      "assetType": "case",
+      "title": "A narrow brown band in an adult's fingernail",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:f23b3362a3be18a93d1c3a1852f3e5ffbfc363794571fa16336e63eef925d229",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/dermatopathology9030035"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Park S, Yun SJ. Dermatopathology 2022, via PubMed Central (PMC9397077)",
+          "organization": "Park and Yun, Dermatopathology 2022, Figure 2 panel A, doi:10.3390/dermatopathology9030035. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/dermatopathology9030035",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Park S, Yun SJ. Dermatopathology 2022, via PubMed Central (PMC9397077)",
+          "organization": "Park and Yun, Dermatopathology 2022, Figure 2 panel B, doi:10.3390/dermatopathology9030035. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/dermatopathology9030035",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g27-06",
+      "assetType": "case",
+      "title": "A dark blot under a nail",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:e556c82ed133b42fb763bb57190e661554540a5cf0b90814808340f72b68cb47",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.1016/j.abd.2024.01.005"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Bertanha L, Noriega LF, Di Chiacchio NG, Matter A, Di Chiacchio N. Anais Brasileiros de Dermatologia 2024, via PubMed Central (PMC11551238)",
+          "organization": "Bertanha and coauthors, Anais Brasileiros de Dermatologia 2024, Figure 1 panel A, doi:10.1016/j.abd.2024.01.005. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.abd.2024.01.005",
+          "metadataCheckedAt": "2026-10-02"
+        },
+        {
+          "title": "Bertanha L, Noriega LF, Di Chiacchio NG, Matter A, Di Chiacchio N. Anais Brasileiros de Dermatologia 2024, via PubMed Central (PMC11551238)",
+          "organization": "Bertanha and coauthors, Anais Brasileiros de Dermatologia 2024, Figure 1 panel B, doi:10.1016/j.abd.2024.01.005. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.1016/j.abd.2024.01.005",
+          "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
     }
   ]
 }

@@ -137,7 +137,7 @@ test("malformed records, broken review references and stale source metadata fail
   const asset = buildAssets()[0];
   assert.throws(() => buildPublicStatus(reviewData([decision(asset, { reviewerId: "missing" })])), /resolve/);
   assert.throws(() => buildPublicStatus({ ...reviewData(), schemaVersion: 99 }), /Unsupported/);
-  assert.deepEqual(sourceMetadataWarnings(buildAssets(), "2026-09-28"), []);
+  assert.deepEqual(sourceMetadataWarnings(buildAssets(), "2026-10-02"), []);
   const stale = clone(asset); stale.evidenceMetadata[0].metadataCheckedAt = "2020-01-01";
   assert.match(sourceMetadataWarnings([stale], "2026-09-28")[0], /stale source metadata/);
 });

@@ -27,7 +27,10 @@
   });
 
   function publicCaseImageSrc(image) {
-    return PUBLIC_CASE_IMAGE_SRC[image && image.src] || null;
+    if (!image || typeof image.src !== "string") return null;
+    if (PUBLIC_CASE_IMAGE_SRC[image.src]) return PUBLIC_CASE_IMAGE_SRC[image.src];
+    if (/^assets\/media\/cases\/case-\d{2}-(?:clinical|dermoscopy)\.jpg$/.test(image.src)) return image.src;
+    return null;
   }
   const EVIDENCE_LABELS = Object.freeze({
     histopathology: "Histopathology",
@@ -40,8 +43,85 @@
   let activeId = null;
   let activeStep = 0;
   let diagnosisRevealed = false;
+  let openComparisonId = null;
   let zoomScales = Object.create(null);
-  const filters = { diseaseId: "", caseType: "", educationalLevel: "", anatomicalSite: "" };
+  const impressions = Object.create(null);
+  const descriptions = Object.create(null);
+  const hintsOpen = Object.create(null);
+  let lastHintButton = null;
+  const dermoscopyOpen = Object.create(null);
+  let lastDermoscopyButton = null;
+  const openPatternKeys = Object.create(null);
+  let patternFocusId = null;
+  let lastPatternButton = null;
+  let lastPatternPanel = null;
+  const TEACHING_TYPE_LABELS = Object.freeze({
+    teaching: "Teaching case",
+    reasoning: "Reasoning case",
+    "expert-challenge": "Expert-challenge case"
+  });
+  const CERTAINTY_LABELS = Object.freeze({
+    clearly_visible: "Clearly visible",
+    probably: "Probably present",
+    uncertain: "Uncertain",
+    not_visible: "Not visible in this image"
+  });
+  const WEIGHT_LABELS = Object.freeze({
+    major: "Major clue",
+    supportive: "Supportive",
+    weak: "Weak",
+    conflicting: "Conflicts with a simple reading"
+  });
+  const ROLE_LABELS = Object.freeze({
+    characteristic: "Characteristic",
+    supportive: "Supportive",
+    weak: "Weak",
+    conflicting: "Conflicts with a simple reading",
+    nonspecific: "Nonspecific",
+    "context-dependent": "Context-dependent"
+  });
+  const EDUCATIONAL_ROLE_LABELS = Object.freeze({
+    diagnostic_structure: "Diagnostic structure",
+    descriptive_morphology: "Descriptive morphology, not a dermoscopic structure",
+    contextual_feature: "Context, not a diagnostic structure",
+    image_artifact_or_annotation: "Image mark, not a skin finding"
+  });
+  const INFORMATION_GAIN_LABELS = Object.freeze({
+    dermoscopy_adds_major_discrimination: "Educational label: dermoscopy adds a major discriminating look. Not a validated metric.",
+    dermoscopy_adds_support: "Educational label: dermoscopy adds support. Not a validated metric.",
+    dermoscopy_changes_leading_differential: "Educational label: dermoscopy changes the leading comparison. Not a validated metric.",
+    dermoscopy_remains_equivocal: "Educational label: dermoscopy stays equivocal. Not a validated metric."
+  });
+  const PAIR_PROVENANCE_LABELS = Object.freeze({
+    same_lesion_confirmed: "Same lesion confirmed by the source",
+    source_documented_pair: "Source-documented paired view",
+    not_paired: "Not a paired lesion"
+  });
+  const PATTERN_GROUPS = Object.freeze([
+    Object.freeze({ id: "clinical-morphology", title: "Clinical morphology", note: "Clinical looks stored on this case. A brown spot, red papule, or other descriptive shape is not a dermoscopic structure." }),
+    Object.freeze({ id: "dermoscopic-structure", title: "Dermoscopic structure", note: "Named only when a dermoscopic frame supports it. A clinical photograph is not dermoscopy." }),
+    Object.freeze({ id: "case-specific", title: "Case-specific observation", note: "Not promoted to a reusable pattern. Nothing was inferred from the diagnosis." }),
+    Object.freeze({ id: "context", title: "Context and image information", note: "Limits and image marks. They do not count as diagnostic structures and they are not a discriminator.", quiet: true })
+  ]);
+  const filters = {
+    diseaseId: "",
+    caseType: "",
+    educationalLevel: "",
+    anatomicalSite: "",
+    pathway: "",
+    curriculumLevel: "",
+    spectrum: "",
+    pattern: "",
+    skill: "",
+    reviewStatus: "",
+    teachingType: ""
+  };
+  const IMPRESSIONS = Object.freeze([
+    ["benign-appearing", "Benign-appearing"],
+    ["suspicious", "Suspicious"],
+    ["malignant-appearing", "Malignant-appearing"],
+    ["uncertain", "Uncertain"]
+  ]);
 
   function element(tag, text, className) {
     const node = document.createElement(tag);
@@ -68,13 +148,57 @@
     return Array.isArray(value) ? value : [];
   }
 
+  function curriculumMap() {
+    return registry.curriculum || null;
+  }
+
+  function curriculumEntries() {
+    const map = curriculumMap();
+    return map && Array.isArray(map.entries) ? map.entries : [];
+  }
+
+  function entryFor(caseItem) {
+    if (!caseItem) return null;
+    return curriculumEntries().find(entry => entry.caseId === caseItem.id) || null;
+  }
+
+  function levelMeta(level) {
+    const map = curriculumMap();
+    return map && Array.isArray(map.levels) ? map.levels.find(item => item.level === level) || null : null;
+  }
+
   function cases() {
-    return registry.cases.filter(item => {
+    const list = registry.cases.filter(item => {
       if (filters.caseType && item.caseType !== filters.caseType) return false;
       if (filters.educationalLevel && item.educationalLevel !== filters.educationalLevel) return false;
       if (filters.anatomicalSite && !(item.patientContext && item.patientContext.anatomicalSite || "").toLocaleLowerCase("en").includes(filters.anatomicalSite.toLocaleLowerCase("en"))) return false;
+      const entry = entryFor(item);
+      if (filters.pathway && (!entry || !curriculumMap() || curriculumMap().id !== filters.pathway)) return false;
+      if (filters.curriculumLevel && (!entry || String(entry.level) !== String(filters.curriculumLevel))) return false;
+      if (filters.spectrum && (!entry || entry.spectrum !== filters.spectrum)) return false;
+      if (filters.skill && (!entry || !asList(entry.skillIds).includes(filters.skill))) return false;
+      if (filters.pattern && !asList(item.patterns).some(pattern => pattern && pattern.id === filters.pattern)) return false;
+      if (filters.reviewStatus === "reviewed" && !isReviewed(item)) return false;
+      if (filters.reviewStatus === "required" && isReviewed(item)) return false;
+      if (filters.teachingType && teachingTypeOf(item) !== filters.teachingType) return false;
       return true;
     });
+    if (filters.pathway) {
+      list.sort((a, b) => ((entryFor(a) || {}).order || 0) - ((entryFor(b) || {}).order || 0));
+    }
+    return list;
+  }
+
+
+  function teachingTypeOf(caseItem) {
+    const entry = entryFor(caseItem);
+    if (entry && entry.teachingType) return entry.teachingType;
+    if (caseItem && caseItem.academy && caseItem.academy.teachingType) return caseItem.academy.teachingType;
+    return "";
+  }
+
+  function teachingTypeLabel(caseItem) {
+    return TEACHING_TYPE_LABELS[teachingTypeOf(caseItem)] || "";
   }
 
   function diseaseName(id) {
@@ -296,38 +420,71 @@
     return [...new Set(registry.cases.map(getter).filter(Boolean))].sort((a, b) => String(a).localeCompare(String(b)));
   }
 
+  function addSelect(parent, key, label, options) {
+    const wrap = element("label", undefined, "case-filter");
+    wrap.appendChild(document.createTextNode(label));
+    const select = document.createElement("select");
+    select.setAttribute("aria-label", label);
+    select.setAttribute("data-filter-key", key);
+    options.forEach(([value, textValue]) => select.appendChild(new Option(textValue, value)));
+    select.value = filters[key] || "";
+    select.addEventListener("change", () => { filters[key] = select.value; renderList(); });
+    wrap.appendChild(select);
+    parent.appendChild(wrap);
+  }
+
   function renderFilters(parent) {
+    const pathway = curriculumMap();
+    if (pathway && pathway.title) {
+      const toggle = element("button", filters.pathway ? "Show all cases" : pathway.title, "case-button case-button-secondary");
+      toggle.type = "button";
+      toggle.setAttribute("aria-pressed", filters.pathway ? "true" : "false");
+      toggle.setAttribute("aria-label", filters.pathway ? "Show all cases" : "Learn Melanoma pathway");
+      toggle.addEventListener("click", () => {
+        filters.pathway = filters.pathway ? "" : pathway.id;
+        renderList();
+      });
+      parent.appendChild(toggle);
+      parent.appendChild(element("p", filters.pathway
+        ? "This pathway follows the curriculum order. It is not a certificate, not a score, and not a device."
+        : "Learn Melanoma is an optional sequence. The default list stays unfiltered.", "case-kind-note"));
+    }
     const bar = element("div", undefined, "case-filters");
-    const specs = [
-      ["caseType", "Case type", uniqueValues(item => item.caseType).map(value => [value, String(value).replaceAll("_", " ")])],
-      ["educationalLevel", "Level", uniqueValues(item => item.educationalLevel).map(value => [value, value])],
-      ["anatomicalSite", "Site contains", null]
-    ];
-    specs.forEach(([key, label, options]) => {
-      const wrap = element("label", undefined, "case-filter");
-      wrap.appendChild(document.createTextNode(label));
-      if (options) {
-        const select = document.createElement("select");
-        select.setAttribute("aria-label", label);
-        select.setAttribute("data-filter-key", key);
-        select.appendChild(new Option("All", ""));
-        options.forEach(([value, text]) => select.appendChild(new Option(text, value)));
-        select.value = filters[key];
-        select.addEventListener("change", () => { filters[key] = select.value; renderList(); });
-        wrap.appendChild(select);
-      } else {
-        const input = document.createElement("input");
-        input.type = "search";
-        input.setAttribute("aria-label", label);
-        input.setAttribute("data-filter-key", key);
-        input.placeholder = "e.g. hand, back";
-        input.value = filters[key];
-        input.addEventListener("input", () => { filters[key] = input.value.trim(); renderList(); });
-        wrap.appendChild(input);
-      }
-      bar.appendChild(wrap);
-    });
+    addSelect(bar, "caseType", "Case type", [["", "All"], ...uniqueValues(item => item.caseType).map(value => [value, String(value).replaceAll("_", " ")])]);
+    addSelect(bar, "educationalLevel", "Level", [["", "All"], ...uniqueValues(item => item.educationalLevel).map(value => [value, value])]);
+    addSelect(bar, "curriculumLevel", "Curriculum level", [["", "All"], ...((pathway && pathway.levels) || []).map(level => [String(level.level), `${level.level}. ${level.title}`])]);
+    addSelect(bar, "teachingType", "Teaching type", [["", "All"], ["teaching", "Teaching case"], ["reasoning", "Reasoning case"], ["expert-challenge", "Expert-challenge case"]]);
+    const siteWrap = element("label", undefined, "case-filter");
+    siteWrap.appendChild(document.createTextNode("Site contains"));
+    const input = document.createElement("input");
+    input.type = "search";
+    input.setAttribute("aria-label", "Site contains");
+    input.setAttribute("data-filter-key", "anatomicalSite");
+    input.placeholder = "e.g. hand, back";
+    input.value = filters.anatomicalSite;
+    input.addEventListener("input", () => { filters.anatomicalSite = input.value.trim(); renderList(); });
+    siteWrap.appendChild(input);
+    bar.appendChild(siteWrap);
     parent.appendChild(bar);
+
+    const teacher = document.createElement("details");
+    teacher.className = "case-teacher-filters";
+    teacher.appendChild(element("summary", "Teacher filters"));
+    teacher.appendChild(element("p", "Closed by default. Spectrum and skill filters expose the curriculum class, so leave them closed during a first pass.", "case-kind-note"));
+    const teacherBar = element("div", undefined, "case-filters");
+    addSelect(teacherBar, "spectrum", "Spectrum", [["", "All"], ["melanoma", "Melanoma-spectrum"], ["mimic", "Mimic"]]);
+    addSelect(teacherBar, "skill", "Skill", [["", "All"], ...((pathway && pathway.skills) || []).map(skill => [skill.id, skill.title])]);
+    const patternOptions = [["", "All"]];
+    const seenPatterns = new Set();
+    registry.cases.forEach(item => asList(item.patterns).forEach(pattern => {
+      if (!pattern || !pattern.id || seenPatterns.has(pattern.id)) return;
+      seenPatterns.add(pattern.id);
+      patternOptions.push([pattern.id, pattern.label || pattern.id]);
+    }));
+    addSelect(teacherBar, "pattern", "Pattern", patternOptions);
+    addSelect(teacherBar, "reviewStatus", "Review status", [["", "All"], ["required", "Review required"], ["reviewed", "Clinician reviewed"]]);
+    teacher.appendChild(teacherBar);
+    parent.appendChild(teacher);
   }
 
   function appendSourcePageLink(parent, image) {
@@ -421,14 +578,168 @@
     renderProvenance(parent, image);
   }
 
+  function renderFirstImpression(parent, caseItem) {
+    const box = element("fieldset", undefined, "case-impression");
+    box.appendChild(element("legend", "First impression, before you read a diagnosis"));
+    box.appendChild(element("p", "Self-assessment only. Not a device output, not a score, and not a diagnosis.", "case-kind-note"));
+    const row = element("div", undefined, "case-impression-row");
+    IMPRESSIONS.forEach(([value, label]) => {
+      const button = element("button", label, "case-button case-button-secondary");
+      button.type = "button";
+      button.setAttribute("aria-pressed", impressions[caseItem.id] === value ? "true" : "false");
+      button.addEventListener("click", () => {
+        impressions[caseItem.id] = value;
+        renderDetail(caseItem, "none");
+      });
+      row.appendChild(button);
+    });
+    box.appendChild(row);
+    const chosen = IMPRESSIONS.find(item => item[0] === impressions[caseItem.id]);
+    if (chosen) box.appendChild(element("p", `Recorded in this page session: ${chosen[1]}. Not submitted and not scored.`, "case-kind-note"));
+    parent.appendChild(box);
+  }
+
+  function pairedImageViews(caseItem) {
+    const images = asList(caseItem.images).filter(Boolean);
+    const clinical = images.filter(image => image.type === "clinical");
+    const dermoscopy = images.filter(image => image.type === "dermoscopy");
+    return { images, clinical, dermoscopy, paired: clinical.length > 0 && dermoscopy.length > 0 };
+  }
+
+  function pairRecord(caseItem) {
+    return asList(registry && registry.pairProvenance).find(row => row && row.caseId === caseItem.id) || null;
+  }
+
+  function isTruePair(caseItem) {
+    const record = pairRecord(caseItem);
+    return !!(record && record.provenance && record.provenance !== "not_paired" && pairedImageViews(caseItem).paired);
+  }
+
+  function dermoscopyContentVisible(caseItem) {
+    if (!isTruePair(caseItem)) return true;
+    if (diagnosisRevealed) return true;
+    return !!dermoscopyOpen[caseItem.id];
+  }
+
+  function modalityStatusText(caseItem) {
+    const views = pairedImageViews(caseItem);
+    if (isTruePair(caseItem)) {
+      if (dermoscopyContentVisible(caseItem) && !diagnosisRevealed) {
+        return "Modality on screen: clinical photograph and dermoscopic image. The diagnosis is still hidden.";
+      }
+      if (!dermoscopyContentVisible(caseItem)) {
+        return "Modality on screen: clinical photograph only. The dermoscopic image is hidden. Showing dermoscopy does not reveal the diagnosis.";
+      }
+      return "Modality on screen: clinical photograph and dermoscopic image. The diagnosis is revealed.";
+    }
+    if (views.dermoscopy.length && !views.clinical.length) return "Modality on screen: dermoscopic image. No clinical photograph of this lesion is stored.";
+    if (views.clinical.length && !views.dermoscopy.length) return "Modality on screen: clinical photograph. No dermoscopic image of this lesion is stored.";
+    return "Modality on screen: the stored images. This case is not a documented pair.";
+  }
+
+  function renderDermoscopyToggle(parent, caseItem) {
+    if (!isTruePair(caseItem) || diagnosisRevealed) return;
+    const open = !!dermoscopyOpen[caseItem.id];
+    const button = element("button", open ? "Hide dermoscopy" : "Show dermoscopy", "case-button case-dermoscopy-toggle");
+    button.type = "button";
+    button.setAttribute("aria-expanded", open ? "true" : "false");
+    button.setAttribute("aria-controls", "caseDermoscopyPanel");
+    button.setAttribute("aria-describedby", "caseModalityStatus");
+    lastDermoscopyButton = button;
+    button.addEventListener("click", () => {
+      dermoscopyOpen[caseItem.id] = !dermoscopyOpen[caseItem.id];
+      renderDetail(caseItem, "dermoscopy");
+    });
+    parent.appendChild(button);
+    parent.appendChild(element("p", open
+      ? "Dermoscopy is open. The clinical photograph stays available. The diagnosis stays hidden."
+      : "Dermoscopy is closed. Only the clinical photograph is on screen.", "case-kind-note"));
+  }
+
+  function renderPairStage(parent, caseItem) {
+    if (!isTruePair(caseItem)) return false;
+    const status = element("p", modalityStatusText(caseItem), "case-modality-status");
+    status.id = "caseModalityStatus";
+    parent.appendChild(status);
+    renderDermoscopyToggle(parent, caseItem);
+    const open = dermoscopyContentVisible(caseItem);
+    const stage = element("div", undefined, open ? "case-pair-stage is-open" : "case-pair-stage");
+    const views = pairedImageViews(caseItem);
+    const clinicalSection = element("section", undefined, "case-view");
+    clinicalSection.appendChild(element("h5", "Clinical view"));
+    clinicalSection.appendChild(element("p", "This frame is a clinical photograph. It is not a dermoscopic structure.", "case-kind-note"));
+    views.clinical.forEach(image => renderZoomableImage(clinicalSection, caseItem, image));
+    stage.appendChild(clinicalSection);
+    const dermoSection = element("section", undefined, "case-view");
+    dermoSection.id = "caseDermoscopyPanel";
+    dermoSection.hidden = !open;
+    dermoSection.appendChild(element("h5", "Dermoscopic view"));
+    dermoSection.appendChild(element("p", open
+      ? "This frame is dermoscopy. Do not read its structures back onto the clinical photograph unless the case says they are there. The diagnosis is not revealed by opening this frame."
+      : "Dermoscopic image hidden.", "case-kind-note"));
+    if (open) views.dermoscopy.forEach(image => renderZoomableImage(dermoSection, caseItem, image));
+    stage.appendChild(dermoSection);
+    parent.appendChild(stage);
+    const block = caseItem.pairedModality;
+    if (block && typeof block.clinicalObservation === "string") {
+      parent.appendChild(element("p", block.clinicalObservation));
+    }
+    if (open && block) {
+      const integration = element("section", undefined, "case-view case-view-integration");
+      integration.appendChild(element("h5", "What the dermoscopic frame adds"));
+      if (block.dermoscopicObservation) integration.appendChild(element("p", block.dermoscopicObservation));
+      if (block.addedValue) integration.appendChild(element("p", block.addedValue));
+      if (block.reasoningImpact) integration.appendChild(element("p", block.reasoningImpact));
+      if (block.limits) integration.appendChild(element("p", block.limits));
+      if (!diagnosisRevealed && block.informationGain && INFORMATION_GAIN_LABELS[block.informationGain]) {
+        integration.appendChild(element("p", INFORMATION_GAIN_LABELS[block.informationGain], "case-kind-note"));
+      }
+      if (typeof caseItem.modalityIntegration === "string" && caseItem.modalityIntegration.trim()) {
+        integration.appendChild(element("p", caseItem.modalityIntegration));
+      }
+      parent.appendChild(integration);
+    }
+    return true;
+  }
+
+  function renderPairComparison(parent, caseItem) {
+    if (!diagnosisRevealed || !isTruePair(caseItem)) return;
+    const block = caseItem.pairedModality;
+    const comparison = block && block.comparison;
+    if (!comparison) return;
+    const section = element("section", undefined, "case-view case-view-integration");
+    section.appendChild(element("h5", "Clinical and dermoscopy, after the diagnosis"));
+    const record = pairRecord(caseItem);
+    if (record) {
+      section.appendChild(element("p", `Pair provenance: ${PAIR_PROVENANCE_LABELS[record.provenance] || record.provenance}.`));
+      if (record.basis) section.appendChild(element("p", record.basis));
+    }
+    if (block.informationGain && INFORMATION_GAIN_LABELS[block.informationGain]) {
+      section.appendChild(element("p", INFORMATION_GAIN_LABELS[block.informationGain], "case-kind-note"));
+    }
+    section.appendChild(element("p", `Clinical clue: ${comparison.clinicalClue}`));
+    section.appendChild(element("p", `Dermoscopic clue: ${comparison.dermoscopicClue}`));
+    section.appendChild(element("p", `Added information: ${comparison.addedInformation}`));
+    section.appendChild(element("p", comparison.diagnosticConflict
+      ? `Diagnostic conflict: ${comparison.diagnosticConflict}`
+      : "Diagnostic conflict: none stored. The two frames do not record different impressions."));
+    section.appendChild(element("p", `Teaching rule: ${comparison.teachingRule}`));
+    parent.appendChild(section);
+  }
+
   function renderInspect(parent, caseItem) {
     parent.appendChild(element("p", "Look at the image, creator, license and attribution. Zoom only changes the view on this page. The diagnosis stays hidden on this step.", "case-step-intro"));
-    const images = asList(caseItem.images);
-    if (!images.length) {
+    renderFirstImpression(parent, caseItem);
+    const views = pairedImageViews(caseItem);
+    if (!views.images.length) {
       parent.appendChild(element("p", "No image is recorded for this case. None was added.", "case-empty"));
       return;
     }
-    images.forEach(image => renderZoomableImage(parent, caseItem, image));
+    if (renderPairStage(parent, caseItem)) return;
+    const status = element("p", modalityStatusText(caseItem), "case-modality-status");
+    status.id = "caseModalityStatus";
+    parent.appendChild(status);
+    views.images.forEach(image => renderZoomableImage(parent, caseItem, image));
   }
 
   function renderLabeledList(parent, items, kindLabel, className, textOfItem) {
@@ -447,11 +758,163 @@
     return true;
   }
 
+  function renderObservationPrompts(parent, caseItem) {
+    const prompts = asList(caseItem.observationPrompts).map(preRevealDisplay).filter(Boolean);
+    if (!prompts.length) return;
+    const section = element("section", undefined, "case-kind-section case-kind-section-observation");
+    section.appendChild(element("h5", "Look for"));
+    section.appendChild(element("p", "These prompts name what to inspect. They do not name the diagnosis.", "case-kind-note"));
+    const list = element("ul", undefined, "case-kind-list");
+    prompts.forEach(prompt => {
+      const item = element("li", prompt);
+      list.appendChild(item);
+    });
+    section.appendChild(list);
+    const hints = asList(caseItem.hints).map(preRevealDisplay).filter(Boolean);
+    if (hints.length) {
+      const hintButton = element("button", hintsOpen[caseItem.id] ? "Hide hint" : "Show a hint", "case-button case-button-secondary");
+      hintButton.type = "button";
+      hintButton.setAttribute("aria-pressed", hintsOpen[caseItem.id] ? "true" : "false");
+      hintButton.setAttribute("aria-controls", "caseHintPanel");
+      lastHintButton = hintButton;
+      hintButton.addEventListener("click", () => {
+        hintsOpen[caseItem.id] = !hintsOpen[caseItem.id];
+        renderDetail(caseItem, "hint");
+      });
+      section.appendChild(hintButton);
+      const panel = element("div", undefined, "case-hint");
+      panel.id = "caseHintPanel";
+      panel.hidden = !hintsOpen[caseItem.id];
+      if (hintsOpen[caseItem.id]) hints.forEach(hint => panel.appendChild(element("p", hint)));
+      section.appendChild(panel);
+    }
+    parent.appendChild(section);
+  }
+
+  function patternGroupId(canonical) {
+    if (!canonical) return "case-specific";
+    if (canonical.educationalRole === "image_artifact_or_annotation" || canonical.educationalRole === "contextual_feature" || canonical.category === "frame-artifact" || canonical.category === "observation-limit") return "context";
+    if (canonical.category === "dermoscopic-structure") return "dermoscopic-structure";
+    return "clinical-morphology";
+  }
+
+  function patternRows(caseItem) {
+    const rows = [];
+    asList(caseItem.patterns).forEach(pattern => {
+      if (!pattern) return;
+      rows.push({ kind: "case-pattern", pattern, canonicalId: canonicalIdForCasePattern(pattern.id) });
+    });
+    const library = patternLibrary();
+    const tokenLinks = library ? (library.dermoscopicTokenLinks || {}) : {};
+    asList(caseItem.dermoscopicFeatures).forEach(feature => {
+      if (!feature || !feature.token || !tokenLinks[feature.token]) return;
+      const canonicalId = tokenLinks[feature.token];
+      if (rows.some(row => row.canonicalId === canonicalId)) return;
+      rows.push({ kind: "token", feature, canonicalId });
+    });
+    return rows;
+  }
+
+  function visiblePatternRows(caseItem) {
+    return patternRows(caseItem).filter(row => {
+      if (dermoscopyContentVisible(caseItem)) return true;
+      if (row.kind === "case-pattern" && row.pattern.modality === "dermoscopy") return false;
+      const canonical = patternRecord(row.canonicalId);
+      if (canonical && (canonical.category === "dermoscopic-structure" || canonical.modality === "dermoscopic")) return false;
+      return true;
+    });
+  }
+
+  function renderGroupedPatterns(parent, caseItem, mode) {
+    const rows = visiblePatternRows(caseItem);
+    if (!rows.length) return;
+    const intro = element("section", undefined, mode === "study" ? "case-pattern-study" : "case-kind-section");
+    const heading = element("h5", mode === "study" ? "Patterns in this case" : "Patterns");
+    if (mode === "study") heading.id = "patternsInThisCase";
+    intro.appendChild(heading);
+    intro.appendChild(element("p", mode === "study"
+      ? "Certainty and weight belong to this case. Clinical morphology, dermoscopic structure, and image context are separate. A pattern note does not replace the case weight."
+      : "A named look is not a diagnosis. Clinical morphology, dermoscopic structure, and image marks are listed separately.", "case-kind-note"));
+    if (isTruePair(caseItem)) {
+      intro.appendChild(element("p", "Image marks stay in the context section. They are not part of the paired diagnostic comparison.", "case-kind-note"));
+    }
+    parent.appendChild(intro);
+    PATTERN_GROUPS.forEach(group => {
+      const groupRows = rows.filter(row => patternGroupId(patternRecord(row.canonicalId)) === group.id);
+      if (!groupRows.length) return;
+      const section = element("section", undefined, group.quiet ? "case-pattern-context" : "case-pattern-group");
+      section.appendChild(element("h5", group.title));
+      section.appendChild(element("p", group.note, "case-kind-note"));
+      const body = element("div");
+      groupRows.forEach(row => {
+        if (mode === "study") appendPatternStudyArticle(body, caseItem, row);
+        else appendPreRevealPattern(body, row);
+      });
+      if (group.quiet) {
+        const details = document.createElement("details");
+        details.className = "case-context-disclosure";
+        const summary = element("summary", group.title);
+        details.appendChild(summary);
+        details.appendChild(element("p", group.note, "case-kind-note"));
+        details.appendChild(body);
+        const quiet = element("section", undefined, "case-pattern-context");
+        quiet.appendChild(details);
+        parent.appendChild(quiet);
+        return;
+      }
+      section.appendChild(body);
+      parent.appendChild(section);
+    });
+  }
+
+  function appendPreRevealPattern(parent, row) {
+    const label = preRevealDisplay(row.kind === "case-pattern" ? row.pattern.label : (row.feature.label || row.feature.token));
+    const note = row.kind === "case-pattern" ? preRevealDisplay(row.pattern.specificityNote) : "";
+    const canonical = patternRecord(row.canonicalId);
+    if (label) parent.appendChild(element("h6", label));
+    if (canonical && EDUCATIONAL_ROLE_LABELS[canonical.educationalRole]) {
+      parent.appendChild(element("p", EDUCATIONAL_ROLE_LABELS[canonical.educationalRole], "case-kind-note"));
+    }
+    if (note) parent.appendChild(element("p", note));
+  }
+
+  function visibleObservations(caseItem) {
+    return asList(caseItem.observations).filter(item => {
+      if (!item || item.modality !== "dermoscopy") return true;
+      return dermoscopyContentVisible(caseItem);
+    });
+  }
+
+  function visibleInterpretations(caseItem) {
+    return asList(caseItem.interpretations).filter(item => {
+      if (!item || dermoscopyContentVisible(caseItem)) return true;
+      const ids = asList(item.relatedObservationIds);
+      if (!ids.length) return true;
+      const observations = asList(caseItem.observations);
+      return ids.every(id => {
+        const found = observations.find(observation => observation && observation.id === id);
+        return !found || found.modality !== "dermoscopy";
+      });
+    });
+  }
+
   function renderObserve(parent, caseItem) {
     parent.appendChild(element("p", "Observations and dermoscopic features are separate from interpretations. Only items already stored on this case are shown.", "case-step-intro"));
-    const observations = asList(caseItem.observations);
-    const features = asList(caseItem.dermoscopicFeatures);
-    const interpretations = asList(caseItem.interpretations);
+    if (isTruePair(caseItem)) renderPairStage(parent, caseItem);
+    renderObservationPrompts(parent, caseItem);
+    const describe = element("label", undefined, "case-filter");
+    describe.appendChild(element("span", "Describe what you see before you read a diagnosis"));
+    const area = document.createElement("textarea");
+    area.value = descriptions[caseItem.id] || "";
+    area.setAttribute("aria-label", "Your description before the diagnosis");
+    area.addEventListener("input", () => { descriptions[caseItem.id] = area.value; });
+    describe.appendChild(area);
+    parent.appendChild(describe);
+    parent.appendChild(element("p", "This note stays in the page session. It is not saved and not scored.", "case-kind-note"));
+    renderGroupedPatterns(parent, caseItem, "observe");
+    const observations = visibleObservations(caseItem);
+    const features = dermoscopyContentVisible(caseItem) ? asList(caseItem.dermoscopicFeatures) : [];
+    const interpretations = visibleInterpretations(caseItem);
 
     const observationSection = element("section", undefined, "case-kind-section case-kind-section-observation");
     observationSection.appendChild(element("h5", "Observations"));
@@ -462,7 +925,11 @@
     const featureSection = element("section", undefined, "case-kind-section");
     featureSection.appendChild(element("h5", "Dermoscopic features"));
     featureSection.appendChild(element("p", "Dermoscopic feature means a recorded structure or vessel finding, not a diagnosis.", "case-kind-note"));
-    appendRecordedOrConcealed(featureSection, features, "Dermoscopic feature", "case-kind-feature", item => item && preRevealDisplay(item.label || item.token), "No dermoscopic features are recorded for this case. None were added.");
+    if (isTruePair(caseItem) && !dermoscopyContentVisible(caseItem)) {
+      featureSection.appendChild(element("p", "Dermoscopic features stay hidden until you show the dermoscopic image. Showing it does not reveal the diagnosis.", "case-kind-note"));
+    } else {
+      appendRecordedOrConcealed(featureSection, features, "Dermoscopic feature", "case-kind-feature", item => item && preRevealDisplay(item.label || item.token), "No dermoscopic features are recorded for this case. None were added.");
+    }
     parent.appendChild(featureSection);
 
     const interpretationSection = element("section", undefined, "case-kind-section case-kind-section-interpretation");
@@ -473,7 +940,15 @@
   }
 
   function renderDifferential(parent, caseItem) {
-    parent.appendChild(element("p", "These are differentials already stored for this case. Opening the list is optional. It is not a scored quiz and it does not confirm a diagnosis.", "case-step-intro"));
+    parent.appendChild(element("p", "These are differentials already stored for this case. Opening the list is optional. It is not a scored quiz and it does not confirm a diagnosis. Order is a teaching rank, not a probability.", "case-step-intro"));
+    if (isTruePair(caseItem)) {
+      renderPairStage(parent, caseItem);
+      if (!dermoscopyContentVisible(caseItem)) {
+        parent.appendChild(element("p", "This is the initial differential from the clinical photograph. No score is stored. The dermoscopic frame is still hidden.", "case-kind-note"));
+      } else if (!diagnosisRevealed && caseItem.pairedModality && caseItem.pairedModality.reasoningImpact) {
+        parent.appendChild(element("p", caseItem.pairedModality.reasoningImpact));
+      }
+    }
     const differentials = asList(caseItem.differentials);
     if (!differentials.length) {
       parent.appendChild(element("p", "No differentials are recorded for this case. None were added.", "case-empty"));
@@ -515,6 +990,82 @@
     if (groundTruth.confidenceNote) parent.appendChild(element("p", groundTruth.confidenceNote, "case-confidence"));
   }
 
+
+  function teachingDiagnosis(id) {
+    return asList(registry && registry.teachingDiagnoses).find(item => item && item.id === id) || null;
+  }
+
+  function comparisonsFor(caseId) {
+    const caseItem = registry.cases.find(item => item.id === caseId);
+    const allowed = new Set(asList(caseItem && caseItem.compareWith));
+    return asList(registry.comparisons).filter(item => item && allowed.has(item.id) && (item.caseIdA === caseId || item.caseIdB === caseId));
+  }
+
+  function appendNamedLines(parent, title, values) {
+    parent.appendChild(element("h6", title));
+    const lines = asList(values).filter(value => typeof value === "string" && value.trim());
+    if (!lines.length) {
+      parent.appendChild(element("p", "None stored.", "case-empty"));
+      return;
+    }
+    lines.forEach(value => parent.appendChild(element("p", value)));
+  }
+
+  function renderCompare(parent, caseItem) {
+    if (!diagnosisRevealed) return;
+    const rows = comparisonsFor(caseItem.id);
+    if (!rows.length) return;
+    const section = element("section", undefined, "case-compare");
+    section.appendChild(element("h5", "Compare with"));
+    section.appendChild(element("p", "These links are stored relationships. They appear only after this diagnosis is revealed. Opening another case hides that diagnosis again.", "case-kind-note"));
+    rows.forEach(row => {
+      const otherId = row.caseIdA === caseItem.id ? row.caseIdB : row.caseIdA;
+      const other = registry.cases.find(item => item.id === otherId);
+      if (!other) return;
+      const title = other.title || "Untitled case";
+      const button = element("button", `Compare with: ${title}`, "case-button case-button-secondary");
+      button.type = "button";
+      button.setAttribute("aria-expanded", openComparisonId === row.id ? "true" : "false");
+      button.setAttribute("aria-controls", `case-compare-${row.id}`);
+      button.addEventListener("click", () => {
+        openComparisonId = openComparisonId === row.id ? null : row.id;
+        renderDetail(caseItem, "compare");
+      });
+      section.appendChild(button);
+      if (openComparisonId !== row.id) return;
+      const panel = element("div", undefined, "case-compare-panel");
+      panel.id = `case-compare-${row.id}`;
+      panel.setAttribute("role", "region");
+      panel.setAttribute("aria-label", `Comparison with ${title}`);
+      panel.tabIndex = -1;
+      const favourThis = row.caseIdA === caseItem.id ? row.favouringA : row.favouringB;
+      const favourOther = row.caseIdA === caseItem.id ? row.favouringB : row.favouringA;
+      appendNamedLines(panel, "Shared features", row.sharedFeatures);
+      appendNamedLines(panel, "Features favouring this case", favourThis);
+      appendNamedLines(panel, `Features favouring ${title}`, favourOther);
+      panel.appendChild(element("h6", "Most useful discriminator"));
+      panel.appendChild(element("p", row.discriminator || "No single discriminator is stored for this pair."));
+      panel.appendChild(element("h6", "Common trap"));
+      panel.appendChild(element("p", row.commonTrap));
+      panel.appendChild(element("h6", "Limits"));
+      panel.appendChild(element("p", row.limits));
+      const open = element("button", `Open case: ${title}`, "case-button case-button-secondary");
+      open.type = "button";
+      open.addEventListener("click", () => {
+        activeId = other.id;
+        activeStep = 0;
+        diagnosisRevealed = false;
+        openComparisonId = null;
+        zoomScales = Object.create(null);
+        patternFocusId = null;
+        renderDetail(other, "step");
+      });
+      panel.appendChild(open);
+      section.appendChild(panel);
+    });
+    parent.appendChild(section);
+  }
+
   function renderReveal(parent, caseItem) {
     parent.appendChild(element("p", "The recorded diagnosis stays hidden until you activate the button. Revealing it is not a score and not a clinical certainty.", "case-step-intro"));
     const revealWrap = element("div", undefined, "case-reveal");
@@ -542,12 +1093,313 @@
       appendEvidence(panel, caseItem);
       appendHeldSourceNotes(panel, caseItem);
       asList(caseItem.images).forEach(image => appendSourcePageLink(panel, image));
+      renderCompare(panel, caseItem);
     }
     revealWrap.appendChild(revealBtn);
     revealWrap.appendChild(status);
     revealWrap.appendChild(panel);
     parent.appendChild(revealWrap);
     return revealBtn;
+  }
+
+
+  function patternLibrary() {
+    const library = window.DOCUTIS_PATTERNS;
+    if (!library || !Array.isArray(library.patterns)) return null;
+    return library;
+  }
+
+  function patternRecord(id) {
+    const library = patternLibrary();
+    if (!library || !id) return null;
+    return library.patterns.find(item => item && item.id === id) || null;
+  }
+
+  function canonicalIdForCasePattern(casePatternId) {
+    const library = patternLibrary();
+    if (!library || !casePatternId) return null;
+    const link = asList(library.links).find(item => item && item.casePatternId === casePatternId);
+    return link ? link.canonicalId : null;
+  }
+
+  function unlinkedPatternReason(casePatternId) {
+    const library = patternLibrary();
+    if (!library) return null;
+    const row = asList(library.unlinkedObservations).find(item => item && item.casePatternId === casePatternId);
+    return row ? row.reason : null;
+  }
+
+  function patternOccurrences(canonicalId) {
+    const library = patternLibrary();
+    if (!library || !canonicalId) return [];
+    const rows = [];
+    registry.cases.forEach(caseItem => {
+      asList(caseItem.patterns).forEach(pattern => {
+        if (!pattern || canonicalIdForCasePattern(pattern.id) !== canonicalId) return;
+        rows.push({
+          caseId: caseItem.id,
+          title: caseItem.title || "Untitled case",
+          certainty: pattern.certainty,
+          weight: pattern.weight,
+          evidence: "case-pattern"
+        });
+      });
+    });
+    const tokens = library.dermoscopicTokenLinks || {};
+    registry.cases.forEach(caseItem => {
+      asList(caseItem.dermoscopicFeatures).forEach(feature => {
+        if (!feature || !feature.token || tokens[feature.token] !== canonicalId) return;
+        const existing = rows.find(row => row.caseId === caseItem.id);
+        if (existing) return;
+        rows.push({
+          caseId: caseItem.id,
+          title: caseItem.title || "Untitled case",
+          certainty: "unrated",
+          weight: null,
+          evidence: "dermoscopic-token"
+        });
+      });
+    });
+    return rows;
+  }
+
+  function certaintySentence(certainty) {
+    if (certainty === "unrated") return "Certainty was not rated on this case";
+    return CERTAINTY_LABELS[certainty] || "Certainty not recorded";
+  }
+
+  function weightSentence(weight) {
+    if (!weight) return "Weight was not rated on this case";
+    return WEIGHT_LABELS[weight] || "Weight not recorded";
+  }
+
+  function appendPatternLines(parent, title, lines) {
+    const usable = asList(lines).filter(line => typeof line === "string" && line.trim());
+    if (!usable.length) return;
+    parent.appendChild(element("h6", title));
+    usable.forEach(line => parent.appendChild(element("p", line)));
+  }
+
+  function appendPatternDetail(panel, canonical, row, caseItem) {
+    panel.appendChild(element("p", "Pattern text is review required. It is not clinician reviewed, and it is not a diagnosis.", "case-kind-note"));
+    const modalityName = row.kind === "case-pattern" && row.pattern.modality
+      ? row.pattern.modality
+      : (canonical.modality || "not recorded");
+    const modalitySentence = modalityName === "dermoscopic" || modalityName === "dermoscopy"
+      ? "Modality: dermoscopic image. A clinical photograph cannot supply this structure."
+      : modalityName === "clinical"
+        ? "Modality: clinical photograph. This is not a dermoscopic structure."
+        : modalityName === "both"
+          ? "Modality: clinical or dermoscopic, only when that frame is actually stored."
+          : "Modality: not a skin image. This is context or an image mark.";
+    panel.appendChild(element("p", modalitySentence, "case-kind-note"));
+    panel.appendChild(element("h6", "What is visible in this case?"));
+    panel.appendChild(element("p", row.kind === "case-pattern" && row.pattern.specificityNote
+      ? row.pattern.specificityNote
+      : "This case records the feature and does not add a region."));
+    panel.appendChild(element("h6", "What is it?"));
+    panel.appendChild(element("p", canonical.definition));
+    if (canonical.displayName && canonical.displayName !== (row.kind === "case-pattern" ? row.pattern.label : row.feature.label)) {
+      panel.appendChild(element("p", `Canonical name: ${canonical.displayName}.`, "case-kind-note"));
+    }
+    if (canonical.displayNameDe) panel.appendChild(element("p", `German term: ${canonical.displayNameDe}.`));
+    if (canonical.internationalTerm) panel.appendChild(element("p", `International term: ${canonical.internationalTerm}.`));
+    panel.appendChild(element("h6", "What should I look for?"));
+    panel.appendChild(element("p", canonical.lookFor));
+    appendPatternLines(panel, "Recognition clues", canonical.morphologyClues);
+    panel.appendChild(element("h6", "Why does it matter here?"));
+    if (row.kind === "case-pattern" && row.pattern.specificityNote) {
+      panel.appendChild(element("p", row.pattern.specificityNote));
+    } else {
+      panel.appendChild(element("p", "This case records the feature and does not record a Goal 19 certainty or weight. The pattern definition does not add either."));
+    }
+    panel.appendChild(element("p", `${certaintySentence(row.kind === "case-pattern" ? row.pattern.certainty : "unrated")}. ${weightSentence(row.kind === "case-pattern" ? row.pattern.weight : null)}.`, "case-feature-weight"));
+    panel.appendChild(element("p", `Usual teaching role, not this case's weight: ${ROLE_LABELS[canonical.usualRole] || canonical.usualRole}.`, "case-kind-note"));
+    if (canonical.educationalRole) {
+      panel.appendChild(element("p", `Educational role: ${EDUCATIONAL_ROLE_LABELS[canonical.educationalRole] || canonical.educationalRole}.`, "case-kind-note"));
+    }
+    appendPatternLines(panel, "Where else can it occur?", canonical.malignantAssociations.concat(canonical.benignAssociations));
+    appendPatternLines(panel, "What can mimic it?", canonical.mimics);
+    appendPatternLines(panel, "Common trap", canonical.traps);
+    appendPatternLines(panel, "Limits", canonical.doesNotProve);
+    panel.appendChild(element("h6", "Learn from other cases"));
+    const others = patternOccurrences(canonical.id).filter(item => item.caseId !== caseItem.id);
+    if (!others.length) {
+      panel.appendChild(element("p", "This is the only structured example in the current library. One exposure is not mastery."));
+      return;
+    }
+    panel.appendChild(element("p", "Other cases encode this pattern. Their diagnoses stay hidden until you reveal them there. One extra case is not mastery.", "case-kind-note"));
+    others.forEach(other => {
+      const otherCase = registry.cases.find(item => item.id === other.caseId);
+      if (!otherCase) return;
+      const line = element("p", `${other.title}. ${certaintySentence(other.certainty)}. ${weightSentence(other.weight)}.`);
+      panel.appendChild(line);
+      const open = element("button", `Open case: ${other.title}`, "case-button case-button-secondary");
+      open.type = "button";
+      open.addEventListener("click", () => {
+        activeId = otherCase.id;
+        activeStep = 0;
+        diagnosisRevealed = false;
+        openComparisonId = null;
+        zoomScales = Object.create(null);
+        patternFocusId = null;
+        renderDetail(otherCase, "step");
+      });
+      panel.appendChild(open);
+    });
+  }
+
+  function appendPatternStudyArticle(parent, caseItem, row) {
+    const article = element("article", undefined, "case-pattern");
+    const canonical = patternRecord(row.canonicalId);
+    if (canonical && (canonical.educationalRole === "image_artifact_or_annotation" || canonical.educationalRole === "contextual_feature")) {
+      article.className = "case-pattern case-pattern-artifact";
+    }
+    const name = row.kind === "case-pattern" ? (row.pattern.label || "Feature") : (row.feature.label || row.feature.token);
+    const certainty = row.kind === "case-pattern" ? row.pattern.certainty : "unrated";
+    const weight = row.kind === "case-pattern" ? row.pattern.weight : null;
+    article.setAttribute("data-certainty", certainty || "unknown");
+    if (row.canonicalId) article.setAttribute("data-pattern-id", row.canonicalId);
+    if (canonical && canonical.educationalRole) article.setAttribute("data-educational-role", canonical.educationalRole);
+    article.appendChild(element("h6", name));
+    if (canonical && EDUCATIONAL_ROLE_LABELS[canonical.educationalRole]) {
+      article.appendChild(element("p", EDUCATIONAL_ROLE_LABELS[canonical.educationalRole], "case-kind-note"));
+    }
+    if (isTruePair(caseItem)) {
+      const modalityName = row.kind === "case-pattern" && row.pattern.modality
+        ? row.pattern.modality
+        : (canonical && canonical.modality) || "not recorded";
+      const modalitySentence = modalityName === "dermoscopic" || modalityName === "dermoscopy"
+        ? "Modality: dermoscopic image. A clinical photograph cannot supply this structure."
+        : modalityName === "clinical"
+          ? "Modality: clinical photograph. This is not a dermoscopic structure."
+          : modalityName === "both"
+            ? "Modality: clinical or dermoscopic, only when that frame is actually stored."
+            : "Modality: not a skin image. This is context or an image mark.";
+      article.appendChild(element("p", modalitySentence, "case-kind-note"));
+    }
+    article.appendChild(element("p", `${certaintySentence(certainty)}. ${weightSentence(weight)}.`, "case-feature-weight"));
+    if (!canonical) {
+      const reason = row.kind === "case-pattern" ? unlinkedPatternReason(row.pattern.id) : null;
+      article.appendChild(element("p", reason || "This observation is not linked to a reusable pattern. Nothing was inferred.", "case-kind-note"));
+      parent.appendChild(article);
+      return;
+    }
+    const localId = row.kind === "case-pattern" ? row.pattern.id : row.feature.token;
+    const key = `${caseItem.id}:${localId}`;
+    const open = !!openPatternKeys[key];
+    const button = element("button", open ? "Close pattern teaching" : "Open pattern teaching", "case-button case-button-secondary case-pattern-toggle");
+    button.type = "button";
+    const panelId = `pattern-panel-${key.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
+    button.setAttribute("aria-expanded", open ? "true" : "false");
+    button.setAttribute("aria-controls", panelId);
+    button.setAttribute("data-pattern-key", key);
+    if (patternFocusId === key) lastPatternButton = button;
+    button.addEventListener("click", () => {
+      openPatternKeys[key] = !openPatternKeys[key];
+      patternFocusId = key;
+      renderDetail(caseItem, openPatternKeys[key] ? "pattern-open" : "pattern-close");
+    });
+    article.appendChild(button);
+    if (open) {
+      const panel = element("div", undefined, "case-pattern-panel");
+      panel.id = panelId;
+      panel.setAttribute("role", "region");
+      panel.setAttribute("aria-label", `Pattern teaching: ${canonical.displayName}`);
+      panel.tabIndex = -1;
+      if (patternFocusId === key) lastPatternPanel = panel;
+      appendPatternDetail(panel, canonical, row, caseItem);
+      article.appendChild(panel);
+    }
+    parent.appendChild(article);
+  }
+
+  function renderPatternStudy(parent, caseItem) {
+    if (!diagnosisRevealed) return;
+    lastPatternButton = null;
+    lastPatternPanel = null;
+    if (!patternLibrary()) {
+      const section = element("section", undefined, "case-pattern-study");
+      section.appendChild(element("p", "Pattern library did not load. No pattern teaching was invented for this view.", "case-empty"));
+      parent.appendChild(section);
+      return;
+    }
+    if (!patternRows(caseItem).length) {
+      const section = element("section", undefined, "case-pattern-study");
+      section.appendChild(element("p", "No canonical pattern is encoded on this case. The diagnosis was not used to invent one.", "case-empty"));
+      parent.appendChild(section);
+      return;
+    }
+    renderGroupedPatterns(parent, caseItem, "study");
+  }
+
+  function renderAcademyReview(parent, caseItem) {
+    if (!caseItem || (!caseItem.synthesis && !caseItem.managementBrief && !caseItem.whyNot)) return;
+    const section = element("section", undefined, "case-teaching");
+    section.appendChild(element("h5", "After the source diagnosis"));
+    const chosen = IMPRESSIONS.find(item => item[0] === impressions[caseItem.id]);
+    if (chosen) section.appendChild(element("p", `Your first impression was ${chosen[1]}. That choice is not scored and is not marked right or wrong.`, "case-kind-note"));
+    const patterns = asList(caseItem.patterns).filter(Boolean);
+    if (patterns.length) {
+      section.appendChild(element("h6", "Feature weights"));
+      section.appendChild(element("p", "Certainty is what this image shows. Weight is qualitative. Neither is a sensitivity, a specificity, or a probability.", "case-kind-note"));
+      patterns.forEach(pattern => {
+        const certainty = CERTAINTY_LABELS[pattern.certainty] || "Certainty not recorded";
+        const weight = WEIGHT_LABELS[pattern.weight] || "Weight not recorded";
+        const line = element("p", `${pattern.label || "Feature"}: ${certainty}. ${weight}.`, "case-feature-weight");
+        section.appendChild(line);
+        if (pattern.specificityNote) section.appendChild(element("p", pattern.specificityNote));
+      });
+    }
+    if (caseItem.closestMimic && caseItem.closestMimic.name) {
+      section.appendChild(element("h6", "Closest mimic"));
+      section.appendChild(element("p", caseItem.closestMimic.name));
+      if (caseItem.closestMimic.whyClosest) section.appendChild(element("p", caseItem.closestMimic.whyClosest));
+    }
+    if (caseItem.synthesis) {
+      section.appendChild(element("h6", "Synthesis"));
+      section.appendChild(element("p", caseItem.synthesis));
+    }
+    if (asList(caseItem.differentials).length) {
+      section.appendChild(element("h6", "Differential discrimination"));
+      section.appendChild(element("p", "Why a stored competitor fits, and why it does not settle the case. This is not a probability.", "case-kind-note"));
+      asList(caseItem.differentials).forEach(diff => {
+        if (!diff) return;
+        section.appendChild(element("p", diff.diagnosis || "Unlabeled differential", "case-feature-weight"));
+        const supports = asList(diff.supportingFeatures).filter(Boolean);
+        const against = asList(diff.contradictingFeatures).filter(Boolean);
+        if (supports.length) section.appendChild(element("p", `Why it fits: ${supports.join("; ")}`));
+        if (against.length) section.appendChild(element("p", `Why not: ${against.join("; ")}`));
+      });
+    }
+    asList(caseItem.whyNot).forEach(item => {
+      if (!item) return;
+      section.appendChild(element("h6", `Why not: ${item.mimic || "Mimic"}`));
+      if (item.text) section.appendChild(element("p", item.text));
+    });
+    if (caseItem.evidenceWeighting) {
+      section.appendChild(element("h6", "Evidence weighting"));
+      section.appendChild(element("p", caseItem.evidenceWeighting));
+    }
+    if (caseItem.diagnosticTrap) {
+      section.appendChild(element("h6", "Diagnostic trap"));
+      section.appendChild(element("p", caseItem.diagnosticTrap));
+    }
+    if (caseItem.mentorNote) {
+      section.appendChild(element("h6", "Mentor note"));
+      section.appendChild(element("p", caseItem.mentorNote));
+    }
+    if (caseItem.takeHomeRule) {
+      section.appendChild(element("h6", "Take-home rule"));
+      section.appendChild(element("p", caseItem.takeHomeRule));
+    }
+    if (caseItem.managementBrief) {
+      section.appendChild(element("h6", "Management brief"));
+      section.appendChild(element("p", "Review required. This is not a protocol and not clinician reviewed.", "case-kind-note"));
+      section.appendChild(element("p", caseItem.managementBrief));
+    }
+    parent.appendChild(section);
+    renderPairComparison(parent, caseItem);
   }
 
   function renderReview(parent, caseItem) {
@@ -564,6 +1416,7 @@
       return;
     }
     renderObserve(parent, caseItem);
+    renderPatternStudy(parent, caseItem);
     const teachingPoints = asList(caseItem.teachingPoints);
     const teaching = element("section", undefined, "case-teaching");
     teaching.appendChild(element("h5", "Teaching points"));
@@ -577,6 +1430,7 @@
       });
     }
     parent.appendChild(teaching);
+    renderAcademyReview(parent, caseItem);
     const summary = element("section", undefined, "case-summary");
     summary.appendChild(element("h5", "Summary"));
     const label = caseItem.diagnosisLabel || "No diagnosis label is recorded";
@@ -590,11 +1444,18 @@
     summary.appendChild(element("p", reviewExplanation(caseItem), "case-review-note"));
     parent.appendChild(summary);
     if (caseItem.clinicalAction) parent.appendChild(element("p", caseItem.clinicalAction, "case-action"));
-    if (caseItem.diseaseId) {
+    if (Object.prototype.hasOwnProperty.call(caseItem, "recordedScreeningDecision") && caseItem.recordedScreeningDecision === null) {
+      parent.appendChild(element("p", "No screening decision is stored. A benign label is not a guarantee that the lesion is safe.", "case-kind-note"));
+    }
+    const teachingRecord = teachingDiagnosis(caseItem.diseaseId);
+    if (teachingRecord && teachingRecord.monograph === false) {
+      parent.appendChild(element("p", "No condition monograph is stored for this teaching diagnosis. The label is not a reviewed disease record.", "case-kind-note"));
+    } else if (caseItem.diseaseId && data.diseases.some(item => item.id === caseItem.diseaseId)) {
       const link = element("a", `Open ${diseaseName(caseItem.diseaseId)} condition record`);
       link.href = `?condition=${encodeURIComponent(caseItem.diseaseId)}`;
       parent.appendChild(link);
     }
+    renderCompare(parent, caseItem);
   }
 
   function renderStepNav(parent, caseItem) {
@@ -641,6 +1502,26 @@
     });
     bar.appendChild(previous);
     bar.appendChild(next);
+    const entry = entryFor(caseItem);
+    if (entry && activeStep === STEPS.length - 1) {
+      const ordered = curriculumEntries().slice().sort((a, b) => a.order - b.order);
+      const index = ordered.findIndex(item => item.caseId === caseItem.id);
+      const nextEntry = index >= 0 ? ordered[index + 1] : null;
+      const nextCase = nextEntry && registry.cases.find(item => item.id === nextEntry.caseId);
+      if (nextCase) {
+        const jump = element("button", `Next curriculum case: ${nextCase.title || "Untitled case"}`, "case-button case-button-secondary");
+        jump.type = "button";
+        jump.addEventListener("click", () => {
+          activeId = nextCase.id;
+          activeStep = 0;
+          diagnosisRevealed = false;
+          openComparisonId = null;
+          zoomScales = Object.create(null);
+          renderDetail(nextCase, "step");
+        });
+        bar.appendChild(jump);
+      }
+    }
     parent.appendChild(bar);
   }
 
@@ -658,7 +1539,8 @@
       root.appendChild(back);
       const site = caseItem.patientContext && caseItem.patientContext.anatomicalSite || "Site not recorded";
       const caseType = caseItem.caseType ? String(caseItem.caseType).replaceAll("_", " ") : "case";
-      root.appendChild(element("p", `${caseType} · ${caseItem.educationalLevel || "level not recorded"} · ${site}`, "case-meta"));
+      const lesson = teachingTypeLabel(caseItem);
+      root.appendChild(element("p", `${caseType} · ${caseItem.educationalLevel || "level not recorded"} · ${site}${lesson ? ` · ${lesson}` : ""}`, "case-meta"));
       root.appendChild(element("h3", caseItem.title || "Untitled case"));
       root.appendChild(element("p", reviewLabel(caseItem), "case-review-badge"));
       root.appendChild(element("p", reviewExplanation(caseItem), "case-review-note"));
@@ -694,6 +1576,23 @@
       root.appendChild(region);
       renderPager(root, caseItem);
       if (focusTarget === "reveal" && revealButton && typeof revealButton.focus === "function") revealButton.focus();
+      else if (focusTarget === "dermoscopy" && lastDermoscopyButton && typeof lastDermoscopyButton.focus === "function") lastDermoscopyButton.focus();
+      else if (focusTarget === "hint" && lastHintButton && typeof lastHintButton.focus === "function") lastHintButton.focus();
+      else if (focusTarget === "pattern-open" && lastPatternPanel && typeof lastPatternPanel.focus === "function") lastPatternPanel.focus();
+      else if (focusTarget === "pattern-close" && lastPatternButton && typeof lastPatternButton.focus === "function") lastPatternButton.focus();
+      else if (focusTarget === "compare") {
+        const panel = region.querySelector ? null : null;
+        const comparePanel = (function findPanel(node) {
+          if (node && node.className === "case-compare-panel") return node;
+          for (const child of (node && node.children) || []) {
+            const found = findPanel(child);
+            if (found) return found;
+          }
+          return null;
+        })(region);
+        if (comparePanel && typeof comparePanel.focus === "function") comparePanel.focus();
+        else if (typeof heading.focus === "function") heading.focus();
+      }
       else if (focusTarget !== "none" && typeof heading.focus === "function") heading.focus();
     } catch (error) {
       showLoadError("The case view could not be shown. No substitute clinical content was added.");
@@ -756,6 +1655,13 @@
         card.appendChild(element("h3", item.title || "Untitled case"));
         const caseType = item.caseType ? String(item.caseType).replaceAll("_", " ") : "case";
         card.appendChild(element("p", `${caseType} · ${item.educationalLevel || "level not recorded"}`));
+        const entry = entryFor(item);
+        if (entry) {
+          const meta = levelMeta(entry.level);
+          card.appendChild(element("p", `Curriculum level ${entry.level}${meta ? `: ${meta.title}` : ""}`, "case-site"));
+          const lesson = teachingTypeLabel(item);
+          if (lesson) card.appendChild(element("p", lesson, "case-teaching-type"));
+        }
         card.appendChild(element("p", item.patientContext && item.patientContext.anatomicalSite || "Site not recorded", "case-site"));
         const open = element("button", "Start case", "case-button");
         open.type = "button";
@@ -764,6 +1670,7 @@
           activeId = item.id;
           activeStep = 0;
           diagnosisRevealed = false;
+          openComparisonId = null;
           zoomScales = Object.create(null);
           renderDetail(item, "step");
         });
