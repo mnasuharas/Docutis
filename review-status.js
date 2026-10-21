@@ -1883,7 +1883,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Large plantar pigmented macule",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:2e75fd0df582a96aa54c6bd247adf309edd61035acf1baac90aebca4dea3226d",
+      "currentFingerprint": "sha256-v1:97e2684345531c2d8f7153bdf9ff857e5baa1a9fd42def1852c1466547f926d7",
       "sections": [
         "images",
         "observations",
@@ -1930,7 +1930,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Nodular lesion dermatoscopy with vessels",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:986c85eaca4eedd59c689380a30a711924daa290c40a7bd451bdfbf8c97c4203",
+      "currentFingerprint": "sha256-v1:62519972f5c5b687f8517591514a383b6d9f07cfd4fce69b6b4153d8b87f9b20",
       "sections": [
         "images",
         "observations",
@@ -1977,7 +1977,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Pigmented lesion dermatoscopy on the back",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:55128f9c0ebc0b1d595205cd4ad0cd100c37edde116db5eb57138975f42acc58",
+      "currentFingerprint": "sha256-v1:13b279feef888a0418561611db23cfc725b9d00276998cea6014b40ff0f35465",
       "sections": [
         "images",
         "observations",
@@ -2071,7 +2071,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Two neighboring lesions on the upper back",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:add58f1939191020d8991eeab99589a9cdb56c82e24ada85471867d9402239e6",
+      "currentFingerprint": "sha256-v1:3fc90dd72df405163716cc729c081454f9ff23d92b64d16c39efe8f275bdc18a",
       "sections": [
         "images",
         "observations",
