@@ -3058,7 +3058,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "Two bright red papules",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:7457b2b9f63bd49cdb5625c30a840ee01fb3fb93da5833e5a977eb553545a596",
+      "currentFingerprint": "sha256-v1:75b6a82f6cf887eca9d0b52064d6d00dd55efb53f47396eb47048f915f729762",
       "sections": [
         "images",
         "observations",
@@ -3420,7 +3420,7 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       "assetType": "case",
       "title": "A small brown macule on the thigh",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:81f38f0d9243a5a103955de5910e33949d31e8f3040352b7517ccace323975b9",
+      "currentFingerprint": "sha256-v1:4f681f715351249c4ce0498bc5965f0efcac4b612f1b9c645050d0d71115ea30",
       "sections": [
         "images",
         "observations",
@@ -4481,6 +4481,53 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
           "doi": null,
           "url": "https://doi.org/10.1016/j.abd.2024.01.005",
           "metadataCheckedAt": "2026-10-02"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g29-01",
+      "assetType": "case",
+      "title": "A firm brown papule on the skin",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:5c5e5b3b72fe85b674a501e57ae8f48e2bfdb87e91e0bb299491f3dae63dfca8",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Dermatofibroma_new_image_to_help_in_diagnosis.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Mohammad2018, via Wikimedia Commons",
+          "organization": "Mohammad2018, via Wikimedia Commons. CC BY-SA 4.0. Recompressed for web delivery by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Dermatofibroma_new_image_to_help_in_diagnosis.jpg",
+          "metadataCheckedAt": "2026-11-19"
         }
       ],
       "status": "review required",

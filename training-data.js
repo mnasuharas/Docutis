@@ -20,9 +20,11 @@
     clinicalReview: null,
     disclaimer: "Training, not a diagnostic device, an exam, or a certificate. Every lesion comes from the existing Docutis case library. The app does not diagnose your choices or grade them. Clinical review of this teaching material is still required.",
     compositionNotice: "Curated for education. Cases are chosen for teaching coverage, not for how often lesions occur. The mix of benign and malignant lesions in a session says nothing about prevalence, screening yield, or predictive value.",
-    stateNotice: "Your notes and choices stay in this browser tab. They are not scored, saved, or sent anywhere, and they are cleared when you restart or leave the page.",
+    stateNotice: "Your notes and choices stay in this browser tab by default. They are not scored or sent anywhere. An optional local revisit list can be kept in this browser only; it never leaves the device and is not an account.",
+    revisitNotice: "Optional. Patterns marked worth revisiting can bias the next session's composition in this browser only. Nothing is scored, uploaded, or used for prevalence.",
     developmentNotice: "Preview curriculum, published for education only. It is not clinically validated, and its teaching text remains clinician review required.",
     impressionNote: "This is your working impression, not the app's diagnosis. It is not scored.",
+    dispositionTeachingLimitation: "Educational next-step teaching only. It is not a protocol, a triage rule, or clinical decision support. Choices are not scored.",
     impressions: [
       { id: "benign-leaning", label: "Benign-leaning" },
       { id: "suspicious", label: "Suspicious" },
@@ -43,7 +45,9 @@
       "Keratinocyte carcinomas and precursors": "keratinocytic",
       "Benign keratinocytic": "keratinocytic",
       "Benign vascular": "vascular-adnexal",
-      "Benign sebaceous": "vascular-adnexal"
+      "Benign sebaceous": "vascular-adnexal",
+      "Benign fibrohistiocytic": "other",
+      "Benign pigmented": "other"
     },
     genericObservationPrompts: [
       "Describe the morphology before naming anything: flat, raised, nodular, or a field of lesions?",
@@ -109,7 +113,7 @@
     },
     nailUnitNote: "Nail-unit evidence note: the accepted dataset holds no histopathology-confirmed nail melanoma with onychoscopy, and the nail haemorrhage labels are weakly verified. Nail cases here teach description and comparison. They are not equal in evidence to the acral melanoma cases.",
     contextCaseNote: "Context case. Shown for comparison and description, not as a core screening anchor.",
-    dispositionNote: "No next-step or management choice is offered. The case records do not store a grounded disposition for every eligible case, so this training does not invent one.",
+    dispositionNote: "When a case stores disposition teaching, it appears after reveal as educational next-step language. It is not offered for every lesion, is not scored, and is not a protocol.",
     minImageSide: 200
   });
 })();

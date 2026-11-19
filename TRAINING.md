@@ -21,9 +21,9 @@ For each lesion:
 
 - It is not a diagnostic device, a validated screening simulator, an exam, or a certificate.
 - It calculates no score, accuracy, sensitivity, specificity, calibration, points, streaks, ranks, or pass mark. The reflection never says correct or incorrect.
-- It produces no probability and no disposition. The case records do not store a grounded next-step decision for every eligible case, so disposition choices are deferred. `screening.categories` stays vocabulary only.
+- It produces no probability and no score. Optional `dispositionTeaching` appears after reveal only on cases that store it; it is educational next-step language, not a triage rule, and it is not offered for every lesion. `screening.categories` stays vocabulary only.
 - It does not generate clinical text. The engine assembles stored case fields. When a field is missing, that teaching element is omitted.
-- It does not store or send anything. Choices live in memory for the open tab only. No account, backend, telemetry, or browser storage.
+- Session impressions and notes stay in memory for the open tab. An optional local revisit list may be saved in this browser only; it is never uploaded and is not an account.
 
 ## Session composition is not prevalence
 
@@ -35,7 +35,7 @@ The composer (`training-engine.js`, `composeSession`) works like this:
 - At most one case per **source group**: cases that share a source page, a source composite figure (`source sha256` in the crop notes), or an image file. Crops of one figure therefore never appear as independent lesions. Lesion identity across crops comes from source captions, so the engine does not try to prove that two crops are different lesions.
 - Benign and malignant lesions each fill about a third of the session or more when the pool allows. Keratoacanthoma, recorded with an uncertain classification, counts toward neither.
 - At most a quarter of the session shares one linked diagnosis record.
-- Among valid candidates it prefers a new lesion family, site class, modality, difficulty band, diagnostic structure, or closest mimic, with a seeded random tie-break. No learner data enters this choice.
+- Among valid candidates it prefers a new lesion family, site class, body region, pigmentation class, modality, difficulty band, diagnostic structure, or closest mimic, with a seeded random tie-break. When melanocytic lesions already dominate the session and the pool allows, it also prefers under-represented non-melanocytic families. An optional browser-local revisit list may bias toward saved pattern ids; session impressions still do not enter the choice.
 - The order avoids two lesions with the same linked record back to back, three in a row from one pole, and an advanced case first when an easier one is present.
 - A seed is used for reproducible tests. It is never shown.
 

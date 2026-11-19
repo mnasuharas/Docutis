@@ -4,7 +4,16 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
-These entries were developed in stacked pull requests #24 to #30 and #32 to #35 and released to `main` through one integration pull request (#36). No new version tag was created. Publication is not clinical review.
+### Training balance, disposition teaching, spaced revisit, catalogue expansion, quality checks
+
+- Add the first dermatofibroma training case (`case-g29-01`, CC BY-SA 4.0 Commons clinical photograph, clinical-diagnosis label only) and teaching diagnoses for dermatofibroma and lichen planus-like keratosis (LPLK remains without an accepted image).
+- Bias mixed-screening composition toward under-represented non-melanocytic families, body region, and derived pigmentation classes; keep composition educational and not prevalence-based.
+- Add optional `dispositionTeaching` on selected cases, shown after reveal only, unscored, with an explicit non-protocol limitation.
+- Add an optional browser-local revisit list (`localStorage`) so patterns worth revisiting can bias later sessions on the same device; session impressions still stay in memory and are not uploaded.
+- Expand the condition catalogue to 57 records with autoimmune/connective-tissue/immunobullous and hair packages (7 new records; all review required).
+- Add offline `scripts/link-check.js`, link-check and a11y smoke tests. Clinical review remains deferred. No release tag.
+
+These Goal 18–28 entries were developed in stacked pull requests #24 to #30 and #32 to #35 and released to `main` through one integration pull request (#36). No new version tag was created. Publication is not clinical review.
 
 ### Goal 28 — Integrated Hautkrebsscreening training
 

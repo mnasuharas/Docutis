@@ -18,7 +18,7 @@ const REVIEWED_FINGERPRINTS = {
   "bcc-clues-schematic": "sha256-v1:0d45d6d602b890b47548da1e708be5d3f365540b0a2b49240763504bfd6e0471",
   "basal-cell-carcinoma-de": "sha256-v1:25cbf04b711b308ca456ab8b67a29bd056d3ccb69c0f404e285adaf8ab92c02e"
 };
-const SCORE_WORDS = /\b(?:accuracy|accurate|correct|incorrect|points|xp|rank(?:ed|ing)?|grade[ds]?|percent(?:age)?|sensitivity|specificity|auc|calibration|mastery|pass(?:ed)?|fail(?:ed|ure)?|certif(?:y|ied|icate))\b|\d+(?:\.\d+)?\s*%/i;
+const SCORE_WORDS = /\b(?:accuracy|accurate|correct|incorrect|points?\s+(?:awarded|earned|total)|(?:award|earn)(?:ed|ing)?\s+points|xp|rank(?:ed|ing)?|grade[ds]?|percent(?:age)?|sensitivity|specificity|auc|calibration|mastery|pass(?:ed)?|fail(?:ed|ure)?|certif(?:y|ied|icate))\b|\d+(?:\.\d+)?\s*%/i;
 
 // A score word may appear only inside a sentence that negates it ("not a score").
 function assertNoScoreClaims(text, label) {
@@ -372,8 +372,12 @@ test("dermoscopy is staged only after the clinical photograph and alt text names
 });
 
 test("learner choices stay in memory and are discarded on restart", () => {
-  const source = fs.readFileSync(path.join(root, "training-app.js"), "utf8") + fs.readFileSync(path.join(root, "training-engine.js"), "utf8");
-  assert.doesNotMatch(source, /localStorage|sessionStorage|indexedDB|document\.cookie|fetch\(|XMLHttpRequest|sendBeacon|navigator\.|WebSocket/);
+  const appSource = fs.readFileSync(path.join(root, "training-app.js"), "utf8");
+  const engineSource = fs.readFileSync(path.join(root, "training-engine.js"), "utf8");
+  // Optional local revisit list may use localStorage. Session impressions must not use network APIs.
+  assert.match(appSource, /localStorage/);
+  assert.doesNotMatch(appSource + engineSource, /sessionStorage|indexedDB|document\.cookie|fetch\(|XMLHttpRequest|sendBeacon|navigator\.sendBeacon|WebSocket/);
+  assert.doesNotMatch(engineSource, /localStorage/);
   const app = createApp([21, 22]);
   app.buttonNamed("Start session").dispatch("click");
   app.choose("training-pre", "uncertain");

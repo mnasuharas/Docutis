@@ -10231,7 +10231,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: Two bright red papules (`case-g21-05`)
 
-- **Exact fingerprint:** `sha256-v1:7457b2b9f63bd49cdb5625c30a840ee01fb3fb93da5833e5a977eb553545a596`
+- **Exact fingerprint:** `sha256-v1:75b6a82f6cf887eca9d0b52064d6d00dd55efb53f47396eb47048f915f729762`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -10399,6 +10399,29 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
     ]
   },
   "recordedScreeningDecision": null,
+  "dispositionTeaching": {
+    "summary": "Educational next-step language for bright red papules with only a clinical uploader label and no dermoscopy.",
+    "options": [
+      {
+        "id": "further-dermoscopy",
+        "label": "Further dermoscopy",
+        "rationale": "No dermoscopic image is stored. Dermoscopy is often used before treating a red papule as routine vascular change."
+      },
+      {
+        "id": "routine-benign-impression",
+        "label": "Routine or benign impression",
+        "rationale": "A routine impression can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+      },
+      {
+        "id": "biopsy-excision-consideration",
+        "label": "Biopsy or excision consideration",
+        "rationale": "Biopsy remains available when a red papule is solitary, changing, or otherwise worrying. This case does not set a threshold."
+      }
+    ],
+    "preferredEducationalId": "further-dermoscopy",
+    "sourceNote": "Teaching derived from missing dermoscopy and histopathology in the stored file, not from a guideline interval.",
+    "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+  },
   "annotations": [],
   "dermoscopicFeatures": [],
   "clinicalAction": "No condition monograph is stored for this teaching diagnosis. Do not treat from this case.",
@@ -11800,7 +11823,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: A small brown macule on the thigh (`case-g25-01`)
 
-- **Exact fingerprint:** `sha256-v1:81f38f0d9243a5a103955de5910e33949d31e8f3040352b7517ccace323975b9`
+- **Exact fingerprint:** `sha256-v1:4f681f715351249c4ce0498bc5965f0efcac4b612f1b9c645050d0d71115ea30`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -12058,6 +12081,29 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
     ]
   },
   "recordedScreeningDecision": null,
+  "dispositionTeaching": {
+    "summary": "Educational next-step language for a histopathology-confirmed melanoma in situ after staged clinical and dermoscopic review in the source.",
+    "options": [
+      {
+        "id": "biopsy-excision-consideration",
+        "label": "Biopsy or excision consideration",
+        "rationale": "The source lesion was excised and confirmed on histopathology. Teaching here is that an uneven network raises concern that usually needs tissue diagnosis, not that every similar lesion must follow one protocol."
+      },
+      {
+        "id": "specialist-evaluation",
+        "label": "Specialist evaluation",
+        "rationale": "Specialist assessment is a reasonable educational discussion point for suspicious pigmented lesions when local pathways differ."
+      },
+      {
+        "id": "monitor",
+        "label": "Monitor",
+        "rationale": "Monitoring alone is not the educational focus once melanoma-specific concern and planned excision are already in the source history."
+      }
+    ],
+    "preferredEducationalId": "biopsy-excision-consideration",
+    "sourceNote": "Teaching mirrors the source history of excision with histopathology. It is not a Docutis staging or margin recommendation.",
+    "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+  },
   "annotations": [],
   "dermoscopicFeatures": [],
   "localization": null,
@@ -16957,6 +17003,229 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
   "localization": null,
   "clinicalAction": "After reveal, compare with the adult great-toenail case. Do not treat from this case.",
   "managementBrief": "No management category is stored. The source history is not a Docutis recommendation. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}
+```
+
+</details>
+
+- Verdict:
+- Reviewed sections:
+- Evidence sources actually checked:
+- Approved exact replacement wording (if any):
+- Required corrections / rejected claims:
+- Public reviewer notes:
+
+## case: A firm brown papule on the skin (`case-g29-01`)
+
+- **Exact fingerprint:** `sha256-v1:5c5e5b3b72fe85b674a501e57ae8f48e2bfdb87e91e0bb299491f3dae63dfca8`
+- **Schema version:** 1
+- **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
+- **Mapped evidence sources:**
+  - https://commons.wikimedia.org/wiki/File:Dermatofibroma_new_image_to_help_in_diagnosis.jpg
+- **Automated warnings:**
+  - Confirm image provenance/license, observations vs interpretations separation, differentials, diagnostic confirmation method honesty, and that AI interpretation is not treated as clinician review.
+  - Automated source attachment and schema validation are not evidence of clinical approval.
+- **AI-generated proposal:** No clinical wording change has been applied. Review the current text below and either approve it unchanged, approve exact replacement wording, request changes, reject an unsupported claim, or defer.
+
+<details>
+<summary>Current exact content</summary>
+
+```json
+{
+  "id": "case-g29-01",
+  "slug": "g29-firm-brown-papule",
+  "title": "A firm brown papule on the skin",
+  "diagnosisLabel": "Dermatofibroma",
+  "diseaseId": "dermatofibroma",
+  "category": "Benign fibrohistiocytic",
+  "educationalLevel": "introductory",
+  "caseType": "clinical",
+  "patientContext": {
+    "ageBand": null,
+    "sex": null,
+    "anatomicalSite": "Skin, site not named on the source",
+    "presentationNotes": "The Commons file names the lesion dermatofibroma and describes a roughly one-centimetre fibrous skin nodule in general terms. It does not name an anatomic site, age, or sex for this photograph."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "other-described",
+      "accessDate": "2026-11-19",
+      "metadataCheckedAt": "2026-11-19",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g29-01",
+      "type": "clinical",
+      "src": "assets/media/cases/case-52-clinical.jpg",
+      "dimensions": {
+        "width": 681,
+        "height": 668
+      },
+      "alt": "Clinical close-up of a brown raised papule on hair-bearing skin. No diagnosis is included.",
+      "caption": "A brown raised papule on hair-bearing skin. The uploader's diagnosis stays hidden until reveal.",
+      "source": "Mohammad2018, via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dermatofibroma_new_image_to_help_in_diagnosis.jpg",
+      "creator": "Mohammad2018",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Mohammad2018, via Wikimedia Commons. CC BY-SA 4.0. Recompressed for web delivery by Docutis.",
+      "modificationsNotes": "Recompressed for web delivery and file metadata removed. No crop and no annotation. The longest edge was already under 1600 pixels. Output sha256 6ec8a25f8976e606e174d87590a818398f08ca0cbcd514f002f2440b966b916a.",
+      "consentBasis": "The author released this own photograph under CC BY-SA 4.0. The frame is a skin close-up without a face. No separate patient-consent document is on the file page."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Dermatofibroma",
+    "confirmationMethod": "clinical_diagnosis",
+    "confirmationNotes": "The Commons title and description name dermatofibroma (French educational text about fibrous histiocytoma). The page does not cite histopathology for this photograph.",
+    "confidenceNote": "Uploader clinical label only. Not a Docutis clinician review. Not a histologic subtype."
+  },
+  "observations": [
+    {
+      "id": "obs-g29-01a",
+      "kind": "observation",
+      "text": "A solitary brown raised papule sits on hair-bearing skin."
+    },
+    {
+      "id": "obs-g29-01b",
+      "kind": "observation",
+      "text": "The surface looks smooth. Terminal hairs are nearby. No dermoscopic image is stored."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g29-01",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g29-01a",
+        "obs-g29-01b"
+      ],
+      "text": "A firm-looking brown papule is the finding. Firmness cannot be proved from a photograph. The caption is a clinical label, not histopathology."
+    }
+  ],
+  "dermoscopicFeatures": [],
+  "differentials": [
+    {
+      "diagnosis": "Dermatofibroma",
+      "supportingFeatures": [
+        "Solitary brown papule",
+        "Uploader names dermatofibroma"
+      ],
+      "contradictingFeatures": [
+        "No histopathology",
+        "No site named",
+        "No dimple sign can be tested in a still image"
+      ],
+      "teachingDistinction": "The caption is a clinical label for a brown papule. It does not prove the fibrous histiocytoma diagnosis."
+    },
+    {
+      "diagnosis": "Melanocytic nevus",
+      "supportingFeatures": [
+        "Brown raised papule"
+      ],
+      "contradictingFeatures": [
+        "No network or other melanocytic dermoscopic structure is available in this file"
+      ],
+      "teachingDistinction": "A brown papule can be a nevus. Without dermoscopy or histology the two remain competing clinical labels."
+    },
+    {
+      "diagnosis": "Nodular melanoma",
+      "supportingFeatures": [
+        "A solitary raised pigmented lesion can be worrying"
+      ],
+      "contradictingFeatures": [
+        "The frame does not show rapid change, ulceration, or polymorphous vessels"
+      ],
+      "teachingDistinction": "A raised pigmented lesion still needs an honest look for melanoma clues. A benign caption is not reassurance for the next patient."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g29-01a",
+      "title": "Notice first",
+      "text": "Name colour, raised shape, and that no dermoscopy is stored."
+    },
+    {
+      "id": "tp-g29-01b",
+      "title": "Limit",
+      "text": "A dermatofibroma caption is a clinical label. Dimple sign and histopathology are not in this file."
+    }
+  ],
+  "observationPrompts": [
+    "Is the lesion flat or raised?",
+    "What colours do you see on the surface?",
+    "Is a dermoscopic image available for this lesion?"
+  ],
+  "hints": [
+    "Firmness and a dimple sign cannot be read from a still photograph alone."
+  ],
+  "closestMimic": {
+    "name": "Melanocytic nevus",
+    "whyClosest": "Both can present as a solitary brown raised papule on hair-bearing skin when only a clinical frame is available."
+  },
+  "patterns": [
+    {
+      "id": "pat-g29-01-papule",
+      "label": "Solitary brown raised papule",
+      "modality": "clinical",
+      "specificityNote": "One brown raised papule is clearly visible. The label does not prove dermatofibroma.",
+      "certainty": "clearly_visible",
+      "weight": "major"
+    },
+    {
+      "id": "pat-g29-01-smooth",
+      "label": "Smooth surface without erosion",
+      "modality": "clinical",
+      "specificityNote": "The surface looks intact in this frame. Smoothness is weak and nonspecific.",
+      "certainty": "probably",
+      "weight": "weak"
+    }
+  ],
+  "synthesis": "The Commons file labels this brown papule a dermatofibroma without histopathology or a named site. The teaching point is a common keratinocytic or fibrohistiocytic mimic in a library that is otherwise melanocytic-heavy.",
+  "evidenceWeighting": "The solitary brown papule is clearly visible and is the major finding. Smooth surface is weak. The confirmation is an uploader clinical label only.",
+  "diagnosticTrap": "Accepting the benign caption without saying that histopathology and dermoscopy are absent, or treating one frame as proof of a dimple sign.",
+  "mentorNote": "This is the first dermatofibroma case in Docutis. Compare it with melanocytic papules that look similar before dermoscopy.",
+  "takeHomeRule": "A solitary brown papule may be a dermatofibroma, a nevus, or something else. Ask what the frame cannot show: firmness, dimple sign, dermoscopy, and histology.",
+  "whyNot": [
+    {
+      "mimic": "Melanocytic nevus",
+      "text": "A nevus can look the same on a clinical close-up. Without dermoscopy this frame cannot separate them."
+    },
+    {
+      "mimic": "Nodular melanoma",
+      "text": "A raised pigmented lesion still needs melanoma clues to be checked. This frame does not show ulceration or clear melanoma-specific structures, and it also does not prove benignity."
+    }
+  ],
+  "compareWith": [],
+  "recordedScreeningDecision": null,
+  "dispositionTeaching": {
+    "summary": "Educational next-step language for a solitary brown papule with only a weak clinical label.",
+    "options": [
+      {
+        "id": "further-dermoscopy",
+        "label": "Further dermoscopy",
+        "rationale": "No dermoscopic image is stored. In practice, dermoscopy often comes before deciding that a brown papule is routine."
+      },
+      {
+        "id": "monitor",
+        "label": "Monitor",
+        "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+      },
+      {
+        "id": "biopsy-excision-consideration",
+        "label": "Biopsy or excision consideration",
+        "rationale": "Biopsy remains the way to settle competing clinical labels when doubt remains. This case does not prescribe a threshold."
+      }
+    ],
+    "preferredEducationalId": "further-dermoscopy",
+    "sourceNote": "Teaching derived from the absence of dermoscopy and histopathology in the stored file, not from a guideline interval.",
+    "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+  },
+  "annotations": [],
+  "localization": null,
+  "clinicalAction": "After reveal, compare with other solitary brown papules in the library. Do not treat from this case.",
+  "managementBrief": "No management category is stored. The source label is not a Docutis recommendation. This brief is not a protocol and remains review required.",
   "reviewStatus": "clinician review required",
   "clinicalReview": null
 }

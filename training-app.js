@@ -1,10 +1,11 @@
-/* Goal 28 mixed-case screening training UI. Session state is in memory only. */
+/* Goal 28 mixed-case screening training UI. Session choices stay in memory; optional revisit list is local-only. */
 (function () {
   "use strict";
 
   const root = document.getElementById("trainingApp");
   const engine = window.DOCUTIS_TRAINING_ENGINE;
   const training = window.DOCUTIS_TRAINING_DATA;
+  const REVISIT_KEY = "docutis-training-revisit-v1";
   if (!root) return;
   if (!engine || !training || !window.DOCUTIS_CASES || !window.DOCUTIS_DATA) {
     root.replaceChildren();
@@ -19,10 +20,50 @@
   const diagnosisOptions = engine.workingDiagnosisOptions(context);
   let uid = 0;
 
+  function readRevisitStore() {
+    try {
+      if (!window.localStorage) return { patternIds: [], updatedAt: null };
+      const raw = window.localStorage.getItem(REVISIT_KEY);
+      if (!raw) return { patternIds: [], updatedAt: null };
+      const parsed = JSON.parse(raw);
+      const patternIds = Array.isArray(parsed && parsed.patternIds)
+        ? parsed.patternIds.filter(id => typeof id === "string" && context.patterns.has(id))
+        : [];
+      return { patternIds, updatedAt: parsed && parsed.updatedAt ? String(parsed.updatedAt) : null };
+    } catch (error) {
+      return { patternIds: [], updatedAt: null };
+    }
+  }
+
+  function writeRevisitStore(patternIds) {
+    try {
+      if (!window.localStorage) return false;
+      const clean = [...new Set((patternIds || []).filter(id => typeof id === "string" && context.patterns.has(id)))];
+      window.localStorage.setItem(REVISIT_KEY, JSON.stringify({
+        schemaVersion: 1,
+        updatedAt: new Date().toISOString(),
+        patternIds: clean
+      }));
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function clearRevisitStore() {
+    try {
+      if (window.localStorage) window.localStorage.removeItem(REVISIT_KEY);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   const state = {
     phase: "setup",
     blueprintId: training.blueprints[0].id,
     lengthId: (training.lengths.find(item => item.isDefault) || training.lengths[0]).id,
+    useRevisitBias: false,
     composition: null,
     index: 0,
     records: Object.create(null),
@@ -133,7 +174,13 @@
   }
 
   function startSession() {
-    state.composition = engine.composeSession(context, { blueprintId: state.blueprintId, lengthId: state.lengthId, seed: newSeed() });
+    const preferPatternIds = state.useRevisitBias ? readRevisitStore().patternIds : [];
+    state.composition = engine.composeSession(context, {
+      blueprintId: state.blueprintId,
+      lengthId: state.lengthId,
+      seed: newSeed(),
+      preferPatternIds
+    });
     state.index = 0;
     state.records = Object.create(null);
     state.phase = "case";
@@ -186,6 +233,35 @@
     fillLengths();
     wrapper.appendChild(lengthHost);
     wrapper.appendChild(element("p", training.dispositionNote, "training-hint"));
+    const revisit = readRevisitStore();
+    const revisitBox = element("fieldset", undefined, "training-choice");
+    revisitBox.appendChild(element("legend", "Local revisit preference"));
+    revisitBox.appendChild(element("p", training.revisitNotice, "training-hint"));
+    const preferId = nextId("training-revisit");
+    const preferWrap = element("div", undefined, "training-option");
+    const prefer = element("input");
+    prefer.type = "checkbox";
+    prefer.id = preferId;
+    prefer.checked = Boolean(state.useRevisitBias && revisit.patternIds.length);
+    prefer.disabled = !revisit.patternIds.length;
+    prefer.addEventListener("change", () => { state.useRevisitBias = prefer.checked; });
+    const preferLabel = element("label", revisit.patternIds.length
+      ? `Prefer ${revisit.patternIds.length} saved pattern${revisit.patternIds.length === 1 ? "" : "s"} from earlier sessions in this browser`
+      : "No saved revisit patterns in this browser yet");
+    preferLabel.htmlFor = preferId;
+    preferLabel.setAttribute("for", preferId);
+    preferWrap.appendChild(prefer);
+    preferWrap.appendChild(preferLabel);
+    revisitBox.appendChild(preferWrap);
+    if (revisit.patternIds.length) {
+      addList(revisitBox, revisit.patternIds.map(id => context.patterns.get(id).displayName), "training-list");
+      revisitBox.appendChild(button("Clear local revisit list", () => {
+        clearRevisitStore();
+        state.useRevisitBias = false;
+        rerender("setup-heading");
+      }, "training-button training-quiet"));
+    }
+    wrapper.appendChild(revisitBox);
     const start = button("Start session", startSession, "training-button training-primary");
     wrapper.appendChild(start);
     root.appendChild(wrapper);
@@ -439,6 +515,24 @@
       mimic.appendChild(details);
     }
 
+    if (view.dispositionTeaching && view.dispositionTeaching.summary) {
+      const disposition = section(reveal, "Educational next-step teaching", "training-section");
+      disposition.appendChild(element("p", training.dispositionNote, "training-hint"));
+      disposition.appendChild(element("p", view.dispositionTeaching.summary));
+      if (view.dispositionTeaching.options.length) {
+        const list = element("ul", undefined, "training-list");
+        view.dispositionTeaching.options.forEach(option => {
+          const entry = element("li");
+          const preferred = view.dispositionTeaching.preferredEducationalId === option.id;
+          entry.appendChild(element("strong", preferred ? `${option.label} (educational focus for this case)` : option.label));
+          if (option.rationale) entry.appendChild(element("p", option.rationale, "training-small"));
+          list.appendChild(entry);
+        });
+        disposition.appendChild(list);
+      }
+      addParagraphs(disposition, [view.dispositionTeaching.sourceNote, view.dispositionTeaching.limitation], "training-small");
+    }
+
     const limits = section(reveal, "Limitations", "training-section");
     addList(limits, view.limitations, "training-list");
     addParagraphs(limits, [view.takeHomeRule ? `Take-home rule (review required): ${view.takeHomeRule}` : null, view.mentorNote], "training-small");
@@ -519,11 +613,22 @@
     const revisit = section(wrapper, "Patterns worth revisiting");
     revisit.appendChild(element("p", "Drawn from what appeared in this session and from lesions you marked uncertain or where your impression and the recorded pole differed. Not a performance measure.", "training-hint"));
     addList(revisit, debrief.revisit.map(entry => entry.name)) || revisit.appendChild(element("p", "Nothing specific to revisit from this session.", "training-small"));
+    if (debrief.revisit.length) {
+      revisit.appendChild(button("Save these patterns for later sessions in this browser", () => {
+        const existing = readRevisitStore().patternIds;
+        const merged = [...new Set([...existing, ...debrief.revisit.map(entry => entry.id)])];
+        const ok = writeRevisitStore(merged);
+        const note = element("p", ok
+          ? `Saved ${merged.length} pattern${merged.length === 1 ? "" : "s"} locally. Nothing was scored or sent.`
+          : "This browser blocked local storage, so the revisit list could not be saved.", "training-hint");
+        revisit.appendChild(note);
+      }, "training-button training-quiet"));
+    }
 
     const actions = element("div", undefined, "training-actions");
     actions.appendChild(button("Start a new session", resetToSetup, "training-button training-primary"));
     wrapper.appendChild(actions);
-    wrapper.appendChild(element("p", "Your choices from this session are discarded when you start again.", "training-hint"));
+    wrapper.appendChild(element("p", "Your choices from this session are discarded when you start again. A saved revisit list, if any, stays in this browser until you clear it.", "training-hint"));
     root.appendChild(wrapper);
   }
 

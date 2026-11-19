@@ -25,7 +25,7 @@
     "keratosis", "keratoses", "lentigo", "lentigines", "angioma", "haemorrhage", "hemorrhage", "hematoma",
     "haematoma", "hyperplasia", "keratoacanthoma", "bcc", "scc", "ak", "melanocytic", "keratinocytic",
     "malignant", "malignancy", "benign", "cancer", "tumor", "tumour", "dysplastic", "seborrheic", "seborrhoeic",
-    "basal", "squamous", "in situ", "lentiginous", "amelanotic", "hutchinson"
+    "basal", "squamous", "in situ", "lentiginous", "amelanotic", "hutchinson", "dermatofibroma", "histiocytoma", "lplk"
   ];
   const LEAK_PATTERN = new RegExp(`\\b(?:${LEAK_WORDS.map(word => word.replace(/\s+/g, "\\s+")).join("|")})\\b`, "i");
   const METHOD_LABELS = Object.freeze({
@@ -95,8 +95,47 @@
     if (disease.subcategory === "keratinocytic-tumor-uncertain") return "uncertain-classification";
     if (disease.category === "premalignant") return "premalignant";
     if (["keratinocytic", "melanocytic", "other"].includes(disease.category)) return "malignant";
-    if (["inflammatory-eczematous", "acneiform-sebaceous", "pigmentary", "infectious-infestation"].includes(disease.category)) return "benign-or-inflammatory";
+    if ([
+      "inflammatory-eczematous",
+      "acneiform-sebaceous",
+      "pigmentary",
+      "infectious-infestation",
+      "autoimmune-connective-immunobullous",
+      "hair-nail-disorders"
+    ].includes(disease.category)) return "benign-or-inflammatory";
     return "unknown";
+  }
+
+  // Composition metadata only. Derived from stored labels; not a clinical pigment score.
+  function pigmentationOf(caseItem) {
+    const truth = caseItem.diagnosticGroundTruth || {};
+    const blob = [
+      caseItem.diagnosisLabel,
+      truth.confirmedDiagnosis,
+      truth.confirmationNotes,
+      caseItem.category,
+      ...(asList(caseItem.patterns).map(item => item && item.label))
+    ].filter(Boolean).join(" ").toLowerCase();
+    if (/amelanotic|non-?pigmented|without pigment|pink nodule without pigment/.test(blob)) return "non-pigmented";
+    if (/haemorrhage|hemorrhage|haematoma|hematoma|angioma/.test(blob)) return "vascular-or-blood";
+    if (/pigmented|melanoma|nevus|naevus|lentigo|melanocytic|brown|blue nevus|blue naevus/.test(blob)) return "pigmented";
+    if (/keratoacanthoma|basal cell|squamous|actinic keratosis|sebaceous hyperplasia|dermatofibroma/.test(blob)) {
+      return "usually-non-pigmented-or-mixed";
+    }
+    return "unspecified";
+  }
+
+  function bodyRegionOf(site) {
+    const value = String(site || "").toLowerCase();
+    if (!value.trim() || /not named|not specified|does not name|site not/.test(value)) return "unknown";
+    if (/nail/.test(value)) return "nail";
+    if (/plantar|palm|sole|\bacral\b|heel/.test(value)) return "acral";
+    if (/\bear\b/.test(value)) return "ear";
+    if (/scalp/.test(value)) return "scalp";
+    if (/face|cheek|nose|lip|eyelid|forehead|malar|periorbital/.test(value)) return "face";
+    if (/back|chest|abdomen|trunk|paraspinal|shoulder/.test(value)) return "trunk";
+    if (/hand|forearm|arm|shin|leg|thigh|extremit|foot(?!nail)/.test(value)) return "extremity";
+    return "other-named";
   }
 
   function poleGroup(pole) {
@@ -316,12 +355,15 @@
         poleGroup: poleGroup(casePole(context, caseItem)),
         family: familyOf(context, caseItem),
         site: specialSite(caseItem.patientContext && caseItem.patientContext.anatomicalSite),
+        bodyRegion: bodyRegionOf(caseItem.patientContext && caseItem.patientContext.anatomicalSite),
+        pigmentation: pigmentationOf(caseItem),
         paired: isTruePair(context, caseItem),
         confirmationMethod: (caseItem.diagnosticGroundTruth || {}).confirmationMethod || "unknown",
         histopathology: (caseItem.diagnosticGroundTruth || {}).confirmationMethod === "histopathology",
         difficulty: difficultyBand(caseItem),
         group: context.groups.get(caseItem.id),
         structures: Object.freeze(structureIds(context, caseItem)),
+        hasDispositionTeaching: Boolean(caseItem.dispositionTeaching && text(caseItem.dispositionTeaching.summary)),
         reviewStatus: caseItem.reviewStatus
       }));
     }
@@ -373,15 +415,31 @@
   function minimumEach(length) { return Math.max(1, Math.round(length * 0.35)); }
   function diseaseCap(length) { return Math.max(1, Math.ceil(length / 4)); }
 
-  function pickCases(context, pool, length, rng) {
+  function pickCases(context, pool, length, rng, preferences) {
+    const preferPatterns = new Set(asList(preferences && preferences.preferPatternIds));
     const chosen = [];
     const usedGroups = new Set();
     const diseaseCounts = new Map();
+    const familyCounts = new Map();
     const poleCounts = { benign: 0, malignant: 0, intermediate: 0 };
-    const seen = { family: new Set(), site: new Set(), paired: new Set(), difficulty: new Set(), structures: new Set(), mimic: new Set() };
+    const seen = {
+      family: new Set(),
+      site: new Set(),
+      bodyRegion: new Set(),
+      pigmentation: new Set(),
+      paired: new Set(),
+      difficulty: new Set(),
+      structures: new Set(),
+      mimic: new Set()
+    };
     const minEach = minimumEach(length);
     const available = { benign: 0, malignant: 0 };
-    pool.forEach(item => { const group = context.eligibility.get(item.id).poleGroup; if (group in available) available[group] += 1; });
+    const poolFamilyCounts = new Map();
+    pool.forEach(item => {
+      const row = context.eligibility.get(item.id);
+      if (row.poleGroup in available) available[row.poleGroup] += 1;
+      poolFamilyCounts.set(row.family, (poolFamilyCounts.get(row.family) || 0) + 1);
+    });
     while (chosen.length < length) {
       const remaining = length - chosen.length;
       const candidates = pool.filter(item => {
@@ -397,27 +455,39 @@
       if (!candidates.length) break;
       let best = null;
       let bestGain = -Infinity;
+      const melanocyticChosen = familyCounts.get("melanocytic") || 0;
       for (const item of candidates) {
         const row = context.eligibility.get(item.id);
         // Coverage gain for composition only. It describes the case mix, never the learner.
         let gain = rng() * 6;
         if (!seen.family.has(row.family)) gain += 3;
         if (!seen.site.has(row.site)) gain += 2;
+        if (!seen.bodyRegion.has(row.bodyRegion)) gain += 1.5;
+        if (!seen.pigmentation.has(row.pigmentation)) gain += 1;
         if (!seen.paired.has(row.paired)) gain += 1;
         if (!seen.difficulty.has(row.difficulty)) gain += 1;
         gain += Math.min(3, row.structures.filter(id => !seen.structures.has(id)).length);
         const mimic = item.closestMimic && item.closestMimic.name;
         if (mimic && !seen.mimic.has(mimic)) gain += 1;
         if (row.poleGroup !== "intermediate" && poleCounts[row.poleGroup] < minEach) gain += 2;
+        // Prefer under-represented non-melanocytic families when the pool allows it.
+        if (row.family !== "melanocytic" && poolFamilyCounts.get(row.family) && melanocyticChosen >= Math.ceil((chosen.length + 1) * 0.55)) {
+          gain += 2.5;
+        }
+        if (preferPatterns.size && row.structures.some(id => preferPatterns.has(id))) gain += 2;
+        if (row.hasDispositionTeaching) gain += 0.25;
         if (gain > bestGain) { bestGain = gain; best = item; }
       }
       const row = context.eligibility.get(best.id);
       chosen.push(best);
       usedGroups.add(row.group);
       diseaseCounts.set(best.diseaseId, (diseaseCounts.get(best.diseaseId) || 0) + 1);
+      familyCounts.set(row.family, (familyCounts.get(row.family) || 0) + 1);
       poleCounts[row.poleGroup] += 1;
       seen.family.add(row.family);
       seen.site.add(row.site);
+      seen.bodyRegion.add(row.bodyRegion);
+      seen.pigmentation.add(row.pigmentation);
       seen.paired.add(row.paired);
       seen.difficulty.add(row.difficulty);
       row.structures.forEach(id => seen.structures.add(id));
@@ -479,6 +549,7 @@
   function composeSession(context, options) {
     const blueprintId = options && options.blueprintId || "mixed-screening";
     const lengthOption = lengthById(context, options && options.lengthId);
+    const preferPatternIds = asList(options && options.preferPatternIds);
     const pool = blueprintPool(context, blueprintId);
     const capacity = distinctGroups(context, pool.core);
     const contextWanted = pool.blueprint.contextSlots > 0 && pool.context.length > 0 ? 1 : 0;
@@ -487,7 +558,7 @@
     let best = null;
     for (let attempt = 0; attempt < 200; attempt += 1) {
       const rng = mulberry32(baseSeed + attempt * 7919);
-      const picked = pickCases(context, pool.core, length, rng);
+      const picked = pickCases(context, pool.core, length, rng, { preferPatternIds });
       const problems = compositionProblems(context, picked, length, pool.blueprint, pool.core);
       if (!best || problems.length < best.problems.length) best = { picked, problems, rng };
       if (!problems.length) break;
@@ -719,6 +790,17 @@
       trap: caseItem.diagnosticTrap || null,
       takeHomeRule: caseItem.takeHomeRule || null,
       mentorNote: caseItem.mentorNote || null,
+      dispositionTeaching: caseItem.dispositionTeaching ? {
+        summary: text(caseItem.dispositionTeaching.summary),
+        options: asList(caseItem.dispositionTeaching.options).map(item => ({
+          id: item.id,
+          label: item.label,
+          rationale: item.rationale || ""
+        })),
+        preferredEducationalId: caseItem.dispositionTeaching.preferredEducationalId || null,
+        sourceNote: text(caseItem.dispositionTeaching.sourceNote),
+        limitation: text(caseItem.dispositionTeaching.limitation) || text(context.trainingData.dispositionTeachingLimitation)
+      } : null,
       limitations,
       role: opts.role || "core",
       eligibility: row.status,
@@ -839,6 +921,9 @@
       corePoles: tally(core, "poleGroup"),
       coreFamilies: tally(core, "family"),
       coreSites: tally(core, "site"),
+      coreBodyRegions: tally(core, "bodyRegion"),
+      corePigmentation: tally(core, "pigmentation"),
+      coreWithDispositionTeaching: core.filter(row => row.hasDispositionTeaching).map(row => row.caseId),
       coreMethods: tally(core, "confirmationMethod"),
       coreHistopathology: core.filter(row => row.histopathology).map(row => row.caseId),
       corePaired: core.filter(row => row.paired).map(row => row.caseId),
@@ -863,6 +948,8 @@
     createContext,
     casePole,
     familyOf,
+    pigmentationOf,
+    bodyRegionOf,
     publicImageSrc,
     sourceGroups,
     leaksFor,
