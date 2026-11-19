@@ -21,8 +21,8 @@ test("the acquisition ledger is valid and separate from clinical cases", () => {
   const ledger = loadLedger();
   const data = loadCaseData();
   const report = validateLedger(ledger, data);
-  assert.equal(report.counts.accepted, 21);
-  assert.equal(ledger.candidates.filter(row => row.goal == null && row.status === "accepted").length, 2);
+  assert.equal(report.counts.accepted, 22);
+  assert.equal(ledger.candidates.filter(row => row.goal == null && row.status === "accepted").length, 3);
   assert.ok(report.counts.rejected_license >= 1);
   assert.ok(report.counts.rejected_not_true_pair >= 1);
   assert.equal(ledger.candidates.some(row => row.status === "accepted" && row.integrated !== true), false);
@@ -55,16 +55,22 @@ test("accepted cases keep explicit licenses, distinct paired assets, and review 
     assert.equal(caseItem.recordedScreeningDecision, null);
     const clinical = caseItem.images.filter(image => image.type === "clinical");
     const dermoscopy = caseItem.images.filter(image => image.type === "dermoscopy");
-    assert.equal(clinical.length, 1);
-    assert.equal(dermoscopy.length, 1);
-    assert.notEqual(clinical[0].src, dermoscopy[0].src);
+    const paired = row.pairedStatus === "source_documented_pair" || row.pairedStatus === "same_lesion_confirmed";
+    if (paired) {
+      assert.equal(clinical.length, 1);
+      assert.equal(dermoscopy.length, 1);
+      assert.notEqual(clinical[0].src, dermoscopy[0].src);
+      assert.equal(dermoscopy[0].license, row.license);
+      assert.ok(caseItem.observations.some(item => item.modality === "dermoscopy"));
+      assert.ok(caseItem.observations.some(item => item.modality === "clinical"));
+      assert.equal(caseItem.observations.filter(item => item.modality === "dermoscopy").every(() => dermoscopy.length === 1), true);
+    } else {
+      assert.ok(clinical.length + dermoscopy.length >= 1);
+    }
     assert.equal(clinical[0].license, row.license);
-    assert.equal(dermoscopy[0].license, row.license);
     assert.match(clinical[0].licenseUrl, row.license === "CC BY-SA 4.0" ? /by-sa\/4\.0/ : /\/by\/4\.0\/$/);
     assert.equal(clinical[0].sourceVerificationStatus, "verified");
-    assert.ok(caseItem.observations.some(item => item.modality === "dermoscopy"));
-    assert.ok(caseItem.observations.some(item => item.modality === "clinical"));
-    assert.equal(caseItem.observations.filter(item => item.modality === "dermoscopy").every(() => dermoscopy.length === 1), true);
+
     for (const pattern of caseItem.patterns) {
       const unlinked = (patterns.unlinkedObservations || []).some(item => item.casePatternId === pattern.id);
       if (links.has(pattern.id)) assert.ok(canonical.has(links.get(pattern.id)), pattern.id);

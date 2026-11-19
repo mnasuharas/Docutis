@@ -158,6 +158,9 @@ function renderReport(context) {
   lines.push("");
   lines.push(`- Lesion families (composition mapping from stored case category): ${Object.entries(report.coreFamilies).map(([key, value]) => `${key} ${value}`).join(", ")}`);
   lines.push(`- Sites: ${Object.entries(report.coreSites).map(([key, value]) => `${key} ${value}`).join(", ")}`);
+  lines.push(`- Body regions (composition metadata from anatomical site text): ${Object.entries(report.coreBodyRegions).map(([key, value]) => `${key} ${value}`).join(", ")}`);
+  lines.push(`- Pigmentation classes (derived from stored labels): ${Object.entries(report.corePigmentation).map(([key, value]) => `${key} ${value}`).join(", ")}`);
+  lines.push(`- Core cases with disposition teaching: ${list(report.coreWithDispositionTeaching)}`);
   lines.push(`- Confirmation methods: ${Object.entries(report.coreMethods).map(([key, value]) => `${key} ${value}`).join(", ")}`);
   lines.push(`- Histopathology: ${list(report.coreHistopathology)}`);
   lines.push(`- Paired: ${list(report.corePaired)}`);

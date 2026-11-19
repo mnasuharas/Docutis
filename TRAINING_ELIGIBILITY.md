@@ -6,17 +6,17 @@ Eligibility uses stored case metadata: local image and diagnosis-neutral public 
 
 ## Summary
 
-- Total cases in development dataset: 51
-- Core-training eligible: 39
+- Total cases in development dataset: 52
+- Core-training eligible: 40
 - Context-only: 12
 - Excluded: 0
-- Core benign: 15
+- Core benign: 16
 - Core malignant: 23
 - Core with another recorded pole (premalignant or uncertain classification): 1
 - Core histopathology-confirmed: 15
 - Core paired clinical and dermoscopy: 18
 - Core melanoma (including melanoma in situ and lentigo maligna): 20
-- Core benign melanoma mimics: 13
+- Core benign melanoma mimics: 14
 - Core face: 3
 - Core acral: 9
 - Core nail: 3
@@ -66,6 +66,7 @@ Counts describe coverage. They are not prevalence and they are not a score.
 - case-g27-03: pole malignant; family melanocytic; site acral; paired; confirmation histopathology; difficulty intermediate
 - case-g27-04: pole malignant; family melanocytic; site acral; paired; confirmation histopathology; difficulty advanced
 - case-g27-05: pole benign; family melanocytic; site nail; paired; confirmation histopathology; difficulty intermediate
+- case-g29-01: pole benign; family other; site unknown; single modality; confirmation clinical_diagnosis; difficulty foundation
 
 ## Context-only cases
 
@@ -88,13 +89,16 @@ Counts describe coverage. They are not prevalence and they are not a score.
 
 ## Coverage of core cases
 
-- Lesion families (composition mapping from stored case category): melanocytic 28, keratinocytic 6, other 2, vascular-adnexal 3
-- Sites: unknown 15, not-special 7, ear 1, face 3, scalp 1, acral 9, nail 3
-- Confirmation methods: source_dataset_diagnosis 13, expert_diagnosis 4, clinical_diagnosis 7, histopathology 15
+- Lesion families (composition mapping from stored case category): melanocytic 28, keratinocytic 6, other 3, vascular-adnexal 3
+- Sites: unknown 16, not-special 7, ear 1, face 3, scalp 1, acral 9, nail 3
+- Body regions (composition metadata from anatomical site text): unknown 16, trunk 3, ear 1, extremity 4, face 3, scalp 1, acral 9, nail 3
+- Pigmentation classes (derived from stored labels): pigmented 29, non-pigmented 4, usually-non-pigmented-or-mixed 4, unspecified 1, vascular-or-blood 2
+- Core cases with disposition teaching: case-g21-05, case-g25-01, case-g29-01
+- Confirmation methods: source_dataset_diagnosis 13, expert_diagnosis 4, clinical_diagnosis 8, histopathology 15
 - Histopathology: case-g25-01, case-g25-02, case-g25-03, case-g25-04, case-g25-05, case-g25-06, case-g26-01, case-g26-02, case-g26-03, case-g26-05, case-g26-06, case-g27-01, case-g27-03, case-g27-04, case-g27-05
 - Paired: case-g21-08, case-g25-01, case-g25-02, case-g25-03, case-g25-04, case-g25-05, case-g25-06, case-g26-01, case-g26-02, case-g26-03, case-g26-04, case-g26-05, case-g26-06, case-g27-01, case-g27-02, case-g27-03, case-g27-04, case-g27-05
 - Melanoma: case-g18-01, case-g18-02, case-g18-03, case-g18-04, case-g18-05, case-g18-06, case-g18-07, case-g18-08, case-g18-09, case-g18-10, case-g18-11, case-g21-07, case-g25-01, case-g25-03, case-g25-04, case-g25-05, case-g26-01, case-g26-03, case-g27-03, case-g27-04
-- Benign melanoma mimics: case-g21-02, case-g21-03, case-g21-04, case-g21-05, case-g21-06, case-g25-02, case-g26-02, case-g26-04, case-g26-05, case-g26-06, case-g27-01, case-g27-02, case-g27-05
+- Benign melanoma mimics: case-g21-02, case-g21-03, case-g21-04, case-g21-05, case-g21-06, case-g25-02, case-g26-02, case-g26-04, case-g26-05, case-g26-06, case-g27-01, case-g27-02, case-g27-05, case-g29-01
 - Face: case-g21-07, case-g25-05, case-g25-06
 - Acral: case-g25-04, case-g26-01, case-g26-02, case-g26-03, case-g26-04, case-g27-01, case-g27-02, case-g27-03, case-g27-04
 - Nail: case-g26-05, case-g26-06, case-g27-05
@@ -105,13 +109,13 @@ Counts describe coverage. They are not prevalence and they are not a score.
 
 ### Mixed screening
 
-- Core cases available: 39 (33 distinct source groups)
+- Core cases available: 40 (34 distinct source groups)
 - Context cases that may fill one labelled slot: none
 - Session lengths offered: short (5), standard (8), extended (12)
 
 ### Melanoma and mimics
 
-- Core cases available: 37 (32 distinct source groups)
+- Core cases available: 38 (33 distinct source groups)
 - Context cases that may fill one labelled slot: none
 - Session lengths offered: short (5), standard (8), extended (12)
 
@@ -124,7 +128,7 @@ Counts describe coverage. They are not prevalence and they are not a score.
 ## Limits
 
 - Nail-unit evidence note: the accepted dataset holds no histopathology-confirmed nail melanoma with onychoscopy, and the nail haemorrhage labels are weakly verified. Nail cases here teach description and comparison. They are not equal in evidence to the acral melanoma cases.
-- No next-step or management choice is offered. The case records do not store a grounded disposition for every eligible case, so this training does not invent one.
+- When a case stores disposition teaching, it appears after reveal as educational next-step language. It is not offered for every lesion, is not scored, and is not a protocol.
 - A session takes at most one case per source group (same source page, same source figure, or same image file). Lesion identity across crops is taken from source captions, so the engine does not try to prove two crops are different lesions.
 - Pigmented versus non-pigmented is not a stored field, so it is not used for composition.
 - All newly authored clinical teaching content remains review required. No physician decision was fabricated.

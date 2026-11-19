@@ -97,7 +97,7 @@ test("Goal 22 single-image behavior and pilot fingerprints stay", () => {
     assert.equal(caseFingerprint(item), status.assets.find(asset => asset.assetType === "case" && asset.id === id).currentFingerprint);
     assert.equal(item.pairedModality, undefined);
   }
-  assert.equal(data.cases.length, 51);
+  assert.equal(data.cases.length, 52);
 });
 
 class CaseElement {
