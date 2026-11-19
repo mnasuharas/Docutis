@@ -37,6 +37,10 @@ const infectiousIds = [
   "pityriasis-versicolor", "scabies", "herpes-simplex", "herpes-zoster",
   "molluscum-contagiosum", "cutaneous-warts"
 ];
+const autoimmuneHairIds = [
+  "bullous-pemphigoid", "pemphigus-vulgaris", "discoid-lupus-erythematosus", "dermatomyositis",
+  "lichen-planus", "alopecia-areata", "androgenetic-alopecia"
+];
 const protectedIds = [...oncologyIds, ...goalTwoIds];
 
 function condition(id) {
@@ -56,17 +60,18 @@ function diagnosisCodes(disease) {
 test("dataset has the intended categories and structured subcategories", () => {
   assert.deepEqual(Array.from(categories, category => category.id), [
     "premalignant", "keratinocytic", "melanocytic", "other",
-    "inflammatory-eczematous", "acneiform-sebaceous", "pigmentary", "infectious-infestation"
+    "inflammatory-eczematous", "acneiform-sebaceous", "pigmentary", "infectious-infestation",
+    "autoimmune-connective-immunobullous", "hair-nail-disorders"
   ]);
-  assert.ok(subcategories.length >= 26);
+  assert.ok(subcategories.length >= 30);
   assert.equal(new Set(subcategories.map(item => item.id)).size, subcategories.length);
   for (const id of ["bacterial-infection", "dermatophyte-infection", "other-fungal-infection", "parasitic-infestation", "viral-infection"]) {
     assert.ok(subcategories.some(item => item.id === id), `missing infectious subcategory ${id}`);
   }
 });
 
-test("all 50 conditions have complete, consistent review records", () => {
-  assert.equal(diseases.length, 50);
+test("all 57 conditions have complete, consistent review records", () => {
+  assert.equal(diseases.length, 57);
   const categoryIds = new Set(categories.map(category => category.id));
   const subcategoryIds = new Set(subcategories.map(subcategory => subcategory.id));
   for (const disease of diseases) {
@@ -86,7 +91,8 @@ test("the existing 34 records remain and all 16 infectious records are present",
   const ids = new Set(diseases.map(disease => disease.id));
   for (const id of protectedIds) assert.ok(ids.has(id), `existing record ${id} was removed`);
   for (const id of infectiousIds) assert.ok(ids.has(id), `planned infectious record ${id} is missing`);
-  assert.equal(protectedIds.length + infectiousIds.length, diseases.length);
+  for (const id of autoimmuneHairIds) assert.ok(ids.has(id), `planned autoimmune or hair record ${id} is missing`);
+  assert.equal(protectedIds.length + infectiousIds.length + autoimmuneHairIds.length, diseases.length);
 });
 
 test("condition identifiers are unique", () => {
@@ -131,7 +137,7 @@ test("coding systems are explicit and ICD-O topography is separate from morpholo
 });
 
 test("non-neoplastic additions explicitly exclude ICD-O without synthetic codes", () => {
-  for (const id of [...goalTwoIds, ...infectiousIds]) {
+  for (const id of [...goalTwoIds, ...infectiousIds, ...autoimmuneHairIds]) {
     const disease = condition(id);
     assert.equal(disease.coding.icdo, null, `${id} must not contain ICD-O topography or morphology`);
     assert.equal(disease.coding.icdoApplicability, "not applicable");
@@ -223,6 +229,30 @@ test("new records retain their disease-specific guideline or consensus sources",
   const psoriasis = condition("plaque-psoriasis").references;
   assert.ok(psoriasis.some(reference => reference.url === "https://www.guidelines.edf.one/guidelines/psoriasis-guideline" && reference.type === "guideline"));
   for (const id of goalTwoIds) assert.equal(condition(id).reviewStatus, "clinician review required");
+});
+
+test("autoimmune and hair records retain primary sources, coding and the review gate", () => {
+  const expectedDois = {
+    "bullous-pemphigoid": "10.1111/jdv.18220",
+    "pemphigus-vulgaris": "10.1111/jdv.16752",
+    "discoid-lupus-erythematosus": "10.1111/bjd.20597",
+    dermatomyositis: "10.1007/s40257-020-00502-6",
+    "lichen-planus": "10.1111/jdv.16464",
+    "alopecia-areata": "10.1111/jdv.19768",
+    "androgenetic-alopecia": "10.1111/jdv.14624"
+  };
+  for (const id of autoimmuneHairIds) {
+    const disease = condition(id);
+    assert.equal(disease.reviewStatus, "clinician review required");
+    assert.equal(disease.clinicalReview, null);
+    assert.equal(disease.coding.icdo, null);
+    assert.equal(disease.coding.icdoApplicability, "not applicable");
+    assert.ok(disease.references.some(reference => reference.organization !== "DermNet"));
+    assert.ok(disease.references.some(reference => reference.metadataCheckedAt === "2026-11-19"));
+  }
+  for (const [id, doi] of Object.entries(expectedDois)) {
+    assert.ok(condition(id).references.some(reference => reference.doi === doi), `${id} is missing ${doi}`);
+  }
 });
 
 test("infectious records retain primary sources, coding and the review gate", () => {

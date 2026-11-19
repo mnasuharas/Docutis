@@ -19,7 +19,7 @@ Clinical review is version-bound and independently tracked for disease records, 
 ### Release state: Goals 18 to 28 on `main` and the live site
 
 - **Previous preview** (tag `v0.2.0-preview.1`, commit `c28f1de`): 50 condition records, the five pilot cases, and 28 public review units, of which 5 are clinician reviewed and 23 are review required.
-- **Current `main` and the live site** (Goals 18 to 28, developed in stacked pull requests #24 to #30 and #32 to #35 and released through one integration pull request, #36; no new version tag): 51 cases, 22 true clinical-dermoscopic pairs, and 74 review units, of which 5 are clinician reviewed and 69 are review required. Publication is not clinical approval. Clinical review is deferred: no Goal 18 to 27 case or pattern is clinician reviewed, and no physician decision was created for them. Goal 28 adds no case and no review unit.
+- **Current `main` and the live site** (Goals 18 to 28, developed in stacked pull requests #24 to #30 and #32 to #35 and released through one integration pull request, #36; no new version tag): 52 cases, 22 true clinical-dermoscopic pairs, and 75 review units, of which 5 are clinician reviewed and 70 are review required. Publication is not clinical approval. Clinical review is deferred: no Goal 18 to 27 case or pattern is clinician reviewed, and no physician decision was created for them. Goal 28 adds no case and no review unit.
 
 Goal 25 adds six histopathology-labelled clinical and dermoscopic pairs from CC BY 4.0 open-access articles: 4 histopathology-confirmed true paired melanoma cases (melanoma in situ, amelanotic nodular melanoma, acral melanoma in situ, and lentigo maligna) and 2 benign mimics that share a feature with a melanoma case (a nevus with cytologic atypia and a facial solar lentigo). Three confirmations come from a figure-caption sentence about that lesion (melanoma in situ, nevus with cytologic atypia, nodular melanoma) and three from a study-level methods statement (acral melanoma in situ, lentigo maligna, solar lentigo); each case record names its basis in `histopathologySource`. Panels were cropped from composite figures with recorded pixel boxes and hashes. Every candidate checked, including 31 Goal 25 candidates, is in `acquisition-ledger.js`; rejected rows never become cases.
 
@@ -27,11 +27,11 @@ Goal 26 adds an acral and nail-unit contrast set of seven clinical and dermoscop
 
 Goal 27 adds six clinical and dermoscopic pairs from CC BY 4.0 open-access articles to repeat the main acral and nail discriminators in new patients: two benign sole cases with a parallel furrow pattern (a cluster of nevi with histopathology from a later biopsy, and a nevus verified by five years of stability), a palm melanoma in situ that shows a furrow pattern beside an eccentric blotch, an independent second parallel ridge example (a heel melanoma in situ), the first adult benign nail band (a nail matrix nevus), and the first nail haemorrhage with onychoscopy. Four have a lesion-specific histopathology statement; the stable nevus and the haemorrhage do not. No histopathology-confirmed nail melanoma with onychoscopy was found under an allowed license. One dermoscopic structure was added (parallel furrow pattern). The ledger records 40 Goal 27 candidates. `node scripts/paired-modality.js` now separates positive observations from independent positive cases for each structure.
 
-Goal 28 adds mixed-case screening training: unknown lesions from the existing library, one at a time, with observation, a working impression, staged dermoscopy, a deliberate reveal of the source diagnosis and its verification, stored mimic and contrast teaching, and a qualitative debrief. It adds no case and no clinical claim. Of 51 cases, 39 are core training, 12 context only (including the caption-only nail melanoma and both nail haemorrhages), and 0 excluded. Sessions are curated for teaching coverage, not prevalence. There is no score, probability, disposition, or pass mark, and choices stay in the open tab. See [TRAINING.md](TRAINING.md) and [TRAINING_ELIGIBILITY.md](TRAINING_ELIGIBILITY.md).
+Goal 28 adds mixed-case screening training: unknown lesions from the existing library, one at a time, with observation, a working impression, staged dermoscopy, a deliberate reveal of the source diagnosis and its verification, stored mimic and contrast teaching, and a qualitative debrief. Later work on this branch adds one dermatofibroma case, optional post-reveal disposition teaching on selected cases, and an optional browser-local revisit list. Of 52 cases, 40 are core training, 12 context only (including the caption-only nail melanoma and both nail haemorrhages), and 0 excluded. Sessions are curated for teaching coverage, not prevalence. There is no score, probability, or pass mark. See [TRAINING.md](TRAINING.md) and [TRAINING_ELIGIBILITY.md](TRAINING_ELIGIBILITY.md).
 
 Goal 18 adds a Learn Melanoma pathway on top of that flow. It is a teaching sequence, not a certificate and not evidence that the cases improve diagnostic skill. No case is clinician reviewed. Goal 19 adds teaching types, observation prompts, qualitative feature weights, and a closest mimic on the academy cases only. It does not add cases, does not claim that learners improve, and does not review any case. The five pilot payloads were not edited. Pull request #21 was not the base, and Goal 18 pull request #24 was not merged. Goal 10 adds a public OSS surface: About/project-status copy, repository and roadmap/changelog links, and “Suggest a correction” / “Report outdated evidence” CTAs that open the clinical content issue form. Docutis remains a public preview and is not validated clinical decision support.
 
-The current site contains 50 condition records. It retains the malignant and precancerous collection, the first common-dermatology package, and a new infectious-dermatology package spanning bacterial, dermatophyte, other fungal, parasitic and viral disease. It is intended for physicians, medical trainees and other healthcare professionals seeking a concise educational reference.
+The current site contains 57 condition records. It retains the malignant and precancerous collection, the first common-dermatology package, and a new infectious-dermatology package spanning bacterial, dermatophyte, other fungal, parasitic and viral disease. It is intended for physicians, medical trainees and other healthcare professionals seeking a concise educational reference.
 
 Docutis is currently in active early development. Its content, structure and technical foundations are being expanded progressively.
 
@@ -57,7 +57,7 @@ Docutis is currently in active early development. Its content, structure and tec
 - Dependency-free automated validation on pull requests and `main` pushes
 - No installation or account required
 - English-language dermato-oncology follow-up UI based on German guidelines for melanoma, BCC and cSCC
-- Mixed-case screening training with staged dermoscopy, reveal, and a qualitative debrief (no score; review required)
+- Mixed-case screening training with staged dermoscopy, reveal, optional post-reveal disposition teaching on selected cases, an optional browser-local revisit list, and a qualitative debrief (no score; review required)
 
 ## Current Clinical Focus
 
@@ -76,8 +76,10 @@ The collection includes:
 - Cutaneous candidiasis and pityriasis versicolor
 - Scabies
 - Herpes simplex, herpes zoster, molluscum contagiosum and cutaneous warts
+- Bullous pemphigoid, pemphigus vulgaris, discoid lupus erythematosus, dermatomyositis and lichen planus
+- Alopecia areata and androgenetic alopecia
 
-The infectious package completes the initial 50-record milestone, but does not make the collection comprehensive. Autoimmune, immunobullous, connective-tissue, hair, nail and many other dermatology domains remain future work.
+The catalogue now has 57 compact legacy-format records. It remains incomplete for nail disease, many connective-tissue disorders and other dermatology domains.
 
 ## Content Principles
 
@@ -89,11 +91,11 @@ Docutis aims to make medical information:
 - Transparent about uncertainty and limitations
 - Suitable for independent professional review
 
-Medical content contributions should include appropriate references. Legacy embedded `reviewStatus` fields on the 50 disease records remain `clinician review required`. The public review layer is different and is summarized under Clinical governance below. New or substantially changed medical content stays review required until a qualified clinician documents review of that version. Do not describe the whole collection as clinician reviewed.
+Medical content contributions should include appropriate references. Legacy embedded `reviewStatus` fields on the 57 disease records remain `clinician review required`. The public review layer is different and is summarized under Clinical governance below. New or substantially changed medical content stays review required until a qualified clinician documents review of that version. Do not describe the whole collection as clinician reviewed.
 
 ## Clinical governance
 
-Clinical review governance distinguishes automated source/schema validation from a physician's personal review of a specific content version. Legacy embedded `reviewStatus` fields on disease records remain `clinician review required` for all 50 records. The authoritative public Goal 9 layer (`review-status.json`) currently marks **5** pilot assets as `clinician reviewed` (actinic keratosis and basal cell carcinoma disease records, BCC follow-up, BCC quiz item, BCC schematic) and the remaining Goal 9 units as `review required`.
+Clinical review governance distinguishes automated source/schema validation from a physician's personal review of a specific content version. Legacy embedded `reviewStatus` fields on disease records remain `clinician review required` for all 57 records. The authoritative public Goal 9 layer (`review-status.json`) currently marks **5** pilot assets as `clinician reviewed` (actinic keratosis and basal cell carcinoma disease records, BCC follow-up, BCC quiz item, BCC schematic) and the remaining Goal 9 units as `review required`.
 
 `clinicalReview` is null until a physician review is documented. A reviewed record stores the date, physician role, specialty and a deterministic content fingerprint. Local validation and CI reject stale fingerprints after clinical changes; contributors must obtain re-review or reset the record to review-required. A matching hash does not establish reviewer credentials or guarantee correctness. See [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md) for the human procedure and the read-only `node scripts/clinical-review.js "Acne Vulgaris"` utility.
 
@@ -111,7 +113,7 @@ Protocols live in `followup-data.js`, separate from disease records and renderin
 
 Docutis is an early-stage public prototype and should not yet be considered a comprehensive dermatology database.
 
-The project currently has 50 records. The initial numeric milestone is complete, but broader dermatology coverage and documented clinician review of every record are not yet complete.
+The project currently has 57 records. The initial numeric milestone is complete, but broader dermatology coverage and documented clinician review of every record are not yet complete.
 
 Current development priorities include:
 
@@ -124,7 +126,7 @@ Current development priorities include:
 - Preparing multilingual support
 - Developing educational visual content with appropriate licensing
 
-Case-learning capabilities on `main`: a five-step case flow (inspect, observe, differential, reveal, review) in which a true pair shows the clinical frame and an initial differential before the dermoscopic frame, pair provenance for every case, reusable pattern objects with case-level certainty and weight, explicit contrastive comparisons, and a source acquisition ledger. Current metrics: 51 cases, 22 true clinical-dermoscopic pairs (20 pattern-rich, 2 equivocal), 8 histopathology-confirmed true paired melanoma cases, and 74 review units. Run `node scripts/paired-modality.js` for the current list. These are qualitative teaching counts, not a score and not evidence of educational efficacy.
+Case-learning capabilities on `main`: a five-step case flow (inspect, observe, differential, reveal, review) in which a true pair shows the clinical frame and an initial differential before the dermoscopic frame, pair provenance for every case, reusable pattern objects with case-level certainty and weight, explicit contrastive comparisons, and a source acquisition ledger. Current metrics: 52 cases, 22 true clinical-dermoscopic pairs (20 pattern-rich, 2 equivocal), 8 histopathology-confirmed true paired melanoma cases, and 75 review units. Run `node scripts/paired-modality.js` for the current list. These are qualitative teaching counts, not a score and not evidence of educational efficacy.
 
 See [ROADMAP.md](ROADMAP.md) for completed foundations, known gaps, the medical review workflow and release direction.
 
@@ -133,10 +135,10 @@ See [ROADMAP.md](ROADMAP.md) for completed foundations, known gaps, the medical 
 The live site is static HTML, CSS and JavaScript. No build step and no package install.
 
 - `index.html`, `style.css`, `app.js` — condition library
-- `data.js` — 50 condition records
+- `data.js` — 57 condition records
 - `followup-data.js`, `followup-app.js` — German dermato-oncology follow-up UI
 - `quiz-data.js`, `quiz-app.js` — eight-question educational quiz
-- `case-data.js`, `case-app.js` — 51 cases: five pilots, 16 Goal 18 cases, 8 Goal 21 cases, 1 Goal 22 case, 2 Goal 24 cases, 6 Goal 25 cases, 7 Goal 26 cases and 6 Goal 27 cases (diagnosis stays hidden until reveal). `academy-review.html` is the generated reviewer workspace, not a learner step.
+- `case-data.js`, `case-app.js` — 52 cases: five pilots, 16 Goal 18 cases, 8 Goal 21 cases, 1 Goal 22 case, 2 Goal 24 cases, 6 Goal 25 cases, 7 Goal 26 cases and 6 Goal 27 cases (diagnosis stays hidden until reveal). `academy-review.html` is the generated reviewer workspace, not a learner step.
 - `training-data.js`, `training-engine.js`, `training-app.js` — mixed-case screening training. `scripts/training.js` validates it and writes `TRAINING_ELIGIBILITY.md`.
 - `pattern-data.js` — 45 reusable pattern objects. A pattern is not a diagnosis and stays review required.
 - `acquisition-ledger.js` — source candidates checked for case acquisition, with accepted and rejected status. Operational metadata, not clinical content.
