@@ -1236,7 +1236,9 @@
       Object.freeze({ casePatternId: "pat-g27-05-plate", canonicalId: "nail-plate-destruction" }),
       Object.freeze({ casePatternId: "pat-g27-06-blood", canonicalId: "hemorrhagic-structureless-area" }),
       Object.freeze({ casePatternId: "pat-g27-06-lines", canonicalId: "longitudinal-nail-plate-lines" }),
-      Object.freeze({ casePatternId: "pat-g29-01-papule", canonicalId: "solitary-dark-papule" })
+      Object.freeze({ casePatternId: "pat-g29-01-papule", canonicalId: "solitary-dark-papule" }),
+      Object.freeze({ casePatternId: "pat-g30-01-pseudo", canonicalId: "facial-pseudonetwork" }),
+      Object.freeze({ casePatternId: "pat-g30-01-gray", canonicalId: "perifollicular-gray-dots" })
     ]),
     dermoscopicTokenLinks: Object.freeze({
       arborizing_vessels: "arborizing-vessels",
@@ -1321,6 +1323,22 @@
       Object.freeze({
         casePatternId: "pat-g29-01-smooth",
         reason: "A smooth intact surface is weak and nonspecific. It stays case-specific rather than a new reusable pattern."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g30-01-mask",
+        reason: "A privacy mask over the eye is a source privacy edit, not a reusable skin pattern."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g30-02-scale",
+        reason: "White scale on a pink plaque is common across many diagnoses. A reusable scale pattern is deferred rather than created from one LPLK example."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g30-02-vessels",
+        reason: "Fine vessels on a pink field are not mapped to arborizing vessels or polymorphous vessels from this one example. They stay case-specific."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g30-02-arrows",
+        reason: "Colored arrows are teaching marks from the source figure, not a skin pattern."
       })
     ])
   });

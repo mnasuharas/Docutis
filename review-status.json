@@ -3647,7 +3647,7 @@
       "assetType": "case",
       "title": "A faint brown patch near the eye",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:1566a31603b6cf3eb0bf3637f21ab6340885d6beaa536446a60d116e349070da",
+      "currentFingerprint": "sha256-v1:be320a5f52341fe91dc4ea23a6ba48241042df8aa0219fd44225fd215bbe93f8",
       "sections": [
         "images",
         "observations",
@@ -4526,6 +4526,120 @@
           "version": null,
           "doi": null,
           "url": "https://commons.wikimedia.org/wiki/File:Dermatofibroma_new_image_to_help_in_diagnosis.jpg",
+          "metadataCheckedAt": "2026-11-19"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g30-01",
+      "assetType": "case",
+      "title": "A brown macule near the eye",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:2a235e56f03fa11d9548e4a5ba14ad9c0d473ff3b41cf4f54a69ab77f1d7f18b",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/diagnostics14222571"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via MDPI open-access PDF",
+          "organization": "Rubegni and coauthors, Diagnostics 2024, Figure 1 panel a, doi:10.3390/diagnostics14222571. CC BY 4.0. Extracted from the MDPI open-access PDF figure embed by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/diagnostics14222571",
+          "metadataCheckedAt": "2026-11-19"
+        },
+        {
+          "title": "Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via MDPI open-access PDF",
+          "organization": "Rubegni and coauthors, Diagnostics 2024, Figure 1 panel b, doi:10.3390/diagnostics14222571. CC BY 4.0. Extracted from the MDPI open-access PDF figure embed by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/diagnostics14222571",
+          "metadataCheckedAt": "2026-11-19"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "case-g30-02",
+      "assetType": "case",
+      "title": "A pink scaly plaque on the back",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:957f40f63c01a030e4ebfdfe7ebbff44f6f9cc8ca773f79ab0360fcec6f93986",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.7759/cureus.83630"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Billah M and coauthors, Cureus 2025, via PubMed Central (PMC12142276)",
+          "organization": "Billah and coauthors, Cureus 2025, Figure 1 panel a, doi:10.7759/cureus.83630. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.7759/cureus.83630",
+          "metadataCheckedAt": "2026-11-19"
+        },
+        {
+          "title": "Billah M and coauthors, Cureus 2025, via PubMed Central (PMC12142276)",
+          "organization": "Billah and coauthors, Cureus 2025, Figure 1 panel b, doi:10.7759/cureus.83630. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.7759/cureus.83630",
           "metadataCheckedAt": "2026-11-19"
         }
       ],

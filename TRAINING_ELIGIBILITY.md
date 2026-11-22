@@ -6,18 +6,18 @@ Eligibility uses stored case metadata: local image and diagnosis-neutral public 
 
 ## Summary
 
-- Total cases in development dataset: 52
-- Core-training eligible: 40
+- Total cases in development dataset: 54
+- Core-training eligible: 42
 - Context-only: 12
 - Excluded: 0
-- Core benign: 16
+- Core benign: 17
 - Core malignant: 23
-- Core with another recorded pole (premalignant or uncertain classification): 1
-- Core histopathology-confirmed: 15
-- Core paired clinical and dermoscopy: 18
+- Core with another recorded pole (premalignant or uncertain classification): 2
+- Core histopathology-confirmed: 17
+- Core paired clinical and dermoscopy: 20
 - Core melanoma (including melanoma in situ and lentigo maligna): 20
 - Core benign melanoma mimics: 14
-- Core face: 3
+- Core face: 4
 - Core acral: 9
 - Core nail: 3
 - Distinct diagnostic structures in core cases: 21
@@ -67,6 +67,8 @@ Counts describe coverage. They are not prevalence and they are not a score.
 - case-g27-04: pole malignant; family melanocytic; site acral; paired; confirmation histopathology; difficulty advanced
 - case-g27-05: pole benign; family melanocytic; site nail; paired; confirmation histopathology; difficulty intermediate
 - case-g29-01: pole benign; family other; site unknown; single modality; confirmation clinical_diagnosis; difficulty foundation
+- case-g30-01: pole premalignant; family keratinocytic; site face; paired; confirmation histopathology; difficulty intermediate
+- case-g30-02: pole benign; family keratinocytic; site not-special; paired; confirmation histopathology; difficulty intermediate
 
 ## Context-only cases
 
@@ -89,17 +91,17 @@ Counts describe coverage. They are not prevalence and they are not a score.
 
 ## Coverage of core cases
 
-- Lesion families (composition mapping from stored case category): melanocytic 28, keratinocytic 6, other 3, vascular-adnexal 3
-- Sites: unknown 16, not-special 7, ear 1, face 3, scalp 1, acral 9, nail 3
-- Body regions (composition metadata from anatomical site text): unknown 16, trunk 3, ear 1, extremity 4, face 3, scalp 1, acral 9, nail 3
-- Pigmentation classes (derived from stored labels): pigmented 29, non-pigmented 4, usually-non-pigmented-or-mixed 4, unspecified 1, vascular-or-blood 2
-- Core cases with disposition teaching: case-g21-05, case-g25-01, case-g29-01
-- Confirmation methods: source_dataset_diagnosis 13, expert_diagnosis 4, clinical_diagnosis 8, histopathology 15
-- Histopathology: case-g25-01, case-g25-02, case-g25-03, case-g25-04, case-g25-05, case-g25-06, case-g26-01, case-g26-02, case-g26-03, case-g26-05, case-g26-06, case-g27-01, case-g27-03, case-g27-04, case-g27-05
-- Paired: case-g21-08, case-g25-01, case-g25-02, case-g25-03, case-g25-04, case-g25-05, case-g25-06, case-g26-01, case-g26-02, case-g26-03, case-g26-04, case-g26-05, case-g26-06, case-g27-01, case-g27-02, case-g27-03, case-g27-04, case-g27-05
+- Lesion families (composition mapping from stored case category): melanocytic 28, keratinocytic 8, other 3, vascular-adnexal 3
+- Sites: unknown 16, not-special 8, ear 1, face 4, scalp 1, acral 9, nail 3
+- Body regions (composition metadata from anatomical site text): unknown 16, trunk 4, ear 1, extremity 4, face 4, scalp 1, acral 9, nail 3
+- Pigmentation classes (derived from stored labels): pigmented 30, non-pigmented 4, usually-non-pigmented-or-mixed 4, unspecified 2, vascular-or-blood 2
+- Core cases with disposition teaching: case-g21-05, case-g25-01, case-g29-01, case-g30-01, case-g30-02
+- Confirmation methods: source_dataset_diagnosis 13, expert_diagnosis 4, clinical_diagnosis 8, histopathology 17
+- Histopathology: case-g25-01, case-g25-02, case-g25-03, case-g25-04, case-g25-05, case-g25-06, case-g26-01, case-g26-02, case-g26-03, case-g26-05, case-g26-06, case-g27-01, case-g27-03, case-g27-04, case-g27-05, case-g30-01, case-g30-02
+- Paired: case-g21-08, case-g25-01, case-g25-02, case-g25-03, case-g25-04, case-g25-05, case-g25-06, case-g26-01, case-g26-02, case-g26-03, case-g26-04, case-g26-05, case-g26-06, case-g27-01, case-g27-02, case-g27-03, case-g27-04, case-g27-05, case-g30-01, case-g30-02
 - Melanoma: case-g18-01, case-g18-02, case-g18-03, case-g18-04, case-g18-05, case-g18-06, case-g18-07, case-g18-08, case-g18-09, case-g18-10, case-g18-11, case-g21-07, case-g25-01, case-g25-03, case-g25-04, case-g25-05, case-g26-01, case-g26-03, case-g27-03, case-g27-04
 - Benign melanoma mimics: case-g21-02, case-g21-03, case-g21-04, case-g21-05, case-g21-06, case-g25-02, case-g26-02, case-g26-04, case-g26-05, case-g26-06, case-g27-01, case-g27-02, case-g27-05, case-g29-01
-- Face: case-g21-07, case-g25-05, case-g25-06
+- Face: case-g21-07, case-g25-05, case-g25-06, case-g30-01
 - Acral: case-g25-04, case-g26-01, case-g26-02, case-g26-03, case-g26-04, case-g27-01, case-g27-02, case-g27-03, case-g27-04
 - Nail: case-g26-05, case-g26-06, case-g27-05
 - Diagnostic structures: asymmetric-thickness, atypical-pigment-network, cerebriform-surface, color-variegation, crateriform-center, facial-pseudonetwork, fibrillar-pattern, flat-area-with-raised-focus, hemorrhagic-structureless-area, irregular-acral-pigmentation, longitudinal-nail-plate-lines, nodule-beside-pigmented-macule, notched-border, pale-center, parallel-furrow-pattern, parallel-ridge-pattern, perifollicular-gray-dots, peripheral-dark-focus, polymorphous-vessels, stuck-on-rough-surface, yellow-white-lobules
@@ -109,7 +111,7 @@ Counts describe coverage. They are not prevalence and they are not a score.
 
 ### Mixed screening
 
-- Core cases available: 40 (34 distinct source groups)
+- Core cases available: 42 (35 distinct source groups)
 - Context cases that may fill one labelled slot: none
 - Session lengths offered: short (5), standard (8), extended (12)
 
@@ -121,7 +123,7 @@ Counts describe coverage. They are not prevalence and they are not a score.
 
 ### Special sites
 
-- Core cases available: 17 (12 distinct source groups)
+- Core cases available: 18 (12 distinct source groups)
 - Context cases that may fill one labelled slot: case-g18-12, case-g22-01, case-g26-07, case-g27-06
 - Session lengths offered: short (5), standard (8)
 
