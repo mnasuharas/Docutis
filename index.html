@@ -22,127 +22,79 @@
       <span class="logo">Docutis</span>
     </a>
     <div class="primary-links">
-      <a href="#searchPanel">Search</a>
-      <a href="#evidenceStatus">Clinical review</a>
-      <a href="#about">About</a>
+      <a href="#trainingModule">Training</a>
+      <a href="#caseModule">Cases</a>
+      <a href="#searchPanel">Conditions</a>
       <a href="#followUpModule">Follow-up</a>
       <a href="#quizModule">Quiz</a>
-      <a href="#caseModule">Cases</a>
-      <a href="#trainingModule">Training</a>
-      <a href="#conditionsTitle">Conditions</a>
+      <a href="#evidenceStatus">Clinical review</a>
+      <a href="#about">About</a>
     </div>
     <div class="nav-oss" aria-label="Open-source project links">
       <a href="https://github.com/mnasuharas/Docutis" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
-    <div class="badge">Open source preview</div>
   </nav>
 </header>
 
 <main id="mainContent" tabindex="-1">
 
   <section class="hero" aria-labelledby="pageTitle">
-    <p class="eyebrow">Clinical dermatology reference</p>
-    <h1 id="pageTitle">Dermatology, structured for fast reference.</h1>
+    <p class="eyebrow">Dermatology education and reference</p>
+    <h1 id="pageTitle">Learn dermatology through cases.</h1>
 
     <p>
-      An open-source dermatology reference and education toolkit
-      designed for physicians, medical trainees and healthcare professionals.
+      Work through lesion images step by step or find a condition in the reference library.
     </p>
+    <div class="hero-actions">
+      <a href="#trainingModule" class="hero-action hero-action-primary">Start mixed-case training</a>
+      <a href="#caseModule" class="hero-action">Browse clinical cases</a>
+      <a href="#searchPanel" class="hero-action">Find a condition</a>
+    </div>
     <p class="hero-status">
-      Public preview · Goal 9 public layer: 5 clinician reviewed / others review required · Not validated clinical decision support.
-      Recommendations are educational drafts unless a matching physician decision exists.
+      Public preview · Educational use only. Check the review status on each item.
+      Docutis is not validated clinical decision support.
     </p>
 
     <div id="libraryStats" class="library-stats js-only" aria-label="Current reference coverage"></div>
   </section>
 
-  <section id="evidenceStatus" class="evidence-dashboard" aria-labelledby="evidenceStatusTitle">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">Clinical transparency</p>
-        <h2 id="evidenceStatusTitle">Evidence status</h2>
-      </div>
-      <p>Live coverage counts are calculated from the published records, follow-up protocols and governed media registry.</p>
-    </div>
-    <noscript><p class="js-fallback">This interactive section requires JavaScript.</p></noscript>
-    <div id="reviewDashboardCounts" class="review-dashboard-counts js-only" aria-label="Clinical review coverage"></div>
-    <details class="review-meaning">
-      <summary>What these states mean</summary>
-      <dl>
-        <div><dt>Source metadata checked</dt><dd>The source identity and link metadata were rechecked; this does not verify every clinical statement.</dd></div>
-        <div><dt>Schema validated</dt><dd>Automated checks found the expected data shape, controlled values and source relationships. Automated tests are not clinical review.</dd></div>
-        <div><dt>Clinician review required</dt><dd>The content remains educational draft material and has no current physician attestation.</dd></div>
-        <div><dt>Clinician reviewed</dt><dd>A physician attestation is bound by a content fingerprint to one exact content version. Later clinical changes invalidate that attestation.</dd></div>
-      </dl>
-      <p>Docutis does not replace professional clinical judgment, diagnosis, treatment decisions or current guidelines.</p>
-    </details>
-    <p class="review-machine-link"><a href="review-status.json">Machine-readable public review status (JSON)</a></p>
-    <div class="clinical-feedback clinical-feedback--dashboard" aria-label="Clinical content feedback">
-      <p class="clinical-feedback-lede">Found a problem in educational content? Open a sourced correction request. Do not include patient-identifiable information.</p>
-      <div class="clinical-feedback-actions">
-        <a class="clinical-feedback-link" href="https://github.com/mnasuharas/Docutis/issues/new?template=clinical_content.yml&amp;title=%5BClinical%20content%5D%3A%20Suggest%20a%20correction%20%E2%80%94%20Evidence%20status%20%2F%20clinical%20review%20area" target="_blank" rel="noopener noreferrer">Suggest a correction</a>
-        <a class="clinical-feedback-link" href="https://github.com/mnasuharas/Docutis/issues/new?template=evidence_update.yml&amp;title=%5BEvidence%5D%3A%20Report%20outdated%20evidence%20%E2%80%94%20Evidence%20status%20%2F%20clinical%20review%20area" target="_blank" rel="noopener noreferrer">Report outdated evidence</a>
-      </div>
-      <p class="clinical-feedback-help">Include the affected record or page, the claim that needs attention, a verifiable source, and a proposed correction.</p>
-    </div>
-  </section>
-
-  <section id="searchPanel" class="search-panel" aria-labelledby="searchTitle">
+  <section id="searchPanel" tabindex="-1" class="search-panel" aria-labelledby="searchTitle">
     <div class="section-heading compact-heading">
       <div>
         <p class="eyebrow">Reference library</p>
         <h2 id="searchTitle">Find a condition</h2>
       </div>
-      <p class="keyboard-hint"><kbd>/</kbd> to focus search</p>
+      <p class="keyboard-hint js-only"><kbd>/</kbd> to focus search</p>
     </div>
-    <noscript><p class="js-fallback">This interactive section requires JavaScript.</p></noscript>
     <div class="search-wrapper js-only">
       <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"/></svg>
       <label class="visually-hidden" for="searchInput">Search conditions</label>
       <input id="searchInput" type="search" placeholder="Search by condition, alias, category or code" autocomplete="off" aria-controls="cards" aria-describedby="searchHelp">
       <button id="searchClear" class="search-clear" type="button" hidden>Clear</button>
     </div>
-    <p id="searchHelp" class="search-help">Examples: melanoma, shingles, eczema, C43</p>
+    <p id="searchHelp" class="search-help js-only">Examples: melanoma, shingles, eczema, C43</p>
     <div id="categoryFilters" class="category-filters js-only" aria-label="Filter conditions by category"></div>
     <p id="resultStatus" class="result-status js-only" role="status" aria-live="polite"></p>
   </section>
 
-  <section id="quizModule" class="quiz-module" aria-labelledby="quizTitle">
+  <section class="reference-library" aria-labelledby="conditionsTitle">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Visual learning pilot</p>
-        <h2 id="quizTitle">Clinical Pattern Quiz</h2>
+        <p class="eyebrow">Browse by category</p>
+        <h2 id="conditionsTitle" tabindex="-1" class="section-title">Conditions</h2>
       </div>
-      <p>Eight educational questions use only the structured pilot records and original Docutis schematics.</p>
-    </div>
-    <p class="quiz-disclaimer">Educational pattern recognition only. This quiz is not clinical decision support and does not replace professional judgment. Most quiz items remain clinician review required; the BCC dermoscopy item is clinician reviewed in the public Goal 9 layer.</p>
-    <div class="clinical-feedback" aria-label="Quiz content feedback">
-      <p class="clinical-feedback-lede">Question wording or a cited source look wrong? Report it without naming repository files.</p>
-      <div class="clinical-feedback-actions">
-        <a class="clinical-feedback-link" href="https://github.com/mnasuharas/Docutis/issues/new?template=clinical_content.yml&amp;title=%5BClinical%20content%5D%3A%20Suggest%20a%20correction%20%E2%80%94%20Clinical%20pattern%20quiz" target="_blank" rel="noopener noreferrer">Suggest a correction</a>
-        <a class="clinical-feedback-link" href="https://github.com/mnasuharas/Docutis/issues/new?template=evidence_update.yml&amp;title=%5BEvidence%5D%3A%20Report%20outdated%20evidence%20%E2%80%94%20Clinical%20pattern%20quiz" target="_blank" rel="noopener noreferrer">Report outdated evidence</a>
-      </div>
+      <p>Open any record for clinical features, dermoscopy, differential diagnosis, treatment, follow-up, coding and sources.</p>
     </div>
     <noscript><p class="js-fallback">This interactive section requires JavaScript.</p></noscript>
-    <div id="quizApp" class="quiz-app js-only" tabindex="-1"></div>
-  </section>
-
-  <section id="caseModule" class="case-module" aria-labelledby="caseTitle">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">Case-based learning</p>
-        <h2 id="caseTitle">Clinical cases</h2>
-      </div>
-      <span class="module-badge">Clinician review required</span>
+    <section id="details" tabindex="-1" role="region" aria-labelledby="diseaseDetailsTitle" hidden></section>
+    <div id="cards" class="cards js-only"></div>
+    <div id="noResult" class="no-result js-only">
+      <strong>No matching condition found.</strong>
+      <span>Try another name, alias, category or classification code.</span>
     </div>
-    <p class="case-disclaimer">Educational steps only: inspect, observe, differential, reveal, then review. Learn Melanoma is an optional sequence, not a certificate and not a device. Cases are not clinical decision support. Image interpretation here is not physician attestation. No case is clinician reviewed. The <a href="academy-review.html">reviewer workspace</a> lists recorded diagnoses for review and is not a learner step.</p>
-    <noscript>
-      <p class="case-empty">Cases cannot be shown because JavaScript is unavailable. No diagnosis, observation or teaching text is substituted. The published pilot cases remain clinician review required.</p>
-    </noscript>
-    <div id="caseApp" class="case-app js-only" tabindex="-1"></div>
   </section>
 
-  <section id="trainingModule" class="training-module" aria-labelledby="trainingTitle">
+  <section id="trainingModule" tabindex="-1" class="training-module" aria-labelledby="trainingTitle">
     <div class="section-heading">
       <div>
         <p class="eyebrow">Case-based screening practice</p>
@@ -157,7 +109,22 @@
     <div id="trainingApp" class="training-app js-only" tabindex="-1"></div>
   </section>
 
-  <section id="followUpModule" class="follow-up-module" aria-labelledby="followUpTitle">
+  <section id="caseModule" tabindex="-1" class="case-module" aria-labelledby="caseTitle">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Case-based learning</p>
+        <h2 id="caseTitle">Clinical cases</h2>
+      </div>
+      <span class="module-badge">Clinician review required</span>
+    </div>
+    <p class="case-disclaimer">Educational steps only: inspect, observe, differential, reveal, then review. Learn Melanoma is an optional sequence, not a certificate and not a device. Cases are not clinical decision support. Image interpretation here is not physician attestation. The <a href="academy-review.html">reviewer workspace</a> contains answers and source diagnoses.</p>
+    <noscript>
+      <p class="case-empty">Cases cannot be shown because JavaScript is unavailable. No diagnosis, observation or teaching text is substituted. The published pilot cases remain clinician review required.</p>
+    </noscript>
+    <div id="caseApp" class="case-app js-only" tabindex="-1"></div>
+  </section>
+
+  <section id="followUpModule" tabindex="-1" class="follow-up-module" aria-labelledby="followUpTitle">
     <div class="follow-up-heading">
       <div>
         <p class="eyebrow">Germany · guideline-based</p>
@@ -189,25 +156,58 @@
     <div id="followUpResult" class="follow-up-result js-only" role="region" aria-labelledby="followUpResultHeading"></div>
   </section>
 
-  <section class="reference-library" aria-labelledby="conditionsTitle">
+  <section id="quizModule" tabindex="-1" class="quiz-module" aria-labelledby="quizTitle">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Browse by category</p>
-        <h2 id="conditionsTitle" class="section-title">Conditions</h2>
+        <p class="eyebrow">Visual learning pilot</p>
+        <h2 id="quizTitle">Clinical Pattern Quiz</h2>
       </div>
-      <p>Open any record for clinical features, dermoscopy, differential diagnosis, treatment, follow-up, coding and sources.</p>
+      <p>Eight educational questions use only the structured pilot records and original Docutis schematics.</p>
+    </div>
+    <p class="quiz-disclaimer">Educational pattern recognition only. This quiz is not clinical decision support and does not replace professional judgment. Check the review status shown with each quiz item.</p>
+    <div class="clinical-feedback" aria-label="Quiz content feedback">
+      <p class="clinical-feedback-lede">Question wording or a cited source look wrong? Report it without naming repository files.</p>
+      <div class="clinical-feedback-actions">
+        <a class="clinical-feedback-link" href="https://github.com/mnasuharas/Docutis/issues/new?template=clinical_content.yml&amp;title=%5BClinical%20content%5D%3A%20Suggest%20a%20correction%20%E2%80%94%20Clinical%20pattern%20quiz" target="_blank" rel="noopener noreferrer">Suggest a correction</a>
+        <a class="clinical-feedback-link" href="https://github.com/mnasuharas/Docutis/issues/new?template=evidence_update.yml&amp;title=%5BEvidence%5D%3A%20Report%20outdated%20evidence%20%E2%80%94%20Clinical%20pattern%20quiz" target="_blank" rel="noopener noreferrer">Report outdated evidence</a>
+      </div>
     </div>
     <noscript><p class="js-fallback">This interactive section requires JavaScript.</p></noscript>
-    <div id="cards" class="cards js-only"></div>
-    <div id="noResult" class="no-result">
-      <strong>No matching condition found.</strong>
-      <span>Try another name, alias, category or classification code.</span>
+    <div id="quizApp" class="quiz-app js-only" tabindex="-1"></div>
+  </section>
+
+  <section id="evidenceStatus" tabindex="-1" class="evidence-dashboard" aria-labelledby="evidenceStatusTitle">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Clinical transparency</p>
+        <h2 id="evidenceStatusTitle">Evidence status</h2>
+      </div>
+      <p>Live coverage counts are calculated from the published records, follow-up protocols and governed media registry.</p>
+    </div>
+    <noscript><p class="js-fallback">This interactive section requires JavaScript.</p></noscript>
+    <div id="reviewDashboardCounts" class="review-dashboard-counts js-only" aria-label="Clinical review coverage"></div>
+    <details class="review-meaning">
+      <summary>What these states mean</summary>
+      <dl>
+        <div><dt>Source metadata checked</dt><dd>The source identity and link metadata were rechecked; this does not verify every clinical statement.</dd></div>
+        <div><dt>Schema validated</dt><dd>Automated checks found the expected data shape, controlled values and source relationships. Automated tests are not clinical review.</dd></div>
+        <div><dt>Clinician review required</dt><dd>The content remains educational draft material and has no current physician attestation.</dd></div>
+        <div><dt>Clinician reviewed</dt><dd>A physician attestation is bound by a content fingerprint to one exact content version. Later clinical changes invalidate that attestation.</dd></div>
+      </dl>
+      <p>Docutis does not replace professional clinical judgment, diagnosis, treatment decisions or current guidelines.</p>
+    </details>
+    <p class="review-machine-link"><a href="review-status.json">Machine-readable public review status (JSON)</a></p>
+    <div class="clinical-feedback clinical-feedback--dashboard" aria-label="Clinical content feedback">
+      <p class="clinical-feedback-lede">Found a problem in educational content? Open a sourced correction request. Do not include patient-identifiable information.</p>
+      <div class="clinical-feedback-actions">
+        <a class="clinical-feedback-link" href="https://github.com/mnasuharas/Docutis/issues/new?template=clinical_content.yml&amp;title=%5BClinical%20content%5D%3A%20Suggest%20a%20correction%20%E2%80%94%20Evidence%20status%20%2F%20clinical%20review%20area" target="_blank" rel="noopener noreferrer">Suggest a correction</a>
+        <a class="clinical-feedback-link" href="https://github.com/mnasuharas/Docutis/issues/new?template=evidence_update.yml&amp;title=%5BEvidence%5D%3A%20Report%20outdated%20evidence%20%E2%80%94%20Evidence%20status%20%2F%20clinical%20review%20area" target="_blank" rel="noopener noreferrer">Report outdated evidence</a>
+      </div>
+      <p class="clinical-feedback-help">Include the affected record or page, the claim that needs attention, a verifiable source, and a proposed correction.</p>
     </div>
   </section>
 
-  <section id="details" tabindex="-1" role="region" aria-labelledby="diseaseDetailsTitle" hidden></section>
-
-  <section id="about" class="about-section" aria-labelledby="aboutTitle">
+  <section id="about" tabindex="-1" class="about-section" aria-labelledby="aboutTitle">
     <div class="section-heading">
       <div>
         <p class="eyebrow">Project status</p>
@@ -222,7 +222,7 @@
       </div>
       <div>
         <h3>Current status</h3>
-        <p><strong>Public preview.</strong> The Goal 9 public layer currently includes five clinician-reviewed assets (AK and BCC disease records plus BCC follow-up, quiz and schematic). Other Goal 9 units and all pilot cases remain review required. Goal 12 only changes how those cases are stepped through; it does not mark any case clinician reviewed. Automated schema, source-metadata and fingerprint checks are not physician attestation.</p>
+        <p><strong>Public preview.</strong> The <a href="#evidenceStatus">evidence dashboard</a> shows current review counts for the library, cases, quiz, visuals and follow-up protocols. Physician review applies to a specific version of each item.</p>
         <p><strong>Not validated clinical decision support.</strong> Content is educational draft material and is <strong>not</strong> clinician-approved recommendations for diagnosis, treatment or follow-up.</p>
       </div>
       <div>
@@ -230,7 +230,7 @@
         <ul class="about-list">
           <li>Coverage is incomplete; many dermatology domains remain future work.</li>
           <li>Product-specific dosing and jurisdiction-specific information are included only when supported by traceable current guidelines or regulatory product information and still require professional verification before clinical use.</li>
-          <li>Human clinical review is published only for assets with a current matching decision; other Goal 9 assets remain review required.</li>
+          <li>A published review requires a current physician decision that matches the content version.</li>
           <li>Always verify claims against current guidelines and professional judgment.</li>
         </ul>
       </div>

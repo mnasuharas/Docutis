@@ -439,6 +439,41 @@ test("site filter keeps focus and typed characters across list refresh", () => {
   assert.doesNotMatch(caseText(harness.root), /Linked condition|Actinic Keratosis|Basal Cell Carcinoma|Squamous Cell Carcinoma|Acral Melanoma/);
 });
 
+test("case filters stay in place and returning from a paired case restores focus", () => {
+  const { document, root } = caseHarness(caseUiFiles);
+  const find = predicate => caseFind(root, predicate)[0];
+  const filter = key => find(node => node.getAttribute?.("data-filter-key") === key);
+  const teacher = find(node => node.className === "case-teacher-filters");
+  teacher.open = true;
+  const modality = filter("modality");
+  modality.value = "paired";
+  modality.focus();
+  modality.dispatch("change");
+  assert.equal(document.activeElement, modality);
+  assert.equal(filter("modality"), modality);
+  assert.match(caseText(root), /25 cases shown/);
+  const site = filter("anatomicalSite");
+  site.value = "back of ";
+  site.dispatch("input");
+  assert.equal(filter("anatomicalSite"), site);
+  assert.equal(site.value, "back of ");
+  site.value = "";
+  site.dispatch("input");
+
+  const start = find(node => node.textContent === "Start case");
+  const label = start.getAttribute("aria-label");
+  start.dispatch("click");
+  find(node => node.textContent === "Back to case list").dispatch("click");
+  assert.equal(document.activeElement.getAttribute("aria-label"), label);
+  assert.equal(find(node => node.className === "case-teacher-filters").open, true);
+  assert.equal(filter("modality").value, "paired");
+
+  const reset = find(node => node.textContent === "Reset case filters");
+  reset.dispatch("click");
+  assert.match(caseText(root), /55 cases shown/);
+  assert.equal(document.activeElement.textContent, "Reset case filters");
+});
+
 test("explicit diagnosis confirmations stay hidden until reveal and remain available afterward", () => {
   const harness = caseHarness(caseUiFiles);
   const cases = harness.window.DOCUTIS_CASES.cases;

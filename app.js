@@ -15,6 +15,7 @@
   const reviewUi = window.DOCUTIS_REVIEW_UI || null;
   let activeCategory = "all";
   let lastOpenedCard = null;
+  let displayedCondition = null;
 
   function prefersReducedMotion() {
     try {
@@ -83,7 +84,7 @@
     const values = [];
     function visit(value) {
       if (value === null || value === undefined) return;
-      if (typeof value === "string") values.push(value, value.replaceAll("-", " "));
+      if (typeof value === "string") values.push(value);
       else if (Array.isArray(value)) value.forEach(visit);
       else if (typeof value === "object") Object.values(value).forEach(visit);
     }
@@ -94,14 +95,27 @@
     return values;
   }
 
+  function normalizeSearch(value) {
+    return value.normalize("NFKD").replace(/\p{M}/gu, "").toLocaleLowerCase("en")
+      .replace(/[‐‑‒–—-]/g, " ").replace(/[’‘]/g, "'").replace(/\s+/g, " ").trim();
+  }
+
+  const searchIndex = data.diseases.map(disease => ({
+    disease,
+    fields: [disease.name, disease.alternative, disease.description, categoryTitle(disease.category),
+      subcategoryTitle(disease.subcategory), ...codingSearchText(disease.coding), ...clinicalProfileSearchText(disease.clinicalProfile)]
+      .filter(Boolean).map(normalizeSearch)
+  }));
+
   function filteredDiseases() {
-    const query = searchInput.value.trim().toLocaleLowerCase();
-    return data.diseases.filter(disease => {
-      const categoryMatches = activeCategory === "all" || disease.category === activeCategory;
-      const searchable = [disease.name, disease.alternative, disease.description, categoryTitle(disease.category),
-        subcategoryTitle(disease.subcategory), ...codingSearchText(disease.coding), ...clinicalProfileSearchText(disease.clinicalProfile)];
-      return categoryMatches && (!query || searchable.some(value => value.toLocaleLowerCase().includes(query)));
-    });
+    const query = normalizeSearch(searchInput.value);
+    const entries = searchIndex.filter(({ disease }) => activeCategory === "all" || disease.category === activeCategory);
+    if (!query) return entries.map(({ disease }) => disease);
+    const phraseMatches = entries.filter(({ fields }) => fields.some(field => field.includes(query)));
+    if (phraseMatches.length) return phraseMatches.map(({ disease }) => disease);
+    const terms = query.split(" ");
+    return entries.filter(({ fields }) => terms.every(term => fields.some(field => field.includes(term))))
+      .map(({ disease }) => disease);
   }
 
   function conditionUrl(id) {
@@ -109,6 +123,7 @@
     const url = new URL(window.location.href);
     if (id) url.searchParams.set("condition", id);
     else url.searchParams.delete("condition");
+    if (url.hash.startsWith("#detail-") && (!id || id !== displayedCondition)) url.hash = "";
     return `${url.pathname}${url.search}${url.hash}`;
   }
 
@@ -118,10 +133,15 @@
   }
 
   function hideDetails(options = {}) {
+    const wasOpen = !detailsElement.hidden;
+    displayedCondition = null;
     detailsElement.hidden = true;
     detailsElement.replaceChildren();
     if (options.clearUrl) updateConditionUrl(null, "replace");
-    if (options.restoreFocus && lastOpenedCard && document.contains(lastOpenedCard)) lastOpenedCard.focus();
+    if (wasOpen && options.restoreFocus) {
+      const target = lastOpenedCard && document.contains(lastOpenedCard) ? lastOpenedCard : searchInput;
+      target.focus();
+    }
   }
 
   function closeDiseaseDetails() {
@@ -586,14 +606,31 @@
     links.forEach(([id, label]) => {
       const link = appendTextElement(navigation, "a", label);
       link.href = `#${id}`;
+      link.addEventListener("click", event => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || !window.history?.replaceState) return;
+        const section = document.getElementById(id);
+        if (!section) return;
+        event.preventDefault();
+        window.history.replaceState(window.history.state, "", link.href);
+        focusDetailSection(section);
+      });
     });
     detailsElement.appendChild(navigation);
+  }
+
+  function focusDetailSection(section) {
+    section.tabIndex = -1;
+    focusWithoutScrolling(section);
+    scrollElementIntoView(section);
   }
 
   function showDisease(id, options = {}) {
     const disease = data.diseases.find(item => item.id === id);
     if (!disease) return false;
-    if (options.updateUrl) updateConditionUrl(id, "push");
+    if (options.updateUrl && id !== displayedCondition) {
+      const mode = displayedCondition ? "replace" : "push";
+      updateConditionUrl(id, mode, mode === "replace" ? window.history?.state : {});
+    }
     detailsElement.replaceChildren();
     const header = document.createElement("div");
     header.className = "detail-header";
@@ -657,9 +694,11 @@
     addOncologySection(content, disease);
     addReferencesSection(content, disease);
     detailsElement.appendChild(content);
+    displayedCondition = id;
     detailsElement.hidden = false;
-    focusWithoutScrolling(detailsElement);
-    scrollElementIntoView(detailsElement);
+    const hash = window.location ? new URL(window.location.href).hash : "";
+    const linkedSection = hash.startsWith("#detail-") && document.getElementById(hash.slice(1));
+    focusDetailSection(linkedSection || detailsElement);
     return true;
   }
 
@@ -667,6 +706,7 @@
     if (!window.location) return;
     const id = new URL(window.location.href).searchParams.get("condition");
     if (!id) { hideDetails({ restoreFocus: !options.initial }); return; }
+    if (id === displayedCondition) return;
     const opened = showDisease(id);
     if (opened && options.initial) updateConditionUrl(id, "replace", { directEntry: true });
     if (!opened) hideDetails();
@@ -720,7 +760,6 @@
     const followUps = window.DOCUTIS_FOLLOW_UP_DATA?.protocols || [];
     const mediaItems = mediaData.items || [];
     const publicAssets = reviewUi?.registry.assets || [];
-    const diseaseAssets = publicAssets.filter(item => item.assetType === "disease");
     const statusCount = (type, status) => publicAssets.filter(item => item.assetType === type && item.status === status).length;
     const legacyReviewed = data.diseases.filter(item => !item.clinicalProfile && item.reviewStatus === "clinician reviewed").length;
     const reviewedRecords = statusCount("disease", "clinician reviewed") + legacyReviewed;

@@ -41,6 +41,10 @@
   });
 
   let activeId = null;
+  let listEntryId = null;
+  let listEntryButton = null;
+  let caseListResults = null;
+  let teacherFilters = null;
   let activeStep = 0;
   let diagnosisRevealed = false;
   let openComparisonId = null;
@@ -106,6 +110,7 @@
   const filters = {
     diseaseId: "",
     caseType: "",
+    modality: "",
     educationalLevel: "",
     anatomicalSite: "",
     pathway: "",
@@ -168,10 +173,13 @@
   }
 
   function cases() {
+    const siteQuery = filters.anatomicalSite.trim().toLocaleLowerCase("en");
     const list = registry.cases.filter(item => {
+      if (filters.modality === "paired" && !isTruePair(item)) return false;
+      if (filters.modality && filters.modality !== "paired" && !asList(item.images).some(image => image.type === filters.modality)) return false;
       if (filters.caseType && item.caseType !== filters.caseType) return false;
       if (filters.educationalLevel && item.educationalLevel !== filters.educationalLevel) return false;
-      if (filters.anatomicalSite && !(item.patientContext && item.patientContext.anatomicalSite || "").toLocaleLowerCase("en").includes(filters.anatomicalSite.toLocaleLowerCase("en"))) return false;
+      if (siteQuery && !(item.patientContext && item.patientContext.anatomicalSite || "").toLocaleLowerCase("en").includes(siteQuery)) return false;
       const entry = entryFor(item);
       if (filters.pathway && (!entry || !curriculumMap() || curriculumMap().id !== filters.pathway)) return false;
       if (filters.curriculumLevel && (!entry || String(entry.level) !== String(filters.curriculumLevel))) return false;
@@ -428,29 +436,36 @@
     select.setAttribute("data-filter-key", key);
     options.forEach(([value, textValue]) => select.appendChild(new Option(textValue, value)));
     select.value = filters[key] || "";
-    select.addEventListener("change", () => { filters[key] = select.value; renderList(); });
+    select.addEventListener("change", () => { filters[key] = select.value; renderListResults(); });
     wrap.appendChild(select);
     parent.appendChild(wrap);
   }
 
-  function renderFilters(parent) {
+  function renderFilters(parent, showTeacherFilters) {
     const pathway = curriculumMap();
     if (pathway && pathway.title) {
-      const toggle = element("button", filters.pathway ? "Show all cases" : pathway.title, "case-button case-button-secondary");
+      const toggle = element("button", pathway.title, "case-button case-button-secondary");
+      const note = element("p", undefined, "case-kind-note");
       toggle.type = "button";
-      toggle.setAttribute("aria-pressed", filters.pathway ? "true" : "false");
-      toggle.setAttribute("aria-label", filters.pathway ? "Show all cases" : "Learn Melanoma pathway");
+      toggle.setAttribute("aria-label", "Learn Melanoma pathway");
+      function updatePathwayState() {
+        toggle.setAttribute("aria-pressed", String(Boolean(filters.pathway)));
+        note.textContent = filters.pathway
+          ? "Cases are shown in curriculum order."
+          : "Choose Learn Melanoma to browse the curriculum in order.";
+      }
+      updatePathwayState();
       toggle.addEventListener("click", () => {
         filters.pathway = filters.pathway ? "" : pathway.id;
-        renderList();
+        updatePathwayState();
+        renderListResults();
       });
       parent.appendChild(toggle);
-      parent.appendChild(element("p", filters.pathway
-        ? "This pathway follows the curriculum order. It is not a certificate, not a score, and not a device."
-        : "Learn Melanoma is an optional sequence. The default list stays unfiltered.", "case-kind-note"));
+      parent.appendChild(note);
     }
     const bar = element("div", undefined, "case-filters");
     addSelect(bar, "caseType", "Case type", [["", "All"], ...uniqueValues(item => item.caseType).map(value => [value, String(value).replaceAll("_", " ")])]);
+    addSelect(bar, "modality", "Image views", [["", "Any view"], ["paired", "Paired clinical and dermoscopic"], ["clinical", "Clinical photograph available"], ["dermoscopy", "Dermoscopy available"]]);
     addSelect(bar, "educationalLevel", "Level", [["", "All"], ...uniqueValues(item => item.educationalLevel).map(value => [value, value])]);
     addSelect(bar, "curriculumLevel", "Curriculum level", [["", "All"], ...((pathway && pathway.levels) || []).map(level => [String(level.level), `${level.level}. ${level.title}`])]);
     addSelect(bar, "teachingType", "Teaching type", [["", "All"], ["teaching", "Teaching case"], ["reasoning", "Reasoning case"], ["expert-challenge", "Expert-challenge case"]]);
@@ -462,13 +477,15 @@
     input.setAttribute("data-filter-key", "anatomicalSite");
     input.placeholder = "e.g. hand, back";
     input.value = filters.anatomicalSite;
-    input.addEventListener("input", () => { filters.anatomicalSite = input.value.trim(); renderList(); });
+    input.addEventListener("input", () => { filters.anatomicalSite = input.value; renderListResults(); });
     siteWrap.appendChild(input);
     bar.appendChild(siteWrap);
     parent.appendChild(bar);
 
     const teacher = document.createElement("details");
     teacher.className = "case-teacher-filters";
+    teacher.open = showTeacherFilters;
+    teacherFilters = teacher;
     teacher.appendChild(element("summary", "Teacher filters"));
     teacher.appendChild(element("p", "Closed by default. Spectrum and skill filters expose the curriculum class, so leave them closed during a first pass.", "case-kind-note"));
     const teacherBar = element("div", undefined, "case-filters");
@@ -485,6 +502,14 @@
     addSelect(teacherBar, "reviewStatus", "Review status", [["", "All"], ["required", "Review required"], ["reviewed", "Clinician reviewed"]]);
     teacher.appendChild(teacherBar);
     parent.appendChild(teacher);
+    const reset = element("button", "Reset case filters", "case-button case-button-secondary");
+    reset.type = "button";
+    reset.addEventListener("click", () => {
+      Object.keys(filters).forEach(key => { filters[key] = ""; });
+      renderList().focus();
+    });
+    parent.appendChild(reset);
+    return reset;
   }
 
   function appendSourcePageLink(parent, image) {
@@ -1492,9 +1517,7 @@
     next.type = "button";
     next.addEventListener("click", () => {
       if (activeStep === STEPS.length - 1) {
-        activeId = null;
-        renderList();
-        if (typeof root.focus === "function") root.focus();
+        returnToCaseList();
         return;
       }
       activeStep += 1;
@@ -1535,7 +1558,7 @@
       root.replaceChildren();
       const back = element("button", "Back to case list", "case-button case-button-secondary");
       back.type = "button";
-      back.addEventListener("click", () => { activeId = null; renderList(); if (typeof root.focus === "function") root.focus(); });
+      back.addEventListener("click", returnToCaseList);
       root.appendChild(back);
       const site = caseItem.patientContext && caseItem.patientContext.anatomicalSite || "Site not recorded";
       const caseType = caseItem.caseType ? String(caseItem.caseType).replaceAll("_", " ") : "case";
@@ -1581,7 +1604,6 @@
       else if (focusTarget === "pattern-open" && lastPatternPanel && typeof lastPatternPanel.focus === "function") lastPatternPanel.focus();
       else if (focusTarget === "pattern-close" && lastPatternButton && typeof lastPatternButton.focus === "function") lastPatternButton.focus();
       else if (focusTarget === "compare") {
-        const panel = region.querySelector ? null : null;
         const comparePanel = (function findPanel(node) {
           if (node && node.className === "case-compare-panel") return node;
           for (const child of (node && node.children) || []) {
@@ -1599,52 +1621,38 @@
     }
   }
 
-  function focusedFilterSnapshot() {
-    const active = document.activeElement;
-    if (!active || typeof active.getAttribute !== "function") return null;
-    const key = active.getAttribute("data-filter-key");
-    if (!key) return null;
-    const start = typeof active.selectionStart === "number" ? active.selectionStart : null;
-    const end = typeof active.selectionEnd === "number" ? active.selectionEnd : start;
-    return { key, start, end };
-  }
-
-  function restoreFilterFocus(snapshot) {
-    if (!snapshot) return;
-    let match = null;
-    function walk(node) {
-      if (!node || match) return;
-      if (typeof node.getAttribute === "function" && node.getAttribute("data-filter-key") === snapshot.key) {
-        match = node;
-        return;
-      }
-      const children = node.children || [];
-      for (let index = 0; index < children.length; index += 1) walk(children[index]);
-    }
-    walk(root);
-    if (!match || typeof match.focus !== "function") return;
-    match.focus();
-    if (snapshot.start == null || typeof match.setSelectionRange !== "function") return;
-    const length = String(match.value || "").length;
-    const start = Math.min(snapshot.start, length);
-    const end = Math.min(snapshot.end == null ? start : snapshot.end, length);
-    match.setSelectionRange(start, end);
+  function returnToCaseList() {
+    activeId = null;
+    renderList();
+    (listEntryButton || root).focus();
+    listEntryId = null;
   }
 
   function renderList() {
-    const filterFocus = focusedFilterSnapshot();
+    const teacherOpen = Boolean(teacherFilters?.open);
+    root.replaceChildren();
+    root.appendChild(element("p", registry.disclaimer || "Educational cases only. Not clinical decision support.", "case-inline-disclaimer"));
+    const reset = renderFilters(root, teacherOpen);
+    const status = element("p", undefined, "case-result-status");
+    status.setAttribute("role", "status");
+    status.setAttribute("aria-live", "polite");
+    root.appendChild(status);
+    const results = element("div");
+    root.appendChild(results);
+    caseListResults = { status, results };
+    renderListResults();
+    return reset;
+  }
+
+  function renderListResults() {
+    const { status, results } = caseListResults;
     try {
-      root.replaceChildren();
-      root.appendChild(element("p", registry.disclaimer || "Educational cases only. Not clinical decision support.", "case-inline-disclaimer"));
-      renderFilters(root);
+      results.replaceChildren();
+      listEntryButton = null;
       const list = cases();
-      const status = element("p", `${list.length} case${list.length === 1 ? "" : "s"} shown. Diagnosis stays hidden until you reveal it inside a case.`, "case-result-status");
-      status.setAttribute("role", "status");
-      status.setAttribute("aria-live", "polite");
-      root.appendChild(status);
+      status.textContent = `${list.length} case${list.length === 1 ? "" : "s"} shown. Diagnosis stays hidden until you reveal it inside a case.`;
       if (!list.length) {
-        root.appendChild(element("p", "No cases match the current filters.", "case-empty"));
-        restoreFilterFocus(filterFocus);
+        results.appendChild(element("p", "No cases match the current filters.", "case-empty"));
         return;
       }
       const grid = element("div", undefined, "case-grid");
@@ -1666,7 +1674,9 @@
         const open = element("button", "Start case", "case-button");
         open.type = "button";
         open.setAttribute("aria-label", `Start case: ${item.title || item.id}`);
+        if (item.id === listEntryId) listEntryButton = open;
         open.addEventListener("click", () => {
+          listEntryId = item.id;
           activeId = item.id;
           activeStep = 0;
           diagnosisRevealed = false;
@@ -1677,8 +1687,7 @@
         card.appendChild(open);
         grid.appendChild(card);
       });
-      root.appendChild(grid);
-      restoreFilterFocus(filterFocus);
+      results.appendChild(grid);
     } catch (error) {
       showLoadError("The case list could not be shown. No substitute clinical content was added.");
     }
