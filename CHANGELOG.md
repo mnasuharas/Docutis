@@ -4,6 +4,10 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
+### Learning path for reviewed keratinocyte records
+
+- Add a learning path on the actinic keratosis and basal cell carcinoma records. It links the published record, schematic, quiz item, German follow-up protocol and related cases, and shows each asset's own review status. Actinic keratosis states that no original schematic and no German follow-up protocol are published. No new clinical claims, cases or review decisions.
+
 ### Disposition coverage, melanoacanthoma mimic, nail and immunobullous catalogue
 - Extend post-reveal disposition teaching to all 43 core training cases via overlays (inline case text still wins).
 - Accept Anais Brasileiros de Dermatologia 2019 Figure 1 as `case-g31-01` (melanoacanthoma; case-text histopathology; scalp paired clinical-dermoscopic; CC BY 4.0). Pigmented facial LPLK remains missing under an allowed license.

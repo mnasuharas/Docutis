@@ -1693,7 +1693,18 @@
     }
   }
 
-  window.DOCUTIS_CASE_APP = Object.freeze({ renderList, renderDetail });
+  function openCase(id) {
+    const item = registry.cases.find(caseItem => caseItem.id === id);
+    if (!item) return false;
+    activeId = item.id;
+    activeStep = 0;
+    diagnosisRevealed = false;
+    zoomScales = Object.create(null);
+    renderDetail(item, "none");
+    return true;
+  }
+
+  window.DOCUTIS_CASE_APP = Object.freeze({ renderList, renderDetail, openCase });
   if (activeId) {
     const item = registry.cases.find(caseItem => caseItem.id === activeId);
     if (item) renderDetail(item, "step");

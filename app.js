@@ -587,7 +587,128 @@
     parent.appendChild(section);
   }
 
-  function addDetailNavigation(hasMedia, hasOncology) {
+  const learningPathDiseaseIds = new Set(["actinic-keratosis", "basal-cell-carcinoma"]);
+
+  function learningReview(assetType, id) {
+    const item = reviewUi?.asset(assetType, id);
+    const status = item?.status || "review required";
+    return {
+      label: reviewUi ? reviewUi.statusLabel(status) : "Clinical review pending",
+      reviewed: status === "clinician reviewed"
+    };
+  }
+
+  function learningStep(parent, step) {
+    const item = document.createElement("li");
+    item.className = "learning-path-step";
+    if (step.unavailable) {
+      appendTextElement(item, "p", `${step.label}. ${step.unavailable}`, "learning-path-missing");
+      parent.appendChild(item);
+      return;
+    }
+    const link = appendTextElement(item, "a", step.label, "learning-path-link");
+    link.href = step.href;
+    link.setAttribute("data-learning-kind", step.kind);
+    if (step.assetId) link.setAttribute("data-asset-id", step.assetId);
+    if (step.kind === "quiz" || step.kind === "follow-up" || step.kind === "case") {
+      link.addEventListener("click", event => {
+        if (event && typeof event.preventDefault === "function") event.preventDefault();
+        if (step.kind === "quiz") window.DOCUTIS_QUIZ_APP?.openQuestion?.(step.assetId);
+        if (step.kind === "follow-up") window.DOCUTIS_FOLLOW_UP_APP?.openProtocol?.(step.assetId);
+        if (step.kind === "case") window.DOCUTIS_CASE_APP?.openCase?.(step.assetId);
+        const target = document.getElementById(step.targetId);
+        if (target) {
+          if (target.tabIndex < 0) target.tabIndex = -1;
+          focusWithoutScrolling(target);
+          scrollElementIntoView(target);
+        }
+      });
+    }
+    const status = learningReview(step.assetType, step.assetId);
+    const badge = appendTextElement(item, "span", status.label, `learning-path-status${status.reviewed ? " is-reviewed" : " is-pending"}`);
+    badge.setAttribute("aria-label", `${step.label} review status: ${status.label}`);
+    parent.appendChild(item);
+  }
+
+  function addLearningPath(parent, disease) {
+    if (!learningPathDiseaseIds.has(disease.id)) return false;
+    const section = document.createElement("section");
+    section.className = "learning-path";
+    section.id = "detail-learning-path";
+    appendTextElement(section, "h3", "Learning path");
+    appendTextElement(section, "p", "These links open material already published for this record. Each item keeps its own review status. A reviewed record does not review the schematic, quiz, follow-up protocol or case. Cases keep the diagnosis hidden until you reveal it. This path is not a diagnostic or treatment sequence.", "learning-path-intro");
+    const list = document.createElement("ol");
+    list.className = "learning-path-list";
+
+    learningStep(list, {
+      kind: "record",
+      label: "Condition record",
+      href: "#detail-overview",
+      assetType: "disease",
+      assetId: disease.id
+    });
+
+    const mediaItems = (mediaData.items || []).filter(item => item.diseaseId === disease.id);
+    if (mediaItems.length) {
+      mediaItems.forEach(item => learningStep(list, {
+        kind: "schematic",
+        label: item.title || "Schematic",
+        href: "#detail-media",
+        assetType: "visual",
+        assetId: item.id
+      }));
+    } else {
+      learningStep(list, { label: "Schematic", unavailable: "No original schematic is published for this record." });
+    }
+
+    const questions = (window.DOCUTIS_QUIZ?.questions || []).filter(item => item.diseaseId === disease.id);
+    if (questions.length) {
+      questions.forEach(question => learningStep(list, {
+        kind: "quiz",
+        label: question.prompt,
+        href: "#quizModule",
+        targetId: "quizModule",
+        assetType: "quiz",
+        assetId: question.id
+      }));
+    } else {
+      learningStep(list, { label: "Quiz", unavailable: "No quiz item is published for this record." });
+    }
+
+    const protocols = (window.DOCUTIS_FOLLOW_UP_DATA?.protocols || []).filter(item => item.diseaseId === disease.id);
+    if (protocols.length) {
+      protocols.forEach(protocol => learningStep(list, {
+        kind: "follow-up",
+        label: `${protocol.jurisdictionLabel} follow-up`,
+        href: "#followUpModule",
+        targetId: "followUpModule",
+        assetType: "follow_up",
+        assetId: protocol.id
+      }));
+    } else {
+      learningStep(list, { label: "Follow-up protocol", unavailable: "No German follow-up protocol is published for this record." });
+    }
+
+    const cases = (window.DOCUTIS_CASES?.cases || []).filter(item => item.diseaseId === disease.id);
+    if (cases.length) {
+      cases.forEach(caseItem => learningStep(list, {
+        kind: "case",
+        label: caseItem.title || "Pilot case",
+        href: "#caseModule",
+        targetId: "caseModule",
+        assetType: "case",
+        assetId: caseItem.id
+      }));
+    } else {
+      learningStep(list, { label: "Case", unavailable: "No pilot case is published for this record." });
+    }
+
+    section.appendChild(list);
+    parent.appendChild(section);
+    return true;
+  }
+
+  function addDetailNavigation(hasMedia, hasOncology, hasLearningPath) {
     const navigation = document.createElement("nav");
     navigation.className = "detail-jump-nav";
     navigation.setAttribute("aria-label", "Condition detail sections");
@@ -600,6 +721,7 @@
       ["detail-follow-up", "Follow-up"],
       ["detail-coding", "Coding"]
     ];
+    if (hasLearningPath) links.unshift(["detail-learning-path", "Learning path"]);
     if (hasMedia) links.push(["detail-media", "Media"]);
     if (hasOncology) links.push(["detail-oncology", "Oncology"]);
     links.push(["detail-sources", "Sources"]);
@@ -678,9 +800,10 @@
       detailsElement.appendChild(workflow);
     }
 
+    const hasLearningPath = addLearningPath(detailsElement, disease);
     const hasMedia = (mediaData.items || []).some(item => item.diseaseId === disease.id);
     const hasOncology = Boolean(disease.clinicalProfile?.oncology);
-    addDetailNavigation(hasMedia, hasOncology);
+    addDetailNavigation(hasMedia, hasOncology, hasLearningPath);
     const content = document.createElement("div");
     content.className = "detail-content";
     addDetailSection(content, "Overview", disease.description, "detail-overview", "detail-section--wide");

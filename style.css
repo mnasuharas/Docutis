@@ -869,6 +869,74 @@ a:focus-visible {
   line-height: 1.55;
 }
 
+.learning-path {
+  margin: 0 0 var(--space-5);
+  padding: var(--space-4);
+  background: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.learning-path h3,
+.learning-path-intro {
+  margin: 0;
+}
+
+.learning-path h3 {
+  font-size: 1.05rem;
+}
+
+.learning-path-intro {
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.learning-path-list {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.learning-path-step {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.learning-path-link {
+  font-weight: 700;
+}
+
+.learning-path-link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.learning-path-status {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.learning-path-status.is-reviewed {
+  color: var(--color-success);
+}
+
+.learning-path-status.is-pending {
+  color: var(--color-warning);
+}
+
+.learning-path-missing {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
 .detail-jump-nav {
   position: sticky;
   top: 80px;
@@ -2309,6 +2377,7 @@ footer {
   .follow-up-controls select:focus,
   .follow-up-provenance summary:focus,
   .detail-jump-nav a:focus,
+  .learning-path-link:focus,
   .public-review-summary:focus,
   .nav-oss a:focus,
   .clinical-feedback-link:focus,

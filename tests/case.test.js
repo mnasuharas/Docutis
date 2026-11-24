@@ -249,6 +249,15 @@ test("case learning flow hides diagnosis until reveal and keeps five cases revie
   assert.match(view, /Review required/);
 });
 
+test("openCase starts at inspect with the diagnosis hidden", () => {
+  const harness = caseHarness(caseUiFiles);
+  assert.equal(harness.window.DOCUTIS_CASE_APP.openCase("case-bcc-nodular-dermoscopy"), true);
+  const view = caseText(harness.root);
+  assert.match(view, /Step 1 of 5: Inspect the image/);
+  assert.equal(view.includes("Nodular basal cell carcinoma"), false);
+  assert.equal(harness.window.DOCUTIS_CASE_APP.openCase("missing-case"), false);
+});
+
 test("missing case data shows an empty state instead of invented content", () => {
   const document = {
     activeElement: null,

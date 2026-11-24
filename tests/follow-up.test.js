@@ -239,6 +239,7 @@ function uiHarness(transform, includeStaging = false) {
   if (transform) context.window.DOCUTIS_FOLLOW_UP_DATA = transform(clone(context.window.DOCUTIS_FOLLOW_UP_DATA));
   if (includeStaging) context.window.DOCUTIS_MELANOMA_STAGING = require("../melanoma-staging");
   vm.runInNewContext(fs.readFileSync(path.join(root, "followup-app.js"), "utf8"), context);
+  document.elements.app = context.window.DOCUTIS_FOLLOW_UP_APP;
   return document.elements;
 }
 
@@ -267,6 +268,14 @@ test("follow-up UI updates disease, group and period with safe provenance links"
     assert.equal(link.target, "_blank");
     assert.equal(link.rel, "noopener noreferrer");
   }
+});
+
+test("openProtocol shows the requested basal cell carcinoma protocol", () => {
+  const elements = uiHarness();
+  assert.equal(elements.app.openProtocol("basal-cell-carcinoma-de"), true);
+  assert.match(textOf(elements.followUpResult), /Basal cell carcinoma/);
+  assert.match(textOf(elements.followUpResult), /Clinician reviewed/);
+  assert.equal(elements.app.openProtocol("not-a-protocol"), false);
 });
 
 test("follow-up UI safely distinguishes absent recommendations and clinician-reviewed BCC protocol", () => {

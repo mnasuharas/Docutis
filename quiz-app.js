@@ -163,6 +163,15 @@
     root.appendChild(form);
   }
 
-  window.DOCUTIS_QUIZ_APP = Object.freeze({ renderQuestion, renderResult });
+  function openQuestion(id) {
+    const next = quiz.questions.findIndex(item => item.id === id);
+    if (next < 0) return false;
+    index = next;
+    answered = false;
+    renderQuestion();
+    return true;
+  }
+
+  window.DOCUTIS_QUIZ_APP = Object.freeze({ renderQuestion, renderResult, openQuestion });
   renderQuestion();
 }());
