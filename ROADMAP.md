@@ -6,7 +6,7 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Goals 18 to 28 release
 
-The Goal 18 to 27 items and the Goal 28 training below were developed in stacked pull requests (#24 to #30 and #32 to #35) and released to `main` and the live site through one integration pull request (#36). No new version tag was created. The previous preview tag `v0.2.0-preview.1` (commit `c28f1de`) had 50 condition records, five pilot cases, and 28 review units (5 clinician reviewed, 23 review required). Current development branch has 55 cases, 25 true clinical-dermoscopic pairs, and 78 review units (5 clinician reviewed, 73 review required). Publication is not clinical approval. Clinical review is deferred for all Goal 18 to 27 content: no case or pattern from those Goals is clinician reviewed, and a consolidated physician review is planned after the curriculum matures.
+The Goal 18 to 27 items and the Goal 28 training below were developed in stacked pull requests (#24 to #30 and #32 to #35) and released to `main` and the live site through one integration pull request (#36). No new version tag was created. The previous preview tag `v0.2.0-preview.1` (commit `c28f1de`) had 50 condition records, five pilot cases, and 28 review units (5 clinician reviewed, 23 review required). Current development branch has 56 cases, 26 true clinical-dermoscopic pairs, and 79 review units (5 clinician reviewed, 74 review required). Publication is not clinical approval. Clinical review is deferred for all Goal 18 to 27 content: no case or pattern from those Goals is clinician reviewed, and a consolidated physician review is planned after the curriculum matures.
 
 ### Implemented
 

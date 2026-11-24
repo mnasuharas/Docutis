@@ -40,6 +40,18 @@
     other: "Other"
   });
 
+  const guidedPathways = Object.freeze([
+    { id: "cutaneous-melanoma", title: "Melanoma and its mimics", cases: ["case-g25-02", "case-g25-01", "case-g25-03", "case-g27-02", "case-g26-01"] },
+    { id: "cutaneous-squamous-cell-carcinoma", title: "Cutaneous SCC and keratinocytic mimics", cases: ["case-scc-ak-paraspinal", "case-g32-01", "case-ak-field-hand"] },
+    { id: "squamous-cell-carcinoma-in-situ", title: "Bowen disease and scaly plaque mimics", cases: ["case-g30-02", "case-g32-01", "case-scc-ak-paraspinal"] }
+  ]);
+  const guidedPrompts = Object.freeze([
+    ["leading", "Working diagnosis (or uncertain)"],
+    ["alternative", "Closest alternative and the finding that separates them"],
+    ["next", "Next step and what would change your decision"]
+  ]);
+  let guided = null;
+  let completedPathway = null;
   let activeId = null;
   let listEntryId = null;
   let listEntryButton = null;
@@ -672,7 +684,8 @@
     button.setAttribute("aria-describedby", "caseModalityStatus");
     lastDermoscopyButton = button;
     button.addEventListener("click", () => {
-      dermoscopyOpen[caseItem.id] = !dermoscopyOpen[caseItem.id];
+      dermoscopyOpen[caseItem.id] = !open;
+      if (guided && !open) guided.dermoscopySeen = true;
       renderDetail(caseItem, "dermoscopy");
     });
     parent.appendChild(button);
@@ -758,6 +771,11 @@
     const views = pairedImageViews(caseItem);
     if (!views.images.length) {
       parent.appendChild(element("p", "No image is recorded for this case. None was added.", "case-empty"));
+      return;
+    }
+    if (guided && isTruePair(caseItem) && !diagnosisRevealed) {
+      parent.appendChild(element("p", "Start with the clinical photograph. The dermoscopic view opens in Observe.", "case-kind-note"));
+      views.clinical.forEach(image => renderZoomableImage(parent, caseItem, image));
       return;
     }
     if (renderPairStage(parent, caseItem)) return;
@@ -928,7 +946,9 @@
     if (isTruePair(caseItem)) renderPairStage(parent, caseItem);
     renderObservationPrompts(parent, caseItem);
     const describe = element("label", undefined, "case-filter");
-    describe.appendChild(element("span", "Describe what you see before you read a diagnosis"));
+    describe.appendChild(element("span", guided
+      ? "Describe the visible findings, where they are and how certain you are"
+      : "Describe what you see before you read a diagnosis"));
     const area = document.createElement("textarea");
     area.value = descriptions[caseItem.id] || "";
     area.setAttribute("aria-label", "Your description before the diagnosis");
@@ -964,15 +984,58 @@
     parent.appendChild(interpretationSection);
   }
 
-  function renderDifferential(parent, caseItem) {
-    parent.appendChild(element("p", "These are differentials already stored for this case. Opening the list is optional. It is not a scored quiz and it does not confirm a diagnosis. Order is a teaching rank, not a probability.", "case-step-intro"));
-    if (isTruePair(caseItem)) {
+  function renderGuidedResponse(parent) {
+    const response = element("fieldset", undefined, "guided-case-response");
+    response.appendChild(element("legend", "Record your reasoning before the reveal"));
+    response.appendChild(element("p", "Use the teaching images only. These answers stay in the current tab and are not scored.", "case-kind-note"));
+    guidedPrompts.forEach(([key, text]) => {
+      const label = element("label", text, "case-filter");
+      const field = document.createElement("textarea");
+      field.rows = 2;
+      field.maxLength = 600;
+      field.value = guided.answers[key] || "";
+      field.addEventListener("input", () => { guided.answers[key] = field.value; });
+      label.appendChild(field);
+      response.appendChild(label);
+    });
+    parent.appendChild(response);
+  }
+
+  function renderGuidedDebrief(parent, caseItem) {
+    const debrief = element("section", undefined, "case-teaching");
+    debrief.appendChild(element("h5", "Compare your reasoning with the source"));
+    const answers = element("dl");
+    guidedPrompts.forEach(([key, text]) => {
+      answers.appendChild(element("dt", text));
+      answers.appendChild(element("dd", guided.answers[key] || "No answer recorded"));
+    });
+    debrief.appendChild(answers);
+    const disposition = caseItem.dispositionTeaching;
+    if (disposition?.summary) {
+      debrief.appendChild(element("h5", "Educational next step for this case"));
+      debrief.appendChild(element("p", disposition.summary));
+      const example = asList(disposition.options).find(option => option.id === disposition.preferredEducationalId);
+      if (example) debrief.appendChild(element("p", example.rationale));
+      if (disposition.limitation) debrief.appendChild(element("p", disposition.limitation, "case-kind-note"));
+    } else {
+      debrief.appendChild(element("p", "No verified management decision is recorded. Compare your proposed next step with the source evidence below.", "case-kind-note"));
+    }
+    parent.appendChild(debrief);
+  }
+
+  function renderDifferential(parent, caseItem, { debrief = false } = {}) {
+    if (!debrief) parent.appendChild(element("p", "These are differentials already stored for this case. Opening the list is optional. It is not a scored quiz and it does not confirm a diagnosis. Order is a teaching rank, not a probability.", "case-step-intro"));
+    if (!debrief && isTruePair(caseItem)) {
       renderPairStage(parent, caseItem);
       if (!dermoscopyContentVisible(caseItem)) {
         parent.appendChild(element("p", "This is the initial differential from the clinical photograph. No score is stored. The dermoscopic frame is still hidden.", "case-kind-note"));
       } else if (!diagnosisRevealed && caseItem.pairedModality && caseItem.pairedModality.reasoningImpact) {
         parent.appendChild(element("p", caseItem.pairedModality.reasoningImpact));
       }
+    }
+    if (guided && !debrief) {
+      renderGuidedResponse(parent);
+      if (!diagnosisRevealed) return;
     }
     const differentials = asList(caseItem.differentials);
     if (!differentials.length) {
@@ -1085,7 +1148,7 @@
         patternFocusId = null;
         renderDetail(other, "step");
       });
-      panel.appendChild(open);
+      if (!guided) panel.appendChild(open);
       section.appendChild(panel);
     });
     parent.appendChild(section);
@@ -1270,7 +1333,7 @@
         patternFocusId = null;
         renderDetail(otherCase, "step");
       });
-      panel.appendChild(open);
+      if (!guided) panel.appendChild(open);
     });
   }
 
@@ -1440,6 +1503,10 @@
       parent.appendChild(jump);
       return;
     }
+    if (guided) {
+      renderGuidedDebrief(parent, caseItem);
+      renderDifferential(parent, caseItem, { debrief: true });
+    }
     renderObserve(parent, caseItem);
     renderPatternStudy(parent, caseItem);
     const teachingPoints = asList(caseItem.teachingPoints);
@@ -1493,6 +1560,7 @@
       button.type = "button";
       button.setAttribute("aria-label", `Step ${index + 1} of ${STEPS.length}: ${step.name}`);
       if (index === activeStep) button.setAttribute("aria-current", "step");
+      if (guided && (index > guided.furthestStep || (index === STEPS.length - 1 && !diagnosisRevealed))) button.disabled = true;
       button.addEventListener("click", () => {
         activeStep = index;
         renderDetail(caseItem, "step");
@@ -1513,20 +1581,50 @@
       activeStep = Math.max(0, activeStep - 1);
       renderDetail(caseItem, "step");
     });
-    const next = element("button", activeStep === STEPS.length - 1 ? "Back to case list" : "Next step", "case-button");
+    const lastStep = activeStep === STEPS.length - 1;
+    const nextLabel = lastStep && guided
+      ? (guided.index < guided.items.length - 1 ? "Start next comparison case" : "Finish learning path")
+      : (lastStep ? "Back to case list" : "Next step");
+    const next = element("button", nextLabel, "case-button");
+    const notice = element("p", "", "case-kind-note");
+    notice.setAttribute("role", "status");
     next.type = "button";
     next.addEventListener("click", () => {
-      if (activeStep === STEPS.length - 1) {
+      if (guided && !diagnosisRevealed) {
+        if (activeStep === 1 && !descriptions[caseItem.id]?.trim()) {
+          notice.textContent = "Record your observations before continuing.";
+          return;
+        }
+        if (activeStep === 2 && (guidedPrompts.some(([key]) => !guided.answers[key]?.trim()) ||
+            (isTruePair(caseItem) && !guided.dermoscopySeen))) {
+          notice.textContent = isTruePair(caseItem) && !guided.dermoscopySeen
+            ? "Open the dermoscopic image before advancing to the reveal."
+            : "Complete the reasoning fields before advancing to the reveal.";
+          return;
+        }
+        if (activeStep === 3 || lastStep) {
+          notice.textContent = "Reveal the source diagnosis before continuing.";
+          return;
+        }
+      }
+      if (lastStep) {
+        if (guided && guided.index < guided.items.length - 1) {
+          guided.index += 1;
+          startGuidedCase("step");
+          return;
+        }
+        if (guided) completedPathway = guided.pathway.title;
         returnToCaseList();
         return;
       }
       activeStep += 1;
+      if (guided) guided.furthestStep = Math.max(guided.furthestStep, activeStep);
       renderDetail(caseItem, "step");
     });
     bar.appendChild(previous);
     bar.appendChild(next);
     const entry = entryFor(caseItem);
-    if (entry && activeStep === STEPS.length - 1) {
+    if (!guided && entry && lastStep) {
       const ordered = curriculumEntries().slice().sort((a, b) => a.order - b.order);
       const index = ordered.findIndex(item => item.caseId === caseItem.id);
       const nextEntry = index >= 0 ? ordered[index + 1] : null;
@@ -1546,6 +1644,7 @@
       }
     }
     parent.appendChild(bar);
+    if (guided) parent.appendChild(notice);
   }
 
   function renderDetail(caseItem, focusTarget) {
@@ -1560,6 +1659,7 @@
       back.type = "button";
       back.addEventListener("click", returnToCaseList);
       root.appendChild(back);
+      if (guided) root.appendChild(element("p", `${guided.pathway.title} · Case ${guided.index + 1} of ${guided.items.length}`, "case-meta"));
       const site = caseItem.patientContext && caseItem.patientContext.anatomicalSite || "Site not recorded";
       const caseType = caseItem.caseType ? String(caseItem.caseType).replaceAll("_", " ") : "case";
       const lesson = teachingTypeLabel(caseItem);
@@ -1622,9 +1722,12 @@
   }
 
   function returnToCaseList() {
+    const pathwayId = guided?.pathway.id;
+    guided = null;
     activeId = null;
     renderList();
-    (listEntryButton || root).focus();
+    const pathwayButton = pathwayId && document.getElementById(`guided-path-${pathwayId}`);
+    (pathwayButton || listEntryButton || root).focus();
     listEntryId = null;
   }
 
@@ -1632,6 +1735,7 @@
     const teacherOpen = Boolean(teacherFilters?.open);
     root.replaceChildren();
     root.appendChild(element("p", registry.disclaimer || "Educational cases only. Not clinical decision support.", "case-inline-disclaimer"));
+    renderGuidedPathways(root);
     const reset = renderFilters(root, teacherOpen);
     const status = element("p", undefined, "case-result-status");
     status.setAttribute("role", "status");
@@ -1693,18 +1797,72 @@
     }
   }
 
-  function openCase(id) {
-    const item = registry.cases.find(caseItem => caseItem.id === id);
-    if (!item) return false;
+  function renderGuidedPathways(parent) {
+    const entry = element("section", undefined, "case-teaching");
+    entry.appendChild(element("h3", "Guided skin cancer cases"));
+    entry.appendChild(element("p", "Work through a short series of unknown lesions, including mimics. Record your reasoning, then compare it with the source diagnosis and its evidence.", "case-kind-note"));
+    if (completedPathway) {
+      const completion = element("p", `Completed: ${completedPathway}.`);
+      completion.setAttribute("role", "status");
+      entry.appendChild(completion);
+    }
+    const actions = element("div", undefined, "case-pager");
+    guidedPathways.forEach(pathway => {
+      if (!pathway.cases.every(id => registry.cases.some(item => item.id === id))) return;
+      const launch = element("button", pathway.title, "case-button case-button-secondary");
+      launch.id = `guided-path-${pathway.id}`;
+      launch.type = "button";
+      launch.addEventListener("click", () => openPathway(pathway.id, "step"));
+      actions.appendChild(launch);
+    });
+    entry.appendChild(actions);
+    parent.appendChild(entry);
+  }
+
+  function initializeCase(item) {
     activeId = item.id;
     activeStep = 0;
     diagnosisRevealed = false;
+    openComparisonId = null;
     zoomScales = Object.create(null);
+    patternFocusId = null;
+  }
+
+  function startGuidedCase(focusTarget) {
+    const item = guided.items[guided.index];
+    initializeCase(item);
+    guided.answers = Object.create(null);
+    guided.furthestStep = 0;
+    guided.dermoscopySeen = false;
+    delete dermoscopyOpen[item.id];
+    delete descriptions[item.id];
+    delete impressions[item.id];
+    delete hintsOpen[item.id];
+    renderDetail(item, focusTarget);
+  }
+
+  function openPathway(id, focusTarget = "none") {
+    const pathway = guidedPathways.find(path => path.id === id);
+    if (!pathway) return false;
+    const items = pathway.cases.map(caseId => registry.cases.find(item => item.id === caseId));
+    if (items.some(item => !item)) return false;
+    completedPathway = null;
+    listEntryId = null;
+    guided = { pathway, items, index: 0 };
+    startGuidedCase(focusTarget);
+    return true;
+  }
+
+  function openCase(id) {
+    const item = registry.cases.find(caseItem => caseItem.id === id);
+    if (!item) return false;
+    guided = null;
+    initializeCase(item);
     renderDetail(item, "none");
     return true;
   }
 
-  window.DOCUTIS_CASE_APP = Object.freeze({ renderList, renderDetail, openCase });
+  window.DOCUTIS_CASE_APP = Object.freeze({ renderList, renderDetail, openCase, openPathway });
   if (activeId) {
     const item = registry.cases.find(caseItem => caseItem.id === activeId);
     if (item) renderDetail(item, "step");

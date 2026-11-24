@@ -2823,3 +2823,20 @@ footer {
     flex-basis: 100%;
   }
 }
+
+
+.guided-case-response {
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+  margin: var(--space-4) 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.guided-case-response textarea {
+  width: 100%;
+  min-width: 0;
+  padding: var(--space-2);
+  font: inherit;
+}

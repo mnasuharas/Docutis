@@ -4715,6 +4715,63 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
         "safety-notice",
         "provenance"
       ]
+    },
+    {
+      "id": "case-g32-01",
+      "assetType": "case",
+      "title": "An oval pink plaque with central crust",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:79cd60f9f426540ee2eabfdeb85caf2b7fb5a3419693cbf5a1bc12ce1478e4f8",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/diagnostics14161799"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Scurtu, Dumitrescu and Simionescu, Diagnostics 2024, Figure 1 (PMC11353497)",
+          "organization": "Scurtu, Dumitrescu and Simionescu, Diagnostics 2024, Figure 1 panel a, https://doi.org/10.3390/diagnostics14161799, CC BY 4.0. Cropped by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/diagnostics14161799",
+          "metadataCheckedAt": "2026-11-24"
+        },
+        {
+          "title": "Scurtu, Dumitrescu and Simionescu, Diagnostics 2024, Figure 1 (PMC11353497)",
+          "organization": "Scurtu, Dumitrescu and Simionescu, Diagnostics 2024, Figure 1 panel b, https://doi.org/10.3390/diagnostics14161799, CC BY 4.0. Cropped by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/diagnostics14161799",
+          "metadataCheckedAt": "2026-11-24"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
     }
   ]
 });

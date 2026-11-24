@@ -4,6 +4,11 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
+### Guided skin cancer cases
+
+- Add guided clinical reasoning paths for melanoma, cutaneous SCC and Bowen disease. Learners record a differential and next step before the diagnosis is revealed, then compare with existing teaching and source evidence.
+- Add a Bowen disease example with paired clinical and dermoscopic images and lesion-specific histopathology in the caption. Asset reuse and cropping are recorded in the acquisition ledger. All cases remain review required.
+
 ### Learning path for reviewed keratinocyte records
 
 - Add a learning path on the actinic keratosis and basal cell carcinoma records. It links the published record, schematic, quiz item, German follow-up protocol and related cases, and shows each asset's own review status. Actinic keratosis states that no original schematic and no German follow-up protocol are published. No new clinical claims, cases or review decisions.

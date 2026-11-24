@@ -167,7 +167,7 @@ const caseUiFiles = ["data.js", "case-data.js", "review-status.js", "oss-feedbac
 test("case learning flow hides diagnosis until reveal and keeps five cases review required", () => {
   const harness = caseHarness(caseUiFiles);
   const cases = harness.window.DOCUTIS_CASES.cases;
-  assert.equal(cases.length, 55);
+  assert.equal(cases.length, 56);
   assert.ok(cases.every(item => item.reviewStatus === "clinician review required" && item.clinicalReview === null));
   const listText = caseText(harness.root);
   for (const item of cases) assert.equal(listText.includes(item.diagnosisLabel), false);
@@ -175,7 +175,7 @@ test("case learning flow hides diagnosis until reveal and keeps five cases revie
   for (const name of diseaseNames) assert.equal(listText.includes(name), false, `case list leaked disease name: ${name}`);
   assert.doesNotMatch(listText, /Linked condition/);
   assert.match(listText, /Review required/);
-  assert.match(listText, /55 cases shown/);
+  assert.match(listText, /56 cases shown/);
 
   const start = caseFind(harness.root, node => node.tagName === "BUTTON" && node.getAttribute("aria-label") === "Start case: Large plantar pigmented macule")[0];
   start.dispatch("click");
@@ -295,7 +295,7 @@ test("case UI keeps zoom, reveal and noscript guards without a scored quiz", () 
     assert.equal(current.activeDecisionId, published.activeDecisionId);
   }
   const caseAssets = built.assets.filter(item => item.assetType === "case");
-  assert.equal(caseAssets.length, 55);
+  assert.equal(caseAssets.length, 56);
   assert.ok(caseAssets.every(item => item.status === "review required"));
   assert.ok(caseAssets.every(item => {
     const published = statusFile.assets.find(asset => asset.assetType === "case" && asset.id === item.id);
@@ -460,7 +460,7 @@ test("case filters stay in place and returning from a paired case restores focus
   modality.dispatch("change");
   assert.equal(document.activeElement, modality);
   assert.equal(filter("modality"), modality);
-  assert.match(caseText(root), /25 cases shown/);
+  assert.match(caseText(root), /26 cases shown/);
   const site = filter("anatomicalSite");
   site.value = "back of ";
   site.dispatch("input");
@@ -479,7 +479,7 @@ test("case filters stay in place and returning from a paired case restores focus
 
   const reset = find(node => node.textContent === "Reset case filters");
   reset.dispatch("click");
-  assert.match(caseText(root), /55 cases shown/);
+  assert.match(caseText(root), /56 cases shown/);
   assert.equal(document.activeElement.textContent, "Reset case filters");
 });
 
@@ -628,7 +628,7 @@ function controlLeakSurface(node) {
 test("diagnosis-bearing source links stay off interactive controls until reveal", () => {
   const harness = caseHarness(caseUiFiles);
   const cases = harness.window.DOCUTIS_CASES.cases;
-  assert.equal(cases.length, 55);
+  assert.equal(cases.length, 56);
   const filenameFragments = [
     "Photography_of_a_large_acral_lentiginous_melanoma",
     "Dermatoskopie_eines_nodulären_Basalzellkarzinoms",
@@ -750,8 +750,8 @@ test("pre-reveal case images use diagnosis-neutral public paths", () => {
     tab.dispatch("click");
   }
 
-  assert.equal(cases.length, 55);
-  const pairedImageCases = new Set(["case-g21-08", "case-g24-01", "case-g24-02", "case-g25-01", "case-g25-02", "case-g25-03", "case-g25-04", "case-g25-05", "case-g25-06", "case-g26-01", "case-g26-02", "case-g26-03", "case-g26-04", "case-g26-05", "case-g26-06", "case-g26-07", "case-g27-01", "case-g27-02", "case-g27-03", "case-g27-04", "case-g27-05", "case-g27-06", "case-g30-01", "case-g30-02", "case-g31-01"]);
+  assert.equal(cases.length, 56);
+  const pairedImageCases = new Set(["case-g21-08", "case-g24-01", "case-g24-02", "case-g25-01", "case-g25-02", "case-g25-03", "case-g25-04", "case-g25-05", "case-g25-06", "case-g26-01", "case-g26-02", "case-g26-03", "case-g26-04", "case-g26-05", "case-g26-06", "case-g26-07", "case-g27-01", "case-g27-02", "case-g27-03", "case-g27-04", "case-g27-05", "case-g27-06", "case-g30-01", "case-g30-02", "case-g31-01", "case-g32-01"]);
   for (const item of cases) {
     assert.equal(item.images.length, pairedImageCases.has(item.id) ? 2 : 1, item.id);
     if (!governedSrc[item.id]) continue;
@@ -836,4 +836,45 @@ test("new academy images use diagnosis-neutral paths before and after reveal", (
     assert.equal(still.src, item.images[0].src);
     assert.equal(still.alt.includes(item.diagnosisLabel), false);
   }
+});
+
+test("guided Bowen cases require reasoning and the paired view before revealing", () => {
+  const { root, window } = caseHarness(caseUiFiles);
+  const find = predicate => caseFind(root, predicate)[0];
+  const button = label => find(node => node.tagName === "BUTTON" && node.textContent === label);
+  const buttons = ["Melanoma and its mimics", "Cutaneous SCC and keratinocytic mimics", "Bowen disease and scaly plaque mimics"];
+  for (const label of buttons) assert.ok(button(label), label);
+  assert.equal(window.DOCUTIS_CASE_APP.openPathway("missing"), false);
+  button(buttons[2]).dispatch("click");
+  assert.match(caseText(root), /Case 1 of 3/);
+  assert.doesNotMatch(caseText(root), /Recorded diagnosis:|Histopathology confirmed lichen planus-like keratosis/);
+  assert.equal(button("Show dermoscopy"), undefined);
+  const revealTab = find(node => node.getAttribute?.("aria-label") === "Step 4 of 5: Reveal");
+  assert.equal(revealTab.disabled, true);
+  button("Next step").dispatch("click");
+  button("Next step").dispatch("click");
+  assert.match(caseText(root), /Record your observations before continuing/);
+  const observation = find(node => node.tagName === "TEXTAREA");
+  observation.value = "Pink plaque with white scale";
+  observation.dispatch("input");
+  button("Next step").dispatch("click");
+  const completeReasoning = () => caseFind(root, node => node.tagName === "TEXTAREA").forEach((field, i) => {
+    field.value = ["Uncertain", "Consider a mimic", "Identify the missing evidence"][i];
+    field.dispatch("input");
+  });
+  completeReasoning();
+  button("Next step").dispatch("click");
+  assert.match(caseText(root), /Open the dermoscopic image/);
+  button("Show dermoscopy").dispatch("click");
+  button("Next step").dispatch("click");
+  button("Next step").dispatch("click");
+  assert.match(caseText(root), /Reveal the source diagnosis before continuing/);
+  button("Reveal diagnosis").dispatch("click");
+  button("Next step").dispatch("click");
+  assert.match(caseText(root), /Compare your reasoning with the source/);
+  assert.match(caseText(root), /Identify the missing evidence/);
+  button("Start next comparison case").dispatch("click");
+  assert.match(caseText(root), /Case 2 of 3/);
+  assert.match(caseText(root), /An oval pink plaque with central crust/);
+  assert.doesNotMatch(caseText(root), /Recorded diagnosis:|Identify the missing evidence/);
 });

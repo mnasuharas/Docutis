@@ -3464,6 +3464,65 @@
         dateChecked: "2026-11-19",
         integrated: false,
         caseId: null
+      }),
+      row({
+        "goal": 32,
+        "partnerUrl": null,
+        "integrated": true,
+        "caseId": "case-g32-01",
+        "dateChecked": "2026-11-24",
+        "thirdPartyExclusion": false,
+        "localizationReadiness": "localization_ready",
+        "extraction": [
+          {
+            "asset": "assets/media/cases/case-56-clinical.jpg",
+            "imageType": "clinical",
+            "figure": "Figure 1",
+            "panel": "a",
+            "sourceFile": "diagnostics-14-01799-g001.png, publisher Figure 1",
+            "sourceSha256": "31bf3a570d5984038fb8e72c1f1ff1a7e2950629c77ce33fb8128f195fddaffc",
+            "box": [
+              34,
+              25,
+              1117,
+              980
+            ],
+            "method": "Crop with Pillow and export as JPEG quality 88 without metadata",
+            "assetSha256": "ddca62231bf1abbeb0fa2d843aaf46c9d8b6d90324fb9af6174bcf2b133f4a63"
+          },
+          {
+            "asset": "assets/media/cases/case-56-dermoscopy.jpg",
+            "imageType": "dermoscopy",
+            "figure": "Figure 1",
+            "panel": "b",
+            "sourceFile": "diagnostics-14-01799-g001.png, publisher Figure 1",
+            "sourceSha256": "31bf3a570d5984038fb8e72c1f1ff1a7e2950629c77ce33fb8128f195fddaffc",
+            "box": [
+              1123,
+              25,
+              2689,
+              980
+            ],
+            "method": "Crop with Pillow and export as JPEG quality 88 without metadata",
+            "assetSha256": "d302948b8eac2a12905569e8e95c9c7eb6d6e8ecc27f9abf88eef08f0a14675e"
+          }
+        ],
+        "id": "cand-g32-bowen-pair",
+        "diagnosisLabel": "Squamous cell carcinoma in situ (Bowen disease)",
+        "sourceLabel": "Scurtu et al., Diagnostics 2024, Figure 1 a–b",
+        "sourceUrl": "https://doi.org/10.3390/diagnostics14161799",
+        "author": "Scurtu, Dumitrescu and Simionescu",
+        "license": "CC BY 4.0",
+        "modality": "clinical_and_dermoscopy",
+        "pairedStatus": "same_lesion_confirmed",
+        "site": "Skin, site not reported in the figure caption",
+        "verificationStrength": "histopathology_in_figure_caption",
+        "verificationMethod": "histopathology",
+        "histopathology": "present_figure_caption",
+        "dermoscopicTeachingValue": "Crust and a few peripheral vessels. The figure caption reports pathology and the invasive clinical mimic.",
+        "specialSiteValue": "none",
+        "status": "accepted",
+        "reason": "Figure 1 ties the two panels to the same lesion and reports its pathology. Publisher pixels and CC BY 4.0 license verified; no third-party figure credit."
       })
     ])
   });
