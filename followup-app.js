@@ -194,9 +194,106 @@
     renderPeriods(announce);
   }
 
+  function bindMelanomaStaging() {
+    const draft = document.getElementById("melanomaStaging");
+    const staging = window.DOCUTIS_MELANOMA_STAGING;
+    if (!draft || !staging) return;
+
+    const get = suffix => document.getElementById(`melanomaStaging${suffix}`);
+    const form = get("Form");
+    const method = get("Method");
+    const stageResult = get("Result");
+    const followUpButton = get("FollowUp");
+    let groupToOpen = null;
+
+    function readCategory() {
+      if (method.value === "category") return { category: get("T").value };
+      return staging.categoryFromBreslow(get("Thickness").value, get("Ulceration").value);
+    }
+
+    function refreshFields() {
+      const manual = method.value === "category";
+      get("TField").hidden = !manual;
+      get("ThicknessField").hidden = manual;
+      get("UlcerationField").hidden = manual;
+      const rField = get("RField");
+      rField.hidden = readCategory()?.category !== "T4b";
+      if (rField.hidden) get("R").value = "";
+      stageResult.replaceChildren();
+      followUpButton.hidden = true;
+      groupToOpen = null;
+    }
+
+    form.addEventListener("input", refreshFields);
+    form.addEventListener("change", refreshFields);
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      refreshFields();
+      const t = readCategory();
+      if (!t?.category) {
+        append(stageResult, "p", method.value === "category"
+          ? "Bitte eine T-Kategorie wählen."
+          : "Bitte die vollständig messbare Breslow-Dicke in mm als positive Zahl mit maximal zwei Nachkommastellen eingeben.");
+        return;
+      }
+
+      const assessment = staging.assessMelanoma({
+        category: t.category,
+        nodal: get("N").value,
+        distant: get("M").value,
+        resection: get("R").value
+      });
+      const thickness = t.roundedThickness ? ` · Breslow für AJCC 8: ${t.roundedThickness.replace(".", ",")} mm` : "";
+      append(stageResult, "p", `T-Kategorie: ${t.category}${thickness}`, "melanoma-staging-category");
+      if (assessment.kind === "outside-scope") {
+        append(stageResult, "p", "Regionäre oder Fernmetastasen liegen außerhalb dieser Stadienhilfe (0–IIC).");
+      } else if (assessment.kind === "t-incomplete") {
+        append(stageResult, "p", "Gesamtstadium nicht ableitbar. Bitte die genaue T-Unterkategorie oder den vollständigen Histologiebefund prüfen.");
+      } else if (assessment.kind === "nm-incomplete") {
+        const missing = [!get("N").value && "N-Status", !get("M").value && "M-Status"].filter(Boolean).join(" und ");
+        append(stageResult, "p", `Gesamtstadium nicht ableitbar. Fehlende Angabe: ${missing}.`);
+      } else {
+        append(stageResult, "p", `Klinische Stadiengruppe bei N0/cM0: ${assessment.clinicalStage}.`);
+        append(stageResult, "p", assessment.pathologicStage
+          ? `Pathologische Stadiengruppe: ${assessment.pathologicStage}.`
+          : "Pathologische Stadiengruppe nicht ableitbar. Für diese T-Kategorie ist pN0 erforderlich.");
+        if (assessment.pathologicStage && assessment.pathologicStage !== assessment.clinicalStage) {
+          append(stageResult, "p", "Bei T1b unterscheiden sich die klinische und die pathologische Stadiengruppe. Für die Nachsorge das ärztlich dokumentierte Stadium im Feld darunter auswählen.");
+        } else if (assessment.pathologicStage === "IIC" && !assessment.followUpGroup) {
+          append(stageResult, "p", "Die S3-Nachsorgegruppe für IIC setzt eine dokumentierte R0-Resektion voraus.");
+        }
+        groupToOpen = selectedProtocol().groups.find(group => group.id === assessment.followUpGroup) || null;
+        if (groupToOpen) {
+          followUpButton.textContent = `Nachsorgegruppe ansehen (${groupToOpen.label})`;
+          followUpButton.hidden = false;
+        }
+      }
+    });
+
+    followUpButton.addEventListener("click", () => {
+      if (!groupToOpen || selectedProtocol().id !== "cutaneous-melanoma-de") return;
+      groupSelect.value = groupToOpen.id;
+      renderPeriods();
+      groupSelect.focus();
+    });
+
+    function syncVisibility() {
+      draft.hidden = selectedProtocol().id !== "cutaneous-melanoma-de";
+      if (draft.hidden) {
+        form.reset();
+        draft.open = false;
+      }
+      refreshFields();
+    }
+
+    diseaseSelect.addEventListener("change", syncVisibility);
+    syncVisibility();
+  }
+
   populate(diseaseSelect, data.protocols);
   diseaseSelect.addEventListener("change", () => renderGroups());
   groupSelect.addEventListener("change", () => renderPeriods());
   periodSelect.addEventListener("change", () => renderResult());
   renderGroups(false);
+  bindMelanomaStaging();
 }());

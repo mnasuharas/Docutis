@@ -145,6 +145,78 @@
       <label for="followUpDisease">Disease
         <select id="followUpDisease"></select>
       </label>
+    </div>
+    <details id="melanomaStaging" class="melanoma-staging js-only" lang="de" hidden>
+      <summary>Stadium aus Befund ermitteln</summary>
+      <p id="melanomaStagingBasis">Kutanes Melanom · AJCC 8 · Stadien 0–IIC · Ärztliche Prüfung ausstehend.</p>
+      <form id="melanomaStagingForm" autocomplete="off" aria-describedby="melanomaStagingBasis">
+        <div class="melanoma-staging-fields">
+          <label for="melanomaStagingMethod">Angabe im Befund
+            <select id="melanomaStagingMethod">
+              <option value="category">T-Kategorie (z. B. pT1b)</option>
+              <option value="breslow">Breslow-Dicke und Ulzeration</option>
+            </select>
+          </label>
+          <label for="melanomaStagingT" id="melanomaStagingTField">T-Kategorie
+            <select id="melanomaStagingT">
+              <option value="">Bitte wählen</option>
+              <option value="Tis">pTis (in situ)</option>
+              <option value="T1">pT1 ohne a/b</option>
+              <option value="T1a">pT1a</option>
+              <option value="T1b">pT1b</option>
+              <option value="T2">pT2 ohne a/b</option>
+              <option value="T2a">pT2a</option>
+              <option value="T2b">pT2b</option>
+              <option value="T3">pT3 ohne a/b</option>
+              <option value="T3a">pT3a</option>
+              <option value="T3b">pT3b</option>
+              <option value="T4">pT4 ohne a/b</option>
+              <option value="T4a">pT4a</option>
+              <option value="T4b">pT4b</option>
+              <option value="TX">pTX (nicht beurteilbar)</option>
+              <option value="T0">T0 (kein nachweisbarer Primärtumor)</option>
+            </select>
+          </label>
+          <label for="melanomaStagingThickness" id="melanomaStagingThicknessField" hidden>Breslow-Dicke (mm)
+            <input id="melanomaStagingThickness" type="text" inputmode="decimal" placeholder="z. B. 0,9">
+          </label>
+          <label for="melanomaStagingUlceration" id="melanomaStagingUlcerationField" hidden>Histologische Ulzeration
+            <select id="melanomaStagingUlceration">
+              <option value="">Unbekannt</option>
+              <option value="no">Nein</option>
+              <option value="yes">Ja</option>
+            </select>
+          </label>
+          <label for="melanomaStagingN">Regionärer Status (N)
+            <select id="melanomaStagingN">
+              <option value="">Unbekannt / unklar</option>
+              <option value="cN0">cN0 · klinisch negativ</option>
+              <option value="pN0">pN0 · pathologisch negativ</option>
+              <option value="positive">N+ · regionäre Metastasierung</option>
+            </select>
+          </label>
+          <label for="melanomaStagingM">Fernmetastasen (M)
+            <select id="melanomaStagingM">
+              <option value="">Unbekannt / unklar</option>
+              <option value="cM0">cM0 · kein Hinweis</option>
+              <option value="positive">M1 · nachgewiesen</option>
+            </select>
+          </label>
+          <label for="melanomaStagingR" id="melanomaStagingRField" hidden>Resektionsstatus (für IIC-Nachsorge)
+            <select id="melanomaStagingR">
+              <option value="">Unbekannt / kein R0</option>
+              <option value="r0">R0 dokumentiert</option>
+            </select>
+          </label>
+        </div>
+        <p class="follow-up-note">N+ umfasst auch Satelliten-, Mikrosatelliten- und In-transit-Metastasen. Bei abweichender oder unbekannter TNM-Version den Befund separat prüfen.</p>
+        <button type="submit" class="filter-button">Stadium anzeigen</button>
+      </form>
+      <div id="melanomaStagingResult" role="status" aria-live="polite" aria-atomic="true"></div>
+      <button id="melanomaStagingFollowUp" type="button" class="filter-button" hidden>Nachsorgegruppe ansehen</button>
+      <p class="follow-up-note"><a href="https://doi.org/10.3322/caac.21409">AJCC 8 · Tabellen 2, 5 und 6</a> · <a href="https://www.leitlinienprogramm-onkologie.de/leitlinien/melanom/">Deutsche S3-Leitlinie Melanom · Version 3.3</a></p>
+    </details>
+    <div class="follow-up-controls js-only">
       <label for="followUpGroup">Stage / risk group
         <select id="followUpGroup"></select>
       </label>
@@ -280,6 +352,7 @@
 <script src="oss-feedback.js"></script>
 <script src="review-ui.js"></script>
 <script src="app.js"></script>
+<script src="melanoma-staging.js"></script>
 <script src="followup-app.js"></script>
 <script src="quiz-app.js"></script>
 <script src="case-app.js"></script>
