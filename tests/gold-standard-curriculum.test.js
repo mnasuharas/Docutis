@@ -43,7 +43,8 @@ test("histopathology on the ledger and on the case agree and cannot be upgraded"
   for (const row of goal25Rows().filter(item => item.status === "accepted")) {
     const truth = cases.get(row.caseId).diagnosticGroundTruth;
     assert.equal(truth.confirmationMethod, "histopathology", row.id);
-    assert.equal(truth.histopathologySource, row.histopathology === "present_figure_caption" ? "figure_caption" : "article_methods");
+    const expectedSource = row.histopathology === "present_figure_caption" ? "figure_caption" : row.histopathology === "present_case_text" ? "case_text" : "article_methods";
+    assert.equal(truth.histopathologySource, expectedSource);
     assert.match(truth.confirmationNotes, /histopatholog|histolog/i);
   }
   const accepted = goal25Rows().find(row => row.caseId === "case-g25-01");
@@ -104,7 +105,8 @@ test("pattern-rich needs a visible dermoscopic diagnostic structure and equivoca
   const data = loadCaseData();
   const patterns = loadPatternData();
   const rich = patternRichPairIds(data, patterns);
-  assert.equal(JSON.stringify(rich.filter(id => !/^case-g2[67]-/.test(id))), JSON.stringify(["case-g21-08", ...goal25]));
+  assert.equal(JSON.stringify(rich.filter(id => !/^case-g2[67]-|^case-g30-/.test(id))), JSON.stringify(["case-g21-08", ...goal25]));
+  assert.ok(rich.includes("case-g30-01"));
   assert.equal(JSON.stringify(equivocalPairIds(data)), JSON.stringify(["case-g24-01", "case-g24-02"]));
   for (const id of equivocalPairIds(data)) assert.equal(rich.includes(id), false);
   const weakened = clone(data);
@@ -167,7 +169,7 @@ test("canonical patterns are reused before new ones are added, and artifacts sta
   assert.ok(scale.occurrences.some(row => row.caseId === "case-g25-01"));
   assert.equal(scale.countsTowardDermoscopyCoverage, false);
   const gray = audit.patterns.find(item => item.id === "perifollicular-gray-dots");
-  assert.equal(JSON.stringify(gray.occurrences.map(row => [row.caseId, row.certainty])), JSON.stringify([["case-g25-05", "probably"], ["case-g25-06", "not_visible"]]));
+  assert.equal(JSON.stringify(gray.occurrences.map(row => [row.caseId, row.certainty])), JSON.stringify([["case-g25-05", "probably"], ["case-g25-06", "not_visible"], ["case-g30-01", "not_visible"]]));
 });
 
 test("scalp is not counted as face, and special-site pairs are named honestly", () => {
@@ -175,7 +177,7 @@ test("scalp is not counted as face, and special-site pairs are named honestly", 
   assert.equal(specialSite("Face, periorbital region"), "face");
   assert.equal(specialSite("Left heel, plantar sole"), "acral");
   const metrics = buildPairedMetrics();
-  assert.equal(JSON.stringify(metrics.specialSiteTruePairs.filter(id => !/^case-g2[67]-/.test(id))), JSON.stringify(["case-g24-01", "case-g25-04", "case-g25-05", "case-g25-06"]));
+  assert.equal(JSON.stringify(metrics.specialSiteTruePairs.filter(id => !/^case-g2[67]-/.test(id))), JSON.stringify(["case-g24-01", "case-g25-04", "case-g25-05", "case-g25-06", "case-g30-01"]));
   assert.equal(metrics.specialSiteTruePairs.includes("case-g25-03"), false);
 });
 

@@ -43,7 +43,7 @@ test("teaching types, quality gate, skills, and pilot payloads stay compatible",
   assert.deepEqual(gate.gaps, []);
   assert.equal(data.curriculum.qualityGate.kind, "qualitative");
   assert.equal(data.curriculum.skills.length, 35);
-  assert.equal(data.cases.length, 52);
+  assert.equal(data.cases.length, 54);
   assert.equal(data.curriculum.entries.length, 49);
   const types = data.curriculum.entries.map(entry => entry.teachingType);
   assert.ok(types.every(type => ["teaching", "reasoning", "expert-challenge"].includes(type)));

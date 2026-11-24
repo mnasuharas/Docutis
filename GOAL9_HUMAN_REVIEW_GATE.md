@@ -12926,7 +12926,7 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 
 ## case: A faint brown patch near the eye (`case-g25-05`)
 
-- **Exact fingerprint:** `sha256-v1:1566a31603b6cf3eb0bf3637f21ab6340885d6beaa536446a60d116e349070da`
+- **Exact fingerprint:** `sha256-v1:be320a5f52341fe91dc4ea23a6ba48241042df8aa0219fd44225fd215bbe93f8`
 - **Schema version:** 1
 - **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
 - **Mapped evidence sources:**
@@ -13146,7 +13146,8 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
     }
   ],
   "compareWith": [
-    "cmp-g25-face"
+    "cmp-g25-face",
+    "cmp-g30-pak-lm"
   ],
   "pairedModality": {
     "clinicalObservation": "A faint brown patch sits on sun-damaged skin of the side of the face near the hairline and the outer corner of the eye. Redness and fine vessels are around it.",
@@ -17226,6 +17227,574 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
   "localization": null,
   "clinicalAction": "After reveal, compare with other solitary brown papules in the library. Do not treat from this case.",
   "managementBrief": "No management category is stored. The source label is not a Docutis recommendation. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}
+```
+
+</details>
+
+- Verdict:
+- Reviewed sections:
+- Evidence sources actually checked:
+- Approved exact replacement wording (if any):
+- Required corrections / rejected claims:
+- Public reviewer notes:
+
+## case: A brown macule near the eye (`case-g30-01`)
+
+- **Exact fingerprint:** `sha256-v1:2a235e56f03fa11d9548e4a5ba14ad9c0d473ff3b41cf4f54a69ab77f1d7f18b`
+- **Schema version:** 1
+- **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
+- **Mapped evidence sources:**
+  - https://doi.org/10.3390/diagnostics14222571
+- **Automated warnings:**
+  - Confirm image provenance/license, observations vs interpretations separation, differentials, diagnostic confirmation method honesty, and that AI interpretation is not treated as clinician review.
+  - Automated source attachment and schema validation are not evidence of clinical approval.
+- **AI-generated proposal:** No clinical wording change has been applied. Review the current text below and either approve it unchanged, approve exact replacement wording, request changes, reject an unsupported claim, or defer.
+
+<details>
+<summary>Current exact content</summary>
+
+```json
+{
+  "id": "case-g30-01",
+  "slug": "g30-periorbital-brown-macule-reticular",
+  "title": "A brown macule near the eye",
+  "diagnosisLabel": "Pigmented actinic keratosis",
+  "diseaseId": "actinic-keratosis",
+  "category": "Keratinocyte carcinomas and precursors",
+  "educationalLevel": "intermediate",
+  "caseType": "clinical_dermoscopic",
+  "patientContext": {
+    "ageBand": "50 years, per the figure caption",
+    "sex": "Male, per the figure caption",
+    "anatomicalSite": "Face, periorbital region, cheek below the eye",
+    "presentationNotes": "The source figure shows atypical pigmented facial lesions of the periorbital region with a similar clinical look. The caption gives a 12 mm maximum diameter. No history of change is given."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-11-19",
+      "metadataCheckedAt": "2026-11-19",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g30-01a",
+      "type": "clinical",
+      "src": "assets/media/cases/case-53-clinical.jpg",
+      "dimensions": {
+        "width": 676,
+        "height": 507
+      },
+      "alt": "Clinical photograph of a cheek below a privacy-masked eye with a flat brown macule on wrinkled sun-damaged skin. No diagnosis is included.",
+      "caption": "Clinical photograph of the periorbital cheek. The source label stays hidden until reveal. A privacy mask covers the eye.",
+      "source": "Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via MDPI open-access PDF",
+      "sourceUrl": "https://doi.org/10.3390/diagnostics14222571",
+      "creator": "Giovanni Rubegni and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Rubegni and coauthors, Diagnostics 2024, Figure 1 panel a, doi:10.3390/diagnostics14222571. CC BY 4.0. Extracted from the MDPI open-access PDF figure embed by Docutis.",
+      "modificationsNotes": "Panel a of Figure 1 was taken from the MDPI open-access PDF diagnostics-14-02571.pdf (source sha256 8d1e2a2ee30d3da8509d3c4123450b1f77d52d2cd8d080ae311748e94b041ef9), embedded figure file page2_img0.png (source sha256 b4adb51ad453f92cf44550fabb754832060c35aff9d02022988c6360e49f3f55), at pixel box left 0, top 0, right 676, bottom 507 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 e05534ee45dc9fe079d3b1fdc56a7d69c517bc72331cc66f721691fe2e51dd1e. No color change, no annotation, and no other edit. The source already includes a privacy mask over the eye.",
+      "consentBasis": "The article states that all patients signed informed written consent and approved sharing of study data. The article is distributed under CC BY 4.0, with no third-party credit on the figure. The crop shows the cheek with a privacy mask over the eye."
+    },
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-11-19",
+      "metadataCheckedAt": "2026-11-19",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g30-01b",
+      "type": "dermoscopy",
+      "src": "assets/media/cases/case-53-dermoscopy.jpg",
+      "dimensions": {
+        "width": 673,
+        "height": 505
+      },
+      "alt": "Polarized dermoscopic view of homogeneous brown reticular pigment broken by pale follicular openings on erythematous sun-damaged skin. No diagnosis is included.",
+      "caption": "Polarized dermoscopic view. The source pairs it with the clinical frame as corresponding images.",
+      "source": "Rubegni G, Cartocci A, Tognetti L, Orione M, Gagliano C, Bacci T, et al. Diagnostics 2024, via MDPI open-access PDF",
+      "sourceUrl": "https://doi.org/10.3390/diagnostics14222571",
+      "creator": "Giovanni Rubegni and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Rubegni and coauthors, Diagnostics 2024, Figure 1 panel b, doi:10.3390/diagnostics14222571. CC BY 4.0. Extracted from the MDPI open-access PDF figure embed by Docutis.",
+      "modificationsNotes": "Panel b of Figure 1 was taken from the MDPI open-access PDF diagnostics-14-02571.pdf (source sha256 8d1e2a2ee30d3da8509d3c4123450b1f77d52d2cd8d080ae311748e94b041ef9), embedded figure file page2_img1.png (source sha256 c4b617521a00c4a9c990869fdd75bf7662a7341b53d29ab5d1ac5ba3e26031b5), at pixel box left 0, top 0, right 673, bottom 505 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 9cc7192bfe8d48da1db17e3d0cbe2b0398b0decabcc50e3386800e7cfdf6d5c2. No color change, no annotation, and no other edit.",
+      "consentBasis": "The article states that all patients signed informed written consent and approved sharing of study data. The article is distributed under CC BY 4.0, with no third-party credit on the figure. The field shows skin only."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Pigmented actinic keratosis (histopathology stated in the article methods)",
+    "confirmationMethod": "histopathology",
+    "histopathologySource": "article_methods",
+    "confirmationNotes": "The Figure 1 caption of Rubegni and coauthors (Diagnostics 2024, doi:10.3390/diagnostics14222571), checked 2026-11-19, names this lesion a pigmented actinic keratosis in a 50-year-old male. The methods say the figure lesions come from the 80 study lesions and that the histological diagnosis was blinded until after the evaluation. The histopathology statement is study-level.",
+    "confidenceNote": "Study-level histopathology statement. Docutis did not see a slide. Not a Docutis clinician review."
+  },
+  "observations": [
+    {
+      "id": "obs-g30-01a",
+      "kind": "observation",
+      "modality": "clinical",
+      "text": "A flat brown macule sits on wrinkled, sun-damaged cheek skin below a privacy-masked eye. Smaller freckle-like spots surround it."
+    },
+    {
+      "id": "obs-g30-01b",
+      "kind": "observation",
+      "modality": "dermoscopy",
+      "text": "Homogeneous brown reticular pigment is broken by many pale follicular openings. Gray dots around the openings are not seen. Fine vessels cross erythematous background skin."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g30-01a",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g30-01a"
+      ],
+      "text": "A brown periorbital macule on photoaged skin is a look that lentigo maligna and pigmented actinic keratosis share. The clinical frame alone does not separate them."
+    },
+    {
+      "id": "int-g30-01b",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g30-01a",
+        "obs-g30-01b"
+      ],
+      "text": "The pale openings make a facial pseudo-network. Homogeneous reticular pigment that spares the openings, without gray perifollicular dots in this frame, is consistent with the source pigmented actinic keratosis label and is not a clearance by itself."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Pigmented actinic keratosis",
+      "supportingFeatures": [
+        "Homogeneous reticular brown pigment sparing follicular openings",
+        "No gray dots around follicles in this frame",
+        "The source names this lesion and reports study-level histology"
+      ],
+      "contradictingFeatures": [
+        "Clinical look overlaps lentigo maligna"
+      ],
+      "teachingDistinction": "The keratinocytic source name comes from study-level histology. Missing gray supports it in this frame only."
+    },
+    {
+      "diagnosis": "Lentigo maligna",
+      "supportingFeatures": [
+        "Flat brown periorbital macule with a facial pseudo-network",
+        "Shared clinical look with the stored lentigo maligna case from the same figure family"
+      ],
+      "contradictingFeatures": [
+        "Gray dots around follicles are not seen in this frame"
+      ],
+      "teachingDistinction": "Lentigo maligna remains a fair concern until the follicles are checked and histology is considered."
+    },
+    {
+      "diagnosis": "Solar lentigo",
+      "supportingFeatures": [
+        "Brown facial pigment on sun-damaged skin"
+      ],
+      "contradictingFeatures": [
+        "The source caption for this panel names pigmented actinic keratosis rather than solar lentigo"
+      ],
+      "teachingDistinction": "Solar lentigo is in the facial differential; the stored solar lentigo panel from the same figure teaches a related benign look."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g30-01a",
+      "title": "Notice first",
+      "text": "Name the brown periorbital macule, then check what surrounds the follicular openings."
+    },
+    {
+      "id": "tp-g30-01b",
+      "title": "What the source says",
+      "text": "The source names pigmented actinic keratosis and reports study-level histology. One benign facial result does not clear the next patch."
+    }
+  ],
+  "observationPrompts": [
+    "What color surrounds the pale follicular openings?",
+    "Are gray dots clustered around the openings in this frame?"
+  ],
+  "hints": [
+    "Compare the follicles with the facial lentigo maligna case that shows gray dots."
+  ],
+  "closestMimic": {
+    "name": "Lentigo maligna",
+    "whyClosest": "A flat brown periorbital macule with a facial pseudo-network is also the look of lentigo maligna. The stored facial lentigo maligna case shows gray dots around follicles."
+  },
+  "patterns": [
+    {
+      "id": "pat-g30-01-pseudo",
+      "label": "Homogeneous brown reticular pigment broken by pale openings",
+      "modality": "dermoscopy",
+      "specificityNote": "Pale follicular openings break homogeneous brown pigment into a net-like look. The same background appears on facial melanoma in situ, so it does not separate them alone.",
+      "certainty": "clearly_visible",
+      "weight": "supportive"
+    },
+    {
+      "id": "pat-g30-01-gray",
+      "label": "Gray dots around follicles not seen",
+      "modality": "dermoscopy",
+      "specificityNote": "No gray dots cluster around the openings in this frame. That absence is consistent with the source diagnosis and is not a clearance.",
+      "certainty": "not_visible",
+      "weight": "supportive"
+    },
+    {
+      "id": "pat-g30-01-mask",
+      "label": "Privacy mask over the eye",
+      "modality": "none",
+      "specificityNote": "A white privacy mask covers the eye in the clinical frame. It is a source privacy edit, not a skin finding.",
+      "certainty": "clearly_visible",
+      "weight": "conflicting"
+    }
+  ],
+  "synthesis": "The source names this periorbital lesion a pigmented actinic keratosis and reports study-level histology. The clinical frame is a flat brown cheek macule. The dermoscopic frame shows a homogeneous reticular pseudo-network without gray dots around the follicular openings.",
+  "evidenceWeighting": "The reticular pseudo-network is clearly visible but supportive only, because facial lentigo maligna can share it. The absence of gray perifollicular dots is supportive for the source diagnosis in this frame. The study-level histology statement is the confirmation.",
+  "diagnosticTrap": "Treating a facial pseudo-network as proof of lentigo maligna, or treating one missing gray clue as reassurance for the next brown facial patch.",
+  "mentorNote": "This fills the long-standing pigmented actinic keratosis gap beside the facial lentigo maligna and solar lentigo panels from the same teaching figure family.",
+  "takeHomeRule": "On facial skin, a pseudo-network is a background. Check the follicles for gray before you accept a keratinocytic or melanocytic name, and keep histopathology in mind when in doubt.",
+  "whyNot": [
+    {
+      "mimic": "Lentigo maligna",
+      "text": "The facial lentigo maligna case shows gray dots around follicles. This frame does not. That difference supports the source diagnosis here and is not a rule."
+    },
+    {
+      "mimic": "Solar lentigo",
+      "text": "Solar lentigo remains in the differential. The source caption for this panel names pigmented actinic keratosis."
+    }
+  ],
+  "compareWith": [
+    "cmp-g30-pak-lm"
+  ],
+  "pairedModality": {
+    "clinicalObservation": "A flat brown macule sits on wrinkled, sun-damaged cheek skin below a privacy-masked eye. Smaller freckle-like spots surround it.",
+    "dermoscopicObservation": "Homogeneous brown reticular pigment is broken by many pale follicular openings. Gray dots around the openings are not seen. Fine vessels cross erythematous background skin.",
+    "addedValue": "The dermoscopic frame shows what surrounds the follicular openings. The clinical frame shows only a brown macule.",
+    "reasoningImpact": "The reading moves from a broad periorbital brown-macule differential to a homogeneous reticular pattern without gray perifollicular dots. That supports the source label in this frame and keeps the facial melanoma-in-situ trap visible.",
+    "limits": "The source pairs clinical and dermoscopic images by corresponding panel letters. The histology statement is study-level. The clinical crop includes a privacy mask over the eye.",
+    "informationGain": "dermoscopy_adds_support",
+    "informationGainNote": "Educational label only. The dermoscopic frame adds a reticular pattern without gray dots around follicles. That supports the source label in this frame; it is not reassurance for another lesion. Not a validated metric and not a probability.",
+    "comparison": {
+      "clinicalClue": "Flat brown periorbital macule on photoaged skin.",
+      "dermoscopicClue": "Homogeneous reticular pigment sparing follicular openings without gray dots.",
+      "addedInformation": "What surrounds the follicles is only visible on the dermoscopic frame.",
+      "diagnosticConflict": "The clinical look is shared with lentigo maligna.",
+      "teachingRule": "A missing clue is weaker evidence than a present one."
+    }
+  },
+  "modalityIntegration": "The first frame is the clinical close-up of a brown cheek macule. The second frame is the corresponding polarized dermoscopic view and shows homogeneous reticular pigment broken by pale openings without gray dots around them.",
+  "dispositionTeaching": {
+    "summary": "Educational next-step language for a brown facial macule that overlaps lentigo maligna until follicles and histology are considered.",
+    "options": [
+      {
+        "id": "further-dermoscopy",
+        "label": "Further dermoscopy",
+        "rationale": "Dermoscopy is already stored here. In practice, careful follicular assessment often comes before accepting a facial brown macule as routine."
+      },
+      {
+        "id": "biopsy-excision-consideration",
+        "label": "Biopsy or excision consideration",
+        "rationale": "Histopathology settled the source label at study level. Competing facial diagnoses often need tissue when doubt remains."
+      },
+      {
+        "id": "monitor",
+        "label": "Monitor",
+        "rationale": "Monitoring can be discussed only when examination and dermoscopy are reassuring. This teaching frame is not that decision."
+      }
+    ],
+    "preferredEducationalId": "biopsy-excision-consideration",
+    "sourceNote": "Teaching derived from the study-level histology statement and the facial overlap with lentigo maligna, not from a guideline interval.",
+    "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "localization": null,
+  "clinicalAction": "After reveal, compare with the facial lentigo maligna case from the same figure family. Open the Docutis actinic keratosis record for precursor context. Do not treat from this case.",
+  "managementBrief": "No management category is stored. A keratinocytic source label is not reassurance for another facial patch. This brief is not a protocol and remains review required.",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}
+```
+
+</details>
+
+- Verdict:
+- Reviewed sections:
+- Evidence sources actually checked:
+- Approved exact replacement wording (if any):
+- Required corrections / rejected claims:
+- Public reviewer notes:
+
+## case: A pink scaly plaque on the back (`case-g30-02`)
+
+- **Exact fingerprint:** `sha256-v1:957f40f63c01a030e4ebfdfe7ebbff44f6f9cc8ca773f79ab0360fcec6f93986`
+- **Schema version:** 1
+- **Reviewable sections:** `images`, `observations`, `interpretations`, `dermoscopic-features`, `differentials`, `diagnostic-ground-truth`, `teaching-points`, `safety-notice`, `provenance`
+- **Mapped evidence sources:**
+  - https://doi.org/10.7759/cureus.83630
+- **Automated warnings:**
+  - Confirm image provenance/license, observations vs interpretations separation, differentials, diagnostic confirmation method honesty, and that AI interpretation is not treated as clinician review.
+  - Automated source attachment and schema validation are not evidence of clinical approval.
+- **AI-generated proposal:** No clinical wording change has been applied. Review the current text below and either approve it unchanged, approve exact replacement wording, request changes, reject an unsupported claim, or defer.
+
+<details>
+<summary>Current exact content</summary>
+
+```json
+{
+  "id": "case-g30-02",
+  "slug": "g30-back-pink-scaly-plaque",
+  "title": "A pink scaly plaque on the back",
+  "diagnosisLabel": "Lichen planus-like keratosis",
+  "diseaseId": "lichen-planus-like-keratosis",
+  "category": "Benign keratinocytic",
+  "educationalLevel": "intermediate",
+  "caseType": "clinical_dermoscopic",
+  "patientContext": {
+    "ageBand": "82 years, per the case text",
+    "sex": "Male, per the case text",
+    "anatomicalSite": "Mid back",
+    "presentationNotes": "The Cureus case report describes a solitary erythematous, scaly lesion on the mid back. Punch histopathology confirmed solitary lichen planus keratosis. Spontaneous regression was later observed."
+  },
+  "images": [
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-11-19",
+      "metadataCheckedAt": "2026-11-19",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g30-02a",
+      "type": "clinical",
+      "src": "assets/media/cases/case-54-clinical.jpg",
+      "dimensions": {
+        "width": 339,
+        "height": 327
+      },
+      "alt": "Clinical close-up of a round pink plaque with white scale on light skin of the trunk. No diagnosis is included.",
+      "caption": "Clinical close-up of a pink scaly plaque. The source label stays hidden until reveal.",
+      "source": "Billah M and coauthors, Cureus 2025, via PubMed Central (PMC12142276)",
+      "sourceUrl": "https://doi.org/10.7759/cureus.83630",
+      "creator": "Mansour Billah and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Billah and coauthors, Cureus 2025, Figure 1 panel a, doi:10.7759/cureus.83630. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel a of Figure 1 was cropped from the PMC figure file cureus-0017-00000083630-i01.jpg (PMC12142276), source sha256 3715374d6a909a0ea53a8d4845bd2684f0444b18580fd5a2471f9410ec8c1c92, at pixel box left 28, top 28, right 367, bottom 355 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 1ffab12cdbdb99ab2cb2ed235a58c9c79e94cbe0723792d44565f6ea86587742. Panel letter cropped away. No color change and no Docutis annotation.",
+      "consentBasis": "The article is distributed under CC BY 4.0. The crop is a skin close-up without a face."
+    },
+    {
+      "attributionRequired": true,
+      "modificationStatus": "cropped",
+      "accessDate": "2026-11-19",
+      "metadataCheckedAt": "2026-11-19",
+      "sourceVerificationStatus": "verified",
+      "patientIdentifiable": false,
+      "id": "img-g30-02b",
+      "type": "dermoscopy",
+      "src": "assets/media/cases/case-54-dermoscopy.jpg",
+      "dimensions": {
+        "width": 339,
+        "height": 327
+      },
+      "alt": "Dermoscopic view of a pink-red field with white scale, fine vessels, and shiny white structures. Colored arrows from the source figure remain visible. No diagnosis is included.",
+      "caption": "Dermoscopic view of the same lesion. Colored arrows are present in the source figure. Tick marks are a scale.",
+      "source": "Billah M and coauthors, Cureus 2025, via PubMed Central (PMC12142276)",
+      "sourceUrl": "https://doi.org/10.7759/cureus.83630",
+      "creator": "Mansour Billah and coauthors",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Billah and coauthors, Cureus 2025, Figure 1 panel b, doi:10.7759/cureus.83630. CC BY 4.0. Cropped from the composite figure by Docutis.",
+      "modificationsNotes": "Panel b of Figure 1 was cropped from the PMC figure file cureus-0017-00000083630-i01.jpg (PMC12142276), source sha256 3715374d6a909a0ea53a8d4845bd2684f0444b18580fd5a2471f9410ec8c1c92, at pixel box left 401, top 28, right 740, bottom 355 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 2efc38c9a52232e90c9bce4188dfbff8cb382354156404042d2ee075eef80d4a. Panel letter cropped away. Source-authored colored arrows remain. No Docutis annotation was added.",
+      "consentBasis": "The article is distributed under CC BY 4.0. The field shows skin only."
+    }
+  ],
+  "diagnosticGroundTruth": {
+    "confirmedDiagnosis": "Solitary lichen planus keratosis (lichen planus-like keratosis)",
+    "confirmationMethod": "histopathology",
+    "histopathologySource": "case_text",
+    "confirmationNotes": "The Cureus case text of Billah and coauthors (doi:10.7759/cureus.83630), checked 2026-11-19 via PMC12142276, states that punch biopsy with histopathological examination confirmed solitary lichen planus keratosis for this mid-back lesion.",
+    "confidenceNote": "Case-text histopathology statement. Docutis did not see a slide. Not a Docutis clinician review."
+  },
+  "observations": [
+    {
+      "id": "obs-g30-02a",
+      "kind": "observation",
+      "modality": "clinical",
+      "text": "A round pink plaque with white scale sits on light trunk skin. The border looks sharp."
+    },
+    {
+      "id": "obs-g30-02b",
+      "kind": "observation",
+      "modality": "dermoscopy",
+      "text": "A pink-red field shows white scale, fine vessels, and shiny white structures. Colored arrows from the source figure point to several of those findings. Tick marks run along the edge."
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "int-g30-02a",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g30-02a"
+      ],
+      "text": "A solitary pink scaly plaque can look like superficial basal cell carcinoma, Bowen disease, or an inflammatory patch. The clinical frame alone does not settle the label."
+    },
+    {
+      "id": "int-g30-02b",
+      "kind": "interpretation",
+      "relatedObservationIds": [
+        "obs-g30-02a",
+        "obs-g30-02b"
+      ],
+      "text": "Scale, vessels, and shiny white structures keep a keratinocytic malignancy in the differential. Histopathology, not a dermoscopic pathognomonic sign, confirmed lichen planus-like keratosis in the source."
+    }
+  ],
+  "differentials": [
+    {
+      "diagnosis": "Lichen planus-like keratosis",
+      "supportingFeatures": [
+        "Solitary pink scaly plaque",
+        "Scale and shiny white structures on dermoscopy",
+        "Punch histopathology in the case text"
+      ],
+      "contradictingFeatures": [
+        "No pathognomonic dermoscopic feature is claimed"
+      ],
+      "teachingDistinction": "The benign name comes from histopathology. Dermoscopy alone did not prove it."
+    },
+    {
+      "diagnosis": "Superficial basal cell carcinoma",
+      "supportingFeatures": [
+        "Pink plaque with vessels and shiny white structures",
+        "The source notes BCC was the initial clinical consideration"
+      ],
+      "contradictingFeatures": [
+        "Histopathology confirmed lichen planus-like keratosis"
+      ],
+      "teachingDistinction": "BCC was a fair working concern until tissue settled the label."
+    },
+    {
+      "diagnosis": "Squamous cell carcinoma in situ / Bowen disease",
+      "supportingFeatures": [
+        "Pink scaly plaque on adult skin"
+      ],
+      "contradictingFeatures": [
+        "Histopathology confirmed lichen planus-like keratosis"
+      ],
+      "teachingDistinction": "A scaly pink plaque still needs an honest look for keratinocytic neoplasia."
+    }
+  ],
+  "teachingPoints": [
+    {
+      "id": "tp-g30-02a",
+      "title": "Notice first",
+      "text": "Name colour, scale, and that this is a solitary plaque before reaching for a malignant label."
+    },
+    {
+      "id": "tp-g30-02b",
+      "title": "Limit",
+      "text": "Dermoscopy kept BCC plausible. Histopathology confirmed lichen planus-like keratosis."
+    }
+  ],
+  "observationPrompts": [
+    "Is the plaque pigmented or pink?",
+    "Which dermoscopic findings are scale or vessels rather than a network?"
+  ],
+  "hints": [
+    "The source authors initially considered basal cell carcinoma before biopsy."
+  ],
+  "closestMimic": {
+    "name": "Superficial basal cell carcinoma",
+    "whyClosest": "A pink plaque with vessels and shiny white structures is a common BCC look. The source text says BCC was the initial diagnosis considered."
+  },
+  "patterns": [
+    {
+      "id": "pat-g30-02-scale",
+      "label": "White scale on a pink plaque",
+      "modality": "clinical",
+      "specificityNote": "White scale is clearly visible on a pink plaque. Scale is common and does not prove lichen planus-like keratosis.",
+      "certainty": "clearly_visible",
+      "weight": "supportive"
+    },
+    {
+      "id": "pat-g30-02-vessels",
+      "label": "Fine vessels on a pink-red dermoscopic field",
+      "modality": "dermoscopy",
+      "specificityNote": "Fine vessels are visible. Vessel morphology alone did not prove basal cell carcinoma here.",
+      "certainty": "clearly_visible",
+      "weight": "supportive"
+    },
+    {
+      "id": "pat-g30-02-arrows",
+      "label": "Colored arrows from the source figure",
+      "modality": "none",
+      "specificityNote": "Colored arrows are teaching marks from the source figure, not skin structures.",
+      "certainty": "clearly_visible",
+      "weight": "conflicting"
+    }
+  ],
+  "synthesis": "The Cureus case labels this mid-back pink scaly plaque a histopathology-confirmed lichen planus-like keratosis. Clinically and dermoscopically it mimicked superficial basal cell carcinoma until biopsy.",
+  "evidenceWeighting": "Scale and vessels are clearly visible and supportive only. The case-text histopathology statement is the confirmation. Source arrows are artifacts.",
+  "diagnosticTrap": "Calling every pink plaque with vessels a basal cell carcinoma, or treating one histopathology-confirmed LPLK as a dermoscopic rule.",
+  "mentorNote": "This is the first lichen planus-like keratosis case in Docutis. It is pink and truncal rather than a pigmented facial LPLK, and it still closes a named mimic gap.",
+  "takeHomeRule": "A solitary pink scaly plaque can be lichen planus-like keratosis or keratinocytic neoplasia. When dermoscopy keeps malignancy plausible, histopathology settles the label.",
+  "whyNot": [
+    {
+      "mimic": "Superficial basal cell carcinoma",
+      "text": "Vessels and shiny white structures made BCC fair. Histopathology did not confirm BCC in this lesion."
+    },
+    {
+      "mimic": "Bowen disease",
+      "text": "A pink scaly plaque can be squamous cell carcinoma in situ. Tissue, not the clinical look alone, separated them here."
+    }
+  ],
+  "compareWith": [],
+  "pairedModality": {
+    "clinicalObservation": "A round pink plaque with white scale sits on light trunk skin. The border looks sharp.",
+    "dermoscopicObservation": "A pink-red field shows white scale, fine vessels, and shiny white structures. Colored arrows from the source figure point to several of those findings.",
+    "addedValue": "The dermoscopic frame shows vessels and shiny white structures that keep BCC in the differential. The clinical frame shows a pink scaly plaque.",
+    "reasoningImpact": "The reading moves from a nonspecific pink plaque to a vessel-and-scale pattern that still needs histopathology.",
+    "limits": "Source-authored colored arrows remain on the dermoscopic crop. The site is mid back, not face. This is not a pigmented facial LPLK example.",
+    "informationGain": "dermoscopy_changes_leading_differential",
+    "informationGainNote": "Educational label only. Dermoscopy kept malignancy plausible rather than proving a benign keratinocytic label. Not a validated metric and not a probability.",
+    "comparison": {
+      "clinicalClue": "Round pink scaly plaque.",
+      "dermoscopicClue": "Scale, fine vessels, and shiny white structures.",
+      "addedInformation": "Vessel and shiny-white detail is only clear on the dermoscopic frame.",
+      "diagnosticConflict": "The same look can be superficial basal cell carcinoma.",
+      "teachingRule": "Histopathology settles pink plaques when dermoscopy cannot."
+    }
+  },
+  "modalityIntegration": "The first frame is the clinical pink scaly plaque. The second frame is the corresponding dermoscopic view with scale, vessels, and shiny white structures.",
+  "dispositionTeaching": {
+    "summary": "Educational next-step language for a pink scaly plaque that still looked like basal cell carcinoma on dermoscopy.",
+    "options": [
+      {
+        "id": "biopsy-excision-consideration",
+        "label": "Biopsy or excision consideration",
+        "rationale": "The source needed punch histopathology to confirm lichen planus-like keratosis after BCC was considered."
+      },
+      {
+        "id": "further-dermoscopy",
+        "label": "Further dermoscopy",
+        "rationale": "Dermoscopy is already stored. It kept malignancy plausible rather than settling the label."
+      },
+      {
+        "id": "monitor",
+        "label": "Monitor",
+        "rationale": "The source later observed regression, but monitoring was not a substitute for the biopsy that made the diagnosis."
+      }
+    ],
+    "preferredEducationalId": "biopsy-excision-consideration",
+    "sourceNote": "Teaching derived from the case-text biopsy confirmation and the initial BCC concern, not from a guideline interval.",
+    "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+  },
+  "recordedScreeningDecision": null,
+  "annotations": [],
+  "dermoscopicFeatures": [],
+  "localization": null,
+  "clinicalAction": "After reveal, compare with pink vascular keratinocytic cases in the library. Do not treat from this case.",
+  "managementBrief": "No management category is stored. The source biopsy result is not a Docutis recommendation. This brief is not a protocol and remains review required.",
   "reviewStatus": "clinician review required",
   "clinicalReview": null
 }

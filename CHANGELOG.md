@@ -4,9 +4,15 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
+### Keratinocytic mimic cases (pigmented AK and LPLK)
+
+- Accept Diagnostics 2024 Figure 1 panels a/b as `case-g30-01` (pigmented actinic keratosis; study-level histopathology; facial paired clinical-dermoscopic; CC BY 4.0).
+- Accept Cureus 2025 Figure 1 as `case-g30-02` (lichen planus-like keratosis; case-text histopathology; truncal pink paired clinical-dermoscopic; CC BY 4.0). Note: not a pigmented facial LPLK.
+- Library now 54 cases, 24 true pairs, 77 review units. Clinical review remains deferred. No release tag.
+
 ### Training balance, disposition teaching, spaced revisit, catalogue expansion, quality checks
 
-- Add the first dermatofibroma training case (`case-g29-01`, CC BY-SA 4.0 Commons clinical photograph, clinical-diagnosis label only) and teaching diagnoses for dermatofibroma and lichen planus-like keratosis (LPLK remains without an accepted image).
+- Add the first dermatofibroma training case (`case-g29-01`, CC BY-SA 4.0 Commons clinical photograph, clinical-diagnosis label only) and teaching diagnoses for dermatofibroma and lichen planus-like keratosis (LPLK later gained `case-g30-02`).
 - Bias mixed-screening composition toward under-represented non-melanocytic families, body region, and derived pigmentation classes; keep composition educational and not prevalence-based.
 - Add optional `dispositionTeaching` on selected cases, shown after reveal only, unscored, with an explicit non-protocol limitation.
 - Add an optional browser-local revisit list (`localStorage`) so patterns worth revisiting can bias later sessions on the same device; session impressions still stay in memory and are not uploaded.
