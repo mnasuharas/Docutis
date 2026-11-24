@@ -522,8 +522,12 @@ kbd {
   color: var(--color-text);
 }
 
-.melanoma-staging .filter-button:not([hidden]) {
+.melanoma-staging .filter-button {
   min-height: 44px;
+}
+
+.melanoma-staging .filter-button[hidden] {
+  display: none;
 }
 
 .melanoma-staging-category {
