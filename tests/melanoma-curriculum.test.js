@@ -37,7 +37,7 @@ test("melanoma curriculum keeps prior melanoma cases and does not use a melanoma
   }
   const academyCases = data.cases.filter(item => item.academy);
   assert.equal(academyCases.length, 46);
-  assert.equal(data.cases.length, 54);
+  assert.equal(data.cases.length, 55);
   for (const item of academyCases) {
     assert.equal(item.reviewStatus, "clinician review required");
     assert.equal(item.clinicalReview, null);
@@ -56,7 +56,7 @@ test("melanoma curriculum keeps prior melanoma cases and does not use a melanoma
     assert.ok(["CC BY 4.0", "CC BY-SA 4.0", "CC0 1.0", "Public domain"].includes(item.images[0].license));
   }
   const outside = data.cases.filter(item => !curriculum.entries.some(entry => entry.caseId === item.id)).map(item => item.id);
-  assert.equal(outside.slice().sort().join("|"), "case-ak-field-hand|case-g29-01|case-g30-01|case-g30-02|case-scc-ak-paraspinal");
+  assert.equal(outside.slice().sort().join("|"), "case-ak-field-hand|case-g29-01|case-g30-01|case-g30-02|case-g31-01|case-scc-ak-paraspinal");
 });
 
 test("pilot case payloads keep their pre-Goal-18 fingerprints", () => {
@@ -129,7 +129,7 @@ test("Learn Melanoma pathway orders the next case and keeps teacher filters clos
   }
   const teacher = find(node => node.tagName === "DETAILS")[0];
   assert.equal(teacher.open, false);
-  assert.match(text(document.root), /54 cases shown/);
+  assert.match(text(document.root), /55 cases shown/);
   const pathway = find(node => node.tagName === "BUTTON" && node.getAttribute("aria-label") === "Learn Melanoma pathway")[0];
   pathway.dispatch("click");
   assert.match(text(document.root), /49 cases shown/);

@@ -4,6 +4,862 @@
 
   const checked = "2026-09-28";
 
+  /* Auto-generated core disposition overlays. Case-specific inline dispositionTeaching wins. */
+  const dispositionOverlays = Object.freeze({
+    "case-g18-01": Object.freeze({
+      "summary": "Educational next-step language for a source-labeled cutaneous melanoma without Docutis histopathology confirmation.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "A malignant or melanoma-spectrum source label still teaches that tissue diagnosis settles competing concerns. This case does not set a protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist pathways vary. Teaching here is that uncertain pigmented or keratinocytic lesions often need more than a single photograph."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy is often used before acting on a worrying clinical look."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source label strength and missing or limited confirmation in this file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g18-02": Object.freeze({
+      "summary": "Educational next-step language for a source-labeled cutaneous melanoma without Docutis histopathology confirmation.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "A malignant or melanoma-spectrum source label still teaches that tissue diagnosis settles competing concerns. This case does not set a protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist pathways vary. Teaching here is that uncertain pigmented or keratinocytic lesions often need more than a single photograph."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy is often used before acting on a worrying clinical look."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source label strength and missing or limited confirmation in this file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g18-03": Object.freeze({
+      "summary": "Educational next-step language for a source-labeled cutaneous melanoma without Docutis histopathology confirmation.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "A malignant or melanoma-spectrum source label still teaches that tissue diagnosis settles competing concerns. This case does not set a protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist pathways vary. Teaching here is that uncertain pigmented or keratinocytic lesions often need more than a single photograph."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy is often used before acting on a worrying clinical look."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source label strength and missing or limited confirmation in this file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g18-04": Object.freeze({
+      "summary": "Educational next-step language for a source-labeled cutaneous melanoma without Docutis histopathology confirmation.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "A malignant or melanoma-spectrum source label still teaches that tissue diagnosis settles competing concerns. This case does not set a protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist pathways vary. Teaching here is that uncertain pigmented or keratinocytic lesions often need more than a single photograph."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy is often used before acting on a worrying clinical look."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source label strength and missing or limited confirmation in this file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g18-05": Object.freeze({
+      "summary": "Educational next-step language for a source-labeled cutaneous melanoma without Docutis histopathology confirmation.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "A malignant or melanoma-spectrum source label still teaches that tissue diagnosis settles competing concerns. This case does not set a protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist pathways vary. Teaching here is that uncertain pigmented or keratinocytic lesions often need more than a single photograph."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy is often used before acting on a worrying clinical look."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source label strength and missing or limited confirmation in this file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g18-06": Object.freeze({
+      "summary": "Educational next-step language for a source-labeled superficial spreading melanoma with a contiguous nodule without Docutis histopathology confirmation.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "A malignant or melanoma-spectrum source label still teaches that tissue diagnosis settles competing concerns. This case does not set a protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist pathways vary. Teaching here is that uncertain pigmented or keratinocytic lesions often need more than a single photograph."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy is often used before acting on a worrying clinical look."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source label strength and missing or limited confirmation in this file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g18-07": Object.freeze({
+      "summary": "Educational next-step language for a source-labeled superficial spreading melanoma arising from a dysplastic nevus without Docutis histopathology confirmation.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "A malignant or melanoma-spectrum source label still teaches that tissue diagnosis settles competing concerns. This case does not set a protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist pathways vary. Teaching here is that uncertain pigmented or keratinocytic lesions often need more than a single photograph."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy is often used before acting on a worrying clinical look."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source label strength and missing or limited confirmation in this file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g18-08": Object.freeze({
+      "summary": "Educational next-step language for a source-labeled invasive melanoma arising in a dysplastic nevus without Docutis histopathology confirmation.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "A malignant or melanoma-spectrum source label still teaches that tissue diagnosis settles competing concerns. This case does not set a protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist pathways vary. Teaching here is that uncertain pigmented or keratinocytic lesions often need more than a single photograph."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy is often used before acting on a worrying clinical look."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source label strength and missing or limited confirmation in this file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g18-09": Object.freeze({
+      "summary": "Educational next-step language for a source-labeled cutaneous melanoma without Docutis histopathology confirmation.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "A malignant or melanoma-spectrum source label still teaches that tissue diagnosis settles competing concerns. This case does not set a protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist pathways vary. Teaching here is that uncertain pigmented or keratinocytic lesions often need more than a single photograph."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy is often used before acting on a worrying clinical look."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source label strength and missing or limited confirmation in this file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g18-10": Object.freeze({
+      "summary": "Educational next-step language for a source-labeled amelanotic melanoma without Docutis histopathology confirmation.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "A malignant or melanoma-spectrum source label still teaches that tissue diagnosis settles competing concerns. This case does not set a protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist pathways vary. Teaching here is that uncertain pigmented or keratinocytic lesions often need more than a single photograph."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy is often used before acting on a worrying clinical look."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source label strength and missing or limited confirmation in this file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g18-11": Object.freeze({
+      "summary": "Educational next-step language for a source-labeled amelanotic melanoma without Docutis histopathology confirmation.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "A malignant or melanoma-spectrum source label still teaches that tissue diagnosis settles competing concerns. This case does not set a protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist pathways vary. Teaching here is that uncertain pigmented or keratinocytic lesions often need more than a single photograph."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "Dermoscopy is already stored. Additional views or specialists may still be needed in practice."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source label strength and missing or limited confirmation in this file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g18-13": Object.freeze({
+      "summary": "Educational next-step language for a source-labeled superficial basal cell carcinoma without Docutis histopathology confirmation.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "A malignant or melanoma-spectrum source label still teaches that tissue diagnosis settles competing concerns. This case does not set a protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist pathways vary. Teaching here is that uncertain pigmented or keratinocytic lesions often need more than a single photograph."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy is often used before acting on a worrying clinical look."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source label strength and missing or limited confirmation in this file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g18-14": Object.freeze({
+      "summary": "Educational next-step language for a source-labeled ulcerated basal cell carcinoma without Docutis histopathology confirmation.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "A malignant or melanoma-spectrum source label still teaches that tissue diagnosis settles competing concerns. This case does not set a protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist pathways vary. Teaching here is that uncertain pigmented or keratinocytic lesions often need more than a single photograph."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy is often used before acting on a worrying clinical look."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source label strength and missing or limited confirmation in this file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g18-15": Object.freeze({
+      "summary": "Educational next-step language for a source-labeled basal cell carcinoma without Docutis histopathology confirmation.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "A malignant or melanoma-spectrum source label still teaches that tissue diagnosis settles competing concerns. This case does not set a protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist pathways vary. Teaching here is that uncertain pigmented or keratinocytic lesions often need more than a single photograph."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy is often used before acting on a worrying clinical look."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source label strength and missing or limited confirmation in this file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g18-16": Object.freeze({
+      "summary": "Educational next-step language for a keratoacanthoma with limited confirmation in the stored file.",
+      "options": [
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy often comes before deciding that a lesion is routine."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+        },
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "Biopsy remains available when doubt persists. This case does not prescribe a threshold."
+        }
+      ],
+      "preferredEducationalId": "further-dermoscopy",
+      "sourceNote": "Teaching derived from limited confirmation in the stored file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g21-02": Object.freeze({
+      "summary": "Educational next-step language for a seborrheic keratosis with limited confirmation in the stored file.",
+      "options": [
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy often comes before deciding that a lesion is routine."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+        },
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "Biopsy remains available when doubt persists. This case does not prescribe a threshold."
+        }
+      ],
+      "preferredEducationalId": "further-dermoscopy",
+      "sourceNote": "Teaching derived from limited confirmation in the stored file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g21-03": Object.freeze({
+      "summary": "Educational next-step language for a seborrheic keratosis with limited confirmation in the stored file.",
+      "options": [
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "Dermoscopy is already stored. In practice it often comes before treating a lesion as routine."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+        },
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "Biopsy remains available when doubt persists. This case does not prescribe a threshold."
+        }
+      ],
+      "preferredEducationalId": "monitor",
+      "sourceNote": "Teaching derived from limited confirmation in the stored file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g21-04": Object.freeze({
+      "summary": "Educational next-step language for a solar lentigo with limited confirmation in the stored file.",
+      "options": [
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy often comes before deciding that a lesion is routine."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+        },
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "Biopsy remains available when doubt persists. This case does not prescribe a threshold."
+        }
+      ],
+      "preferredEducationalId": "further-dermoscopy",
+      "sourceNote": "Teaching derived from limited confirmation in the stored file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g21-06": Object.freeze({
+      "summary": "Educational next-step language for a blue nevus with limited confirmation in the stored file.",
+      "options": [
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy often comes before deciding that a lesion is routine."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+        },
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "Biopsy remains available when doubt persists. This case does not prescribe a threshold."
+        }
+      ],
+      "preferredEducationalId": "further-dermoscopy",
+      "sourceNote": "Teaching derived from limited confirmation in the stored file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g21-07": Object.freeze({
+      "summary": "Educational next-step language for a source-labeled lentigo maligna melanoma without Docutis histopathology confirmation.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "A malignant or melanoma-spectrum source label still teaches that tissue diagnosis settles competing concerns. This case does not set a protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist pathways vary. Teaching here is that uncertain pigmented or keratinocytic lesions often need more than a single photograph."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "No dermoscopic image is stored. Dermoscopy is often used before acting on a worrying clinical look."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source label strength and missing or limited confirmation in this file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g21-08": Object.freeze({
+      "summary": "Educational next-step language for a sebaceous hyperplasia with limited confirmation in the stored file.",
+      "options": [
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "Dermoscopy is already stored. In practice it often comes before treating a lesion as routine."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+        },
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "Biopsy remains available when doubt persists. This case does not prescribe a threshold."
+        }
+      ],
+      "preferredEducationalId": "monitor",
+      "sourceNote": "Teaching derived from limited confirmation in the stored file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g25-02": Object.freeze({
+      "summary": "Educational next-step language for a histopathology-confirmed lentiginous melanocytic nevus with cytologic atypia that still needed tissue to settle competing labels.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "Histopathology settled the source label. Competing looks often need tissue when doubt remains."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "Dermoscopy is already stored here. In practice it often comes before deciding that a lesion is routine."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source histopathology statement, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g25-03": Object.freeze({
+      "summary": "Educational next-step language for a histopathology-confirmed nodular melanoma, amelanotic after the stored images are reviewed.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "The source lesion was confirmed on histopathology. Teaching here is that concerning features usually need tissue diagnosis, not that every similar lesion must follow one protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist assessment is a reasonable educational discussion point when local pathways differ."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring alone is not the educational focus once tissue confirmation is already in the source history."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching mirrors the source histopathology confirmation. It is not a Docutis staging or margin recommendation.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g25-04": Object.freeze({
+      "summary": "Educational next-step language for a histopathology-confirmed acral melanoma in situ after the stored images are reviewed.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "The source lesion was confirmed on histopathology. Teaching here is that concerning features usually need tissue diagnosis, not that every similar lesion must follow one protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist assessment is a reasonable educational discussion point when local pathways differ."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring alone is not the educational focus once tissue confirmation is already in the source history."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching mirrors the source histopathology confirmation. It is not a Docutis staging or margin recommendation.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g25-05": Object.freeze({
+      "summary": "Educational next-step language for a histopathology-confirmed lentigo maligna (melanoma in situ) after the stored images are reviewed.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "The source lesion was confirmed on histopathology. Teaching here is that concerning features usually need tissue diagnosis, not that every similar lesion must follow one protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist assessment is a reasonable educational discussion point when local pathways differ."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring alone is not the educational focus once tissue confirmation is already in the source history."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching mirrors the source histopathology confirmation. It is not a Docutis staging or margin recommendation.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g25-06": Object.freeze({
+      "summary": "Educational next-step language for a histopathology-confirmed solar lentigo that still needed tissue to settle competing labels.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "Histopathology settled the source label. Competing looks often need tissue when doubt remains."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "Dermoscopy is already stored here. In practice it often comes before deciding that a lesion is routine."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source histopathology statement, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g26-01": Object.freeze({
+      "summary": "Educational next-step language for a histopathology-confirmed acral melanoma after the stored images are reviewed.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "The source lesion was confirmed on histopathology. Teaching here is that concerning features usually need tissue diagnosis, not that every similar lesion must follow one protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist assessment is a reasonable educational discussion point when local pathways differ."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring alone is not the educational focus once tissue confirmation is already in the source history."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching mirrors the source histopathology confirmation. It is not a Docutis staging or margin recommendation.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g26-02": Object.freeze({
+      "summary": "Educational next-step language for a histopathology-confirmed acral melanocytic nevus that still needed tissue to settle competing labels.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "Histopathology settled the source label. Competing looks often need tissue when doubt remains."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "Dermoscopy is already stored here. In practice it often comes before deciding that a lesion is routine."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source histopathology statement, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g26-03": Object.freeze({
+      "summary": "Educational next-step language for a histopathology-confirmed acral lentiginous melanoma in situ after the stored images are reviewed.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "The source lesion was confirmed on histopathology. Teaching here is that concerning features usually need tissue diagnosis, not that every similar lesion must follow one protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist assessment is a reasonable educational discussion point when local pathways differ."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring alone is not the educational focus once tissue confirmation is already in the source history."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching mirrors the source histopathology confirmation. It is not a Docutis staging or margin recommendation.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g26-04": Object.freeze({
+      "summary": "Educational next-step language for a subcorneal haematoma with limited confirmation in the stored file.",
+      "options": [
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "Dermoscopy is already stored. In practice it often comes before treating a lesion as routine."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+        },
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "Biopsy remains available when doubt persists. This case does not prescribe a threshold."
+        }
+      ],
+      "preferredEducationalId": "monitor",
+      "sourceNote": "Teaching derived from limited confirmation in the stored file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g26-05": Object.freeze({
+      "summary": "Educational next-step language for a histopathology-confirmed junctional melanocytic nevus of the nail unit that still needed tissue to settle competing labels.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "Histopathology settled the source label. Competing looks often need tissue when doubt remains."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "Dermoscopy is already stored here. In practice it often comes before deciding that a lesion is routine."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source histopathology statement, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g26-06": Object.freeze({
+      "summary": "Educational next-step language for a histopathology-confirmed recurrent junctional melanocytic nevus of the nail unit that still needed tissue to settle competing labels.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "Histopathology settled the source label. Competing looks often need tissue when doubt remains."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "Dermoscopy is already stored here. In practice it often comes before deciding that a lesion is routine."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source histopathology statement, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g27-01": Object.freeze({
+      "summary": "Educational next-step language for a histopathology-confirmed acquired agminated melanocytic nevi of the sole that still needed tissue to settle competing labels.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "Histopathology settled the source label. Competing looks often need tissue when doubt remains."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "Dermoscopy is already stored here. In practice it often comes before deciding that a lesion is routine."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source histopathology statement, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g27-02": Object.freeze({
+      "summary": "Educational next-step language for a acral melanocytic nevus with limited confirmation in the stored file.",
+      "options": [
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "Dermoscopy is already stored. In practice it often comes before treating a lesion as routine."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+        },
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "Biopsy remains available when doubt persists. This case does not prescribe a threshold."
+        }
+      ],
+      "preferredEducationalId": "monitor",
+      "sourceNote": "Teaching derived from limited confirmation in the stored file, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g27-03": Object.freeze({
+      "summary": "Educational next-step language for a histopathology-confirmed acral melanoma in situ after the stored images are reviewed.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "The source lesion was confirmed on histopathology. Teaching here is that concerning features usually need tissue diagnosis, not that every similar lesion must follow one protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist assessment is a reasonable educational discussion point when local pathways differ."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring alone is not the educational focus once tissue confirmation is already in the source history."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching mirrors the source histopathology confirmation. It is not a Docutis staging or margin recommendation.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g27-04": Object.freeze({
+      "summary": "Educational next-step language for a histopathology-confirmed acral lentiginous melanoma in situ after the stored images are reviewed.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "The source lesion was confirmed on histopathology. Teaching here is that concerning features usually need tissue diagnosis, not that every similar lesion must follow one protocol."
+        },
+        {
+          "id": "specialist-evaluation",
+          "label": "Specialist evaluation",
+          "rationale": "Specialist assessment is a reasonable educational discussion point when local pathways differ."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring alone is not the educational focus once tissue confirmation is already in the source history."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching mirrors the source histopathology confirmation. It is not a Docutis staging or margin recommendation.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+    "case-g27-05": Object.freeze({
+      "summary": "Educational next-step language for a histopathology-confirmed nail matrix nevus that still needed tissue to settle competing labels.",
+      "options": [
+        {
+          "id": "biopsy-excision-consideration",
+          "label": "Biopsy or excision consideration",
+          "rationale": "Histopathology settled the source label. Competing looks often need tissue when doubt remains."
+        },
+        {
+          "id": "further-dermoscopy",
+          "label": "Further dermoscopy",
+          "rationale": "Dermoscopy is already stored here. In practice it often comes before deciding that a lesion is routine."
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor",
+          "rationale": "Monitoring can be discussed when history, examination, and dermoscopy are reassuring. This file alone does not establish that."
+        }
+      ],
+      "preferredEducationalId": "biopsy-excision-consideration",
+      "sourceNote": "Teaching derived from the source histopathology statement, not from a guideline interval.",
+      "limitation": "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+    }),
+  });
+
+
   function freezeImage(image) {
     return Object.freeze({
       ...image,
@@ -42,10 +898,11 @@
         skillIds: Object.freeze([...(item.academy.skillIds || [])])
       });
     }
-    if (item.dispositionTeaching) {
+    const disposition = item.dispositionTeaching || dispositionOverlays[item.id];
+    if (disposition) {
       frozen.dispositionTeaching = Object.freeze({
-        ...item.dispositionTeaching,
-        options: Object.freeze((item.dispositionTeaching.options || []).map(value => Object.freeze({ ...value })))
+        ...disposition,
+        options: Object.freeze((disposition.options || []).map(value => Object.freeze({ ...value })))
       });
     }
     return Object.freeze(frozen);
@@ -172,7 +1029,8 @@
       Object.freeze({ id: "subungual-haemorrhage", name: "Subungual haemorrhage", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record. The source caption says hematoma. Histopathology is not claimed." }),
       Object.freeze({ id: "subcorneal-haemorrhage", name: "Subcorneal haemorrhage", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record. The linked source favoured haematoma clinically and reports resolution at follow-up. Histopathology is not claimed." }),
       Object.freeze({ id: "dermatofibroma", name: "Dermatofibroma", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record. Uploader clinical label only unless a case states histopathology." }),
-      Object.freeze({ id: "lichen-planus-like-keratosis", name: "Lichen planus-like keratosis", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record. Linked cases stay clinician review required." })
+      Object.freeze({ id: "lichen-planus-like-keratosis", name: "Lichen planus-like keratosis", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage. Not a condition monograph and not a treatment record. Linked cases stay clinician review required." }),
+      Object.freeze({ id: "melanoacanthoma", name: "Melanoacanthoma", pole: "benign", monograph: false, reviewStatus: "clinician review required", clinicalReview: null, limitation: "Teaching diagnosis for case linkage in the seborrheic keratosis family. Not a condition monograph and not a treatment record. Linked cases stay clinician review required." })
     ]),
     screening: Object.freeze({
       schemaVersion: 1,
@@ -671,6 +1529,15 @@
         dermoscopicImageIds: Object.freeze(["img-g30-02b"]),
         informationGain: "dermoscopy_changes_leading_differential",
         informationGainNote: "Educational label only. Dermoscopy kept malignancy plausible rather than proving a benign keratinocytic label. Not a validated metric and not a probability."
+      }),
+      Object.freeze({
+        caseId: "case-g31-01",
+        provenance: "same_lesion_confirmed",
+        basis: "The Figure 1 caption of Porto and coauthors, Anais Brasileiros de Dermatologia 2019, shows clinical panel (A) and polarized dermoscopic panel (B) of the same right parietal scalp lesion in one patient, with histopathology confirmed in the case text.",
+        clinicalImageIds: Object.freeze(["img-g31-01a"]),
+        dermoscopicImageIds: Object.freeze(["img-g31-01b"]),
+        informationGain: "dermoscopy_changes_leading_differential",
+        informationGainNote: "Educational label only. Dermoscopy shows fat-finger ridges beside irregular dark dots, so a keratinocytic look and a melanoma concern stay together until tissue. Not a validated metric and not a probability."
       })
 
     ]),
@@ -11288,6 +12155,198 @@
         dermoscopicFeatures: [],
         localization: null,
         clinicalAction: "After reveal, compare with pink vascular keratinocytic cases in the library. Do not treat from this case.",
+        managementBrief: "No management category is stored. The source biopsy result is not a Docutis recommendation. This brief is not a protocol and remains review required.",
+        reviewStatus: "clinician review required",
+        clinicalReview: null
+      }),
+      freezeCase({
+        id: "case-g31-01",
+        slug: "g31-parietal-dark-plaque-fat-fingers",
+        title: "A dark plaque on the scalp",
+        diagnosisLabel: "Melanoacanthoma",
+        diseaseId: "melanoacanthoma",
+        category: "Benign keratinocytic",
+        educationalLevel: "intermediate",
+        caseType: "clinical_dermoscopic",
+        patientContext: {
+          ageBand: "76 years, per the case text",
+          sex: "Male, per the case text",
+          anatomicalSite: "Right parietal scalp",
+          presentationNotes: "The case report describes a rapidly growing 9-mm asymmetric dark-brown plaque on the right parietal scalp. The authors first considered seborrheic keratosis, then used reflectance confocal microscopy because of irregular dermoscopic dots, and excised the lesion."
+        },
+        images: [
+          {
+            attributionRequired: true,
+            modificationStatus: "cropped",
+            accessDate: "2026-11-19",
+            metadataCheckedAt: "2026-11-19",
+            sourceVerificationStatus: "verified",
+            patientIdentifiable: false,
+            id: "img-g31-01a",
+            type: "clinical",
+            src: "assets/media/cases/case-55-clinical.jpg",
+            dimensions: { width: 332, height: 421 },
+            alt: "Clinical close-up of a dark-brown plaque on short white scalp hair beside a paper measuring ruler. No diagnosis is included.",
+            caption: "Clinical close-up of a dark scalp plaque. The source label stays hidden until reveal. A paper ruler sits beside the lesion.",
+            source: "Porto ACS, Blumetti TP, de Macedo MP, Braga JCT. Anais Brasileiros de Dermatologia 2019, via PubMed Central (PMC6939077)",
+            sourceUrl: "https://doi.org/10.1016/j.abd.2019.01.002",
+            creator: "Ana Carolina Souza Porto and coauthors",
+            license: "CC BY 4.0",
+            licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+            attribution: "Porto and coauthors, Anais Brasileiros de Dermatologia 2019, Figure 1 panel A, doi:10.1016/j.abd.2019.01.002. CC BY 4.0. Cropped from the PMC figure by Docutis.",
+            modificationsNotes: "Panel A of Figure 1 was cropped from the PMC figure file gr1.jpg (PMC6939077), source sha256 902f80f5192ac06e5af7eaa05807baf89c9b6dc90c4acb86cb1a4ecca5616acb, at pixel box left 2, top 2, right 334, bottom 423 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 b2ccc7471c74fddb029f97715ef18223961c6f3414d340b74dd1575883f2a55b. No color change, no annotation, and no other edit.",
+            consentBasis: "The article is distributed under CC BY 4.0. The crop is a scalp close-up with an ear edge and no full face."
+          },
+          {
+            attributionRequired: true,
+            modificationStatus: "cropped",
+            accessDate: "2026-11-19",
+            metadataCheckedAt: "2026-11-19",
+            sourceVerificationStatus: "verified",
+            patientIdentifiable: false,
+            id: "img-g31-01b",
+            type: "dermoscopy",
+            src: "assets/media/cases/case-55-dermoscopy.jpg",
+            dimensions: { width: 253, height: 421 },
+            alt: "Polarized dermoscopic view of a dark plaque with ridge-and-fissure surface, irregular dark dots, light hairs, and colored source arrows. No diagnosis is included.",
+            caption: "Polarized dermoscopic view of the same lesion. Colored arrows are present in the source figure. A millimetre scale runs along the bottom edge.",
+            source: "Porto ACS, Blumetti TP, de Macedo MP, Braga JCT. Anais Brasileiros de Dermatologia 2019, via PubMed Central (PMC6939077)",
+            sourceUrl: "https://doi.org/10.1016/j.abd.2019.01.002",
+            creator: "Ana Carolina Souza Porto and coauthors",
+            license: "CC BY 4.0",
+            licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+            attribution: "Porto and coauthors, Anais Brasileiros de Dermatologia 2019, Figure 1 panel B, doi:10.1016/j.abd.2019.01.002. CC BY 4.0. Cropped from the PMC figure by Docutis.",
+            modificationsNotes: "Panel B of Figure 1 was cropped from the PMC figure file gr1.jpg (PMC6939077), source sha256 902f80f5192ac06e5af7eaa05807baf89c9b6dc90c4acb86cb1a4ecca5616acb, at pixel box left 348, top 2, right 601, bottom 423 with Pillow, then saved as JPEG quality 90 without metadata. Output sha256 5df06a6994bae9bc7e7b99219f9a30fe48dc28c65b337ecc80105b40a9e1fa17. Source-authored colored arrows remain. No Docutis annotation was added.",
+            consentBasis: "The article is distributed under CC BY 4.0. The field shows skin and hairs only."
+          }
+        ],
+        diagnosticGroundTruth: {
+          confirmedDiagnosis: "Melanoacanthoma (cutaneous melanoacanthoma; rare seborrheic keratosis variant)",
+          confirmationMethod: "histopathology",
+          histopathologySource: "case_text",
+          confirmationNotes: "The case text of Porto and coauthors (Anais Brasileiros de Dermatologia 2019, doi:10.1016/j.abd.2019.01.002), checked 2026-11-19 via PMC6939077, states that on histopathological evaluation hyperplastic epidermis, hyperkeratosis, acanthosis, and dendritic melanocytes were seen throughout the lesion, that Melan-A and CD1a immunostain were positive, and that these findings were consistent with cutaneous melanoacanthoma.",
+          confidenceNote: "Case-text histopathology statement. Docutis did not see a slide. Not a Docutis clinician review."
+        },
+        observations: [
+          { id: "obs-g31-01a", kind: "observation", modality: "clinical", text: "A dark-brown, sharply bordered plaque sits on short white scalp hair beside a paper measuring ruler. Mild redness surrounds the edge." },
+          { id: "obs-g31-01b", kind: "observation", modality: "dermoscopy", text: "A dark field shows ridge-and-fissure fat-finger structures, irregularly placed dark dots, and many light hairs. Colored arrows from the source figure mark several of those findings. A millimetre scale sits at the bottom edge." }
+        ],
+        interpretations: [
+          { id: "int-g31-01a", kind: "interpretation", relatedObservationIds: ["obs-g31-01a"], text: "A rapidly growing dark scalp plaque can be a seborrheic keratosis variant or melanoma. The clinical frame alone does not settle the label." },
+          { id: "int-g31-01b", kind: "interpretation", relatedObservationIds: ["obs-g31-01a", "obs-g31-01b"], text: "Fat-finger ridges support a keratinocytic reading, while irregular dark dots keep melanoma in the differential. Histopathology, not a pathognomonic dermoscopic sign, confirmed the source label." }
+        ],
+        differentials: [
+          {
+            diagnosis: "Melanoacanthoma",
+            supportingFeatures: ["Dark sharply bordered scalp plaque", "Fat-finger ridges on polarized dermoscopy", "Case-text histopathology and immunostain consistent with cutaneous melanoacanthoma"],
+            contradictingFeatures: ["Irregular dark dots also raise melanoma concern"],
+            teachingDistinction: "The benign seborrheic-keratosis-family name comes from histopathology. Dermoscopy alone did not prove it."
+          },
+          {
+            diagnosis: "Melanoma",
+            supportingFeatures: ["Rapid growth history in the case text", "Asymmetric dark plaque", "Irregularly distributed dark dots on dermoscopy"],
+            contradictingFeatures: ["Fat-finger ridges are keratinocytic clues; histopathology did not confirm melanoma"],
+            teachingDistinction: "Melanoma was a fair concern until tissue settled the label."
+          },
+          {
+            diagnosis: "Seborrheic keratosis",
+            supportingFeatures: ["Fat fingers and comedo-like openings belong to the same keratinocytic family", "The source calls melanoacanthoma a rare seborrheic keratosis variant"],
+            contradictingFeatures: ["The case-text histopathology names melanoacanthoma specifically"],
+            teachingDistinction: "Ordinary seborrheic keratosis remains the family context; this teaching record keeps the named variant."
+          }
+        ],
+        teachingPoints: [
+          { id: "tp-g31-01a", title: "Notice first", text: "Name the dark scalp plaque, then ask whether fat fingers and irregular dots point the same way." },
+          { id: "tp-g31-01b", title: "Limit", text: "Ridges support a keratinocytic look. Irregular dots kept melanoma plausible until histopathology." }
+        ],
+        observationPrompts: [
+          "Is the plaque flat-dark or does dermoscopy show ridges?",
+          "Are the dark dots evenly spaced or irregularly placed?"
+        ],
+        hints: [
+          "The source first considered seborrheic keratosis, then worried about irregular dots."
+        ],
+        closestMimic: {
+          name: "Melanoma",
+          whyClosest: "A rapidly growing asymmetric dark scalp plaque with irregular dermoscopic dots is a classic melanoma concern. The source needed tissue after confocal imaging also looked suspicious."
+        },
+        patterns: [
+          {
+            id: "pat-g31-01-ridges",
+            label: "Fat-finger ridges and fissures",
+            modality: "dermoscopy",
+            specificityNote: "Thick ridge-and-fissure fat fingers are clearly visible. They support a keratinocytic reading and do not clear irregular dark dots.",
+            certainty: "clearly_visible",
+            weight: "supportive"
+          },
+          {
+            id: "pat-g31-01-dots",
+            label: "Irregularly placed dark dots",
+            modality: "dermoscopy",
+            specificityNote: "Dark dots are scattered rather than evenly spaced. They kept melanoma in the differential in the source.",
+            certainty: "clearly_visible",
+            weight: "supportive"
+          },
+          {
+            id: "pat-g31-01-arrows",
+            label: "Colored arrows from the source figure",
+            modality: "none",
+            specificityNote: "Colored arrows are teaching marks from the source figure, not skin structures.",
+            certainty: "clearly_visible",
+            weight: "conflicting"
+          },
+          {
+            id: "pat-g31-01-scale",
+            label: "Measuring scale in the frame",
+            modality: "none",
+            specificityNote: "A paper ruler is in the clinical frame and a millimetre scale is in the dermoscopic frame. Scales are artifacts, not diagnosis.",
+            certainty: "clearly_visible",
+            weight: "conflicting"
+          }
+        ],
+        synthesis: "The source labels this right parietal dark plaque a histopathology-confirmed melanoacanthoma, a rare seborrheic keratosis variant. Clinically and dermoscopically it kept melanoma plausible until excision.",
+        evidenceWeighting: "Fat-finger ridges are clearly visible and supportive for a keratinocytic reading. Irregular dark dots are clearly visible and keep melanoma open. The case-text histopathology statement is the confirmation. Source arrows and measuring scales are artifacts.",
+        diagnosticTrap: "Treating fat fingers as proof that a dark scalp plaque is safe, or treating irregular dots as proof of melanoma without tissue when the frames conflict.",
+        mentorNote: "This is the first melanoacanthoma case in Docutis. It sits in the seborrheic keratosis family and teaches a melanoma mimic that needed histopathology.",
+        takeHomeRule: "On a dark scalp plaque, fat fingers and irregular dots can point in opposite directions. When dermoscopy stays mixed, histopathology settles the label.",
+        whyNot: [
+          { mimic: "Melanoma", text: "Irregular dots and rapid growth made melanoma fair. Histopathology did not confirm melanoma in this lesion." },
+          { mimic: "Ordinary seborrheic keratosis", text: "Fat fingers belong to the same family. The case-text histopathology names the melanoacanthoma variant specifically." }
+        ],
+        compareWith: [],
+        pairedModality: {
+          clinicalObservation: "A dark-brown, sharply bordered plaque sits on short white scalp hair beside a paper measuring ruler. Mild redness surrounds the edge.",
+          dermoscopicObservation: "A dark field shows ridge-and-fissure fat-finger structures, irregularly placed dark dots, and many light hairs. Colored arrows from the source figure mark several of those findings.",
+          addedValue: "The dermoscopic frame shows fat fingers beside irregular dark dots. The clinical frame shows only a dark plaque.",
+          reasoningImpact: "The reading moves from a nonspecific dark scalp plaque to a mixed keratinocytic-plus-dot pattern that still needed histopathology.",
+          limits: "Source-authored colored arrows remain on the dermoscopic crop. Measuring scales are in both frames. The site is scalp, not face.",
+          informationGain: "dermoscopy_changes_leading_differential",
+          informationGainNote: "Educational label only. Dermoscopy shows fat-finger ridges beside irregular dark dots, so a keratinocytic look and a melanoma concern stay together until tissue. Not a validated metric and not a probability.",
+          comparison: {
+            clinicalClue: "Dark sharply bordered scalp plaque beside a ruler.",
+            dermoscopicClue: "Fat-finger ridges with irregular dark dots.",
+            addedInformation: "Ridge versus dot detail is only clear on the dermoscopic frame.",
+            diagnosticConflict: "The same look can be melanoma until histopathology.",
+            teachingRule: "Mixed dermoscopic clues need tissue when melanoma stays plausible."
+          }
+        },
+        modalityIntegration: "The first frame is the clinical dark scalp plaque. The second frame is the corresponding polarized dermoscopic view with fat fingers, irregular dark dots, and source arrows.",
+        dispositionTeaching: {
+          summary: "Educational next-step language for a dark scalp plaque whose dermoscopy mixed keratinocytic ridges with irregular dots.",
+          options: [
+            { id: "biopsy-excision-consideration", label: "Biopsy or excision consideration", rationale: "The source excised the lesion after dermoscopy and confocal imaging could not classify it as clearly benign, and histopathology confirmed the label." },
+            { id: "further-dermoscopy", label: "Further dermoscopy", rationale: "Dermoscopy is already stored. It mixed fat fingers with irregular dots rather than settling the label." },
+            { id: "monitor", label: "Monitor", rationale: "Monitoring was not a substitute for the excision that made the diagnosis in the source." }
+          ],
+          preferredEducationalId: "biopsy-excision-consideration",
+          sourceNote: "Teaching derived from the case-text excision and histopathology confirmation after mixed dermoscopic and confocal findings, not from a guideline interval.",
+          limitation: "Educational next-step teaching only. Not a protocol, triage rule, or clinical decision support."
+        },
+        recordedScreeningDecision: null,
+        annotations: [],
+        dermoscopicFeatures: [],
+        localization: null,
+        clinicalAction: "After reveal, compare with seborrheic keratosis cases that show stuck-on or ridged surfaces, and with dark melanoma mimics in the library. Do not treat from this case.",
         managementBrief: "No management category is stored. The source biopsy result is not a Docutis recommendation. This brief is not a protocol and remains review required.",
         reviewStatus: "clinician review required",
         clinicalReview: null

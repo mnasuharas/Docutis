@@ -1238,7 +1238,9 @@
       Object.freeze({ casePatternId: "pat-g27-06-lines", canonicalId: "longitudinal-nail-plate-lines" }),
       Object.freeze({ casePatternId: "pat-g29-01-papule", canonicalId: "solitary-dark-papule" }),
       Object.freeze({ casePatternId: "pat-g30-01-pseudo", canonicalId: "facial-pseudonetwork" }),
-      Object.freeze({ casePatternId: "pat-g30-01-gray", canonicalId: "perifollicular-gray-dots" })
+      Object.freeze({ casePatternId: "pat-g30-01-gray", canonicalId: "perifollicular-gray-dots" }),
+      Object.freeze({ casePatternId: "pat-g31-01-ridges", canonicalId: "cerebriform-surface" }),
+      Object.freeze({ casePatternId: "pat-g31-01-scale", canonicalId: "measuring-scale-in-frame" })
     ]),
     dermoscopicTokenLinks: Object.freeze({
       arborizing_vessels: "arborizing-vessels",
@@ -1338,6 +1340,14 @@
       }),
       Object.freeze({
         casePatternId: "pat-g30-02-arrows",
+        reason: "Colored arrows are teaching marks from the source figure, not a skin pattern."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g31-01-dots",
+        reason: "Irregular dark dots are clearly visible in one frame. A reusable dots-and-globules pattern stays deferred, as in Goal 25, rather than created from one example."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g31-01-arrows",
         reason: "Colored arrows are teaching marks from the source figure, not a skin pattern."
       })
     ])

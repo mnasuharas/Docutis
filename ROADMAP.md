@@ -6,7 +6,7 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Goals 18 to 28 release
 
-The Goal 18 to 27 items and the Goal 28 training below were developed in stacked pull requests (#24 to #30 and #32 to #35) and released to `main` and the live site through one integration pull request (#36). No new version tag was created. The previous preview tag `v0.2.0-preview.1` (commit `c28f1de`) had 50 condition records, five pilot cases, and 28 review units (5 clinician reviewed, 23 review required). Current development branch has 54 cases, 24 true clinical-dermoscopic pairs, and 77 review units (5 clinician reviewed, 72 review required). Publication is not clinical approval. Clinical review is deferred for all Goal 18 to 27 content: no case or pattern from those Goals is clinician reviewed, and a consolidated physician review is planned after the curriculum matures.
+The Goal 18 to 27 items and the Goal 28 training below were developed in stacked pull requests (#24 to #30 and #32 to #35) and released to `main` and the live site through one integration pull request (#36). No new version tag was created. The previous preview tag `v0.2.0-preview.1` (commit `c28f1de`) had 50 condition records, five pilot cases, and 28 review units (5 clinician reviewed, 23 review required). Current development branch has 55 cases, 25 true clinical-dermoscopic pairs, and 78 review units (5 clinician reviewed, 73 review required). Publication is not clinical approval. Clinical review is deferred for all Goal 18 to 27 content: no case or pattern from those Goals is clinician reviewed, and a consolidated physician review is planned after the curriculum matures.
 
 ### Implemented
 
@@ -51,7 +51,7 @@ The Goal 18 to 27 items and the Goal 28 training below were developed in stacked
 
 ### Known engineering and usability gaps
 
-- Training gaps after the balance/disposition/revisit work: disposition teaching is still missing on most cases; the optional local revisit list is not spaced repetition across devices; the core set remains melanocytic-heavy even after the first dermatofibroma case; many source captions still omit a named site; pigmented actinic keratosis and LPLK now have accepted paired cases (case-g30-01, case-g30-02); additional facial pigmented LPLK examples remain desirable.
+- Training gaps after the balance/disposition/revisit work: disposition teaching now covers all 43 core cases; the optional local revisit list is not spaced repetition across devices; the core set remains melanocytic-heavy even after dermatofibroma and keratinocytic-mimic cases; many source captions still omit a named site; pigmented actinic keratosis, truncal LPLK, and melanoacanthoma now have accepted cases (case-g30-01, case-g30-02, case-g31-01); additional facial pigmented LPLK examples remain desirable.
 - Curriculum gaps after Goal 27: the nail-unit melanoma with dermoscopy is still one caption-verified case, with no histopathology-confirmed example; nail haemorrhage with dermoscopy and the adult benign nail band have one example each; acral pore anatomy is resolved in only one frame, so most ridge and furrow calls stay probable; one example of gray dots around facial follicles; A clinical-only dermatofibroma case is present, plus paired pigmented actinic keratosis and truncal LPLK cases. A pigmented facial LPLK example is still missing. Licensed candidates for several remaining gaps stay in `acquisition-ledger.js` as `candidate`.
 
 - Obtain physician review of the remaining German follow-up protocols (melanoma-de and cSCC-de; BCC-de is already clinician reviewed) and reconcile any interpretive questions in the cSCC modality table before a broader reviewed Nachsorge release.
@@ -71,12 +71,12 @@ The Goal 18 to 27 items and the Goal 28 training below were developed in stacked
 
 ### Current focus
 
-The collection now contains 57 records: the original 26 cutaneous malignancy and premalignant records, eight common inflammatory and pigmentary records, 16 infectious and infestation records, and a first autoimmune or connective-tissue and hair package with seven additional records. Legacy embedded disease review fields remain `clinician review required` for all 57. In the public Goal 9 layer, actinic keratosis and basal cell carcinoma disease records are clinician reviewed; case-based learning pilots from Goal 11 remain review required pending physician attestation. Goal 12 does not change that state.
+The collection now contains 62 records: the original 26 cutaneous malignancy and premalignant records, eight common inflammatory and pigmentary records, 16 infectious and infestation records, a first autoimmune or connective-tissue and immunobullous package (now nine records including mucous membrane pemphigoid and dermatitis herpetiformis), and a hair-and-nail package (five records including nail psoriasis, chronic paronychia and nail lichen planus under subcategory `nail-disorder`). Legacy embedded disease review fields remain `clinician review required` for all 62. In the public Goal 9 layer, actinic keratosis and basal cell carcinoma disease records are clinician reviewed; case-based learning pilots from Goal 11 remain review required pending physician attestation. Goal 12 does not change that state.
 
 ### Next content packages
 
-1. Nail disease and additional connective-tissue or immunobullous entities once optional diagnosis, investigation, pathology and red-flag fields are agreed.
-2. Review gaps within infectious, autoimmune and hair content without multiplying near-duplicate records.
+1. Further connective-tissue or immunobullous entities, and additional nail phenotypes, once optional diagnosis, investigation, pathology and red-flag fields are agreed.
+2. Review gaps within infectious, autoimmune, hair and nail content without multiplying near-duplicate records.
 3. Expand hair and nail coverage only when records and sourcing meet the same validation bar as existing packages.
 
 Additional oncology records should still fill meaningful gaps rather than multiply near-duplicate entries.
