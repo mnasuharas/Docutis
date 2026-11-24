@@ -73,7 +73,7 @@ function quizHarness() {
   document.root = new Element("div", document);
   const context = { window: {}, document };
   for (const file of ["data.js", "media-data.js", "quiz-data.js", "review-status.js", "oss-feedback.js", "review-ui.js", "quiz-app.js"]) vm.runInNewContext(fs.readFileSync(path.join(root, file), "utf8"), context);
-  return { document, root: document.root, quiz: context.window.DOCUTIS_QUIZ };
+  return { document, root: document.root, quiz: context.window.DOCUTIS_QUIZ, app: context.window.DOCUTIS_QUIZ_APP };
 }
 
 test("quiz UI announces feedback, exposes secure evidence links, scores and restarts", () => {
@@ -109,6 +109,14 @@ test("quiz UI announces feedback, exposes secure evidence links, scores and rest
   assert.match(textOf(harness.root), /8 of 8 correct/);
   harness.root.querySelector("button").dispatch("click");
   assert.match(textOf(harness.root), /Question 1 of 8/);
+});
+
+test("openQuestion shows the requested item without revealing its answer", () => {
+  const harness = quizHarness();
+  assert.equal(harness.app.openQuestion("ak-biopsy"), true);
+  assert.match(textOf(harness.root), /persistently thickened, tender or concerning for invasion/);
+  assert.doesNotMatch(textOf(harness.root), /Correct\./);
+  assert.equal(harness.app.openQuestion("missing-question"), false);
 });
 
 test("quiz implementation stays local, keyboard-native and reduced-motion ready", () => {

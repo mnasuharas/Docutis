@@ -104,6 +104,8 @@ function createHarness(transformData, transformMedia, initialHref = "https://exa
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "data.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "media-data.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "followup-data.js"), "utf8"), context);
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "quiz-data.js"), "utf8"), context);
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "case-data.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "review-status.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "oss-feedback.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "review-ui.js"), "utf8"), context);
@@ -481,4 +483,57 @@ test("opening a condition respects reduced motion and legacy focus options", () 
   assert.equal(legacy.document.activeElement, legacy.elements.details);
   assert.equal(legacy.elements.details.scrollIntoViewCalls, 1);
   assert.ok(legacy.elements.details.focusCalls.some(args => args.length === 0));
+});
+
+test("actinic keratosis and basal cell carcinoma expose per-asset learning paths", () => {
+  const { elements, window } = createHarness();
+  const card = name => elements.cards.querySelectorAll(".card").find(item => textOf(item).includes(name));
+
+  card("Actinic Keratosis").dispatch("click");
+  const akPath = elements.details.querySelectorAll(".learning-path")[0];
+  const ak = textOf(akPath);
+  assert.match(ak, /Learning path/);
+  assert.match(ak, /does not review the schematic, quiz, follow-up protocol or case/);
+  assert.match(ak, /No original schematic is published for this record/);
+  assert.match(ak, /persistently thickened, tender or concerning for invasion/);
+  assert.match(ak, /No German follow-up protocol is published for this record/);
+  assert.match(ak, /Field change on the dorsum of the hand/);
+  assert.match(ak, /Clinician reviewed/);
+  assert.match(ak, /Clinical review pending/);
+  assert.doesNotMatch(ak, /Actinic keratoses \/ field cancerization/);
+  assert.doesNotMatch(ak, /Pigmented actinic keratosis/);
+  assert.doesNotMatch(ak, /Biopsy or specialist assessment/);
+  let openedQuiz = null;
+  window.DOCUTIS_QUIZ_APP = { openQuestion(id) { openedQuiz = id; return true; } };
+  akPath.querySelectorAll(".learning-path-link").find(link => link.getAttribute("data-learning-kind") === "quiz").dispatch("click");
+  assert.equal(openedQuiz, "ak-biopsy");
+
+  card("Basal Cell Carcinoma").dispatch("click");
+  const bccPath = elements.details.querySelectorAll(".learning-path")[0];
+  const bcc = textOf(bccPath);
+  assert.match(bcc, /Basal cell carcinoma morphology and dermoscopic clues/);
+  assert.match(bcc, /Which schematic vascular clue is classically associated with basal cell carcinoma/);
+  assert.match(bcc, /Germany follow-up/);
+  const links = bccPath.querySelectorAll(".learning-path-link");
+  const caseLinks = links.filter(link => link.getAttribute("data-learning-kind") === "case");
+  const bccCases = window.DOCUTIS_CASES.cases.filter(item => item.diseaseId === "basal-cell-carcinoma");
+  assert.equal(caseLinks.length, bccCases.length);
+  for (const item of bccCases) {
+    const link = caseLinks.find(entry => entry.getAttribute("data-asset-id") === item.id);
+    assert.equal(link.textContent, item.title);
+    assert.notEqual(link.textContent, item.diagnosisLabel);
+  }
+  assert.ok(bccPath.querySelectorAll(".is-reviewed").length >= 4);
+  assert.ok(bccPath.querySelectorAll(".is-pending").length >= 2);
+  let openedCase = null;
+  let openedProtocol = null;
+  window.DOCUTIS_CASE_APP = { openCase(id) { openedCase = id; return true; } };
+  window.DOCUTIS_FOLLOW_UP_APP = { openProtocol(id) { openedProtocol = id; return true; } };
+  links.find(link => link.getAttribute("data-learning-kind") === "case").dispatch("click");
+  links.find(link => link.getAttribute("data-learning-kind") === "follow-up").dispatch("click");
+  assert.equal(openedCase, "case-bcc-nodular-dermoscopy");
+  assert.equal(openedProtocol, "basal-cell-carcinoma-de");
+
+  card("Plaque Psoriasis").dispatch("click");
+  assert.equal(elements.details.querySelectorAll(".learning-path").length, 0);
 });

@@ -194,6 +194,16 @@
     renderPeriods(announce);
   }
 
+  function openProtocol(id) {
+    const protocol = data.protocols.find(item => item.id === id);
+    if (!protocol) return false;
+    diseaseSelect.value = protocol.id;
+    renderGroups(true);
+    return true;
+  }
+
+  window.DOCUTIS_FOLLOW_UP_APP = Object.freeze({ openProtocol });
+
   function bindMelanomaStaging() {
     const draft = document.getElementById("melanomaStaging");
     const staging = window.DOCUTIS_MELANOMA_STAGING;
