@@ -47,6 +47,7 @@ Docutis is currently in active early development. Its content, structure and tec
 - Differential diagnoses
 - Explicitly labelled ICD-10 WHO diagnosis classification and ICD-O oncology coding, where verified
 - Treatment overviews
+- AJCC 8 staging preview for cutaneous melanoma (0–IIC), with separate clinical and pathological stage groups and links to the existing German S3 reference where applicable. The staging helper requires clinician review.
 - Follow-up considerations
 - Links to external clinical references
 - Responsive browser-based interface

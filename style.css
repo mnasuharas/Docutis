@@ -482,6 +482,54 @@ kbd {
   line-height: 1.65;
 }
 
+.melanoma-staging {
+  margin-bottom: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+}
+
+.melanoma-staging summary {
+  color: var(--color-accent-strong);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.melanoma-staging-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: var(--space-3);
+}
+
+.melanoma-staging label:not([hidden]) {
+  display: grid;
+  align-content: start;
+  gap: var(--space-1);
+  min-width: 0;
+  font-weight: 700;
+}
+
+.melanoma-staging input,
+.melanoma-staging select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.melanoma-staging .filter-button:not([hidden]) {
+  min-height: 44px;
+}
+
+.melanoma-staging-category {
+  font-weight: 700;
+}
+
 .follow-up-controls {
   display: grid;
   gap: var(--space-4);
@@ -511,6 +559,7 @@ kbd {
   width: 100%;
 }
 
+.melanoma-staging :is(summary, input, select):focus-visible,
 .follow-up-controls select:focus-visible,
 .follow-up-provenance summary:focus-visible {
   outline: 3px solid var(--color-accent);
@@ -2252,6 +2301,7 @@ footer {
   .filter-button:focus,
   .close-button:focus,
   .search-clear:focus,
+  .melanoma-staging :is(summary, input, select):focus,
   .follow-up-controls select:focus,
   .follow-up-provenance summary:focus,
   .detail-jump-nav a:focus,

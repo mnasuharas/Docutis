@@ -214,19 +214,30 @@ class Element {
   replaceChildren(...children) { this.children = []; children.forEach(child => this.appendChild(child)); if (!children.length) this.value = ""; }
   setAttribute(name, value) { this.attributes[name] = String(value); }
   addEventListener(type, listener) { (this.listeners[type] ||= []).push(listener); }
-  dispatch(type) { for (const listener of this.listeners[type] || []) listener({ type, target: this }); }
+  dispatch(type) { for (const listener of this.listeners[type] || []) listener({ type, target: this, preventDefault() {} }); }
+  focus() { this.ownerDocument.activeElement = this; }
   querySelectorAll(selector) { const found = []; const visit = node => { if (selector.startsWith(".") && node.className.split(" ").includes(selector.slice(1))) found.push(node); if (/^[a-z]+$/.test(selector) && node.tagName === selector.toUpperCase()) found.push(node); node.children.forEach(visit); }; this.children.forEach(visit); return found; }
 }
 
-function uiHarness(transform) {
+function uiHarness(transform, includeStaging = false) {
   const document = { elements: {}, createElement(tag) { return new Element(tag, document); }, getElementById(id) { return document.elements[id]; } };
   for (const id of ["followUpDisease", "followUpGroup", "followUpPeriod", "followUpResult", "followUpStatus"]) document.elements[id] = new Element(id.includes("followUp") && !id.match(/Result|Status/) ? "select" : "div", document);
+  if (includeStaging) {
+    const suffixes = ["", "Form", "Method", "Result", "FollowUp", "T", "Thickness", "Ulceration", "N", "M", "R", "TField", "ThicknessField", "UlcerationField", "RField"];
+    for (const suffix of suffixes) document.elements[`melanomaStaging${suffix}`] = new Element("div", document);
+    document.elements.melanomaStagingForm.reset = () => {
+      for (const suffix of ["T", "Thickness", "Ulceration", "N", "M", "R"]) document.elements[`melanomaStaging${suffix}`].value = "";
+      document.elements.melanomaStagingMethod.value = "category";
+    };
+    document.elements.melanomaStagingForm.reset();
+  }
   const context = { window: {}, document };
   vm.runInNewContext(fs.readFileSync(path.join(root, "followup-data.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(root, "review-status.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(root, "oss-feedback.js"), "utf8"), context);
   vm.runInNewContext(fs.readFileSync(path.join(root, "review-ui.js"), "utf8"), context);
   if (transform) context.window.DOCUTIS_FOLLOW_UP_DATA = transform(clone(context.window.DOCUTIS_FOLLOW_UP_DATA));
+  if (includeStaging) context.window.DOCUTIS_MELANOMA_STAGING = require("../melanoma-staging");
   vm.runInNewContext(fs.readFileSync(path.join(root, "followup-app.js"), "utf8"), context);
   return document.elements;
 }
@@ -302,4 +313,62 @@ test("follow-up UI does not let legacy inline metadata bypass the public decisio
   });
   assert.match(textOf(elements.followUpResult), /Follow-up protocol review status[\s\S]*Clinical review pending/);
   assert.doesNotMatch(textOf(elements.followUpResult), /Reviewed by a physician in dermatology|Reviewed: 2026-09-16/);
+});
+
+
+test("melanoma staging opens an eligible follow-up reference and clears stale results", () => {
+  const elements = uiHarness(null, true);
+  const get = suffix => elements[`melanomaStaging${suffix}`];
+  const form = get("Form");
+  const next = get("FollowUp");
+  const submit = () => form.dispatch("submit");
+  const text = () => textOf(get("Result"));
+
+  assert.equal(get("").hidden, false);
+  get("T").value = "T1b";
+  submit();
+  assert.match(text(), /N-Status und M-Status/);
+  assert.equal(next.hidden, true);
+  get("N").value = "cN0";
+  get("M").value = "cM0";
+  submit();
+  assert.match(text(), /Klinische Stadiengruppe bei N0\/cM0: IB/);
+  assert.match(text(), /Pathologische Stadiengruppe: IA/);
+  assert.equal(next.hidden, true);
+
+  get("Method").value = "breslow";
+  form.dispatch("change");
+  assert.equal(get("TField").hidden, true);
+  assert.equal(get("ThicknessField").hidden, false);
+  assert.doesNotMatch(text(), /Stadiengruppe/);
+  get("Thickness").value = "1,4";
+  get("Ulceration").value = "yes";
+  get("N").value = "pN0";
+  submit();
+  assert.match(text(), /T2b/);
+  assert.match(text(), /Pathologische Stadiengruppe: IIA/);
+  assert.equal(next.hidden, false);
+  next.dispatch("click");
+  assert.equal(elements.followUpGroup.value, "stage-ib-iib");
+  assert.match(textOf(elements.followUpResult), /Stages IB–IIB/);
+
+  get("Thickness").value = "4,5";
+  form.dispatch("input");
+  assert.equal(next.hidden, true);
+  assert.equal(get("RField").hidden, false);
+  submit();
+  assert.match(text(), /R0-Resektion/);
+  assert.equal(next.hidden, true);
+  get("R").value = "r0";
+  submit();
+  assert.equal(next.hidden, false);
+  get("N").value = "positive";
+  submit();
+  assert.match(text(), /außerhalb/);
+  assert.equal(next.hidden, true);
+
+  elements.followUpDisease.value = "basal-cell-carcinoma-de";
+  elements.followUpDisease.dispatch("change");
+  assert.equal(get("").hidden, true);
+  assert.equal(get("Thickness").value, "");
 });
