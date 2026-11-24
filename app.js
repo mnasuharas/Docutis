@@ -587,7 +587,8 @@
     parent.appendChild(section);
   }
 
-  const learningPathDiseaseIds = new Set(["actinic-keratosis", "basal-cell-carcinoma"]);
+  const guidedDiseaseIds = new Set(["cutaneous-melanoma", "cutaneous-squamous-cell-carcinoma", "squamous-cell-carcinoma-in-situ"]);
+  const learningPathDiseaseIds = new Set(["actinic-keratosis", "basal-cell-carcinoma", ...guidedDiseaseIds]);
 
   function learningReview(assetType, id) {
     const item = reviewUi?.asset(assetType, id);
@@ -637,6 +638,11 @@
     section.id = "detail-learning-path";
     appendTextElement(section, "h3", "Learning path");
     appendTextElement(section, "p", "These links open material already published for this record. Each item keeps its own review status. A reviewed record does not review the schematic, quiz, follow-up protocol or case. Cases keep the diagnosis hidden until you reveal it. This path is not a diagnostic or treatment sequence.", "learning-path-intro");
+    if (guidedDiseaseIds.has(disease.id)) {
+      const launch = appendTextElement(section, "a", "Start guided cases", "hero-action");
+      launch.href = "#caseModule";
+      launch.addEventListener("click", () => window.DOCUTIS_CASE_APP?.openPathway?.(disease.id));
+    }
     const list = document.createElement("ol");
     list.className = "learning-path-list";
 

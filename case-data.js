@@ -1538,10 +1538,33 @@
         dermoscopicImageIds: Object.freeze(["img-g31-01b"]),
         informationGain: "dermoscopy_changes_leading_differential",
         informationGainNote: "Educational label only. Dermoscopy shows fat-finger ridges beside irregular dark dots, so a keratinocytic look and a melanoma concern stay together until tissue. Not a validated metric and not a probability."
+      }),
+      Object.freeze({
+        "caseId": "case-g32-01",
+        "provenance": "same_lesion_confirmed",
+        "basis": "Figure 1 identifies clinical panel a and dermoscopic panel b as the same ulcerated plaque and reports the pathology result for those panels. Panels c and d show a different plaque.",
+        "clinicalImageIds": [
+          "img-g32-01a"
+        ],
+        "dermoscopicImageIds": [
+          "img-g32-01b"
+        ],
+        "informationGain": "dermoscopy_adds_support",
+        "informationGainNote": "Dermoscopy shows the blood crust and a few fine peripheral vessels more closely. The images do not establish whether the lesion is invasive."
       })
-
     ]),
     comparisons: Object.freeze([
+      Object.freeze({
+        id: "cmp-bowen-lplk-crust",
+        caseIdA: "case-g32-01",
+        caseIdB: "case-g30-02",
+        sharedFeatures: Object.freeze(["Both lesions are pink plaques with scale."]),
+        favouringA: Object.freeze(["Central dark crust and an eroded appearance are conspicuous in this image."]),
+        favouringB: Object.freeze(["White scale covers a pink plaque; the source records a benign result on punch histopathology."]),
+        discriminator: "The morphology overlaps. Each source's lesion-specific pathology settled its own diagnosis.",
+        commonTrap: "Treating the presence or absence of crust as proof of either diagnosis.",
+        limits: "The images do not show invasion depth. The sources refer to separate lesions and use different imaging conditions."
+      }),
       Object.freeze({
         id: "cmp-nevus-dark-papule",
         caseIdA: "case-g21-01",
@@ -12350,8 +12373,193 @@
         managementBrief: "No management category is stored. The source biopsy result is not a Docutis recommendation. This brief is not a protocol and remains review required.",
         reviewStatus: "clinician review required",
         clinicalReview: null
+      }),
+      freezeCase({
+        "id": "case-g32-01",
+        "slug": "g32-oval-plaque-with-crust",
+        "title": "An oval pink plaque with central crust",
+        "diagnosisLabel": "Squamous cell carcinoma in situ (Bowen disease)",
+        "diseaseId": "squamous-cell-carcinoma-in-situ",
+        "category": "Keratinocytic malignancies",
+        "educationalLevel": "intermediate",
+        "caseType": "clinical_dermoscopic",
+        "patientContext": {
+          "ageBand": "Not reported",
+          "sex": "Not reported",
+          "anatomicalSite": "Skin, site not reported in the figure caption",
+          "presentationNotes": "Figure 1 panels a and b show the same crusted plaque. Its anatomical site and clinical course are not reported in the caption."
+        },
+        "images": [
+          {
+            "id": "img-g32-01a",
+            "type": "clinical",
+            "src": "assets/media/cases/case-56-clinical.jpg",
+            "dimensions": {
+              "width": 1083,
+              "height": 955
+            },
+            "alt": "An oval pink plaque has dark central crust and pale scale.",
+            "caption": "An oval pink plaque has dark central crust and pale scale.",
+            "source": "Scurtu, Dumitrescu and Simionescu, Diagnostics 2024, Figure 1 (PMC11353497)",
+            "sourceUrl": "https://doi.org/10.3390/diagnostics14161799",
+            "creator": "Scurtu, Dumitrescu and Simionescu",
+            "license": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "attribution": "Scurtu, Dumitrescu and Simionescu, Diagnostics 2024, Figure 1 panel a, https://doi.org/10.3390/diagnostics14161799, CC BY 4.0. Cropped by Docutis.",
+            "attributionRequired": true,
+            "modificationStatus": "cropped",
+            "accessDate": "2026-11-24",
+            "metadataCheckedAt": "2026-11-24",
+            "sourceVerificationStatus": "verified",
+            "patientIdentifiable": false,
+            "consentBasis": "Published open-access figure licensed CC BY 4.0. The crop shows only non-identifiable close-up skin.",
+            "modificationsNotes": "diagnostics-14-01799-g001.png, publisher Figure 1; source sha256 31bf3a570d5984038fb8e72c1f1ff1a7e2950629c77ce33fb8128f195fddaffc; Pillow crop left 34, top 25, right 1117, bottom 980, saved JPEG quality 88, metadata omitted; output sha256 ddca62231bf1abbeb0fa2d843aaf46c9d8b6d90324fb9af6174bcf2b133f4a63. Panel letter removed."
+          },
+          {
+            "id": "img-g32-01b",
+            "type": "dermoscopy",
+            "src": "assets/media/cases/case-56-dermoscopy.jpg",
+            "dimensions": {
+              "width": 1566,
+              "height": 955
+            },
+            "alt": "A red-pink field shows adherent red-brown crust and a few fine vessels toward the edge. Hairs and surface reflections are visible.",
+            "caption": "A red-pink field shows adherent red-brown crust and a few fine vessels toward the edge. Hairs and surface reflections are visible.",
+            "source": "Scurtu, Dumitrescu and Simionescu, Diagnostics 2024, Figure 1 (PMC11353497)",
+            "sourceUrl": "https://doi.org/10.3390/diagnostics14161799",
+            "creator": "Scurtu, Dumitrescu and Simionescu",
+            "license": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "attribution": "Scurtu, Dumitrescu and Simionescu, Diagnostics 2024, Figure 1 panel b, https://doi.org/10.3390/diagnostics14161799, CC BY 4.0. Cropped by Docutis.",
+            "attributionRequired": true,
+            "modificationStatus": "cropped",
+            "accessDate": "2026-11-24",
+            "metadataCheckedAt": "2026-11-24",
+            "sourceVerificationStatus": "verified",
+            "patientIdentifiable": false,
+            "consentBasis": "Published open-access figure licensed CC BY 4.0. The crop shows only non-identifiable close-up skin.",
+            "modificationsNotes": "diagnostics-14-01799-g001.png, publisher Figure 1; source sha256 31bf3a570d5984038fb8e72c1f1ff1a7e2950629c77ce33fb8128f195fddaffc; Pillow crop left 1123, top 25, right 2689, bottom 980, saved JPEG quality 88, metadata omitted; output sha256 d302948b8eac2a12905569e8e95c9c7eb6d6e8ecc27f9abf88eef08f0a14675e. Panel letter removed."
+          }
+        ],
+        "diagnosticGroundTruth": {
+          "confirmedDiagnosis": "Squamous cell carcinoma in situ (Bowen disease)",
+          "confirmationMethod": "histopathology",
+          "histopathologySource": "figure_caption",
+          "confirmationNotes": "Scurtu and coauthors, Figure 1 panels a–b, report that histopathology showed ulcerated, non-pigmented Bowen disease for this lesion, with no invasive cSCC reported.",
+          "confidenceNote": "Lesion-specific statement in the figure caption. The slide is not included in this teaching case."
+        },
+        "observations": [
+          {
+            "id": "obs-g32-01a",
+            "kind": "observation",
+            "modality": "clinical",
+            "text": "An oval pink plaque has dark central crust and pale scale."
+          },
+          {
+            "id": "obs-g32-01b",
+            "kind": "observation",
+            "modality": "dermoscopy",
+            "text": "A red-pink field shows adherent red-brown crust and a few fine vessels toward the edge. Hairs and surface reflections are visible."
+          }
+        ],
+        "interpretations": [
+          {
+            "id": "int-g32-01",
+            "kind": "interpretation",
+            "relatedObservationIds": [
+              "obs-g32-01a",
+              "obs-g32-01b"
+            ],
+            "text": "The dark center is compatible with dried blood or crust; the two views do not establish invasion."
+          }
+        ],
+        "differentials": [
+          {
+            "diagnosis": "Invasive cutaneous squamous cell carcinoma",
+            "supportingFeatures": [
+              "Crusted red plaque with an eroded center"
+            ],
+            "contradictingFeatures": [
+              "Depth is not assessable on these photographs"
+            ],
+            "teachingDistinction": "The source considered an invasive lesion clinically; the pathology distinguished the two."
+          },
+          {
+            "diagnosis": "Squamous cell carcinoma in situ (Bowen disease)",
+            "supportingFeatures": [
+              "Pink plaque with scale and crust"
+            ],
+            "contradictingFeatures": [
+              "The few visible peripheral vessels do not settle the label"
+            ],
+            "teachingDistinction": "The plaque and crust overlap with an invasive appearance."
+          },
+          {
+            "diagnosis": "Lichen planus-like keratosis",
+            "supportingFeatures": [
+              "Pink scaly plaque"
+            ],
+            "contradictingFeatures": [
+              "The crusted center leaves the competing diagnoses unresolved"
+            ],
+            "teachingDistinction": "A pink scaly plaque can have a benign source diagnosis too. Compare the contrasting case."
+          }
+        ],
+        "teachingPoints": [
+          {
+            "id": "tp-g32-01a",
+            "title": "Describe the center and edge separately",
+            "text": "Describe central crust and the few peripheral vessels before deciding what either means."
+          },
+          {
+            "id": "tp-g32-01b",
+            "title": "What settled this case",
+            "text": "The lesion looked concerning for invasion, but the figure caption reports in-situ disease on pathology."
+          }
+        ],
+        "closestMimic": {
+          "name": "Invasive cutaneous squamous cell carcinoma",
+          "whyClosest": "The source describes this lesion as a clinical mimic of invasive cSCC."
+        },
+        "pairedModality": {
+          "clinicalObservation": "An oval pink plaque has dark central crust and pale scale.",
+          "dermoscopicObservation": "A red-pink field shows adherent red-brown crust and a few fine vessels toward the edge. Hairs and surface reflections are visible.",
+          "addedValue": "The second view separates surface reflections and hairs from vessels and crust.",
+          "reasoningImpact": "The second view refines the surface and vessel description without resolving invasion.",
+          "limits": "The scale, body site, palpation and histology slide cannot be assessed from these frames.",
+          "informationGain": "dermoscopy_adds_support",
+          "informationGainNote": "Dermoscopy shows the blood crust and a few fine peripheral vessels more closely. The images do not establish whether the lesion is invasive.",
+          "comparison": {
+            "clinicalClue": "An oval pink plaque with crust.",
+            "dermoscopicClue": "Dark crust and fine peripheral vessels.",
+            "addedInformation": "Fine peripheral detail is visible in the close view.",
+            "diagnosticConflict": "Both views leave the depth question open.",
+            "teachingRule": "Compare the image-based differential with the lesion-specific pathology in the source."
+          }
+        },
+        "dispositionTeaching": {
+          "summary": "In the source, pathology distinguished in-situ disease from a lesion that looked invasive.",
+          "options": [
+            {
+              "id": "biopsy-excision-consideration",
+              "label": "Biopsy or excision consideration",
+              "rationale": "Tissue examination resolved the uncertain distinction in the figure caption."
+            }
+          ],
+          "preferredEducationalId": "biopsy-excision-consideration",
+          "sourceNote": "Diagnostics 2024, Figure 1 a–b; German S3 AK/cSCC guideline, diagnostic work-up.",
+          "limitation": "Educational review of the published example. No individual management recommendation."
+        },
+        "modalityIntegration": "The clinical photograph shows the whole crusted pink plaque. The dermoscopic view depicts central crust and a few peripheral vessels at closer range.",
+        "compareWith": ["cmp-bowen-lplk-crust"],
+        "recordedScreeningDecision": null,
+        "patterns": [],
+        "annotations": [],
+        "dermoscopicFeatures": [],
+        "localization": null,
+        "reviewStatus": "clinician review required",
+        "clinicalReview": null
       })
-
     ])
   });
 }());
