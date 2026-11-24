@@ -70,9 +70,9 @@ test("interactive modules explain a disabled JavaScript environment without medi
     assert.ok(html.includes(idClass), `missing ${idClass}`);
   }
   const blocks = [...html.matchAll(/<noscript>([\s\S]*?)<\/noscript>/g)].map(match => match[1].trim());
-  assert.equal(blocks.length, 7);
+  assert.equal(blocks.length, 6);
   const generic = blocks.filter(block => block.includes("This interactive section requires JavaScript."));
-  assert.equal(generic.length, 5);
+  assert.equal(generic.length, 4);
   for (const block of generic) {
     assert.equal(block, '<p class="js-fallback">This interactive section requires JavaScript.</p>');
     assert.doesNotMatch(block, /melanoma|basal cell|actinic|diagnosis|ICD/i);
@@ -81,13 +81,20 @@ test("interactive modules explain a disabled JavaScript environment without medi
   assert.ok(blocks.some(block => /Training cannot run because JavaScript is unavailable/.test(block)));
 });
 
+test("the condition search, status and result cards have no unrelated module between them", () => {
+  const search = html.slice(html.indexOf('id="searchPanel"'), html.indexOf('id="cards"'));
+  assert.match(search, /id="searchInput"[\s\S]*id="resultStatus"[\s\S]*id="conditionsTitle"[\s\S]*id="details"/);
+  assert.doesNotMatch(search, /id="(?:case|training|quiz|followUp)Module"/);
+});
+
 test("condition scrolling can choose auto motion and legacy focus does not abort", () => {
   assert.match(app, /function prefersReducedMotion\(\)/);
   assert.match(app, /prefers-reduced-motion:\s*reduce/);
   assert.match(app, /function focusWithoutScrolling\(element\)/);
   assert.match(app, /function scrollElementIntoView\(element\)/);
-  assert.match(app, /focusWithoutScrolling\(detailsElement\)/);
-  assert.match(app, /scrollElementIntoView\(detailsElement\)/);
+  assert.match(app, /focusDetailSection\(linkedSection \|\| detailsElement\)/);
+  assert.match(app, /focusWithoutScrolling\(section\)/);
+  assert.match(app, /scrollElementIntoView\(section\)/);
   assert.doesNotMatch(app, /scrollIntoView\(\{\s*behavior:\s*"smooth"/);
 });
 

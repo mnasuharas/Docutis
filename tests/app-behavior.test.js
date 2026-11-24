@@ -23,7 +23,11 @@ class Element {
   setAttribute(name, value) { this.attributes[name] = String(value); }
   getAttribute(name) { return this.attributes[name]; }
   addEventListener(type, listener) { (this.listeners[type] ||= []).push(listener); }
-  dispatch(type, extra = {}) { for (const listener of this.listeners[type] || []) listener({ type, key: extra.key, target: this }); }
+  dispatch(type, extra = {}) {
+    const event = { type, target: this, preventDefault() { this.defaultPrevented = true; }, ...extra };
+    for (const listener of this.listeners[type] || []) listener(event);
+    return event;
+  }
   focus(...args) {
     this.focusCalls = this.focusCalls || [];
     this.focusCalls.push(args);
@@ -54,7 +58,9 @@ function createHarness(transformData, transformMedia, initialHref = "https://exa
     elements: {},
     listeners: {},
     createElement(tagName) { return new Element(tagName, document); },
-    getElementById(id) { return document.elements[id]; },
+    getElementById(id) {
+      return document.elements[id] || document.elements.details?.querySelectorAll("section").find(section => section.id === id);
+    },
     contains(element) { return Boolean(element); },
     addEventListener(type, listener) { (document.listeners[type] ||= []).push(listener); },
     dispatch(type, extra = {}) { for (const listener of document.listeners[type] || []) listener({ type, target: extra.target, key: extra.key, ctrlKey: false, metaKey: false, altKey: false, preventDefault() {} }); }
@@ -164,6 +170,16 @@ test("search covers names, aliases, categories, subcategories and both coding sy
   assert.equal(searchFor(elements, "Infectious and Infestation Disorders").length, 16);
   assert.equal(searchFor(elements, "Dermatophyte infection").length, 5);
   assert.equal(searchFor(elements, "B35.0").length, 1);
+});
+
+test("search accepts spacing, diacritics, typographic punctuation and reordered terms", () => {
+  const { elements } = createHarness();
+  for (const query of ["  MÉRKEL   cell carcinoma ", "carcinoma merkel", "8247/3 merkel"]) {
+    const cards = searchFor(elements, query);
+    assert.equal(cards.length, 1, query);
+    assert.match(textOf(cards[0]), /Merkel Cell Carcinoma/);
+  }
+  assert.equal(searchFor(elements, "athlete’s foot").length, 1);
 });
 
 test("category filters preserve every broad grouping", () => {
@@ -348,6 +364,27 @@ test("card URLs support Back and Forward while Escape restores card focus", () =
   elements.details.dispatch("keydown", { key: "Escape" });
   assert.equal(elements.details.hidden, true);
   assert.equal(document.activeElement, card);
+});
+
+test("condition section links preserve deep links and close in one Back step", () => {
+  const { document, elements, window, history } = createHarness(null, null, "https://example.test/Docutis/#searchPanel");
+  const card = elements.cards.querySelectorAll(".card").find(item => textOf(item).includes("Acne Vulgaris"));
+  card.dispatch("click");
+  const sources = elements.details.querySelectorAll("a").find(link => link.href === "#detail-sources");
+  assert.ok(sources.dispatch("click").defaultPrevented);
+  assert.equal(history.length, 2);
+  assert.equal(new URL(window.location.href).hash, "#detail-sources");
+  assert.equal(document.activeElement.id, "detail-sources");
+  elements.details.dispatch("keydown", { key: "Escape" });
+  assert.equal(window.location.href, "https://example.test/Docutis/#searchPanel");
+  assert.equal(elements.details.hidden, true);
+  assert.equal(document.activeElement, card);
+
+  const direct = createHarness(null, null, "https://example.test/Docutis/?condition=acne-vulgaris#detail-sources");
+  assert.equal(direct.document.activeElement.id, "detail-sources");
+  direct.elements.details.dispatch("keydown", { key: "Escape" });
+  assert.equal(direct.window.location.href, "https://example.test/Docutis/");
+  assert.equal(direct.document.activeElement, direct.elements.searchInput);
 });
 
 test("optional educational media renders provenance and recovers from image failure", () => {
