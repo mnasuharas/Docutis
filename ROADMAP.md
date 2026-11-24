@@ -6,7 +6,7 @@ Docutis is an early-stage educational dermatology reference. This roadmap separa
 
 ### Goals 18 to 28 release
 
-The Goal 18 to 27 items and the Goal 28 training below were developed in stacked pull requests (#24 to #30 and #32 to #35) and released to `main` and the live site through one integration pull request (#36). No new version tag was created. The previous preview tag `v0.2.0-preview.1` (commit `c28f1de`) had 50 condition records, five pilot cases, and 28 review units (5 clinician reviewed, 23 review required). Current `main` has 51 cases, 22 true clinical-dermoscopic pairs, and 74 review units (5 clinician reviewed, 69 review required). Publication is not clinical approval. Clinical review is deferred for all Goal 18 to 27 content: no case or pattern from those Goals is clinician reviewed, and a consolidated physician review is planned after the curriculum matures.
+The Goal 18 to 27 items and the Goal 28 training below were developed in stacked pull requests (#24 to #30 and #32 to #35) and released to `main` and the live site through one integration pull request (#36). No new version tag was created. The previous preview tag `v0.2.0-preview.1` (commit `c28f1de`) had 50 condition records, five pilot cases, and 28 review units (5 clinician reviewed, 23 review required). Current `main` has 52 cases, 22 true clinical-dermoscopic pairs, and 75 review units (5 clinician reviewed, 70 review required). Publication is not clinical approval. Clinical review is deferred for all Goal 18 to 27 content: no case or pattern from those Goals is clinician reviewed, and a consolidated physician review is planned after the curriculum matures.
 
 ### Implemented
 
@@ -51,8 +51,8 @@ The Goal 18 to 27 items and the Goal 28 training below were developed in stacked
 
 ### Known engineering and usability gaps
 
-- Training gaps after Goal 28: no longitudinal or spaced review across sessions (by design, nothing is stored); disposition teaching is deferred because next-step decisions are not grounded across eligible cases; pigmented versus non-pigmented is not a stored field; the core set is weighted toward melanocytic lesions (28 of 39) with few keratinocytic (6) and vascular or adnexal (3) cases; and 15 core cases have no named site.
-- Curriculum gaps after Goal 27: the nail-unit melanoma with dermoscopy is still one caption-verified case, with no histopathology-confirmed example; nail haemorrhage with dermoscopy and the adult benign nail band have one example each; acral pore anatomy is resolved in only one frame, so most ridge and furrow calls stay probable; one example of gray dots around facial follicles; and no dermatofibroma, LPLK, or pigmented actinic keratosis case. Licensed candidates for several of these are recorded in `acquisition-ledger.js` as `candidate`.
+- Training gaps after the balance/disposition/revisit work: disposition teaching is still missing on most cases; the optional local revisit list is not spaced repetition across devices; the core set remains melanocytic-heavy even after the first dermatofibroma case; many source captions still omit a named site; pigmented actinic keratosis and LPLK still lack accepted case images.
+- Curriculum gaps after Goal 27: the nail-unit melanoma with dermoscopy is still one caption-verified case, with no histopathology-confirmed example; nail haemorrhage with dermoscopy and the adult benign nail band have one example each; acral pore anatomy is resolved in only one frame, so most ridge and furrow calls stay probable; one example of gray dots around facial follicles; and no LPLK or pigmented actinic keratosis case yet. A clinical-only dermatofibroma case is now present. Licensed candidates for several remaining gaps stay in `acquisition-ledger.js` as `candidate`.
 
 - Obtain physician review of the remaining German follow-up protocols (melanoma-de and cSCC-de; BCC-de is already clinician reviewed) and reconcile any interpretive questions in the cSCC modality table before a broader reviewed Nachsorge release.
 - Obtain dermatologist sign-off on the melanoma in situ statement, the absence of a German S3 structured interval, at least annual full-skin examination, risk-factor qualifier, monthly self-examination, non-routine ultrasound/S100B/imaging wording and separation of AAD international context.
@@ -71,13 +71,13 @@ The Goal 18 to 27 items and the Goal 28 training below were developed in stacked
 
 ### Current focus
 
-The collection now contains 50 records: the original 26 cutaneous malignancy and premalignant records, eight common inflammatory and pigmentary records, and 16 infectious and infestation records. Legacy embedded disease review fields remain `clinician review required` for all 50. In the public Goal 9 layer, actinic keratosis and basal cell carcinoma disease records are clinician reviewed; case-based learning pilots from Goal 11 remain review required pending physician attestation. Goal 12 does not change that state.
+The collection now contains 57 records: the original 26 cutaneous malignancy and premalignant records, eight common inflammatory and pigmentary records, 16 infectious and infestation records, and a first autoimmune or connective-tissue and hair package with seven additional records. Legacy embedded disease review fields remain `clinician review required` for all 57. In the public Goal 9 layer, actinic keratosis and basal cell carcinoma disease records are clinician reviewed; case-based learning pilots from Goal 11 remain review required pending physician attestation. Goal 12 does not change that state.
 
 ### Next content packages
 
-1. Autoimmune, connective-tissue and immunobullous disease: begin only after optional diagnosis, investigation, pathology and red-flag fields are agreed.
-2. Hair and nail disease: define whether these remain one navigation group or separate populated categories.
-3. Review gaps within infectious dermatology without multiplying near-duplicate records or treating the 50-record milestone as evidence of clinical completeness.
+1. Nail disease and additional connective-tissue or immunobullous entities once optional diagnosis, investigation, pathology and red-flag fields are agreed.
+2. Review gaps within infectious, autoimmune and hair content without multiplying near-duplicate records.
+3. Expand hair and nail coverage only when records and sourcing meet the same validation bar as existing packages.
 
 Additional oncology records should still fill meaningful gaps rather than multiply near-duplicate entries.
 
@@ -115,7 +115,7 @@ Potential next records, only after adequate sourcing and clinician prioritizatio
 2. Automated validation confirms the complete schema, unique identifiers, valid category/subcategory mapping, separated ICD-O fields, structured HTTPS references, and the required review state.
 3. A qualified clinician checks every clinical claim against the cited source and records the guideline version/date, jurisdiction, and review date in the pull request.
 4. A second reviewer checks language, uncertainty, duplication, category placement, link behavior, and preservation of the medical disclaimer.
-5. Follow [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md): a maintainer may record `clinician reviewed` only after a physician attests to the specific version, with date, role, specialty and matching fingerprint. Infrastructure is implemented. Five public assets are clinician reviewed, as listed in the Goal 9 baseline bullet. Every other review unit, including all 51 development-branch cases, remains review required. A software release would not clinically validate the remaining content.
+5. Follow [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md): a maintainer may record `clinician reviewed` only after a physician attests to the specific version, with date, role, specialty and matching fingerprint. Infrastructure is implemented. Five public assets are clinician reviewed, as listed in the Goal 9 baseline bullet. Every other review unit, including all 52 development-branch cases, remains review required. A software release would not clinically validate the remaining content.
 6. Records are re-reviewed when a source is replaced, a recommendation changes, or the agreed review interval expires.
 
 ## Data-schema evolution
@@ -135,10 +135,10 @@ Epidemiology, etiology/pathogenesis, distribution, complications, and prognosis 
 
 ## Category architecture
 
-The interface now exposes eight populated first-level filters: the original four cutaneous-oncology groups plus inflammatory and eczematous disorders, acneiform and sebaceous disorders, pigmentary disorders, and infectious and infestation disorders. Main categories and subcategories remain controlled values. Future expansion should add a first-level group only when records exist for it, avoiding empty navigation. Likely later groups include:
+The interface now exposes ten populated first-level filters: the original four cutaneous-oncology groups plus inflammatory and eczematous disorders, acneiform and sebaceous disorders, pigmentary disorders, infectious and infestation disorders, autoimmune and connective-tissue and immunobullous disorders, and hair and nail disorders. Main categories and subcategories remain controlled values. Future expansion should add a first-level group only when records exist for it, avoiding empty navigation. Likely later groups include:
 
-- autoimmune, connective-tissue, and immunobullous diseases
-- hair and nail disorders
+- additional immunobullous and connective-tissue diseases
+- nail disorders as a populated subcategory
 - benign tumors, cysts, and vascular disorders
 - genodermatoses and keratinization disorders
 - drug reactions and photodermatoses

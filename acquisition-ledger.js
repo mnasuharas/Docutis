@@ -3361,6 +3361,40 @@
         "specialSiteValue": "acral",
         "status": "rejected_license",
         "reason": "Non-commercial and no-derivatives terms are not allowed. Not downloaded into the case library."
+      }),
+      row({
+        id: "cand-g29-commons-dermatofibroma",
+        sourceLabel: "Dermatofibroma new image to help in diagnosis",
+        sourceUrl: "https://commons.wikimedia.org/wiki/File:Dermatofibroma_new_image_to_help_in_diagnosis.jpg",
+        partnerUrl: null,
+        author: "Mohammad2018",
+        license: "CC BY-SA 4.0",
+        modality: "clinical",
+        pairedStatus: "not_a_pair",
+        site: "Not named on the file page",
+        verificationStrength: "file_title_and_description_not_histopathology",
+        status: "accepted",
+        reason: "Allowed CC BY-SA 4.0 clinical photograph labelled dermatofibroma. Site and histopathology are not stated. Integrated as case-g29-01 to widen non-melanocytic mimic coverage. The earlier Goal 25 LC-OCT dermatofibroma candidate remains deferred because PMC figure download was blocked in this environment.",
+        dateChecked: "2026-11-19",
+        integrated: true,
+        caseId: "case-g29-01"
+      }),
+      row({
+        id: "cand-g29-commons-df-sa3",
+        sourceLabel: "Pigmented and tenderness dermatofibroma",
+        sourceUrl: "https://commons.wikimedia.org/wiki/File:Pigmented_and_tenderness_dermatofibroma.jpg",
+        partnerUrl: null,
+        author: "Jmarchn",
+        license: "CC BY-SA 3.0",
+        modality: "clinical",
+        pairedStatus: "not_a_pair",
+        site: "Leg",
+        verificationStrength: "license_blocked",
+        status: "rejected_license",
+        reason: "CC BY-SA 3.0 is outside the allowed Docutis case licenses (4.0 / CC0 / Public domain). Not downloaded.",
+        dateChecked: "2026-11-19",
+        integrated: false,
+        caseId: null
       })
     ])
   });

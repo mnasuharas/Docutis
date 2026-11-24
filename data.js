@@ -11,7 +11,9 @@
     { id: "inflammatory-eczematous", title: "Inflammatory and Eczematous Disorders" },
     { id: "acneiform-sebaceous", title: "Acneiform and Sebaceous Disorders" },
     { id: "pigmentary", title: "Pigmentary Disorders" },
-    { id: "infectious-infestation", title: "Infectious and Infestation Disorders" }
+    { id: "infectious-infestation", title: "Infectious and Infestation Disorders" },
+    { id: "autoimmune-connective-immunobullous", title: "Autoimmune, Connective-Tissue and Immunobullous Disorders" },
+    { id: "hair-nail-disorders", title: "Hair and Nail Disorders" }
   ];
   const subcategories = [
     { id: "premalignant-keratinocytic", title: "Premalignant keratinocytic lesion" },
@@ -39,7 +41,11 @@
     { id: "dermatophyte-infection", title: "Dermatophyte infection" },
     { id: "other-fungal-infection", title: "Other fungal infection" },
     { id: "parasitic-infestation", title: "Parasitic infestation" },
-    { id: "viral-infection", title: "Viral infection" }
+    { id: "viral-infection", title: "Viral infection" },
+    { id: "immunobullous-disorder", title: "Immunobullous disorder" },
+    { id: "connective-tissue-disorder", title: "Connective-tissue disorder" },
+    { id: "lichenoid-disorder", title: "Lichenoid disorder" },
+    { id: "alopecia-disorder", title: "Alopecia disorder" }
   ];
   const sourceTypes = new Set([
     "official classification", "guideline", "consensus", "systematic review",
@@ -133,7 +139,15 @@
     cdcHerpes: source({ title: "Herpes - STI Treatment Guidelines", organization: "Centers for Disease Control and Prevention", type: "guideline", year: 2021, version: "2021 STI Treatment Guidelines", url: "https://www.cdc.gov/std/treatment-guidelines/herpes.htm", metadataCheckedAt: "2026-09-16" }),
     cdcZoster: source({ title: "Clinical Overview of Shingles (Herpes Zoster)", organization: "Centers for Disease Control and Prevention", type: "clinical reference", year: 2024, url: "https://www.cdc.gov/shingles/hcp/clinical-overview/index.html", metadataCheckedAt: "2026-09-16" }),
     cdcMolluscum: source({ title: "Clinical Overview of Molluscum Contagiosum", organization: "Centers for Disease Control and Prevention", type: "clinical reference", year: 2025, url: "https://www.cdc.gov/molluscum-contagiosum/hcp/clinical-overview/index.html", metadataCheckedAt: "2026-09-16" }),
-    cutaneousWartsGuideline: source({ title: "Clinical guideline for the diagnosis and treatment of cutaneous warts (2022)", organization: "Journal of Evidence-Based Medicine guideline group", type: "guideline", year: 2022, url: "https://pubmed.ncbi.nlm.nih.gov/36117295/", doi: "10.1111/jebm.12494", metadataCheckedAt: "2026-09-16" })
+    cutaneousWartsGuideline: source({ title: "Clinical guideline for the diagnosis and treatment of cutaneous warts (2022)", organization: "Journal of Evidence-Based Medicine guideline group", type: "guideline", year: 2022, url: "https://pubmed.ncbi.nlm.nih.gov/36117295/", doi: "10.1111/jebm.12494", metadataCheckedAt: "2026-09-16" }),
+    eadvBullousPemphigoid: source({ title: "Updated S2 K guidelines for the management of bullous pemphigoid initiated by the European Academy of Dermatology and Venereology (EADV)", organization: "European Academy of Dermatology and Venereology", type: "guideline", year: 2022, url: "https://pubmed.ncbi.nlm.nih.gov/35766904/", doi: "10.1111/jdv.18220", metadataCheckedAt: "2026-11-19" }),
+    jaadSubepithelialBlisterDiagnosis: source({ title: "Subepithelial autoimmune blistering dermatoses: Clinical features and diagnosis", organization: "Journal of the American Academy of Dermatology", type: "peer-reviewed review", year: 2021, url: "https://pubmed.ncbi.nlm.nih.gov/33684496/", doi: "10.1016/j.jaad.2020.11.076", metadataCheckedAt: "2026-11-19" }),
+    eadvPemphigus: source({ title: "Updated S2K guidelines on the management of pemphigus vulgaris and foliaceus initiated by the European Academy of Dermatology and Venereology (EADV)", organization: "European Academy of Dermatology and Venereology", type: "guideline", year: 2020, url: "https://pubmed.ncbi.nlm.nih.gov/32830877/", doi: "10.1111/jdv.16752", metadataCheckedAt: "2026-11-19" }),
+    badCutaneousLupus: source({ title: "British Association of Dermatologists guidelines for the management of people with cutaneous lupus erythematosus 2021", organization: "British Association of Dermatologists", type: "guideline", year: 2021, url: "https://pubmed.ncbi.nlm.nih.gov/34170012/", doi: "10.1111/bjd.20597", metadataCheckedAt: "2026-11-19" }),
+    dermatomyositisReview: source({ title: "Dermatomyositis: An Update on Diagnosis and Treatment", organization: "American Journal of Clinical Dermatology", type: "peer-reviewed review", year: 2020, url: "https://pubmed.ncbi.nlm.nih.gov/32096127/", doi: "10.1007/s40257-020-00502-6", metadataCheckedAt: "2026-11-19" }),
+    edfLichenPlanus: source({ title: "European S1 guidelines on the management of lichen planus: a cooperation of the European Dermatology Forum with the European Academy of Dermatology and Venereology", organization: "European Dermatology Forum / European Academy of Dermatology and Venereology", type: "guideline", year: 2020, url: "https://pubmed.ncbi.nlm.nih.gov/32678513/", doi: "10.1111/jdv.16464", metadataCheckedAt: "2026-11-19" }),
+    eadvAlopeciaAreataSystemic: source({ title: "European expert consensus statement on the systemic treatment of alopecia areata", organization: "European Academy of Dermatology and Venereology / international expert panel", type: "consensus", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/38169088/", doi: "10.1111/jdv.19768", metadataCheckedAt: "2026-11-19" }),
+    edfAndrogeneticAlopecia: source({ title: "Evidence-based (S3) guideline for the treatment of androgenetic alopecia in women and in men – short version", organization: "European Dermatology Forum", type: "guideline", year: 2017, url: "https://pubmed.ncbi.nlm.nih.gov/29178529/", doi: "10.1111/jdv.14624", metadataCheckedAt: "2026-11-19" })
   };
   function dermNet(title, slug, metadataCheckedAt) {
     return source({ title, organization: "DermNet", type: "clinical reference", url: `https://dermnetnz.org/topics/${slug}`, metadataCheckedAt });
@@ -1672,6 +1686,83 @@
       treatment: "Many warts regress spontaneously. Treatment selection depends on site, symptoms, burden, age and immune status and may use keratolytic, destructive or other clinician-directed approaches; repeated treatment is often needed.",
       followup: "Reconsider the diagnosis for rapid growth, ulceration, persistent bleeding or treatment resistance, especially in immunocompromised people or at high-risk sites. Anogenital disease requires separate assessment.",
       references: [refs.cutaneousWartsGuideline, refs.whoIcd10, dermNet("Viral wart", "viral-wart", "2026-09-16")]
+    }),
+    record({
+      id: "bullous-pemphigoid", name: "Bullous Pemphigoid", alternative: "BP; autoimmune subepidermal blistering disease", category: "autoimmune-connective-immunobullous", subcategory: "immunobullous-disorder",
+      coding: coding({ diagnoses: [icd10Who("L12.0", "Pemphigoid")], icdoApplicability: "not applicable", verificationNote: "ICD-10 WHO groups pemphigoid variants under L12.-; document mucosal or nonbullous pemphigoid phenotypes separately when the clinical record supports a more specific code." }),
+      description: "An acquired autoimmune subepidermal blistering disorder directed against basement-membrane-zone antigens, most common among older adults.",
+      clinical: "Tense bullae on erythematous or urticarial skin are typical, though pruritus, eczematous or urticarial lesions without bullae, and localized disease occur. Mucosal involvement is usually limited compared with pemphigus. Neurological comorbidity has been reported in population studies but should not be assumed in every patient.",
+      dermoscopy: "Dermoscopy is not routinely diagnostic; clinical pattern, histology and immunofluorescence or serology carry more weight.",
+      differential: "Pemphigus vulgaris, epidermolysis bullosa acquisita, linear IgA bullous dermatosis, bullous drug eruption, porphyria cutanea tarda, arthropod bites and bullous impetigo.",
+      treatment: "Severity, age, frailty, comorbidity and medication burden guide therapy. Disease-specific guidelines emphasize high-potency topical anti-inflammatory treatment when feasible, with systemic immunomodulation reserved for more extensive or refractory disease; specialists usually coordinate induction, tapering and relapse care.",
+      followup: "Monitor blister control, infection risk, treatment adverse effects and functional impact. New weakness, dysphagia, airway symptoms or widespread relapse warrant urgent reassessment.",
+      references: [refs.eadvBullousPemphigoid, refs.jaadSubepithelialBlisterDiagnosis, refs.whoIcd10, dermNet("Bullous pemphigoid", "bullous-pemphigoid", "2026-11-19")]
+    }),
+    record({
+      id: "pemphigus-vulgaris", name: "Pemphigus Vulgaris", alternative: "PV; intraepidermal autoimmune blistering disease", category: "autoimmune-connective-immunobullous", subcategory: "immunobullous-disorder",
+      coding: coding({ diagnoses: [icd10Who("L10.0", "Pemphigus vulgaris")], icdoApplicability: "not applicable", verificationNote: "Other pemphigus subtypes have distinct ICD-10 WHO codes; this record is limited to pemphigus vulgaris." }),
+      description: "An acquired intraepidermal autoimmune blistering disorder with epithelial acantholysis, often involving mucosa and potentially life-threatening without treatment.",
+      clinical: "Flaccid bullae, erosions and painful mucosal lesions are characteristic. The Nikolskiy sign may be present but is not sufficient for diagnosis. Chronic erosions impair eating, speech and quality of life.",
+      dermoscopy: "Dermoscopy may show erosion and vascular patterns but cannot replace histology and immunopathology.",
+      differential: "Bullous pemphigoid, mucous membrane pemphigoid, linear IgA disease, Stevens–Johnson spectrum disorders, herpesvirus infection, aphthous stomatitis and necrotic oral ulcers.",
+      treatment: "Specialist-led immunomodulatory therapy is typically required. Contemporary guidelines balance disease control with cumulative treatment toxicity; therapy is individualized by burden, mucosal involvement and comorbidity rather than by a single universal regimen.",
+      followup: "Assess lesion healing, relapse, infection, malnutrition and treatment adverse effects. Worsening mucosal involvement, airway symptoms or inadequate control on therapy requires prompt specialist review.",
+      references: [refs.eadvPemphigus, refs.whoIcd10, dermNet("Pemphigus vulgaris", "pemphigus-vulgaris", "2026-11-19")]
+    }),
+    record({
+      id: "discoid-lupus-erythematosus", name: "Discoid Lupus Erythematosus", alternative: "DLE; chronic cutaneous lupus erythematosus", category: "autoimmune-connective-immunobullous", subcategory: "connective-tissue-disorder",
+      coding: coding({ diagnoses: [icd10Who("L93.0", "Discoid lupus erythematosus")], icdoApplicability: "not applicable", verificationNote: "Other cutaneous lupus phenotypes use different ICD-10 WHO codes; systemic lupus erythematosus may coexist and requires separate assessment." }),
+      description: "A chronic cutaneous lupus phenotype with inflammatory plaques that can scar, pigment and destroy adnexal structures.",
+      clinical: "Erythematous plaques with scale, follicular plugging and atrophic scarring favour sun-exposed skin and the scalp. Activity and damage may coexist. Oral, nasal or ocular mucosa can be involved.",
+      dermoscopy: "Follicular red dots, whitish structureless areas, perifollicular whitish halo and branching vessels may support active discoid lesions but are not pathognomonic.",
+      differential: "Lichen planus, psoriasis, sarcoidosis, granuloma annulare, keratinocyte carcinoma, tinea faciei and other inflammatory or scarring alopecias of the scalp.",
+      treatment: "Photoprotection is foundational. Topical or intralesional anti-inflammatory therapy often supports limited disease; broader, scarring or treatment-resistant disease usually needs specialist escalation that may include antimalarial or other immunomodulatory approaches guided by activity, site and systemic risk.",
+      followup: "Document scarring, dyspigmentation, alopecia and mucosal damage. Assess for systemic lupus features when the clinical context warrants; monitor treatment-related ophthalmic and other organ risks per specialist protocol.",
+      references: [refs.badCutaneousLupus, refs.whoIcd10, dermNet("Discoid lupus erythematosus", "discoid-lupus-erythematosus", "2026-11-19")]
+    }),
+    record({
+      id: "dermatomyositis", name: "Dermatomyositis", alternative: "DM; idiopathic inflammatory myopathy with characteristic cutaneous signs", category: "autoimmune-connective-immunobullous", subcategory: "connective-tissue-disorder",
+      coding: coding({ diagnoses: [icd10Who("M33.1", "Other dermatomyositis")], icdoApplicability: "not applicable", verificationNote: "This record emphasizes cutaneous and multisystem features; ICD-10 WHO classifies dermatomyositis primarily under M33.- rather than L93.- cutaneous lupus codes." }),
+      description: "An idiopathic inflammatory myopathy with characteristic cutaneous findings and variable muscle, lung, cardiac and systemic involvement.",
+      clinical: "Heliotrope erythema, Gottron papules and photodistributed erythema are common cutaneous clues; poikilodermatous or violaceous eruptions may occur. Proximal muscle weakness is classic but the skin disease can precede, parallel or dominate the presentation. Malignancy association has been reported in adults and requires context-appropriate evaluation without automatic cancer work-up for every case.",
+      dermoscopy: "Dermoscopy may highlight vascular and pigment alterations in inflammatory patches but does not establish the diagnosis.",
+      differential: "Systemic lupus erythematosus, polymorphous light eruption, contact dermatitis, graft-versus-host disease, drug reaction, psoriasis and other interface dermatoses.",
+      treatment: "Rheumatology and dermatology usually co-manage disease. Photoprotection and topical anti-inflammatory therapy may help limited cutaneous disease; broader skin involvement, myositis, interstitial lung disease or refractory eruption typically needs specialist systemic immunomodulation tailored to phenotype and autoantibody profile.",
+      followup: "Monitor muscle strength, respiratory symptoms, dysphagia, cardiac symptoms, cutaneous activity and treatment adverse effects. New weakness, dyspnea, palpitations or rapidly progressive rash warrants urgent specialist reassessment.",
+      references: [refs.dermatomyositisReview, refs.whoIcd10, dermNet("Dermatomyositis", "dermatomyositis", "2026-11-19")]
+    }),
+    record({
+      id: "lichen-planus", name: "Lichen Planus", alternative: "LP; lichenoid dermatosis", category: "autoimmune-connective-immunobullous", subcategory: "lichenoid-disorder",
+      coding: coding({ diagnoses: [icd10Who("L43", "Lichen planus")], icdoApplicability: "not applicable", verificationNote: "ICD-10 WHO provides morphoea-variant and site-specific fourth-character codes; use them only when documentation supports the subtype." }),
+      description: "A chronic inflammatory lichenoid disorder that can involve skin, mucous membranes, hair and nails.",
+      clinical: "Pruritic violaceous flat-topped papules with fine white lines on the wrists, ankles, trunk or mucosa are typical. Wickham striae may be visible. Oral, genital, scalp and nail disease alters presentation and can cause pain, scarring alopecia or nail destruction.",
+      dermoscopy: "Whitish reticular structures, comedo-like openings and central grey dots may appear in cutaneous lesions; mucosal disease is often assessed clinically and histologically.",
+      differential: "Lichenoid drug eruption, lichen sclerosus, psoriasis, pityriasis rosea, lupus erythematosus, secondary syphilis, graft-versus-host disease and cutaneous lymphoma.",
+      treatment: "Asymptomatic limited disease may be observed. Symptomatic cutaneous disease often uses potent topical anti-inflammatory therapy selected by site and severity; mucosal, nail, scalp or widespread disease requires specialist pathways that may include phototherapy or systemic immunomodulation.",
+      followup: "Reassess erosive mucosal disease, scarring alopecia, nail dystrophy and treatment tolerance. Persistent erosive oral or genital lesions warrant specialist review because malignant transformation risk is discussed in guidelines but remains uncertain at the individual-patient level.",
+      references: [refs.edfLichenPlanus, refs.whoIcd10, dermNet("Lichen planus", "lichen-planus", "2026-11-19")]
+    }),
+    record({
+      id: "alopecia-areata", name: "Alopecia Areata", alternative: "AA; autoimmune patchy hair loss", category: "hair-nail-disorders", subcategory: "alopecia-disorder",
+      coding: coding({ diagnoses: [icd10Who("L63.9", "Alopecia areata, unspecified")], icdoApplicability: "not applicable", verificationNote: "ICD-10 WHO includes ophiasis and other alopecia areata variants with more specific fourth-character codes when documented." }),
+      description: "An immune-mediated nonscarring alopecia causing well-circumscribed hair loss that may relapse or extend.",
+      clinical: "Smooth patches of complete hair loss may involve the scalp, beard, eyebrows or body hair. Exclamation-mark hairs, nail pitting and loss of gray hairs may be seen. Extent ranges from localized patches to alopecia totalis or universalis; course is unpredictable.",
+      dermoscopy: "Yellow dots, black dots, exclamation-mark hairs and broken hairs may support active disease; trichoscopy aids extent assessment more than it replaces clinical diagnosis.",
+      differential: "Tinea capitis, trichotillomania, traction alopecia, androgenetic alopecia, telogen effluvium, secondary syphilis and scarring alopecias.",
+      treatment: "Observation may be appropriate for limited recent patches. Topical or intralesional anti-inflammatory therapy, contact immunotherapy and systemic immunomodulation are considered based on age, extent, duration, activity and patient preference; newer systemic options require specialist selection and monitoring.",
+      followup: "Monitor extent, regrowth, relapse, psychosocial impact and treatment adverse effects. Rapid progression, widespread loss, ocular lash involvement or failure to respond to initial therapy should prompt specialist reassessment.",
+      references: [refs.eadvAlopeciaAreataSystemic, refs.whoIcd10, dermNet("Alopecia areata", "alopecia-areata", "2026-11-19")]
+    }),
+    record({
+      id: "androgenetic-alopecia", name: "Androgenetic Alopecia", alternative: "Pattern hair loss; male-pattern hair loss; female-pattern hair loss", category: "hair-nail-disorders", subcategory: "alopecia-disorder",
+      coding: coding({ diagnoses: [icd10Who("L64.9", "Androgenic alopecia, unspecified")], icdoApplicability: "not applicable", verificationNote: "Drug-induced pattern alopecia maps to L64.0 and other specified variants to L64.8; select a more specific code only when documentation supports it." }),
+      description: "A common, often progressive pattern of hair thinning driven by androgen-sensitive follicle miniaturization in genetically predisposed people.",
+      clinical: "Men typically show bitemporal recession and vertex thinning; women more often show central thinning with relative frontal sparing, though overlap exists. Hair shaft diameter decreases before obvious baldness. Onset may occur in adolescence or later and progresses variably.",
+      dermoscopy: "Hair diameter diversity, increased vellus hairs, peripilar signs and yellow dots may support the diagnosis and help distinguish scarring alopecia.",
+      differential: "Telogen effluvium, alopecia areata, traction alopecia, frontal fibrosing alopecia, trichotillomania, thyroid disease-related effluvium and nutritional deficiency.",
+      treatment: "Counsel on progressive course and realistic goals. Topical minoxidil and, where appropriate and licensed, antiandrogen or 5-alpha reductase inhibitor therapy are common medical approaches in guidelines; procedural options are specialist decisions. Treatment selection must account for sex, age, childbearing plans, comorbidity and local licensing.",
+      followup: "Assess response over months, not weeks; maintenance is often needed to retain benefit. Sudden shedding, patchy loss, scarring features or treatment intolerance should prompt diagnostic review.",
+      references: [refs.edfAndrogeneticAlopecia, refs.whoIcd10, dermNet("Androgenetic alopecia", "androgenetic-alopecia", "2026-11-19")]
     })
   ];
 

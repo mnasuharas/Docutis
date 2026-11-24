@@ -117,18 +117,18 @@ function searchFor(elements, query) {
   return elements.cards.querySelectorAll(".card");
 }
 
-test("initial rendering creates all cards and eight category sections", () => {
+test("initial rendering creates all cards and ten category sections", () => {
   const { elements } = createHarness();
-  assert.equal(elements.cards.querySelectorAll(".card").length, 50);
+  assert.equal(elements.cards.querySelectorAll(".card").length, 57);
   assert.ok(elements.cards.querySelectorAll(".card").every(card => card.tagName === "BUTTON" && card.type === "button"));
-  assert.equal(elements.cards.querySelectorAll(".category-section").length, 8);
-  assert.equal(elements.categoryFilters.querySelectorAll("button").length, 9);
+  assert.equal(elements.cards.querySelectorAll(".category-section").length, 10);
+  assert.equal(elements.categoryFilters.querySelectorAll("button").length, 11);
   assert.ok(elements.categoryFilters.querySelectorAll("button").every(button => button.type === "button"));
-  assert.match(elements.resultStatus.textContent, /50 conditions shown/);
+  assert.match(elements.resultStatus.textContent, /57 conditions shown/);
   assert.match(textOf(elements.libraryStats), /3\s+oncology follow-up protocols/);
   assert.match(textOf(elements.reviewDashboardCounts), /2\s+Clinician-reviewed records/);
   assert.match(textOf(elements.reviewDashboardCounts), /0\s+Partially reviewed records/);
-  assert.match(textOf(elements.reviewDashboardCounts), /48\s+Records requiring clinician review/);
+  assert.match(textOf(elements.reviewDashboardCounts), /55\s+Records requiring clinician review/);
   assert.match(textOf(elements.reviewDashboardCounts), /1\/8\s+Reviewed quiz items/);
   assert.match(textOf(elements.reviewDashboardCounts), /1\/4\s+Reviewed visual items/);
   assert.match(textOf(elements.reviewDashboardCounts), /1\/3\s+Reviewed follow-up protocols/);
@@ -176,7 +176,9 @@ test("category filters preserve every broad grouping", () => {
     "inflammatory-eczematous": 5,
     "acneiform-sebaceous": 2,
     pigmentary: 1,
-    "infectious-infestation": 16
+    "infectious-infestation": 16,
+    "autoimmune-connective-immunobullous": 5,
+    "hair-nail-disorders": 2
   };
   for (const [category, expected] of Object.entries(expectedCounts)) {
     const button = elements.categoryFilters.querySelectorAll("button").find(item => item.dataset.category === category);
@@ -329,7 +331,7 @@ test("valid condition deep links open safely and invalid IDs preserve the librar
   assert.match(textOf(valid.elements.details), /Acne Vulgaris/);
   const invalid = createHarness(null, null, "https://example.test/Docutis/?condition=not-a-condition");
   assert.equal(invalid.elements.details.hidden, true);
-  assert.equal(invalid.elements.cards.querySelectorAll(".card").length, 50);
+  assert.equal(invalid.elements.cards.querySelectorAll(".card").length, 57);
 });
 
 test("card URLs support Back and Forward while Escape restores card focus", () => {

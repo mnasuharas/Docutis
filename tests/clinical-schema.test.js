@@ -24,7 +24,7 @@ test("Goal 7 exposes bounded controlled vocabularies and validates all productio
 test("exactly eight representative records use the structured pilot schema", () => {
   assert.deepEqual(Array.from(data.diseases.filter(record => record.clinicalProfile), record => record.id).sort(), [...pilots].sort());
   assert.deepEqual(coverage(data), {
-    totalRecords: 50,
+    totalRecords: 57,
     structuredProfiles: 8,
     structuredMorphology: 8,
     structuredLocalization: 6,
@@ -35,7 +35,7 @@ test("exactly eight representative records use the structured pilot schema", () 
     structuredMedicationDetails: 2,
     structuredFollowUp: 8,
     structuredRedFlags: 8,
-    legacyCompatible: 42
+    legacyCompatible: 49
   });
 });
 
@@ -44,7 +44,7 @@ test("legacy-only records remain valid and the profile is optional", () => {
   legacy.diseases.forEach(record => delete record.clinicalProfile);
   assert.doesNotThrow(() => validateData(legacy));
   assert.equal(coverage(legacy).structuredProfiles, 0);
-  assert.equal(coverage(legacy).legacyCompatible, 50);
+  assert.equal(coverage(legacy).legacyCompatible, 57);
 });
 
 test("structured aliases cannot duplicate a canonical name or another profile", () => {

@@ -1236,6 +1236,7 @@
       Object.freeze({ casePatternId: "pat-g27-05-plate", canonicalId: "nail-plate-destruction" }),
       Object.freeze({ casePatternId: "pat-g27-06-blood", canonicalId: "hemorrhagic-structureless-area" }),
       Object.freeze({ casePatternId: "pat-g27-06-lines", canonicalId: "longitudinal-nail-plate-lines" }),
+      Object.freeze({ casePatternId: "pat-g29-01-papule", canonicalId: "solitary-dark-papule" })
     ]),
     dermoscopicTokenLinks: Object.freeze({
       arborizing_vessels: "arborizing-vessels",
@@ -1316,6 +1317,10 @@
       Object.freeze({
         casePatternId: "pat-g27-06-streak",
         reason: "A thin dark streak toward the free edge is seen in one frame. No migration or growth-out is claimed, so it stays case-specific."
+      }),
+      Object.freeze({
+        casePatternId: "pat-g29-01-smooth",
+        reason: "A smooth intact surface is weak and nonspecific. It stays case-specific rather than a new reusable pattern."
       })
     ])
   });
