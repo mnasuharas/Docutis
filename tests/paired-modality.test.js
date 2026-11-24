@@ -14,7 +14,7 @@ test("pair provenance is required and unrelated images cannot become a silent pa
   assert.doesNotThrow(() => validatePairProvenance(data));
   assert.equal(data.pairProvenance.length, data.cases.length);
   const paired = data.pairProvenance.filter(row => row.provenance !== "not_paired");
-  assert.equal(JSON.stringify(paired.map(row => row.caseId)), JSON.stringify(["case-g21-08", "case-g24-01", "case-g24-02", "case-g25-01", "case-g25-02", "case-g25-03", "case-g25-04", "case-g25-05", "case-g25-06", "case-g26-01", "case-g26-02", "case-g26-03", "case-g26-04", "case-g26-05", "case-g26-06", "case-g26-07", "case-g27-01", "case-g27-02", "case-g27-03", "case-g27-04", "case-g27-05", "case-g27-06", "case-g30-01", "case-g30-02"]));
+  assert.equal(JSON.stringify(paired.map(row => row.caseId)), JSON.stringify(["case-g21-08", "case-g24-01", "case-g24-02", "case-g25-01", "case-g25-02", "case-g25-03", "case-g25-04", "case-g25-05", "case-g25-06", "case-g26-01", "case-g26-02", "case-g26-03", "case-g26-04", "case-g26-05", "case-g26-06", "case-g26-07", "case-g27-01", "case-g27-02", "case-g27-03", "case-g27-04", "case-g27-05", "case-g27-06", "case-g30-01", "case-g30-02", "case-g31-01"]));
   assert.equal(paired[0].provenance, "source_documented_pair");
   for (const id of ["case-g18-10", "case-g18-11", "case-g21-02", "case-g21-03"]) {
     assert.equal(data.pairProvenance.find(row => row.caseId === id).provenance, "not_paired", id);
@@ -79,7 +79,7 @@ test("clinical images cannot claim dermoscopic structures, and artifacts stay ou
     assert.equal(pattern.countsTowardDermoscopyCoverage, false);
     assert.equal(pattern.broadCoverage, false);
   }
-  assert.equal(JSON.stringify(metrics.paired), JSON.stringify(["case-g21-08", "case-g24-01", "case-g24-02", "case-g25-01", "case-g25-02", "case-g25-03", "case-g25-04", "case-g25-05", "case-g25-06", "case-g26-01", "case-g26-02", "case-g26-03", "case-g26-04", "case-g26-05", "case-g26-06", "case-g26-07", "case-g27-01", "case-g27-02", "case-g27-03", "case-g27-04", "case-g27-05", "case-g27-06", "case-g30-01", "case-g30-02"]));
+  assert.equal(JSON.stringify(metrics.paired), JSON.stringify(["case-g21-08", "case-g24-01", "case-g24-02", "case-g25-01", "case-g25-02", "case-g25-03", "case-g25-04", "case-g25-05", "case-g25-06", "case-g26-01", "case-g26-02", "case-g26-03", "case-g26-04", "case-g26-05", "case-g26-06", "case-g26-07", "case-g27-01", "case-g27-02", "case-g27-03", "case-g27-04", "case-g27-05", "case-g27-06", "case-g30-01", "case-g30-02", "case-g31-01"]));
   assert.equal(JSON.stringify(metrics.pairedMelanoma), JSON.stringify(["case-g24-01", "case-g24-02", "case-g25-01", "case-g25-03", "case-g25-04", "case-g25-05", "case-g26-01", "case-g26-03", "case-g26-07", "case-g27-03", "case-g27-04"]));
   assert.equal(JSON.stringify(metrics.pairedMelanomaWithHistopathology), JSON.stringify(["case-g25-01", "case-g25-03", "case-g25-04", "case-g25-05", "case-g26-01", "case-g26-03", "case-g27-03", "case-g27-04"]));
   assert.equal(JSON.stringify(metrics.melanomaWithHistopathology), JSON.stringify(["case-acral-melanoma-plantar", "case-g25-01", "case-g25-03", "case-g25-04", "case-g25-05", "case-g26-01", "case-g26-03", "case-g27-03", "case-g27-04"]));
@@ -97,7 +97,7 @@ test("Goal 22 single-image behavior and pilot fingerprints stay", () => {
     assert.equal(caseFingerprint(item), status.assets.find(asset => asset.assetType === "case" && asset.id === id).currentFingerprint);
     assert.equal(item.pairedModality, undefined);
   }
-  assert.equal(data.cases.length, 54);
+  assert.equal(data.cases.length, 55);
 });
 
 class CaseElement {

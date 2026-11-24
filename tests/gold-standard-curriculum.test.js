@@ -105,8 +105,9 @@ test("pattern-rich needs a visible dermoscopic diagnostic structure and equivoca
   const data = loadCaseData();
   const patterns = loadPatternData();
   const rich = patternRichPairIds(data, patterns);
-  assert.equal(JSON.stringify(rich.filter(id => !/^case-g2[67]-|^case-g30-/.test(id))), JSON.stringify(["case-g21-08", ...goal25]));
+  assert.equal(JSON.stringify(rich.filter(id => !/^case-g2[67]-|^case-g3[01]-/.test(id))), JSON.stringify(["case-g21-08", ...goal25]));
   assert.ok(rich.includes("case-g30-01"));
+  assert.ok(rich.includes("case-g31-01"));
   assert.equal(JSON.stringify(equivocalPairIds(data)), JSON.stringify(["case-g24-01", "case-g24-02"]));
   for (const id of equivocalPairIds(data)) assert.equal(rich.includes(id), false);
   const weakened = clone(data);

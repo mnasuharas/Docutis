@@ -129,8 +129,8 @@ test("CI validates pull requests, main pushes and manual runs with read-only per
   }
 });
 
-test("documentation reports CI, 57 records and the unfinished broader-coverage target", () => {
-  assert.match(readme, /57 condition records/i);
+test("documentation reports CI, 62 records and the unfinished broader-coverage target", () => {
+  assert.match(readme, /62 condition records/i);
   assert.match(readme, /v0\.2\.0-preview\.1[\s\S]*50 condition records/i);
   assert.match(readme, /GitHub Actions/i);
   assert.match(readme, /broader dermatology coverage[^.]*not yet complete/i);

@@ -41,6 +41,10 @@ const autoimmuneHairIds = [
   "bullous-pemphigoid", "pemphigus-vulgaris", "discoid-lupus-erythematosus", "dermatomyositis",
   "lichen-planus", "alopecia-areata", "androgenetic-alopecia"
 ];
+const nailImmunobullousIds = [
+  "mucous-membrane-pemphigoid", "dermatitis-herpetiformis",
+  "nail-psoriasis", "chronic-paronychia", "nail-lichen-planus"
+];
 const protectedIds = [...oncologyIds, ...goalTwoIds];
 
 function condition(id) {
@@ -63,15 +67,16 @@ test("dataset has the intended categories and structured subcategories", () => {
     "inflammatory-eczematous", "acneiform-sebaceous", "pigmentary", "infectious-infestation",
     "autoimmune-connective-immunobullous", "hair-nail-disorders"
   ]);
-  assert.ok(subcategories.length >= 30);
+  assert.ok(subcategories.length >= 31);
+  assert.ok(subcategories.some(item => item.id === "nail-disorder"));
   assert.equal(new Set(subcategories.map(item => item.id)).size, subcategories.length);
   for (const id of ["bacterial-infection", "dermatophyte-infection", "other-fungal-infection", "parasitic-infestation", "viral-infection"]) {
     assert.ok(subcategories.some(item => item.id === id), `missing infectious subcategory ${id}`);
   }
 });
 
-test("all 57 conditions have complete, consistent review records", () => {
-  assert.equal(diseases.length, 57);
+test("all 62 conditions have complete, consistent review records", () => {
+  assert.equal(diseases.length, 62);
   const categoryIds = new Set(categories.map(category => category.id));
   const subcategoryIds = new Set(subcategories.map(subcategory => subcategory.id));
   for (const disease of diseases) {
@@ -92,7 +97,8 @@ test("the existing 34 records remain and all 16 infectious records are present",
   for (const id of protectedIds) assert.ok(ids.has(id), `existing record ${id} was removed`);
   for (const id of infectiousIds) assert.ok(ids.has(id), `planned infectious record ${id} is missing`);
   for (const id of autoimmuneHairIds) assert.ok(ids.has(id), `planned autoimmune or hair record ${id} is missing`);
-  assert.equal(protectedIds.length + infectiousIds.length + autoimmuneHairIds.length, diseases.length);
+  for (const id of nailImmunobullousIds) assert.ok(ids.has(id), `planned nail or immunobullous record ${id} is missing`);
+  assert.equal(protectedIds.length + infectiousIds.length + autoimmuneHairIds.length + nailImmunobullousIds.length, diseases.length);
 });
 
 test("condition identifiers are unique", () => {
@@ -137,7 +143,7 @@ test("coding systems are explicit and ICD-O topography is separate from morpholo
 });
 
 test("non-neoplastic additions explicitly exclude ICD-O without synthetic codes", () => {
-  for (const id of [...goalTwoIds, ...infectiousIds, ...autoimmuneHairIds]) {
+  for (const id of [...goalTwoIds, ...infectiousIds, ...autoimmuneHairIds, ...nailImmunobullousIds]) {
     const disease = condition(id);
     assert.equal(disease.coding.icdo, null, `${id} must not contain ICD-O topography or morphology`);
     assert.equal(disease.coding.icdoApplicability, "not applicable");
@@ -313,4 +319,35 @@ test("actinic keratosis carries ICD-10-GM L57.0 with German topical labeling gua
   assert.ok(ak.clinicalProfile.diagnostics.some(item => item.method === "biopsy"));
   assert.match(JSON.stringify(ak.clinicalProfile.dermoscopy), /strawberry|pseudonetwork/i);
   assert.match(JSON.stringify(ak.clinicalProfile.dermoscopy), /pigmented|gray|rhomboid/i);
+});
+
+test("nail and immunobullous extension records retain primary sources, coding and the review gate", () => {
+  const expectedDois = {
+    "mucous-membrane-pemphigoid": ["10.1111/jdv.17397", "10.1111/jdv.17395"],
+    "dermatitis-herpetiformis": ["10.1111/jdv.17183"],
+    "nail-psoriasis": ["10.1016/j.jaad.2019.01.072"],
+    "chronic-paronychia": ["10.4103/JCAS.JCAS_30_21"],
+    "nail-lichen-planus": ["10.1016/j.jaad.2020.02.056"]
+  };
+  const expectedCodes = {
+    "mucous-membrane-pemphigoid": "L12.1",
+    "dermatitis-herpetiformis": "L13.0",
+    "nail-psoriasis": "L40.8",
+    "chronic-paronychia": "L03.0",
+    "nail-lichen-planus": "L43.8"
+  };
+  for (const id of nailImmunobullousIds) {
+    const disease = condition(id);
+    assert.equal(disease.reviewStatus, "clinician review required");
+    assert.equal(disease.clinicalReview, null);
+    assert.equal(disease.coding.icdo, null);
+    assert.equal(disease.coding.icdoApplicability, "not applicable");
+    assert.ok(disease.references.some(reference => reference.organization !== "DermNet"));
+    assert.ok(disease.references.some(reference => reference.metadataCheckedAt === "2026-11-23"));
+    assert.ok(disease.coding.diagnoses.some(d => d.code === expectedCodes[id]), `${id} missing ${expectedCodes[id]}`);
+  }
+  assert.match(condition("nail-psoriasis").coding.verificationNote, /L40\.4/);
+  for (const [id, dois] of Object.entries(expectedDois)) {
+    for (const doi of dois) assert.ok(condition(id).references.some(reference => reference.doi === doi), `${id} is missing ${doi}`);
+  }
 });

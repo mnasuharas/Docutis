@@ -4,6 +4,12 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
+### Disposition coverage, melanoacanthoma mimic, nail and immunobullous catalogue
+- Extend post-reveal disposition teaching to all 43 core training cases via overlays (inline case text still wins).
+- Accept Anais Brasileiros de Dermatologia 2019 Figure 1 as `case-g31-01` (melanoacanthoma; case-text histopathology; scalp paired clinical-dermoscopic; CC BY 4.0). Pigmented facial LPLK remains missing under an allowed license.
+- Expand the condition catalogue to 62 records with mucous membrane pemphigoid, dermatitis herpetiformis, and a first nail package (nail psoriasis, chronic paronychia, nail lichen planus); add subcategory `nail-disorder` (5 new records; all review required).
+- Library now 55 cases, 25 true pairs, 78 review units. Clinical review remains deferred. No release tag.
+
 ### Keratinocytic mimic cases (pigmented AK and LPLK)
 
 - Accept Diagnostics 2024 Figure 1 panels a/b as `case-g30-01` (pigmented actinic keratosis; study-level histopathology; facial paired clinical-dermoscopic; CC BY 4.0).
