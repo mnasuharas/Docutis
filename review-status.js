@@ -4772,6 +4772,63 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
         "safety-notice",
         "provenance"
       ]
+    },
+    {
+      "id": "case-g33-01",
+      "assetType": "case",
+      "title": "A raised pink lesion on the upper eyelid",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:1da1161a5e111c1f99f4c889259363090aa14b27fc61b4b74a640d1bee61885d",
+      "sections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/diagnostics13233590"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Di Stefani et al., Diagnostics 2023, Figure 3",
+          "organization": "Di Stefani et al., Diagnostics 2023, Figure 3, panel a. https://doi.org/10.3390/diagnostics13233590. CC BY 4.0. Cropped by Docutis.",
+          "type": "clinical",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/diagnostics13233590",
+          "metadataCheckedAt": "2026-11-25"
+        },
+        {
+          "title": "Di Stefani et al., Diagnostics 2023, Figure 3",
+          "organization": "Di Stefani et al., Diagnostics 2023, Figure 3, panel b. https://doi.org/10.3390/diagnostics13233590. CC BY 4.0. Cropped by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/diagnostics13233590",
+          "metadataCheckedAt": "2026-11-25"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "images",
+        "observations",
+        "interpretations",
+        "dermoscopic-features",
+        "differentials",
+        "diagnostic-ground-truth",
+        "teaching-points",
+        "safety-notice",
+        "provenance"
+      ]
     }
   ]
 });

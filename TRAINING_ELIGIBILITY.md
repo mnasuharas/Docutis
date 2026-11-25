@@ -6,9 +6,9 @@ Eligibility uses stored case metadata: local image and diagnosis-neutral public 
 
 ## Summary
 
-- Total cases in development dataset: 56
+- Total cases in development dataset: 57
 - Core-training eligible: 43
-- Context-only: 13
+- Context-only: 14
 - Excluded: 0
 - Core benign: 18
 - Core malignant: 23
@@ -86,6 +86,7 @@ Counts describe coverage. They are not prevalence and they are not a score.
 - case-g26-07: Nail-unit case without histopathology. Its label comes from a caption or a clinical description, so it cannot anchor a nail screening rule.
 - case-g27-06: Nail-unit case without histopathology. Its label comes from a caption or a clinical description, so it cannot anchor a nail screening rule.
 - case-g32-01: Legacy pilot case without a stored closest mimic or pattern links. The reveal cannot carry mimic and contrast teaching, so it is not a core anchor.
+- case-g33-01: Legacy pilot case without a stored closest mimic or pattern links. The reveal cannot carry mimic and contrast teaching, so it is not a core anchor. The smallest stored image side is under the training minimum, so structures may not be judgeable.
 
 ## Excluded cases
 

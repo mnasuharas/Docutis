@@ -167,7 +167,7 @@ const caseUiFiles = ["data.js", "case-data.js", "review-status.js", "oss-feedbac
 test("case learning flow hides diagnosis until reveal and keeps five cases review required", () => {
   const harness = caseHarness(caseUiFiles);
   const cases = harness.window.DOCUTIS_CASES.cases;
-  assert.equal(cases.length, 56);
+  assert.equal(cases.length, 57);
   assert.ok(cases.every(item => item.reviewStatus === "clinician review required" && item.clinicalReview === null));
   const listText = caseText(harness.root);
   for (const item of cases) assert.equal(listText.includes(item.diagnosisLabel), false);
@@ -175,7 +175,7 @@ test("case learning flow hides diagnosis until reveal and keeps five cases revie
   for (const name of diseaseNames) assert.equal(listText.includes(name), false, `case list leaked disease name: ${name}`);
   assert.doesNotMatch(listText, /Linked condition/);
   assert.match(listText, /Review required/);
-  assert.match(listText, /56 cases shown/);
+  assert.match(listText, /57 cases shown/);
 
   const start = caseFind(harness.root, node => node.tagName === "BUTTON" && node.getAttribute("aria-label") === "Start case: Large plantar pigmented macule")[0];
   start.dispatch("click");
@@ -295,7 +295,7 @@ test("case UI keeps zoom, reveal and noscript guards without a scored quiz", () 
     assert.equal(current.activeDecisionId, published.activeDecisionId);
   }
   const caseAssets = built.assets.filter(item => item.assetType === "case");
-  assert.equal(caseAssets.length, 56);
+  assert.equal(caseAssets.length, 57);
   assert.ok(caseAssets.every(item => item.status === "review required"));
   assert.ok(caseAssets.every(item => {
     const published = statusFile.assets.find(asset => asset.assetType === "case" && asset.id === item.id);
@@ -460,7 +460,7 @@ test("case filters stay in place and returning from a paired case restores focus
   modality.dispatch("change");
   assert.equal(document.activeElement, modality);
   assert.equal(filter("modality"), modality);
-  assert.match(caseText(root), /26 cases shown/);
+  assert.match(caseText(root), /27 cases shown/);
   const site = filter("anatomicalSite");
   site.value = "back of ";
   site.dispatch("input");
@@ -479,7 +479,7 @@ test("case filters stay in place and returning from a paired case restores focus
 
   const reset = find(node => node.textContent === "Reset case filters");
   reset.dispatch("click");
-  assert.match(caseText(root), /56 cases shown/);
+  assert.match(caseText(root), /57 cases shown/);
   assert.equal(document.activeElement.textContent, "Reset case filters");
 });
 
@@ -628,7 +628,7 @@ function controlLeakSurface(node) {
 test("diagnosis-bearing source links stay off interactive controls until reveal", () => {
   const harness = caseHarness(caseUiFiles);
   const cases = harness.window.DOCUTIS_CASES.cases;
-  assert.equal(cases.length, 56);
+  assert.equal(cases.length, 57);
   const filenameFragments = [
     "Photography_of_a_large_acral_lentiginous_melanoma",
     "Dermatoskopie_eines_nodulären_Basalzellkarzinoms",
@@ -750,8 +750,8 @@ test("pre-reveal case images use diagnosis-neutral public paths", () => {
     tab.dispatch("click");
   }
 
-  assert.equal(cases.length, 56);
-  const pairedImageCases = new Set(["case-g21-08", "case-g24-01", "case-g24-02", "case-g25-01", "case-g25-02", "case-g25-03", "case-g25-04", "case-g25-05", "case-g25-06", "case-g26-01", "case-g26-02", "case-g26-03", "case-g26-04", "case-g26-05", "case-g26-06", "case-g26-07", "case-g27-01", "case-g27-02", "case-g27-03", "case-g27-04", "case-g27-05", "case-g27-06", "case-g30-01", "case-g30-02", "case-g31-01", "case-g32-01"]);
+  assert.equal(cases.length, 57);
+  const pairedImageCases = new Set(["case-g21-08", "case-g24-01", "case-g24-02", "case-g25-01", "case-g25-02", "case-g25-03", "case-g25-04", "case-g25-05", "case-g25-06", "case-g26-01", "case-g26-02", "case-g26-03", "case-g26-04", "case-g26-05", "case-g26-06", "case-g26-07", "case-g27-01", "case-g27-02", "case-g27-03", "case-g27-04", "case-g27-05", "case-g27-06", "case-g30-01", "case-g30-02", "case-g31-01", "case-g32-01", "case-g33-01"]);
   for (const item of cases) {
     assert.equal(item.images.length, pairedImageCases.has(item.id) ? 2 : 1, item.id);
     if (!governedSrc[item.id]) continue;
@@ -901,33 +901,68 @@ test("guided Bowen cases require reasoning and the paired view before revealing"
   assert.match(bowenReview, /Clinical review pending|clinician review required/i);
 });
 
-test("invasive cSCC guided comparison states caption evidence and a clinical photograph", () => {
+test("guided SCC compares paired Bowen, invasive SCC and AK, with evidence held until reveal", () => {
   const { root, window } = caseHarness(caseUiFiles);
   const find = predicate => caseFind(root, predicate)[0];
   const button = label => find(node => node.tagName === "BUTTON" && node.textContent === label);
-  assert.equal(window.DOCUTIS_CASE_APP.pathwayFor("cutaneous-squamous-cell-carcinoma").count, 3);
-  assert.equal(window.DOCUTIS_CASE_APP.openPathway("cutaneous-squamous-cell-carcinoma"), true);
-  assert.match(caseText(root), /Case 1 of 3/);
-  assert.doesNotMatch(caseText(root), /Recorded diagnosis:/);
-  button("Next step").dispatch("click");
-  button("Next step").dispatch("click");
-  find(node => node.tagName === "TEXTAREA").value = "Two neighboring lesions, one thicker";
-  find(node => node.tagName === "TEXTAREA").dispatch("input");
-  button("Next step").dispatch("click");
-  caseFind(root, node => node.tagName === "TEXTAREA").forEach((field, index) => {
-    field.value = ["Uncertain keratinizing tumor", "Hypertrophic actinic keratosis", "A pathology report"][index];
+  const path = "cutaneous-squamous-cell-carcinoma";
+  assert.equal(window.DOCUTIS_CASE_APP.pathwayFor(path).count, 3);
+  assert.equal(window.DOCUTIS_CASE_APP.openPathway(path), true);
+  const views = () => caseFind(root, node => node.tagName === "IMG").map(image => image.src);
+  const reasonAndReveal = () => {
+    assert.equal(views().length, 1);
+    assert.doesNotMatch(caseText(root), /Recorded diagnosis:|Evidence type on record:/);
+    button("Next step").dispatch("click");
+    button("Show dermoscopy").dispatch("click");
+    assert.equal(views().length, 2);
+    const field = find(node => node.tagName === "TEXTAREA");
+    field.value = "Visible surface detail and uncertain depth";
     field.dispatch("input");
-  });
-  button("Next step").dispatch("click");
-  button("Next step").dispatch("click");
-  button("Reveal diagnosis").dispatch("click");
-  button("Next step").dispatch("click");
+    button("Next step").dispatch("click");
+    assert.ok(find(node => node.tagName === "LABEL" && /What do the images leave uncertain about invasion/.test(node.textContent)));
+    caseFind(root, node => node.tagName === "TEXTAREA").forEach((answer, index) => {
+      answer.value = ["Uncertain keratinizing tumor", "Scaly plaque mimic", "A tissue result"][index];
+      answer.dispatch("input");
+    });
+    button("Next step").dispatch("click");
+    button("Reveal diagnosis").dispatch("click");
+    button("Next step").dispatch("click");
+  };
+  assert.match(caseText(root), /Case 1 of 3/);
+  reasonAndReveal();
+  assert.match(caseText(root), /Recorded diagnosis: Squamous cell carcinoma in situ/);
+
+  button("Start next comparison case").dispatch("click");
+  assert.match(caseText(root), /Case 2 of 3/);
+  assert.match(views()[0], /case-57-clinical\.jpg$/);
+  assert.doesNotMatch(caseText(root), /Invasive cutaneous squamous cell carcinoma/);
+  assert.equal(caseFind(root, node => node.tagName === "A" && (node.href || "").includes("diagnostics13233590")).length, 0);
+  reasonAndReveal();
   const review = caseText(root);
-  assert.match(review, /Source evidence on record/);
-  assert.match(review, /Stored views: Clinical photograph\./);
+  assert.match(review, /Stored views: Clinical photograph and Dermoscopic image/);
+  assert.match(review, /Histopathology is the confirmation method recorded for this case/);
+  assert.match(review, /Figure 3/);
+  assert.match(review, /Recorded diagnosis: Invasive cutaneous squamous cell carcinoma/);
+  assert.match(review, /Clinical review pending|clinician review required/i);
+  assert.ok(caseFind(root, node => node.tagName === "A" && (node.href || "").includes("diagnostics13233590")).length);
+
+  button("Start next comparison case").dispatch("click");
+  assert.match(caseText(root), /Case 3 of 3/);
+  assert.match(views()[0], /case-53-clinical\.jpg$/);
+  reasonAndReveal();
+  assert.match(caseText(root), /Recorded diagnosis: Pigmented actinic keratosis/);
+  button("Finish learning path").dispatch("click");
+  assert.match(caseText(root), /Completed: Cutaneous SCC and keratinocytic mimics/);
+});
+
+test("the original clinical-only SCC retains its source-caption evidence", () => {
+  const { root, window } = caseHarness(caseUiFiles);
+  assert.equal(window.DOCUTIS_CASE_APP.openCase("case-scc-ak-paraspinal"), true);
+  const find = predicate => caseFind(root, predicate)[0];
+  find(node => node.getAttribute?.("aria-label") === "Step 4 of 5: Reveal").dispatch("click");
+  find(node => node.tagName === "BUTTON" && node.textContent === "Reveal diagnosis").dispatch("click");
+  const review = caseText(root);
   assert.match(review, /Evidence type on record: Expert diagnosis/);
   assert.match(review, /histopathology report is not linked/);
   assert.doesNotMatch(review, /Histopathology is the confirmation method recorded for this case/);
-  assert.match(review, /These answers stay in this tab/);
-  assert.match(review, /not clinician review/);
 });

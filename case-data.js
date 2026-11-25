@@ -1551,9 +1551,56 @@
         ],
         "informationGain": "dermoscopy_adds_support",
         "informationGainNote": "Dermoscopy shows the blood crust and a few fine peripheral vessels more closely. The images do not establish whether the lesion is invasive."
+      }),
+      Object.freeze({
+        "caseId": "case-g33-01",
+        "provenance": "same_lesion_confirmed",
+        "basis": "Figure 3 identifies panels a and b as the clinical and dermoscopic views of one left upper eyelid lesion. Panel d shows its histopathology. The Results section refers to this figure when discussing invasive SCC.",
+        "clinicalImageIds": [
+          "img-g33-01a"
+        ],
+        "dermoscopicImageIds": [
+          "img-g33-01b"
+        ],
+        "informationGain": "dermoscopy_adds_support",
+        "informationGainNote": "The closer view adds detail about the surface break, pale structureless area and curved vessels. It does not show the invasion depth."
       })
     ]),
     comparisons: Object.freeze([
+      Object.freeze({
+        "id": "cmp-invasive-scc-bowen-erosion",
+        "caseIdA": "case-g33-01",
+        "caseIdB": "case-g32-01",
+        "sharedFeatures": [
+          "The two clinical views show pink lesions with surface damage and adherent material."
+        ],
+        "favouringA": [
+          "This upper-eyelid lesion appears raised and its close view has a pale area and curved vessels. The source documents invasive disease."
+        ],
+        "favouringB": [
+          "The other lesion is pictured as an oval plaque with prominent central dark crust. The source reports in-situ disease."
+        ],
+        "discriminator": "The lesions differ in contour and surface detail. The lesion-specific histopathology is what separates the source diagnoses.",
+        "commonTrap": "Inferring dermal invasion from crust or an eroded surface alone.",
+        "limits": "Different anatomical views and crops. The surface findings cannot establish or exclude invasion."
+      }),
+      Object.freeze({
+        "id": "cmp-invasive-scc-pak-surface",
+        "caseIdA": "case-g33-01",
+        "caseIdB": "case-g30-01",
+        "sharedFeatures": [
+          "Both examples involve facial skin and have areas where the surface or follicular detail needs close inspection."
+        ],
+        "favouringA": [
+          "A raised pink eyelid lesion with surface breaks and pale adherent material."
+        ],
+        "favouringB": [
+          "A flatter brown cheek lesion with visible pale follicular openings in the close view."
+        ],
+        "discriminator": "Compare raised versus flat contour, surface disruption and the distribution of pigment. These differences support a differential, with the source pathology providing the diagnosis for each case.",
+        "commonTrap": "Turning these two different appearances into a universal rule for invasion.",
+        "limits": "This actinic keratosis example is pigmented and the report ties pathology at study level. It does not represent all actinic keratoses."
+      }),
       Object.freeze({
         id: "cmp-bowen-lplk-crust",
         caseIdA: "case-g32-01",
@@ -12552,6 +12599,195 @@
         },
         "modalityIntegration": "The clinical photograph shows the whole crusted pink plaque. The dermoscopic view depicts central crust and a few peripheral vessels at closer range.",
         "compareWith": ["cmp-bowen-lplk-crust"],
+        "recordedScreeningDecision": null,
+        "patterns": [],
+        "annotations": [],
+        "dermoscopicFeatures": [],
+        "localization": null,
+        "reviewStatus": "clinician review required",
+        "clinicalReview": null
+      }),
+      freezeCase({
+        "id": "case-g33-01",
+        "slug": "g33-raised-pink-eyelid-lesion",
+        "title": "A raised pink lesion on the upper eyelid",
+        "diagnosisLabel": "Invasive cutaneous squamous cell carcinoma",
+        "diseaseId": "cutaneous-squamous-cell-carcinoma",
+        "category": "Keratinocytic malignancies",
+        "educationalLevel": "intermediate",
+        "caseType": "clinical_dermoscopic",
+        "patientContext": {
+          "ageBand": "Not reported for this figure",
+          "sex": "Not reported for this figure",
+          "anatomicalSite": "Left upper eyelid",
+          "presentationNotes": "The figure shows a lesion at the left upper eyelid margin. Growth history and palpation are unavailable."
+        },
+        "images": [
+          {
+            "id": "img-g33-01a",
+            "type": "clinical",
+            "src": "assets/media/cases/case-57-clinical.jpg",
+            "dimensions": {
+              "width": 490,
+              "height": 180
+            },
+            "alt": "A raised pink lesion sits at the upper eyelid margin. There are small red surface breaks and pale yellow-white adherent material.",
+            "caption": "A raised pink lesion sits at the upper eyelid margin. There are small red surface breaks and pale yellow-white adherent material.",
+            "source": "Di Stefani et al., Diagnostics 2023, Figure 3",
+            "sourceUrl": "https://doi.org/10.3390/diagnostics13233590",
+            "creator": "Alessandro Di Stefani and coauthors",
+            "license": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "attribution": "Di Stefani et al., Diagnostics 2023, Figure 3, panel a. https://doi.org/10.3390/diagnostics13233590. CC BY 4.0. Cropped by Docutis.",
+            "attributionRequired": true,
+            "modificationStatus": "cropped",
+            "accessDate": "2026-11-25",
+            "metadataCheckedAt": "2026-11-25",
+            "sourceVerificationStatus": "verified",
+            "patientIdentifiable": false,
+            "consentBasis": "Published CC BY 4.0 figure. The selected crop is lesion-focused and excludes the iris and wider face.",
+            "modificationsNotes": "diagnostics-13-03590-g003.png, publisher Figure 3; source sha256 4e6adcc3e20f00984356a7fb338a4c63cae57cde83575895a8da842441eaac5d; Pillow crop left 235, top 185, right 725, bottom 365, saved JPEG quality 92 without metadata; output sha256 7c4b4e36831d2d9ece7e4fa9ead38246ef5c83040845925d8265cb3370b4cc06."
+          },
+          {
+            "id": "img-g33-01b",
+            "type": "dermoscopy",
+            "src": "assets/media/cases/case-57-dermoscopy.jpg",
+            "dimensions": {
+              "width": 836,
+              "height": 693
+            },
+            "alt": "The close-up shows a pale structureless area below the red center and indistinct curved vessels to the right. Lashes and scale markings cross the field.",
+            "caption": "The close-up shows a pale structureless area below the red center and indistinct curved vessels to the right. Lashes and scale markings cross the field.",
+            "source": "Di Stefani et al., Diagnostics 2023, Figure 3",
+            "sourceUrl": "https://doi.org/10.3390/diagnostics13233590",
+            "creator": "Alessandro Di Stefani and coauthors",
+            "license": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+            "attribution": "Di Stefani et al., Diagnostics 2023, Figure 3, panel b. https://doi.org/10.3390/diagnostics13233590. CC BY 4.0. Cropped by Docutis.",
+            "attributionRequired": true,
+            "modificationStatus": "cropped",
+            "accessDate": "2026-11-25",
+            "metadataCheckedAt": "2026-11-25",
+            "sourceVerificationStatus": "verified",
+            "patientIdentifiable": false,
+            "consentBasis": "Published CC BY 4.0 figure. The selected crop is lesion-focused and excludes the iris and wider face.",
+            "modificationsNotes": "diagnostics-13-03590-g003.png, publisher Figure 3; source sha256 4e6adcc3e20f00984356a7fb338a4c63cae57cde83575895a8da842441eaac5d; Pillow crop left 30, top 985, right 866, bottom 1678, saved JPEG quality 92 without metadata; output sha256 81701a3f0bc3698dd7835af3def45255e3eebbe4e9593287a57d2af3e5376020."
+          }
+        ],
+        "diagnosticGroundTruth": {
+          "confirmedDiagnosis": "Invasive cutaneous squamous cell carcinoma",
+          "confirmationMethod": "histopathology",
+          "histopathologySource": "figure_caption",
+          "confirmationNotes": "Di Stefani et al. label the upper-eyelid lesion SCC in Figure 3, provide its histopathology in panel d and discuss invasive SCC with direct reference to this figure in the Results.",
+          "confidenceNote": "Lesion-specific clinical, dermoscopic and histopathological correlation in the article. The depth and grade are not stated for this example."
+        },
+        "observations": [
+          {
+            "id": "obs-g33-01a",
+            "kind": "observation",
+            "modality": "clinical",
+            "text": "A raised pink lesion sits at the upper eyelid margin. There are small red surface breaks and pale yellow-white adherent material."
+          },
+          {
+            "id": "obs-g33-01b",
+            "kind": "observation",
+            "modality": "dermoscopy",
+            "text": "The close-up shows a pale structureless area below the red center and indistinct curved vessels to the right. Lashes and scale markings cross the field."
+          }
+        ],
+        "interpretations": [
+          {
+            "id": "int-g33-01",
+            "kind": "interpretation",
+            "relatedObservationIds": [
+              "obs-g33-01a",
+              "obs-g33-01b"
+            ],
+            "text": "The paired views add details about the damaged surface and vessels. The depth of the lesion remains indeterminate on these views."
+          }
+        ],
+        "differentials": [
+          {
+            "diagnosis": "Invasive cutaneous squamous cell carcinoma",
+            "supportingFeatures": [
+              "Raised pink lesion with focal surface breakdown and keratotic material"
+            ],
+            "contradictingFeatures": [
+              "The photographs do not show depth"
+            ],
+            "teachingDistinction": "The source histopathology resolved the distinction."
+          },
+          {
+            "diagnosis": "Squamous cell carcinoma in situ (Bowen disease)",
+            "supportingFeatures": [
+              "Pink surface with erosion and crust can be seen in the comparison case"
+            ],
+            "contradictingFeatures": [
+              "The appearance cannot settle whether there is dermal invasion"
+            ],
+            "teachingDistinction": "Compare the surface before relying on the histopathology result."
+          },
+          {
+            "diagnosis": "Actinic keratosis",
+            "supportingFeatures": [
+              "Adherent pale surface material suggests keratinization"
+            ],
+            "contradictingFeatures": [
+              "The raised, eroded morphology differs from the paired cheek comparison"
+            ],
+            "teachingDistinction": "The comparison illustrates two appearances. It does not turn the visible differences into an exclusion rule."
+          }
+        ],
+        "teachingPoints": [
+          {
+            "id": "tp-g33-01a",
+            "title": "Describe what changes in the closer view",
+            "text": "Locate the pale area and surface break. Keep the lashes and ruler marks out of the lesion description."
+          },
+          {
+            "id": "tp-g33-01b",
+            "title": "Resolve uncertainty with the source evidence",
+            "text": "The article shows histopathology for this exact lesion. Neither clinical image shows the invasion depth."
+          }
+        ],
+        "closestMimic": {
+          "name": "Squamous cell carcinoma in situ (Bowen disease)",
+          "whyClosest": "The two case images share surface damage on a pink background. Their sources report different pathology."
+        },
+        "pairedModality": {
+          "clinicalObservation": "A raised pink lesion sits at the upper eyelid margin. There are small red surface breaks and pale yellow-white adherent material.",
+          "dermoscopicObservation": "The close-up shows a pale structureless area below the red center and indistinct curved vessels to the right. Lashes and scale markings cross the field.",
+          "addedValue": "The second view shows the pale area, surface break and vessel contours at higher magnification.",
+          "reasoningImpact": "The close view refines the surface description; depth remains uncertain.",
+          "limits": "The clinical crop shows the lesion margin and surrounding lid only. Palpation, evolution and histological depth are unavailable in the learning view.",
+          "informationGain": "dermoscopy_adds_support",
+          "informationGainNote": "The closer view adds detail about the surface break, pale structureless area and curved vessels. It does not show the invasion depth.",
+          "comparison": {
+            "clinicalClue": "Raised pink eyelid lesion with adherent pale material.",
+            "dermoscopicClue": "Pale structureless area and indistinct curved vessels.",
+            "addedInformation": "The close view resolves finer surface and vessel detail.",
+            "diagnosticConflict": "Similar surface damage can occur in the in-situ comparison.",
+            "teachingRule": "Distinguish the visible clues from what the source histopathology established."
+          }
+        },
+        "modalityIntegration": "The clinical crop shows the raised eyelid lesion and damaged surface. The corresponding dermoscopic view resolves the pale area and curved vessels.",
+        "dispositionTeaching": {
+          "summary": "The study used histopathology to establish the lesion diagnosis. The clinical and dermoscopic images supported assessment of the visible morphology.",
+          "options": [
+            {
+              "id": "biopsy-excision-consideration",
+              "label": "Biopsy or excision consideration",
+              "rationale": "The tissue result in Figure 3 resolved the lesion diagnosis and is available in the source."
+            }
+          ],
+          "preferredEducationalId": "biopsy-excision-consideration",
+          "sourceNote": "Di Stefani et al., Figure 3 and Results.",
+          "limitation": "Educational account of one published case. No individual management recommendation."
+        },
+        "compareWith": [
+          "cmp-invasive-scc-bowen-erosion",
+          "cmp-invasive-scc-pak-surface"
+        ],
         "recordedScreeningDecision": null,
         "patterns": [],
         "annotations": [],

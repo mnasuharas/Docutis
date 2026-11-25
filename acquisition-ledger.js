@@ -3523,6 +3523,65 @@
         "specialSiteValue": "none",
         "status": "accepted",
         "reason": "Figure 1 ties the two panels to the same lesion and reports its pathology. Publisher pixels and CC BY 4.0 license verified; no third-party figure credit."
+      }),
+      row({
+        "goal": 33,
+        "partnerUrl": null,
+        "integrated": true,
+        "caseId": "case-g33-01",
+        "dateChecked": "2026-11-25",
+        "thirdPartyExclusion": false,
+        "localizationReadiness": "localization_ready",
+        "extraction": [
+          {
+            "asset": "assets/media/cases/case-57-clinical.jpg",
+            "imageType": "clinical",
+            "figure": "Figure 3",
+            "panel": "a",
+            "sourceFile": "diagnostics-13-03590-g003.png, publisher Figure 3",
+            "sourceSha256": "4e6adcc3e20f00984356a7fb338a4c63cae57cde83575895a8da842441eaac5d",
+            "box": [
+              235,
+              185,
+              725,
+              365
+            ],
+            "method": "Crop with Pillow and export as JPEG quality 92 without metadata",
+            "assetSha256": "7c4b4e36831d2d9ece7e4fa9ead38246ef5c83040845925d8265cb3370b4cc06"
+          },
+          {
+            "asset": "assets/media/cases/case-57-dermoscopy.jpg",
+            "imageType": "dermoscopy",
+            "figure": "Figure 3",
+            "panel": "b",
+            "sourceFile": "diagnostics-13-03590-g003.png, publisher Figure 3",
+            "sourceSha256": "4e6adcc3e20f00984356a7fb338a4c63cae57cde83575895a8da842441eaac5d",
+            "box": [
+              30,
+              985,
+              866,
+              1678
+            ],
+            "method": "Crop with Pillow and export as JPEG quality 92 without metadata",
+            "assetSha256": "81701a3f0bc3698dd7835af3def45255e3eebbe4e9593287a57d2af3e5376020"
+          }
+        ],
+        "id": "cand-g33-invasive-eyelid-scc",
+        "diagnosisLabel": "Invasive cutaneous squamous cell carcinoma",
+        "sourceLabel": "Di Stefani et al., Diagnostics 2023, Figure 3",
+        "sourceUrl": "https://doi.org/10.3390/diagnostics13233590",
+        "author": "Alessandro Di Stefani and coauthors",
+        "license": "CC BY 4.0",
+        "modality": "clinical_and_dermoscopy",
+        "pairedStatus": "same_lesion_confirmed",
+        "site": "Left upper eyelid",
+        "verificationStrength": "histopathology_in_figure_caption",
+        "verificationMethod": "histopathology",
+        "histopathology": "present_figure_caption",
+        "dermoscopicTeachingValue": "Surface breakdown, pale structureless area and indistinct curved vessels. Lashes and scale markings remain.",
+        "specialSiteValue": "face",
+        "status": "accepted",
+        "reason": "Figure 3 links the clinical and dermoscopic views to a lesion-specific histopathology panel. The Results text directly references this figure for invasive SCC. Publisher figure and its CC BY 4.0 license checked."
       })
     ])
   });

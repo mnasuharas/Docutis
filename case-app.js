@@ -42,7 +42,12 @@
 
   const guidedPathways = Object.freeze([
     { id: "cutaneous-melanoma", title: "Melanoma and its mimics", cases: ["case-g25-02", "case-g25-01", "case-g25-03", "case-g27-02", "case-g26-01"] },
-    { id: "cutaneous-squamous-cell-carcinoma", title: "Cutaneous SCC and keratinocytic mimics", cases: ["case-scc-ak-paraspinal", "case-g32-01", "case-ak-field-hand"] },
+    {
+      id: "cutaneous-squamous-cell-carcinoma",
+      title: "Cutaneous SCC and keratinocytic mimics",
+      cases: ["case-g32-01", "case-g33-01", "case-g30-01"],
+      nextPrompt: "What do the images leave uncertain about invasion, and what evidence would resolve it?"
+    },
     { id: "squamous-cell-carcinoma-in-situ", title: "Bowen disease and scaly plaque mimics", cases: ["case-g30-02", "case-g32-01", "case-scc-ak-paraspinal"] }
   ]);
   const guidedPrompts = Object.freeze([
@@ -998,7 +1003,7 @@
     const response = element("fieldset", undefined, "guided-case-response");
     response.appendChild(element("legend", "Record your reasoning before the reveal"));
     response.appendChild(element("p", "Use the teaching images only. These answers stay in the current tab and are not scored.", "case-kind-note"));
-    guidedPrompts.forEach(([key, text]) => {
+    guided.prompts.forEach(([key, text]) => {
       const label = element("label", text, "case-filter");
       const field = document.createElement("textarea");
       field.rows = 2;
@@ -1015,7 +1020,7 @@
     const debrief = element("section", undefined, "case-teaching");
     debrief.appendChild(element("h5", "Compare your reasoning with the source"));
     const answers = element("dl");
-    guidedPrompts.forEach(([key, text]) => {
+    guided.prompts.forEach(([key, text]) => {
       answers.appendChild(element("dt", text));
       answers.appendChild(element("dd", guided.answers[key] || "No answer recorded"));
     });
@@ -1609,7 +1614,7 @@
           notice.textContent = "Record your observations before continuing.";
           return;
         }
-        if (activeStep === 2 && (guidedPrompts.some(([key]) => !guided.answers[key]?.trim()) ||
+        if (activeStep === 2 && (guided.prompts.some(([key]) => !guided.answers[key]?.trim()) ||
             (isTruePair(caseItem) && !guided.dermoscopySeen))) {
           notice.textContent = isTruePair(caseItem) && !guided.dermoscopySeen
             ? "Open the dermoscopic image before advancing to the reveal."
@@ -1868,7 +1873,10 @@
     if (items.some(item => !item)) return false;
     completedPathway = null;
     listEntryId = null;
-    guided = { pathway, items, index: 0 };
+    const prompts = pathway.nextPrompt
+      ? guidedPrompts.map(([key, text]) => [key, key === "next" ? pathway.nextPrompt : text])
+      : guidedPrompts;
+    guided = { pathway, items, prompts, index: 0 };
     startGuidedCase(focusTarget);
     return true;
   }
