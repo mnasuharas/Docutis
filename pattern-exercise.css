@@ -112,7 +112,7 @@
   height: auto;
 }
 
-.exercise-workspace .exercise-frame img {
+.exercise-workspace .exercise-frame.is-markable img {
   cursor: crosshair;
 }
 
@@ -162,8 +162,42 @@
   font-size: .875rem;
 }
 
-.exercise-pattern {
+.exercise-pattern,
+.exercise-clinical {
   margin-block: .8rem;
+}
+
+.exercise-clinical summary {
+  padding-block: .55rem;
+}
+
+.exercise-visibility {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: 44px;
+  width: fit-content;
+}
+
+.exercise-contrast {
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-accent);
+}
+
+.exercise-contrast dt {
+  font-weight: 700;
+}
+
+.exercise-contrast dd {
+  margin: 0 0 .75rem;
+}
+
+.exercise-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
 }
 
 .pattern-exercise summary {
