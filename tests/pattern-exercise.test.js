@@ -22,6 +22,7 @@ class Element {
   }
 
   appendChild(child) {
+    child.parentElement = this;
     this.children.push(child);
   }
 
@@ -93,6 +94,9 @@ test("the exercise hides both diagnoses and teaching marks until the paired answ
   click("Start pattern exercise");
   assert.equal(tag("h3")[0].focused, true);
   assert.equal(tag("img")[0].src, "assets/media/cases/case-33-dermoscopy.jpg");
+  assert.equal(tag("img")[1].src, "assets/media/cases/case-33-clinical.jpg");
+  assert.equal(tag("img")[1].alt, "Clinical photograph for the current case.");
+  assert.ok(tag("a").every(link => !link.href.includes("doi.org")));
   assert.doesNotMatch(contents(), /melanoma|nevus|teaching marks|atypical pigment network/i);
   answer("Clear");
   submit();
@@ -120,6 +124,19 @@ test("the exercise hides both diagnoses and teaching marks until the paired answ
   assert.match(contents(), /Additional structure/);
   assert.match(contents(), /50% from the left, 40% from the top/);
   assert.equal(tag("span").filter(node => node.className.includes("educator")).length, 4);
+  assert.match(contents(), /What dermoscopy adds/);
+  assert.match(contents(), /Show the worked comparison/);
+  assert.match(contents(), /Limits of the image comparison/);
+  const overlay = tag("div").find(node => node.className === "exercise-overlay");
+  const toggle = tag("input")[0];
+  assert.equal(toggle.checked, true);
+  toggle.checked = false;
+  toggle.emit("change");
+  assert.equal(overlay.hidden, true);
+  assert.equal(tag("span").filter(node => node.className.includes("educator")).length, 4);
+  toggle.checked = true;
+  toggle.emit("change");
+  assert.equal(overlay.hidden, false);
 });
 
 test("the independent case resets input, permits uncertainty without a mark and reveals its source afterwards", () => {
@@ -131,6 +148,7 @@ test("the independent case resets input, permits uncertainty without a mark and 
   submit();
   click("Open independent case");
   assert.equal(tag("img")[0].src, "assets/media/cases/case-39-dermoscopy.jpg");
+  assert.equal(tag("img")[1].src, "assets/media/cases/case-39-clinical.jpg");
   assert.equal(tag("span").length, 0);
   assert.equal(tag("input")[0].value, "");
   assert.doesNotMatch(contents(), /melanoma|blotch|learner reasoning|pigment network/i);
@@ -143,6 +161,10 @@ test("the independent case resets input, permits uncertainty without a mark and 
   assert.match(contents(), /Eccentric dark blotch/);
   assert.match(contents(), /Cannot assess/);
   assert.ok(tag("a").some(link => link.href === "https://doi.org/10.3390/life14060659"));
+  click("Review the first two cases");
+  assert.equal(tag("article").length, 2);
+  click("Return to independent case review");
+  assert.match(contents(), /Cannot assess/);
   click("Restart exercise");
   assert.equal(tag("img").length, 0);
   assert.equal(tag("h3")[0].focused, true);
@@ -151,6 +173,6 @@ test("the independent case resets input, permits uncertainty without a mark and 
 test("the public page loads the pattern exercise after the case and pattern data", () => {
   const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
   assert.match(html, /id="patternExercise"[^>]*hidden>/);
-  assert.match(html, /href="pattern-exercise\.css"/);
-  assert.match(html, /src="case-data\.js"[\s\S]*src="pattern-data\.js"[\s\S]*src="pattern-exercise\.js"/);
+  assert.match(html, /href="pattern-exercise\.css\?v=paired-views"/);
+  assert.match(html, /src="case-data\.js"[\s\S]*src="pattern-data\.js"[\s\S]*src="pattern-exercise\.js\?v=paired-views"/);
 });

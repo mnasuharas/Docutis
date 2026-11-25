@@ -23,14 +23,24 @@
     }
   ].map(function (lesson) {
     const record = collection.cases.find(function (item) { return item.id === lesson.id; });
+    const image = record && record.images.find(function (item) { return item.type === "dermoscopy"; });
+    const pair = image && collection.pairProvenance.find(function (item) {
+      return item.caseId === lesson.id &&
+        ["same_lesion_confirmed", "source_documented_pair"].includes(item.provenance) &&
+        item.dermoscopicImageIds.includes(image.id);
+    });
     return Object.assign(lesson, {
       record: record,
-      image: record && record.images.find(function (item) { return item.type === "dermoscopy"; })
+      image: image,
+      clinicalImage: pair && record.images.find(function (item) {
+        return item.type === "clinical" && pair.clinicalImageIds.includes(item.id);
+      })
     });
   });
 
   if (lessons.some(function (lesson) { return !lesson.image; })) return;
 
+  const comparison = collection.comparisons.find(function (item) { return item.id === "cmp-g25-network"; });
   const pattern = window.DOCUTIS_PATTERNS && window.DOCUTIS_PATTERNS.patterns.find(function (item) {
     return item.id === "atypical-pigment-network";
   });
@@ -64,16 +74,43 @@
     return title;
   }
 
-  function frame(parent, image) {
-    const container = add(parent, "div", "", "exercise-frame");
+  function photograph(container, image, description) {
     const photo = add(container, "img");
     photo.src = image.src;
     photo.width = image.dimensions.width;
     photo.height = image.dimensions.height;
-    photo.alt = "Dermoscopy image. Record any visible structures and their distribution.";
+    photo.alt = description;
+    return photo;
+  }
+
+  function frame(parent, image) {
+    const container = add(parent, "div", "", "exercise-frame is-markable");
+    const photo = photograph(container, image, "Dermoscopy image. Record any visible structures and their distribution.");
     const overlay = add(container, "div", "", "exercise-overlay");
     overlay.setAttribute("aria-hidden", "true");
     return { photo: photo, overlay: overlay };
+  }
+
+  function attribution(parent, image, revealed) {
+    if (revealed) {
+      const source = add(parent, "a", image.attribution, "exercise-caption");
+      source.href = image.sourceUrl;
+      return;
+    }
+    const credit = add(parent, "p", image.creator + " · cropped image · ", "exercise-caption");
+    const license = add(credit, "a", image.license);
+    license.href = image.licenseUrl;
+  }
+
+  function clinicalView(parent, lesson, revealed) {
+    if (!lesson.clinicalImage) return;
+    const detail = add(parent, "details", "", "exercise-clinical");
+    add(detail, "summary", "Clinical photograph");
+    const container = add(detail, "div", "", "exercise-frame");
+    const photo = photograph(container, lesson.clinicalImage,
+      revealed ? lesson.clinicalImage.alt : "Clinical photograph for the current case.");
+    photo.loading = "lazy";
+    attribution(detail, lesson.clinicalImage, revealed);
   }
 
   function mark(overlay, position, label, educator) {
@@ -105,14 +142,13 @@
     form.noValidate = true;
     const viewer = add(form, "div");
     const picture = frame(viewer, lesson.image);
-    const credit = add(viewer, "p", lesson.image.creator + " · cropped image · ", "exercise-caption");
-    const license = add(credit, "a", lesson.image.license);
-    license.href = lesson.image.licenseUrl;
 
     const fields = add(form, "div", "", "exercise-fields");
     const slots = [];
     const status = add(viewer, "p", "", "exercise-caption");
     status.setAttribute("role", "status");
+    attribution(viewer, lesson.image, false);
+    clinicalView(viewer, lesson, false);
     let active = 0;
 
     function draw() {
@@ -240,6 +276,17 @@
     responses[index].findings.forEach(function (finding, i) {
       if (finding.position) mark(picture.overlay, finding.position, String(i + 1), false);
     });
+    const toggle = labeled(card, "Show marks on dermoscopy", "input");
+    toggle.parentElement.className = "exercise-visibility";
+    toggle.type = "checkbox";
+    toggle.checked = true;
+    toggle.addEventListener("change", function () { picture.overlay.hidden = !toggle.checked; });
+    clinicalView(card, lesson, true);
+    if (lesson.clinicalImage && lesson.record.pairedModality) {
+      add(card, "h5", "What dermoscopy adds");
+      add(card, "p", lesson.record.pairedModality.addedValue);
+      add(card, "p", lesson.record.pairedModality.limits, "exercise-caption");
+    }
     add(card, "h5", "Your findings");
     const findings = add(card, "ol");
     responses[index].findings.forEach(function (finding) {
@@ -260,8 +307,24 @@
     });
     add(card, "p", lesson.weight);
     add(card, "p", lesson.record.diagnosticGroundTruth.confirmationNotes);
-    const source = add(card, "a", lesson.image.attribution, "exercise-caption");
-    source.href = lesson.image.sourceUrl;
+    attribution(card, lesson.image, true);
+  }
+
+  function renderContrast(parent) {
+    const section = add(parent, "section", "", "exercise-contrast");
+    add(section, "h4", "How much weight does the shared pattern carry?");
+    add(section, "p", "Compare your leading diagnoses. Which finding is shared, and what could you distinguish from the images alone?");
+    const review = add(section, "details");
+    add(review, "summary", "Show the worked comparison");
+    const list = add(review, "dl");
+    [
+      ["Shared finding", comparison.sharedFeatures.join(" ")],
+      ["Diagnostic pitfall", comparison.commonTrap],
+      ["Limits of the image comparison", comparison.limits]
+    ].forEach(function (row) {
+      add(list, "dt", row[0]);
+      add(list, "dd", row[1]);
+    });
   }
 
   function renderDebrief(independent) {
@@ -270,17 +333,21 @@
     const cards = add(root, "div", "", independent ? "exercise-comparison" : "exercise-comparison is-paired");
     const indices = independent ? [2] : [0, 1];
     indices.forEach(function (index) { renderReview(cards, lessons[index], index); });
+    if (!independent && comparison) renderContrast(root);
     if (!independent && pattern) {
       const detail = add(root, "details", "", "exercise-pattern");
       add(detail, "summary", pattern.displayName + " · " + pattern.displayNameDe);
       add(detail, "p", pattern.definition);
       add(detail, "p", pattern.lookFor);
     }
-    if (independent) button(root, "Restart exercise", function () {
+    const actions = add(root, "div", "", "exercise-actions");
+    if (independent) button(actions, "Review the first two cases", function () { renderDebrief(false); });
+    else if (responses[2]) button(actions, "Return to independent case review", function () { renderDebrief(true); });
+    else button(actions, "Open independent case", function () { renderCase(2); });
+    if (responses[2]) button(actions, "Restart exercise", function () {
       responses.length = 0;
       renderIntro().focus();
     });
-    else button(root, "Open independent case", function () { renderCase(2); });
     title.focus();
   }
 
