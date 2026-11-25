@@ -319,6 +319,16 @@
     return recordedDiagnosisPhrases(caseItem).some(phrase => tokensContainPhrase(haystack, phrase));
   }
 
+  function storedViewSummary(caseItem) {
+    const labels = [];
+    asList(caseItem.images).forEach(image => {
+      if (!image) return;
+      const label = imageKindLabel(image);
+      if (!labels.includes(label)) labels.push(label);
+    });
+    return labels.length ? labels.join(" and ") : "No image is stored";
+  }
+
   function imageKindLabel(image) {
     if (image.type === "dermoscopy") return "Dermoscopic image";
     if (image.type === "clinical") return "Clinical photograph";
@@ -1010,6 +1020,10 @@
       answers.appendChild(element("dd", guided.answers[key] || "No answer recorded"));
     });
     debrief.appendChild(answers);
+    debrief.appendChild(element("h5", "Source evidence on record"));
+    debrief.appendChild(element("p", `Stored views: ${storedViewSummary(caseItem)}.`));
+    appendEvidence(debrief, caseItem);
+    debrief.appendChild(element("p", "These answers stay in this tab. This comparison is not clinician review.", "case-kind-note"));
     const disposition = caseItem.dispositionTeaching;
     if (disposition?.summary) {
       debrief.appendChild(element("h5", "Educational next step for this case"));
@@ -1841,6 +1855,12 @@
     renderDetail(item, focusTarget);
   }
 
+  function pathwayFor(id) {
+    const pathway = guidedPathways.find(path => path.id === id);
+    if (!pathway) return null;
+    return { id: pathway.id, title: pathway.title, count: pathway.cases.length };
+  }
+
   function openPathway(id, focusTarget = "none") {
     const pathway = guidedPathways.find(path => path.id === id);
     if (!pathway) return false;
@@ -1862,7 +1882,8 @@
     return true;
   }
 
-  window.DOCUTIS_CASE_APP = Object.freeze({ renderList, renderDetail, openCase, openPathway });
+  window.DOCUTIS_CASE_APP = Object.freeze({ renderList, renderDetail, openCase, openPathway, pathwayFor });
+  if (typeof window.DOCUTIS_REFRESH_LEARNING_PATH === "function") window.DOCUTIS_REFRESH_LEARNING_PATH();
   if (activeId) {
     const item = registry.cases.find(caseItem => caseItem.id === activeId);
     if (item) renderDetail(item, "step");

@@ -536,4 +536,32 @@ test("actinic keratosis and basal cell carcinoma expose per-asset learning paths
 
   card("Plaque Psoriasis").dispatch("click");
   assert.equal(elements.details.querySelectorAll(".learning-path").length, 0);
+
+  card("Cutaneous Squamous Cell Carcinoma").dispatch("click");
+  const sccText = textOf(elements.details.querySelectorAll(".learning-path")[0]);
+  assert.match(sccText, /Start guided cases/);
+  assert.doesNotMatch(sccText, /Start guided cases \(/);
+  assert.doesNotMatch(sccText, /No pilot case is published/);
+  assert.doesNotMatch(sccText, /Two neighboring lesions on the upper back/);
+
+  let openedPathway = null;
+  window.DOCUTIS_CASE_APP = {
+    pathwayFor(id) { return id === "cutaneous-melanoma" ? { id, title: "Melanoma and its mimics", count: 5 } : { id, title: "Guided series", count: 3 }; },
+    openPathway(id) { openedPathway = id; return true; }
+  };
+  card("Cutaneous Melanoma").dispatch("click");
+  const melanomaPath = elements.details.querySelectorAll(".learning-path")[0];
+  const melanomaText = textOf(melanomaPath);
+  assert.match(melanomaText, /Start guided cases \(5\)/);
+  assert.match(melanomaText, /full case library stays under Clinical cases/);
+  assert.match(melanomaText, /Every guided case remains clinician review required/);
+  assert.doesNotMatch(melanomaText, /Large plantar pigmented macule/);
+  assert.equal(melanomaPath.querySelectorAll(".learning-path-link").filter(link => link.getAttribute("data-learning-kind") === "case").length, 0);
+  melanomaPath.querySelectorAll(".learning-path-launch")[0].dispatch("click");
+  assert.equal(openedPathway, "cutaneous-melanoma");
+
+  card("Squamous Cell Carcinoma in Situ").dispatch("click");
+  const bowenText = textOf(elements.details.querySelectorAll(".learning-path")[0]);
+  assert.match(bowenText, /Start guided cases \(3\)/);
+  assert.doesNotMatch(bowenText, /An oval pink plaque with central crust/);
 });

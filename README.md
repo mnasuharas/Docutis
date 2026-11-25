@@ -37,7 +37,7 @@ Docutis is currently in active early development. Its content, structure and tec
 
 ### Guided skin cancer cases
 
-Open Clinical cases and choose Melanoma and its mimics, Cutaneous SCC and keratinocytic mimics, or Bowen disease and scaly plaque mimics. Inspect the stored views, record a working diagnosis, the closest alternative and a proposed next step, and then reveal the source diagnosis. The review compares your notes with published evidence and the next case tests a related diagnostic distinction. Notes stay in the tab. All guided cases require clinician review. The invasive cSCC example has a clinical photograph and a source-caption diagnosis. The new Bowen case has paired images and a lesion-specific histopathology statement in the figure caption.
+Open Clinical cases and choose Melanoma and its mimics, Cutaneous SCC and keratinocytic mimics, or Bowen disease and scaly plaque mimics. The same series starts from Start guided cases on those three condition records. Those records do not list every related case. Inspect the stored views, record a working diagnosis, the closest alternative and a proposed next step, and then reveal the source diagnosis. The review compares your notes with published evidence and the next case tests a related diagnostic distinction. Notes stay in the tab. All guided cases require clinician review. The invasive cSCC example has a clinical photograph and a source-caption diagnosis. The new Bowen case has paired images and a lesion-specific histopathology statement in the figure caption.
 
 ## Current Features
 

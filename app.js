@@ -636,12 +636,25 @@
     const section = document.createElement("section");
     section.className = "learning-path";
     section.id = "detail-learning-path";
+    const guided = guidedDiseaseIds.has(disease.id);
     appendTextElement(section, "h3", "Learning path");
     appendTextElement(section, "p", "These links open material already published for this record. Each item keeps its own review status. A reviewed record does not review the schematic, quiz, follow-up protocol or case. Cases keep the diagnosis hidden until you reveal it. This path is not a diagnostic or treatment sequence.", "learning-path-intro");
-    if (guidedDiseaseIds.has(disease.id)) {
-      const launch = appendTextElement(section, "a", "Start guided cases", "hero-action");
+    if (guided) {
+      const info = window.DOCUTIS_CASE_APP?.pathwayFor?.(disease.id);
+      const countLabel = info && info.count ? ` (${info.count})` : "";
+      const launch = appendTextElement(section, "a", `Start guided cases${countLabel}`, "learning-path-launch hero-action hero-action-primary");
       launch.href = "#caseModule";
-      launch.addEventListener("click", () => window.DOCUTIS_CASE_APP?.openPathway?.(disease.id));
+      launch.addEventListener("click", event => {
+        if (event && typeof event.preventDefault === "function") event.preventDefault();
+        const opened = window.DOCUTIS_CASE_APP?.openPathway?.(disease.id);
+        if (opened === false) return;
+        const target = document.getElementById("caseModule");
+        if (!target) return;
+        if (target.tabIndex < 0) target.tabIndex = -1;
+        focusWithoutScrolling(target);
+        scrollElementIntoView(target);
+      });
+      appendTextElement(section, "p", "The guided series is the case path for this record. The full case library stays under Clinical cases. Notes stay in this tab. Every guided case remains clinician review required.", "learning-path-note");
     }
     const list = document.createElement("ol");
     list.className = "learning-path-list";
@@ -695,7 +708,7 @@
       learningStep(list, { label: "Follow-up protocol", unavailable: "No German follow-up protocol is published for this record." });
     }
 
-    const cases = (window.DOCUTIS_CASES?.cases || []).filter(item => item.diseaseId === disease.id);
+    const cases = guided ? [] : (window.DOCUTIS_CASES?.cases || []).filter(item => item.diseaseId === disease.id);
     if (cases.length) {
       cases.forEach(caseItem => learningStep(list, {
         kind: "case",
@@ -705,7 +718,7 @@
         assetType: "case",
         assetId: caseItem.id
       }));
-    } else {
+    } else if (!guided) {
       learningStep(list, { label: "Case", unavailable: "No pilot case is published for this record." });
     }
 
@@ -953,4 +966,8 @@
   renderFilters();
   renderCards({ preserveUrl: true });
   syncConditionFromUrl({ initial: true });
+  window.DOCUTIS_REFRESH_LEARNING_PATH = function () {
+    if (!displayedCondition || !guidedDiseaseIds.has(displayedCondition) || detailsElement.hidden) return;
+    showDisease(displayedCondition);
+  };
 }());
