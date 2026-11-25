@@ -178,7 +178,7 @@ test("scalp is not counted as face, and special-site pairs are named honestly", 
   assert.equal(specialSite("Face, periorbital region"), "face");
   assert.equal(specialSite("Left heel, plantar sole"), "acral");
   const metrics = buildPairedMetrics();
-  assert.equal(JSON.stringify(metrics.specialSiteTruePairs.filter(id => !/^case-g2[67]-/.test(id))), JSON.stringify(["case-g24-01", "case-g25-04", "case-g25-05", "case-g25-06", "case-g30-01"]));
+  assert.equal(JSON.stringify(metrics.specialSiteTruePairs.filter(id => !/^case-g2[67]-/.test(id))), JSON.stringify(["case-g24-01", "case-g25-04", "case-g25-05", "case-g25-06", "case-g30-01", "case-g33-01"]));
   assert.equal(metrics.specialSiteTruePairs.includes("case-g25-03"), false);
 });
 

@@ -4,6 +4,11 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
+### Paired invasive SCC case
+
+- Add non-identifying clinical and dermoscopic crops of the same upper-eyelid lesion from Figure 3 of Di Stefani et al. (CC BY 4.0), with lesion-specific histopathology in the source.
+- Compare this case with paired Bowen disease and actinic keratosis examples in the guided SCC path. Ask what the images leave uncertain about invasion before revealing the source evidence. The new case requires clinician review.
+
 ### Guided path focus
 
 - Make the short guided series the case path on the melanoma, cutaneous SCC and Bowen records. Those records no longer list every related case; the full library stays under Clinical cases.
