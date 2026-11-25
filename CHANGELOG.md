@@ -4,6 +4,11 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
+### Guided path focus
+
+- Make the short guided series the case path on the melanoma, cutaneous SCC and Bowen records. Those records no longer list every related case; the full library stays under Clinical cases.
+- Show the stored views and confirmation method on the guided comparison step. Notes stay in the tab. No case is marked clinician reviewed.
+
 ### Guided skin cancer cases
 
 - Add guided clinical reasoning paths for melanoma, cutaneous SCC and Bowen disease. Learners record a differential and next step before the diagnosis is revealed, then compare with existing teaching and source evidence.

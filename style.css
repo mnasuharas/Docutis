@@ -909,6 +909,16 @@ a:focus-visible {
   border-top: 1px solid var(--color-border);
 }
 
+.learning-path-launch {
+  margin-top: var(--space-3);
+}
+
+.learning-path-note {
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
 .learning-path-link {
   font-weight: 700;
 }
