@@ -255,6 +255,75 @@
     }
     return null;
   }
+  const conditionNames = {
+    "Actinic Keratosis": "Aktinik keratoz", "Actinic Cheilitis": "Aktinik keilit",
+    "Porokeratosis": "Porokeratoz", "Basal Cell Carcinoma": "Bazal hücreli karsinom",
+    "Cutaneous Squamous Cell Carcinoma": "Kutanöz skuamöz hücreli karsinom",
+    "Squamous Cell Carcinoma in Situ": "Skuamöz hücreli karsinom in situ",
+    "Keratoacanthoma": "Keratoakantom", "Cutaneous Melanoma": "Kutanöz melanom",
+    "Lentigo Maligna": "Lentigo maligna", "Lentigo Maligna Melanoma": "Lentigo maligna melanomu",
+    "Acral Melanoma": "Akral melanom", "Nodular Melanoma": "Nodüler melanom",
+    "Desmoplastic Melanoma": "Desmoplastik melanom",
+    "Merkel Cell Carcinoma": "Merkel hücreli karsinom",
+    "Sebaceous Carcinoma": "Sebase karsinom",
+    "Dermatofibrosarcoma Protuberans": "Dermatofibrosarkoma protuberans",
+    "Atypical Fibroxanthoma": "Atipik fibrosantom",
+    "Pleomorphic Dermal Sarcoma": "Pleomorfik dermal sarkom",
+    "Cutaneous Angiosarcoma": "Kutanöz anjiyosarkom",
+    "Kaposi Sarcoma": "Kaposi sarkomu",
+    "Extramammary Paget Disease": "Ekstramammaryan Paget hastalığı",
+    "Microcystic Adnexal Carcinoma": "Mikrokistik adneksiyal karsinom",
+    "Eccrine Porocarcinoma": "Ekrin porokarsinom",
+    "Mycosis Fungoides": "Mikozis fungoides", "Sézary Syndrome": "Sézary sendromu",
+    "Primary Cutaneous Anaplastic Large-Cell Lymphoma": "Primer kutanöz anaplastik büyük hücreli lenfoma",
+    "Atopic Dermatitis": "Atopik dermatit", "Contact Dermatitis": "Kontakt dermatit",
+    "Seborrheic Dermatitis": "Seboreik dermatit", "Plaque Psoriasis": "Plak psoriazis",
+    "Acne Vulgaris": "Akne vulgaris", "Rosacea": "Rozasea",
+    "Chronic Urticaria": "Kronik ürtiker", "Vitiligo": "Vitiligo",
+    "Impetigo": "İmpetigo", "Bacterial Folliculitis": "Bakteriyel folikülit",
+    "Erysipelas": "Erizipel", "Erythrasma": "Eritrazma",
+    "Tinea Corporis": "Tinea korporis", "Tinea Cruris": "Tinea kruris",
+    "Tinea Pedis": "Tinea pedis", "Tinea Capitis": "Tinea kapitis",
+    "Onychomycosis": "Onikomikoz", "Cutaneous Candidiasis": "Kutanöz kandidiyazis",
+    "Pityriasis Versicolor": "Pitriyazis versikolor", "Scabies": "Uyuz",
+    "Herpes Simplex": "Herpes simpleks", "Herpes Zoster": "Herpes zoster",
+    "Molluscum Contagiosum": "Molluskum kontagiozum",
+    "Cutaneous Warts": "Kutanöz siğiller", "Bullous Pemphigoid": "Büllöz pemfigoid",
+    "Pemphigus Vulgaris": "Pemfigus vulgaris",
+    "Discoid Lupus Erythematosus": "Diskoid lupus eritematozus",
+    "Dermatomyositis": "Dermatomiyozit", "Lichen Planus": "Liken planus",
+    "Alopecia Areata": "Alopesi areata",
+    "Androgenetic Alopecia": "Androgenetik alopesi",
+    "Mucous Membrane Pemphigoid": "Mukoz membran pemfigoidi",
+    "Dermatitis Herpetiformis": "Dermatitis herpetiformis",
+    "Nail Psoriasis": "Tırnak psoriazisi",
+    "Chronic Paronychia": "Kronik paronişi",
+    "Nail Lichen Planus": "Tırnak liken planusu"
+  };
+  Object.assign(translations, conditionNames, {
+    "All conditions": "Tüm tanılar",
+    "Overview": "Genel bakış", "Clinical features": "Klinik bulgular",
+    "Dermoscopy": "Dermoskopi", "Differential": "Ayırıcı tanı",
+    "Differential diagnosis": "Ayırıcı tanı", "Treatment": "Tedavi",
+    "Treatment overview": "Tedaviye genel bakış",
+    "Follow-up and escalation": "Takip ve ileri değerlendirme",
+    "Classification and coding": "Sınıflandırma ve kodlama",
+    "Diagnosis classification": "Tanı sınıflandırması",
+    "Oncology context": "Onkolojik bağlam", "Sources": "Kaynaklar",
+    "Educational media": "Eğitici görseller", "Learning path": "Öğrenme yolu",
+    "Red flags": "Uyarıcı bulgular", "Referral / escalation": "Sevk / ileri değerlendirme",
+    "Patient counseling": "Hasta bilgilendirmesi",
+    "Non-pharmacological care": "İlaç dışı yaklaşım",
+    "Close details": "Ayrıntıları kapat", "Alternative name": "Diğer ad",
+    "Uncategorized": "Kategorisiz",
+    "condition records": "tanı kaydı", "clinical categories": "klinik kategori",
+    "oncology follow-up protocols": "onkolojik takip protokolü",
+    "Media supports visual learning and does not replace clinical examination or histopathologic assessment.": "Görseller eğitimi destekler. Klinik muayene ve histopatolojik değerlendirme ayrıca gereklidir.",
+    "Educational image unavailable. Source details remain below.": "Eğitici görsel kullanılamıyor. Kaynak bilgileri aşağıda yer alıyor."
+  });
+  window.DOCUTIS_LOCALE = Object.freeze({
+    conditionName: function (name) { return conditionNames[name] || ""; }
+  });
   const original = new WeakMap();
   let language = "en";
   try { language = localStorage.getItem("docutis-language") === "tr" ? "tr" : "en"; } catch (error) { /* Storage may be disabled. */ }

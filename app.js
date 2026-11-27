@@ -102,7 +102,7 @@
 
   const searchIndex = data.diseases.map(disease => ({
     disease,
-    fields: [disease.name, disease.alternative, disease.description, categoryTitle(disease.category),
+    fields: [disease.name, window.DOCUTIS_LOCALE?.conditionName(disease.name), disease.alternative, disease.description, categoryTitle(disease.category),
       subcategoryTitle(disease.subcategory), ...codingSearchText(disease.coding), ...clinicalProfileSearchText(disease.clinicalProfile)]
       .filter(Boolean).map(normalizeSearch)
   }));
