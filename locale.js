@@ -281,12 +281,32 @@
     [/^Place mark (\d+) on image$/, "Görsele $1. işareti yerleştir"],
     [/^Case (\d+) of (\d+)$/, "Vaka $1 / $2"],
     [/^Site: (.*)$/, "Yerleşim: $1"],
-    [/^Pattern marking · Case (\d+) of (\d+)$/, "Patern işaretleme · Vaka $1 / $2"]
+    [/^Pattern marking · Case (\d+) of (\d+)$/, "Patern işaretleme · Vaka $1 / $2"],
+    [/^(\d+) condition shown\.$/, function (count) { return count + " tanı gösteriliyor."; }],
+    [/^(\d+) conditions shown\.$/, function (count) { return count + " tanı gösteriliyor."; }],
+    [/^Alternative name: (.*)$/, function (name) { return "Diğer ad: " + name; }],
+    [/^Close details for (.*)$/, function (name) { return piece(name) + " ayrıntılarını kapat"; }],
+    [/^Open details for (.*)$/, function (name) { return piece(name) + " ayrıntılarını aç"; }],
+    [/^Clinical review status: (.*)$/, function (status) { return "Klinik inceleme durumu: " + piece(status); }],
+    [/^(\d+) linked source\(s\)$/, function (count) { return count + " bağlantılı kaynak"; }],
+    [/^(\d+) sources attached$/, function (count) { return count + " kaynak eklendi"; }],
+    [/^Scope: (.*)\. Content integrity ID: (.*)\.$/, function (scope, fingerprint) { return "Kapsam: " + scope + ". İçerik bütünlüğü kimliği: " + fingerprint + "."; }],
+    [/^Superseded by (.*)\.$/, function (id) { return "Yerine geçen karar: " + id + "."; }]
   ];
+  function piece(value) {
+    return Object.prototype.hasOwnProperty.call(translations, value) ? translations[value] : value;
+  }
   function translated(value) {
     if (Object.prototype.hasOwnProperty.call(translations, value)) return translations[value];
     for (const [pattern, replacement] of variableTranslations) {
-      if (pattern.test(value)) return value.replace(pattern, replacement);
+      if (!pattern.test(value)) continue;
+      if (typeof replacement === "function") {
+        return value.replace(pattern, function () {
+          const groups = Array.prototype.slice.call(arguments, 1, arguments.length - 2);
+          return replacement.apply(null, groups);
+        });
+      }
+      return value.replace(pattern, replacement);
     }
     return null;
   }
@@ -356,9 +376,9 @@
     "Media supports visual learning and does not replace clinical examination or histopathologic assessment.": "Görseller eğitimi destekler. Klinik muayene ve histopatolojik değerlendirme ayrıca gereklidir.",
     "Educational image unavailable. Source details remain below.": "Eğitici görsel kullanılamıyor. Kaynak bilgileri aşağıda yer alıyor."
   });
-  window.DOCUTIS_LOCALE = Object.freeze({
+  window.DOCUTIS_LOCALE = {
     conditionName: function (name) { return conditionNames[name] || ""; }
-  });
+  };
   Object.assign(translations, {
     "Asymmetric thickness": "Asimetrik kalınlık",
     "Notched border": "Çentikli sınır",
@@ -780,7 +800,74 @@
     "Quiz-item review status": "Test sorusunun inceleme durumu",
     "Choose one answer, then check it.": "Bir yanıt seçin, ardından kontrol edin."
   });
-  Object.assign(translations, window.DOCUTIS_CLINICAL_LOCALE || {});
+  Object.assign(translations, window.DOCUTIS_CLINICAL_LOCALE || {}, window.DOCUTIS_DIFFERENTIAL_LOCALE || {}, {
+    "This article has not yet completed human physician review.": "Bu kayıt henüz hekim incelemesini tamamlamamıştır.",
+    "Physician review applies to this content version. It does not guarantee correctness or replace professional medical judgment.": "Hekim incelemesi bu içerik sürümü için geçerlidir. Doğruluğu garanti etmez ve mesleki tıbbi değerlendirmenin yerine geçmez.",
+    "Include the affected record or page, the claim that needs attention, a verifiable source, and a proposed correction. Do not include patient-identifiable information.": "İlgili kaydı veya sayfayı, incelenmesi gereken ifadeyi, doğrulanabilir kaynağı ve önerilen düzeltmeyi belirtin. Hastayı tanımlayan bilgi eklemeyin.",
+    "Structured content available": "Yapılandırılmış içerik var",
+    "Automated schema validation included": "Otomatik şema doğrulaması dahildir",
+    "Review details": "İnceleme ayrıntıları",
+    "Coding": "Kodlama",
+    "Coding: verification required": "Kodlama: doğrulama gerekli",
+    "First Line": "İlk basamak",
+    "Second Line Or Alternative": "İkinci basamak veya alternatif",
+    "Refractory Or Severe": "Dirençli veya ağır",
+    "Procedural": "Girişimsel",
+    "Supportive Care": "Destekleyici bakım",
+    "Article review status": "Kaydın inceleme durumu",
+    "Human clinical review": "Hekim klinik incelemesi",
+    "Suggest improvements to this educational material. Feedback opens a GitHub issue form and is not clinical advice.": "Bu eğitim materyali için düzeltme önerebilirsiniz. Geri bildirim bir GitHub sorun formu açar ve klinik öneri değildir.",
+    "A human clinician reviewed every section listed for this exact content fingerprint. This does not guarantee completeness or universal applicability.": "Bir hekim, bu içerik parmak izindeki listelenen her bölümü incelemiştir. Bu, eksiksizlik veya her duruma uygulanabilirlik anlamına gelmez.",
+    "Only the recorded sections have a current human decision. The remaining sections are not clinician reviewed.": "Yalnızca kayıtlı bölümlerin güncel bir hekim kararı vardır. Kalan bölümler hekim incelemesinden geçmemiştir.",
+    "A human reviewer requested corrections. This content is not clinician reviewed.": "Bir inceleyici düzeltme istemiştir. Bu içerik hekim incelemesinden geçmemiştir.",
+    "A previous human decision exists, but clinically relevant content changed afterwards. The old decision remains in history and no active reviewed badge is shown.": "Daha önceki bir hekim kararı vardır. Klinik açıdan ilgili içerik sonradan değişmiştir. Eski karar geçmişte durur ve etkin bir incelenmiş rozeti gösterilmez.",
+    "No valid human approval is bound to this exact content version. Automated tests and source checks are not clinical review.": "Bu içerik sürümüne bağlı geçerli bir hekim onayı yoktur. Otomatik testler ve kaynak kontrolleri klinik inceleme değildir.",
+    "Review scope": "İnceleme kapsamı",
+    "Content integrity ID": "İçerik bütünlüğü kimliği",
+    "Used to ensure that physician approval applies to this exact content version.": "Hekim onayının bu içerik sürümüne ait olduğunu doğrulamak için kullanılır.",
+    "Review date": "İnceleme tarihi",
+    "Public reviewer role": "Kamuya açık inceleyici rolü",
+    "Reviewed sections": "İncelenen bölümler",
+    "Evidence checked": "Kontrol edilen kanıt",
+    "None recorded": "Kayıt yok",
+    "No physician review has been recorded yet.": "Henüz hekim incelemesi kaydedilmemiştir.",
+    "Review history": "İnceleme geçmişi",
+    "View technical review data (JSON)": "Teknik inceleme verisini görüntüle (JSON)",
+    "Premalignant keratinocytic lesion": "Premalign keratinositik lezyon",
+    "Keratinization disorder with variable malignant potential": "Malign potansiyeli değişken keratinizasyon bozukluğu",
+    "Keratinocytic carcinoma": "Keratinositik karsinom",
+    "Keratinocytic tumor with classification uncertainty": "Sınıflaması belirsiz keratinositik tümör",
+    "Cutaneous melanoma": "Kutanöz melanom",
+    "Melanoma in situ": "Melanom in situ",
+    "Melanoma subtype": "Melanom alt tipi",
+    "Neuroendocrine carcinoma": "Nöroendokrin karsinom",
+    "Adnexal carcinoma": "Adneksiyal karsinom",
+    "Cutaneous sarcoma": "Kutanöz sarkom",
+    "Fibrohistiocytic tumor": "Fibrohistiyositik tümör",
+    "Vascular neoplasm": "Vasküler neoplazm",
+    "Extramammary Paget disease": "Ekstramammaryan Paget hastalığı",
+    "Cutaneous lymphoma": "Kutanöz lenfoma",
+    "Eczematous dermatitis": "Ekzematöz dermatit",
+    "Seborrheic disorder": "Seboreik bozukluk",
+    "Papulosquamous disorder": "Papüloskuamöz bozukluk",
+    "Urticarial disorder": "Ürtikeryal bozukluk",
+    "Acneiform disorder": "Akneiform bozukluk",
+    "Depigmenting disorder": "Depigmentasyon bozukluğu",
+    "Bacterial infection": "Bakteriyel enfeksiyon",
+    "Dermatophyte infection": "Dermatofit enfeksiyonu",
+    "Other fungal infection": "Diğer mantar enfeksiyonu",
+    "Parasitic infestation": "Paraziter enfestasyon",
+    "Viral infection": "Viral enfeksiyon",
+    "Immunobullous disorder": "İmmünobüllöz bozukluk",
+    "Connective-tissue disorder": "Bağ dokusu bozukluğu",
+    "Lichenoid disorder": "Likenoid bozukluk",
+    "Alopecia disorder": "Alopesi bozukluğu",
+    "Nail disorder": "Tırnak bozukluğu"
+  });
+  window.DOCUTIS_LOCALE = Object.freeze({
+    conditionName: window.DOCUTIS_LOCALE.conditionName,
+    translate: function (value) { return translated(value); }
+  });
   const originalText = new WeakMap();
   const originalAttributes = new WeakMap();
   const englishTitle = document.title;
