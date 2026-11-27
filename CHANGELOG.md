@@ -4,6 +4,13 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
+### Pink lesion reasoning practice
+
+- Add a bilingual, selection-only twelve-case session: six amelanotic/hypomelanotic melanomas and six non-melanoma mimics (including BCC, Bowen disease and invasive SCC). Eight newly sourced cases and four existing pairs; every pair has lesion-specific source histopathology. The set includes thick tumors and is not presented as an early-melanoma series.
+- Record structures and a keyboard-selectable image region before an impression; open clinical context only after committing, then compare pre/post impressions and confidence with source evidence. Save a reflection and optionally repeat uncertain/discordant cases. No score, probability or competence claim; session data stays in memory.
+- Record original asset URLs, exact crops, dimensions, hashes, attribution and per-image licenses in `pink-media.json`. Original annotations remain; small clinical panels and uncertainty are explicit. All new teaching remains clinician review required.
+
+
 ### Paired invasive SCC case
 
 - Add non-identifying clinical and dermoscopic crops of the same upper-eyelid lesion from Figure 3 of Di Stefani et al. (CC BY 4.0), with lesion-specific histopathology in the source.
