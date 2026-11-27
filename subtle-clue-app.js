@@ -11,6 +11,7 @@
   const blankAnswers = () => [{ choice: "", visibility: "", position: null }, { choice: "", visibility: "", position: null }];
   let answers = blankAnswers();
   let revealed = false;
+  let comparisonOpen = false;
   const revisitKey = "docutis-subtle-revisit-v1";
   let revisit = [];
   try {
@@ -76,7 +77,7 @@
     ["Lower left", "Sol alt", 17, 83], ["Lower centre", "Alt orta", 50, 83], ["Lower right", "Sağ alt", 83, 83]
   ];
   function ready() {
-    return answers.every(answer => answer.choice !== "" && answer.visibility !== "" &&
+    return answers.slice(0, comparisonOpen ? 2 : 1).every(answer => answer.choice !== "" && answer.visibility !== "" &&
       (answer.visibility === "unassessable" || answer.position !== null));
   }
   function updateReveal() {
@@ -122,7 +123,7 @@
     if (reversed) { entries.reverse(); expected.reverse(); }
     const nav = node("div", undefined, "subtle-nav");
     available.forEach((item, index) => {
-      const button = node("button", label(item.title), "subtle-button");
+      const button = node("button", say("Comparison ", "Karşılaştırma ") + (index + 1), "subtle-button");
       button.type = "button";
       button.setAttribute("aria-current", index === active ? "step" : "false");
       button.addEventListener("click", () => {
@@ -131,6 +132,7 @@
         reversed = Math.random() < 0.5;
         reflection = "";
         revealed = false;
+        comparisonOpen = false;
         render();
         root.querySelectorAll("h3")[1].focus();
       });
@@ -158,6 +160,7 @@
         reversed = Math.random() < 0.5;
         reflection = "";
         revealed = false;
+        comparisonOpen = false;
         render();
         root.querySelectorAll("h3")[1].focus();
       });
@@ -168,12 +171,12 @@
       repeat.appendChild(clear);
     }
     root.appendChild(repeat);
-    const heading = node("h3", label(lesson.title));
+    const heading = node("h3", comparisonOpen ? label(lesson.title) : say("Independent observation", "Bağımsız gözlem"));
     heading.tabIndex = -1;
     root.appendChild(heading);
-    root.appendChild(node("p", label(lesson.question)));
+    root.appendChild(node("p", comparisonOpen ? label(lesson.question) : say("Assess this lesion before opening its comparison. Choose a finding, visibility and location.", "Karşılaştırmayı açmadan bu lezyonu değerlendirin. Bulgu, görülebilirlik ve konum seçin.")));
     const grid = node("div", undefined, "subtle-grid");
-    entries.forEach((entry, index) => {
+    entries.slice(0, comparisonOpen ? 2 : 1).forEach((entry, index) => {
       const panel = node("section", undefined, "subtle-panel");
       panel.dataset.imageNumber = String(index + 1);
       panel.appendChild(node("h4", say("Image ", "Görsel ") + (index + 1)));
@@ -309,10 +312,13 @@
     });
     root.appendChild(grid);
     if (!revealed) {
-      const reveal = node("button", say("Reveal and compare", "Tanıları aç ve karşılaştır"), "subtle-button subtle-reveal-button");
+      const reveal = node("button", comparisonOpen ? say("Reveal and compare", "Tanıları aç ve karşılaştır") : say("Save observation and open comparison", "Gözlemi kaydet ve karşılaştırmayı aç"), "subtle-button subtle-reveal-button");
       reveal.type = "button";
       reveal.disabled = !ready();
-      reveal.addEventListener("click", () => { revealed = true; render(); root.querySelector(".subtle-comparison").focus(); });
+      reveal.addEventListener("click", () => {
+        if (!comparisonOpen) { comparisonOpen = true; render(); root.querySelectorAll("h3")[1].focus(); return; }
+        revealed = true; render(); root.querySelector(".subtle-comparison").focus();
+      });
       root.appendChild(reveal);
     } else {
       const result = node("section", undefined, "subtle-comparison");
@@ -344,6 +350,7 @@
         reversed = !reversed;
         answers = blankAnswers();
         revealed = false;
+        comparisonOpen = false;
         reflection = "";
         render();
         root.querySelectorAll("h3")[1].focus();

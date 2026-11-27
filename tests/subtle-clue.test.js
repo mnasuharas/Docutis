@@ -126,7 +126,7 @@ test("observation, visibility and location must be selected before source diagno
   }
   const panels = () => rootNode.querySelectorAll(".subtle-panel");
   const reveal = () => rootNode.querySelector(".subtle-reveal-button");
-  assert.equal(panels().length, 2);
+  assert.equal(panels().length, 1);
   assert.equal(rootNode.querySelectorAll(".subtle-answer").length, 0);
   assert.equal(reveal().disabled, true);
   for (const panel of panels()) {
@@ -139,6 +139,13 @@ test("observation, visibility and location must be selected before source diagno
   assert.equal(reveal().disabled, true);
   panels()[0].querySelectorAll("select")[1].value = "4";
   panels()[0].querySelectorAll("select")[1].dispatch("change");
+  assert.equal(reveal().disabled, false);
+  reveal().dispatch("click");
+  assert.equal(panels().length, 2);
+  assert.equal(rootNode.querySelectorAll(".subtle-answer").length, 0);
+  panels()[1].querySelector("input[type=radio]").dispatch("change");
+  const visibility = panels()[1].querySelectorAll("select")[0];
+  visibility.value = "clear"; visibility.dispatch("change");
   const photo = panels()[1].querySelector(".subtle-markable");
   photo.dispatch("click", { clientX: 40, clientY: 60 });
   assert.equal(reveal().disabled, false);
