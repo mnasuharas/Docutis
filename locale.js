@@ -317,6 +317,40 @@
     [/^Curriculum level (\d+): (.+)$/, function (level, title) { return "Müfredat seviyesi " + level + ": " + piece(title); }],
     [/^(\d+)\. (Recognition|Differentiation|Pattern integration|Diagnostic traps|Advanced reasoning)$/, function (level, title) { return level + ". " + piece(title); }],
     [/^\s*·\s*(.+?) and coauthors\s*·\s*$/, function (name) { return " · " + name + " ve diğer yazarlar · "; }],
+    [/^Image zoom (\d+) percent$/, function (n) { return "Görsel yakınlaştırma yüzde " + n; }],
+    [/^Step (\d+) of (\d+): (.+)\. (.+)$/, function (i, n, title, rest) { return "Adım " + i + " / " + n + ": " + piece(title) + ". " + piece(rest); }],
+    [/^Step (\d+) of (\d+): (.+)$/, function (i, n, title) { return "Adım " + i + " / " + n + ": " + piece(title); }],
+    [/^(\d+)\. (Inspect|Observe|Differential|Reveal|Review)$/, function (n, name) { return n + ". " + piece(name); }],
+    [/^Diagnosis revealed: (.+)\.?$/, function (label) { return "Tanı açıldı: " + piece(label.replace(/\.$/, "")); }],
+    [/^Recorded in this page session: (.+)\. Not submitted and not scored\.$/, function (value) { return "Bu sayfa oturumunda kayıtlı: " + piece(value) + ". Gönderilmedi ve puanlanmadı."; }],
+    [/^Pair provenance: (.+)\.$/, function (value) { return "Çift kaynak bilgisi: " + piece(value.replace(/\.$/, "")) + "."; }],
+    [/^Clinical clue: (.+)$/, function (value) { return "Klinik ipucu: " + piece(value); }],
+    [/^Dermoscopic clue: (.+)$/, function (value) { return "Dermoskopik ipucu: " + piece(value); }],
+    [/^Added information: (.+)$/, function (value) { return "Eklenen bilgi: " + piece(value); }],
+    [/^Diagnostic conflict: (.+)$/, function (value) { return "Tanısal çatışma: " + piece(value); }],
+    [/^Teaching rule: (.+)$/, function (value) { return "Öğretim kuralı: " + piece(value); }],
+    [/^Supports: (.+)$/, function (value) { return "Destekleyen: " + piece(value); }],
+    [/^Against: (.+)$/, function (value) { return "Karşıt: " + piece(value); }],
+    [/^Evidence type on record: (.+)\.$/, function (value) { return "Kayıttaki kanıt türü: " + piece(value) + "."; }],
+    [/^Compare with: (.+)$/, function (value) { return "Karşılaştır: " + piece(value); }],
+    [/^Open case: (.+)$/, function (value) { return "Vakayı aç: " + piece(value); }],
+    [/^Comparison with (.+)$/, function (value) { return piece(value) + " ile karşılaştırma"; }],
+    [/^Canonical name: (.+)\.$/, function (value) { return "Kanonik ad: " + piece(value) + "."; }],
+    [/^German term: (.+)\.$/, function (value) { return "Almanca terim: " + value + "."; }],
+    [/^International term: (.+)\.$/, function (value) { return "Uluslararası terim: " + value + "."; }],
+    [/^Modification: (.+)$/, function (value) { return "Değişiklik: " + piece(value); }],
+    [/^Zoom (.+)$/, function (kind) { return piece(kind) + " yakınlaştır"; }],
+    [/^Not quite\. The best answer is: (.+)\.$/, function (answer) { return "Tam değil. En uygun yanıt: " + piece(answer) + "."; }],
+    [/^Open (.+) reference$/, function (name) { return piece(name) + " kaydını aç"; }],
+    [/^Age: (.+)$/, function (value) { return "Yaş: " + value; }],
+    [/^Sex: (.+)$/, function (value) { return "Cinsiyet: " + value; }],
+    [/^Trap: (.+)$/, function (value) { return "Tuzak: " + piece(value); }],
+    [/^Source diagnosis: (.+)$/, function (value) { return "Kaynak tanı: " + piece(value); }],
+    [/^Method: (.+)$/, function (value) { return "Yöntem: " + piece(value); }],
+    [/^Strength: (.+)$/, function (value) { return "Güç: " + piece(value); }],
+    [/^(.+), (.+)\. No observation text is recorded for this case\.$/, function (kind, site) { return piece(kind) + ", " + piece(site) + ". Bu vaka için gözlem metni kaydedilmemiştir."; }],
+    [/^(.+), (.+)\. No diagnosis is included in this image description\.$/, function (kind, site) { return piece(kind) + ", " + piece(site) + ". Bu görsel açıklamasında tanı yoktur."; }],
+    [/^(.+)\. No diagnosis is included in this image description\.$/, function (kind) { return piece(kind) + ". Bu görsel açıklamasında tanı yoktur."; }],
     [/^Scope: (.*)\. Content integrity ID: (.*)\.$/, function (scope, fingerprint) {
       const names = scope === "No sections approved" ? piece(scope) : scope.split(", ").map(function (id) {
         return piece(id.replaceAll("-", " ").replace(/\b\w/g, function (character) { return character.toUpperCase(); }));
@@ -954,7 +988,33 @@
     "Safety Notice": "Güvenlik notu",
     "Scope": "Kapsam",
     "Teaching Points": "Öğretim noktaları",
-    "Title": "Başlık"
+    "Title": "Başlık",
+    "Limits": "Sınırlar",
+    "Summary": "Özet",
+    "Finding": "Bulgu",
+    "Inspect": "İncele",
+    "Observe": "Gözlemle",
+    "Reveal": "Tanıyı aç",
+    "Review": "Gözden geçir",
+    "Differential": "Ayırıcı tanı",
+    "Inspect the image": "Görseli incele",
+    "Recorded observations": "Kayıtlı gözlemler",
+    "Reveal the diagnosis": "Tanıyı aç",
+    "Review the case": "Vakayı gözden geçir",
+    "Diagnosis stays hidden.": "Tanı gizli kalır.",
+    "Case learning steps": "Vaka öğrenme adımları",
+    "Shared:": "Ortak:",
+    "Tap the image to place mark": "İşareti yerleştirmek için görsele dokunun",
+    "This interactive section requires JavaScript.": "Bu etkileşimli bölüm JavaScript gerektirir.",
+    "This image exercise requires JavaScript.": "Bu görsel egzersiz JavaScript gerektirir.",
+    "Training cannot run because JavaScript is unavailable. No diagnosis or teaching text is substituted.": "Eğitim, JavaScript olmadığı için çalışamaz. Tanı veya öğretim metni yerine konmaz.",
+    "Cases cannot be shown because JavaScript is unavailable. No diagnosis, observation or teaching text is substituted. The published pilot cases remain clinician review required.": "Vakalar JavaScript olmadığı için gösterilemez. Tanı, gözlem veya öğretim metni yerine konmaz. Yayımlanmış pilot vakalar hekim incelemesi gerekli durumunda kalır.",
+    "Educational dermatology reference. Not a diagnosis, not a treatment protocol, and not a substitute for clinical judgment.": "Dermatoloji eğitimi ve başvuru kaynağı. Tanı değildir, tedavi protokolü değildir ve klinik yargının yerine geçmez.",
+    "Reviewer workspace for the Learn Melanoma teaching sequence. Diagnoses are visible here. This page is not a learner step and not clinician approval.": "Melanom eğitimi dizisinin inceleme alanı. Tanılar burada görünür. Bu sayfa bir öğrenen adımı değildir ve hekim onayı değildir."
+  });
+  const caseProse = window.DOCUTIS_CASE_PROSE_LOCALE || {};
+  Object.keys(caseProse).forEach(function (key) {
+    if (!Object.prototype.hasOwnProperty.call(translations, key)) translations[key] = caseProse[key];
   });
   function humanizeToken(value) {
     return String(value).replaceAll("-", " ").replace(/\b\w/g, function (character) { return character.toUpperCase(); });
@@ -1014,6 +1074,13 @@
   function applyLanguage() {
     document.documentElement.lang = language;
     document.title = (language === "tr" && translated(englishTitle)) || englishTitle;
+    const description = document.querySelector('meta[name="description"]');
+    if (description) {
+      const english = description.getAttribute("data-english") || description.getAttribute("content") || "";
+      if (!description.getAttribute("data-english")) description.setAttribute("data-english", english);
+      const turkish = language === "tr" && translated(english);
+      description.setAttribute("content", turkish || english);
+    }
     translate(document.body);
     const control = document.getElementById("docutisLanguage");
     if (control) control.value = language;

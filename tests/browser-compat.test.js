@@ -74,7 +74,7 @@ test("interactive modules explain a disabled JavaScript environment without medi
   const generic = blocks.filter(block => block.includes("This interactive section requires JavaScript."));
   assert.equal(generic.length, 4);
   for (const block of generic) {
-    assert.equal(block, '<p class="js-fallback">This interactive section requires JavaScript.</p>');
+    assert.equal(block, '<p class="js-fallback">This interactive section requires JavaScript. Bu etkileşimli bölüm JavaScript gerektirir.</p>');
     assert.doesNotMatch(block, /melanoma|basal cell|actinic|diagnosis|ICD/i);
   }
   assert.ok(blocks.some(block => /Cases cannot be shown because JavaScript is unavailable/.test(block)));

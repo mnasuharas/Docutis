@@ -111,6 +111,15 @@ function createHarness(transformData, transformMedia, initialHref = "https://exa
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "review-ui.js"), "utf8"), context);
   if (transformData) context.window.DOCUTIS_DATA = transformData(context.window.DOCUTIS_DATA);
   if (transformMedia) context.window.DOCUTIS_MEDIA = transformMedia(context.window.DOCUTIS_MEDIA);
+  if (extras.loadLocale) {
+    document.readyState = "loading";
+    document.documentElement = {};
+    document.body = {};
+    document.title = "Docutis | Dermatology Reference Toolkit";
+    for (const name of ["clinical-locale.js", "differential-locale.js", "profile-locale.js", "remainder-locale.js", "coding-locale.js", "training-locale.js", "case-prose-locale.js", "locale.js"]) {
+      vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", name), "utf8"), context, { filename: name });
+    }
+  }
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "app.js"), "utf8"), context);
   return { document, elements: document.elements, window, history: window.history };
 }
@@ -124,6 +133,16 @@ function searchFor(elements, query) {
   elements.searchInput.dispatch("input");
   return elements.cards.querySelectorAll(".card");
 }
+
+test("Turkish search ignores diacritics and matches translated condition names", () => {
+  const { elements, window } = createHarness(null, null, "https://example.test/Docutis/", { loadLocale: true });
+  assert.equal(window.DOCUTIS_SEARCH.normalize("sağlık"), "saglik");
+  assert.equal(window.DOCUTIS_SEARCH.normalize("İstanbul"), "istanbul");
+  assert.equal(window.DOCUTIS_SEARCH.normalize("Bazal hücreli karsinom"), "bazal hucreli karsinom");
+  const cards = searchFor(elements, "bazal hucreli");
+  assert.ok(cards.some(card => /basal cell carcinoma/i.test(textOf(card))), "folded Turkish name should find BCC");
+  assert.equal(searchFor(elements, "aktinik keratoz").some(card => /actinic keratosis/i.test(textOf(card))), true);
+});
 
 test("initial rendering creates all cards and ten category sections", () => {
   const { elements } = createHarness();
