@@ -96,15 +96,26 @@
   }
 
   function normalizeSearch(value) {
-    return value.normalize("NFKD").replace(/\p{M}/gu, "").toLocaleLowerCase("en")
+    return String(value)
+      .replace(/İ/g, "i").replace(/ı/g, "i")
+      .replace(/[Şş]/g, "s").replace(/[Ğğ]/g, "g").replace(/[Çç]/g, "c")
+      .replace(/[Öö]/g, "o").replace(/[Üü]/g, "u")
+      .normalize("NFKD").replace(/\p{M}/gu, "").toLocaleLowerCase("en")
       .replace(/[‐‑‒–—-]/g, " ").replace(/[’‘]/g, "'").replace(/\s+/g, " ").trim();
+  }
+
+  function searchValues(value) {
+    if (!value) return [];
+    const text = String(value);
+    const turkish = window.DOCUTIS_LOCALE?.translate?.(text);
+    return turkish && turkish !== text ? [text, turkish] : [text];
   }
 
   const searchIndex = data.diseases.map(disease => ({
     disease,
     fields: [disease.name, window.DOCUTIS_LOCALE?.conditionName(disease.name), disease.alternative, disease.description, categoryTitle(disease.category),
       subcategoryTitle(disease.subcategory), ...codingSearchText(disease.coding), ...clinicalProfileSearchText(disease.clinicalProfile)]
-      .filter(Boolean).map(normalizeSearch)
+      .flatMap(searchValues).filter(Boolean).map(normalizeSearch)
   }));
 
   function filteredDiseases() {
@@ -976,6 +987,7 @@
   renderFilters();
   renderCards({ preserveUrl: true });
   syncConditionFromUrl({ initial: true });
+  window.DOCUTIS_SEARCH = Object.freeze({ normalize: normalizeSearch });
   window.DOCUTIS_REFRESH_LEARNING_PATH = function () {
     if (!displayedCondition || !guidedDiseaseIds.has(displayedCondition) || detailsElement.hidden) return;
     showDisease(displayedCondition);

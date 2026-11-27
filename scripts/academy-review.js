@@ -187,6 +187,7 @@ function renderDocument(caseData) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learn Melanoma reviewer workspace</title>
+  <meta name="description" content="Reviewer workspace for the Learn Melanoma teaching sequence. Diagnoses are visible here. This page is not a learner step and not clinician approval.">
   <style>
     body { font-family: Georgia, "Times New Roman", serif; line-height: 1.5; margin: 1.5rem; color: #1b1b1b; background: #fff; }
     main { max-width: 46rem; }
@@ -219,7 +220,8 @@ function renderDocument(caseData) {
   <ul>${outsideHtml}</ul>
   ${body}
 </main>
-<script src="locale.js?v=tr-chips-20261127"></script>
+<script src="case-prose-locale.js?v=tr-case-20261127"></script>
+<script src="locale.js?v=tr-case-20261127"></script>
 </body>
 </html>
 `.replace(/[ \t]+$/gm, ""); // empty optional fields leave indent-only lines; keep git diff --check clean
