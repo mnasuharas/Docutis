@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" href="style.css?v=locale">
   <link rel="stylesheet" href="pattern-exercise.css?v=paired-views">
+  <link rel="stylesheet" href="subtle-clue.css?v=1">
 
 </head>
 
@@ -49,6 +50,7 @@
     </p>
     <div class="hero-actions">
       <a href="#trainingModule" class="hero-action hero-action-primary">Start mixed-case training</a>
+      <a href="#subtleClueModule" class="hero-action">Practise subtle clues</a>
       <a href="#caseModule" class="hero-action">Browse clinical cases</a>
       <a href="#searchPanel" class="hero-action">Find a condition</a>
     </div>
@@ -109,6 +111,19 @@
       <p class="case-empty">Training cannot run because JavaScript is unavailable. No diagnosis or teaching text is substituted.</p>
     </noscript>
     <div id="trainingApp" class="training-app js-only" tabindex="-1"></div>
+  </section>
+
+  <section id="subtleClueModule" tabindex="-1" class="subtle-clue-module" aria-labelledby="subtleClueTitle">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Contrastive image practice</p>
+        <h2 id="subtleClueTitle">Subtle clues and close mimics</h2>
+      </div>
+      <span class="module-badge">Clinician review required</span>
+    </div>
+    <p>Choose what is visible in two source-linked cases, then reveal the recorded diagnoses and the limits of that comparison. Educational preview only; no individual lesion decision or score.</p>
+    <noscript><p class="case-empty">This image exercise requires JavaScript.</p></noscript>
+    <div id="subtleClueApp" class="js-only" tabindex="-1"></div>
   </section>
 
   <section id="caseModule" tabindex="-1" class="case-module" aria-labelledby="caseTitle">
@@ -370,6 +385,8 @@
 <script src="training-data.js"></script>
 <script src="training-engine.js"></script>
 <script src="training-app.js"></script>
+<script src="subtle-clue-data.js?v=1"></script>
+<script src="subtle-clue-app.js?v=1"></script>
 
 
 </body>
