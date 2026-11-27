@@ -290,7 +290,6 @@
     [/^Clinical review status: (.*)$/, function (status) { return "Klinik inceleme durumu: " + piece(status); }],
     [/^(\d+) linked source\(s\)$/, function (count) { return count + " bağlantılı kaynak"; }],
     [/^(\d+) sources attached$/, function (count) { return count + " kaynak eklendi"; }],
-    [/^Scope: (.*)\. Content integrity ID: (.*)\.$/, function (scope, fingerprint) { return "Kapsam: " + scope + ". İçerik bütünlüğü kimliği: " + fingerprint + "."; }],
     [/^Superseded by (.*)\.$/, function (id) { return "Yerine geçen karar: " + id + "."; }],
     [/^Evidence for (.+) \((\d+)\)$/, function (label, count) { return piece(label) + " için kanıt (" + count + ")"; }],
     [/^(\d{4}-\d{2}-\d{2}) · (.+)$/, function (date, verdict) { return date + " · " + piece(verdict); }],
@@ -301,13 +300,44 @@
     [/^Lesion (\d+) of (\d+)$/, function (index, total) { return "Lezyon " + index + " / " + total; }],
     [/^(.+), (\d+) lesions$/, function (label, count) { return piece(label) + ", " + count + " lezyon"; }],
     [/^Unknown lesion (\d+) of (\d+): (.*)$/, function (index, total, title) { return "Tanısı gizli lezyon " + index + " / " + total + ": " + title; }],
-    [/^Source supporting (.+): (.+) \(opens in a new tab\)$/, function (label, title) { return piece(label) + " bölümünü destekleyen kaynak: " + title + " (yeni sekmede açılır)"; }]
+    [/^Source supporting (.+): (.+) \(opens in a new tab\)$/, function (label, title) { return piece(label) + " bölümünü destekleyen kaynak: " + title + " (yeni sekmede açılır)"; }],
+    [/^Organization or journal: (.*)$/, function (name) { return "Kurum veya dergi: " + name; }],
+    [/^Source type: (.*)$/, function (type) { return "Kaynak türü: " + piece(type); }],
+    [/^Publication year: (.*)$/, function (year) { return "Yayın yılı: " + year; }],
+    [/^Diagnosis: (.*)$/, function (name) { return "Tanı: " + piece(name); }],
+    [/^Anatomical site: (.*)$/, function (site) { return "Anatomik yerleşim: " + piece(site); }],
+    [/^License: (.*)$/, function (license) { return "Lisans: " + piece(license); }],
+    [/^Attribution: (.*)$/, function (attribution) { return "Atıf: " + piece(attribution); }],
+    [/^Patient-identifiable content: (.*)$/, function (value) { return "Hastayı tanımlayan içerik: " + (value === "No" ? "Hayır" : piece(value)); }],
+    [/^Consent basis: (.*)$/, function (value) { return "Onam dayanağı: " + piece(value); }],
+    [/^(Schematic|Quiz|Follow-up protocol|Case)\. (No (?:original schematic|quiz item|German follow-up protocol|pilot case) is published for this record\.)$/, function (label, rest) { return piece(label) + ". " + piece(rest); }],
+    [/^(.+) \(opens in a new tab\)$/, function (title) { return piece(title) + " (yeni sekmede açılır)"; }],
+    [/^(.+) \(new tab\)$/, function (title) { return piece(title) + " (yeni sekme)"; }],
+    [/^(\d+) cases shown\. Diagnosis stays hidden until you reveal it inside a case\.$/, function (count) { return count + " vaka gösteriliyor. Tanı, vakanın içinde siz açana kadar gizli kalır."; }],
+    [/^Curriculum level (\d+): (.+)$/, function (level, title) { return "Müfredat seviyesi " + level + ": " + piece(title); }],
+    [/^(\d+)\. (Recognition|Differentiation|Pattern integration|Diagnostic traps|Advanced reasoning)$/, function (level, title) { return level + ". " + piece(title); }],
+    [/^\s*·\s*(.+?) and coauthors\s*·\s*$/, function (name) { return " · " + name + " ve diğer yazarlar · "; }],
+    [/^Scope: (.*)\. Content integrity ID: (.*)\.$/, function (scope, fingerprint) {
+      const names = scope === "No sections approved" ? piece(scope) : scope.split(", ").map(function (id) {
+        return piece(id.replaceAll("-", " ").replace(/\b\w/g, function (character) { return character.toUpperCase(); }));
+      }).join(", ");
+      return "Kapsam: " + names + ". İçerik bütünlüğü kimliği: " + fingerprint + ".";
+    }]
   ];
   function piece(value) {
     return Object.prototype.hasOwnProperty.call(translations, value) ? translations[value] : value;
   }
   function translated(value) {
     if (Object.prototype.hasOwnProperty.call(translations, value)) return translations[value];
+    if (value.includes(" · ")) {
+      let changed = false;
+      const mapped = value.split(" · ").map(function (part) {
+        const next = translated(part);
+        if (next && next !== part) changed = true;
+        return next || part;
+      });
+      if (changed) return mapped.join(" · ");
+    }
     for (const [pattern, replacement] of variableTranslations) {
       if (!pattern.test(value)) continue;
       if (typeof replacement === "function") {
@@ -887,11 +917,58 @@
     "follow-up": "takip",
     "red flags": "uyarıcı bulgular",
     "oncology context": "onkolojik bağlam",
-    "Mapped sources support this section at section level; source attachment is not physician endorsement.": "Eşlenen kaynaklar bu bölümü bölüm düzeyinde destekler. Kaynak bağlantısı hekim onayı değildir."
+    "Mapped sources support this section at section level; source attachment is not physician endorsement.": "Eşlenen kaynaklar bu bölümü bölüm düzeyinde destekler. Kaynak bağlantısı hekim onayı değildir.",
+    "None": "Yok",
+    "No sections approved": "Onaylanan bölüm yok",
+    "Alternative Text": "Alternatif metin",
+    "Best Answer": "En iyi yanıt",
+    "Caption": "Altyazı",
+    "Clinical Examination": "Klinik muayene",
+    "Clinical Presentation": "Klinik görünüm",
+    "Context": "Bağlam",
+    "Cross Sectional Imaging": "Kesitsel görüntüleme",
+    "Dermoscopic Features": "Dermoskopik bulgular",
+    "Diagnostic Ground Truth": "Tanısal referans",
+    "Diagnostics": "Tanısal değerlendirme",
+    "Differential Diagnosis": "Ayırıcı tanı",
+    "Differentials": "Ayırıcı tanılar",
+    "Educational Description": "Eğitici açıklama",
+    "Explanation": "Açıklama",
+    "Follow Up": "Takip",
+    "Histopathology": "Histopatoloji",
+    "Image": "Görsel",
+    "Images": "Görseller",
+    "Interpretations": "Yorumlar",
+    "Legend": "Lejant",
+    "Lymph Node Ultrasound": "Lenf nodu ultrasonu",
+    "Observations": "Gözlemler",
+    "Options": "Seçenekler",
+    "Patient Safety": "Hasta güvenliği",
+    "Periods": "Dönemler",
+    "Prompt": "Soru",
+    "Red Flags": "Uyarıcı bulgular",
+    "References": "Kaynaklar",
+    "Referral": "Sevk",
+    "Risk Groups": "Risk grupları",
+    "S100b": "S100B",
+    "Safety Notice": "Güvenlik notu",
+    "Scope": "Kapsam",
+    "Teaching Points": "Öğretim noktaları",
+    "Title": "Başlık"
   });
+  function humanizeToken(value) {
+    return String(value).replaceAll("-", " ").replace(/\b\w/g, function (character) { return character.toUpperCase(); });
+  }
+  function chipSource(value) {
+    if (Object.prototype.hasOwnProperty.call(translations, value)) return value;
+    const titled = humanizeToken(value);
+    if (Object.prototype.hasOwnProperty.call(translations, titled)) return titled;
+    return value;
+  }
   window.DOCUTIS_LOCALE = Object.freeze({
     conditionName: window.DOCUTIS_LOCALE.conditionName,
-    translate: function (value) { return translated(value); }
+    translate: function (value) { return translated(value); },
+    chipSource: chipSource
   });
   const originalText = new WeakMap();
   const originalAttributes = new WeakMap();

@@ -205,7 +205,17 @@
   }
 
   function humanize(value) {
-    return value.replaceAll("-", " ").replace(/\b\w/g, character => character.toUpperCase());
+    return String(value)
+      .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+      .replaceAll("-", " ")
+      .replace(/\b\w/g, character => character.toUpperCase());
+  }
+
+  function chipSource(value) {
+    if (window.DOCUTIS_LOCALE && typeof window.DOCUTIS_LOCALE.chipSource === "function") {
+      return window.DOCUTIS_LOCALE.chipSource(value);
+    }
+    return humanize(value);
   }
 
   function addStructuredList(parent, values, className = "structured-list") {
@@ -224,7 +234,7 @@
     if (Array.isArray(values)) {
       const tags = document.createElement("div");
       tags.className = "clinical-tags";
-      values.forEach(value => appendTextElement(tags, "span", humanize(value), "clinical-tag"));
+      values.forEach(value => appendTextElement(tags, "span", chipSource(value), "clinical-tag"));
       row.appendChild(tags);
     } else appendTextElement(row, "p", values);
     parent.appendChild(row);

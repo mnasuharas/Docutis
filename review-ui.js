@@ -55,6 +55,27 @@
     return box;
   }
 
+  function sectionDisplay(id) {
+    return String(id).replaceAll("-", " ").replace(/\b\w/g, character => character.toUpperCase());
+  }
+
+  function appendSectionList(parent, ids) {
+    if (!ids || !ids.length) {
+      append(parent, "span", "None");
+      return;
+    }
+    ids.forEach((id, index) => {
+      if (index) append(parent, "span", ", ");
+      append(parent, "span", sectionDisplay(id));
+    });
+  }
+
+  function factSections(details, term, ids) {
+    const row = append(details, "div");
+    append(row, "dt", term);
+    appendSectionList(append(row, "dd"), ids);
+  }
+
   function appendReviewPanel(parent, assetType, id, title = "Human clinical review") {
     const item = asset(assetType, id);
     if (!item) return null;
@@ -75,7 +96,7 @@
     const details = append(content, "dl", undefined, "public-review-facts");
     const fact = (term, value) => { const row = append(details, "div"); append(row, "dt", term); append(row, "dd", value); };
     fact("Review status", statusLabel(item.status));
-    fact("Review scope", item.sections.join(", "));
+    factSections(details, "Review scope", item.sections);
     const integrity = append(details, "div", undefined, "public-review-integrity");
     append(integrity, "dt", "Content integrity ID");
     const integrityValue = append(integrity, "dd");
@@ -86,7 +107,7 @@
       const person = reviewer(active.reviewerId);
       fact("Review date", active.reviewDate);
       fact("Public reviewer role", person ? person.professionalRole : active.reviewerRole);
-      fact("Reviewed sections", active.reviewedSections.join(", ") || "None");
+      factSections(details, "Reviewed sections", active.reviewedSections);
       fact("Evidence checked", active.evidenceSourcesChecked.length ? `${active.evidenceSourcesChecked.length} linked source(s)` : "None recorded");
     }
     if (!item.history.length) {
