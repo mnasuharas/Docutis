@@ -174,5 +174,35 @@ test("the public page loads the pattern exercise after the case and pattern data
   const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
   assert.match(html, /id="patternExercise"[^>]*hidden>/);
   assert.match(html, /href="pattern-exercise\.css\?v=paired-views"/);
-  assert.match(html, /src="case-data\.js"[\s\S]*src="pattern-data\.js"[\s\S]*src="pattern-exercise\.js\?v=paired-views"/);
+  assert.match(html, /src="case-data\.js"[\s\S]*src="pattern-data\.js"[\s\S]*src="pattern-exercise\.js\?v=clinical-first"/);
+});
+
+test("clinical-first practice records independent impressions before each dermoscopic view", () => {
+  const { tag, contents, click, submit, answer } = harness();
+  click("Start with clinical impression");
+  for (const number of [1, 2, 3]) {
+    assert.equal(tag("img").length, 1);
+    assert.match(tag("img")[0].src, /clinical\.jpg$/);
+    assert.equal(tag("textarea")[0].value, "");
+    tag("textarea")[0].value = "   ";
+    submit();
+    assert.equal(tag("img").length, 1);
+    const note = "First impression for case " + number;
+    tag("textarea")[0].value = note;
+    submit();
+    assert.match(tag("img")[0].src, /dermoscopy\.jpg$/);
+    assert.ok(contents().includes(note));
+    assert.match(contents(), /changed or reinforced/);
+    answer("Possible", "4");
+    submit();
+    if (number === 2) {
+      assert.ok(contents().includes("First impression for case 1"));
+      assert.ok(contents().includes(note));
+      click("Open independent case");
+    }
+  }
+  assert.ok(contents().includes("First impression for case 3"));
+  click("Restart exercise");
+  click("Start pattern exercise");
+  assert.match(tag("img")[0].src, /dermoscopy\.jpg$/);
 });
