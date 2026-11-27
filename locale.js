@@ -802,7 +802,7 @@
     "Quiz-item review status": "Test sorusunun inceleme durumu",
     "Choose one answer, then check it.": "Bir yanıt seçin, ardından kontrol edin."
   });
-  Object.assign(translations, window.DOCUTIS_CLINICAL_LOCALE || {}, window.DOCUTIS_DIFFERENTIAL_LOCALE || {}, window.DOCUTIS_PROFILE_LOCALE || {}, {
+  Object.assign(translations, window.DOCUTIS_CLINICAL_LOCALE || {}, window.DOCUTIS_DIFFERENTIAL_LOCALE || {}, window.DOCUTIS_PROFILE_LOCALE || {}, window.DOCUTIS_REMAINDER_LOCALE || {}, {
     "This article has not yet completed human physician review.": "Bu kayıt henüz hekim incelemesini tamamlamamıştır.",
     "Physician review applies to this content version. It does not guarantee correctness or replace professional medical judgment.": "Hekim incelemesi bu içerik sürümü için geçerlidir. Doğruluğu garanti etmez ve mesleki tıbbi değerlendirmenin yerine geçmez.",
     "Include the affected record or page, the claim that needs attention, a verifiable source, and a proposed correction. Do not include patient-identifiable information.": "İlgili kaydı veya sayfayı, incelenmesi gereken ifadeyi, doğrulanabilir kaynağı ve önerilen düzeltmeyi belirtin. Hastayı tanımlayan bilgi eklemeyin.",
