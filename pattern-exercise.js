@@ -50,6 +50,7 @@
     ["Lower left", 25, 75], ["Lower center", 50, 75], ["Lower right", 75, 75]
   ];
   const responses = [];
+  let clinicalFirst = false;
 
   function add(parent, tag, value, className) {
     const element = document.createElement(tag);
@@ -133,7 +134,36 @@
     option.value = value;
   }
 
-  function renderCase(index) {
+  function startCase(index) {
+    const lesson = lessons[index];
+    if (!clinicalFirst || !lesson.clinicalImage) {
+      renderCase(index);
+      return;
+    }
+    const title = heading(index === 2 ? "Independent case · clinical impression" : "Case " + (index + 1) + " · clinical impression");
+    add(root, "p", "Site: " + lesson.record.patientContext.anatomicalSite);
+    const workspace = add(root, "div", "", "exercise-workspace");
+    const viewer = add(workspace, "div");
+    const container = add(viewer, "div", "", "exercise-frame");
+    photograph(container, lesson.clinicalImage, "Clinical photograph for the current case.");
+    attribution(viewer, lesson.clinicalImage, false);
+    const form = add(workspace, "form", "", "exercise-fields");
+    const prompt = "Which visible feature guides your first impression? If uncertain, describe what you need to clarify.";
+    const impression = labeled(form, prompt, "textarea");
+    impression.required = true;
+    impression.maxLength = 400;
+    impression.rows = 3;
+    const next = add(form, "button", "Save impression and open dermoscopy", "exercise-action");
+    next.type = "submit";
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      impression.value = impression.value.trim();
+      if (form.reportValidity()) renderCase(index, impression.value);
+    });
+    title.focus();
+  }
+
+  function renderCase(index, impression) {
     const lesson = lessons[index];
     const title = heading(index === 2 ? "Independent case" : "Pattern marking · Case " + (index + 1) + " of 2");
     add(root, "p", "Site: " + lesson.record.patientContext.anatomicalSite);
@@ -232,6 +262,11 @@
       "What is your leading diagnosis, and what is the closest alternative?",
       "What is still uncertain or hard to assess?"
     ];
+    if (impression) {
+      add(fields, "h4", "Your clinical impression");
+      add(fields, "p", impression);
+      prompts.push("Which dermoscopic finding changed or reinforced your initial impression, and why?");
+    }
     const reasoning = prompts.map(function (prompt) {
       const answer = labeled(fields, prompt, "textarea");
       answer.required = true;
@@ -257,12 +292,13 @@
       reasoning.forEach(function (answer) { answer.value = answer.value.trim(); });
       if (!form.reportValidity()) return;
       responses[index] = {
+        impression: impression,
         findings: checked.map(function (slot) {
           return { description: slot.description.value, certainty: slot.certainty.value, position: slot.position };
         }),
         reasoning: reasoning.map(function (answer, i) { return [prompts[i], answer.value]; })
       };
-      if (index === 0) renderCase(1);
+      if (index === 0) startCase(1);
       else renderDebrief(index === 2);
     });
     title.focus();
@@ -296,6 +332,10 @@
     const reasoning = add(card, "details");
     add(reasoning, "summary", "Your reasoning");
     const answers = add(reasoning, "dl");
+    if (responses[index].impression) {
+      add(answers, "dt", "Before dermoscopy");
+      add(answers, "dd", responses[index].impression);
+    }
     responses[index].reasoning.forEach(function (entry) {
       add(answers, "dt", entry[0]);
       add(answers, "dd", entry[1]);
@@ -343,7 +383,7 @@
     const actions = add(root, "div", "", "exercise-actions");
     if (independent) button(actions, "Review the first two cases", function () { renderDebrief(false); });
     else if (responses[2]) button(actions, "Return to independent case review", function () { renderDebrief(true); });
-    else button(actions, "Open independent case", function () { renderCase(2); });
+    else button(actions, "Open independent case", function () { startCase(2); });
     if (responses[2]) button(actions, "Restart exercise", function () {
       responses.length = 0;
       renderIntro().focus();
@@ -354,7 +394,15 @@
   function renderIntro() {
     const title = heading("Dermoscopy pattern exercise");
     add(root, "p", "Mark what you see in two cases, compare your reasoning with the teaching examples, then try an independent case.");
-    button(root, "Start pattern exercise", function () { renderCase(0); });
+    const actions = add(root, "div", "", "exercise-actions");
+    button(actions, "Start with clinical impression", function () {
+      clinicalFirst = true;
+      startCase(0);
+    });
+    button(actions, "Start pattern exercise", function () {
+      clinicalFirst = false;
+      startCase(0);
+    });
     return title;
   }
 
