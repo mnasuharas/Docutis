@@ -42,6 +42,44 @@
       )
     }),
     Object.freeze({
+      id: "acral-ridges", cases: ["case-g27-01", "case-g27-03"],
+      title: dual("Where is the pigment on the sole?", "Ayak tabanında pigment nerede?"),
+      question: dual("Choose the relationship between brown lines and pale bands.", "Kahverengi çizgilerle açık renkli bantların ilişkisini seçin."),
+      options: Object.freeze([
+        dual("Thin brown lines with broader pale bands", "Geniş açık bantlarla birlikte ince kahverengi çizgiler"),
+        dual("Broad brown bands between thin pale scale lines", "İnce açık renkli skuam çizgileri arasında geniş kahverengi bantlar"),
+        dual("The lines cannot be located reliably", "Çizgilerin konumu güvenle değerlendirilemiyor")
+      ]),
+      expected: [0, 1],
+      comparison: dual(
+        "The brown in the melanoma in situ frame occupies broad bands between pale furrow scale markers. The benign cluster shows thin brown furrow lines. This is a comparison of two source images, not a calculation for another sole.",
+        "Melanoma in situ karesinde pigment, açık renkli oluk skuamı işaretleri arasındaki geniş bantları doldurur. Benign kümede ince kahverengi oluk çizgileri görülür. Bu iki kaynak görselinin karşılaştırmasıdır; başka bir taban lezyonu için hesaplama değildir."
+      ),
+      limit: dual(
+        "The melanoma in situ figure has lesion-specific histopathology. The benign biopsy sampled only one spot years after the photographs. Pores are unresolved in both frames, so the ridge/furrow assignment should remain cautious. Printed scales and lines are not skin.",
+        "Melanoma in situ şekli lezyona özgü histopatoloji içerir. Benign biyopsi yıllar sonra kümedeki yalnızca bir noktadan alınmıştır. Her iki karede de gözenekler çözümlenemediğinden sırt/oluk yorumu temkinli kalmalıdır. Basılı ölçek ve çizgiler deri değildir."
+      )
+    }),
+    Object.freeze({
+      id: "face", cases: ["case-g25-06", "case-g25-05"],
+      title: dual("Look around the facial follicles", "Yüzde folikül çevresini inceleyin"),
+      question: dual("What appears around the follicular openings?", "Folikül açıklıklarının çevresinde ne görülüyor?"),
+      options: Object.freeze([
+        dual("Orange-brown pigment without visible gray dots", "Gri noktalar görülmeden turuncu kahverengi pigment"),
+        dual("Gray dots around several openings", "Birkaç açıklığın çevresinde gri noktalar"),
+        dual("The follicles cannot be assessed", "Foliküller değerlendirilemiyor")
+      ]),
+      expected: [0, 1],
+      comparison: dual(
+        "Both facial frames show a pseudo-network interrupted by pale follicular openings. Gray perifollicular dots and darker pigment on one side occur in the source lentigo maligna frame. The solar lentigo frame lacks visible gray dots. Absence in one photograph is weaker than a present clue.",
+        "İki yüz karesinde de açık renkli folikül açıklıklarıyla kesilen psödoağ var. Kaynağın lentigo maligna karesinde folikül çevresinde gri noktalar ve bir yanda daha koyu pigment görülür. Solar lentigo karesinde gri noktalar seçilmiyor. Bir fotoğrafta bulgunun görülmemesi, mevcut bir ipucundan daha zayıf kanıttır."
+      ),
+      limit: dual(
+        "Both names come from a teaching figure with study-level histology, not a lesion-specific pathology sentence. Different faces and sites; the missing gray clue does not clear a new lesion.",
+        "İki ad da lezyona özgü patoloji cümlesi yerine çalışma düzeyinde histoloji bildiren bir eğitim şekline dayanır. Yüzler ve bölgeler farklıdır; gri ipucunun görülmemesi yeni bir lezyonu güvenli kılmaz."
+      )
+    }),
+    Object.freeze({
       id: "papules", cases: ["case-g21-08", "case-g18-15"],
       title: dual("Sebaceous hyperplasia and a BCC look-alike", "Sebase hiperplazi ve bazal hücreli karsinom benzeri"),
       question: dual("What is actually available in each stored image?", "Kayıtlı görsellerde gerçekten ne değerlendirilebilir?"),
