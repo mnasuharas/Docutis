@@ -1,0 +1,19 @@
+#pinkCaseModule { scroll-margin-top: 6rem; margin-block: 2rem; }
+#pinkCaseApp { border: 1px solid var(--border, #cbd5e1); border-radius: 1rem; padding: clamp(1rem, 3vw, 2rem); }
+.pink-panels, .pink-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.pink-figure { margin: 0; min-width: 0; }
+.pink-image-frame { position: relative; width: fit-content; max-width: 100%; }
+.pink-image-frame img { display: block; max-width: 100%; height: auto; max-height: 36rem; object-fit: contain; width: auto; }
+.pink-figure figcaption { font-size: .85rem; overflow-wrap: anywhere; margin-block: .5rem; }
+.pink-marker { position: absolute; width: 2rem; height: 2rem; border: 3px solid #fff; outline: 2px solid #0369a1; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+.pink-marker[hidden] { display: none; }
+.pink-record { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .35rem 1rem; }
+.pink-record dd { margin: 0; }
+#pinkCaseApp select { width: 100%; min-width: 0; min-height: 44px; }
+#pinkCaseApp button { min-height: 44px; margin: .5rem .5rem .5rem 0; white-space: normal; }
+#pinkCaseApp :focus-visible { outline: 3px solid #0284c7; outline-offset: 3px; }
+@media (max-width: 700px) {
+  .pink-panels, .pink-fields { grid-template-columns: minmax(0, 1fr); }
+  .pink-record { grid-template-columns: minmax(0, 1fr); }
+  .pink-record dd { margin-bottom: .5rem; }
+}
