@@ -1,0 +1,20 @@
+.subtle-clue-module { margin: 2rem 0; padding: clamp(1rem, 3vw, 2rem); border: 1px solid var(--color-border); border-radius: 1.25rem; background: var(--color-surface); }
+.subtle-clue-module .section-heading { margin-bottom: 1rem; }
+.subtle-nav { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+.subtle-button { border: 1px solid var(--color-border); border-radius: .7rem; padding: .65rem .9rem; background: var(--color-surface); color: var(--color-text); font: inherit; cursor: pointer; }
+.subtle-button[aria-current="step"] { border-color: var(--color-accent); font-weight: 700; }
+.subtle-button:disabled { opacity: .6; cursor: not-allowed; }
+.subtle-button:focus-visible, .subtle-option:focus-within { outline: 3px solid var(--color-accent); outline-offset: 3px; }
+.subtle-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 1rem 0; }
+.subtle-panel { min-width: 0; border: 1px solid var(--color-border); border-radius: .8rem; padding: 1rem; }
+.subtle-panel figure { margin: .6rem 0; }
+.subtle-panel img { display: block; max-width: 100%; width: auto; height: auto; max-height: 24rem; object-fit: contain; border-radius: .4rem; }
+.subtle-panel figcaption, .subtle-limit { font-size: .9rem; opacity: .85; }
+.subtle-panel fieldset { border: 0; padding: 0; margin: 1rem 0 0; }
+.subtle-panel legend { font-weight: 700; margin-bottom: .5rem; }
+.subtle-option { display: flex; gap: .6rem; padding: .5rem .3rem; cursor: pointer; }
+.subtle-option input { flex: none; }
+.subtle-answer, .subtle-comparison, .subtle-concept { margin-top: 1rem; padding: 1rem; border-radius: .7rem; background: var(--color-canvas); }
+.subtle-concept p { margin: .5rem 0; }
+.subtle-clue-module a { overflow-wrap: anywhere; }
+@media (max-width: 700px) { .subtle-grid { grid-template-columns: 1fr; } }
