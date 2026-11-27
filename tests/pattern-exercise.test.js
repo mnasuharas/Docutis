@@ -174,7 +174,7 @@ test("the public page loads the pattern exercise after the case and pattern data
   const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
   assert.match(html, /id="patternExercise"[^>]*hidden>/);
   assert.match(html, /href="pattern-exercise\.css\?v=paired-views"/);
-  assert.match(html, /src="case-data\.js"[\s\S]*src="pattern-data\.js"[\s\S]*src="pattern-exercise\.js\?v=heel-practice"/);
+  assert.match(html, /src="case-data\.js"[\s\S]*src="pattern-data\.js"[\s\S]*src="pattern-exercise\.js\?v=vessel-practice"/);
 });
 
 test("clinical-first practice records independent impressions before each dermoscopic view", () => {
@@ -233,4 +233,23 @@ test("optional heel practice withholds the comparison until the learner submits 
   click("Return to independent case review");
   click("Review the heel comparison");
   assert.equal(tag("article").length, 2);
+});
+
+test("pink-lesion practice requires observations and reasoning for both cases before revealing the source comparison", () => {
+  const { tag, contents, click, submit } = harness();
+  click("Practise vessel patterns in pink lesions");
+  assert.equal(tag("img").length, 2);
+  assert.doesNotMatch(contents(), /melanoma|carcinoma|branching|irregular linear/i);
+  tag("textarea").forEach(field => { field.value = "My assessment"; });
+  tag("textarea")[3].value = " ";
+  submit();
+  assert.equal(tag("textarea").length, 4);
+  tag("textarea")[3].value = "My second differential";
+  submit();
+  assert.match(contents(), /Nodular basal cell carcinoma/);
+  assert.match(contents(), /Nodular melanoma, amelanotic/);
+  assert.match(contents(), /My second differential/);
+  assert.match(contents(), /Only the melanoma caption reports histopathology/);
+  click("Back to exercises");
+  assert.equal(tag("img").length, 0);
 });
