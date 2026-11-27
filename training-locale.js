@@ -197,7 +197,7 @@
   "Preview curriculum, published for education only. It is not clinically validated, and its teaching text remains clinician review required.": "Önizleme müfredatı, yalnızca eğitim için yayımlanmıştır. Klinik olarak doğrulanmamıştır ve öğretim metni için hekim incelemesi gerekli olmaya devam eder.",
   "This is your working impression, not the app's diagnosis. It is not scored.": "Bu sizin çalışma izleniminizdir, uygulamanın tanısı değildir. Puanlanmaz.",
   "Educational next-step teaching only. It is not a protocol, a triage rule, or clinical decision support. Choices are not scored.": "Yalnızca sonraki adıma ilişkin eğitim metnidir. Bir protokol, bir triyaj kuralı veya klinik karar desteği değildir. Seçimler puanlanmaz.",
-  "Benign-leaning": "Benign ağırlıklı",
+  "Benign-leaning": "Benign eğilimli",
   "Melanocytic": "Melanositik",
   "Keratinocytic": "Keratinositik",
   "Vascular or adnexal": "Vasküler veya adneksiyal",
