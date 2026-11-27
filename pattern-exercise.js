@@ -49,7 +49,12 @@
     ["Middle left", 25, 50], ["Center", 50, 50], ["Middle right", 75, 50],
     ["Lower left", 25, 75], ["Lower center", 50, 75], ["Lower right", 75, 75]
   ];
+  const heelComparison = collection.comparisons.find(function (item) { return item.id === "cmp-g26-heel"; });
+  const followUp = heelComparison && collection.cases.find(function (item) { return item.id === heelComparison.caseIdA; });
+  const followUpImage = followUp && followUp.images.find(function (image) { return image.type === "dermoscopy"; });
   const responses = [];
+  let learningPoint = "";
+  let followUpAnswer = null;
   let clinicalFirst = false;
 
   function add(parent, tag, value, className) {
@@ -367,6 +372,58 @@
     });
   }
 
+  function renderFollowUp() {
+    const title = heading("Another heel lesion");
+    add(root, "p", "Examine this second lesion before comparing it with the previous heel case.");
+    const workspace = add(root, "div", "", "exercise-workspace");
+    const viewer = add(workspace, "div");
+    const container = add(viewer, "div", "", "exercise-frame");
+    photograph(container, followUpImage, "Dermoscopy of a second heel lesion.");
+    attribution(viewer, followUpImage, false);
+    const form = add(workspace, "form", "", "exercise-fields");
+    const observation = labeled(form, "Describe the distribution of pigment across this lesion.", "textarea");
+    const diagnosis = labeled(form, "What is your leading diagnosis and which finding supports it?", "textarea");
+    [observation, diagnosis].forEach(function (field) {
+      field.required = true;
+      field.rows = 2;
+      field.maxLength = 400;
+    });
+    const submit = add(form, "button", "Compare the heel cases", "exercise-action");
+    submit.type = "submit";
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      observation.value = observation.value.trim();
+      diagnosis.value = diagnosis.value.trim();
+      if (!form.reportValidity()) return;
+      followUpAnswer = [observation.value, diagnosis.value];
+      renderHeelReview();
+    });
+    title.focus();
+  }
+
+  function renderHeelReview() {
+    const title = heading("Compare the heel cases");
+    const cards = add(root, "div", "", "exercise-comparison is-paired");
+    [lessons[2], { record: followUp, image: followUpImage }].forEach(function (lesson) {
+      const card = add(cards, "article", "", "exercise-review");
+      add(card, "h4", lesson.record.diagnosisLabel);
+      photograph(add(card, "div", "", "exercise-frame"), lesson.image, lesson.image.alt);
+      add(card, "p", lesson.record.pairedModality.dermoscopicObservation);
+      attribution(card, lesson.image, true);
+    });
+    add(root, "h4", "Your assessment of the second lesion");
+    followUpAnswer.forEach(function (answer) { add(root, "p", answer); });
+    if (learningPoint) {
+      add(root, "h4", "What you wanted to check again");
+      add(root, "p", learningPoint);
+    }
+    add(root, "h4", "What distinguishes these two images?");
+    add(root, "p", heelComparison.discriminator);
+    add(root, "p", heelComparison.limits);
+    button(root, "Return to independent case review", function () { renderDebrief(true); });
+    title.focus();
+  }
+
   function renderDebrief(independent) {
     const title = heading(independent ? "Independent case · review" : "Compare the two cases");
     add(root, "p", "Your marks are numbered. Teaching marks begin with E and identify example regions. Compare the reasoning as well as the locations.");
@@ -381,11 +438,24 @@
       add(detail, "p", pattern.lookFor);
     }
     const actions = add(root, "div", "", "exercise-actions");
+    if (independent && followUpImage) {
+      if (followUpAnswer) button(actions, "Review the heel comparison", renderHeelReview);
+      else {
+        const practice = add(root, "div", "", "exercise-fields");
+        const note = labeled(practice, "Which feature did you miss or want to check again? (optional)", "textarea");
+        note.maxLength = 400;
+        note.value = learningPoint;
+        note.addEventListener("input", function () { learningPoint = note.value.trim(); });
+        button(practice, "Practise on another heel lesion", renderFollowUp);
+      }
+    }
     if (independent) button(actions, "Review the first two cases", function () { renderDebrief(false); });
     else if (responses[2]) button(actions, "Return to independent case review", function () { renderDebrief(true); });
     else button(actions, "Open independent case", function () { startCase(2); });
     if (responses[2]) button(actions, "Restart exercise", function () {
       responses.length = 0;
+      learningPoint = "";
+      followUpAnswer = null;
       renderIntro().focus();
     });
     title.focus();

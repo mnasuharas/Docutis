@@ -174,7 +174,7 @@ test("the public page loads the pattern exercise after the case and pattern data
   const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
   assert.match(html, /id="patternExercise"[^>]*hidden>/);
   assert.match(html, /href="pattern-exercise\.css\?v=paired-views"/);
-  assert.match(html, /src="case-data\.js"[\s\S]*src="pattern-data\.js"[\s\S]*src="pattern-exercise\.js\?v=clinical-first"/);
+  assert.match(html, /src="case-data\.js"[\s\S]*src="pattern-data\.js"[\s\S]*src="pattern-exercise\.js\?v=heel-practice"/);
 });
 
 test("clinical-first practice records independent impressions before each dermoscopic view", () => {
@@ -205,4 +205,32 @@ test("clinical-first practice records independent impressions before each dermos
   click("Restart exercise");
   click("Start pattern exercise");
   assert.match(tag("img")[0].src, /dermoscopy\.jpg$/);
+});
+
+test("optional heel practice withholds the comparison until the learner submits both answers", () => {
+  const { tag, contents, click, submit, answer } = harness();
+  click("Start pattern exercise");
+  answer("Possible", "4");
+  submit();
+  answer("Possible", "4");
+  submit();
+  click("Open independent case");
+  answer("Possible", "4");
+  submit();
+  tag("textarea")[0].value = "Check pigment distribution";
+  tag("textarea")[0].emit("input");
+  click("Practise on another heel lesion");
+  assert.equal(tag("img")[0].src, "assets/media/cases/case-40-dermoscopy.jpg");
+  assert.doesNotMatch(contents(), /nevus|melanoma|regular rows/i);
+  tag("textarea")[0].value = "Evenly spaced strokes";
+  submit();
+  assert.equal(tag("form").length, 1);
+  tag("textarea")[1].value = "Organized pattern supports a nevus";
+  submit();
+  assert.equal(tag("article").length, 2);
+  assert.match(contents(), /Check pigment distribution/);
+  assert.match(contents(), /Organized pattern supports a nevus/);
+  click("Return to independent case review");
+  click("Review the heel comparison");
+  assert.equal(tag("article").length, 2);
 });
