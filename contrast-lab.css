@@ -1,0 +1,17 @@
+#contrastLabModule { scroll-margin-top: 6rem; margin-block: 2rem; }
+#contrastLabApp { border: 1px solid var(--border, #cbd5e1); border-radius: 1rem; padding: clamp(1rem, 3vw, 2rem); }
+.contrast-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.contrast-side { min-width: 0; }
+.contrast-photo { margin: 0 0 1rem; }
+.contrast-image { position: relative; width: fit-content; max-width: 100%; }
+.contrast-image img { display: block; max-width: 100%; height: auto; max-height: 32rem; width: auto; }
+.contrast-marker { position: absolute; border: 2px dashed #fff; box-shadow: inset 0 0 0 2px #075985, 0 0 0 1px #075985; pointer-events: none; box-sizing: border-box; }
+.contrast-zoom { width: min(100%, 24rem); position: relative; overflow: hidden; background: #e2e8f0; }
+.contrast-zoom img { position: absolute; max-width: none; height: auto; }
+.contrast-photo figcaption { font-size: .85rem; overflow-wrap: anywhere; margin-top: .5rem; }
+.contrast-storage { display: flex; align-items: center; gap: .75rem; padding-block: .75rem; }
+.contrast-storage input { width: 1.25rem; height: 1.25rem; }
+#contrastLabApp select { width: 100%; min-width: 0; min-height: 44px; }
+#contrastLabApp button { min-height: 44px; white-space: normal; margin: .5rem .5rem .5rem 0; }
+#contrastLabApp :focus-visible { outline: 3px solid #0284c7; outline-offset: 3px; }
+@media (max-width: 700px) { .contrast-panels { grid-template-columns: minmax(0, 1fr); } }

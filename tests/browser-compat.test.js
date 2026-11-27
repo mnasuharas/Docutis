@@ -70,7 +70,7 @@ test("interactive modules explain a disabled JavaScript environment without medi
     assert.ok(html.includes(idClass), `missing ${idClass}`);
   }
   const blocks = [...html.matchAll(/<noscript>([\s\S]*?)<\/noscript>/g)].map(match => match[1].trim());
-  assert.equal(blocks.length, 8);
+  assert.equal(blocks.length, 9);
   const generic = blocks.filter(block => block.includes("This interactive section requires JavaScript."));
   assert.equal(generic.length, 4);
   for (const block of generic) {
