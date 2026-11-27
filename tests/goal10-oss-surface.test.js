@@ -52,7 +52,7 @@ test("Goal 10 exposes About, OSS links and feedback CTAs without relative doc pa
   assert.match(html, /Public preview/i);
   assert.match(html, /Not validated clinical decision support/i);
   assert.match(html, /clinician reviewed|Clinician review required|review required/i);
-  assert.match(html, /is <strong>not<\/strong> clinician-approved recommendations/i);
+  assert.match(html, /does not constitute clinician-approved recommendations/i);
 
   for (const href of [
     REPO,

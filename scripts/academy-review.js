@@ -196,9 +196,16 @@ function renderDocument(caseData) {
     dd { margin: 0 0 0.4rem; }
     .meta { font-weight: 400; font-size: 0.9rem; }
     a { color: #0b3a75; }
+    header { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; align-items: center; justify-content: space-between; margin: 0 0 1rem; }
+    header label { font-family: system-ui, sans-serif; font-size: 0.95rem; }
+    header select { min-height: 44px; font: inherit; }
   </style>
 </head>
 <body>
+<header>
+  <a href="index.html">Back to Docutis</a>
+  <label for="docutisLanguage">Language <select id="docutisLanguage"><option value="en" lang="en" data-no-translate>English</option><option value="tr" lang="tr" data-no-translate>Türkçe</option></select></label>
+</header>
 <main>
   <p class="banner">Review required. This page is for a human reviewer. It is not clinician review, not a score, and not a learner step. Diagnoses are visible here on purpose. No case was approved by generating this page.</p>
   <h1>Learn Melanoma reviewer workspace</h1>
@@ -212,6 +219,7 @@ function renderDocument(caseData) {
   <ul>${outsideHtml}</ul>
   ${body}
 </main>
+<script src="locale.js?v=tr-records-20261127"></script>
 </body>
 </html>
 `.replace(/[ \t]+$/gm, ""); // empty optional fields leave indent-only lines; keep git diff --check clean

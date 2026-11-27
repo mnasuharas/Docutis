@@ -25,3 +25,25 @@ test("seven skin-cancer overviews have separate Turkish drafts for all six visib
     }
   }
 });
+
+test("every other condition overview has a separate Turkish draft for all six visible fields", () => {
+  const root = path.join(__dirname, "..");
+  const context = { window: {} };
+  for (const name of ["data.js", "clinical-locale.js"]) {
+    vm.runInNewContext(fs.readFileSync(path.join(root, name), "utf8"), context);
+  }
+  const oncologyIds = new Set([
+    "actinic-keratosis", "basal-cell-carcinoma", "cutaneous-squamous-cell-carcinoma",
+    "squamous-cell-carcinoma-in-situ", "cutaneous-melanoma", "lentigo-maligna", "acral-melanoma"
+  ]);
+  const dictionary = context.window.DOCUTIS_CLINICAL_LOCALE;
+  const diseases = context.window.DOCUTIS_DATA.diseases.filter(item => !oncologyIds.has(item.id));
+  assert.equal(diseases.length, 55);
+  for (const disease of diseases) {
+    for (const field of ["description", "clinical", "dermoscopy", "differential", "treatment", "followup"]) {
+      assert.equal(typeof disease[field], "string", `${disease.id} ${field} source`);
+      assert.ok(dictionary[disease[field]], `${disease.id} ${field}`);
+      assert.notEqual(dictionary[disease[field]], disease[field]);
+    }
+  }
+});
