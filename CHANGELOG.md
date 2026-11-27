@@ -4,6 +4,13 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
+### Early melanoma contrast lab
+
+- Add six bilingual, selection-only comparisons with five in-situ and one thin invasive melanoma and non-melanoma controls. Import two distinct back MIS panels from Colmant et al. (same patient; original article CC BY notice); retain source arrows and clinical insets. Reuse existing source-verified cases without changing their review status.
+- Randomize pair order and left/right placement. Record structures, certainty, regions and closer-assessment choices (including Both/Uncertain) before source reveal. Compare selected and suggested regions at enlarged scale with source-specific evidence and limits; no score or diagnostic probability.
+- Offer targeted repeat practice, with optional browser-local storage of lesson IDs only. New teaching and suggested regions remain clinician review required. Preserve the published figure/table diameter discrepancy for the 0.75 mm example.
+
+
 ### Pink lesion reasoning practice
 
 - Add a bilingual, selection-only twelve-case session: six amelanotic/hypomelanotic melanomas and six non-melanoma mimics (including BCC, Bowen disease and invasive SCC). Eight newly sourced cases and four existing pairs; every pair has lesion-specific source histopathology. The set includes thick tumors and is not presented as an early-melanoma series.

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="pattern-exercise.css?v=paired-views">
   <link rel="stylesheet" href="subtle-clue.css?v=2">
   <link rel="stylesheet" href="pink-case.css?v=1">
+  <link rel="stylesheet" href="contrast-lab.css?v=1">
 
 </head>
 
@@ -53,6 +54,7 @@
     <div class="hero-actions">
       <a href="#trainingModule" class="hero-action hero-action-primary">Start mixed-case training</a>
       <a href="#subtleClueModule" class="hero-action">Practise subtle clues</a>
+      <a href="#contrastLabModule" id="contrastLabLink" class="hero-action" data-no-translate>Early melanoma comparisons / Erken melanom karşılaştırmaları</a>
       <a href="#pinkCaseModule" id="pinkCaseLink" class="hero-action" data-no-translate>Pink lesions / Pembe lezyonlar</a>
       <a href="#caseModule" class="hero-action">Browse clinical cases</a>
       <a href="#searchPanel" class="hero-action">Find a condition</a>
@@ -128,6 +130,11 @@
     <noscript><p class="case-empty">This image exercise requires JavaScript. Bu görsel egzersiz JavaScript gerektirir.</p></noscript>
     <div id="subtleClueApp" class="js-only" tabindex="-1"></div>
     <div id="balancedClueApp" class="subtle-concept js-only" tabindex="-1"></div>
+  </section>
+
+  <section id="contrastLabModule" tabindex="-1" aria-label="Early melanoma comparisons / Erken melanom karşılaştırmaları" data-no-translate>
+    <noscript><p class="case-empty">Comparisons require JavaScript. Karşılaştırmalar JavaScript gerektirir.</p></noscript>
+    <div id="contrastLabApp" class="js-only" tabindex="-1" data-no-translate></div>
   </section>
 
   <section id="pinkCaseModule" tabindex="-1" aria-label="Pink lesion practice / Pembe lezyon çalışması" data-no-translate>
@@ -399,6 +406,9 @@
 <script src="early-clue-data.js?v=1"></script>
 <script src="subtle-clue-app.js?v=6"></script>
 <script src="balanced-clue-app.js?v=1"></script>
+<script src="contrast-lab-media.js?v=1"></script>
+<script src="contrast-lab-data.js?v=1"></script>
+<script src="contrast-lab-app.js?v=1"></script>
 <script src="pink-media.js?v=1"></script>
 <script src="pink-case-data.js?v=1"></script>
 <script src="pink-case-app.js?v=2"></script>

@@ -1,0 +1,62 @@
+window.DOCUTIS_CONTRAST_MEDIA = [
+  {
+    "id": "contrast-new-01",
+    "src": "assets/media/contrast-lab/contrast-new-01.jpg",
+    "dimensions": {
+      "width": 340,
+      "height": 456
+    },
+    "creator": "Colmant et al.",
+    "license": "CC BY (original article notice)",
+    "licenseUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5808376/#copyright",
+    "sourceUrl": "https://doi.org/10.5826/dpc.0801a14",
+    "figure": "Figure 2A",
+    "sourceImageUrl": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/7075/5808376/24bd8df3dd5d/dp0801a14g002.jpg",
+    "sourceDimensions": [
+      772,
+      492
+    ],
+    "crop": [
+      27,
+      18,
+      367,
+      474
+    ],
+    "sourceSha256": "93d11a7ce6259063eb8a571f08773ed96e63cab645f0b3698e3346733a11c371",
+    "sha256": "3284436e783a4f571a1c18266a20876018f250c97f838d816e005ffc7e7fb473",
+    "modifications": "Pixel crop and JPEG encoding only. Clinical inset and original arrows retained. No enhancement.",
+    "checkedAt": "2026-11-27",
+    "reviewStatus": "clinician review required",
+    "clinicalReview": null
+  },
+  {
+    "id": "contrast-new-02",
+    "src": "assets/media/contrast-lab/contrast-new-02.jpg",
+    "dimensions": {
+      "width": 360,
+      "height": 456
+    },
+    "creator": "Colmant et al.",
+    "license": "CC BY (original article notice)",
+    "licenseUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5808376/#copyright",
+    "sourceUrl": "https://doi.org/10.5826/dpc.0801a14",
+    "figure": "Figure 2B",
+    "sourceImageUrl": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/7075/5808376/24bd8df3dd5d/dp0801a14g002.jpg",
+    "sourceDimensions": [
+      772,
+      492
+    ],
+    "crop": [
+      382,
+      18,
+      742,
+      474
+    ],
+    "sourceSha256": "93d11a7ce6259063eb8a571f08773ed96e63cab645f0b3698e3346733a11c371",
+    "sha256": "3de4c63d576822f841b1d6eb3a3bb329e1c7f37eb7ac509dea89d9bc15f3fc1c",
+    "modifications": "Pixel crop and JPEG encoding only. Clinical inset and original arrows retained. No enhancement.",
+    "checkedAt": "2026-11-27",
+    "reviewStatus": "clinician review required",
+    "clinicalReview": null
+  }
+];
