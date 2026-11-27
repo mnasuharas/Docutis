@@ -299,6 +299,7 @@
     [/^Start guided cases(?: \((\d+)\))?$/, function (count) { return count ? "Yönlendirmeli vakalara başla (" + count + ")" : "Yönlendirmeli vakalara başla"; }],
     [/^(.+) · Lesion (\d+) of (\d+)$/, function (title, index, total) { return piece(title) + " · Lezyon " + index + " / " + total; }],
     [/^Lesion (\d+) of (\d+)$/, function (index, total) { return "Lezyon " + index + " / " + total; }],
+    [/^(.+), (\d+) lesions$/, function (label, count) { return piece(label) + ", " + count + " lezyon"; }],
     [/^Unknown lesion (\d+) of (\d+): (.*)$/, function (index, total, title) { return "Tanısı gizli lezyon " + index + " / " + total + ": " + title; }],
     [/^Source supporting (.+): (.+) \(opens in a new tab\)$/, function (label, title) { return piece(label) + " bölümünü destekleyen kaynak: " + title + " (yeni sekmede açılır)"; }]
   ];
