@@ -72,24 +72,25 @@ function harness() {
     vm.runInContext(fs.readFileSync(path.join(__dirname, "..", file), "utf8"), context, { filename: file });
   }
   const tag = name => root.all(node => node.tagName === name);
+  const picks = () => tag("select").filter(el => el.className === "exercise-pick");
   const contents = () => root.all(() => true).map(node => node.textContent).join(" ");
   const click = title => tag("button").find(button => button.textContent === title).emit("click");
   const submit = () => tag("form")[0].emit("submit");
   const answer = (certainty, region) => {
-    tag("input")[0].value = "Uneven brown structure";
-    tag("select")[0].value = certainty;
-    tag("select")[0].emit("change");
+    tag("select")[0].value = "Uneven network";
+    tag("select")[1].value = certainty;
+    tag("select")[1].emit("change");
     if (region !== undefined) {
-      tag("select")[1].value = region;
-      tag("select")[1].emit("change");
+      tag("select")[2].value = region;
+      tag("select")[2].emit("change");
     }
-    tag("textarea").forEach(area => { area.value = "Learner reasoning"; });
+    picks().slice(2).forEach(area => { area.value = area.children[1].value; });
   };
-  return { root, tag, contents, click, submit, answer };
+  return { root, tag, picks, contents, click, submit, answer };
 }
 
 test("the exercise hides both diagnoses and teaching marks until the paired answers are saved", () => {
-  const { root, tag, contents, click, submit, answer } = harness();
+  const { root, tag, picks, contents, click, submit, answer } = harness();
   assert.equal(root.hidden, false);
   click("Start pattern exercise");
   assert.equal(tag("h3")[0].focused, true);
@@ -97,7 +98,7 @@ test("the exercise hides both diagnoses and teaching marks until the paired answ
   assert.equal(tag("img")[1].src, "assets/media/cases/case-33-clinical.jpg");
   assert.equal(tag("img")[1].alt, "Clinical photograph for the current case.");
   assert.ok(tag("a").every(link => !link.href.includes("doi.org")));
-  assert.doesNotMatch(contents(), /melanoma|nevus|teaching marks|atypical pigment network/i);
+  assert.doesNotMatch(contents(), /histopathology|teaching marks|lentiginous/i);
   answer("Clear");
   submit();
   assert.match(contents(), /Case 1 of 2/);
@@ -109,19 +110,19 @@ test("the exercise hides both diagnoses and teaching marks until the paired answ
   tag("img")[0].emit("click", { clientX: 80, clientY: 120 });
   submit();
   assert.match(contents(), /Case 1 of 2/);
-  tag("input")[1].value = "Additional structure";
-  tag("select")[2].value = "Possible";
+  tag("select")[3].value = "Dots or globules";
+  tag("select")[4].value = "Possible";
   submit();
   assert.match(contents(), /Case 2 of 2/);
   assert.equal(tag("img")[0].src, "assets/media/cases/case-34-dermoscopy.jpg");
-  assert.doesNotMatch(contents(), /melanoma|nevus|teaching marks|learner reasoning/i);
+  assert.doesNotMatch(contents(), /histopathology|teaching marks|learner reasoning/i);
   answer("Possible", "4");
   submit();
   assert.equal(tag("article").length, 2);
   assert.match(contents(), /Melanoma in situ/);
   assert.match(contents(), /Lentiginous melanocytic nevus with cytologic atypia/);
   assert.match(contents(), /Atypisches Pigmentnetz/);
-  assert.match(contents(), /Additional structure/);
+  assert.match(contents(), /Dots or globules/);
   assert.match(contents(), /50% from the left, 40% from the top/);
   assert.equal(tag("span").filter(node => node.className.includes("educator")).length, 4);
   assert.match(contents(), /What dermoscopy adds/);
@@ -140,7 +141,7 @@ test("the exercise hides both diagnoses and teaching marks until the paired answ
 });
 
 test("the independent case resets input, permits uncertainty without a mark and reveals its source afterwards", () => {
-  const { tag, contents, click, submit, answer } = harness();
+  const { tag, picks, contents, click, submit, answer } = harness();
   click("Start pattern exercise");
   answer("Clear", "4");
   submit();
@@ -150,8 +151,8 @@ test("the independent case resets input, permits uncertainty without a mark and 
   assert.equal(tag("img")[0].src, "assets/media/cases/case-39-dermoscopy.jpg");
   assert.equal(tag("img")[1].src, "assets/media/cases/case-39-clinical.jpg");
   assert.equal(tag("span").length, 0);
-  assert.equal(tag("input")[0].value, "");
-  assert.doesNotMatch(contents(), /melanoma|blotch|learner reasoning|pigment network/i);
+  assert.equal(tag("select")[0].value, "");
+  assert.doesNotMatch(contents(), /histopathology|eccentric dark blotch|learner reasoning/i);
   answer("Possible", "4");
   answer("Cannot assess");
   assert.equal(tag("span").length, 0);
@@ -174,21 +175,21 @@ test("the public page loads the pattern exercise after the case and pattern data
   const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
   assert.match(html, /id="patternExercise"[^>]*hidden>/);
   assert.match(html, /href="pattern-exercise\.css\?v=paired-views"/);
-  assert.match(html, /src="case-data\.js"[\s\S]*src="pattern-data\.js"[\s\S]*src="pattern-exercise\.js\?v=vessel-practice"/);
+  assert.match(html, /src="case-data\.js"[\s\S]*src="pattern-data\.js"[\s\S]*src="pattern-exercise\.js\?v=selection"/);
 });
 
 test("clinical-first practice records independent impressions before each dermoscopic view", () => {
-  const { tag, contents, click, submit, answer } = harness();
+  const { tag, picks, contents, click, submit, answer } = harness();
   click("Start with clinical impression");
   for (const number of [1, 2, 3]) {
     assert.equal(tag("img").length, 1);
     assert.match(tag("img")[0].src, /clinical\.jpg$/);
-    assert.equal(tag("textarea")[0].value, "");
-    tag("textarea")[0].value = "   ";
+    assert.equal(picks()[0].value, "");
+    picks()[0].value = "   ";
     submit();
     assert.equal(tag("img").length, 1);
-    const note = "First impression for case " + number;
-    tag("textarea")[0].value = note;
+    const note = ["Colour variation", "Asymmetric outline", "Uniform appearance"][number - 1];
+    picks()[0].value = note;
     submit();
     assert.match(tag("img")[0].src, /dermoscopy\.jpg$/);
     assert.ok(contents().includes(note));
@@ -196,19 +197,19 @@ test("clinical-first practice records independent impressions before each dermos
     answer("Possible", "4");
     submit();
     if (number === 2) {
-      assert.ok(contents().includes("First impression for case 1"));
+      assert.ok(contents().includes("Colour variation"));
       assert.ok(contents().includes(note));
       click("Open independent case");
     }
   }
-  assert.ok(contents().includes("First impression for case 3"));
+  assert.ok(contents().includes("Uniform appearance"));
   click("Restart exercise");
   click("Start pattern exercise");
   assert.match(tag("img")[0].src, /dermoscopy\.jpg$/);
 });
 
 test("optional heel practice withholds the comparison until the learner submits both answers", () => {
-  const { tag, contents, click, submit, answer } = harness();
+  const { tag, picks, contents, click, submit, answer } = harness();
   click("Start pattern exercise");
   answer("Possible", "4");
   submit();
@@ -217,39 +218,53 @@ test("optional heel practice withholds the comparison until the learner submits 
   click("Open independent case");
   answer("Possible", "4");
   submit();
-  tag("textarea")[0].value = "Check pigment distribution";
-  tag("textarea")[0].emit("input");
+  picks()[0].value = "Irregular pigment distribution";
+  picks()[0].emit("change");
   click("Practise on another heel lesion");
   assert.equal(tag("img")[0].src, "assets/media/cases/case-40-dermoscopy.jpg");
-  assert.doesNotMatch(contents(), /nevus|melanoma|regular rows/i);
-  tag("textarea")[0].value = "Evenly spaced strokes";
+  assert.doesNotMatch(contents(), /histopathology|study-level/i);
+  picks()[0].value = "Regular parallel rows";
   submit();
   assert.equal(tag("form").length, 1);
-  tag("textarea")[1].value = "Organized pattern supports a nevus";
+  picks()[1].value = "Melanocytic nevus";
   submit();
   assert.equal(tag("article").length, 2);
-  assert.match(contents(), /Check pigment distribution/);
-  assert.match(contents(), /Organized pattern supports a nevus/);
+  assert.match(contents(), /Irregular pigment distribution/);
+  assert.match(contents(), /Melanocytic nevus/);
   click("Return to independent case review");
   click("Review the heel comparison");
   assert.equal(tag("article").length, 2);
 });
 
 test("pink-lesion practice requires observations and reasoning for both cases before revealing the source comparison", () => {
-  const { tag, contents, click, submit } = harness();
+  const { tag, picks, contents, click, submit } = harness();
   click("Practise vessel patterns in pink lesions");
   assert.equal(tag("img").length, 2);
-  assert.doesNotMatch(contents(), /melanoma|carcinoma|branching|irregular linear/i);
-  tag("textarea").forEach(field => { field.value = "My assessment"; });
-  tag("textarea")[3].value = " ";
+  assert.doesNotMatch(contents(), /histopathology|nodular melanoma|nodular basal cell carcinoma/i);
+  picks().forEach(field => { field.value = field.children[1].value; });
+  picks()[3].value = " ";
   submit();
-  assert.equal(tag("textarea").length, 4);
-  tag("textarea")[3].value = "My second differential";
+  assert.equal(picks().length, 4);
+  picks()[3].value = "Basal cell carcinoma";
   submit();
   assert.match(contents(), /Nodular basal cell carcinoma/);
   assert.match(contents(), /Nodular melanoma, amelanotic/);
-  assert.match(contents(), /My second differential/);
+  assert.match(contents(), /Basal cell carcinoma/);
   assert.match(contents(), /Only the melanoma caption reports histopathology/);
   click("Back to exercises");
   assert.equal(tag("img").length, 0);
+});
+
+test("learner exercises use selections and keep the same unselected options for both pink lesions", () => {
+  for (const file of ["case-app.js", "training-app.js", "pattern-exercise.js"]) {
+    const script = fs.readFileSync(path.join(__dirname, "..", file), "utf8");
+    assert.doesNotMatch(script, /["']textarea["']|\.type\s*=\s*["']text["']/);
+  }
+  const { click, picks } = harness();
+  click("Practise vessel patterns in pink lesions");
+  const menus = picks();
+  for (const offset of [0, 1]) {
+    assert.equal(menus[offset].value, "");
+    assert.deepEqual(menus[offset].children.map(item => item.value), menus[offset + 2].children.map(item => item.value));
+  }
 });

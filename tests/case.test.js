@@ -854,13 +854,13 @@ test("guided Bowen cases require reasoning and the paired view before revealing"
   button("Next step").dispatch("click");
   button("Next step").dispatch("click");
   assert.match(caseText(root), /Record your observations before continuing/);
-  const observation = find(node => node.tagName === "TEXTAREA");
-  observation.value = "Pink plaque with white scale";
-  observation.dispatch("input");
+  const observation = find(node => node.className === "case-answer");
+  observation.value = "Scale or crust";
+  observation.dispatch("change");
   button("Next step").dispatch("click");
-  const completeReasoning = () => caseFind(root, node => node.tagName === "TEXTAREA").forEach((field, i) => {
-    field.value = ["Uncertain", "Consider a mimic", "Identify the missing evidence"][i];
-    field.dispatch("input");
+  const completeReasoning = () => caseFind(root, node => node.className === "case-answer").forEach((field, i) => {
+    field.value = ["Uncertain", "Melanoma", "Identify the missing evidence"][i];
+    field.dispatch("change");
   });
   completeReasoning();
   button("Next step").dispatch("click");
@@ -882,8 +882,8 @@ test("guided Bowen cases require reasoning and the paired view before revealing"
   button("Next step").dispatch("click");
   button("Next step").dispatch("click");
   assert.match(caseText(root), /Record your observations before continuing/);
-  find(node => node.tagName === "TEXTAREA").value = "Oval pink plaque with central crust";
-  find(node => node.tagName === "TEXTAREA").dispatch("input");
+  find(node => node.className === "case-answer").value = "Scale or crust";
+  find(node => node.className === "case-answer").dispatch("change");
   button("Next step").dispatch("click");
   completeReasoning();
   button("Next step").dispatch("click");
@@ -915,14 +915,14 @@ test("guided SCC compares paired Bowen, invasive SCC and AK, with evidence held 
     button("Next step").dispatch("click");
     button("Show dermoscopy").dispatch("click");
     assert.equal(views().length, 2);
-    const field = find(node => node.tagName === "TEXTAREA");
-    field.value = "Visible surface detail and uncertain depth";
-    field.dispatch("input");
+    const field = find(node => node.className === "case-answer");
+    field.value = "Cannot assess";
+    field.dispatch("change");
     button("Next step").dispatch("click");
     assert.ok(find(node => node.tagName === "LABEL" && /What do the images leave uncertain about invasion/.test(node.textContent)));
-    caseFind(root, node => node.tagName === "TEXTAREA").forEach((answer, index) => {
-      answer.value = ["Uncertain keratinizing tumor", "Scaly plaque mimic", "A tissue result"][index];
-      answer.dispatch("input");
+    caseFind(root, node => node.className === "case-answer").forEach((answer, index) => {
+      answer.value = ["Uncertain", "Bowen disease", "Review histopathology"][index];
+      answer.dispatch("change");
     });
     button("Next step").dispatch("click");
     button("Reveal diagnosis").dispatch("click");

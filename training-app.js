@@ -315,15 +315,19 @@
     observe.appendChild(element("p", view.promptSource === "case" ? "Look before you interpret:" : "Look before you interpret. Not every question fits every lesion:", "training-hint"));
     addList(observe, view.prompts, "training-list");
     const notesId = nextId("training-notes");
-    const notesLabel = element("label", "Your description (optional, stays in this tab)");
+    const notesLabel = element("label", "Most noticeable finding (optional)");
     notesLabel.htmlFor = notesId;
     notesLabel.setAttribute("for", notesId);
-    const notes = element("textarea");
+    const notes = element("select", undefined, "training-dx-select");
+    ["", "Colour distribution", "Border", "Surface", "Pigment pattern", "Vessel pattern", "Cannot assess"].forEach(value => {
+      const option = element("option", value || "Choose a finding");
+      option.value = value;
+      notes.appendChild(option);
+    });
     notes.id = notesId;
-    notes.rows = 3;
     notes.value = rec.notes;
     notes.disabled = rec.revealed;
-    notes.addEventListener("input", () => { rec.notes = notes.value; });
+    notes.addEventListener("change", () => { rec.notes = notes.value; });
     observe.appendChild(notesLabel);
     observe.appendChild(notes);
     if (view.hints.length && !rec.revealed) {
