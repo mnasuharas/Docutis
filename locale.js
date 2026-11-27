@@ -415,6 +415,7 @@
     "Branching / telangiectatic vascular structures are visible.": "Dallanan veya telenjiektatik damar yapıları görülür.",
     "Translucent to pink structural background without a regular pigment network of a banal nevus.": "Pembe yarı saydam zeminde sıradan bir nevüsün düzenli pigment ağı görülmez."
   });
+  Object.assign(translations, window.DOCUTIS_CLINICAL_LOCALE || {});
   const original = new WeakMap();
   let language = "en";
   try { language = localStorage.getItem("docutis-language") === "tr" ? "tr" : "en"; } catch (error) { /* Storage may be disabled. */ }
