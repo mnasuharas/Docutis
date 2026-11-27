@@ -139,6 +139,19 @@
     option.value = value;
   }
 
+  const findingChoices = ["Uneven network", "Uniform network", "Dots or globules", "Structureless area", "Regular parallel rows", "Irregular pigment distribution", "Vascular structures", "Cannot assess"];
+  const diagnosisChoices = ["Basal cell carcinoma", "Melanoma", "Melanocytic nevus", "Seborrhoeic keratosis", "Squamous cell carcinoma", "Uncertain"];
+  const impressionChoices = ["Colour variation", "Asymmetric outline", "Uniform appearance", "Surface change", "Cannot assess"];
+
+  function pick(parent, prompt, options, required = true) {
+    const select = labeled(parent, prompt, "select");
+    select.className = "exercise-pick";
+    choice(select, required ? "Choose an answer" : "No selection", "");
+    options.forEach(function (value) { choice(select, value, value); });
+    select.required = required;
+    return select;
+  }
+
   function startCase(index) {
     const lesson = lessons[index];
     if (!clinicalFirst || !lesson.clinicalImage) {
@@ -153,11 +166,7 @@
     photograph(container, lesson.clinicalImage, "Clinical photograph for the current case.");
     attribution(viewer, lesson.clinicalImage, false);
     const form = add(workspace, "form", "", "exercise-fields");
-    const prompt = "Which visible feature guides your first impression? If uncertain, describe what you need to clarify.";
-    const impression = labeled(form, prompt, "textarea");
-    impression.required = true;
-    impression.maxLength = 400;
-    impression.rows = 3;
+    const impression = pick(form, "Which clinical feature guides your first impression?", impressionChoices);
     const next = add(form, "button", "Save impression and open dermoscopy", "exercise-action");
     next.type = "submit";
     form.addEventListener("submit", function (event) {
@@ -172,7 +181,7 @@
     const lesson = lessons[index];
     const title = heading(index === 2 ? "Independent case" : "Pattern marking · Case " + (index + 1) + " of 2");
     add(root, "p", "Site: " + lesson.record.patientContext.anatomicalSite);
-    add(root, "p", "Describe one or two findings in your own words. Use the image or the location menu to place each mark.");
+    add(root, "p", "Select one or two findings. Use the image or the location menu to place each mark.");
     const form = add(root, "form", "", "exercise-workspace");
     form.noValidate = true;
     const viewer = add(form, "div");
@@ -202,10 +211,7 @@
     for (let i = 0; i < 2; i += 1) {
       const group = add(fields, "fieldset");
       add(group, "legend", "Finding " + (i + 1) + (i === 1 ? " (optional)" : ""));
-      const description = labeled(group, "What do you see?", "input");
-      description.type = "text";
-      description.maxLength = 180;
-      description.required = i === 0;
+      const description = pick(group, "What do you see?", findingChoices, i === 0);
       const certainty = labeled(group, "Visibility", "select");
       choice(certainty, "Choose visibility", "");
       ["Clear", "Possible", "Cannot assess"].forEach(function (value) { choice(certainty, value, value); });
@@ -262,23 +268,18 @@
       setPosition(slot, position);
     });
 
-    const prompts = [
-      "Which finding carries the most weight here, and why?",
-      "What is your leading diagnosis, and what is the closest alternative?",
-      "What is still uncertain or hard to assess?"
+    const questions = [
+      ["Most influential finding", findingChoices],
+      ["Leading diagnosis", diagnosisChoices],
+      ["Closest alternative", diagnosisChoices],
+      ["Main uncertainty", ["Image detail", "Overlapping patterns", "Missing history", "No major uncertainty"]]
     ];
     if (impression) {
       add(fields, "h4", "Your clinical impression");
       add(fields, "p", impression);
-      prompts.push("Which dermoscopic finding changed or reinforced your initial impression, and why?");
+      questions.push(["How has dermoscopy changed or reinforced your impression?", ["Reinforced it", "Changed it", "Still uncertain"]]);
     }
-    const reasoning = prompts.map(function (prompt) {
-      const answer = labeled(fields, prompt, "textarea");
-      answer.required = true;
-      answer.maxLength = 400;
-      answer.rows = 2;
-      return answer;
-    });
+    const reasoning = questions.map(function ([prompt, options]) { return pick(fields, prompt, options); });
     const submit = add(fields, "button", ["Save and open case 2", "Compare both cases", "Reveal the independent case"][index], "exercise-action");
     submit.type = "submit";
 
@@ -301,7 +302,7 @@
         findings: checked.map(function (slot) {
           return { description: slot.description.value, certainty: slot.certainty.value, position: slot.position };
         }),
-        reasoning: reasoning.map(function (answer, i) { return [prompts[i], answer.value]; })
+        reasoning: reasoning.map(function (answer, i) { return [questions[i][0], answer.value]; })
       };
       if (index === 0) startCase(1);
       else renderDebrief(index === 2);
@@ -381,13 +382,8 @@
     photograph(container, followUpImage, "Dermoscopy of a second heel lesion.");
     attribution(viewer, followUpImage, false);
     const form = add(workspace, "form", "", "exercise-fields");
-    const observation = labeled(form, "Describe the distribution of pigment across this lesion.", "textarea");
-    const diagnosis = labeled(form, "What is your leading diagnosis and which finding supports it?", "textarea");
-    [observation, diagnosis].forEach(function (field) {
-      field.required = true;
-      field.rows = 2;
-      field.maxLength = 400;
-    });
+    const observation = pick(form, "Pigment distribution", findingChoices);
+    const diagnosis = pick(form, "Leading diagnosis", diagnosisChoices);
     const submit = add(form, "button", "Compare the heel cases", "exercise-action");
     submit.type = "submit";
     form.addEventListener("submit", function (event) {
@@ -442,10 +438,9 @@
       if (followUpAnswer) button(actions, "Review the heel comparison", renderHeelReview);
       else {
         const practice = add(root, "div", "", "exercise-fields");
-        const note = labeled(practice, "Which feature did you miss or want to check again? (optional)", "textarea");
-        note.maxLength = 400;
+        const note = pick(practice, "Feature to check again (optional)", findingChoices, false);
         note.value = learningPoint;
-        note.addEventListener("input", function () { learningPoint = note.value.trim(); });
+        note.addEventListener("change", function () { learningPoint = note.value.trim(); });
         button(practice, "Practise on another heel lesion", renderFollowUp);
       }
     }
@@ -470,7 +465,7 @@
 
     function show(answers) {
       const title = heading(answers ? "Pink lesions · comparison" : "Compare vessels in two pink lesions");
-      if (!answers) add(root, "p", "Inspect both images. Describe vessel shape and distribution before proposing a diagnosis. Record uncertainty where vessels are hard to resolve.");
+      if (!answers) add(root, "p", "Inspect both images. Select the vessel pattern and your leading diagnosis for each image.");
       const form = add(root, "form");
       const cards = add(form, "div", "", "exercise-comparison is-paired");
       const fields = [];
@@ -486,13 +481,10 @@
           add(card, "h5", "Teaching observations · clinician review required");
           (i === 0 ? pair.favouringA : pair.favouringB).forEach(function (note) { add(card, "p", note); });
         } else {
-          fields.push(["Describe the vessels you can see.", "Which diagnosis do you favour, and why?"].map(function (prompt) {
-            const input = labeled(card, prompt, "textarea");
-            input.rows = 2;
-            input.required = true;
-            input.maxLength = 400;
-            return input;
-          }));
+          fields.push([
+            pick(card, "Vessel pattern", ["Long branching vessels", "Dotted and short irregular vessels", "Hairpin vessels", "Coiled vessels", "Cannot assess"]),
+            pick(card, "Leading diagnosis", diagnosisChoices)
+          ]);
         }
       });
       if (answers) {

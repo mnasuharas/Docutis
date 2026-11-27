@@ -52,8 +52,8 @@
   ]);
   const guidedPrompts = Object.freeze([
     ["leading", "Working diagnosis (or uncertain)"],
-    ["alternative", "Closest alternative and the finding that separates them"],
-    ["next", "Next step and what would change your decision"]
+    ["alternative", "Closest alternative"],
+    ["next", "Next evidence to consider"]
   ]);
   let guided = null;
   let completedPathway = null;
@@ -956,18 +956,25 @@
     });
   }
 
+  const diagnosisMenu = ["Actinic keratosis", "Basal cell carcinoma", "Bowen disease", "Melanocytic nevus", "Melanoma", "Seborrhoeic keratosis", "Squamous cell carcinoma", "Uncertain"];
+
+  function learnerSelect(options, selected, save) {
+    const field = element("select", undefined, "case-answer");
+    field.appendChild(new Option("Choose an answer", ""));
+    options.forEach(value => field.appendChild(new Option(value, value)));
+    field.value = selected || "";
+    field.addEventListener("change", () => save(field.value));
+    return field;
+  }
+
   function renderObserve(parent, caseItem) {
     parent.appendChild(element("p", "Observations and dermoscopic features are separate from interpretations. Only items already stored on this case are shown.", "case-step-intro"));
     if (isTruePair(caseItem)) renderPairStage(parent, caseItem);
     renderObservationPrompts(parent, caseItem);
     const describe = element("label", undefined, "case-filter");
-    describe.appendChild(element("span", guided
-      ? "Describe the visible findings, where they are and how certain you are"
-      : "Describe what you see before you read a diagnosis"));
-    const area = document.createElement("textarea");
-    area.value = descriptions[caseItem.id] || "";
-    area.setAttribute("aria-label", "Your description before the diagnosis");
-    area.addEventListener("input", () => { descriptions[caseItem.id] = area.value; });
+    describe.appendChild(element("span", "Most noticeable finding"));
+    const area = learnerSelect(["Colour variation", "Uneven outline", "Scale or crust", "Vessel pattern", "Pigment structure", "Cannot assess"],
+      descriptions[caseItem.id], value => { descriptions[caseItem.id] = value; });
     describe.appendChild(area);
     parent.appendChild(describe);
     parent.appendChild(element("p", "This note stays in the page session. It is not saved and not scored.", "case-kind-note"));
@@ -1005,11 +1012,10 @@
     response.appendChild(element("p", "Use the teaching images only. These answers stay in the current tab and are not scored.", "case-kind-note"));
     guided.prompts.forEach(([key, text]) => {
       const label = element("label", text, "case-filter");
-      const field = document.createElement("textarea");
-      field.rows = 2;
-      field.maxLength = 600;
-      field.value = guided.answers[key] || "";
-      field.addEventListener("input", () => { guided.answers[key] = field.value; });
+      const options = key === "next"
+        ? ["Compare prior images", "Review clinical history", "Review histopathology", "Identify the missing evidence", "Uncertain"]
+        : diagnosisMenu;
+      const field = learnerSelect(options, guided.answers[key], value => { guided.answers[key] = value; });
       label.appendChild(field);
       response.appendChild(label);
     });
