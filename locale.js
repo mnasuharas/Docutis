@@ -2,7 +2,32 @@
   "use strict";
 
   const translations = {
-    "Language": "Dil", "Skip to main content": "Ana içeriğe geç",
+    "Language": "Dil",
+    "Docutis | Dermatology Reference Toolkit": "Docutis | Dermatoloji Eğitim ve Başvuru Kaynağı",
+    "Learn Melanoma reviewer workspace": "Melanom eğitimi inceleme alanı",
+    "Back to Docutis": "Docutis’e dön",
+    "Provenance": "Görsel ve kaynak bilgileri",
+    "Teaching type": "Eğitim türü",
+    "Curriculum level": "Müfredat seviyesi",
+    "Recorded diagnosis": "Kayıtlı tanı",
+    "Disease record": "Hastalık kaydı",
+    "Observation prompts": "Gözlem soruları",
+    "Features, certainty, and weight": "Bulgular, kesinlik ve tanısal ağırlık",
+    "Case-specific observation": "Vakaya özgü gözlem",
+    "Context and image information": "Bağlam ve görsel bilgileri",
+    "Closest mimic": "En çok benzeyen tanı",
+    "Diagnostic trap": "Tanısal tuzak",
+    "Mentor note": "Eğitmen notu",
+    "Take-home rule": "Akılda kalacak kural",
+    "Management brief": "Klinik yaklaşım özeti",
+    "Verification, not a total": "Tanının doğrulanma biçimi",
+    "Outside the primary path": "Ana eğitim yolu dışındaki vakalar",
+    "None stored on this case.": "Bu vaka için kayıt yok.",
+    "None recorded on this case.": "Bu vaka için kayıt yok.",
+    "Review required. Not a protocol.": "İnceleme gerekli. Klinik protokol değildir.",
+    "Review required. Not clinician reviewed. clinicalReview is null.": "İnceleme gerekli. Hekim incelemesi kaydedilmemiştir.",
+    "Review required. This page is for a human reviewer. It is not clinician review, not a score, and not a learner step. Diagnoses are visible here on purpose. No case was approved by generating this page.": "İnceleme gerekli. Bu sayfa incelemeyi yapacak kişi içindir. Hekim incelemesinin sonucu, puanlama veya eğitim adımı değildir. Tanılar burada bilerek gösterilir. Sayfanın oluşturulması hiçbir vakayı onaylamaz.",
+    "Learn Melanoma is a teaching sequence. It does not certify competence, estimate a probability, or act as a diagnostic device. New cases stay review required. Teaching type is a lesson shape, not a diagnosis and not a score.": "Melanom eğitimi bir öğrenme dizisidir. Yetkinlik belgelemez, olasılık hesaplamaz ve tanı aracı olarak kullanılmaz. Yeni vakalar inceleme bekler. Eğitim türü dersin biçimini tanımlar.", "Skip to main content": "Ana içeriğe geç",
     "Training": "Eğitim", "Cases": "Vakalar", "Conditions": "Tanılar",
     "Follow-up": "Takip", "Quiz": "Test", "Clinical review": "Klinik inceleme",
     "About": "Hakkında", "Primary navigation": "Ana gezinme",
@@ -240,6 +265,16 @@
     "Source attachment and automated validation do not constitute physician endorsement.": "Kaynak bağlantısı ve otomatik doğrulama hekim onayı anlamına gelmez."
   });
   const variableTranslations = [
+    [/^Every (\d+(?:–\d+)?) months$/, "$1 ayda bir"],
+    [/^Once at (\d+) months$/, "$1. ayda bir kez"],
+    [/^At least (\d+)× per year$/, "Yılda en az $1 kez"],
+    [/^(\d+(?:–\d+)?)× per year$/, "Yılda $1 kez"],
+    [/^Official guideline title: (.*)$/, "Resmî kılavuz başlığı: $1"],
+    [/^Guideline jurisdiction: (.*)$/, "Kılavuzun geçerli olduğu yer: $1"],
+    [/^Version: (.*)$/, "Sürüm: $1"],
+    [/^AWMF register: (.*)$/, "AWMF kayıt numarası: $1"],
+    [/^Recommendation location: (.*)$/, "Önerinin kılavuzdaki yeri: $1"],
+    [/^Source metadata checked: (.*)$/, "Kaynak bilgileri kontrol tarihi: $1"],
     [/^Question (\d+) of (\d+)$/, "Soru $1 / $2"],
     [/^(\d+) of (\d+) correct$/, "$2 sorudan $1 doğru"],
     [/^Finding (\d+)( \(optional\))?$/, "Bulgu $1$2"],
@@ -249,7 +284,7 @@
     [/^Pattern marking · Case (\d+) of (\d+)$/, "Patern işaretleme · Vaka $1 / $2"]
   ];
   function translated(value) {
-    if (translations[value]) return translations[value];
+    if (Object.prototype.hasOwnProperty.call(translations, value)) return translations[value];
     for (const [pattern, replacement] of variableTranslations) {
       if (pattern.test(value)) return value.replace(pattern, replacement);
     }
@@ -267,7 +302,7 @@
     "Merkel Cell Carcinoma": "Merkel hücreli karsinom",
     "Sebaceous Carcinoma": "Sebase karsinom",
     "Dermatofibrosarcoma Protuberans": "Dermatofibrosarkoma protuberans",
-    "Atypical Fibroxanthoma": "Atipik fibrosantom",
+    "Atypical Fibroxanthoma": "Atipik fibroksantom",
     "Pleomorphic Dermal Sarcoma": "Pleomorfik dermal sarkom",
     "Cutaneous Angiosarcoma": "Kutanöz anjiyosarkom",
     "Kaposi Sarcoma": "Kaposi sarkomu",
@@ -415,42 +450,381 @@
     "Branching / telangiectatic vascular structures are visible.": "Dallanan veya telenjiektatik damar yapıları görülür.",
     "Translucent to pink structural background without a regular pigment network of a banal nevus.": "Pembe yarı saydam zeminde sıradan bir nevüsün düzenli pigment ağı görülmez."
   });
+  Object.assign(translations, {
+    "Open-source project links": "Açık kaynak proje bağlantıları",
+    "Public preview · Educational use only. Check the review status on each item. Docutis is not validated clinical decision support.": "Herkese açık önizleme. Yalnızca eğitim amaçlıdır. Her içeriğin inceleme durumunu kontrol edin. Docutis, doğrulanmış bir klinik karar destek aracı değildir.",
+    "Filter conditions by category": "Tanıları kategoriye göre filtrele",
+    "Follow-up content feedback": "Takip içeriği hakkında geri bildirim",
+    "Quiz content feedback": "Test içeriği hakkında geri bildirim",
+    "Clinical review coverage": "Klinik inceleme kapsamı",
+    "Clinical content feedback": "Klinik içerik hakkında geri bildirim",
+    "Docutis is an open-source, structured dermatology reference and education toolkit for physicians, medical trainees and other healthcare professionals. It organizes concise educational records, follow-up references, visual learning aids and a small quiz behind a transparent clinical-review status model. It is an educational and professional reference in active development (a public preview, not a finished release) and is not a substitute for individual care. Some assets are clinician reviewed; most content is still review required.": "Docutis, hekimler, sağlık alanında eğitim görenler ve diğer sağlık profesyonelleri için açık kaynaklı, yapılandırılmış bir dermatoloji eğitim ve başvuru kaynağıdır. Klinik inceleme durumunu açıkça göstererek kısa eğitim kayıtları, takip kaynakları, görsel eğitim materyalleri ve bir test sunar. Geliştirilmekte olan bu herkese açık önizleme, bireysel sağlık hizmetinin yerine geçmez. Bazı materyaller hekim tarafından incelenmiştir. İçeriklerin çoğu inceleme beklemektedir.",
+    "Coverage is incomplete; many dermatology domains remain future work.": "Kapsam henüz tamamlanmamıştır. Dermatolojinin birçok alanı ileride eklenecektir.",
+    "Product-specific dosing and jurisdiction-specific information are included only when supported by traceable current guidelines or regulatory product information and still require professional verification before clinical use.": "Ürüne özgü doz bilgileri ve ülkeye özgü bilgiler yalnızca izlenebilir güncel kılavuzlar veya resmi ürün bilgileriyle desteklendiğinde verilir. Klinik kullanımdan önce uzman doğrulaması gerekir.",
+    "A published review requires a current physician decision that matches the content version.": "İncelemenin yayımlanması için içerik sürümüyle eşleşen güncel bir hekim kararı gerekir.",
+    "Always verify claims against current guidelines and professional judgment.": "Bilgileri her zaman güncel kılavuzlar ve mesleki değerlendirmeyle doğrulayın.",
+    "Inspect the code, roadmap and changelog, or propose sourced corrections through GitHub.": "Kodu, yol haritasını ve değişiklik günlüğünü inceleyebilir veya GitHub üzerinden kaynak göstererek düzeltme önerebilirsiniz.",
+    "Docutis is intended for educational and informational purposes only. It does not replace professional medical judgment, diagnosis, treatment decisions or consultation of current clinical guidelines.": "Docutis yalnızca eğitim ve bilgilendirme amaçlıdır. Hekim değerlendirmesinin, tanının, tedavi kararlarının veya güncel klinik kılavuzlara başvurmanın yerine geçmez.",
+    "Docutis · Open-source dermatology reference toolkit · Public preview": "Docutis · Açık kaynaklı dermatoloji başvuru kaynağı · Herkese açık önizleme",
+    "Project documentation and source": "Proje belgeleri ve kaynak kodu",
+    "Kutanes Melanom · AJCC 8 · Stadien 0–IIC · Ärztliche Prüfung ausstehend.": "Kutanöz melanom · AJCC 8 · Evre 0–IIC · Hekim incelemesi bekleniyor.",
+    "pT1 ohne a/b": "pT1 (a/b belirtilmemiş)",
+    "pT2 ohne a/b": "pT2 (a/b belirtilmemiş)",
+    "pT3 ohne a/b": "pT3 (a/b belirtilmemiş)",
+    "pT4 ohne a/b": "pT4 (a/b belirtilmemiş)",
+    "pTX (nicht beurteilbar)": "pTX (değerlendirilemiyor)",
+    "T0 (kein nachweisbarer Primärtumor)": "T0 (primer tümör saptanmamış)",
+    "cN0 · klinisch negativ": "cN0 · klinik olarak negatif",
+    "pN0 · pathologisch negativ": "pN0 · patolojik olarak negatif",
+    "N+ · regionäre Metastasierung": "N+ · bölgesel metastaz",
+    "cM0 · kein Hinweis": "cM0 · metastaz bulgusu yok",
+    "M1 · nachgewiesen": "M1 · metastaz doğrulandı",
+    "Unbekannt / kein R0": "Bilinmiyor veya R0 değil",
+    "R0 dokumentiert": "R0 belgelendi",
+    "N+ umfasst auch Satelliten-, Mikrosatelliten- und In-transit-Metastasen. Bei abweichender oder unbekannter TNM-Version den Befund separat prüfen.": "N+ uydu, mikrouydu ve in-transit metastazları da kapsar. TNM sürümü farklı veya bilinmiyorsa raporu ayrıca değerlendirin.",
+    "AJCC 8 · Tabellen 2, 5 und 6": "AJCC 8 · Tablo 2, 5 ve 6",
+    "Deutsche S3-Leitlinie Melanom · Version 3.3": "Alman S3 melanom kılavuzu · Sürüm 3.3",
+    "Which ABCDE feature explicitly describes change over time?": "ABCDE ölçütlerinden hangisi zaman içindeki değişimi tanımlar?",
+    "Evolution means a lesion is changing over time. It is assessed with the overall clinical and dermoscopic pattern, not in isolation.": "Evrim, lezyonun zamanla değişmesidir. Genel klinik ve dermoskopik paternle birlikte değerlendirilir.",
+    "Which schematic vascular clue is classically associated with basal cell carcinoma?": "Şemadaki hangi damar bulgusu klasik olarak bazal hücreli karsinomla ilişkilidir?",
+    "Arborising vessels are a classically associated high-yield schematic dermoscopic clue for basal cell carcinoma, although diagnosis and subtype assessment still require the full clinical-pathologic context.": "Dallanan damarlar, bazal hücreli karsinomla klasik olarak ilişkili önemli bir dermoskopik ipucudur. Tanı ve alt tip değerlendirmesi klinik ve patolojik bağlamın tamamını gerektirir.",
+    "Which distribution best fits the common plaque psoriasis pattern shown in the schematic?": "Şemada gösterilen tipik plak psoriazis paternine en çok hangi dağılım uyar?",
+    "Plaque psoriasis commonly involves the scalp and extensor surfaces; site-specific variants can look different.": "Plak psoriazis sıklıkla saçlı deriyi ve ekstansör yüzleri tutar. Bölgeye özgü varyantlar farklı görünebilir.",
+    "Which finding most strongly supports acne vulgaris over rosacea in this learning set?": "Bu eğitim setinde hangi bulgu rozaseaya kıyasla akne vulgarisi en güçlü biçimde destekler?",
+    "Comedones are characteristic acne lesions and are not a typical rosacea feature.": "Komedonlar aknenin karakteristik lezyonlarıdır. Rozaseada tipik değildir.",
+    "What is the appropriate next diagnostic step when an actinic keratosis is persistently thickened, tender or concerning for invasion?": "Aktinik keratozda kalıcı kalınlaşma, hassasiyet veya invazyon şüphesi varsa bir sonraki tanısal adım nedir?",
+    "Diagnostic uncertainty or concern for invasive squamous cell carcinoma warrants biopsy or specialist assessment.": "Tanısal belirsizlikte veya invaziv skuamöz hücreli karsinom şüphesinde biyopsi ya da uzman değerlendirmesi gerekir.",
+    "Which option belongs in the first-line treatment hierarchy for atopic dermatitis?": "Atopik dermatitin ilk basamak tedavisine hangi seçenek dahildir?",
+    "Regular moisturization and appropriately selected topical anti-inflammatory therapy form the first-line structured approach; escalation depends on severity and response.": "Düzenli nemlendirme ve uygun topikal antiinflamatuvar tedavi ilk basamağı oluşturur. Üst basamağa geçiş şiddete ve yanıta bağlıdır.",
+    "Which finding should prompt consideration of ophthalmic assessment in rosacea?": "Rozaseada hangi bulgu göz hastalıkları değerlendirmesini düşündürmelidir?",
+    "Ocular symptoms are an escalation clue and may require ophthalmic assessment.": "Oküler belirtiler ileri değerlendirme gerektirebilir. Göz hastalıkları görüşü gerekebilir.",
+    "When tinea corporis morphology is atypical or treatment fails, which step supports confirmation?": "Tinea korporis atipik görünüyorsa veya tedavi başarısızsa hangi adım tanıyı doğrulamaya yardımcı olur?",
+    "Microscopy or culture can support confirmation when morphology is atypical or treatment fails; corticosteroid monotherapy can obscure infection.": "Atipik görünümde veya tedavi başarısızlığında mikroskopi ya da kültür tanıyı destekleyebilir. Kortikosteroid monoterapisi enfeksiyonu maskeleyebilir.",
+    "Border irregularity": "Sınır düzensizliği",
+    "Evolution": "Zamanla değişim",
+    "Color variation": "Renk çeşitliliği",
+    "Arborising vessels": "Dallanan damarlar",
+    "Regular dotted vessels": "Düzenli noktasal damarlar",
+    "Comma vessels": "Virgül biçimli damarlar",
+    "Glomerular vessels": "Glomerüler damarlar",
+    "Dermatomal trunk only": "Yalnızca gövdede dermatomal dağılım",
+    "Scalp and extensor surfaces": "Saçlı deri ve ekstansör yüzler",
+    "Finger webs only": "Yalnızca el parmak araları",
+    "Unilateral eyelid only": "Yalnızca tek taraflı göz kapağı",
+    "Open and closed comedones": "Açık ve kapalı komedonlar",
+    "Persistent centrofacial erythema": "Kalıcı sentrofasiyal eritem",
+    "Ocular irritation": "Oküler irritasyon",
+    "Ignore the change": "Değişikliği göz ardı etmek",
+    "Biopsy or specialist assessment": "Biyopsi veya uzman değerlendirmesi",
+    "Assign melanoma staging": "Melanom evresi belirlemek",
+    "Use dermoscopy as definitive proof": "Dermoskopiyi kesin kanıt olarak kullanmak",
+    "Regular moisturization with appropriate topical anti-inflammatory therapy": "Düzenli nemlendirme ve uygun topikal antiinflamatuvar tedavi",
+    "Routine systemic therapy for every presentation": "Her olguda rutin sistemik tedavi",
+    "Surgery": "Cerrahi",
+    "No barrier care": "Deri bariyerine yönelik bakım uygulamamak",
+    "An isolated comedone": "Tek bir komedon",
+    "Ocular symptoms": "Oküler belirtiler",
+    "A single freckle": "Tek bir çil",
+    "Stable scalp scale": "Değişmeyen saçlı deri skuamı",
+    "Microscopy or culture": "Mikroskopi veya kültür",
+    "Corticosteroid monotherapy": "Kortikosteroid monoterapisi",
+    "Oncology staging": "Onkolojik evreleme",
+    "No reassessment": "Yeniden değerlendirme yapmamak"
+  });
+  Object.assign(translations, {
+    "Cutaneous melanoma": "Kutanöz melanom",
+    "Cutaneous squamous cell carcinoma": "Kutanöz skuamöz hücreli karsinom",
+    "Melanoma in situ (Stage 0)": "Melanom in situ (Evre 0)",
+    "German S3 follow-up schedule: No Stage 0-specific structured follow-up interval is defined. The formal risk-adapted follow-up tables begin with Stage IA.": "Alman S3 takip şemasında Evre 0’a özgü yapılandırılmış takip aralığı tanımlanmamıştır. Resmî risk uyarlamalı tablolar Evre IA ile başlar.",
+    "German clinical-practice context": "Almanya’daki klinik uygulama",
+    "Formal German S3 surveillance tables begin at Stage IA. German expert information for melanoma in situ separately supports dermatology follow-up at least annually, with shorter intervals for multiple or atypical nevi, a previous melanoma, relevant family history or other clinically significant melanoma-risk features.": "Alman S3 izlem tabloları Evre IA ile başlar. Almanya’daki uzman kaynakları, melanom in situ için en az yılda bir dermatolojik izlemi destekler. Çok sayıda veya atipik nevüs, önceki melanom, ilgili aile öyküsü ya da başka klinik risk etkenleri varsa aralık kısaltılabilir.",
+    "Self-examination": "Kendi kendine muayene",
+    "Monthly skin self-examination should be encouraged, with help for difficult-to-see areas when needed.": "Ayda bir kendi kendine deri muayenesi teşvik edilmelidir. Görülmesi zor bölgeler için gerektiğinde yardım alınabilir.",
+    "International context": "Uluslararası kılavuz bağlamı",
+    "American Academy of Dermatology guidance supports ongoing dermatologist-led complete skin examinations after melanoma, with frequency individualized by stage and risk and at least annual examinations after more frequent follow-up ends. This context does not replace or extend the German S3 Stage 0 schedule.": "Amerikan Dermatoloji Akademisi, melanom sonrasında dermatolog tarafından düzenli tam deri muayenesini destekler. Sıklık evreye ve riske göre belirlenir. Daha sık takip dönemi bitince en az yılda bir muayene yapılır. Bu bilgi Alman S3 Evre 0 şemasının yerine geçmez ve kapsamını genişletmez.",
+    "Guidance without a Stage 0-specific S3 interval": "Evre 0 için S3 aralığı bulunmadığında takip yaklaşımı",
+    "The absence of a Stage 0-specific S3 schedule does not mean that dermatologic surveillance is unnecessary, and the Stage IA schedule must not be extrapolated to Stage 0.": "Evre 0’a özgü S3 şeması bulunmasa da dermatolojik izlem gereklidir. Evre IA şeması Evre 0’a uygulanmamalıdır.",
+    "Regular dermatologic surveillance is appropriate. German expert information supports at least annual full-skin examination, with shorter intervals when additional melanoma risk factors are present.": "Düzenli dermatolojik izlem uygundur. Almanya’daki uzman kaynakları en az yılda bir tam deri muayenesini destekler. Ek melanom risk etkenleri varsa aralık kısaltılabilir.",
+    "Not routinely recommended for Stage 0. The German S3 risk-adapted algorithm assigns ultrasound only in selected invasive-stage groups.": "Evre 0’da rutin önerilmez. Alman S3 algoritmasında ultrason yalnızca bazı invaziv evre gruplarında yer alır.",
+    "Not routinely recommended for Stage 0. The German S3 risk-adapted algorithm assigns S100B only in selected invasive-stage groups.": "Evre 0’da rutin önerilmez. Alman S3 algoritmasında S100B yalnızca bazı invaziv evre gruplarında yer alır.",
+    "Not routinely recommended in asymptomatic Stage 0 patients. Symptoms or another clinical indication require diagnostic assessment outside routine surveillance.": "Semptomsuz Evre 0 hastalarında rutin önerilmez. Belirti veya başka klinik endikasyon varsa rutin izlem dışında tanısal değerlendirme gerekir.",
+    "Stage IA": "Evre IA",
+    "Cutaneous melanoma, stage IA.": "Kutanöz melanom, Evre IA.",
+    "The German guideline recommends 10 years of follow-up for invasive melanoma and lifelong self-examination.": "Alman kılavuzu invaziv melanomda 10 yıl izlem ve yaşam boyu kendi kendine muayene önerir.",
+    "Years 1–3": "1–3. yıllar",
+    "Years 4–5": "4–5. yıllar",
+    "Years 6–10": "6–10. yıllar",
+    "Stages IB–IIB": "Evre IB–IIB",
+    "Stages IB through IIB; the ultrasound recommendation assumes correct pathological staging with sentinel lymph node biopsy.": "Evre IB–IIB. Ultrason önerisi, sentinel lenf nodu biyopsisiyle doğru patolojik evrelemenin yapılmış olmasına dayanır.",
+    "Only after correct pathological staging with sentinel lymph node biopsy; otherwise use the stage IIC schedule.": "Yalnızca sentinel lenf nodu biyopsisiyle doğru patolojik evreleme sonrasında uygulanır. Aksi halde Evre IIC şeması kullanılır.",
+    "Stages IIC–IV (R0 resected)": "Evre IIC–IV (R0 rezeksiyon)",
+    "Completely resected disease (R0) only; active metastatic disease requires an individualized treatment and monitoring plan.": "Yalnızca tam rezeke edilmiş (R0) hastalık için geçerlidir. Aktif metastatik hastalıkta bireysel tedavi ve izlem planı gerekir.",
+    "The guideline recommends regular self-examination. Patients should be counselled on UV protection, with particular emphasis on patients with BCC syndromes or chronic immunosuppression. Other modalities are not assigned fixed routine intervals in the follow-up section. Chronic immunosuppression does not create a separate numerical follow-up schedule in this protocol.": "Kılavuz düzenli kendi kendine muayene önerir. Özellikle bazal hücreli karsinom sendromu veya kronik immünsüpresyonu olanlara UV korunması anlatılmalıdır. Takip bölümünde diğer yöntemler için sabit rutin aralıklar veya kronik immünsüpresyon için ayrı bir sayısal şema tanımlanmaz.",
+    "Isolated, surgically treated, low-recurrence-risk BCC": "Cerrahi tedavi uygulanmış, nüks riski düşük tek bazal hücreli karsinom",
+    "Isolated, surgically treated BCC with a low risk of recurrence.": "Cerrahi tedavi uygulanmış, nüks riski düşük tek bazal hücreli karsinom.",
+    "6 months after treatment": "Tedaviden 6 ay sonra",
+    "One examination to exclude local recurrence.": "Lokal nüksü dışlamak için bir muayene.",
+    "Thereafter": "Sonrasında",
+    "Multiple BCCs / high recurrence risk / locally advanced / metastatic / syndromic": "Çoklu bazal hücreli karsinom, yüksek nüks riski, lokal ileri, metastatik veya sendromik hastalık",
+    "The guideline combines multiple BCCs, high recurrence risk, locally advanced BCC, metastatic BCC and syndromes in one follow-up recommendation.": "Kılavuz çoklu, yüksek nüks riskli, lokal ileri ve metastatik bazal hücreli karsinom ile sendromları tek takip önerisinde birleştirir.",
+    "Every 3 months until more than 2 years without new BCC or recurrence": "Yeni bazal hücreli karsinom veya nüks olmadan 2 yıldan uzun süre geçene kadar 3 ayda bir",
+    "Closer follow-up may be required on an individual basis.": "Bireysel duruma göre daha yakın izlem gerekebilir.",
+    "Continue every 3 months until more than 2 years without a new BCC or recurrence; do not transition to annual merely because two calendar years have elapsed.": "Yeni bazal hücreli karsinom veya nüks olmadan 2 yıldan uzun süre geçene dek 3 ayda bir izlem sürdürülür. Yalnızca iki takvim yılı geçtiği için yıllık takibe geçilmez.",
+    "After more than 2 event-free years": "Yeni tümör veya nüks olmadan 2 yıldan uzun süre sonra",
+    "A new BCC or recurrence does not automatically qualify for this reduced frequency.": "Yeni bazal hücreli karsinom veya nüks gelişmesi durumunda daha seyrek izleme otomatik olarak geçilmez.",
+    "Only if no new BCC or recurrence has occurred for more than 2 years.": "Yalnızca 2 yıldan uzun süredir yeni bazal hücreli karsinom veya nüks gelişmemişse.",
+    "Clinical examination includes full-skin inspection and inspection and palpation of the primary scar, in-transit pathway and regional lymph nodes.": "Klinik muayene tüm derinin incelenmesini, primer skarın, in-transit yayılım hattının ve bölgesel lenf nodlarının inspeksiyon ve palpasyonunu içerir.",
+    "Chest radiography and abdominal ultrasound are not intended as routine follow-up.": "Akciğer grafisi ve abdominal ultrason rutin takip için öngörülmez.",
+    "Low risk": "Düşük risk",
+    "R0-resected primary tumor: tumor thickness ≤ 6 mm, or ≤ 4 mm with desmoplasia, and differentiation grade G1–2.": "R0 rezeke primer tümör. Kalınlık ≤ 6 mm veya desmoplazi varsa ≤ 4 mm. Diferansiyasyon derecesi G1–2.",
+    "Years 1–2": "1–2. yıllar",
+    "Not a fixed routine for every low-risk situation; use for an unclear palpation finding.": "Her düşük riskli olguda rutin uygulanmaz. Palpasyon bulgusu belirsizse kullanılır.",
+    "The schedule does not specify routine imaging.": "Şema rutin görüntüleme öngörmez.",
+    "Years 3–5": "3–5. yıllar",
+    "The schedule does not specify a routine interval.": "Şemada rutin aralık belirtilmemiştir.",
+    "The schedule does not specify a fixed tumor-specific interval for this group.": "Bu grup için tümöre özgü sabit takip aralığı belirtilmemiştir.",
+    "High risk": "Yüksek risk",
+    "R0-resected primary tumor with tumor thickness > 6 mm, > 4 mm with desmoplasia, differentiation grade G3–4 or perineural tumor growth; the guideline also lists immunosuppression and secondary tumors as high-risk factors.": "R0 rezeke primer tümörde kalınlık > 6 mm, desmoplazi varsa > 4 mm, diferansiyasyon derecesi G3–4 veya perinöral tümör büyümesi. Kılavuz immünsüpresyonu ve sekonder tümörleri de yüksek risk etkenleri arasında sayar.",
+    "Frequency depends on risk factors.": "Sıklık risk etkenlerine bağlıdır.",
+    "The schedule interval applies to perineural tumor growth. For findings suspicious for metastasis, imaging is diagnostic work-up rather than a fixed routine interval.": "Şemadaki aralık perinöral tümör büyümesi için geçerlidir. Metastaz şüphesinde görüntüleme tanısal amaçla yapılır.",
+    "Year 3": "3. yıl",
+    "Depends on risk factors.": "Risk etkenlerine bağlıdır.",
+    "The schedule does not specify routine imaging from year 4 onward.": "Şema 4. yıldan itibaren rutin görüntüleme öngörmez.",
+    "Immunosuppression": "İmmünsüpresyon",
+    "Patients receiving immunosuppression; the individual risk profile determines the frequency range.": "İmmünsüpresif tedavi alan hastalarda takip sıklığını bireysel risk profili belirler.",
+    "According to the individual risk profile.": "Bireysel risk profiline göre.",
+    "Locally advanced / metastatic": "Lokal ileri / metastatik",
+    "Locally advanced or metastatic disease; interdisciplinary individualization remains necessary.": "Lokal ileri veya metastatik hastalıkta izlem disiplinler arası değerlendirmeyle bireyselleştirilir.",
+    "After locally advanced or metastatic cSCC; also for diagnostic work-up of findings suspicious for metastasis.": "Lokal ileri veya metastatik kutanöz skuamöz hücreli karsinom sonrasında ve metastaz şüphesi taşıyan bulguların tanısal değerlendirmesinde.",
+    "Clinical examination": "Klinik muayene",
+    "Lymph node ultrasound": "Lenf nodu ultrasonu",
+    "Cross-sectional imaging": "Kesitsel görüntüleme",
+    "Annually": "Yılda bir",
+    "At least annually": "En az yılda bir",
+    "Not specified": "Belirtilmemiş",
+    "Not specified in the guideline": "Kılavuzda belirtilmemiş",
+    "Not routinely scheduled": "Rutin olarak planlanmaz",
+    "Risk-adapted": "Riske göre uyarlanır",
+    "Guideline basis and clinical governance": "Kılavuz dayanağı ve klinik inceleme",
+    "Open the official guideline (new tab)": "Resmî kılavuzu aç (yeni sekme)",
+    "Supporting context sources": "Bağlamı destekleyen kaynaklar",
+    "German expert-practice context": "Almanya’daki uzman uygulaması",
+    "German stage-based clinical context": "Almanya’da evreye dayalı klinik yaklaşım"
+  });
+  Object.assign(translations, {
+    "Large plantar pigmented macule": "Ayak tabanında geniş pigmente makül",
+    "Nodular lesion dermatoscopy with vessels": "Damarların görüldüğü nodüler lezyonun dermoskopisi",
+    "Pigmented lesion dermatoscopy on the back": "Sırtta pigmente lezyonun dermoskopisi",
+    "Field change on the dorsum of the hand": "El sırtında yaygın deri değişikliği",
+    "Two neighboring lesions on the upper back": "Üst sırtta komşu iki lezyon",
+    "Dark lesion thicker on one side": "Bir tarafı daha kalın koyu lezyon",
+    "Dark lesion with an uneven edge": "Düzensiz kenarlı koyu lezyon",
+    "Lesion with several dark colors": "Birden fazla koyu renk içeren lezyon",
+    "Broad brown patch with an uneven edge": "Düzensiz kenarlı geniş kahverengi yama",
+    "Brown lesion with a pale center": "Merkezi açık renkli kahverengi lezyon",
+    "Red nodule beside a dark macule": "Koyu makül yanında kırmızı nodül",
+    "Flat brown area beside a blue-black papule": "Mavi-siyah papül yanında düz kahverengi alan",
+    "Single dark papule with a brown edge": "Kahverengi kenarlı tek koyu papül",
+    "Brown patch beside a skin crease": "Deri kıvrımı yanında kahverengi yama",
+    "Pink nodule inside a drape": "Örtünün açıklığında pembe nodül",
+    "Pink field with more than one vessel shape": "Birden fazla damar biçimi içeren pembe alan",
+    "Damaged thumbnail with dark debris": "Koyu birikim içeren hasarlı başparmak tırnağı",
+    "Small eroded spot on the ear": "Kulakta küçük erozyonlu odak",
+    "Shiny red papule on hair-bearing skin": "Kıllı deride parlak kırmızı papül",
+    "Nodule with a dark plugged center": "Merkezinde koyu tıkaç bulunan nodül",
+    "Five looks in one teaching plate": "Tek eğitim görselinde beş görünüm",
+    "Rough brown papule": "Pürtüklü kahverengi papül",
+    "Ridged surface under a dermatoscope": "Dermoskopide kabartılı yüzey",
+    "Many brown spots on the back of a hand": "El sırtında çok sayıda kahverengi leke",
+    "Two bright red papules": "Parlak kırmızı iki papül",
+    "Small blue spot under hair": "Saçların altında küçük mavi odak",
+    "Brown patch with ink dots": "Mürekkep noktaları içeren kahverengi yama",
+    "A group of papules on the chest": "Göğüste papül kümesi",
+    "Dark patch under a fingernail": "El tırnağı altında koyu alan",
+    "A light brown patch on the forehead": "Alında açık kahverengi yama",
+    "A pink-brown patch on the back": "Sırtta pembe-kahverengi yama",
+    "A small brown macule on the thigh": "Uylukta küçük kahverengi makül",
+    "A dark brown macule on the lower leg": "Alt bacakta koyu kahverengi makül",
+    "A pink papule in the scalp": "Saçlı deride pembe papül",
+    "A brown macule on the heel": "Topukta kahverengi makül",
+    "A faint brown patch near the eye": "Göz yakınında silik kahverengi yama",
+    "A light brown patch on the eyelid": "Göz kapağında açık kahverengi yama",
+    "A small brown macule on the heel with a dark centre": "Topukta koyu merkezli küçük kahverengi makül",
+    "A faint brown spot on the heel": "Topukta silik kahverengi odak",
+    "A dark brown macule on the sole": "Ayak tabanında koyu kahverengi makül",
+    "A dark spot on a fingertip": "Parmak ucunda koyu odak",
+    "A brown band on a child's toenail": "Çocuğun ayak tırnağında kahverengi bant",
+    "A broad dark band on a child's fingernail": "Çocuğun el tırnağında geniş koyu bant",
+    "A discoloured great toenail with a split": "Rengi değişmiş ve yarılmış ayak başparmak tırnağı",
+    "A cluster of small brown spots on the sole": "Ayak tabanında küçük kahverengi odak kümesi",
+    "A small dark spot on the sole": "Ayak tabanında küçük koyu odak",
+    "A large dark patch on the outer heel": "Topuğun dış bölümünde geniş koyu yama",
+    "A brown oval patch at the base of a finger": "Parmak tabanında oval kahverengi yama",
+    "A narrow brown band in an adult's fingernail": "Erişkinin el tırnağında dar kahverengi bant",
+    "A dark blot under a nail": "Tırnak altında koyu leke",
+    "A firm brown papule on the skin": "Deride sert kahverengi papül",
+    "A brown macule near the eye": "Göz yakınında kahverengi makül",
+    "A pink scaly plaque on the back": "Sırtta pembe skuamlı plak",
+    "A dark plaque on the scalp": "Saçlı deride koyu plak",
+    "An oval pink plaque with central crust": "Merkezi krutlu oval pembe plak",
+    "A raised pink lesion on the upper eyelid": "Üst göz kapağında kabarık pembe lezyon",
+    "This dashboard shows current review counts for the library, cases, quiz, visuals and follow-up protocols. Physician review applies to a specific version of each item.": "Bu pano kütüphane, vakalar, test, görseller ve takip protokolleri için güncel inceleme sayılarını gösterir. Hekim incelemesi her içeriğin belirli bir sürümü için geçerlidir.",
+    "Content is educational draft material. It does not constitute clinician-approved recommendations for diagnosis, treatment or follow-up.": "İçerik eğitim amaçlı taslaktır. Hekim onaylı tanı, tedavi veya takip önerisi niteliği taşımaz.",
+    "Evidence dashboard": "Kanıt panosu"
+  });
+  Object.assign(translations, {
+    "Training could not load. The case library is unavailable.": "Eğitim yüklenemedi. Vaka kütüphanesine ulaşılamıyor.",
+    "Start a screening-style session": "Tarama tarzında oturum başlat",
+    "Session length": "Oturum uzunluğu",
+    "Session focus": "Oturumun konusu",
+    "Local revisit preference": "Tekrar ayarı",
+    "No saved revisit patterns in this browser yet": "Bu tarayıcıda tekrar için kaydedilmiş patern yok",
+    "Clear local revisit list": "Tekrar listesini temizle",
+    "Start session": "Oturumu başlat",
+    "End session": "Oturumu bitir",
+    "Curated for teaching coverage, not for prevalence.": "Vaka seçimi eğitim kapsamını yansıtır. Hastalık sıklığını göstermez.",
+    "Look before you interpret:": "Yorumlamadan önce inceleyin",
+    "Look before you interpret. Not every question fits every lesion:": "Yorumlamadan önce inceleyin. Her soru her lezyona uymaz.",
+    "Hide looking hint": "Gözlem ipucunu gizle",
+    "Show a looking hint": "Gözlem ipucunu göster",
+    "Working impression": "Ön değerlendirme",
+    "Your impression from the clinical photograph": "Klinik fotoğrafa dayalı değerlendirmeniz",
+    "Dermoscopy shown": "Dermoskopi gösterildi",
+    "Showing dermoscopy does not reveal the diagnosis.": "Dermoskopi açıldığında tanı gizli kalır.",
+    "Update your impression after dermoscopy (optional)": "Dermoskopi sonrası değerlendirmenizi güncelleyin (isteğe bağlı)",
+    "Reveal source diagnosis": "Kaynakta belirtilen tanıyı göster",
+    "You can reveal without recording an impression, but committing first is the point of the exercise.": "Ön değerlendirme kaydetmeden tanıyı açabilirsiniz. Egzersizin amacı önce kendi değerlendirmenizi yapmaktır.",
+    "Source diagnosis": "Kaynakta belirtilen tanı",
+    "Your reflection": "Geriye dönük değerlendirmeniz",
+    "Side by side, not graded.": "Yan yana karşılaştırma. Puanlama yapılmaz.",
+    "What may have pulled you toward the alternative?": "Sizi alternatif tanıya hangi bulgu yöneltmiş olabilir?",
+    "Your impression and the recorded pole lead in different directions. This is a prompt to reflect, not a mark. The lines below are stored case teaching.": "Ön değerlendirmeniz ile kayıttaki benign veya malign sınıflandırma farklı. Aşağıdaki vaka notları değerlendirme içindir. Puanlama yapılmaz.",
+    "Recorded observations": "Kayıtlı gözlemler",
+    "Recorded interpretations": "Kayıtlı yorumlar",
+    "Patterns, certainty and case weight": "Paternler, kesinlik ve vakadaki tanısal ağırlık",
+    "Certainty and weight are qualitative labels for this case. They are not sensitivities or probabilities.": "Kesinlik ve tanısal ağırlık bu vakaya özgü nitel değerlendirmelerdir. Duyarlılık veya olasılık değerleri değildir.",
+    "What changed with dermoscopy?": "Dermoskopiyle ne değişti?",
+    "Before dermoscopy": "Dermoskopi öncesi",
+    "Dermoscopy added": "Dermoskopinin katkısı",
+    "Reasoning impact": "Tanısal değerlendirmeye etkisi",
+    "Closest mimic and contrast": "En çok benzeyen tanı ve ayırıcı özellikler",
+    "Favours this lesion:": "Bu lezyonu destekleyen bulgu",
+    "Favours the other lesion:": "Diğer lezyonu destekleyen bulgu",
+    "No single discriminator is recorded for this pair.": "Bu çift için tek bir ayırt edici bulgu kaydedilmemiştir.",
+    "Recorded differentials": "Kayıtlı ayırıcı tanılar",
+    "Educational next-step teaching": "Sonraki adıma ilişkin eğitim notu",
+    "No extra limitation is stored beyond the verification above.": "Yukarıdaki doğrulama bilgisine ek bir sınırlama kaydedilmemiştir.",
+    "Image sources and licences": "Görsel kaynakları ve lisanslar",
+    "Source page": "Kaynak sayfası",
+    "Finish and open debrief": "Bitir ve oturum özetini aç",
+    "Next unknown lesion": "Tanısı gizli sonraki lezyon",
+    "Session debrief": "Oturum özeti",
+    "Recorded case categories encountered": "Oturumda görülen vaka kategorileri",
+    "No lesion was revealed.": "Hiçbir lezyonun tanısı açılmadı.",
+    "Benign and malignant contexts encountered": "Oturumda karşılaşılan benign ve malign örnekler",
+    "Patterns encountered": "Görülen paternler",
+    "No linked pattern appeared in the revealed lesions.": "Tanısı açılan lezyonlarda kayıtlı bir patern bağlantısı bulunmadı.",
+    "Seen in both benign and malignant lesions this session": "Bu oturumda hem benign hem malign lezyonlarda görüldü",
+    "Where dermoscopy changed your impression": "Dermoskopinin değerlendirmenizi değiştirdiği vakalar",
+    "No recorded impression changed after dermoscopy.": "Dermoskopi sonrasında kaydedilen ön değerlendirmeler değişmedi.",
+    "Traps encountered": "Karşılaşılan tanısal tuzaklar",
+    "Inspect the image": "Görseli incele",
+    "Reveal the diagnosis": "Tanıyı göster",
+    "Review the case": "Vakayı gözden geçir",
+    "Expert diagnosis": "Uzman tanısı",
+    "Source dataset diagnosis": "Kaynak veri setindeki tanı",
+    "Clinical diagnosis": "Klinik tanı",
+    "Melanoma and its mimics": "Melanom ve benzer lezyonlar",
+    "Cutaneous SCC and keratinocytic mimics": "Kutanöz skuamöz hücreli karsinom ve benzer keratinositik lezyonlar",
+    "What do the images leave uncertain about invasion, and what evidence would resolve it?": "Görseller invazyon hakkında hangi soruyu yanıtsız bırakıyor ve bunu hangi kanıt yanıtlayabilir?",
+    "Bowen disease and scaly plaque mimics": "Bowen hastalığı ve benzer skuamlı plaklar",
+    "Probably present": "Muhtemelen var",
+    "Not visible in this image": "Bu görüntüde görülmüyor",
+    "Major clue": "Başlıca ipucu",
+    "Conflicts with a simple reading": "İlk değerlendirmeyle çelişen bulgu",
+    "Diagnostic structure": "Tanısal yapı",
+    "Descriptive morphology, not a dermoscopic structure": "Betimleyici morfoloji",
+    "Context, not a diagnostic structure": "Görsel bağlam bilgisi",
+    "Image mark, not a skin finding": "Görsel üzerindeki işaret",
+    "Educational label: dermoscopy adds a major discriminating look. Not a validated metric.": "Eğitim etiketi. Dermoskopi belirgin bir ayırt edici bulgu ekler. Bu, doğrulanmış bir ölçüt değildir.",
+    "Educational label: dermoscopy adds support. Not a validated metric.": "Eğitim etiketi. Dermoskopi değerlendirmeyi destekler. Bu, doğrulanmış bir ölçüt değildir.",
+    "Educational label: dermoscopy changes the leading comparison. Not a validated metric.": "Eğitim etiketi. Dermoskopi öne çıkan ayırıcı tanıyı değiştirir. Bu, doğrulanmış bir ölçüt değildir.",
+    "Educational label: dermoscopy stays equivocal. Not a validated metric.": "Eğitim etiketi. Dermoskopiyle de ayrım belirsiz kalır. Bu, doğrulanmış bir ölçüt değildir.",
+    "Same lesion confirmed by the source": "Aynı lezyon olduğu kaynakta doğrulanmış",
+    "Source-documented paired view": "Kaynakta belgelenen eşleştirilmiş görünüm",
+    "Not a paired lesion": "Eşleştirilmemiş lezyon",
+    "Clinical morphology": "Klinik morfoloji",
+    "Clinical looks stored on this case. A brown spot, red papule, or other descriptive shape is not a dermoscopic structure.": "Vaka için kayıtlı klinik görünümler. Kahverengi leke, kırmızı papül ve benzeri betimlemeler dermoskopik yapı sayılmaz.",
+    "Dermoscopic structure": "Dermoskopik yapı",
+    "Named only when a dermoscopic frame supports it. A clinical photograph is not dermoscopy.": "Yalnızca dermoskopik görüntü destekliyorsa adlandırılır. Klinik fotoğraf tek başına yeterli değildir.",
+    "Not promoted to a reusable pattern. Nothing was inferred from the diagnosis.": "Bu gözlem genel bir patern olarak kaydedilmemiştir. Tanıdan çıkarım yapılmamıştır.",
+    "Limits and image marks. They do not count as diagnostic structures and they are not a discriminator.": "Görselin sınırlamaları ve üzerindeki işaretler. Bunlar tanısal yapı veya ayırt edici bulgu sayılmaz.",
+    "Case data did not load. No observations, differentials or diagnoses are shown in their place.": "Vaka verileri yüklenemedi. Gözlemler, ayırıcı tanılar ve tanılar gösterilmiyor.",
+    "Review required. This case is not clinician reviewed. That means it is educational draft material with no physician attestation in Docutis.": "İnceleme gerekli. Bu vaka Docutis’te hekim incelemesi kaydedilmemiş bir eğitim taslağıdır.",
+    "Recorded confirmation method": "Kayıtlı tanı doğrulama yöntemi",
+    "No image is stored": "Görsel kaydı yok",
+    "Dermoscopic image": "Dermoskopik görüntü",
+    "Microscopy image": "Mikroskopi görüntüsü",
+    "Diagnosis hidden.": "Tanı gizli.",
+    "Learn Melanoma pathway": "Melanom eğitim yolu",
+    "Cases are shown in curriculum order.": "Vakalar müfredat sırasıyla gösterilir.",
+    "Choose Learn Melanoma to browse the curriculum in order.": "Vakaları müfredat sırasıyla görmek için Melanom Eğitimi’ni seçin.",
+    "Case type": "Vaka türü",
+    "Image views": "Görsel türleri",
+    "Site contains": "Yerleşimde ara",
+    "Closed by default. Spectrum and skill filters expose the curriculum class, so leave them closed during a first pass.": "Varsayılan olarak kapalıdır. Spektrum ve beceri filtreleri vaka sınıfını gösterir. İlk incelemede kapalı tutun.",
+    "Review status": "İnceleme durumu",
+    "Source page (opens in a new tab)": "Kaynak sayfası (yeni sekmede açılır)",
+    "Image inspection. Scroll or use arrow keys to pan when zoomed in.": "Görsel inceleme. Yakınlaştırdığınızda kaydırın veya yön tuşlarıyla ilerleyin.",
+    "Site not recorded": "Yerleşim kaydedilmemiş",
+    "Quiz-item review status": "Test sorusunun inceleme durumu",
+    "Choose one answer, then check it.": "Bir yanıt seçin, ardından kontrol edin."
+  });
   Object.assign(translations, window.DOCUTIS_CLINICAL_LOCALE || {});
-  const original = new WeakMap();
+  const originalText = new WeakMap();
+  const originalAttributes = new WeakMap();
+  const englishTitle = document.title;
+  const localizedAttributes = ["placeholder", "aria-label", "title", "alt", "aria-valuetext"];
   let language = "en";
   try { language = localStorage.getItem("docutis-language") === "tr" ? "tr" : "en"; } catch (error) { /* Storage may be disabled. */ }
 
+  function displayValue(value, previous) {
+    const english = previous && value === previous.rendered ? previous.english : value;
+    const trimmed = english.trim();
+    const turkish = language === "tr" && (translated(trimmed) || translated(trimmed.replace(/\s+/g, " ")));
+    return { english, rendered: turkish ? english.replace(trimmed, function () { return turkish; }) : english };
+  }
+
+  function translateAttributes(node) {
+    const previous = originalAttributes.get(node) || {};
+    localizedAttributes.forEach(function (attribute) {
+      const current = node.getAttribute(attribute);
+      if (current === null) {
+        delete previous[attribute];
+        return;
+      }
+      const next = displayValue(current, previous[attribute]);
+      previous[attribute] = next;
+      if (current !== next.rendered) node.setAttribute(attribute, next.rendered);
+    });
+    originalAttributes.set(node, previous);
+  }
+
   function translate(node) {
     if (node.nodeType === 3) {
-      const value = node.nodeValue;
-      if (!original.has(node) ||
-          (value !== original.get(node) && value !== translated(original.get(node)))) {
-        original.set(node, value);
-      }
-      const english = original.get(node);
-      const trimmed = english.trim();
-      const result = translated(trimmed);
-      if (result) node.nodeValue = language === "tr"
-        ? english.replace(trimmed, result) : english;
+      const next = displayValue(node.nodeValue, originalText.get(node));
+      originalText.set(node, next);
+      if (node.nodeValue !== next.rendered) node.nodeValue = next.rendered;
       return;
     }
-    if (node.nodeType !== 1 || ["SCRIPT", "STYLE"].includes(node.tagName)) return;
-    ["placeholder", "aria-label", "title"].forEach(function (attribute) {
-      const value = node.getAttribute(attribute);
-      if (!value) return;
-      const key = "data-original-" + attribute;
-      const english = node.getAttribute(key) || value;
-      if (translated(english)) {
-        node.setAttribute(key, english);
-        node.setAttribute(attribute, language === "tr" ? translated(english) : english);
-      }
-    });
+    if (node.nodeType !== 1 || ["SCRIPT", "STYLE"].includes(node.tagName) || node.hasAttribute("data-no-translate")) return;
+    translateAttributes(node);
     Array.from(node.childNodes).forEach(translate);
   }
 
   function applyLanguage() {
     document.documentElement.lang = language;
-    document.title = language === "tr" ? "Docutis | Dermatoloji Eğitim ve Başvuru Kaynağı" : "Docutis | Dermatology Reference Toolkit";
+    document.title = (language === "tr" && translated(englishTitle)) || englishTitle;
     translate(document.body);
     const control = document.getElementById("docutisLanguage");
     if (control) control.value = language;
@@ -466,10 +840,13 @@
     applyLanguage();
     new MutationObserver(function (records) {
       records.forEach(function (record) {
+        const element = record.target.nodeType === 1 ? record.target : record.target.parentElement;
+        if (element?.closest("[data-no-translate], script, style")) return;
+        if (record.type === "attributes") translateAttributes(element);
         record.addedNodes.forEach(translate);
         if (record.type === "characterData") translate(record.target);
       });
-    }).observe(document.body, { subtree: true, childList: true, characterData: true });
+    }).observe(document.body, { subtree: true, childList: true, characterData: true, attributeFilter: localizedAttributes });
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
