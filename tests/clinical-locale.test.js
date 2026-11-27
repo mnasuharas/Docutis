@@ -6,7 +6,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
 
-test("seven skin-cancer overviews have separate Turkish drafts for all three visible fields", () => {
+test("seven skin-cancer overviews have separate Turkish drafts for all six visible fields", () => {
   const root = path.join(__dirname, "..");
   const context = { window: {} };
   for (const name of ["data.js", "clinical-locale.js"]) {
@@ -19,7 +19,7 @@ test("seven skin-cancer overviews have separate Turkish drafts for all three vis
   const dictionary = context.window.DOCUTIS_CLINICAL_LOCALE;
   for (const id of ids) {
     const disease = context.window.DOCUTIS_DATA.diseases.find(item => item.id === id);
-    for (const field of ["description", "clinical", "dermoscopy"]) {
+    for (const field of ["description", "clinical", "dermoscopy", "differential", "treatment", "followup"]) {
       assert.ok(dictionary[disease[field]], `${id} ${field}`);
       assert.notEqual(dictionary[disease[field]], disease[field]);
     }
