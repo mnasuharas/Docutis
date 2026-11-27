@@ -6,7 +6,8 @@
   if (!root || !lessons || !collection) return;
   const byId = new Map(collection.cases.map(item => [item.id, item]));
   let active = 0;
-  let answers = ["", ""];
+  const blankAnswers = () => [{ choice: "", visibility: "", position: null }, { choice: "", visibility: "", position: null }];
+  let answers = blankAnswers();
   let revealed = false;
   const pairImages = lesson => lesson.cases.map(id => {
     const record = byId.get(id);
@@ -38,7 +39,13 @@
     photo.width = asset.dimensions.width;
     photo.height = asset.dimensions.height;
     photo.loading = "lazy";
-    figure.appendChild(photo);
+    const frame = node("div", undefined, "subtle-image-frame");
+    frame.appendChild(photo);
+    const mark = node("span", String(parent.dataset.imageNumber || ""), "subtle-image-mark");
+    mark.setAttribute("aria-hidden", "true");
+    mark.hidden = true;
+    frame.appendChild(mark);
+    figure.appendChild(frame);
     const caption = node("figcaption", kind === "dermoscopy" ? say("Dermoscopy", "Dermoskopi") : say("Clinical view", "Klinik görünüm"));
     caption.appendChild(document.createTextNode(" · " + asset.creator + " · "));
     const license = node("a", asset.license);
@@ -48,6 +55,20 @@
     caption.appendChild(license);
     figure.appendChild(caption);
     parent.appendChild(figure);
+    return { photo, mark };
+  }
+  const regions = [
+    ["Upper left", "Sol üst", 17, 17], ["Upper centre", "Üst orta", 50, 17], ["Upper right", "Sağ üst", 83, 17],
+    ["Middle left", "Sol orta", 17, 50], ["Centre", "Merkez", 50, 50], ["Middle right", "Sağ orta", 83, 50],
+    ["Lower left", "Sol alt", 17, 83], ["Lower centre", "Alt orta", 50, 83], ["Lower right", "Sağ alt", 83, 83]
+  ];
+  function ready() {
+    return answers.every(answer => answer.choice !== "" && answer.visibility !== "" &&
+      (answer.visibility === "unassessable" || answer.position !== null));
+  }
+  function updateReveal() {
+    const button = root.querySelector(".subtle-reveal-button");
+    if (button) button.disabled = !ready();
   }
   function render() {
     root.replaceChildren();
@@ -91,10 +112,10 @@
       button.setAttribute("aria-current", index === active ? "step" : "false");
       button.addEventListener("click", () => {
         active = index;
-        answers = ["", ""];
+        answers = blankAnswers();
         revealed = false;
         render();
-        root.querySelector("h3").focus();
+        root.querySelectorAll("h3")[1].focus();
       });
       nav.appendChild(button);
     });
@@ -106,10 +127,24 @@
     const grid = node("div", undefined, "subtle-grid");
     entries.forEach((entry, index) => {
       const panel = node("section", undefined, "subtle-panel");
+      panel.dataset.imageNumber = String(index + 1);
       panel.appendChild(node("h4", say("Image ", "Görsel ") + (index + 1)));
       // The image order is fixed within a pair, but the diagnosis remains hidden until reveal.
       if (entry.clinical) image(panel, entry, "clinical");
-      if (entry.dermoscopy) image(panel, entry, "dermoscopy");
+      const target = entry.dermoscopy ? image(panel, entry, "dermoscopy") : panel.querySelector(".subtle-image-frame") && {
+        photo: panel.querySelector(".subtle-image-frame img"),
+        mark: panel.querySelector(".subtle-image-mark")
+      };
+      const answerState = answers[index];
+      function showMark() {
+        if (!target) return;
+        target.mark.hidden = answerState.position === null;
+        if (answerState.position) {
+          target.mark.style.left = answerState.position[0] + "%";
+          target.mark.style.top = answerState.position[1] + "%";
+        }
+      }
+      showMark();
       const fieldset = node("fieldset");
       fieldset.appendChild(node("legend", say("Most useful observation", "En yararlı gözlem")));
       lesson.options.forEach((option, choice) => {
@@ -118,26 +153,103 @@
         radio.type = "radio";
         radio.name = lesson.id + "-" + index;
         radio.value = String(choice);
-        radio.checked = answers[index] === String(choice);
+        radio.checked = answerState.choice === String(choice);
         radio.disabled = revealed;
         radio.addEventListener("change", () => {
-          answers[index] = radio.value;
-          // Keep both selections in place; a reveal button is always explicit.
-          const revealButton = root.querySelector(".subtle-reveal-button");
-          if (revealButton) revealButton.disabled = answers.some(value => value === "");
+          answerState.choice = radio.value;
+          updateReveal();
         });
         wrapper.appendChild(radio);
         wrapper.appendChild(node("span", label(option)));
         fieldset.appendChild(wrapper);
       });
       panel.appendChild(fieldset);
+      const certaintyLabel = node("label", say("Visibility of your chosen finding", "Seçtiğiniz bulgunun görülebilirliği"), "subtle-field");
+      const certainty = node("select");
+      const certaintyOptions = [
+        ["", say("Choose visibility", "Görülebilirliği seç")],
+        ["clear", say("Clear", "Net")],
+        ["possible", say("Possible", "Olası")],
+        ["unassessable", say("Cannot assess", "Değerlendirilemiyor")]
+      ];
+      certaintyOptions.forEach(([value, text]) => {
+        const option = node("option", text);
+        option.value = value;
+        certainty.appendChild(option);
+      });
+      certainty.value = answerState.visibility;
+      certainty.disabled = revealed;
+      certainty.addEventListener("change", () => {
+        answerState.visibility = certainty.value;
+        if (certainty.value === "unassessable") answerState.position = null;
+        showMark();
+        region.disabled = certainty.value === "unassessable";
+        if (certainty.value === "unassessable") region.value = "";
+        updateReveal();
+      });
+      certaintyLabel.appendChild(certainty);
+      panel.appendChild(certaintyLabel);
+      const regionLabel = node("label", say("Mark a region (or tap the image)", "Bir bölge işaretleyin (veya görsele dokunun)"), "subtle-field");
+      const region = node("select");
+      const prompt = node("option", say("Choose a region", "Bir bölge seçin"));
+      prompt.value = "";
+      region.appendChild(prompt);
+      regions.forEach((item, n) => {
+        const option = node("option", language() === "tr" ? item[1] : item[0]);
+        option.value = String(n);
+        region.appendChild(option);
+      });
+      const tapped = node("option", say("Point selected on image", "Görselde seçilen nokta"));
+      tapped.value = "point";
+      tapped.disabled = true;
+      region.appendChild(tapped);
+      if (answerState.position) {
+        const exact = regions.findIndex(item => item[2] === answerState.position[0] && item[3] === answerState.position[1]);
+        if (exact >= 0) region.value = String(exact);
+        else { tapped.disabled = false; region.value = "point"; }
+      }
+      region.disabled = revealed || answerState.visibility === "unassessable";
+      region.addEventListener("change", () => {
+        if (region.value === "") answerState.position = null;
+        else {
+          const item = regions[Number(region.value)];
+          answerState.position = [item[2], item[3]];
+        }
+        showMark();
+        updateReveal();
+      });
+      regionLabel.appendChild(region);
+      panel.appendChild(regionLabel);
+      if (target && !revealed) {
+        target.photo.classList.add("subtle-markable");
+        target.photo.addEventListener("click", event => {
+          if (answerState.visibility === "unassessable") return;
+          const bounds = target.photo.getBoundingClientRect();
+          if (!bounds.width || !bounds.height) return;
+          answerState.position = [
+            Math.max(0, Math.min(100, Math.round((event.clientX - bounds.left) * 100 / bounds.width))),
+            Math.max(0, Math.min(100, Math.round((event.clientY - bounds.top) * 100 / bounds.height)))
+          ];
+          tapped.disabled = false;
+          region.value = "point";
+          showMark();
+          updateReveal();
+        });
+      }
+      panel.appendChild(node("p", say(
+        "Mark where you see it. Use the region menu with a keyboard. The mark records your observation; it is not automatically graded.",
+        "Gördüğünüz yeri işaretleyin. Klavye ile bölge menüsünü kullanın. İşaret gözleminizi kaydeder; otomatik puanlanmaz."
+      ), "subtle-limit"));
       if (revealed) {
         const answer = node("div", undefined, "subtle-answer");
         answer.appendChild(node("p", say("Source diagnosis: ", "Kaynak tanısı: ") + entry.record.diagnosticGroundTruth.confirmedDiagnosis));
         answer.appendChild(node("p", say("Useful observation: ", "Yararlı gözlem: ") + label(lesson.options[lesson.expected[index]])));
-        answer.appendChild(node("p", answers[index] === String(lesson.expected[index])
+        answer.appendChild(node("p", answerState.choice === String(lesson.expected[index])
           ? say("Your selection matches this observation.", "Seçiminiz bu gözlemle örtüşüyor.")
           : say("Compare your selection with the recorded observation. An image may still need closer assessment.", "Seçiminizi kayıtlı gözlemle karşılaştırın. Görsel yine de daha yakından değerlendirme gerektirebilir.")));
+        answer.appendChild(node("p", say("Your visibility: ", "Görülebilirlik seçiminiz: ") +
+          (answerState.visibility === "clear" ? say("Clear", "Net") :
+            answerState.visibility === "possible" ? say("Possible", "Olası") : say("Cannot assess", "Değerlendirilemiyor"))));
         const link = node("a", say("Original case source", "Özgün vaka kaynağı"));
         link.href = (entry.dermoscopy || entry.clinical).sourceUrl;
         link.target = "_blank";
@@ -151,7 +263,7 @@
     if (!revealed) {
       const reveal = node("button", say("Reveal and compare", "Tanıları aç ve karşılaştır"), "subtle-button subtle-reveal-button");
       reveal.type = "button";
-      reveal.disabled = answers.some(value => value === "");
+      reveal.disabled = !ready();
       reveal.addEventListener("click", () => { revealed = true; render(); root.querySelector(".subtle-comparison").focus(); });
       root.appendChild(reveal);
     } else {
