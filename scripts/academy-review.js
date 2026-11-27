@@ -221,7 +221,7 @@ function renderDocument(caseData) {
   ${body}
 </main>
 <script src="case-prose-locale.js?v=tr-case-20261127"></script>
-<script src="locale.js?v=tr-case-20261127"></script>
+<script src="locale.js?v=tr-svg-20261127"></script>
 </body>
 </html>
 `.replace(/[ \t]+$/gm, ""); // empty optional fields leave indent-only lines; keep git diff --check clean
