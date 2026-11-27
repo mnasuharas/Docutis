@@ -165,6 +165,96 @@
     "Stadium anzeigen": "Evreyi göster",
     "Nachsorgegruppe ansehen": "Takip grubunu göster"
   });
+  Object.assign(translations, {
+    "Quiz complete": "Test tamamlandı", "Restart quiz": "Testi yeniden başlat",
+    "Check answer": "Yanıtı kontrol et", "Select an answer before checking.": "Kontrol etmeden önce bir yanıt seçin.",
+    "Supporting sources": "Destekleyici kaynaklar", "Clinical review pending": "Klinik inceleme bekleniyor",
+    "View score": "Sonucu gör", "Next question": "Sonraki soru",
+    "Use the explanations and linked condition records to review each pattern. A score is not a measure of clinical competence.": "Her paterni açıklama ve ilgili tanı kaydıyla yeniden inceleyin. Test sonucu klinik yeterliliği ölçmez.",
+    "Source notes": "Kaynak notları", "Teacher filters": "Eğitici filtreleri",
+    "Reset case filters": "Vaka filtrelerini sıfırla",
+    "Source page opens after the diagnosis is revealed.": "Kaynak sayfası tanı açıldıktan sonra görüntülenir.",
+    "This image has no diagnosis-neutral public file. The stored filename was not used.": "Bu görselin tanıyı gizleyen herkese açık dosyası bulunmuyor.",
+    "Zoom out": "Uzaklaştır", "Zoom in": "Yakınlaştır", "Reset zoom": "Yakınlaştırmayı sıfırla",
+    "First impression, before you read a diagnosis": "Tanıyı görmeden önce ilk izlenim",
+    "Self-assessment only. Not a device output, not a score, and not a diagnosis.": "Kendi değerlendirmeniz içindir. Tanı veya puan değildir.",
+    "Hide dermoscopy": "Dermoskopiyi gizle", "Show dermoscopy": "Dermoskopiyi göster",
+    "Clinical view": "Klinik görünüm", "Dermoscopic view": "Dermoskopik görünüm",
+    "This frame is a clinical photograph. It is not a dermoscopic structure.": "Bu görsel klinik fotoğraftır.",
+    "What the dermoscopic frame adds": "Dermoskopik görüntünün katkısı",
+    "Clinical and dermoscopy, after the diagnosis": "Tanı sonrasında klinik ve dermoskopik görünüm",
+    "Look for": "Dikkat edilecekler", "Hide hint": "İpucunu gizle",
+    "Show a hint": "İpucu göster", "Patterns": "Paternler",
+    "Patterns in this case": "Bu vakadaki paternler",
+    "Observations": "Gözlemler", "Dermoscopic features": "Dermoskopik bulgular",
+    "Interpretations": "Yorumlar",
+    "Record your reasoning before the reveal": "Tanı açılmadan önce değerlendirmenizi seçin",
+    "Compare your reasoning with the source": "Değerlendirmenizi kaynakla karşılaştırın",
+    "Source evidence on record": "Kayıtlı kaynak kanıtı",
+    "Educational next step for this case": "Bu vakanın eğitim açısından sonraki adımı",
+    "Show recorded differentials": "Kayıtlı ayırıcı tanıları göster",
+    "Unlabeled differential": "Adlandırılmamış ayırıcı tanı",
+    "Clearly visible": "Net görülüyor", "Probably visible": "Olası",
+    "Not assessable": "Değerlendirilemiyor",
+    "Clinical photograph available": "Klinik fotoğraf mevcut",
+    "Dermoscopy available": "Dermoskopi mevcut",
+    "Paired clinical and dermoscopic": "Eşleşmiş klinik ve dermoskopik görseller",
+    "Any view": "Tüm görünümler",
+    "Teaching case": "Eğitici vaka", "Reasoning case": "Akıl yürütme vakası",
+    "Expert-challenge case": "İleri düzey vaka",
+    "Your impression": "Sizin izleniminiz",
+    "Broad lesion family (optional)": "Geniş lezyon grubu (isteğe bağlı)",
+    "Working diagnosis (optional). The same list is offered for every lesion.": "Ön tanı (isteğe bağlı). Her lezyonda aynı liste sunulur.",
+    "No working diagnosis": "Ön tanı seçilmedi",
+    "Most noticeable finding (optional)": "En belirgin bulgu (isteğe bağlı)",
+    "Choose a finding": "Bir bulgu seçin",
+    "Colour distribution": "Renk dağılımı", "Border": "Sınır",
+    "Surface": "Yüzey", "Pigment pattern": "Pigment paterni",
+    "Your description before the diagnosis": "Tanı açılmadan önce seçilen bulgu",
+    "Most noticeable finding": "En belirgin bulgu",
+    "The same list is offered for every lesion.": "Her lezyon için aynı seçenekler sunulur.",
+    "Inspect both images. Select the vessel pattern and your leading diagnosis for each image.": "İki görüntüyü inceleyin. Her biri için damar paternini ve ön tanınızı seçin.",
+    "Compare vessels in two pink lesions": "İki pembe lezyonda damarları karşılaştır",
+    "Pink lesions · comparison": "Pembe lezyonlar · karşılaştırma",
+    "Describe the vessels you can see.": "Gördüğünüz damarları seçin.",
+    "Which diagnosis do you favour, and why?": "Ön tanınız hangisi?",
+    "Your observations and reasoning": "Gözlemleriniz ve değerlendirmeniz",
+    "Teaching observations · clinician review required": "Eğitici gözlemler · hekim incelemesi gerekli",
+    "Which finding separates these cases?": "Bu vakaları hangi bulgu ayırıyor?",
+    "Another heel lesion": "Başka bir topuk lezyonu",
+    "Examine this second lesion before comparing it with the previous heel case.": "Önce ikinci lezyonu değerlendirin, sonra ilk topuk vakasıyla karşılaştırın.",
+    "Compare the heel cases": "Topuk vakalarını karşılaştır",
+    "Your assessment of the second lesion": "İkinci lezyon değerlendirmeniz",
+    "What you wanted to check again": "Yeniden kontrol etmek istediğiniz bulgu",
+    "What distinguishes these two images?": "İki görseli ne ayırıyor?",
+    "Feature to check again (optional)": "Yeniden kontrol edilecek bulgu (isteğe bağlı)",
+    "Pigment distribution": "Pigment dağılımı",
+    "How much weight does the shared pattern carry?": "Ortak paternin tanısal ağırlığı nedir?",
+    "Save impression and open dermoscopy": "İzlenimi kaydet ve dermoskopiyi aç",
+    "Reinforced it": "İzlenimimi güçlendirdi",
+    "Changed it": "İzlenimimi değiştirdi",
+    "Still uncertain": "Hâlâ belirsiz",
+    "How has dermoscopy changed or reinforced your impression?": "Dermoskopi ilk izleniminizi nasıl etkiledi?",
+    "No major uncertainty": "Belirgin belirsizlik yok",
+    "Site": "Yerleşim",
+    "Source attachment and automated validation do not constitute physician endorsement.": "Kaynak bağlantısı ve otomatik doğrulama hekim onayı anlamına gelmez."
+  });
+  const variableTranslations = [
+    [/^Question (\d+) of (\d+)$/, "Soru $1 / $2"],
+    [/^(\d+) of (\d+) correct$/, "$2 sorudan $1 doğru"],
+    [/^Finding (\d+)( \(optional\))?$/, "Bulgu $1$2"],
+    [/^Place mark (\d+) on image$/, "Görsele $1. işareti yerleştir"],
+    [/^Case (\d+) of (\d+)$/, "Vaka $1 / $2"],
+    [/^Site: (.*)$/, "Yerleşim: $1"],
+    [/^Pattern marking · Case (\d+) of (\d+)$/, "Patern işaretleme · Vaka $1 / $2"]
+  ];
+  function translated(value) {
+    if (translations[value]) return translations[value];
+    for (const [pattern, replacement] of variableTranslations) {
+      if (pattern.test(value)) return value.replace(pattern, replacement);
+    }
+    return null;
+  }
   const original = new WeakMap();
   let language = "en";
   try { language = localStorage.getItem("docutis-language") === "tr" ? "tr" : "en"; } catch (error) { /* Storage may be disabled. */ }
@@ -172,11 +262,15 @@
   function translate(node) {
     if (node.nodeType === 3) {
       const value = node.nodeValue;
-      if (!original.has(node)) original.set(node, value);
+      if (!original.has(node) ||
+          (value !== original.get(node) && value !== translated(original.get(node)))) {
+        original.set(node, value);
+      }
       const english = original.get(node);
       const trimmed = english.trim();
-      if (translations[trimmed]) node.nodeValue = language === "tr"
-        ? english.replace(trimmed, translations[trimmed]) : english;
+      const result = translated(trimmed);
+      if (result) node.nodeValue = language === "tr"
+        ? english.replace(trimmed, result) : english;
       return;
     }
     if (node.nodeType !== 1 || ["SCRIPT", "STYLE"].includes(node.tagName)) return;
@@ -185,9 +279,9 @@
       if (!value) return;
       const key = "data-original-" + attribute;
       const english = node.getAttribute(key) || value;
-      if (translations[english]) {
+      if (translated(english)) {
         node.setAttribute(key, english);
-        node.setAttribute(attribute, language === "tr" ? translations[english] : english);
+        node.setAttribute(attribute, language === "tr" ? translated(english) : english);
       }
     });
     Array.from(node.childNodes).forEach(translate);
