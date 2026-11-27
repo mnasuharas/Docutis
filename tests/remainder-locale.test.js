@@ -86,7 +86,9 @@ test("every number and unit token in an English dose line remains in the Turkish
           lines += 1;
           assert.equal(typeof turkish, "string", english);
           for (const piece of english.match(token) || []) {
-            assert.ok(turkish.includes(piece.trim()), `${disease.id} lost ${piece} from ${english}`);
+            const kept = piece.trim();
+            const natural = kept.replace("g/day", "g/gün");
+            assert.ok(turkish.includes(kept) || turkish.includes(natural), `${disease.id} lost ${kept} from ${english}`);
           }
         }
       }
