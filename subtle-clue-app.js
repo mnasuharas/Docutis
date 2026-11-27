@@ -9,6 +9,17 @@
   const blankAnswers = () => [{ choice: "", visibility: "", position: null }, { choice: "", visibility: "", position: null }];
   let answers = blankAnswers();
   let revealed = false;
+  const revisitKey = "docutis-subtle-revisit-v1";
+  let revisit = [];
+  try {
+    const saved = JSON.parse(window.localStorage.getItem(revisitKey) || "[]");
+    if (Array.isArray(saved)) revisit = saved.filter(id => lessons.some(lesson => lesson.id === id));
+  } catch (error) { /* Continue with a tab-only list if storage is unavailable. */ }
+  let storageAvailable = true;
+  function saveRevisit() {
+    try { window.localStorage.setItem(revisitKey, JSON.stringify(revisit)); }
+    catch (error) { storageAvailable = false; }
+  }
   const pairImages = lesson => lesson.cases.map(id => {
     const record = byId.get(id);
     if (!record) return null;
@@ -120,6 +131,35 @@
       nav.appendChild(button);
     });
     root.appendChild(nav);
+    const repeat = node("section", undefined, "subtle-concept");
+    repeat.appendChild(node("h4", say("Your revisit list", "Tekrar listeniz")));
+    repeat.appendChild(node("p", say(
+      "Choose the comparisons you want to practise again. This list stays in this browser; it is not a competence score.",
+      "Yeniden çalışmak istediğiniz karşılaştırmaları seçin. Liste bu tarayıcıda tutulur; yetkinlik puanı değildir."
+    )));
+    const pending = available.filter(item => revisit.includes(item.id));
+    repeat.appendChild(node("p", pending.length
+      ? pending.map(item => label(item.title)).join(" · ")
+      : say("No comparisons saved yet.", "Henüz karşılaştırma eklenmedi.")));
+    if (!storageAvailable) repeat.appendChild(node("p", say("Storage unavailable: the list lasts for this tab only.", "Depolama kullanılamıyor: liste yalnızca bu sekmede kalır.")));
+    if (pending.length) {
+      const start = node("button", say("Practise a saved comparison", "Listedeki karşılaştırmayı çalış"), "subtle-button");
+      start.type = "button";
+      start.addEventListener("click", () => {
+        const next = pending.find(item => item.id !== available[active].id) || pending[0];
+        active = available.indexOf(next);
+        answers = blankAnswers();
+        revealed = false;
+        render();
+        root.querySelectorAll("h3")[1].focus();
+      });
+      repeat.appendChild(start);
+      const clear = node("button", say("Clear revisit list", "Tekrar listesini temizle"), "subtle-button");
+      clear.type = "button";
+      clear.addEventListener("click", () => { revisit = []; saveRevisit(); render(); });
+      repeat.appendChild(clear);
+    }
+    root.appendChild(repeat);
     const heading = node("h3", label(lesson.title));
     heading.tabIndex = -1;
     root.appendChild(heading);
@@ -272,6 +312,19 @@
       result.appendChild(node("h4", say("What the pair teaches", "Bu ikilinin öğrettiği")));
       result.appendChild(node("p", label(lesson.comparison)));
       result.appendChild(node("p", label(lesson.limit), "subtle-limit"));
+      const saved = revisit.includes(lesson.id);
+      const toggle = node("button", saved
+        ? say("Remove from revisit list", "Tekrar listesinden çıkar")
+        : say("Add this clue to revisit list", "Bu ipucunu tekrar listesine ekle"), "subtle-button");
+      toggle.type = "button";
+      toggle.setAttribute("aria-pressed", String(saved));
+      toggle.addEventListener("click", () => {
+        revisit = saved ? revisit.filter(id => id !== lesson.id) : [...revisit, lesson.id];
+        saveRevisit();
+        render();
+        root.querySelector(".subtle-comparison").focus();
+      });
+      result.appendChild(toggle);
       root.appendChild(result);
     }
   }
