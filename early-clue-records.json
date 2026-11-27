@@ -1,0 +1,347 @@
+[
+  {
+    "id": "early-xp-3a",
+    "author": "Freire et al.",
+    "doi": "10.1016/j.abd.2025.501182",
+    "panel": "Figure 3A",
+    "diagnosis": "Melanoma in situ",
+    "finding": {
+      "en": "Peripheral brown structureless areas and short white lines",
+      "tr": "Periferik kahverengi yapısız alanlar ve kısa beyaz çizgiler"
+    },
+    "mimic": "case-g30-02",
+    "src": "assets/media/early-clues/xp-3a.jpg",
+    "dimensions": {
+      "width": 1300,
+      "height": 950
+    },
+    "originalDimensions": [
+      2508,
+      1846
+    ],
+    "crop": [
+      0,
+      0,
+      1307,
+      955
+    ],
+    "sha256": "da70f6d8fed57275cc6b8966f93747357778a7e26b9bb88ce5cfc9e44f8fccda",
+    "sourceFile": "xp",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "sourceImageUrl": "https://static.elsevier.es/multimedia/03650596/0000010000000005/v3_202509260736/S0365059625001242/v3_202509260736/en/main.assets/gr3.jpeg",
+    "metadataCheckedAt": "2026-11-27",
+    "reviewStatus": "clinician review required",
+    "clinicalReview": null
+  },
+  {
+    "id": "early-xp-3b",
+    "author": "Freire et al.",
+    "doi": "10.1016/j.abd.2025.501182",
+    "panel": "Figure 3B",
+    "diagnosis": "Melanoma in situ",
+    "finding": {
+      "en": "Brown structureless pigment beside a pink area with short white lines",
+      "tr": "Kısa beyaz çizgili pembe alanın yanında kahverengi yapısız pigment"
+    },
+    "mimic": "case-g30-02",
+    "src": "assets/media/early-clues/xp-3b.jpg",
+    "dimensions": {
+      "width": 1170,
+      "height": 955
+    },
+    "originalDimensions": [
+      2508,
+      1846
+    ],
+    "crop": [
+      1338,
+      0,
+      2508,
+      955
+    ],
+    "sha256": "ac43ce4b4a78db3e0a180e12bb5324ea5208cc7086126d0840fee7b5872c7ddd",
+    "sourceFile": "xp",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "sourceImageUrl": "https://static.elsevier.es/multimedia/03650596/0000010000000005/v3_202509260736/S0365059625001242/v3_202509260736/en/main.assets/gr3.jpeg",
+    "metadataCheckedAt": "2026-11-27",
+    "reviewStatus": "clinician review required",
+    "clinicalReview": null
+  },
+  {
+    "id": "early-xp-3c",
+    "author": "Freire et al.",
+    "doi": "10.1016/j.abd.2025.501182",
+    "panel": "Figure 3C",
+    "diagnosis": "Hypopigmented melanoma in situ",
+    "finding": {
+      "en": "Pink structureless field with dotted vessels",
+      "tr": "Noktasal damarlı pembe yapısız alan"
+    },
+    "mimic": "case-g30-02",
+    "src": "assets/media/early-clues/xp-3c.jpg",
+    "dimensions": {
+      "width": 1300,
+      "height": 858
+    },
+    "originalDimensions": [
+      2508,
+      1846
+    ],
+    "crop": [
+      0,
+      983,
+      1307,
+      1846
+    ],
+    "sha256": "2969cc7582c23ff0c0cf5ee4ca2abba6a92b797375ef942f97bb0814e4b1f698",
+    "sourceFile": "xp",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "sourceImageUrl": "https://static.elsevier.es/multimedia/03650596/0000010000000005/v3_202509260736/S0365059625001242/v3_202509260736/en/main.assets/gr3.jpeg",
+    "metadataCheckedAt": "2026-11-27",
+    "reviewStatus": "clinician review required",
+    "clinicalReview": null
+  },
+  {
+    "id": "early-xp-4",
+    "author": "Freire et al.",
+    "doi": "10.1016/j.abd.2025.501182",
+    "panel": "Figure 4 dermoscopy",
+    "diagnosis": "Melanoma in situ",
+    "finding": {
+      "en": "Uneven network with darker and gray-blue areas",
+      "tr": "Koyu ve gri mavi alanlarla birlikte düzensiz ağ"
+    },
+    "mimic": "case-g25-02",
+    "src": "assets/media/early-clues/xp-4.jpg",
+    "dimensions": {
+      "width": 1209,
+      "height": 1129
+    },
+    "originalDimensions": [
+      2508,
+      1129
+    ],
+    "crop": [
+      1299,
+      0,
+      2508,
+      1129
+    ],
+    "sha256": "b351b3d02ec82896d55752a237dea302f01e110b269fcd960b883575d9e40b47",
+    "sourceFile": "xp4",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "sourceImageUrl": "https://static.elsevier.es/multimedia/03650596/0000010000000005/v3_202509260736/S0365059625001242/v3_202509260736/en/main.assets/gr4.jpeg",
+    "metadataCheckedAt": "2026-11-27",
+    "reviewStatus": "clinician review required",
+    "clinicalReview": null
+  },
+  {
+    "id": "early-xp-6",
+    "author": "Freire et al.",
+    "doi": "10.1016/j.abd.2025.501182",
+    "panel": "Figure 6B",
+    "diagnosis": "Melanoma in situ",
+    "finding": {
+      "en": "Short white lines beside an eccentric dark area",
+      "tr": "Eksantrik koyu alanın yanında kısa beyaz çizgiler"
+    },
+    "mimic": "case-g30-02",
+    "src": "assets/media/early-clues/xp-6.jpg",
+    "dimensions": {
+      "width": 1300,
+      "height": 936
+    },
+    "originalDimensions": [
+      2508,
+      957
+    ],
+    "crop": [
+      1179,
+      0,
+      2508,
+      957
+    ],
+    "sha256": "0f9b94c4c221bdf999a226928d6b1861732432ea52207ecf40bc97309ed365bc",
+    "sourceFile": "xp6",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "sourceImageUrl": "https://static.elsevier.es/multimedia/03650596/0000010000000005/v3_202509260736/S0365059625001242/v3_202509260736/en/main.assets/gr6.jpeg",
+    "metadataCheckedAt": "2026-11-27",
+    "reviewStatus": "clinician review required",
+    "clinicalReview": null
+  },
+  {
+    "id": "early-xp-7",
+    "author": "Freire et al.",
+    "doi": "10.1016/j.abd.2025.501182",
+    "panel": "Figure 7B",
+    "diagnosis": "Melanoma in situ",
+    "finding": {
+      "en": "Irregular dots and granularity with a structureless area",
+      "tr": "Yapısız alanla birlikte düzensiz noktalar ve granülarite"
+    },
+    "mimic": "case-g25-02",
+    "src": "assets/media/early-clues/xp-7.jpg",
+    "dimensions": {
+      "width": 1095,
+      "height": 911
+    },
+    "originalDimensions": [
+      2508,
+      3116
+    ],
+    "crop": [
+      1413,
+      0,
+      2508,
+      911
+    ],
+    "sha256": "a0990c310b1ecbe770c5f9a02b10be149854020a4cf64c52d4263cd02c235478",
+    "sourceFile": "xp7",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "sourceImageUrl": "https://static.elsevier.es/multimedia/03650596/0000010000000005/v3_202509260736/S0365059625001242/v3_202509260736/en/main.assets/gr7.jpeg",
+    "metadataCheckedAt": "2026-11-27",
+    "reviewStatus": "clinician review required",
+    "clinicalReview": null
+  },
+  {
+    "id": "early-micro-1",
+    "author": "Vargas-Mora et al.",
+    "doi": "10.1016/j.abd.2020.10.014",
+    "panel": "Figure 1B",
+    "diagnosis": "Melanoma in situ, source diameter 4 mm",
+    "finding": {
+      "en": "Uneven network with irregular dark areas",
+      "tr": "Düzensiz koyu alanlarla birlikte düzensiz ağ"
+    },
+    "mimic": "case-g25-02",
+    "src": "assets/media/early-clues/micro-1.jpg",
+    "dimensions": {
+      "width": 1238,
+      "height": 1045
+    },
+    "originalDimensions": [
+      2507,
+      1045
+    ],
+    "crop": [
+      1269,
+      0,
+      2507,
+      1045
+    ],
+    "sha256": "1aaeb67227cc190910f8be0f2ce0251e0f2b91a6a7458fbabc23f9832436ead3",
+    "sourceFile": "micro",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "sourceImageUrl": "https://static.elsevier.es/multimedia/03650596/0000009700000001/v1_202201230559/S0365059621002683/v1_202201230559/en/main.assets/gr1.jpeg",
+    "metadataCheckedAt": "2026-11-27",
+    "reviewStatus": "clinician review required",
+    "clinicalReview": null
+  },
+  {
+    "id": "early-micro-2",
+    "author": "Vargas-Mora et al.",
+    "doi": "10.1016/j.abd.2020.10.014",
+    "panel": "Figure 2B",
+    "diagnosis": "Invasive melanoma, source Breslow 0.75 mm and diameter 3 mm",
+    "finding": {
+      "en": "Pink-brown structureless areas with white structures",
+      "tr": "Beyaz yapılarla birlikte pembe kahverengi yapısız alanlar"
+    },
+    "mimic": "case-g30-02",
+    "src": "assets/media/early-clues/micro-2.jpg",
+    "dimensions": {
+      "width": 1241,
+      "height": 1045
+    },
+    "originalDimensions": [
+      2507,
+      1045
+    ],
+    "crop": [
+      1266,
+      0,
+      2507,
+      1045
+    ],
+    "sha256": "8a7640bd8c106704ebebaabab2ed9819346343f568d57aae6b0797a4d05a8e06",
+    "sourceFile": "micro2",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "sourceImageUrl": "https://static.elsevier.es/multimedia/03650596/0000009700000001/v1_202201230559/S0365059621002683/v1_202201230559/en/main.assets/gr2.jpeg",
+    "metadataCheckedAt": "2026-11-27",
+    "reviewStatus": "clinician review required",
+    "clinicalReview": null
+  },
+  {
+    "id": "early-huang",
+    "author": "Huang et al.",
+    "doi": "10.25259/IJDVL_183_20",
+    "panel": "Figure 1b",
+    "diagnosis": "Melanoma in situ, source diameter 2.3 mm",
+    "finding": {
+      "en": "Dark structureless pigment with peripheral projections",
+      "tr": "Periferik uzantılarla birlikte koyu yapısız pigment"
+    },
+    "mimic": "case-g31-01",
+    "src": "assets/media/early-clues/huang.jpg",
+    "dimensions": {
+      "width": 1011,
+      "height": 674
+    },
+    "originalDimensions": [
+      1011,
+      674
+    ],
+    "crop": null,
+    "sha256": "9bb22aea8b4556909824716451e1ffb4065b0184d350b4b1ce361884e4c3c103",
+    "sourceFile": "huang",
+    "license": "CC BY-NC-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "sourceImageUrl": "https://ijdvl.com/content/126/2021/87/1/img/IJDVL-87-071-g002.png",
+    "metadataCheckedAt": "2026-11-27",
+    "reviewStatus": "clinician review required",
+    "clinicalReview": null
+  },
+  {
+    "id": "early-jcm",
+    "author": "Nazzaro et al.",
+    "doi": "10.3390/jcm11164912",
+    "panel": "Figure 2b",
+    "diagnosis": "Small-diameter melanoma in situ",
+    "finding": {
+      "en": "Uneven network and small irregular dark clods",
+      "tr": "Düzensiz ağ ve küçük düzensiz koyu kümeler"
+    },
+    "mimic": "case-g25-02",
+    "src": "assets/media/early-clues/jcm.jpg",
+    "dimensions": {
+      "width": 1030,
+      "height": 1028
+    },
+    "originalDimensions": [
+      2153,
+      2153
+    ],
+    "crop": [
+      1090,
+      32,
+      2120,
+      1060
+    ],
+    "sha256": "6c78b126f0bbf70ae61f42c7ebee6d4b08ccb61954eca7af9dcd574b8ee606a1",
+    "sourceFile": "jcm",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "sourceImageUrl": "https://www.mdpi.com/jcm/jcm-11-04912/article_deploy/html/images/jcm-11-04912-g002.png",
+    "metadataCheckedAt": "2026-11-27",
+    "reviewStatus": "clinician review required",
+    "clinicalReview": null
+  }
+]

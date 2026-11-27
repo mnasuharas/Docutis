@@ -4,7 +4,7 @@
   const lessons = window.DOCUTIS_SUBTLE_CLUES;
   const collection = window.DOCUTIS_CASES;
   if (!root || !lessons || !collection) return;
-  const byId = new Map(collection.cases.map(item => [item.id, item]));
+  const byId = new Map([...collection.cases, ...(window.DOCUTIS_EARLY_CASES || [])].map(item => [item.id, item]));
   let active = 0;
   let reversed = Math.random() < 0.5;
   let reflection = "";
@@ -53,6 +53,10 @@
     photo.width = asset.dimensions.width;
     photo.height = asset.dimensions.height;
     photo.loading = "lazy";
+    photo.addEventListener("error", () => {
+      photo.hidden = true;
+      figure.appendChild(node("p", say("Image unavailable. Select Cannot assess or choose another comparison.", "Görsel yüklenemedi. Değerlendirilemiyor seçin veya başka karşılaştırma açın.")));
+    });
     const frame = node("div", undefined, "subtle-image-frame");
     frame.appendChild(photo);
     const mark = node("span", String(parent.dataset.imageNumber || ""), "subtle-image-mark");
@@ -67,6 +71,9 @@
     license.target = "_blank";
     license.rel = "noopener noreferrer";
     caption.appendChild(license);
+    if (asset.modificationStatus === "cropped" || asset.modificationStatus === "reencoded") {
+      caption.appendChild(document.createTextNode(say(" · cropped/re-encoded", " · kırpıldı/yeniden kodlandı")));
+    }
     figure.appendChild(caption);
     parent.appendChild(figure);
     return { photo, mark };
@@ -117,6 +124,25 @@
     });
     concept.appendChild(references);
     root.appendChild(concept);
+    if (window.DOCUTIS_EARLY_SOURCES) {
+      const sources = node("details", undefined, "subtle-concept");
+      sources.appendChild(node("summary", say("Ten checked publications · four supply new images", "Kontrol edilen on yayın · dördünden yeni görseller")));
+      const list = node("ul");
+      window.DOCUTIS_EARLY_SOURCES.forEach(source => {
+        const item = node("li");
+        const link = node("a", source.authors + " — " + source.title);
+        link.href = source.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        item.appendChild(link);
+        item.appendChild(document.createTextNode(source.role === "image"
+          ? say(" · image source", " · görsel kaynağı")
+          : say(" · further reading; no images imported", " · ek okuma; görselleri aktarılmadı")));
+        list.appendChild(item);
+      });
+      sources.appendChild(list);
+      root.appendChild(sources);
+    }
     const lesson = available[active];
     const entries = pairImages(lesson);
     const expected = [...lesson.expected];
@@ -174,6 +200,12 @@
     const heading = node("h3", comparisonOpen ? label(lesson.title) : say("Independent observation", "Bağımsız gözlem"));
     heading.tabIndex = -1;
     root.appendChild(heading);
+    if (entries.some(entry => entry.record.provenance)) {
+      root.appendChild(node("p", say(
+        "Source-image practice: published arrows and labels may give hints. These examples are curated and do not represent screening prevalence.",
+        "Kaynak görsel çalışması: yayımlanmış ok ve etiketler ipucu verebilir. Bu seçilmiş örnekler tarama sıklıklarını temsil etmez."
+      ), "subtle-limit"));
+    }
     root.appendChild(node("p", comparisonOpen ? label(lesson.question) : say("Assess this lesion before opening its comparison. Choose a finding, visibility and location.", "Karşılaştırmayı açmadan bu lezyonu değerlendirin. Bulgu, görülebilirlik ve konum seçin.")));
     const grid = node("div", undefined, "subtle-grid");
     entries.slice(0, comparisonOpen ? 2 : 1).forEach((entry, index) => {
@@ -294,6 +326,12 @@
       if (revealed) {
         const answer = node("div", undefined, "subtle-answer");
         answer.appendChild(node("p", say("Source diagnosis: ", "Kaynak tanısı: ") + entry.record.diagnosticGroundTruth.confirmedDiagnosis));
+        if (entry.record.provenance) {
+          answer.appendChild(node("p", say(
+            "Verification: source-reported histopathology; Docutis has not reviewed slides. Clinician review required. ",
+            "Doğrulama: kaynağın bildirdiği histopatoloji; Docutis preparatları incelemedi. Hekim incelemesi gerekli. "
+          ) + entry.record.provenance.author + " · " + entry.record.provenance.panel));
+        }
         answer.appendChild(node("p", say("Useful observation: ", "Yararlı gözlem: ") + label(lesson.options[expected[index]])));
         answer.appendChild(node("p", answerState.choice === String(expected[index])
           ? say("Your selection matches this observation.", "Seçiminiz bu gözlemle örtüşüyor.")
