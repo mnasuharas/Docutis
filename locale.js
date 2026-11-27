@@ -291,7 +291,9 @@
     [/^(\d+) linked source\(s\)$/, function (count) { return count + " bağlantılı kaynak"; }],
     [/^(\d+) sources attached$/, function (count) { return count + " kaynak eklendi"; }],
     [/^Scope: (.*)\. Content integrity ID: (.*)\.$/, function (scope, fingerprint) { return "Kapsam: " + scope + ". İçerik bütünlüğü kimliği: " + fingerprint + "."; }],
-    [/^Superseded by (.*)\.$/, function (id) { return "Yerine geçen karar: " + id + "."; }]
+    [/^Superseded by (.*)\.$/, function (id) { return "Yerine geçen karar: " + id + "."; }],
+    [/^Evidence for (.+) \((\d+)\)$/, function (label, count) { return piece(label) + " için kanıt (" + count + ")"; }],
+    [/^Source supporting (.+): (.+) \(opens in a new tab\)$/, function (label, title) { return piece(label) + " bölümünü destekleyen kaynak: " + title + " (yeni sekmede açılır)"; }]
   ];
   function piece(value) {
     return Object.prototype.hasOwnProperty.call(translations, value) ? translations[value] : value;
@@ -800,7 +802,7 @@
     "Quiz-item review status": "Test sorusunun inceleme durumu",
     "Choose one answer, then check it.": "Bir yanıt seçin, ardından kontrol edin."
   });
-  Object.assign(translations, window.DOCUTIS_CLINICAL_LOCALE || {}, window.DOCUTIS_DIFFERENTIAL_LOCALE || {}, {
+  Object.assign(translations, window.DOCUTIS_CLINICAL_LOCALE || {}, window.DOCUTIS_DIFFERENTIAL_LOCALE || {}, window.DOCUTIS_PROFILE_LOCALE || {}, {
     "This article has not yet completed human physician review.": "Bu kayıt henüz hekim incelemesini tamamlamamıştır.",
     "Physician review applies to this content version. It does not guarantee correctness or replace professional medical judgment.": "Hekim incelemesi bu içerik sürümü için geçerlidir. Doğruluğu garanti etmez ve mesleki tıbbi değerlendirmenin yerine geçmez.",
     "Include the affected record or page, the claim that needs attention, a verifiable source, and a proposed correction. Do not include patient-identifiable information.": "İlgili kaydı veya sayfayı, incelenmesi gereken ifadeyi, doğrulanabilir kaynağı ve önerilen düzeltmeyi belirtin. Hastayı tanımlayan bilgi eklemeyin.",
@@ -862,7 +864,16 @@
     "Connective-tissue disorder": "Bağ dokusu bozukluğu",
     "Lichenoid disorder": "Likenoid bozukluk",
     "Alopecia disorder": "Alopesi bozukluğu",
-    "Nail disorder": "Tırnak bozukluğu"
+    "Nail disorder": "Tırnak bozukluğu",
+    "clinical presentation": "klinik görünüm",
+    "diagnostic workflow": "tanısal yaklaşım",
+    "dermoscopy": "dermoskopi",
+    "differential diagnosis": "ayırıcı tanı",
+    "treatment hierarchy": "tedavi basamakları",
+    "follow-up": "takip",
+    "red flags": "uyarıcı bulgular",
+    "oncology context": "onkolojik bağlam",
+    "Mapped sources support this section at section level; source attachment is not physician endorsement.": "Eşlenen kaynaklar bu bölümü bölüm düzeyinde destekler. Kaynak bağlantısı hekim onayı değildir."
   });
   window.DOCUTIS_LOCALE = Object.freeze({
     conditionName: window.DOCUTIS_LOCALE.conditionName,
