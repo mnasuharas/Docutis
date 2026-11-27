@@ -54,9 +54,9 @@ class Element {
   querySelectorAll(selector) { const all = []; const visit = parent => parent.children.forEach(child => { if (child.tagName === selector.toUpperCase() || child.className === selector.slice(1)) all.push(child); visit(child); }); visit(this); return all; }
   querySelector(selector) { return this.querySelectorAll(selector)[0] || null; }
 }
-function harness() {
+function harness(loading = false) {
   const app = new Element("div"), language = new Element("select");
-  const context = { window: {}, document: { documentElement: { lang: "en" }, createElement: tag => new Element(tag), getElementById: id => id === "pinkCaseApp" ? app : id === "docutisLanguage" ? language : null } };
+  const context = { window: {}, document: { readyState: loading ? "loading" : "complete", readyCallbacks: [], addEventListener(type, callback) { if (type === "DOMContentLoaded") this.readyCallbacks.push(callback); }, documentElement: { lang: "en" }, createElement: tag => new Element(tag), getElementById: id => id === "pinkCaseApp" ? app : id === "docutisLanguage" ? language : null } };
   load(context, true);
   const button = part => app.querySelectorAll("button").find(item => item.textContent.includes(part));
   const choose = (key, value) => { const select = app.querySelectorAll("select").find(item => item.dataset.answer === key); assert.ok(select, key); select.value = value; select.dispatch("change"); };
@@ -96,4 +96,16 @@ test("location selection marks the dermoscopic image and language changes keep a
   assert.ok(h.app.textContent.includes("Nesnel yapılar"));
   assert.equal(h.app.querySelectorAll("select").find(item => item.dataset.answer === "location").value, "9");
   h.click("Gözlemleri kaydet"); assert.ok(h.app.textContent.includes("Öykü öncesi"));
+});
+
+test("initialization waits for locale startup and registers its change listener afterwards", () => {
+  const h = harness(true);
+  assert.equal(h.app.textContent, "");
+  assert.equal(h.language.listeners.change, undefined);
+  h.context.document.documentElement.lang = "tr";
+  h.context.document.readyCallbacks.forEach(callback => callback());
+  assert.ok(h.app.textContent.includes("Pembe lezyonlar"));
+  h.language.listeners.change.unshift(() => { h.context.document.documentElement.lang = "en"; });
+  h.language.dispatch("change");
+  assert.ok(h.app.textContent.includes("Pink lesions"));
 });

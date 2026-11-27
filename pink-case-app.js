@@ -172,7 +172,13 @@
     }
     button("Skip without saving or revealing", "Kaydetmeden ve tanıyı açmadan geç", root, () => { index++; answers = {}; phase = "observe"; render(); focus(); });
   }
-  render();
-  const language = document.getElementById("docutisLanguage");
-  if (language) language.addEventListener("change", render);
+  // locale.js installs its listener at DOMContentLoaded. Initialize afterwards so
+  // its language update runs before our render, including a saved preference.
+  function initialize() {
+    render();
+    const language = document.getElementById("docutisLanguage");
+    if (language) language.addEventListener("change", render);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initialize);
+  else initialize();
 })();
