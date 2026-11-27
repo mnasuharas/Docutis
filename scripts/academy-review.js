@@ -219,7 +219,7 @@ function renderDocument(caseData) {
   <ul>${outsideHtml}</ul>
   ${body}
 </main>
-<script src="locale.js?v=tr-all-20261127"></script>
+<script src="locale.js?v=tr-chips-20261127"></script>
 </body>
 </html>
 `.replace(/[ \t]+$/gm, ""); // empty optional fields leave indent-only lines; keep git diff --check clean
