@@ -103,7 +103,7 @@
       source.href = image.sourceUrl;
       return;
     }
-    const credit = add(parent, "p", image.creator + " · cropped image · ", "exercise-caption");
+    const credit = add(parent, "p", image.creator + (image.modificationStatus === "cropped" ? " · cropped image · " : " · "), "exercise-caption");
     const license = add(credit, "a", image.license);
     license.href = image.licenseUrl;
   }
@@ -461,6 +461,62 @@
     title.focus();
   }
 
+  function openVesselExercise() {
+    const pair = collection.comparisons.find(function (item) { return item.id === "cmp-g25-pink-vessels"; });
+    const cases = [pair.caseIdA, pair.caseIdB].map(function (id) {
+      const record = collection.cases.find(function (item) { return item.id === id; });
+      return { record: record, image: record.images.find(function (item) { return item.type === "dermoscopy"; }) };
+    });
+
+    function show(answers) {
+      const title = heading(answers ? "Pink lesions · comparison" : "Compare vessels in two pink lesions");
+      if (!answers) add(root, "p", "Inspect both images. Describe vessel shape and distribution before proposing a diagnosis. Record uncertainty where vessels are hard to resolve.");
+      const form = add(root, "form");
+      const cards = add(form, "div", "", "exercise-comparison is-paired");
+      const fields = [];
+      cases.forEach(function (item, i) {
+        const card = add(cards, "article", "", "exercise-review exercise-fields");
+        add(card, "h4", "Case " + (i + 1) + (answers ? " · " + item.record.diagnosisLabel : ""));
+        photograph(add(card, "div", "", "exercise-frame"), item.image,
+          answers ? item.image.alt : "Dermoscopy of pink lesion " + (i + 1));
+        attribution(card, item.image, Boolean(answers));
+        if (answers) {
+          add(card, "h5", "Your observations and reasoning");
+          answers[i].forEach(function (answer) { add(card, "p", answer); });
+          add(card, "h5", "Teaching observations · clinician review required");
+          (i === 0 ? pair.favouringA : pair.favouringB).forEach(function (note) { add(card, "p", note); });
+        } else {
+          fields.push(["Describe the vessels you can see.", "Which diagnosis do you favour, and why?"].map(function (prompt) {
+            const input = labeled(card, prompt, "textarea");
+            input.rows = 2;
+            input.required = true;
+            input.maxLength = 400;
+            return input;
+          }));
+        }
+      });
+      if (answers) {
+        add(root, "h4", "Which finding separates these cases?");
+        add(root, "p", pair.discriminator);
+        add(root, "p", pair.commonTrap);
+        add(root, "p", pair.limits);
+      } else {
+        const submit = add(form, "button", "Reveal and compare", "exercise-action");
+        submit.type = "submit";
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          const saved = fields.map(function (row) {
+            return row.map(function (field) { field.value = field.value.trim(); return field.value; });
+          });
+          if (form.reportValidity()) show(saved);
+        });
+      }
+      button(root, "Back to exercises", function () { renderIntro().focus(); });
+      title.focus();
+    }
+    show(null);
+  }
+
   function renderIntro() {
     const title = heading("Dermoscopy pattern exercise");
     add(root, "p", "Mark what you see in two cases, compare your reasoning with the teaching examples, then try an independent case.");
@@ -473,6 +529,7 @@
       clinicalFirst = false;
       startCase(0);
     });
+    button(actions, "Practise vessel patterns in pink lesions", openVesselExercise);
     return title;
   }
 
