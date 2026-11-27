@@ -6,6 +6,8 @@
   if (!root || !lessons || !collection) return;
   const byId = new Map(collection.cases.map(item => [item.id, item]));
   let active = 0;
+  let reversed = Math.random() < 0.5;
+  let reflection = "";
   const blankAnswers = () => [{ choice: "", visibility: "", position: null }, { choice: "", visibility: "", position: null }];
   let answers = blankAnswers();
   let revealed = false;
@@ -116,6 +118,8 @@
     root.appendChild(concept);
     const lesson = available[active];
     const entries = pairImages(lesson);
+    const expected = [...lesson.expected];
+    if (reversed) { entries.reverse(); expected.reverse(); }
     const nav = node("div", undefined, "subtle-nav");
     available.forEach((item, index) => {
       const button = node("button", label(item.title), "subtle-button");
@@ -124,6 +128,8 @@
       button.addEventListener("click", () => {
         active = index;
         answers = blankAnswers();
+        reversed = Math.random() < 0.5;
+        reflection = "";
         revealed = false;
         render();
         root.querySelectorAll("h3")[1].focus();
@@ -149,6 +155,8 @@
         const next = pending.find(item => item.id !== available[active].id) || pending[0];
         active = available.indexOf(next);
         answers = blankAnswers();
+        reversed = Math.random() < 0.5;
+        reflection = "";
         revealed = false;
         render();
         root.querySelectorAll("h3")[1].focus();
@@ -283,8 +291,8 @@
       if (revealed) {
         const answer = node("div", undefined, "subtle-answer");
         answer.appendChild(node("p", say("Source diagnosis: ", "Kaynak tanısı: ") + entry.record.diagnosticGroundTruth.confirmedDiagnosis));
-        answer.appendChild(node("p", say("Useful observation: ", "Yararlı gözlem: ") + label(lesson.options[lesson.expected[index]])));
-        answer.appendChild(node("p", answerState.choice === String(lesson.expected[index])
+        answer.appendChild(node("p", say("Useful observation: ", "Yararlı gözlem: ") + label(lesson.options[expected[index]])));
+        answer.appendChild(node("p", answerState.choice === String(expected[index])
           ? say("Your selection matches this observation.", "Seçiminiz bu gözlemle örtüşüyor.")
           : say("Compare your selection with the recorded observation. An image may still need closer assessment.", "Seçiminizi kayıtlı gözlemle karşılaştırın. Görsel yine de daha yakından değerlendirme gerektirebilir.")));
         answer.appendChild(node("p", say("Your visibility: ", "Görülebilirlik seçiminiz: ") +
@@ -312,6 +320,35 @@
       result.appendChild(node("h4", say("What the pair teaches", "Bu ikilinin öğrettiği")));
       result.appendChild(node("p", label(lesson.comparison)));
       result.appendChild(node("p", label(lesson.limit), "subtle-limit"));
+      const reflectionLabel = node("label", say("What needs more practice?", "Hangi konuda daha çok çalışmalısınız?"), "subtle-field");
+      const reflectionSelect = node("select");
+      [
+        ["", say("Choose a reflection (optional)", "Değerlendirme seçin (isteğe bağlı)")],
+        ["notice", say("Noticing the finding", "Bulguyu fark etmek")],
+        ["name", say("Naming the structure", "Yapıyı adlandırmak")],
+        ["weight", say("Weighing the clue against a mimic", "İpucunu taklitçiyle birlikte tartmak")],
+        ["quality", say("Recognising image limitations", "Görüntünün sınırlarını fark etmek")],
+        ["comfortable", say("Comfortable with this comparison", "Bu karşılaştırmada rahatım")]
+      ].forEach(([value, text]) => {
+        const option = node("option", text);
+        option.value = value;
+        reflectionSelect.appendChild(option);
+      });
+      reflectionSelect.value = reflection;
+      reflectionSelect.addEventListener("change", () => { reflection = reflectionSelect.value; });
+      reflectionLabel.appendChild(reflectionSelect);
+      result.appendChild(reflectionLabel);
+      const retry = node("button", say("Try this pair again with images swapped", "Görsellerin yerini değiştirerek yeniden çalış"), "subtle-button");
+      retry.type = "button";
+      retry.addEventListener("click", () => {
+        reversed = !reversed;
+        answers = blankAnswers();
+        revealed = false;
+        reflection = "";
+        render();
+        root.querySelectorAll("h3")[1].focus();
+      });
+      result.appendChild(retry);
       const saved = revisit.includes(lesson.id);
       const toggle = node("button", saved
         ? say("Remove from revisit list", "Tekrar listesinden çıkar")
