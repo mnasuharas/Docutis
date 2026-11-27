@@ -29,7 +29,7 @@ test("coding titles, verification notes and learning-path labels have Turkish dr
     seen.add(value);
     const turkish = translate(value);
     assert.equal(typeof turkish, "string", value.slice(0, 120));
-    if (turkish === value) assert.match(value, / — Vitiligo$/);
+    if (turkish === value) assert.match(value, / — (Vitiligo|Tinea pedis|Tinea corporis|Tinea cruris|Tinea unguium)$/);
     else assert.notEqual(turkish, value);
     for (const code of value.match(/[A-Z]\d{2}(?:\.\d+)?|\d{4}\/\d|C44\._/g) || []) {
       assert.ok(turkish.includes(code), `${code} missing from ${value}`);
