@@ -92,7 +92,9 @@
     if (illustration) {
       const figure = element("figure", undefined, "quiz-media");
       const image = document.createElement("img");
-      image.src = illustration.src;
+      if (/-schematic\.svg$/.test(illustration.src)) image.setAttribute("data-schematic-src", illustration.src);
+      const turkishSchematic = /-schematic\.svg$/.test(illustration.src) && document.documentElement && document.documentElement.lang === "tr";
+      image.src = turkishSchematic ? illustration.src.replace(/\.svg$/, ".tr.svg") : illustration.src;
       image.alt = illustration.alt;
       image.width = illustration.dimensions.width;
       image.height = illustration.dimensions.height;

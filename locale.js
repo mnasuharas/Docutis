@@ -1003,6 +1003,8 @@
     "Review the case": "Vakayı gözden geçir",
     "Diagnosis stays hidden.": "Tanı gizli kalır.",
     "Case learning steps": "Vaka öğrenme adımları",
+    "Condition detail sections": "Tanı kaydı bölümleri",
+    "Clinical content workflow status": "Klinik içerik iş akışı durumu",
     "Shared:": "Ortak:",
     "Tap the image to place mark": "İşareti yerleştirmek için görsele dokunun",
     "This interactive section requires JavaScript.": "Bu etkileşimli bölüm JavaScript gerektirir.",
@@ -1073,6 +1075,11 @@
 
   function applyLanguage() {
     document.documentElement.lang = language;
+    document.querySelectorAll("img[data-schematic-src]").forEach(function (img) {
+      const base = img.getAttribute("data-schematic-src");
+      const next = language === "tr" ? base.replace(/\.svg$/, ".tr.svg") : base;
+      if (img.getAttribute("src") !== next) img.src = next;
+    });
     document.title = (language === "tr" && translated(englishTitle)) || englishTitle;
     const description = document.querySelector('meta[name="description"]');
     if (description) {

@@ -525,7 +525,9 @@
       const figure = document.createElement("figure");
       figure.className = "media-item";
       const image = document.createElement("img");
-      image.src = item.src;
+      if (/-schematic\.svg$/.test(item.src)) image.setAttribute("data-schematic-src", item.src);
+      const turkishSchematic = /-schematic\.svg$/.test(item.src) && document.documentElement && document.documentElement.lang === "tr";
+      image.src = turkishSchematic ? item.src.replace(/\.svg$/, ".tr.svg") : item.src;
       image.alt = item.alt;
       image.loading = "lazy";
       image.decoding = "async";
