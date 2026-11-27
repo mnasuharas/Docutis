@@ -20,6 +20,14 @@
     ["quality", "Image quality or artifacts limited me", "Görüntü kalitesi veya artefaktlar sınırladı"],
     ["none", "None of these / I kept uncertainty", "Hiçbiri / belirsizliği korudum"]
   ];
+  const observationOptions = {
+    vessels: [["dots", "Dotted", "Noktasal"], ["irregular", "Irregular linear", "Düzensiz çizgisel"], ["arborizing", "Arborizing / branching", "Ağaçsı / dallanan"], ["mixed", "Mixed morphologies", "Birden fazla biçim"], ["other", "Other visible morphology", "Görülen başka biçim"], ["unassessable", "Cannot assess", "Değerlendirilemiyor"]],
+    white: [["lines", "Lines / strands", "Çizgiler"], ["area", "Structureless white area", "Beyaz yapısız alan"], ["scale", "Scale / collarette", "Skuam / kolaret"], ["none", "Not seen", "Görülmedi"], ["unassessable", "Cannot assess", "Değerlendirilemiyor"]],
+    pink: [["milky", "Milky-red areas", "Sütlü kırmızı alanlar"], ["homogeneous", "Homogeneous red area", "Homojen kırmızı alan"], ["other", "Other pink/red background", "Başka pembe/kırmızı zemin"], ["none", "Not seen", "Görülmedi"], ["unassessable", "Cannot assess", "Değerlendirilemiyor"]],
+    pigment: [["yes", "Brown / blue / gray visible", "Kahverengi / mavi / gri görülüyor"], ["no", "Not seen", "Görülmedi"], ["unassessable", "Cannot assess", "Değerlendirilemiyor"]],
+    visibility: [["clear", "Clear", "Net"], ["possible", "Possible", "Olası"], ["unassessable", "Cannot assess", "Değerlendirilemiyor"]],
+    location: [["1", "Top left", "Sol üst"], ["2", "Top center", "Üst orta"], ["3", "Top right", "Sağ üst"], ["4", "Middle left", "Sol orta"], ["5", "Center", "Merkez"], ["6", "Middle right", "Sağ orta"], ["7", "Bottom left", "Sol alt"], ["8", "Bottom center", "Alt orta"], ["9", "Bottom right", "Sağ alt"]]
+  };
   function node(tag, content, parent) {
     const element = document.createElement(tag);
     if (content) element.textContent = content;
@@ -106,12 +114,12 @@
       const grid = node("div", "", root); grid.className = "pink-fields";
       let next;
       const update = () => { if (root._pinkPlace) root._pinkPlace(); next.disabled = !ready(["vessels", "white", "pink", "pigment", "visibility"]) || (answers.visibility !== "unassessable" && !answers.location); };
-      pick("vessels", "Most evident vessel morphology", "En belirgin damar biçimi", [["dots", "Dotted", "Noktasal"], ["irregular", "Irregular linear", "Düzensiz çizgisel"], ["arborizing", "Arborizing / branching", "Ağaçsı / dallanan"], ["mixed", "Mixed morphologies", "Birden fazla biçim"], ["other", "Other visible morphology", "Görülen başka biçim"], ["unassessable", "Cannot assess", "Değerlendirilemiyor"]], grid, update);
-      pick("white", "White structures", "Beyaz yapılar", [["lines", "Lines / strands", "Çizgiler"], ["area", "Structureless white area", "Beyaz yapısız alan"], ["scale", "Scale / collarette", "Skuam / kolaret"], ["none", "Not seen", "Görülmedi"], ["unassessable", "Cannot assess", "Değerlendirilemiyor"]], grid, update);
-      pick("pink", "Pink/red areas", "Pembe/kırmızı alanlar", [["milky", "Milky-red areas", "Sütlü kırmızı alanlar"], ["homogeneous", "Homogeneous red area", "Homojen kırmızı alan"], ["other", "Other pink/red background", "Başka pembe/kırmızı zemin"], ["none", "Not seen", "Görülmedi"], ["unassessable", "Cannot assess", "Değerlendirilemiyor"]], grid, update);
-      pick("pigment", "Residual pigment", "Kalan pigment", [["yes", "Brown / blue / gray visible", "Kahverengi / mavi / gri görülüyor"], ["no", "Not seen", "Görülmedi"], ["unassessable", "Cannot assess", "Değerlendirilemiyor"]], grid, update);
-      pick("visibility", "Certainty of the selected findings", "Seçilen bulguların kesinliği", [["clear", "Clear", "Net"], ["possible", "Possible", "Olası"], ["unassessable", "Cannot assess", "Değerlendirilemiyor"]], grid, update);
-      pick("location", "Locate the main clue in the dermoscopic image (3 × 3 grid)", "Ana ipucunu dermoskopik görüntüde konumlandırın (3 × 3 ızgara)", [["1", "Top left", "Sol üst"], ["2", "Top center", "Üst orta"], ["3", "Top right", "Sağ üst"], ["4", "Middle left", "Sol orta"], ["5", "Center", "Merkez"], ["6", "Middle right", "Sağ orta"], ["7", "Bottom left", "Sol alt"], ["8", "Bottom center", "Alt orta"], ["9", "Bottom right", "Sağ alt"]], grid, update);
+      pick("vessels", "Most evident vessel morphology", "En belirgin damar biçimi", observationOptions.vessels, grid, update);
+      pick("white", "White structures", "Beyaz yapılar", observationOptions.white, grid, update);
+      pick("pink", "Pink/red areas", "Pembe/kırmızı alanlar", observationOptions.pink, grid, update);
+      pick("pigment", "Residual pigment", "Kalan pigment", observationOptions.pigment, grid, update);
+      pick("visibility", "Certainty of the selected findings", "Seçilen bulguların kesinliği", observationOptions.visibility, grid, update);
+      pick("location", "Locate the main clue in the dermoscopic image (3 × 3 grid)", "Ana ipucunu dermoskopik görüntüde konumlandırın (3 × 3 ızgara)", observationOptions.location, grid, update);
       node("p", say("The ring marks your selected grid region only; it is not a validated annotation or grading target.", "Halka yalnızca seçtiğiniz ızgara bölgesini gösterir; doğrulanmış anotasyon veya puanlama hedefi değildir."), root);
       next = button("Save observations", "Gözlemleri kaydet", root, () => advance("impression")); update();
     } else if (phase === "impression") {
@@ -138,6 +146,15 @@
       node("p", text(item.evidence), panel);
       node("h4", say("Recorded findings and limits", "Kayıtlı bulgular ve sınırlar"), panel);
       node("p", text(item.findings), panel); node("p", text(item.limit), panel);
+      node("h4", say("Your recorded observations", "Kaydettiğiniz gözlemler"), panel);
+      summary(panel, [
+        [say("Vessels", "Damarlar"), "vessels", observationOptions.vessels],
+        [say("White structures", "Beyaz yapılar"), "white", observationOptions.white],
+        [say("Pink/red areas", "Pembe/kırmızı alanlar"), "pink", observationOptions.pink],
+        [say("Pigment", "Pigment"), "pigment", observationOptions.pigment],
+        [say("Visibility", "Görülebilirlik"), "visibility", observationOptions.visibility],
+        [say("Selected region (ignored if unassessable)", "Seçilen bölge (değerlendirilemiyorsa kullanılmaz)"), "location", observationOptions.location]
+      ]);
       summary(panel, [[say("Your first impression", "İlk izleniminiz"), "before", dx], [say("After history", "Öykü sonrası"), "after", dx], [say("Confidence before", "Önceki güven düzeyi"), "confidenceBefore", confidence], [say("Confidence after", "Sonraki güven düzeyi"), "confidenceAfter", confidence]]);
       node("p", answers.after === item.diagnosis ? say("Your selected category matches the source. This is not independent diagnostic validation.", "Seçtiğiniz kategori kaynakla eşleşiyor. Bu bağımsız tanısal doğrulama değildir.") : say("Your selected category differs from the source. Compare the findings and source evidence; do not memorize a single clue as a diagnosis.", "Seçtiğiniz kategori kaynaktan farklı. Bulguları ve kaynak kanıtını karşılaştırın; tek bulguyu tanı olarak ezberlemeyin."), panel);
       if (answers.visibility === "unassessable" || answers.confidenceAfter === "low") node("p", say("You recorded uncertainty. Keep it visible rather than replacing it with hindsight certainty.", "Belirsizlik kaydettiniz. Sonucu gördükten sonra bunu kesinlikle değiştirmeyin."), panel);
