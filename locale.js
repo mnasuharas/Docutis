@@ -293,6 +293,10 @@
     [/^Scope: (.*)\. Content integrity ID: (.*)\.$/, function (scope, fingerprint) { return "Kapsam: " + scope + ". İçerik bütünlüğü kimliği: " + fingerprint + "."; }],
     [/^Superseded by (.*)\.$/, function (id) { return "Yerine geçen karar: " + id + "."; }],
     [/^Evidence for (.+) \((\d+)\)$/, function (label, count) { return piece(label) + " için kanıt (" + count + ")"; }],
+    [/^(\d{4}-\d{2}-\d{2}) · (.+)$/, function (date, verdict) { return date + " · " + piece(verdict); }],
+    [/^Media review: (.*)$/, function (status) { return "Medya incelemesi: " + piece(status); }],
+    [/^(.+) review status: (.*)$/, function (label, status) { return piece(label) + " inceleme durumu: " + piece(status); }],
+    [/^Start guided cases(?: \((\d+)\))?$/, function (count) { return count ? "Yönlendirmeli vakalara başla (" + count + ")" : "Yönlendirmeli vakalara başla"; }],
     [/^Source supporting (.+): (.+) \(opens in a new tab\)$/, function (label, title) { return piece(label) + " bölümünü destekleyen kaynak: " + title + " (yeni sekmede açılır)"; }]
   ];
   function piece(value) {
@@ -802,7 +806,13 @@
     "Quiz-item review status": "Test sorusunun inceleme durumu",
     "Choose one answer, then check it.": "Bir yanıt seçin, ardından kontrol edin."
   });
-  Object.assign(translations, window.DOCUTIS_CLINICAL_LOCALE || {}, window.DOCUTIS_DIFFERENTIAL_LOCALE || {}, window.DOCUTIS_PROFILE_LOCALE || {}, window.DOCUTIS_REMAINDER_LOCALE || {}, {
+  Object.assign(translations, window.DOCUTIS_CLINICAL_LOCALE || {}, window.DOCUTIS_DIFFERENTIAL_LOCALE || {}, window.DOCUTIS_PROFILE_LOCALE || {}, window.DOCUTIS_REMAINDER_LOCALE || {}, window.DOCUTIS_CODING_LOCALE || {}, {
+    "approved": "onaylandı",
+    "pending": "bekliyor",
+    "changes requested": "düzeltme istendi",
+    "review invalidated": "inceleme geçersiz",
+    "Physician in dermatology specialty training": "Dermatoloji uzmanlık eğitimindeki hekim",
+    "Germany follow-up": "Almanya takibi",
     "This article has not yet completed human physician review.": "Bu kayıt henüz hekim incelemesini tamamlamamıştır.",
     "Physician review applies to this content version. It does not guarantee correctness or replace professional medical judgment.": "Hekim incelemesi bu içerik sürümü için geçerlidir. Doğruluğu garanti etmez ve mesleki tıbbi değerlendirmenin yerine geçmez.",
     "Include the affected record or page, the claim that needs attention, a verifiable source, and a proposed correction. Do not include patient-identifiable information.": "İlgili kaydı veya sayfayı, incelenmesi gereken ifadeyi, doğrulanabilir kaynağı ve önerilen düzeltmeyi belirtin. Hastayı tanımlayan bilgi eklemeyin.",
