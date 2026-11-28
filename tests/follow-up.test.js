@@ -11,11 +11,12 @@ const { validateFollowUpData } = require("../scripts/follow-up");
 function clone(value) { return JSON.parse(JSON.stringify(value)); }
 function protocol(id) { return loadFollowUpData().protocols.find(item => item.id === id); }
 
-test("German follow-up data covers exactly melanoma, BCC and cSCC", () => {
+test("German follow-up data keeps melanoma, BCC and cSCC and adds sourced drafts", () => {
   const data = validateFollowUpData();
-  assert.equal(data.protocols.length, 3);
+  assert.equal(data.protocols.length, 7);
   assert.deepEqual(Array.from(data.protocols, item => item.diseaseId).sort(), [
-    "basal-cell-carcinoma", "cutaneous-melanoma", "cutaneous-squamous-cell-carcinoma"
+    "actinic-keratosis", "basal-cell-carcinoma", "cutaneous-melanoma", "cutaneous-squamous-cell-carcinoma",
+    "dermatofibrosarcoma-protuberans", "merkel-cell-carcinoma", "squamous-cell-carcinoma-in-situ"
   ]);
   assert.ok(data.protocols.every(item => item.jurisdiction === "DE" && item.guideline.sourceUrl.startsWith("https://")));
 });
@@ -201,7 +202,7 @@ test("maintainer CLI validates data and reports a read-only protocol fingerprint
   const { spawnSync } = require("node:child_process");
   const validation = spawnSync(process.execPath, [path.join(root, "scripts", "follow-up.js")], { encoding: "utf8" });
   assert.equal(validation.status, 0, validation.stderr);
-  assert.match(validation.stdout, /Validated 3 German follow-up protocols/);
+  assert.match(validation.stdout, /Validated 7 German follow-up protocols/);
   const result = spawnSync(process.execPath, [path.join(root, "scripts", "clinical-review.js"), "--follow-up", "cutaneous-melanoma"], { encoding: "utf8" });
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.stdout, /sha256-v1:[0-9a-f]{64}/);

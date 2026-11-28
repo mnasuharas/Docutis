@@ -23,7 +23,7 @@ function harness(url = "https://example.org/Docutis/", loading = false) {
   const elements = {}, body = new Element("body"), library = new Element("section"), events = {}, windowEvents = {}, nav = [];
   const statSpans = [new Element("span"),new Element("span"),new Element("span")];
   library.className = "reference-library"; body.appendChild(library);
-  for (const id of ["studioHome","learn","patterns","searchPanel","mainContent","trainingModule","caseModule","contrastLabModule","pinkCaseModule","subtleClueModule","patternModule","patternExercise","quizModule","followUpModule","evidenceStatus","about","studioToolbar","studioBack","studioScreenLabel","docutisLanguage","cards"]) { const el = new Element(id === "studioBack" ? "a" : "section",id); elements[id] = el; (id === "patternExercise" ? elements.patternModule : id === "cards" ? library : body).appendChild(el); }
+  for (const id of ["studioHome","learn","patterns","searchPanel","mainContent","trainingModule","caseModule","contrastLabModule","pinkCaseModule","subtleClueModule","patternModule","patternExercise","quizModule","followUpModule","nachsorgeModule","evidenceStatus","about","studioToolbar","studioBack","studioScreenLabel","docutisLanguage","cards"]) { const el = new Element(id === "studioBack" ? "a" : "section",id); elements[id] = el; (id === "patternExercise" ? elements.patternModule : id === "cards" ? library : body).appendChild(el); }
   ["home","learn","patterns","reference"].forEach(name => { const el = new Element("a"); el.href = name === "home" ? "#mainContent" : name === "reference" ? "#searchPanel" : "#"+name; el.setAttribute("data-studio-nav",name); nav.push(el); body.appendChild(el); });
   const win = { location: { href:url, hash:new URL(url).hash }, history: { state:{ keep:true }, pushState(state,title,value) { win.location.href=value;win.location.hash=new URL(value).hash; } }, addEventListener(type,cb) { (windowEvents[type] ||= []).push(cb); } };
   const doc = { body, readyState: loading ? "loading" : "complete", documentElement: {lang:"en"}, getElementById:id=>elements[id] || null, createElement:tag=>new Element(tag), querySelector:selector=>selector === ".reference-library" ? library : null, querySelectorAll:selector=>selector === ".primary-links a" ? nav : selector === "#libraryStats .stat-item > span" ? statSpans : [], addEventListener(type,cb) { (events[type] ||= []).push(cb); } };
@@ -63,4 +63,15 @@ test("presentation has three landing paths, responsive grids and preserved medic
  const html=fs.readFileSync(path.join(root,"index.html"),"utf8"), css=fs.readFileSync(path.join(root,"studio.css"),"utf8");
  assert.equal((html.match(/class="studio-path"/g)||[]).length,3);assert.match(html,/id="patternModule"/);assert.match(html,/studio-context[\s\S]*case-disclaimer/);
  assert.match(css,/@media \(max-width: 700px\)/);assert.match(css,/\.studio-paths, \.studio-course-grid \{ grid-template-columns: minmax\(0, 1fr\)/);assert.match(css,/\[hidden\] \{ display: none !important/);
+});
+
+test("nachsorge query and hash open the follow-up screen and other tabs clear the query", () => {
+  const h = harness("https://example.org/Docutis/?nachsorge=cutaneous-melanoma");
+  assert.equal(h.elements.nachsorgeModule.hidden, false);
+  assert.equal(h.elements.studioHome.hidden, true);
+  h.click("#patterns");
+  assert.equal(h.elements.patterns.hidden, false);
+  assert.ok(!new URL(h.win.location.href).searchParams.has("nachsorge"));
+  h.history("https://example.org/Docutis/?nachsorge=merkel-cell-carcinoma#nachsorgeModule");
+  assert.equal(h.elements.nachsorgeModule.hidden, false);
 });

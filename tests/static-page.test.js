@@ -50,7 +50,7 @@ test("static page keeps load order, disclaimer and accessible controls", () => {
   assert.ok(html.indexOf('src="clinical-schema.js"') < html.indexOf('src="data.js"'));
   assert.ok(html.indexOf('src="data.js"') < html.indexOf('src="app.js'));
   assert.ok(html.indexOf('src="media-data.js"') < html.indexOf('src="app.js'));
-  assert.ok(html.indexOf('src="followup-data.js"') < html.indexOf('src="followup-app.js'));
+  assert.ok(html.indexOf('src="followup-data.js') < html.indexOf('src="followup-app.js'));
   assert.ok(html.indexOf('src="quiz-data.js"') < html.indexOf('src="quiz-app.js'));
   assert.ok(html.indexOf('src="case-data.js"') < html.indexOf('src="case-app.js"'));
   assert.match(html, /id="caseModule"/);
@@ -197,9 +197,9 @@ test("Goal 8 exposes review transparency, quiz and deep-link architecture", () =
 
 test("Goal 9 exposes independent public review status without fabricated approval", () => {
   const caseCount = reviewStatus.assets.filter(item => item.assetType === "case").length;
-  assert.equal(reviewStatus.assets.length, 28 + caseCount);
+  assert.equal(reviewStatus.assets.length, 32 + caseCount);
   assert.equal(reviewStatus.assets.filter(item => item.status === "clinician reviewed").length, 4);
-  assert.equal(reviewStatus.assets.filter(item => item.status === "review required").length, 23 + caseCount);
+  assert.equal(reviewStatus.assets.filter(item => item.status === "review required").length, 27 + caseCount);
   assert.ok(caseCount >= 3);
   assert.equal(reviewStatus.latestValidHumanReviewDate, "2026-09-23");
   assert.match(reviewUi, /No valid human approval is bound to this exact content version/);

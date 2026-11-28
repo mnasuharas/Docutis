@@ -158,6 +158,73 @@
     ]);
   }
 
+  function unspecifiedGroup(id, label, description, note) {
+    return group(id, label, description, [
+      period("no-fixed-interval", "No fixed interval", null, [
+        recommendation("clinical_examination", "not_specified", null, note),
+        recommendation("lymph_node_ultrasound", "not_specified", null, note),
+        recommendation("s100b", "not_specified", null, note),
+        recommendation("cross_sectional_imaging", "not_specified", null, note)
+      ], [note], "not_specified")
+    ], [note]);
+  }
+
+  const akGuideline = Object.freeze({
+    ...csccGuideline,
+    sourceMetadataCheckedAt: "2026-11-28",
+    recommendationLocation: "Chapter 4.5 field cancerization; chapter 9 numeric Nachsorge schema applies to invasive cutaneous SCC, not to uncomplicated actinic keratosis"
+  });
+
+  const bowenGuideline = Object.freeze({
+    ...csccGuideline,
+    sourceMetadataCheckedAt: "2026-11-28",
+    recommendationLocation: "Chapter 9. No separate year-by-year table for Bowen disease or SCC in situ was identified in version 2.0"
+  });
+
+  const mccGuideline = Object.freeze({
+    title: "S2k-Leitlinie Merkelzellkarzinom (Update 2022)",
+    organization: "AWMF / Deutsche Krebsgesellschaft / Deutsche Dermatologische Gesellschaft",
+    guidelineSystem: "DE_S2K",
+    version: "Update 2022",
+    publishedAt: "2022-06",
+    registerNumber: "032-023",
+    sourceUrl: "https://www.degum.de/fileadmin/dokumente/Aktivitaeten/Leitlinien/PDF-Verlinkungen/032-023l_S2k_Merkelzellkarziom-der-Haut_2023-04_Langversion.pdf",
+    sourceMetadataCheckedAt: "2026-11-28",
+    recommendationLocation: "Chapter 8, Nachsorge"
+  });
+
+  const mccRegister = Object.freeze([{
+    id: "awmf-032-023",
+    title: "AWMF register 032-023, Merkelzellkarzinom",
+    organization: "AWMF",
+    sourceType: "guideline register",
+    publishedAt: "2022-06",
+    sourceUrl: "https://register.awmf.org/leitlinien/detail/032-023",
+    sourceMetadataCheckedAt: "2026-11-28"
+  }]);
+
+  const dfspGuideline = Object.freeze({
+    title: "S1-Leitlinie Dermatofibrosarcoma protuberans",
+    organization: "AWMF / Deutsche Dermatologische Gesellschaft",
+    guidelineSystem: "DE_S1",
+    version: "Update 2018; validity ended 2023-08-22",
+    publishedAt: "2018-08",
+    registerNumber: "032-026",
+    sourceUrl: "https://register.awmf.org/leitlinien/detail/032-026",
+    sourceMetadataCheckedAt: "2026-11-28",
+    recommendationLocation: "No current S3 or S2k Nachsorge table. This S1 is in revision and its validity ended on 22 August 2023. Intervals from that S1 are not copied."
+  });
+
+  const mccSoll = basis("soll", "Starker Konsens");
+  const mccSollte = basis("sollte", "Starker Konsens");
+  const mccKann = basis("kann", "Starker Konsens");
+  const mccS100 = "S100B is not assigned in the 2022 Nachsorge section.";
+  const mccUltrasoundIII = "The visit sentence that pairs palpation with regional ultrasound is written for stage I–II. No separate month interval is stated for stage III ultrasound.";
+  const mccImagingNegative = "Negative sentinel node: cross-sectional imaging may be used once a year (kann).";
+  const mccImagingIII = "Optional close cross-sectional imaging in the first 2 years (kann): 18-FDG-PET/CT, or ultrasound plus CT and MRI. No month interval is stated.";
+  const mccImagingLater = "No cross-sectional interval is stated for this later period.";
+  const mccFromYear6 = "After year 5 the 2022 text says controls may be needs-based (kann, bedarfsorientiert). No fixed interval is stated.";
+
   const protocols = Object.freeze([
     Object.freeze({
       id: "cutaneous-melanoma-de",
@@ -300,7 +367,123 @@
       notes: Object.freeze(["Clinical examination includes full-skin inspection and inspection and palpation of the primary scar, in-transit pathway and regional lymph nodes.", "Chest radiography and abdominal ultrasound are not intended as routine follow-up."]),
       reviewStatus: reviewRequired,
       clinicalReview: null
-    })
+    }),
+    {
+      id: "merkel-cell-carcinoma-de",
+      diseaseId: "merkel-cell-carcinoma",
+      diseaseLabel: "Merkel cell carcinoma",
+      jurisdiction: "DE",
+      jurisdictionLabel: "Germany",
+      guideline: mccGuideline,
+      supplementalSources: mccRegister,
+      groups: Object.freeze([
+        group("stage-i-ii", "Stage I–II", "Locoregional follow-up for stage I–II. The 3-month interval is soll for the first 2 years.", [
+          period("years-1-2", "Years 1–2", { fromYear: 1, toYear: 2 }, [
+            recommendation("clinical_examination", "scheduled", exactMonths(3), "Every 3 months for the first 2 years (soll).", mccSoll),
+            recommendation("lymph_node_ultrasound", "scheduled", exactMonths(3), "Included in the stage I–II visit description (sollte).", mccSollte),
+            recommendation("s100b", "not_specified", null, mccS100),
+            recommendation("cross_sectional_imaging", "conditional", perYear(1), mccImagingNegative, mccKann)
+          ], ["Every 3 months for the first 2 years (soll)."]),
+          period("years-3-5", "Years 3–5", { fromYear: 3, toYear: 5 }, [
+            recommendation("clinical_examination", "scheduled", exactMonths(6), "From year 3, every 6 months for a further 3 years is kann, and only if no recurrence has occurred.", mccKann),
+            recommendation("lymph_node_ultrasound", "scheduled", exactMonths(6), "Included in the stage I–II visit description (sollte).", mccSollte),
+            recommendation("s100b", "not_specified", null, mccS100),
+            recommendation("cross_sectional_imaging", "conditional", perYear(1), mccImagingNegative, mccKann)
+          ], ["From year 3, every 6 months for a further 3 years is kann, and only if no recurrence has occurred."]),
+          period("from-year-6", "From year 6", { fromYear: 6, toYear: null }, [
+            recommendation("clinical_examination", "not_routinely_scheduled", null, mccFromYear6, mccKann),
+            recommendation("lymph_node_ultrasound", "not_routinely_scheduled", null, mccFromYear6, mccKann),
+            recommendation("s100b", "not_specified", null, mccS100),
+            recommendation("cross_sectional_imaging", "not_routinely_scheduled", null, mccFromYear6, mccKann)
+          ], [mccFromYear6])
+        ], ["Stage I–II visits include clinical examination with lymph-node palpation and regional lymph-node ultrasound."]),
+        group("stage-iii-unclear-slnb", "Stage III or unclear sentinel-node status", "The general 3-month then 6-month clinical interval still applies. Imaging in the first 2 years is optional and has no month number.", [
+          period("years-1-2", "Years 1–2", { fromYear: 1, toYear: 2 }, [
+            recommendation("clinical_examination", "scheduled", exactMonths(3), "Every 3 months for the first 2 years (soll).", mccSoll),
+            recommendation("lymph_node_ultrasound", "not_specified", null, mccUltrasoundIII),
+            recommendation("s100b", "not_specified", null, mccS100),
+            recommendation("cross_sectional_imaging", "not_routinely_scheduled", null, mccImagingIII, mccKann)
+          ], ["Every 3 months for the first 2 years (soll)."]),
+          period("years-3-5", "Years 3–5", { fromYear: 3, toYear: 5 }, [
+            recommendation("clinical_examination", "scheduled", exactMonths(6), "From year 3, every 6 months for a further 3 years is kann, and only if no recurrence has occurred.", mccKann),
+            recommendation("lymph_node_ultrasound", "not_specified", null, mccUltrasoundIII),
+            recommendation("s100b", "not_specified", null, mccS100),
+            recommendation("cross_sectional_imaging", "not_specified", null, mccImagingLater)
+          ], ["From year 3, every 6 months for a further 3 years is kann, and only if no recurrence has occurred."]),
+          period("from-year-6", "From year 6", { fromYear: 6, toYear: null }, [
+            recommendation("clinical_examination", "not_routinely_scheduled", null, mccFromYear6, mccKann),
+            recommendation("lymph_node_ultrasound", "not_specified", null, mccUltrasoundIII),
+            recommendation("s100b", "not_specified", null, mccS100),
+            recommendation("cross_sectional_imaging", "not_specified", null, mccImagingLater)
+          ], [mccFromYear6])
+        ], ["Stage III, or sentinel-node status unclear. Optional cross-sectional imaging in the first 2 years has no month number in the 2022 recommendation sentence."])
+      ]),
+      notes: Object.freeze([
+        "Patients shall be taught self-examination of the locoregional skin and lymph drainage pathways (soll).",
+        "The 2022 Nachsorge chapter does not publish a separate red-flag catalogue. If a recurrence has occurred, the text does not authorize stepping down to the longer interval.",
+        "Immunosuppression may require the interval to be adjusted. No alternate number is stated.",
+        "No published scientifically secured studies on Merkel-cell follow-up are cited. Intervals follow the 2022 recommendation sentences and are not taken from the expired 2018 text."
+      ]),
+      reviewStatus: reviewRequired,
+      clinicalReview: null
+    },
+    {
+      id: "actinic-keratosis-de",
+      diseaseId: "actinic-keratosis",
+      diseaseLabel: "Actinic keratosis and field cancerization",
+      jurisdiction: "DE",
+      jurisdictionLabel: "Germany",
+      guideline: akGuideline,
+      groups: Object.freeze([
+        unspecifiedGroup(
+          "no-numeric-schedule",
+          "No numeric schedule",
+          "Uncomplicated actinic keratosis and field cancerization have no year-by-year Nachsorge table in this S3.",
+          "The S3 numeric Nachsorge schema is defined for invasive cutaneous squamous cell carcinoma. It is not a schedule for uncomplicated actinic keratosis or for field cancerization. Statement 4.10: there is no generally accepted definition of field cancerization. If a clinical field is present without actinic keratoses, the text recommends education, preventive measures and patient self-monitoring of the field. No year-by-year interval is stated."
+        )
+      ]),
+      notes: Object.freeze(["The invasive cutaneous SCC rows are not copied onto actinic keratosis."]),
+      reviewStatus: reviewRequired,
+      clinicalReview: null
+    },
+    {
+      id: "squamous-cell-carcinoma-in-situ-de",
+      diseaseId: "squamous-cell-carcinoma-in-situ",
+      diseaseLabel: "Bowen disease / squamous-cell carcinoma in situ",
+      jurisdiction: "DE",
+      jurisdictionLabel: "Germany",
+      guideline: bowenGuideline,
+      groups: Object.freeze([
+        unspecifiedGroup(
+          "no-separate-table",
+          "No separate table",
+          "Bowen disease and squamous-cell carcinoma in situ have no separate year-by-year table in S3 version 2.0.",
+          "No separate year-by-year table for Bowen disease or squamous-cell carcinoma in situ was identified in S3 version 2.0. The numeric schema uses invasive features such as thickness, grade, desmoplasia and perineural growth. Those invasive rows are not copied here."
+        )
+      ]),
+      notes: Object.freeze(["Invasive cSCC intervals are not extrapolated to SCC in situ."]),
+      reviewStatus: reviewRequired,
+      clinicalReview: null
+    },
+    {
+      id: "dermatofibrosarcoma-protuberans-de",
+      diseaseId: "dermatofibrosarcoma-protuberans",
+      diseaseLabel: "Dermatofibrosarcoma protuberans",
+      jurisdiction: "DE",
+      jurisdictionLabel: "Germany",
+      guideline: dfspGuideline,
+      groups: Object.freeze([
+        unspecifiedGroup(
+          "no-current-s3-s2k",
+          "No current S3/S2k schedule",
+          "No current AWMF S3 or S2k states a DFSP follow-up interval.",
+          "No current AWMF S3 or S2k states a follow-up interval. Register 032-026 is an S1 whose validity ended on 22 August 2023 and which is in revision. Intervals from that expired S1 are not copied into this table."
+        )
+      ]),
+      notes: Object.freeze(["Expired S1 intervals are intentionally absent."]),
+      reviewStatus: reviewRequired,
+      clinicalReview: null
+    }
   ]);
 
   window.DOCUTIS_FOLLOW_UP_DATA = Object.freeze({

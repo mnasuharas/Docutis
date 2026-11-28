@@ -19,7 +19,7 @@
   ];
   const reference = document.querySelector(".reference-library");
   const screens = { home: [home], learn: [document.getElementById("learn")], patterns: [document.getElementById("patterns")], reference: [document.getElementById("searchPanel"), reference] };
-  [...catalog.map(item => item.id), "followUpModule", "evidenceStatus", "about"].forEach(id => { screens[id] = [document.getElementById(id)]; });
+  [...catalog.map(item => item.id), "followUpModule", "evidenceStatus", "about", "nachsorgeModule"].forEach(id => { screens[id] = [document.getElementById(id)]; });
   let current = "home";
   function node(tag, content, parent, className) {
     const el = document.createElement(tag); if (content) el.textContent = content; if (className) el.className = className;
@@ -55,6 +55,7 @@
   }
   function route(hash) {
     const id = String(hash || "").replace(/^#/, "");
+    if ((id === "" || id === "nachsorgeModule") && new URL(window.location.href).searchParams.has("nachsorge")) return "nachsorgeModule";
     if (["mainContent", "studioHome", "pageTitle"].includes(id)) return "home";
     if (id === "patternExercise") return "patternModule";
     if (id === "searchPanel" || id === "conditionsTitle" || id === "cards" || id === "details" || id.startsWith("detail-") || id.startsWith("category-")) return "reference";
@@ -69,7 +70,7 @@
     const item = catalog.find(item => item.id === current), group = item ? item.group : "home";
     back.href = group === "home" ? "#mainContent" : "#" + group;
     back.textContent = group === "home" ? say("← Home", "← Ana sayfa") : group === "learn" ? say("← Case studio", "← Vaka eğitimleri") : say("← Pattern studio", "← Patern eğitimleri");
-    label.textContent = item ? say(...item.tag) : current === "reference" ? say("Reference library", "Başvuru kütüphanesi") : current === "followUpModule" ? say("Oncology follow-up", "Onkolojik takip") : say("About & evidence", "Proje ve kanıtlar");
+    label.textContent = item ? say(...item.tag) : current === "reference" ? say("Reference library", "Başvuru kütüphanesi") : current === "nachsorgeModule" ? say("Follow-up (Nachsorge)", "Nachsorge (Takip)") : current === "followUpModule" ? say("Oncology follow-up", "Onkolojik takip") : say("About & evidence", "Proje ve kanıtlar");
   }
   const caseViews = new Set(["caseModule", "trainingModule", "guidedPatternModule", "mimicModule", "contrastLabModule", "pinkCaseModule", "subtleClueModule", "patternModule"]);
   let loadedCaseViews = false;
@@ -112,6 +113,7 @@
     const name = route(hash), id = hash.replace(/^#/, ""), url = new URL(window.location.href);
     url.hash = hash;
     if (name !== "reference") url.searchParams.delete("condition");
+    if (name !== "nachsorgeModule") url.searchParams.delete("nachsorge");
     if (url.href !== window.location.href) window.history.pushState(window.history.state, "", url.href);
     show(name, focus, id === "mainContent" ? "studioHome" : id);
   }

@@ -12,7 +12,8 @@
     soll: "strong recommendation",
     sollte: "recommendation",
     "sollte (EK)": "expert consensus recommendation",
-    "Schema 9.2": "schedule 9.2"
+    "Schema 9.2": "schedule 9.2",
+    kann: "may (kann)"
   });
   const consensusStrengths = Object.freeze({
     Konsens: "consensus",
@@ -208,7 +209,6 @@
     const draft = document.getElementById("melanomaStaging");
     const staging = window.DOCUTIS_MELANOMA_STAGING;
     if (!draft || !staging) return;
-
     const get = suffix => document.getElementById(`melanomaStaging${suffix}`);
     const form = get("Form");
     const method = get("Method");
@@ -297,9 +297,15 @@
       groupSelect.value = groupToOpen.id;
       renderPeriods();
       groupSelect.focus();
+      if (typeof CustomEvent === "function") document.dispatchEvent(new CustomEvent("docutis-nachsorge-group", { detail: { groupId: groupToOpen.id } }));
     });
 
     function syncVisibility() {
+      const hosted = typeof draft.closest === "function" && draft.closest("#nachsorgeModule");
+      if (hosted) {
+        draft.hidden = false;
+        return;
+      }
       draft.hidden = selectedProtocol().id !== "cutaneous-melanoma-de";
       if (draft.hidden) {
         form.reset();

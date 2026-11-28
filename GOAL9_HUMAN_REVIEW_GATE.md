@@ -5706,6 +5706,713 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 - Required corrections / rejected claims:
 - Public reviewer notes:
 
+## follow_up: Merkel cell carcinoma — Germany (`merkel-cell-carcinoma-de`)
+
+- **Exact fingerprint:** `sha256-v1:f4a0123ad40d5ebf0913c6315203a7ef18082e80623398fcf1a3c5d4b3424c3a`
+- **Schema version:** 1
+- **Reviewable sections:** `scope`, `risk-groups`, `periods`, `clinical-examination`, `lymph-node-ultrasound`, `s100b`, `cross-sectional-imaging`, `context`, `safety-notice`, `references`
+- **Mapped evidence sources:**
+  - https://www.degum.de/fileadmin/dokumente/Aktivitaeten/Leitlinien/PDF-Verlinkungen/032-023l_S2k_Merkelzellkarziom-der-Haut_2023-04_Langversion.pdf
+  - https://register.awmf.org/leitlinien/detail/032-023
+- **Automated warnings:**
+  - Confirm German jurisdiction, guideline version, every interval/status, modality, recommendation strength, and contextual source independently.
+  - Automated source attachment and schema validation are not evidence of clinical approval.
+- **AI-generated proposal:** No clinical wording change has been applied. Review the current text below and either approve it unchanged, approve exact replacement wording, request changes, reject an unsupported claim, or defer.
+
+<details>
+<summary>Current exact content</summary>
+
+```json
+{
+  "id": "merkel-cell-carcinoma-de",
+  "diseaseId": "merkel-cell-carcinoma",
+  "diseaseLabel": "Merkel cell carcinoma",
+  "jurisdiction": "DE",
+  "jurisdictionLabel": "Germany",
+  "guideline": {
+    "title": "S2k-Leitlinie Merkelzellkarzinom (Update 2022)",
+    "organization": "AWMF / Deutsche Krebsgesellschaft / Deutsche Dermatologische Gesellschaft",
+    "guidelineSystem": "DE_S2K",
+    "version": "Update 2022",
+    "publishedAt": "2022-06",
+    "registerNumber": "032-023",
+    "sourceUrl": "https://www.degum.de/fileadmin/dokumente/Aktivitaeten/Leitlinien/PDF-Verlinkungen/032-023l_S2k_Merkelzellkarziom-der-Haut_2023-04_Langversion.pdf",
+    "sourceMetadataCheckedAt": "2026-11-28",
+    "recommendationLocation": "Chapter 8, Nachsorge"
+  },
+  "supplementalSources": [
+    {
+      "id": "awmf-032-023",
+      "title": "AWMF register 032-023, Merkelzellkarzinom",
+      "organization": "AWMF",
+      "sourceType": "guideline register",
+      "publishedAt": "2022-06",
+      "sourceUrl": "https://register.awmf.org/leitlinien/detail/032-023",
+      "sourceMetadataCheckedAt": "2026-11-28"
+    }
+  ],
+  "groups": [
+    {
+      "id": "stage-i-ii",
+      "label": "Stage I–II",
+      "description": "Locoregional follow-up for stage I–II. The 3-month interval is soll for the first 2 years.",
+      "periods": [
+        {
+          "id": "years-1-2",
+          "label": "Years 1–2",
+          "range": {
+            "fromYear": 1,
+            "toYear": 2
+          },
+          "recommendations": [
+            {
+              "modality": "clinical_examination",
+              "status": "scheduled",
+              "frequency": {
+                "kind": "interval_months",
+                "min": 3,
+                "max": 3
+              },
+              "note": "Every 3 months for the first 2 years (soll).",
+              "recommendationBasis": {
+                "character": "soll",
+                "consensus": "Starker Konsens"
+              }
+            },
+            {
+              "modality": "lymph_node_ultrasound",
+              "status": "scheduled",
+              "frequency": {
+                "kind": "interval_months",
+                "min": 3,
+                "max": 3
+              },
+              "note": "Included in the stage I–II visit description (sollte).",
+              "recommendationBasis": {
+                "character": "sollte",
+                "consensus": "Starker Konsens"
+              }
+            },
+            {
+              "modality": "s100b",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "S100B is not assigned in the 2022 Nachsorge section.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "cross_sectional_imaging",
+              "status": "conditional",
+              "frequency": {
+                "kind": "occurrences_per_year",
+                "min": 1,
+                "max": 1
+              },
+              "note": "Negative sentinel node: cross-sectional imaging may be used once a year (kann).",
+              "recommendationBasis": {
+                "character": "kann",
+                "consensus": "Starker Konsens"
+              }
+            }
+          ],
+          "notes": [
+            "Every 3 months for the first 2 years (soll)."
+          ]
+        },
+        {
+          "id": "years-3-5",
+          "label": "Years 3–5",
+          "range": {
+            "fromYear": 3,
+            "toYear": 5
+          },
+          "recommendations": [
+            {
+              "modality": "clinical_examination",
+              "status": "scheduled",
+              "frequency": {
+                "kind": "interval_months",
+                "min": 6,
+                "max": 6
+              },
+              "note": "From year 3, every 6 months for a further 3 years is kann, and only if no recurrence has occurred.",
+              "recommendationBasis": {
+                "character": "kann",
+                "consensus": "Starker Konsens"
+              }
+            },
+            {
+              "modality": "lymph_node_ultrasound",
+              "status": "scheduled",
+              "frequency": {
+                "kind": "interval_months",
+                "min": 6,
+                "max": 6
+              },
+              "note": "Included in the stage I–II visit description (sollte).",
+              "recommendationBasis": {
+                "character": "sollte",
+                "consensus": "Starker Konsens"
+              }
+            },
+            {
+              "modality": "s100b",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "S100B is not assigned in the 2022 Nachsorge section.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "cross_sectional_imaging",
+              "status": "conditional",
+              "frequency": {
+                "kind": "occurrences_per_year",
+                "min": 1,
+                "max": 1
+              },
+              "note": "Negative sentinel node: cross-sectional imaging may be used once a year (kann).",
+              "recommendationBasis": {
+                "character": "kann",
+                "consensus": "Starker Konsens"
+              }
+            }
+          ],
+          "notes": [
+            "From year 3, every 6 months for a further 3 years is kann, and only if no recurrence has occurred."
+          ]
+        },
+        {
+          "id": "from-year-6",
+          "label": "From year 6",
+          "range": {
+            "fromYear": 6,
+            "toYear": null
+          },
+          "recommendations": [
+            {
+              "modality": "clinical_examination",
+              "status": "not_routinely_scheduled",
+              "frequency": null,
+              "note": "After year 5 the 2022 text says controls may be needs-based (kann, bedarfsorientiert). No fixed interval is stated.",
+              "recommendationBasis": {
+                "character": "kann",
+                "consensus": "Starker Konsens"
+              }
+            },
+            {
+              "modality": "lymph_node_ultrasound",
+              "status": "not_routinely_scheduled",
+              "frequency": null,
+              "note": "After year 5 the 2022 text says controls may be needs-based (kann, bedarfsorientiert). No fixed interval is stated.",
+              "recommendationBasis": {
+                "character": "kann",
+                "consensus": "Starker Konsens"
+              }
+            },
+            {
+              "modality": "s100b",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "S100B is not assigned in the 2022 Nachsorge section.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "cross_sectional_imaging",
+              "status": "not_routinely_scheduled",
+              "frequency": null,
+              "note": "After year 5 the 2022 text says controls may be needs-based (kann, bedarfsorientiert). No fixed interval is stated.",
+              "recommendationBasis": {
+                "character": "kann",
+                "consensus": "Starker Konsens"
+              }
+            }
+          ],
+          "notes": [
+            "After year 5 the 2022 text says controls may be needs-based (kann, bedarfsorientiert). No fixed interval is stated."
+          ]
+        }
+      ],
+      "notes": [
+        "Stage I–II visits include clinical examination with lymph-node palpation and regional lymph-node ultrasound."
+      ]
+    },
+    {
+      "id": "stage-iii-unclear-slnb",
+      "label": "Stage III or unclear sentinel-node status",
+      "description": "The general 3-month then 6-month clinical interval still applies. Imaging in the first 2 years is optional and has no month number.",
+      "periods": [
+        {
+          "id": "years-1-2",
+          "label": "Years 1–2",
+          "range": {
+            "fromYear": 1,
+            "toYear": 2
+          },
+          "recommendations": [
+            {
+              "modality": "clinical_examination",
+              "status": "scheduled",
+              "frequency": {
+                "kind": "interval_months",
+                "min": 3,
+                "max": 3
+              },
+              "note": "Every 3 months for the first 2 years (soll).",
+              "recommendationBasis": {
+                "character": "soll",
+                "consensus": "Starker Konsens"
+              }
+            },
+            {
+              "modality": "lymph_node_ultrasound",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "The visit sentence that pairs palpation with regional ultrasound is written for stage I–II. No separate month interval is stated for stage III ultrasound.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "s100b",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "S100B is not assigned in the 2022 Nachsorge section.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "cross_sectional_imaging",
+              "status": "not_routinely_scheduled",
+              "frequency": null,
+              "note": "Optional close cross-sectional imaging in the first 2 years (kann): 18-FDG-PET/CT, or ultrasound plus CT and MRI. No month interval is stated.",
+              "recommendationBasis": {
+                "character": "kann",
+                "consensus": "Starker Konsens"
+              }
+            }
+          ],
+          "notes": [
+            "Every 3 months for the first 2 years (soll)."
+          ]
+        },
+        {
+          "id": "years-3-5",
+          "label": "Years 3–5",
+          "range": {
+            "fromYear": 3,
+            "toYear": 5
+          },
+          "recommendations": [
+            {
+              "modality": "clinical_examination",
+              "status": "scheduled",
+              "frequency": {
+                "kind": "interval_months",
+                "min": 6,
+                "max": 6
+              },
+              "note": "From year 3, every 6 months for a further 3 years is kann, and only if no recurrence has occurred.",
+              "recommendationBasis": {
+                "character": "kann",
+                "consensus": "Starker Konsens"
+              }
+            },
+            {
+              "modality": "lymph_node_ultrasound",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "The visit sentence that pairs palpation with regional ultrasound is written for stage I–II. No separate month interval is stated for stage III ultrasound.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "s100b",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "S100B is not assigned in the 2022 Nachsorge section.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "cross_sectional_imaging",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "No cross-sectional interval is stated for this later period.",
+              "recommendationBasis": null
+            }
+          ],
+          "notes": [
+            "From year 3, every 6 months for a further 3 years is kann, and only if no recurrence has occurred."
+          ]
+        },
+        {
+          "id": "from-year-6",
+          "label": "From year 6",
+          "range": {
+            "fromYear": 6,
+            "toYear": null
+          },
+          "recommendations": [
+            {
+              "modality": "clinical_examination",
+              "status": "not_routinely_scheduled",
+              "frequency": null,
+              "note": "After year 5 the 2022 text says controls may be needs-based (kann, bedarfsorientiert). No fixed interval is stated.",
+              "recommendationBasis": {
+                "character": "kann",
+                "consensus": "Starker Konsens"
+              }
+            },
+            {
+              "modality": "lymph_node_ultrasound",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "The visit sentence that pairs palpation with regional ultrasound is written for stage I–II. No separate month interval is stated for stage III ultrasound.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "s100b",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "S100B is not assigned in the 2022 Nachsorge section.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "cross_sectional_imaging",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "No cross-sectional interval is stated for this later period.",
+              "recommendationBasis": null
+            }
+          ],
+          "notes": [
+            "After year 5 the 2022 text says controls may be needs-based (kann, bedarfsorientiert). No fixed interval is stated."
+          ]
+        }
+      ],
+      "notes": [
+        "Stage III, or sentinel-node status unclear. Optional cross-sectional imaging in the first 2 years has no month number in the 2022 recommendation sentence."
+      ]
+    }
+  ],
+  "notes": [
+    "Patients shall be taught self-examination of the locoregional skin and lymph drainage pathways (soll).",
+    "The 2022 Nachsorge chapter does not publish a separate red-flag catalogue. If a recurrence has occurred, the text does not authorize stepping down to the longer interval.",
+    "Immunosuppression may require the interval to be adjusted. No alternate number is stated.",
+    "No published scientifically secured studies on Merkel-cell follow-up are cited. Intervals follow the 2022 recommendation sentences and are not taken from the expired 2018 text."
+  ],
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}
+```
+
+</details>
+
+- Verdict:
+- Reviewed sections:
+- Evidence sources actually checked:
+- Approved exact replacement wording (if any):
+- Required corrections / rejected claims:
+- Public reviewer notes:
+
+## follow_up: Actinic keratosis and field cancerization — Germany (`actinic-keratosis-de`)
+
+- **Exact fingerprint:** `sha256-v1:309e48054a3c8d632eef293763b56e46f518e0bbbd68caa14732a4f680aa5f25`
+- **Schema version:** 1
+- **Reviewable sections:** `scope`, `risk-groups`, `periods`, `clinical-examination`, `lymph-node-ultrasound`, `s100b`, `cross-sectional-imaging`, `context`, `safety-notice`, `references`
+- **Mapped evidence sources:**
+  - https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Aktinische_Keratosen_und_PEK/Version_2/LL_Aktinische_Keratose_und_PEK_Langversion_2.0.pdf
+- **Automated warnings:**
+  - Confirm German jurisdiction, guideline version, every interval/status, modality, recommendation strength, and contextual source independently.
+  - Automated source attachment and schema validation are not evidence of clinical approval.
+- **AI-generated proposal:** No clinical wording change has been applied. Review the current text below and either approve it unchanged, approve exact replacement wording, request changes, reject an unsupported claim, or defer.
+
+<details>
+<summary>Current exact content</summary>
+
+```json
+{
+  "id": "actinic-keratosis-de",
+  "diseaseId": "actinic-keratosis",
+  "diseaseLabel": "Actinic keratosis and field cancerization",
+  "jurisdiction": "DE",
+  "jurisdictionLabel": "Germany",
+  "guideline": {
+    "title": "S3-Leitlinie Aktinische Keratose und Plattenepithelkarzinom der Haut",
+    "organization": "Leitlinienprogramm Onkologie (AWMF, Deutsche Krebsgesellschaft, Deutsche Krebshilfe)",
+    "guidelineSystem": "DE_S3",
+    "version": "2.0",
+    "publishedAt": "2022-12",
+    "registerNumber": "032/022OL",
+    "sourceUrl": "https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Aktinische_Keratosen_und_PEK/Version_2/LL_Aktinische_Keratose_und_PEK_Langversion_2.0.pdf",
+    "sourceMetadataCheckedAt": "2026-11-28",
+    "recommendationLocation": "Chapter 4.5 field cancerization; chapter 9 numeric Nachsorge schema applies to invasive cutaneous SCC, not to uncomplicated actinic keratosis"
+  },
+  "groups": [
+    {
+      "id": "no-numeric-schedule",
+      "label": "No numeric schedule",
+      "description": "Uncomplicated actinic keratosis and field cancerization have no year-by-year Nachsorge table in this S3.",
+      "periods": [
+        {
+          "id": "no-fixed-interval",
+          "label": "No fixed interval",
+          "range": null,
+          "recommendations": [
+            {
+              "modality": "clinical_examination",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "The S3 numeric Nachsorge schema is defined for invasive cutaneous squamous cell carcinoma. It is not a schedule for uncomplicated actinic keratosis or for field cancerization. Statement 4.10: there is no generally accepted definition of field cancerization. If a clinical field is present without actinic keratoses, the text recommends education, preventive measures and patient self-monitoring of the field. No year-by-year interval is stated.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "lymph_node_ultrasound",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "The S3 numeric Nachsorge schema is defined for invasive cutaneous squamous cell carcinoma. It is not a schedule for uncomplicated actinic keratosis or for field cancerization. Statement 4.10: there is no generally accepted definition of field cancerization. If a clinical field is present without actinic keratoses, the text recommends education, preventive measures and patient self-monitoring of the field. No year-by-year interval is stated.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "s100b",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "The S3 numeric Nachsorge schema is defined for invasive cutaneous squamous cell carcinoma. It is not a schedule for uncomplicated actinic keratosis or for field cancerization. Statement 4.10: there is no generally accepted definition of field cancerization. If a clinical field is present without actinic keratoses, the text recommends education, preventive measures and patient self-monitoring of the field. No year-by-year interval is stated.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "cross_sectional_imaging",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "The S3 numeric Nachsorge schema is defined for invasive cutaneous squamous cell carcinoma. It is not a schedule for uncomplicated actinic keratosis or for field cancerization. Statement 4.10: there is no generally accepted definition of field cancerization. If a clinical field is present without actinic keratoses, the text recommends education, preventive measures and patient self-monitoring of the field. No year-by-year interval is stated.",
+              "recommendationBasis": null
+            }
+          ],
+          "notes": [
+            "The S3 numeric Nachsorge schema is defined for invasive cutaneous squamous cell carcinoma. It is not a schedule for uncomplicated actinic keratosis or for field cancerization. Statement 4.10: there is no generally accepted definition of field cancerization. If a clinical field is present without actinic keratoses, the text recommends education, preventive measures and patient self-monitoring of the field. No year-by-year interval is stated."
+          ],
+          "timingStatus": "not_specified"
+        }
+      ],
+      "notes": [
+        "The S3 numeric Nachsorge schema is defined for invasive cutaneous squamous cell carcinoma. It is not a schedule for uncomplicated actinic keratosis or for field cancerization. Statement 4.10: there is no generally accepted definition of field cancerization. If a clinical field is present without actinic keratoses, the text recommends education, preventive measures and patient self-monitoring of the field. No year-by-year interval is stated."
+      ]
+    }
+  ],
+  "notes": [
+    "The invasive cutaneous SCC rows are not copied onto actinic keratosis."
+  ],
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}
+```
+
+</details>
+
+- Verdict:
+- Reviewed sections:
+- Evidence sources actually checked:
+- Approved exact replacement wording (if any):
+- Required corrections / rejected claims:
+- Public reviewer notes:
+
+## follow_up: Bowen disease / squamous-cell carcinoma in situ — Germany (`squamous-cell-carcinoma-in-situ-de`)
+
+- **Exact fingerprint:** `sha256-v1:f7412a06d285006ae9e93122aece4cced78e6a5a0241864727457e10d898306b`
+- **Schema version:** 1
+- **Reviewable sections:** `scope`, `risk-groups`, `periods`, `clinical-examination`, `lymph-node-ultrasound`, `s100b`, `cross-sectional-imaging`, `context`, `safety-notice`, `references`
+- **Mapped evidence sources:**
+  - https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Aktinische_Keratosen_und_PEK/Version_2/LL_Aktinische_Keratose_und_PEK_Langversion_2.0.pdf
+- **Automated warnings:**
+  - Confirm German jurisdiction, guideline version, every interval/status, modality, recommendation strength, and contextual source independently.
+  - Automated source attachment and schema validation are not evidence of clinical approval.
+- **AI-generated proposal:** No clinical wording change has been applied. Review the current text below and either approve it unchanged, approve exact replacement wording, request changes, reject an unsupported claim, or defer.
+
+<details>
+<summary>Current exact content</summary>
+
+```json
+{
+  "id": "squamous-cell-carcinoma-in-situ-de",
+  "diseaseId": "squamous-cell-carcinoma-in-situ",
+  "diseaseLabel": "Bowen disease / squamous-cell carcinoma in situ",
+  "jurisdiction": "DE",
+  "jurisdictionLabel": "Germany",
+  "guideline": {
+    "title": "S3-Leitlinie Aktinische Keratose und Plattenepithelkarzinom der Haut",
+    "organization": "Leitlinienprogramm Onkologie (AWMF, Deutsche Krebsgesellschaft, Deutsche Krebshilfe)",
+    "guidelineSystem": "DE_S3",
+    "version": "2.0",
+    "publishedAt": "2022-12",
+    "registerNumber": "032/022OL",
+    "sourceUrl": "https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Aktinische_Keratosen_und_PEK/Version_2/LL_Aktinische_Keratose_und_PEK_Langversion_2.0.pdf",
+    "sourceMetadataCheckedAt": "2026-11-28",
+    "recommendationLocation": "Chapter 9. No separate year-by-year table for Bowen disease or SCC in situ was identified in version 2.0"
+  },
+  "groups": [
+    {
+      "id": "no-separate-table",
+      "label": "No separate table",
+      "description": "Bowen disease and squamous-cell carcinoma in situ have no separate year-by-year table in S3 version 2.0.",
+      "periods": [
+        {
+          "id": "no-fixed-interval",
+          "label": "No fixed interval",
+          "range": null,
+          "recommendations": [
+            {
+              "modality": "clinical_examination",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "No separate year-by-year table for Bowen disease or squamous-cell carcinoma in situ was identified in S3 version 2.0. The numeric schema uses invasive features such as thickness, grade, desmoplasia and perineural growth. Those invasive rows are not copied here.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "lymph_node_ultrasound",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "No separate year-by-year table for Bowen disease or squamous-cell carcinoma in situ was identified in S3 version 2.0. The numeric schema uses invasive features such as thickness, grade, desmoplasia and perineural growth. Those invasive rows are not copied here.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "s100b",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "No separate year-by-year table for Bowen disease or squamous-cell carcinoma in situ was identified in S3 version 2.0. The numeric schema uses invasive features such as thickness, grade, desmoplasia and perineural growth. Those invasive rows are not copied here.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "cross_sectional_imaging",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "No separate year-by-year table for Bowen disease or squamous-cell carcinoma in situ was identified in S3 version 2.0. The numeric schema uses invasive features such as thickness, grade, desmoplasia and perineural growth. Those invasive rows are not copied here.",
+              "recommendationBasis": null
+            }
+          ],
+          "notes": [
+            "No separate year-by-year table for Bowen disease or squamous-cell carcinoma in situ was identified in S3 version 2.0. The numeric schema uses invasive features such as thickness, grade, desmoplasia and perineural growth. Those invasive rows are not copied here."
+          ],
+          "timingStatus": "not_specified"
+        }
+      ],
+      "notes": [
+        "No separate year-by-year table for Bowen disease or squamous-cell carcinoma in situ was identified in S3 version 2.0. The numeric schema uses invasive features such as thickness, grade, desmoplasia and perineural growth. Those invasive rows are not copied here."
+      ]
+    }
+  ],
+  "notes": [
+    "Invasive cSCC intervals are not extrapolated to SCC in situ."
+  ],
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}
+```
+
+</details>
+
+- Verdict:
+- Reviewed sections:
+- Evidence sources actually checked:
+- Approved exact replacement wording (if any):
+- Required corrections / rejected claims:
+- Public reviewer notes:
+
+## follow_up: Dermatofibrosarcoma protuberans — Germany (`dermatofibrosarcoma-protuberans-de`)
+
+- **Exact fingerprint:** `sha256-v1:fb6610dd78dfe92a9c59570bcb43f4fd519cad347ca0ab5f595fcd24445f6db2`
+- **Schema version:** 1
+- **Reviewable sections:** `scope`, `risk-groups`, `periods`, `clinical-examination`, `lymph-node-ultrasound`, `s100b`, `cross-sectional-imaging`, `context`, `safety-notice`, `references`
+- **Mapped evidence sources:**
+  - https://register.awmf.org/leitlinien/detail/032-026
+- **Automated warnings:**
+  - Confirm German jurisdiction, guideline version, every interval/status, modality, recommendation strength, and contextual source independently.
+  - Automated source attachment and schema validation are not evidence of clinical approval.
+- **AI-generated proposal:** No clinical wording change has been applied. Review the current text below and either approve it unchanged, approve exact replacement wording, request changes, reject an unsupported claim, or defer.
+
+<details>
+<summary>Current exact content</summary>
+
+```json
+{
+  "id": "dermatofibrosarcoma-protuberans-de",
+  "diseaseId": "dermatofibrosarcoma-protuberans",
+  "diseaseLabel": "Dermatofibrosarcoma protuberans",
+  "jurisdiction": "DE",
+  "jurisdictionLabel": "Germany",
+  "guideline": {
+    "title": "S1-Leitlinie Dermatofibrosarcoma protuberans",
+    "organization": "AWMF / Deutsche Dermatologische Gesellschaft",
+    "guidelineSystem": "DE_S1",
+    "version": "Update 2018; validity ended 2023-08-22",
+    "publishedAt": "2018-08",
+    "registerNumber": "032-026",
+    "sourceUrl": "https://register.awmf.org/leitlinien/detail/032-026",
+    "sourceMetadataCheckedAt": "2026-11-28",
+    "recommendationLocation": "No current S3 or S2k Nachsorge table. This S1 is in revision and its validity ended on 22 August 2023. Intervals from that S1 are not copied."
+  },
+  "groups": [
+    {
+      "id": "no-current-s3-s2k",
+      "label": "No current S3/S2k schedule",
+      "description": "No current AWMF S3 or S2k states a DFSP follow-up interval.",
+      "periods": [
+        {
+          "id": "no-fixed-interval",
+          "label": "No fixed interval",
+          "range": null,
+          "recommendations": [
+            {
+              "modality": "clinical_examination",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "No current AWMF S3 or S2k states a follow-up interval. Register 032-026 is an S1 whose validity ended on 22 August 2023 and which is in revision. Intervals from that expired S1 are not copied into this table.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "lymph_node_ultrasound",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "No current AWMF S3 or S2k states a follow-up interval. Register 032-026 is an S1 whose validity ended on 22 August 2023 and which is in revision. Intervals from that expired S1 are not copied into this table.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "s100b",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "No current AWMF S3 or S2k states a follow-up interval. Register 032-026 is an S1 whose validity ended on 22 August 2023 and which is in revision. Intervals from that expired S1 are not copied into this table.",
+              "recommendationBasis": null
+            },
+            {
+              "modality": "cross_sectional_imaging",
+              "status": "not_specified",
+              "frequency": null,
+              "note": "No current AWMF S3 or S2k states a follow-up interval. Register 032-026 is an S1 whose validity ended on 22 August 2023 and which is in revision. Intervals from that expired S1 are not copied into this table.",
+              "recommendationBasis": null
+            }
+          ],
+          "notes": [
+            "No current AWMF S3 or S2k states a follow-up interval. Register 032-026 is an S1 whose validity ended on 22 August 2023 and which is in revision. Intervals from that expired S1 are not copied into this table."
+          ],
+          "timingStatus": "not_specified"
+        }
+      ],
+      "notes": [
+        "No current AWMF S3 or S2k states a follow-up interval. Register 032-026 is an S1 whose validity ended on 22 August 2023 and which is in revision. Intervals from that expired S1 are not copied into this table."
+      ]
+    }
+  ],
+  "notes": [
+    "Expired S1 intervals are intentionally absent."
+  ],
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}
+```
+
+</details>
+
+- Verdict:
+- Reviewed sections:
+- Evidence sources actually checked:
+- Approved exact replacement wording (if any):
+- Required corrections / rejected claims:
+- Public reviewer notes:
+
 ## case: Large plantar pigmented macule (`case-acral-melanoma-plantar`)
 
 - **Exact fingerprint:** `sha256-v1:2e75fd0df582a96aa54c6bd247adf309edd61035acf1baac90aebca4dea3226d`

@@ -8,7 +8,7 @@
   <title>Docutis | Dermatology Reference Toolkit</title>
   <meta name="description" content="Educational dermatology reference. Not a diagnosis, not a treatment protocol, and not a substitute for clinical judgment.">
 
-  <link rel="stylesheet" href="style.css?v=quiz-image-zoom-20261128">
+  <link rel="stylesheet" href="style.css?v=nachsorge-20261128">
   <link rel="stylesheet" href="pattern-exercise.css?v=paired-views">
   <link rel="stylesheet" href="subtle-clue.css?v=2">
   <link rel="stylesheet" href="pink-case.css?v=1">
@@ -32,6 +32,7 @@
       <a href="#mainContent" data-studio-nav="home" data-en="Home" data-tr="Ana sayfa" data-no-translate>Home</a>
       <a href="#learn" data-studio-nav="learn" data-en="Cases" data-tr="Vakalar" data-no-translate>Cases</a>
       <a href="#patterns" data-studio-nav="patterns" data-en="Patterns" data-tr="Paternler" data-no-translate>Patterns</a>
+      <a href="#nachsorgeModule" data-studio-nav="nachsorgeModule" data-en="Follow-up (Nachsorge)" data-tr="Nachsorge (Takip)" data-no-translate>Follow-up (Nachsorge)</a>
       <a href="#searchPanel" data-studio-nav="reference" data-en="Reference" data-tr="Başvuru" data-no-translate>Reference</a>
       <a href="#about">About</a>
     </div>
@@ -239,6 +240,31 @@
     <div id="caseApp" class="case-app js-only" tabindex="-1"></div>
   </section>
 
+
+  <section id="nachsorgeModule" tabindex="-1" class="nachsorge-module" aria-labelledby="nachsorgeTitle" data-no-translate>
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow" data-en="Germany · in clinic" data-tr="Almanya · poliklinikte">Germany · in clinic</p>
+        <h2 id="nachsorgeTitle" data-en="Follow-up (Nachsorge)" data-tr="Nachsorge (Takip)">Follow-up (Nachsorge)</h2>
+      </div>
+    </div>
+    <p class="nachsorge-disclaimer" data-en="Educational draft pending physician review. Use the current guideline. Eğitim amaçlı taslak, hekim onayı bekliyor. Güncel kılavuzu esas alın." data-tr="Eğitim amaçlı taslak, hekim onayı bekliyor. Güncel kılavuzu esas alın.">Educational draft pending physician review. Use the current guideline. Eğitim amaçlı taslak, hekim onayı bekliyor. Güncel kılavuzu esas alın.</p>
+    <div class="follow-up-controls">
+      <label for="nachsorgeSearch"><span data-en="Search a diagnosis" data-tr="Tanı ara">Search a diagnosis</span>
+        <input id="nachsorgeSearch" type="search" autocomplete="off" data-en-placeholder="Melanoma, Merkel, Bowen…" data-tr-placeholder="Melanom, Merkel, Bowen…">
+      </label>
+      <label for="nachsorgeDisease"><span data-en="Diagnosis" data-tr="Tanı">Diagnosis</span>
+        <select id="nachsorgeDisease"></select>
+      </label>
+      <label for="nachsorgeGroup"><span data-en="Risk / stage group" data-tr="Risk / evre grubu">Risk / stage group</span>
+        <select id="nachsorgeGroup"></select>
+      </label>
+    </div>
+    <div id="nachsorgeStaging"></div>
+    <div id="nachsorgeResult" class="follow-up-result" role="region" aria-live="polite"></div>
+    <noscript><p class="js-fallback">This follow-up section requires JavaScript. Bu takip bölümü JavaScript gerektirir.</p></noscript>
+  </section>
+
   <section id="followUpModule" tabindex="-1" class="follow-up-module" aria-labelledby="followUpTitle">
     <div class="follow-up-heading">
       <div>
@@ -262,19 +288,19 @@
       </label>
     </div>
     <details id="melanomaStaging" class="melanoma-staging js-only" hidden>
-      <summary>Calculate stage from the report (Stadium aus Befund ermitteln)</summary>
-      <p id="melanomaStagingBasis">Cutaneous melanoma · AJCC 8 · stages 0–IIC · clinician review required.</p>
+      <summary data-en="Stage from the report (Stadium aus Befund ermitteln)" data-tr="Rapordan evre (Stadium aus Befund ermitteln)">Stage from the report (Stadium aus Befund ermitteln)</summary>
+      <p id="melanomaStagingBasis"><span data-en="Cutaneous melanoma · AJCC 8 · stages 0–IIC · physician review pending (Ärztliche Prüfung ausstehend)." data-tr="Kutanöz melanom · AJCC 8 · evre 0–IIC · hekim incelemesi bekliyor (Ärztliche Prüfung ausstehend).">Cutaneous melanoma · AJCC 8 · stages 0–IIC · physician review pending (Ärztliche Prüfung ausstehend).</span></p>
       <form id="melanomaStagingForm" autocomplete="off" aria-describedby="melanomaStagingBasis">
         <div class="melanoma-staging-fields">
-          <label for="melanomaStagingMethod">Report input (Angabe im Befund)
+          <label for="melanomaStagingMethod"><span data-en="Report field (Angabe im Befund)" data-tr="Rapor alanı (Angabe im Befund)">Report field (Angabe im Befund)</span>
             <select id="melanomaStagingMethod">
-              <option value="category">T category (T-Kategorie), e.g. pT1b</option>
-              <option value="breslow">Breslow thickness and ulceration (Breslow-Dicke und Ulzeration)</option>
+              <option value="category" data-en="T category (T-Kategorie, e.g. pT1b)" data-tr="T kategorisi (T-Kategorie, örn. pT1b)">T category (T-Kategorie, e.g. pT1b)</option>
+              <option value="breslow" data-en="Breslow thickness and ulceration (Breslow-Dicke und Ulzeration)" data-tr="Breslow kalınlığı ve ülserasyon (Breslow-Dicke und Ulzeration)">Breslow thickness and ulceration (Breslow-Dicke und Ulzeration)</option>
             </select>
           </label>
-          <label for="melanomaStagingT" id="melanomaStagingTField">T category (T-Kategorie)
+          <label for="melanomaStagingT" id="melanomaStagingTField"><span data-en="T category (T-Kategorie)" data-tr="T kategorisi (T-Kategorie)">T category (T-Kategorie)</span>
             <select id="melanomaStagingT">
-              <option value="">Select</option>
+              <option value="" data-en="Choose (Bitte wählen)" data-tr="Seçin (Bitte wählen)">Choose (Bitte wählen)</option>
               <option value="Tis">pTis (in situ)</option>
               <option value="T1">pT1 without a/b</option>
               <option value="T1a">pT1a</option>
@@ -288,49 +314,50 @@
               <option value="T4">pT4 without a/b</option>
               <option value="T4a">pT4a</option>
               <option value="T4b">pT4b</option>
-              <option value="TX">pTX (cannot assess)</option>
-              <option value="T0">T0 (no detectable primary tumour)</option>
+              <option value="TX" data-en="pTX (nicht beurteilbar)" data-tr="pTX (nicht beurteilbar)">pTX (nicht beurteilbar)</option>
+              <option value="T0" data-en="T0 (kein nachweisbarer Primärtumor)" data-tr="T0 (kein nachweisbarer Primärtumor)">T0 (kein nachweisbarer Primärtumor)</option>
             </select>
           </label>
-          <label for="melanomaStagingThickness" id="melanomaStagingThicknessField" hidden>Breslow thickness (Breslow-Dicke), mm
-            <input id="melanomaStagingThickness" type="text" inputmode="decimal" placeholder="e.g. 0.9">
+          <label for="melanomaStagingThickness" id="melanomaStagingThicknessField" hidden><span data-en="Breslow thickness, mm (Breslow-Dicke)" data-tr="Breslow kalınlığı, mm (Breslow-Dicke)">Breslow thickness, mm (Breslow-Dicke)</span>
+            <input id="melanomaStagingThickness" type="text" inputmode="decimal" placeholder="z. B. 0,9">
           </label>
-          <label for="melanomaStagingUlceration" id="melanomaStagingUlcerationField" hidden>Histological ulceration (Histologische Ulzeration)
+          <label for="melanomaStagingUlceration" id="melanomaStagingUlcerationField" hidden><span data-en="Histologic ulceration (Histologische Ulzeration)" data-tr="Histolojik ülserasyon (Histologische Ulzeration)">Histologic ulceration (Histologische Ulzeration)</span>
             <select id="melanomaStagingUlceration">
-              <option value="">Unknown</option>
-              <option value="no">No</option>
-              <option value="yes">Yes</option>
+              <option value="" data-en="Unknown (Unbekannt)" data-tr="Bilinmiyor (Unbekannt)">Unknown (Unbekannt)</option>
+              <option value="no" data-en="No (Nein)" data-tr="Hayır (Nein)">No (Nein)</option>
+              <option value="yes" data-en="Yes (Ja)" data-tr="Evet (Ja)">Yes (Ja)</option>
             </select>
           </label>
-          <label for="melanomaStagingN">Regional status (Regionärer Status, N)
+          <label for="melanomaStagingN"><span data-en="Regional status (Regionärer Status, N)" data-tr="Bölgesel durum (Regionärer Status, N)">Regional status (Regionärer Status, N)</span>
             <select id="melanomaStagingN">
-              <option value="">Unknown or unclear</option>
-              <option value="cN0">cN0 · clinically negative (klinisch negativ)</option>
-              <option value="pN0">pN0 · pathologically negative (pathologisch negativ)</option>
-              <option value="positive">N+ · regional metastases (regionäre Metastasierung)</option>
+              <option value="" data-en="Unknown / unclear (Unbekannt / unklar)" data-tr="Bilinmiyor / belirsiz (Unbekannt / unklar)">Unknown / unclear (Unbekannt / unklar)</option>
+              <option value="cN0" data-en="cN0 · clinically negative (klinisch negativ)" data-tr="cN0 · klinik negatif (klinisch negativ)">cN0 · clinically negative (klinisch negativ)</option>
+              <option value="pN0" data-en="pN0 · pathologically negative (pathologisch negativ)" data-tr="pN0 · patolojik negatif (pathologisch negativ)">pN0 · pathologically negative (pathologisch negativ)</option>
+              <option value="positive" data-en="N+ · regional metastasis (regionäre Metastasierung)" data-tr="N+ · bölgesel metastaz (regionäre Metastasierung)">N+ · regional metastasis (regionäre Metastasierung)</option>
             </select>
           </label>
-          <label for="melanomaStagingM">Distant metastases (Fernmetastasen, M)
+          <label for="melanomaStagingM"><span data-en="Distant metastasis (Fernmetastasen, M)" data-tr="Uzak metastaz (Fernmetastasen, M)">Distant metastasis (Fernmetastasen, M)</span>
             <select id="melanomaStagingM">
-              <option value="">Unknown or unclear</option>
-              <option value="cM0">cM0 · no evidence of distant metastases</option>
-              <option value="positive">M1 · distant metastases documented</option>
+              <option value="" data-en="Unknown / unclear (Unbekannt / unklar)" data-tr="Bilinmiyor / belirsiz (Unbekannt / unklar)">Unknown / unclear (Unbekannt / unklar)</option>
+              <option value="cM0" data-en="cM0 · no evidence (kein Hinweis)" data-tr="cM0 · bulgu yok (kein Hinweis)">cM0 · no evidence (kein Hinweis)</option>
+              <option value="positive" data-en="M1 · confirmed (nachgewiesen)" data-tr="M1 · gösterilmiş (nachgewiesen)">M1 · confirmed (nachgewiesen)</option>
             </select>
           </label>
-          <label for="melanomaStagingR" id="melanomaStagingRField" hidden>Resection status (Resektionsstatus), for IIC follow-up
+          <label for="melanomaStagingR" id="melanomaStagingRField" hidden><span data-en="Resection status for IIC follow-up (Resektionsstatus)" data-tr="IIC takibi için rezeksiyon durumu (Resektionsstatus)">Resection status for IIC follow-up (Resektionsstatus)</span>
             <select id="melanomaStagingR">
-              <option value="">Unknown or not R0</option>
-              <option value="r0">R0 documented</option>
+              <option value="" data-en="Unknown / no R0 (Unbekannt / kein R0)" data-tr="Bilinmiyor / R0 yok (Unbekannt / kein R0)">Unknown / no R0 (Unbekannt / kein R0)</option>
+              <option value="r0" data-en="R0 documented (R0 dokumentiert)" data-tr="R0 belgelendi (R0 dokumentiert)">R0 documented (R0 dokumentiert)</option>
             </select>
           </label>
         </div>
-        <p class="follow-up-note">N+ includes satellite, microsatellite and in-transit metastases. Check the report separately if its TNM version differs or is unknown.</p>
-        <button type="submit" class="filter-button">Show stage</button>
+        <p class="follow-up-note"><span data-en="N+ also includes satellite, microsatellite and in-transit metastases (Satelliten-, Mikrosatelliten- und In-transit-Metastasen). If the TNM version differs or is unknown, check the report separately." data-tr="N+ uydu, mikrosatellit ve in-transit metastazları da kapsar (Satelliten-, Mikrosatelliten- und In-transit-Metastasen). TNM sürümü farklıysa veya bilinmiyorsa raporu ayrıca kontrol edin.">N+ also includes satellite, microsatellite and in-transit metastases (Satelliten-, Mikrosatelliten- und In-transit-Metastasen). If the TNM version differs or is unknown, check the report separately.</span></p>
+        <button type="submit" class="filter-button" data-en="Show stage (Stadium anzeigen)" data-tr="Evreyi göster (Stadium anzeigen)">Show stage (Stadium anzeigen)</button>
       </form>
       <div id="melanomaStagingResult" role="status" aria-live="polite" aria-atomic="true"></div>
       <button id="melanomaStagingFollowUp" type="button" class="filter-button" hidden>Open follow-up group (Nachsorgegruppe)</button>
       <p class="follow-up-note"><a href="https://doi.org/10.3322/caac.21409">AJCC 8 · Tables 2, 5 and 6</a> · <a href="https://www.leitlinienprogramm-onkologie.de/leitlinien/melanom/">German S3 melanoma guideline · v3.3</a></p>
     </details>
+    <span id="melanomaStagingHome" hidden></span>
     <div class="follow-up-controls js-only">
       <label for="followUpGroup">Stage / risk group
         <select id="followUpGroup"></select>
@@ -459,7 +486,7 @@
 <script src="clinical-schema.js"></script>
 <script src="data.js"></script>
 <script src="media-data.js?v=photo-quiz-20261128"></script>
-<script src="followup-data.js"></script>
+<script src="followup-data.js?v=nachsorge-20261128"></script>
 <script src="quiz-data.js?v=photo-quiz-20261128"></script>
 <script src="review-status.js?v=photo-quiz-20261128"></script>
 <script src="oss-feedback.js"></script>
@@ -497,9 +524,10 @@
 <script src="case-loader.js?v=1"></script>
 <script src="app.js?v=catalogue-20261128"></script>
 <script src="melanoma-staging.js"></script>
-<script src="followup-app.js?v=staging-language-20261128"></script>
+<script src="followup-app.js?v=nachsorge-20261128"></script>
+<script src="nachsorge-app.js?v=nachsorge-20261128"></script>
 <script src="quiz-app.js?v=quiz-image-zoom-20261128"></script>
-<script src="studio.js?v=learning-load-20261128"></script>
+<script src="studio.js?v=nachsorge-20261128"></script>
 
 
 </body>
