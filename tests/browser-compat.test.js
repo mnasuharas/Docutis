@@ -108,6 +108,9 @@ test("very narrow header puts primary links on their own visible row", () => {
   assert.ok(links, "missing narrow primary-links rule");
   assert.match(links[1], /flex:\s*1 0 100%/);
   assert.match(links[1], /max-width:\s*100%/);
+  assert.match(links[1], /flex-wrap:\s*wrap/);
+  assert.match(links[1], /overflow:\s*visible/);
+  assert.doesNotMatch(links[1], /overflow-x:\s*auto/);
   assert.match(block, /\.primary-links a:focus-visible\s*\{[^}]*scroll-margin-inline:\s*12px/);
   const wide = css.match(/@media\s*\(max-width:\s*900px\)\s*\{[\s\S]*?\.primary-links\s*\{([^}]*)\}/);
   assert.match(wide[1], /overflow-x:\s*auto/);
