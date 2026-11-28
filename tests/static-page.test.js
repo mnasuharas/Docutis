@@ -50,7 +50,7 @@ test("static page keeps load order, disclaimer and accessible controls", () => {
   assert.ok(html.indexOf('src="clinical-schema.js"') < html.indexOf('src="data.js"'));
   assert.ok(html.indexOf('src="data.js"') < html.indexOf('src="app.js'));
   assert.ok(html.indexOf('src="media-data.js"') < html.indexOf('src="app.js'));
-  assert.ok(html.indexOf('src="followup-data.js"') < html.indexOf('src="followup-app.js"'));
+  assert.ok(html.indexOf('src="followup-data.js"') < html.indexOf('src="followup-app.js'));
   assert.ok(html.indexOf('src="quiz-data.js"') < html.indexOf('src="quiz-app.js'));
   assert.ok(html.indexOf('src="case-data.js"') < html.indexOf('src="case-app.js"'));
   assert.match(html, /id="caseModule"/);
@@ -129,8 +129,8 @@ test("CI validates pull requests, main pushes and manual runs with read-only per
   }
 });
 
-test("documentation reports CI, 62 records and the unfinished broader-coverage target", () => {
-  assert.match(readme, /62 condition records/i);
+test("documentation reports CI, 65 records and the unfinished broader-coverage target", () => {
+  assert.match(readme, /65 condition records/i);
   assert.match(readme, /v0\.2\.0-preview\.1[\s\S]*50 condition records/i);
   assert.match(readme, /GitHub Actions/i);
   assert.match(readme, /broader dermatology coverage[^.]*not yet complete/i);
@@ -211,7 +211,7 @@ test("Goal 9 exposes independent public review status without fabricated approva
   assert.match(reviewUi, /No physician review has been recorded yet/);
   assert.doesNotMatch(reviewUi, /Awaiting review/);
   assert.match(app, /Partially reviewed records/);
-  assert.match(app, /Invalidated or outdated reviews/);
+  assert.match(app, /Invalidated reviews of learning materials/);
   assert.match(goal9Review, /Required attestation/);
   assert.match(goal9Review, /No clinical wording change has been applied/);
   assert.match(css, /\.public-review-panel\s*{/);

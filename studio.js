@@ -14,6 +14,7 @@
     { id: "pinkCaseModule", group: "patterns", art: "vessels", title: ["Beyond pigment", "Pigmentin ötesinde"], description: ["Explore vessels and white structures in pink lesions, then add the clinical story.", "Pembe lezyonlarda damarları ve beyaz yapıları incele; ardından klinik öyküyü ekle."], tag: ["Pink lesions", "Pembe lezyonlar"] },
     { id: "subtleClueModule", group: "patterns", art: "clues", title: ["The subtle clue", "Silik ipucunu fark et"], description: ["Find a structure, mark its location and compare with a close mimic.", "Yapıyı bul, yerini işaretle ve yakın taklitçisiyle karşılaştır."], tag: ["Clues & counterexamples", "İpuçları ve karşı örnekler"] },
     { id: "patternModule", target: "patternExercise", group: "patterns", art: "pattern", title: ["Start with what you see", "Önce gördüğünü tarif et"], description: ["Work through structures and vessel patterns before opening the diagnosis.", "Tanıyı açmadan önce yapıları ve damar paternlerini çalış."], tag: ["Pattern foundations", "Patern temelleri"] },
+    { id: "inflammatoryCaseModule", group: "learn", art: "clues", title: ["Inflammatory and paediatric cases", "İnflamatuvar ve pediatrik vakalar"], description: ["Compare morphology and distribution in three short practice cases.", "Üç kısa vakada morfoloji ve dağılımı karşılaştır."], tag: ["Clinical reasoning", "Klinik akıl yürütme"] },
     { id: "quizModule", group: "learn", alsoIn: ["patterns"], art: "quiz", title: ["A short knowledge check", "Kısa bir bilgi çalışması"], description: ["Review morphology and clinical reasoning across inflammatory, acneiform, infectious and skin-cancer examples.", "İnflamatuvar, akneiform, enfeksiyöz ve deri kanseri örneklerinde morfoloji ve klinik akıl yürütmeyi tekrar et."], tag: ["Cross-condition quiz", "Farklı tanılardan kısa test"] }
   ];
   const reference = document.querySelector(".reference-library");
@@ -70,6 +71,27 @@
     back.textContent = group === "home" ? say("← Home", "← Ana sayfa") : group === "learn" ? say("← Case studio", "← Vaka eğitimleri") : say("← Pattern studio", "← Patern eğitimleri");
     label.textContent = item ? say(...item.tag) : current === "reference" ? say("Reference library", "Başvuru kütüphanesi") : current === "followUpModule" ? say("Oncology follow-up", "Onkolojik takip") : say("About & evidence", "Proje ve kanıtlar");
   }
+  const caseViews = new Set(["caseModule", "trainingModule", "guidedPatternModule", "mimicModule", "contrastLabModule", "pinkCaseModule", "subtleClueModule", "patternModule"]);
+  let loadedCaseViews = false;
+  function prepareCaseScreen(screen) {
+    if (!screen || loadedCaseViews || !window.DOCUTIS_LOAD_CASES || screen.querySelector(".studio-case-loading")) return;
+    const status = node("div", "", screen, "studio-case-loading");
+    status.setAttribute("role", "status");
+    const load = () => {
+      status.textContent = say("Loading case exercises…", "Vaka eğitimleri yükleniyor…");
+      window.DOCUTIS_LOAD_CASES().then(() => {
+        loadedCaseViews = true;
+        status.remove();
+      }, () => {
+        status.textContent = say("The case exercises could not load.", "Vaka eğitimleri yüklenemedi.");
+        const retry = node("button", say("Retry", "Tekrar dene"), status, "filter-button");
+        retry.type = "button";
+        retry.addEventListener("click", load);
+      });
+    };
+    load();
+  }
+
   function show(name, focus = false, targetId) {
     current = name;
     Object.entries(screens).forEach(([key, elements]) => elements.forEach(el => { if (el) el.hidden = key !== name; }));
@@ -80,6 +102,7 @@
       if (belongs === section) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     });
     toolbar();
+    if (caseViews.has(name)) prepareCaseScreen(screens[name]?.[0]);
     if (focus) {
       const target = document.getElementById(targetId) || screens[name]?.find(Boolean);
       if (target) { target.tabIndex = -1; try { target.focus({ preventScroll: true }); } catch (error) { target.focus(); } target.scrollIntoView({ block: "start", behavior: "auto" }); }

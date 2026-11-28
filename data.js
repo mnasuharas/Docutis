@@ -16,6 +16,8 @@
     { id: "hair-nail-disorders", title: "Hair and Nail Disorders" }
   ];
   const subcategories = [
+    { id: "benign-pigmented-lesion", title: "Benign pigmented lesion" },
+    { id: "benign-epidermal-tumour", title: "Benign epidermal tumour" },
     { id: "premalignant-keratinocytic", title: "Premalignant keratinocytic lesion" },
     { id: "keratinization-disorder", title: "Keratinization disorder with variable malignant potential" },
     { id: "keratinocytic-carcinoma", title: "Keratinocytic carcinoma" },
@@ -1091,10 +1093,10 @@
       id: "dermatofibrosarcoma-protuberans", name: "Dermatofibrosarcoma Protuberans", alternative: "DFSP", category: "other", subcategory: "cutaneous-sarcoma",
       coding: coding({ oncology: icdo(skinTopography(), [{ code: "8832/1", label: "Dermatofibrosarcoma protuberans, NOS", note: "ICD-O-3.2 assigns borderline behavior to DFSP, NOS." }, { code: "8832/3", label: "Fibrosarcomatous dermatofibrosarcoma protuberans", note: "Malignant behavior applies to the fibrosarcomatous variant." }]), verificationNote: "Do not collapse DFSP, NOS and fibrosarcomatous DFSP into one behavior code; confirm against final pathology and registry rules." }),
       description: "A slow-growing dermal sarcoma with infiltrative local behavior, a high propensity for local recurrence if incompletely removed and usually low metastatic risk.",
-      clinical: "Typically a slowly enlarging firm plaque that may develop protuberant nodules, commonly on the trunk or proximal limbs.",
+      clinical: "A slowly expanding indurated plaque may precede prominent nodules. It can resemble a scar, dermatofibroma or morphea. Progressive change and fixation to deeper tissue support obtaining representative tissue.",
       dermoscopy: "Findings are nonspecific and cannot establish the diagnosis.",
       differential: "Dermatofibroma, scar, keloid, morphea, cyst and other soft-tissue tumors.",
-      treatment: "Complete excision with margin control is central; complex, recurrent or advanced disease requires specialist multidisciplinary input.",
+      treatment: "A sufficiently deep biopsy and specialist pathology review are needed to establish the diagnosis and assess for fibrosarcomatous transformation. Treatment prioritises complete excision with histologically clear margins. Recurrent, extensive or transformed tumours merit multidisciplinary discussion.",
       followup: "Long-term clinical follow-up of the treated site is appropriate because local recurrence can occur.",
       references: [refs.dfsp, refs.icdo32, refs.whoSkin, dermNet("Dermatofibrosarcoma protuberans", "dermatofibrosarcoma-protuberans", "2026-09-15")]
     }),
@@ -1124,10 +1126,10 @@
       id: "cutaneous-angiosarcoma", name: "Cutaneous Angiosarcoma", alternative: "Angiosarcoma of skin", category: "other", subcategory: "vascular-neoplasm",
       coding: coding({ oncology: icdo(skinTopography("Use C44._ only for a documented primary cutaneous tumor; record radiation-associated or lymphoedema-associated context separately."), [{ code: "9120/3", label: "Hemangiosarcoma", note: "ICD-O morphology terminology; confirm the final pathologic classification." }]), verificationNote: "Do not infer the ICD-10 WHO soft-tissue category C49 from the tumor name alone; diagnosis coding is site- and system-dependent." }),
       description: "A rare aggressive malignant vascular tumor that may arise spontaneously, after radiation or with chronic lymphoedema.",
-      clinical: "May appear as an enlarging bruise-like or violaceous patch, plaque or nodule; spontaneous tumors often involve the scalp or face of older adults.",
+      clinical: "An expanding violaceous or bruise-like patch on the scalp or face of an older adult can be the initial presentation. Induration, nodules, oedema or bleeding may develop. Ask about prior radiotherapy and chronic lymphoedema, and document the visible extent and any additional foci.",
       dermoscopy: "No diagnostic dermoscopic pattern is established.",
       differential: "Bruising, cellulitis, rosacea, Kaposi sarcoma and benign or malignant vascular lesions.",
-      treatment: "Urgent biopsy, staging and multidisciplinary sarcoma or oncology management are required.",
+      treatment: "A persistent or expanding suspicious lesion warrants prompt representative biopsy and specialist pathology review. Staging and local treatment planning should involve a sarcoma multidisciplinary team. Extent, feasibility of complete surgery and radiotherapy options are assessed together.",
       followup: "Close surveillance is needed because local recurrence and metastatic spread are possible.",
       references: [refs.angiosarcoma, refs.icdo32, refs.whoSkin, dermNet("Angiosarcoma", "angiosarcoma", "2026-09-15")]
     }),
@@ -1157,10 +1159,10 @@
       id: "microcystic-adnexal-carcinoma", name: "Microcystic Adnexal Carcinoma", alternative: "MAC; sclerosing sweat duct carcinoma", category: "other", subcategory: "adnexal-carcinoma",
       coding: coding({ oncology: icdo(skinTopography(), [{ code: "8407/3", label: "Sclerosing sweat duct carcinoma", note: "ICD-O synonym used for microcystic adnexal carcinoma; confirm final pathology." }]), verificationNote: "No single disease-specific ICD-10 WHO diagnosis code is asserted." }),
       description: "A rare, deeply infiltrative adnexal carcinoma that is usually locally aggressive and commonly arises on the central face.",
-      clinical: "Often a slowly enlarging firm, indurated skin-colored plaque or nodule; symptoms can occur with perineural involvement.",
+      clinical: "A slowly enlarging, firm, poorly defined plaque or nodule on the central face may resemble a scar. Assess sensory change and pain in the distribution of adjacent nerves. The visible border may underestimate tissue involvement.",
       dermoscopy: "No diagnostic dermoscopic pattern is established.",
       differential: "Morpheaform basal cell carcinoma, scar, desmoplastic trichoepithelioma and other adnexal tumors.",
-      treatment: "Complete margin-controlled excision and specialist pathology review are generally required; extent and perineural disease influence planning.",
+      treatment: "Suspected lesions require a deep biopsy including subcutis to assess infiltrative growth. For resectable skin-confined disease, the consensus guideline favours surgery that examines peripheral and deep margins. Perineural involvement or inability to achieve clear margins warrants multidisciplinary planning.",
       followup: "Long-term surveillance is appropriate because delayed local recurrence can occur.",
       references: [refs.mac, refs.icdo32, refs.whoSkin, dermNet("Microcystic adnexal carcinoma", "microcystic-adnexal-carcinoma", "2026-09-15")]
     }),
@@ -1168,10 +1170,10 @@
       id: "eccrine-porocarcinoma", name: "Eccrine Porocarcinoma", alternative: "Porocarcinoma; malignant eccrine poroma", category: "other", subcategory: "adnexal-carcinoma",
       coding: coding({ oncology: icdo(skinTopography(), [{ code: "8409/3", label: "Eccrine porocarcinoma", note: "Malignant morphology; verify final pathology." }]), verificationNote: "No disease-specific ICD-10 WHO code was verified; D44.90 is intentionally not used because it is not a supported international mapping here." }),
       description: "A rare malignant adnexal tumor showing sweat-duct differentiation.",
-      clinical: "Typically a slowly growing papule, plaque or nodule that may ulcerate or bleed; it can arise within a longstanding poroma or de novo.",
+      clinical: "A papule, plaque or nodule can ulcerate or bleed. New rapid growth, ulceration or bleeding in a longstanding poroma-like lesion should prompt reassessment. The clinical appearance overlaps with several more common keratinocytic and vascular tumours.",
       dermoscopy: "Reported vascular and structureless patterns are nonspecific; histopathology establishes the diagnosis.",
       differential: "Poroma, seborrhoeic keratosis, pyogenic granuloma, verruca and cutaneous squamous cell carcinoma.",
-      treatment: "Complete surgical removal and histopathologic assessment are central; high-risk or advanced disease requires multidisciplinary evaluation.",
+      treatment: "Obtain representative histology and specialist dermatopathology review when the distinction from squamous cell carcinoma or poroma is difficult. Localised disease is generally treated surgically with histological margin assessment. Evidence for nodal staging and adjuvant strategies is limited, so discuss high-risk presentations individually.",
       followup: "Surveillance should be individualized for local recurrence and regional or distant spread.",
       references: [refs.porocarcinoma, refs.icdo32, refs.whoSkin, dermNet("Eccrine porocarcinoma", "eccrine-porocarcinoma", "2026-09-15")]
     }),
@@ -1825,6 +1827,39 @@
       treatment: "Evidence is limited and largely expert-based. Consensus statements favour early specialist-directed anti-inflammatory therapy for active classical disease because topical monotherapy is often insufficient; treatment selection depends on nail count, severity, scarring risk and comorbidity rather than a universal protocol.",
       followup: "Monitor progression toward pterygium or anonychia, functional impact and treatment adverse effects over months of nail growth. New single-digit atypical change or treatment-resistant dystrophy should prompt diagnostic review including biopsy when tumour cannot be excluded.",
       references: [refs.nailLichenPlanusConsensus, refs.whoIcd10, dermNet("Lichen planus", "lichen-planus", "2026-11-19")]
+    }),
+    record({
+      id: "seborrheic-keratosis", name: "Seborrheic Keratosis", alternative: "Seborrhoeic keratosis; seboreik keratoz; seborrhoische Keratose", category: "pigmentary", subcategory: "benign-epidermal-tumour",
+      coding: coding({ diagnoses: [icd10Who("L82", "Seborrhoeic keratosis")], icdoApplicability: "not applicable" }),
+      description: "A benign epidermal keratinocytic tumour.",
+      clinical: "A sharply demarcated waxy or keratotic papule or plaque, often with a stuck-on appearance. Irritation can change the surface and obscure typical features.",
+      dermoscopy: "Comedo-like openings, milia-like cysts and fissures or ridges can support the diagnosis. Review the entire lesion for discordant structures, including an atypical pigment network, blue-white veil or irregular peripheral projections.",
+      differential: "Melanoma, pigmented basal cell carcinoma, actinic keratosis and squamous cell carcinoma.",
+      treatment: "A confidently diagnosed asymptomatic lesion usually needs no treatment. Diagnostic uncertainty calls for further assessment, with histology when malignancy remains in the differential.",
+      followup: "Reassess changes or new unexplained symptoms, particularly in lesions with atypical or discordant features.",
+      references: [source({ title: "Carrera et al. — Dermoscopic clues for melanoma resembling seborrheic keratosis", organization: "JAMA Dermatology", type: "clinical reference", year: 2017, url: "https://doi.org/10.1001/jamadermatol.2017.0129", metadataCheckedAt: "2026-11-28" }), refs.whoIcd10, dermNet("Seborrheic Keratosis", "seborrhoeic-keratosis", "2026-11-28")]
+    }),
+    record({
+      id: "dermatofibroma", name: "Dermatofibroma", alternative: "Benign fibrous histiocytoma; dermatofibrom; Dermatofibrom", category: "pigmentary", subcategory: "fibrohistiocytic-tumor",
+      coding: coding({ diagnoses: [icd10Who("D23", "Other benign neoplasms of skin")], icdoApplicability: "not established" }),
+      description: "A benign dermal fibrohistiocytic lesion.",
+      clinical: "Usually a firm papule or nodule, often on an extremity. Lateral pressure may produce dimpling.",
+      dermoscopy: "A central white scar-like area with a peripheral delicate pigment network is a classic combination. Variant patterns are common.",
+      differential: "Melanocytic nevus, melanoma, scar and dermatofibrosarcoma protuberans, especially when the lesion is enlarging or atypical.",
+      treatment: "A stable, confidently diagnosed asymptomatic lesion usually needs no treatment. Progressive or diagnostically uncertain lesions merit assessment with representative histology.",
+      followup: "Review progressive enlargement, ulceration or new clinical and dermoscopic discordance.",
+      references: [source({ title: "Zaballos et al. — Prospective dermoscopy study of 412 dermatofibromas", organization: "Archives of Dermatology", type: "clinical reference", year: 2008, url: "https://pubmed.ncbi.nlm.nih.gov/18209171/", metadataCheckedAt: "2026-11-28" }), refs.whoIcd10, dermNet("Dermatofibroma", "dermatofibroma", "2026-11-28")]
+    }),
+    record({
+      id: "solar-lentigo", name: "Solar Lentigo", alternative: "Solar lentigines; lentigo solaris; güneş lekesi; Altersfleck", category: "pigmentary", subcategory: "benign-pigmented-lesion",
+      coding: coding({ diagnoses: [icd10Who("L81.4", "Other melanin hyperpigmentation")], icdoApplicability: "not applicable" }),
+      description: "A benign acquired pigmented macule associated with cumulative ultraviolet exposure.",
+      clinical: "Flat tan to brown macules commonly affect sun-exposed face, backs of hands and upper trunk. Compare a solitary changing macule with its neighbours.",
+      dermoscopy: "A sharply demarcated or scalloped border, fingerprint-like lines and relatively uniform brown pigmentation can be supportive. Assess the distribution around facial follicles and any focal grey structures in context.",
+      differential: "Lentigo maligna, pigmented actinic keratosis, lichenoid keratosis and flat seborrheic keratosis.",
+      treatment: "Photoprotection is appropriate. Confirm a benign diagnosis before cosmetic treatment. If malignancy remains plausible, further assessment and representative histology take priority.",
+      followup: "Reassess new asymmetry, focal changes in pigmentation or documented evolution.",
+      references: [source({ title: "Rosendahl et al. — Dermatoscopy of flat pigmented facial lesions", organization: "Journal of the European Academy of Dermatology and Venereology", type: "clinical reference", year: 2014, url: "https://pubmed.ncbi.nlm.nih.gov/24661420/", metadataCheckedAt: "2026-11-28" }), refs.whoIcd10, dermNet("Solar Lentigo", "solar-lentigo", "2026-11-28")]
     })
   ];
 

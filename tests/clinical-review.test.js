@@ -21,20 +21,20 @@ function reviewedFixture() {
   return record;
 }
 
-test("Goal 8 preserves every legacy record, alias, clinical field, code, verified source and taxonomy", () => {
-  assert.equal(data.diseases.length, 62);
+test("Catalogue content matches the scoped catalog update baseline", () => {
+  assert.equal(data.diseases.length, 65);
   assert.equal(data.categories.length, 10);
-  assert.equal(data.subcategories.length, 31);
+  assert.equal(data.subcategories.length, 33);
   const { schemaVersion, ...legacyTopLevel } = data;
   const content = { ...legacyTopLevel, diseases: data.diseases.map(({ reviewStatus, clinicalReview, clinicalProfile, ...record }) => ({
     ...record, references: record.references.map(({ metadataCheckedAt, ...reference }) => reference)
   })) };
   // Legacy clinical snapshot, excluding review state, Goal 7 profiles and bibliographic recheck dates.
   assert.equal(createHash("sha256").update(JSON.stringify(canonicalize(content))).digest("hex"),
-    "81fa1f4314141e3adad56fd0e15e248a645dfedf141dc556a599c9c6d50358b9");
+    "54b46f7e59981441e68ba28b9f6822e810448ea86cbabfe54d5cc0c5e9e9f8fd");
 });
 
-test("all 62 production records remain unreviewed with null metadata", () => {
+test("all 65 production records remain unreviewed with null metadata", () => {
   assert.deepEqual(statuses, ["clinician review required", "clinician reviewed"]);
   for (const record of data.diseases) {
     assert.equal(record.reviewStatus, statuses[0]);
@@ -155,12 +155,12 @@ test("CLINICAL_REVIEW.md current-state summary matches public review-status.json
   const reviewed = status.assets.filter(item => item.status === "clinician reviewed").length;
   const required = status.assets.filter(item => item.status === "review required").length;
   const total = status.assets.length;
-  assert.equal(data.diseases.length, 62);
+  assert.equal(data.diseases.length, 65);
   assert.doesNotMatch(procedure, /0 records are clinician reviewed/i);
   assert.doesNotMatch(procedure, /Current state:\s*57 records require clinician review;\s*0 records are clinician reviewed/i);
   assert.match(procedure, new RegExp(`${total}\\s+independent review units`, "i"));
   assert.match(procedure, new RegExp(`${reviewed}\\s+\`clinician reviewed\``));
   assert.match(procedure, new RegExp(`${required}\\s+\`review required\``));
-  assert.match(procedure, /disease catalogue contains 62 records/i);
+  assert.match(procedure, /disease catalogue contains 65 records/i);
   assert.match(procedure, /not the Goal 9 public review-unit count|Do not equate/i);
 });

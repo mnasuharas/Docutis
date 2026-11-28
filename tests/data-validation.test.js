@@ -75,8 +75,8 @@ test("dataset has the intended categories and structured subcategories", () => {
   }
 });
 
-test("all 62 conditions have complete, consistent review records", () => {
-  assert.equal(diseases.length, 62);
+test("all 65 conditions have complete, consistent review records", () => {
+  assert.equal(diseases.length, 65);
   const categoryIds = new Set(categories.map(category => category.id));
   const subcategoryIds = new Set(subcategories.map(subcategory => subcategory.id));
   for (const disease of diseases) {
@@ -98,7 +98,8 @@ test("the existing 34 records remain and all 16 infectious records are present",
   for (const id of infectiousIds) assert.ok(ids.has(id), `planned infectious record ${id} is missing`);
   for (const id of autoimmuneHairIds) assert.ok(ids.has(id), `planned autoimmune or hair record ${id} is missing`);
   for (const id of nailImmunobullousIds) assert.ok(ids.has(id), `planned nail or immunobullous record ${id} is missing`);
-  assert.equal(protectedIds.length + infectiousIds.length + autoimmuneHairIds.length + nailImmunobullousIds.length, diseases.length);
+  for (const id of ["seborrheic-keratosis", "dermatofibroma", "solar-lentigo"]) assert.ok(ids.has(id));
+  assert.equal(protectedIds.length + infectiousIds.length + autoimmuneHairIds.length + nailImmunobullousIds.length + 3, diseases.length);
 });
 
 test("condition identifiers are unique", () => {
