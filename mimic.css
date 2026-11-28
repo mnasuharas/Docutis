@@ -1,4 +1,4 @@
-#mimicApp {
+#mimicApp, #guidedPatternApp {
   padding: clamp(14px, 3vw, 28px);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -39,3 +39,9 @@
   .mimic-topics { grid-template-columns: minmax(0, 1fr); }
   .mimic-panel .subtle-field { font-size: .85rem; }
 }
+
+#guidedPatternApp select { width: 100%; min-height: 44px; }
+#guidedPatternApp button { min-height: 44px; margin: .5rem .5rem .5rem 0; }
+#guidedPatternApp .contrast-panels { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(8px, 2vw, 24px); }
+#guidedPatternApp .contrast-image img { max-height: none; width: 100%; }
+#guidedPatternApp .contrast-image { width: min(100%, 24rem); }
