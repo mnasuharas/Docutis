@@ -5,6 +5,7 @@
   const { chapters, handouts: addedHandouts } = window.DOCUTIS_PRAXIS_CATALOG;
   const byCondition = new Map(Object.entries(chapters).flatMap(([id, chapter]) =>
     chapter.conditions.map(condition => [condition, id])));
+  const titlesTr = window.DOCUTIS_PRAXIS_TITLES_TR?.chapters || {};
   const handouts = { ...addedHandouts };
   for (const [id, chapter] of Object.entries(chapters)) {
     const record = detailed[chapter.verifiedCard];
@@ -95,7 +96,7 @@
       const sheet = add(preview, "article", "", "praxis-handout");
       sheet.lang = "tr";
       add(sheet, "h4", note.title);
-      add(sheet, "p", note.germanName, "praxis-german").lang = "de";
+      if (!current()) add(sheet, "p", note.germanName, "praxis-german").lang = "de";
       for (const [title, name] of [["Bu Nedir?", "about"], ["Tedavi ve Öneriler", "treatment"], ["Evde Neler Yapabilirsiniz?", "daily"], ["Ne Zaman Başvurmalısınız?", "contact"]]) {
         add(sheet, "h5", title);
         add(sheet, "p", note[name]);
@@ -117,7 +118,8 @@
       const wasOpen = card.querySelector("details")?.open || false;
       card.replaceChildren();
       add(card, "h3", say("Praxis Quick Card", "Praxis Kısa Kartı")).id = card.id + "-title";
-      add(card, "p", chapter.germanName, "praxis-german").lang = "de";
+      const subtitle = add(card, "p", current() ? titlesTr[id] || chapter.turkishName : chapter.germanName, "praxis-german");
+      subtitle.lang = current() ? "tr" : "de";
       add(card, "p", say("Germany · Educational draft awaiting clinician review", "Almanya · Hekim incelemesi bekleyen eğitim taslağı"), "praxis-status");
       if (record) verifiedContent(card, record, wasOpen);
       else adaptedContent(card, chapter);
@@ -152,7 +154,7 @@
     aliases(condition) {
       const chapter = chapters[byCondition.get(condition)];
       if (!chapter) return [];
-      const names = [chapter.germanName, chapter.turkishName];
+      const names = [chapter.germanName, chapter.turkishName, titlesTr[byCondition.get(condition)]].filter(Boolean);
       const shortNames = names.flatMap(name => [...name.matchAll(/\(([^)]+)\)/g)].map(match => match[1]));
       return [...names, ...shortNames, ...(detailed[chapter.verifiedCard]?.aliases || [])];
     },

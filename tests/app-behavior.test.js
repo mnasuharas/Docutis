@@ -157,7 +157,7 @@ test("initial rendering creates all cards and ten category sections", () => {
   assert.match(textOf(elements.reviewDashboardCounts), /0\s+Partially reviewed records/);
   assert.match(textOf(elements.reviewDashboardCounts), /63\s+Records requiring clinician review/);
   assert.match(textOf(elements.reviewDashboardCounts), /1\s+Invalidated reviews of learning materials/);
-  assert.match(textOf(elements.reviewDashboardCounts), /bcc-dermoscopy quiz/);
+  assert.match(textOf(elements.reviewDashboardCounts), /BCC dermoscopy quiz/);
   assert.match(textOf(elements.reviewDashboardCounts), /0\/8\s+Reviewed quiz items/);
   assert.match(textOf(elements.reviewDashboardCounts), /1\/9\s+Reviewed visual items/);
   assert.match(textOf(elements.reviewDashboardCounts), /1\/7\s+Reviewed follow-up protocols/);
@@ -549,7 +549,7 @@ test("actinic keratosis and basal cell carcinoma expose per-asset learning paths
   let openedCase = null;
   let openedProtocol = null;
   window.DOCUTIS_CASE_APP = { openCase(id) { openedCase = id; return true; } };
-  window.DOCUTIS_FOLLOW_UP_APP = { openProtocol(id) { openedProtocol = id; return true; } };
+  window.DOCUTIS_NACHSORGE_APP = { openProtocol(id) { openedProtocol = id; return true; } };
   links.find(link => link.getAttribute("data-learning-kind") === "case").dispatch("click");
   links.find(link => link.getAttribute("data-learning-kind") === "follow-up").dispatch("click");
   assert.equal(openedCase, "case-bcc-nodular-dermoscopy");

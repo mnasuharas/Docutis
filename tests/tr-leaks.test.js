@@ -31,8 +31,8 @@ function loadLocale() {
 test("Turkish accessible names, follow-up headings and shared follow-up strings do not fall back to English", () => {
   const { window } = loadLocale();
   const translate = window.DOCUTIS_LOCALE.translate;
-  assert.equal(translate("Infectious and Infestation Disorders, 16 conditions"), "Enfeksiyon ve enfestasyonlar, 16 tanı");
-  assert.equal(translate("All conditions, 65 conditions"), "Tüm tanılar, 65 tanı");
+  assert.equal(translate("Infectious and Infestation Disorders 16 conditions"), "Enfeksiyon ve enfestasyonlar 16 tanı");
+  assert.equal(translate("All conditions 65 conditions"), "Tüm tanılar 65 tanı");
   assert.equal(translate("Cutaneous melanoma: Melanoma in situ (Stage 0)"), "Kutanöz melanom: Melanom in situ (Evre 0)");
   assert.equal(translate("Level"), "Seviye");
   assert.match(translate("Start case: Dark lesion with an uneven edge"), /^Vakayı başlat: /u);

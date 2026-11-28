@@ -96,7 +96,7 @@ Docutis aims to make medical information:
 - Transparent about uncertainty and limitations
 - Suitable for independent professional review
 
-Medical content contributions should include appropriate references. Legacy embedded `reviewStatus` fields on the 62 disease records remain `clinician review required`. The public review layer is different and is summarized under Clinical governance below. New or substantially changed medical content stays review required until a qualified clinician documents review of that version. Do not describe the whole collection as clinician reviewed.
+Medical content contributions should include appropriate references. Legacy embedded `reviewStatus` fields on the 65 disease records remain `clinician review required`. The public review layer is different and is summarized under Clinical governance below. New or substantially changed medical content stays review required until a qualified clinician documents review of that version. Do not describe the whole collection as clinician reviewed.
 
 ## Clinical governance
 

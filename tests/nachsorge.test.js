@@ -117,7 +117,9 @@ test("navigation exposes the bilingual Nachsorge tab and the draft disclaimer", 
   assert.match(fs.readFileSync(path.join(root, "studio.js"), "utf8"), /Tümör Takibi/);
   assert.doesNotMatch(fs.readFileSync(path.join(root, "studio.js"), "utf8"), /Kontrol takibi/);
   assert.doesNotMatch(fs.readFileSync(path.join(root, "nachsorge-app.js"), "utf8"), /Nachsorge \(Takip\)/);
-  assert.match(html, /Eğitim amaçlı taslak, hekim onayı bekliyor\. Güncel kılavuzu esas alın\./);
+  assert.equal((html.match(/nachsorge-disclaimer/g) || []).length, 0);
+  assert.match(fs.readFileSync(path.join(root, "nachsorge-app.js"), "utf8"), /Eğitim amaçlı taslak, hekim onayı bekliyor\. Güncel kılavuzu esas alın\./);
+  assert.match(html, /<section id="followUpModule"[^>]*\shidden[^>]*data-legacy-engine/);
   assert.match(html, /src="nachsorge-app\.js/);
   assert.match(fs.readFileSync(path.join(root, "studio.js"), "utf8"), /searchParams\.has\("nachsorge"\)/);
 });
@@ -130,7 +132,8 @@ test("deep link selects the diagnosis and language switch re-renders the same in
   assert.equal(elements.melanomaStaging.parentElement, elements.nachsorgeStaging);
   assert.match(textOf(elements.nachsorgeResult), /Cutaneous melanoma/);
   assert.match(textOf(elements.nachsorgeResult), /Educational draft pending physician review/);
-  assert.ok(textOf(elements.nachsorgeResult).includes(api.DISCLAIMER_TR));
+  assert.ok(!textOf(elements.nachsorgeResult).includes(api.DISCLAIMER_TR));
+  assert.equal(textOf(elements.nachsorgeResult).match(/Educational draft pending physician review/g).length, 1);
   document.documentElement.lang = "tr";
   elements.docutisLanguage.dispatch("change");
   const turkish = textOf(elements.nachsorgeResult);
