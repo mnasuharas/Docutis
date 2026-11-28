@@ -1128,6 +1128,7 @@
     "pT4 without a/b": "pT4, a/b belirtilmemiş",
     "e.g. 0.9": "ör. 0,9"
 });
+  Object.assign(translations, { "Compare with": "Karşılaştırılacak kayıt" });
   const caseProse = window.DOCUTIS_CASE_PROSE_LOCALE || {};
   Object.keys(caseProse).forEach(function (key) {
     if (!Object.prototype.hasOwnProperty.call(translations, key)) translations[key] = caseProse[key];

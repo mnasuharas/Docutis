@@ -31,7 +31,7 @@ test("Catalogue content matches the scoped catalog update baseline", () => {
   })) };
   // Legacy clinical snapshot, excluding review state, Goal 7 profiles and bibliographic recheck dates.
   assert.equal(createHash("sha256").update(JSON.stringify(canonicalize(content))).digest("hex"),
-    "54b46f7e59981441e68ba28b9f6822e810448ea86cbabfe54d5cc0c5e9e9f8fd");
+    "e796db8d495f259a407fa05b8b6515db75ebd2310265f51acdee36027da74305");
 });
 
 test("all 65 production records remain unreviewed with null metadata", () => {

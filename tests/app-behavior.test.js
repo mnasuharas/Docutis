@@ -586,3 +586,26 @@ test("actinic keratosis and basal cell carcinoma expose per-asset learning paths
   assert.match(bowenText, /Start guided cases \(3\)/);
   assert.doesNotMatch(bowenText, /An oval pink plaque with central crust/);
 });
+
+test("five expanded records link their differential and available teaching cases", () => {
+  const comparisons = [
+    ["Atypical Fibroxanthoma", "atypical-fibroxanthoma", "pleomorphic-dermal-sarcoma"],
+    ["Pleomorphic Dermal Sarcoma", "pleomorphic-dermal-sarcoma", "atypical-fibroxanthoma"],
+    ["Seborrheic Keratosis", "seborrheic-keratosis", "cutaneous-melanoma"],
+    ["Dermatofibroma", "dermatofibroma", "dermatofibrosarcoma-protuberans"],
+    ["Solar Lentigo", "solar-lentigo", "lentigo-maligna"]
+  ];
+  const { elements, window } = createHarness();
+  for (const [title, id, comparison] of comparisons) {
+    const card = elements.cards.querySelectorAll(".card").find(item => textOf(item).includes(title));
+    card.dispatch("click");
+    const path = elements.details.querySelectorAll(".learning-path")[0];
+    assert.ok(path.querySelectorAll("a").some(link => link.href === "?condition=" + comparison));
+    const cases = window.DOCUTIS_CASES.cases.filter(item => item.diseaseId === id);
+    const caseLinks = path.querySelectorAll(".learning-path-link");
+    assert.equal(caseLinks.length, cases.length);
+    for (const item of cases) {
+      assert.ok(caseLinks.some(link => link.getAttribute("data-asset-id") === item.id && link.textContent === item.title));
+    }
+  }
+});

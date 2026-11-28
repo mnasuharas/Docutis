@@ -74,3 +74,10 @@ Goal 19 did not record a clinician review. Management briefs were not rewritten.
 Use the exact versions in [the review packet](GOAL9_HUMAN_REVIEW_GATE.md) and [the decision template](goal9-review-decisions.template.json). Start with the eight structured profiles. Check diagnosis and referral, therapy and dosing where shown, and the evidence attached to each section. The public manifest already records current decisions for the actinic keratosis and basal cell carcinoma profiles. Verify their fingerprints before deciding whether they require another review.
 
 Review the 57 cases in batches. Prioritise melanoma in situ, amelanotic melanoma and difficult differential diagnoses, then review special sites and the remaining cases. Use [the reviewer workspace](academy-review.html) to compare teaching with the recorded images. For each case, check that the diagnosis matches the source, that verification strength and pairing are accurately described, and that the visible structures, image attribution and feedback fit the evidence. Record approve, partial approval, corrections requested or deferral against the exact fingerprint. A physician who personally reviewed the unit supplies the dated attestation. Record a decision only for the scope actually reviewed.
+
+
+## Focused review packet: five expanded records
+
+- Atypical fibroxanthoma and pleomorphic dermal sarcoma: check biopsy depth, subcutaneous invasion, adverse histological features and lineage exclusion against the [AWMF S1 guideline, version 2.0](https://register.awmf.org/assets/guidelines/032-057l_S1_Atypisches-Fibroxanthom-AFX-Pleomorphes-Dermalles_Sarkom-PDS_2026-08.pdf), sections 3–4.
+- Seborrheic keratosis, dermatofibroma and solar lentigo: check each pattern and the limits of the linked case evidence. In particular, the dermatofibroma teaching photo carries a clinical source label without histopathological verification. Review the English source text and Turkish rendering together.
+- Record a decision for the exact current content only after the physician checks the relevant source and wording. These remain clinician-review-required legacy reference records.

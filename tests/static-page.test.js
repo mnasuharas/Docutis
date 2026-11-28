@@ -47,8 +47,8 @@ function contrastRatio(foreground, background) {
 }
 
 test("static page keeps load order, disclaimer and accessible controls", () => {
-  assert.ok(html.indexOf('src="clinical-schema.js"') < html.indexOf('src="data.js"'));
-  assert.ok(html.indexOf('src="data.js"') < html.indexOf('src="app.js'));
+  assert.ok(html.indexOf('src="clinical-schema.js"') < html.indexOf('src="data.js'));
+  assert.ok(html.indexOf('src="data.js') < html.indexOf('src="app.js'));
   assert.ok(html.indexOf('src="media-data.js"') < html.indexOf('src="app.js'));
   assert.ok(html.indexOf('src="followup-data.js') < html.indexOf('src="followup-app.js'));
   assert.ok(html.indexOf('src="quiz-data.js"') < html.indexOf('src="quiz-app.js'));
