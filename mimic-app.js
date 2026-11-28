@@ -167,7 +167,7 @@
       add(review, "h4", t("What to compare and how the source verified it", "Neyi Karşılaştırmalı? Kaynak Sonucu Nasıl Doğruladı?"));
       add(review, "p", local(lesson.review));
       if (["network", "face", "acral", "blood"].includes(lesson.id)) {
-        add(review, "h4", t("Pattern analysis and Chaos and Clues", "Patern analizi ve Chaos and Clues"));
+        add(review, "h4", t("Pattern analysis and Chaos and Clues", "Patern Analizi ve Chaos and Clues"));
         add(review, "p", t("Review your structure and distribution choices first. Then compare your symmetry choice with the clue described above. Which did more to shape your differential in this pair?", "Önce yapı ve dağılım seçimlerini gözden geçir. Ardından simetri seçimini yukarıdaki ipucuyla karşılaştır. Bu çiftte hangisi ayırıcı tanını daha çok etkiledi?"));
         link(review, "Rosendahl et al. · Diagnostic accuracy of dermatoscopy", "https://pubmed.ncbi.nlm.nih.gov/21440329/");
       }

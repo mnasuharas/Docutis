@@ -357,7 +357,7 @@
     const result = document.getElementById("nachsorgeResult");
     const search = document.getElementById("nachsorgeSearch");
     if (!disease || !groupSelect || !result) return;
-    if (search) search.placeholder = say("Melanoma, Merkel, Bowen…", "Tümör takibi: melanom, Merkel, Bowen…");
+    if (search) search.placeholder = say("Melanoma, Merkel, Bowen…", "Tümör Takibi: melanom, Merkel, Bowen…");
     const query = normalize(search ? search.value : "");
     const fromUrl = selectedFromUrl();
     const previous = (options.preferUrl && fromUrl) || entryById(disease.value) || fromUrl;
@@ -430,7 +430,7 @@
       const wrap = add(result, "div", null, "nachsorge-table-wrap");
       const table = add(wrap, "table", null, "nachsorge-table");
       const head = add(table, "tr");
-      add(head, "th", say("At each visit", "Her ziyarette"));
+      add(head, "th", say("At each visit", "Her Ziyarette"));
       group.periods.forEach(period => add(head, "th", labelOf(PERIOD_LABELS, period.id, period.label)));
       const modalityIds = ["clinical_examination", "lymph_node_ultrasound", "s100b", "cross_sectional_imaging"];
       modalityIds.forEach(modality => {

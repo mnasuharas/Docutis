@@ -59,7 +59,7 @@
     pair(overview, say("Follow-up and red flags", "Kontrol ve Kırmızı Bayraklar"), record.followUp[lang]);
     const prescribing = add(card, "details", "", "praxis-disclosure");
     prescribing.open = wasOpen;
-    add(prescribing, "summary", say("Prescription example, authorisation and skin care", "Reçete örneği, ruhsat ve bakım"));
+    add(prescribing, "summary", say("Prescription example, authorisation and skin care", "Reçete Örneği, Ruhsat ve Bakım"));
     add(prescribing, "h4", say("Product-specific example", "Preparata Özgü Örnek"));
     add(prescribing, "p", record.example[lang]);
     add(prescribing, "h4", say("Authorisation and off-label checks", "Ruhsat ve Off-label Kontrolü"));

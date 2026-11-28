@@ -51,7 +51,7 @@
         node("span", say("Open practice →", "Eğitimi aç →"), copy, "studio-course-action");
       });
       const utility = node("div", "", hub, "studio-utility-links");
-      [["followUpModule", "Oncology follow-up", "Onkolojik takip"], ["evidenceStatus", "Review status & sources", "İnceleme durumu ve kaynaklar"]].forEach(([id, en, turkish]) => { const a = node("a", say(en, turkish) + " →", utility); a.href = "#" + id; });
+      [["followUpModule", "Oncology follow-up", "Onkolojik Takip"], ["evidenceStatus", "Review status & sources", "İnceleme Durumu ve Kaynaklar"]].forEach(([id, en, turkish]) => { const a = node("a", say(en, turkish) + " →", utility); a.href = "#" + id; });
     });
   }
   function route(hash) {
@@ -70,10 +70,10 @@
     bar.hidden = ["home", "learn", "patterns"].includes(current);
     const item = catalog.find(item => item.id === current), group = item ? item.group : "home";
     back.href = group === "home" ? "#mainContent" : "#" + group;
-    back.textContent = group === "home" ? say("← Home", "← Ana sayfa") : group === "learn" ? say("← Case studio", "← Vaka eğitimleri") : say("← Pattern studio", "← Patern eğitimleri");
-    label.textContent = item ? say(...item.tag) : current === "reference" ? say("Reference library", "Tanı rehberi") : current === "nachsorgeModule" ? say("Follow-up (Nachsorge)", "Tümör takibi") : current === "followUpModule" ? say("Oncology follow-up", "Onkolojik takip") : say("About & evidence", "Proje ve kanıtlar");
-    if (current === "nachsorgeModule") document.title = say("Follow-up (Nachsorge) | Docutis", "Tümör takibi | Docutis");
-    else if (/^(?:Follow-up \(Nachsorge\)|Tümör takibi) \| Docutis$/.test(document.title)) document.title = say("Docutis | Dermatology Reference Toolkit", "Docutis | Dermatoloji Eğitim ve Başvuru Kaynağı");
+    back.textContent = group === "home" ? say("← Home", "← Ana Sayfa") : group === "learn" ? say("← Case studio", "← Vaka Eğitimleri") : say("← Pattern studio", "← Patern Eğitimleri");
+    label.textContent = item ? say(...item.tag) : current === "reference" ? say("Reference library", "Tanı Rehberi") : current === "nachsorgeModule" ? say("Follow-up (Nachsorge)", "Tümör Takibi") : current === "followUpModule" ? say("Oncology follow-up", "Onkolojik Takip") : say("About & evidence", "Proje ve Kanıtlar");
+    if (current === "nachsorgeModule") document.title = say("Follow-up (Nachsorge) | Docutis", "Tümör Takibi | Docutis");
+    else if (/^(?:Follow-up \(Nachsorge\)|Tümör Takibi) \| Docutis$/.test(document.title)) document.title = say("Docutis | Dermatology Reference Toolkit", "Docutis | Dermatoloji Eğitim ve Başvuru Kaynağı");
   }
   const caseViews = new Set(["patternContextModule", "caseModule", "trainingModule", "guidedPatternModule", "mimicModule", "contrastLabModule", "pinkCaseModule", "subtleClueModule", "patternModule"]);
   let loadedCaseViews = false;

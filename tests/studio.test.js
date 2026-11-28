@@ -54,7 +54,7 @@ test("learning links reveal a module before its own handler; modified clicks kee
 });
 test("Turkish hubs change immediately without resetting an active module",()=>{
  const h=harness();h.click("#contrastLabModule");h.elements.contrastLabModule.session="ongoing";h.doc.documentElement.lang="tr";h.elements.docutisLanguage.dispatch("change");
- assert.equal(h.elements.contrastLabModule.hidden,false);assert.equal(h.elements.contrastLabModule.session,"ongoing");assert.match(h.elements.patterns.textContent,/Erken Melanom/);assert.match(h.elements.studioBack.textContent,/Patern eğitimleri/);assert.equal(h.statSpans[0].textContent," tanı kaydı");
+ assert.equal(h.elements.contrastLabModule.hidden,false);assert.equal(h.elements.contrastLabModule.session,"ongoing");assert.match(h.elements.patterns.textContent,/Erken Melanom/);assert.match(h.elements.studioBack.textContent,/Patern Eğitimleri/);assert.equal(h.statSpans[0].textContent," tanı kaydı");
 });
 test("deferred initialization and unknown fragments keep a usable home",()=>{
  const h=harness("https://example.org/Docutis/#unknown",true);assert.equal(h.events.click,undefined);h.events.DOMContentLoaded.forEach(cb=>cb());assert.equal(h.elements.studioHome.hidden,false);

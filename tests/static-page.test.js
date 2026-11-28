@@ -235,13 +235,13 @@ test("result status and footer meet WCAG AA normal-text contrast", () => {
   }
 });
 
-test("Turkish reference library labels use Tanı rehberi", () => {
-  assert.match(html, /data-en="Reference" data-tr="Tanı rehberi"/);
-  assert.match(html, /data-en="Clinical reference" data-tr="Tanı rehberi"/);
+test("Turkish reference library labels use Tanı Rehberi", () => {
+  assert.match(html, /data-en="Reference" data-tr="Tanı Rehberi"/);
+  assert.match(html, /data-en="Clinical reference" data-tr="Tanı Rehberi"/);
   assert.match(html, /href="#searchPanel" data-studio-nav="reference"/);
   assert.doesNotMatch(html, /data-tr="Başvuru"|data-tr="Klinik başvuru"/);
-  assert.match(fs.readFileSync(path.join(root, "locale.js"), "utf8"), /"Reference library": "Tanı rehberi"/);
-  assert.match(fs.readFileSync(path.join(root, "studio.js"), "utf8"), /say\("Reference library", "Tanı rehberi"\)/);
+  assert.match(fs.readFileSync(path.join(root, "locale.js"), "utf8"), /"Reference library": "Tanı Rehberi"/);
+  assert.match(fs.readFileSync(path.join(root, "studio.js"), "utf8"), /say\("Reference library", "Tanı Rehberi"\)/);
   assert.doesNotMatch(fs.readFileSync(path.join(root, "studio.js"), "utf8"), /Başvuru kütüphanesi/);
 });
 
@@ -253,4 +253,38 @@ test("CI includes case validation beside quiz and media checks", () => {
   assert.ok(fs.existsSync(path.join(root, "scripts", "case.js")));
   assert.ok(fs.existsSync(path.join(root, "case-data.js")));
   assert.ok(fs.existsSync(path.join(root, "case-app.js")));
+});
+
+
+function isTurkishTitleCase(text) {
+  const small = new Set(["ve", "ile", "veya", "da", "de", "mı", "mi", "mu", "mü", "ki", "için"]);
+  const cap = word => {
+    const first = word.charAt(0);
+    const mapped = { i: "İ", ı: "I", ş: "Ş", ğ: "Ğ", ü: "Ü", ö: "Ö", ç: "Ç" };
+    return (mapped[first] || first.toLocaleUpperCase("tr-TR")) + word.slice(1);
+  };
+  const words = text.split(" ");
+  return words.every((word, index) => {
+    const core = word.replace(/^[←→]+/, "").replace(/[?!:.,]+$/, "");
+    if (!core) return true;
+    if (core === "ya" && words[index + 1] && words[index + 1].replace(/[?!:.,]+$/, "") === "da") return index === 0 ? core === "Ya" : true;
+    if (core === "da" && words[index - 1] === "ya") return true;
+    if (index > 0 && small.has(core.toLocaleLowerCase("tr-TR"))) {
+      return core === core.toLocaleLowerCase("tr-TR");
+    }
+    return core.charAt(0) === cap(core).charAt(0);
+  });
+}
+
+test("Turkish navigation labels use title case", () => {
+  const nav = html.match(/<div class="primary-links">[\s\S]*?<\/div>/)[0];
+  const labels = [...nav.matchAll(/data-tr="([^"]+)"/g)].map(item => item[1]);
+  assert.deepEqual(labels, ["Ana Sayfa", "Vakalar", "Paternler", "Tümör Takibi", "Tanı Rehberi"]);
+  for (const label of labels) assert.ok(isTurkishTitleCase(label), label);
+  assert.match(html, />Praxis<\/a>/);
+  assert.match(html, /<a href="#about">About<\/a>/);
+  assert.match(fs.readFileSync(path.join(root, "locale.js"), "utf8"), /"About": "Hakkında"/);
+  assert.match(html, /data-tr="Klinik Vakalar"/);
+  assert.match(html, /data-tr="Dermoskopi Paternleri"/);
+  assert.match(html, /data-tr="Bugün Ne Çalışmak İstersin\?"/);
 });
