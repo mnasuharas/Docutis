@@ -795,7 +795,7 @@
     return true;
   }
 
-  function addDetailNavigation(hasMedia, hasOncology, hasLearningPath, hasPraxis) {
+  function addDetailNavigation(hasMedia, hasOncology, hasLearningPath, hasPraxis, hasPraxisHandout) {
     const navigation = document.createElement("nav");
     navigation.className = "detail-jump-nav";
     navigation.setAttribute("aria-label", "Condition detail sections");
@@ -808,7 +808,8 @@
       ["detail-follow-up", "Follow-up"],
       ["detail-coding", "Coding"]
     ];
-    if (hasPraxis) links.unshift(["detail-praxis", "Praxis"], ["detail-patient-info", "Patient information"]);
+    if (hasPraxisHandout) links.unshift(["detail-patient-info", "Patient information"]);
+    if (hasPraxis) links.unshift(["detail-praxis", "Praxis"]);
     if (hasLearningPath) links.unshift(["detail-learning-path", "Learning path"]);
     if (hasMedia) links.push(["detail-media", "Media"]);
     if (hasOncology) links.push(["detail-oncology", "Oncology"]);
@@ -891,7 +892,7 @@
     const hasLearningPath = addLearningPath(detailsElement, disease);
     const hasMedia = (mediaData.items || []).some(item => item.diseaseId === disease.id);
     const hasOncology = Boolean(disease.clinicalProfile?.oncology);
-    addDetailNavigation(hasMedia, hasOncology, hasLearningPath, praxis?.has(disease.id));
+    addDetailNavigation(hasMedia, hasOncology, hasLearningPath, praxis?.has(disease.id), praxis?.hasHandout(disease.id));
     const content = document.createElement("div");
     content.className = "detail-content";
     addDetailSection(content, "Overview", disease.description, "detail-overview", "detail-section--wide");
