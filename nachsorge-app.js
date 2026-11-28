@@ -357,7 +357,7 @@
     const result = document.getElementById("nachsorgeResult");
     const search = document.getElementById("nachsorgeSearch");
     if (!disease || !groupSelect || !result) return;
-    if (search) search.placeholder = say("Melanoma, Merkel, Bowen…", "Melanom, Merkel, Bowen…");
+    if (search) search.placeholder = say("Melanoma, Merkel, Bowen…", "Kontrol takibi: melanom, Merkel, Bowen…");
     const query = normalize(search ? search.value : "");
     const fromUrl = selectedFromUrl();
     const previous = (options.preferUrl && fromUrl) || entryById(disease.value) || fromUrl;
