@@ -179,7 +179,13 @@
     }
     renderReview(protocol, provenance);
 
-    if (announce) status.textContent = `Showing ${protocol.diseaseLabel}, ${group.label}, ${period.label}.`;
+    if (announce) {
+      const turkish = document.documentElement?.lang === "tr" && window.DOCUTIS_LOCALE;
+      const tl = text => (turkish && typeof window.DOCUTIS_LOCALE.translate === "function" && window.DOCUTIS_LOCALE.translate(text)) || text;
+      status.textContent = turkish
+        ? `${tl(protocol.diseaseLabel)}, ${tl(group.label)}, ${tl(period.label)} gösteriliyor.`
+        : `Showing ${protocol.diseaseLabel}, ${group.label}, ${period.label}.`;
+    }
   }
 
   function renderPeriods(announce = true) {
@@ -294,7 +300,7 @@
     });
     function syncPlaceholder() {
       const thickness = get("Thickness");
-      if (thickness) thickness.placeholder = say("z. B. 0,9", "ör. 0,9");
+      if (thickness) thickness.placeholder = say("e.g. 0.9", "ör. 0,9");
     }
     syncPlaceholder();
     languageControl?.addEventListener("change", () => {

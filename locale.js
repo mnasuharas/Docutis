@@ -276,10 +276,10 @@
     [/^At least (\d+)× per year$/, "Yılda en az $1 kez"],
     [/^(\d+(?:–\d+)?)× per year$/, "Yılda $1 kez"],
     [/^Official guideline title: (.*)$/, "Resmî kılavuz başlığı: $1"],
-    [/^Guideline jurisdiction: (.*)$/, "Kılavuzun geçerli olduğu yer: $1"],
+    [/^Guideline jurisdiction: (.*)$/, function (value) { return "Kılavuzun geçerli olduğu yer: " + (translated(value) || value); }],
     [/^Version: (.*)$/, "Sürüm: $1"],
     [/^AWMF register: (.*)$/, "AWMF kayıt numarası: $1"],
-    [/^Recommendation location: (.*)$/, "Önerinin kılavuzdaki yeri: $1"],
+    [/^Recommendation location: (.*)$/, function (value) { return "Önerinin kılavuzdaki yeri: " + (translated(value) || value); }],
     [/^Source metadata checked: (.*)$/, "Kaynak bilgileri kontrol tarihi: $1"],
     [/^Question (\d+) of (\d+)$/, "Soru $1 / $2"],
     [/^(\d+) of (\d+) correct$/, "$2 sorudan $1 doğru"],
@@ -362,7 +362,10 @@
         return piece(id.replaceAll("-", " ").replace(/\b\w/g, function (character) { return character.toUpperCase(); }));
       }).join(", ");
       return "Kapsam: " + names + ". İçerik bütünlüğü kimliği: " + fingerprint + ".";
-    }]
+    }],
+    [/^Start case: (.+)$/, function (title) { return "Vakayı başlat: " + (translated(title) || title); }],
+    [/^(.+), (\d+) conditions?$/, function (label, count) { return piece(label) + ", " + count + " tanı"; }],
+    [/^([^:]+): (.+)$/, function (label, rest) { return (translated(label) || label) + ": " + (translated(rest) || rest); }]
   ];
   function piece(value) {
     return Object.prototype.hasOwnProperty.call(translations, value) ? translations[value] : value;
@@ -438,6 +441,8 @@
   };
   Object.assign(translations, conditionNames, {
     "All conditions": "Tüm tanılar",
+    "Level": "Seviye", "Spectrum": "Spektrum", "Skill": "Beceri",
+    "e.g. hand, back": "ör. el, sırt",
     "Overview": "Genel Bakış", "Clinical features": "Klinik Bulgular",
     "Dermoscopy": "Dermoskopi", "Differential": "Ayırıcı Tanı",
     "Differential diagnosis": "Ayırıcı Tanı", "Treatment": "Tedavi",
@@ -1147,7 +1152,15 @@
   window.DOCUTIS_LOCALE = Object.freeze({
     conditionName: window.DOCUTIS_LOCALE.conditionName,
     translate: function (value) { return translated(value); },
-    chipSource: chipSource
+    chipSource: chipSource,
+    // Lets other modules register English-to-Turkish strings they already own.
+    // Existing entries win; a re-translate runs when the language is Turkish.
+    extend: function (map) {
+      Object.keys(map).forEach(function (key) {
+        if (!Object.prototype.hasOwnProperty.call(translations, key)) translations[key] = map[key];
+      });
+      if (language === "tr" && document.body) translate(document.body);
+    }
   });
   const originalText = new WeakMap();
   const originalAttributes = new WeakMap();

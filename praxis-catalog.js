@@ -17,6 +17,7 @@
   function localize() {
     document.documentElement.lang = language.value;
     document.getElementById("praxisLanguageLabel").textContent = say("Language", "Dil");
+    document.getElementById("praxisSkipLink").textContent = say("Skip to content", "İçeriğe geç");
   }
 
   function add(parent, tag, value, className) {

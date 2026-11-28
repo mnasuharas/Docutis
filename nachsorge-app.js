@@ -224,6 +224,34 @@
     "No current S3 or S2k Nachsorge table. This S1 is in revision and its validity ended on 22 August 2023. Intervals from that S1 are not copied.": "Güncel bir S3 veya S2k takip tablosu yok. Bu S1 revizyondadır ve geçerliliği 22 Ağustos 2023'te bitmiştir. Bu S1'in aralıkları kopyalanmaz."
   });
 
+  // The Dermato-Oncology Follow-Up page renders the same English protocol text as this page.
+  // Share the Turkish strings so that page does not show English when Turkish is selected.
+  (function registerSharedTurkish() {
+    if (!window.DOCUTIS_LOCALE || typeof window.DOCUTIS_LOCALE.extend !== "function") return;
+    const map = Object.assign({}, NOTE_TR, {
+      "Germany": "Almanya",
+      "Merkel cell carcinoma": "Merkel hücreli karsinom",
+      "official patient guideline": "resmî hasta kılavuzu",
+      "German expert information": "Alman uzman bilgisi",
+      "professional society patient guidance": "meslek derneği hasta rehberi",
+      "guideline register": "kılavuz kaydı",
+      "German expert-practice context": "Almanya’daki uzman uygulaması",
+      "German stage-based clinical context": "Almanya’da evreye dayalı klinik yaklaşım",
+      "strong recommendation": "güçlü öneri",
+      "recommendation": "öneri",
+      "expert consensus recommendation": "uzman uzlaşısı önerisi",
+      "may (kann)": "yapılabilir",
+      "schedule 9.2": "çizelge 9.2",
+      "consensus": "uzlaşı",
+      "strong consensus": "güçlü uzlaşı",
+      "100% consensus": "%100 uzlaşı"
+    });
+    [GROUP_LABELS, PERIOD_LABELS, redFlags, education].forEach(group => {
+      Object.keys(group).forEach(key => { if (group[key] && group[key].en && group[key].tr) map[group[key].en] = group[key].tr; });
+    });
+    window.DOCUTIS_LOCALE.extend(map);
+  }());
+
   function lang() { return document.documentElement && document.documentElement.lang === "tr" ? "tr" : "en"; }
   function say(en, tr) { return lang() === "tr" ? tr : en; }
   function labelOf(map, id, fallback) {
