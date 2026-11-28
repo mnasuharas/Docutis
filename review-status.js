@@ -2111,6 +2111,213 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
       ]
     },
     {
+      "id": "merkel-cell-carcinoma-de",
+      "assetType": "follow_up",
+      "title": "Merkel cell carcinoma — Germany",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:f4a0123ad40d5ebf0913c6315203a7ef18082e80623398fcf1a3c5d4b3424c3a",
+      "sections": [
+        "scope",
+        "risk-groups",
+        "periods",
+        "clinical-examination",
+        "lymph-node-ultrasound",
+        "s100b",
+        "cross-sectional-imaging",
+        "context",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSources": [
+        "https://www.degum.de/fileadmin/dokumente/Aktivitaeten/Leitlinien/PDF-Verlinkungen/032-023l_S2k_Merkelzellkarziom-der-Haut_2023-04_Langversion.pdf",
+        "https://register.awmf.org/leitlinien/detail/032-023"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "S2k-Leitlinie Merkelzellkarzinom (Update 2022)",
+          "organization": "AWMF / Deutsche Krebsgesellschaft / Deutsche Dermatologische Gesellschaft",
+          "type": "DE_S2K",
+          "year": "2022-06",
+          "version": "Update 2022",
+          "doi": null,
+          "url": "https://www.degum.de/fileadmin/dokumente/Aktivitaeten/Leitlinien/PDF-Verlinkungen/032-023l_S2k_Merkelzellkarziom-der-Haut_2023-04_Langversion.pdf",
+          "metadataCheckedAt": "2026-11-28"
+        },
+        {
+          "title": "AWMF register 032-023, Merkelzellkarzinom",
+          "organization": "AWMF",
+          "type": "guideline register",
+          "year": "2022-06",
+          "version": null,
+          "doi": null,
+          "url": "https://register.awmf.org/leitlinien/detail/032-023",
+          "metadataCheckedAt": "2026-11-28"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "scope",
+        "risk-groups",
+        "periods",
+        "clinical-examination",
+        "lymph-node-ultrasound",
+        "s100b",
+        "cross-sectional-imaging",
+        "context",
+        "safety-notice",
+        "references"
+      ]
+    },
+    {
+      "id": "actinic-keratosis-de",
+      "assetType": "follow_up",
+      "title": "Actinic keratosis and field cancerization — Germany",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:309e48054a3c8d632eef293763b56e46f518e0bbbd68caa14732a4f680aa5f25",
+      "sections": [
+        "scope",
+        "risk-groups",
+        "periods",
+        "clinical-examination",
+        "lymph-node-ultrasound",
+        "s100b",
+        "cross-sectional-imaging",
+        "context",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSources": [
+        "https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Aktinische_Keratosen_und_PEK/Version_2/LL_Aktinische_Keratose_und_PEK_Langversion_2.0.pdf"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "S3-Leitlinie Aktinische Keratose und Plattenepithelkarzinom der Haut",
+          "organization": "Leitlinienprogramm Onkologie (AWMF, Deutsche Krebsgesellschaft, Deutsche Krebshilfe)",
+          "type": "DE_S3",
+          "year": "2022-12",
+          "version": "2.0",
+          "doi": null,
+          "url": "https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Aktinische_Keratosen_und_PEK/Version_2/LL_Aktinische_Keratose_und_PEK_Langversion_2.0.pdf",
+          "metadataCheckedAt": "2026-11-28"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "scope",
+        "risk-groups",
+        "periods",
+        "clinical-examination",
+        "lymph-node-ultrasound",
+        "s100b",
+        "cross-sectional-imaging",
+        "context",
+        "safety-notice",
+        "references"
+      ]
+    },
+    {
+      "id": "squamous-cell-carcinoma-in-situ-de",
+      "assetType": "follow_up",
+      "title": "Bowen disease / squamous-cell carcinoma in situ — Germany",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:f7412a06d285006ae9e93122aece4cced78e6a5a0241864727457e10d898306b",
+      "sections": [
+        "scope",
+        "risk-groups",
+        "periods",
+        "clinical-examination",
+        "lymph-node-ultrasound",
+        "s100b",
+        "cross-sectional-imaging",
+        "context",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSources": [
+        "https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Aktinische_Keratosen_und_PEK/Version_2/LL_Aktinische_Keratose_und_PEK_Langversion_2.0.pdf"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "S3-Leitlinie Aktinische Keratose und Plattenepithelkarzinom der Haut",
+          "organization": "Leitlinienprogramm Onkologie (AWMF, Deutsche Krebsgesellschaft, Deutsche Krebshilfe)",
+          "type": "DE_S3",
+          "year": "2022-12",
+          "version": "2.0",
+          "doi": null,
+          "url": "https://www.leitlinienprogramm-onkologie.de/fileadmin/user_upload/Downloads/Leitlinien/Aktinische_Keratosen_und_PEK/Version_2/LL_Aktinische_Keratose_und_PEK_Langversion_2.0.pdf",
+          "metadataCheckedAt": "2026-11-28"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "scope",
+        "risk-groups",
+        "periods",
+        "clinical-examination",
+        "lymph-node-ultrasound",
+        "s100b",
+        "cross-sectional-imaging",
+        "context",
+        "safety-notice",
+        "references"
+      ]
+    },
+    {
+      "id": "dermatofibrosarcoma-protuberans-de",
+      "assetType": "follow_up",
+      "title": "Dermatofibrosarcoma protuberans — Germany",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:fb6610dd78dfe92a9c59570bcb43f4fd519cad347ca0ab5f595fcd24445f6db2",
+      "sections": [
+        "scope",
+        "risk-groups",
+        "periods",
+        "clinical-examination",
+        "lymph-node-ultrasound",
+        "s100b",
+        "cross-sectional-imaging",
+        "context",
+        "safety-notice",
+        "references"
+      ],
+      "evidenceSources": [
+        "https://register.awmf.org/leitlinien/detail/032-026"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "S1-Leitlinie Dermatofibrosarcoma protuberans",
+          "organization": "AWMF / Deutsche Dermatologische Gesellschaft",
+          "type": "DE_S1",
+          "year": "2018-08",
+          "version": "Update 2018; validity ended 2023-08-22",
+          "doi": null,
+          "url": "https://register.awmf.org/leitlinien/detail/032-026",
+          "metadataCheckedAt": "2026-11-28"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "scope",
+        "risk-groups",
+        "periods",
+        "clinical-examination",
+        "lymph-node-ultrasound",
+        "s100b",
+        "cross-sectional-imaging",
+        "context",
+        "safety-notice",
+        "references"
+      ]
+    },
+    {
       "id": "case-acral-melanoma-plantar",
       "assetType": "case",
       "title": "Large plantar pigmented macule",

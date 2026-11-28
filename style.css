@@ -2964,3 +2964,54 @@ footer {
   background: var(--color-surface);
   color: var(--color-text);
 }
+
+.nachsorge-module .follow-up-controls input,
+.nachsorge-module .follow-up-controls select {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 8px;
+  color: var(--color-text);
+  min-height: 44px;
+  min-width: 0;
+  padding: 11px 12px;
+  width: 100%;
+}
+
+.nachsorge-disclaimer {
+  background: var(--color-surface-muted);
+  border-inline-start: 4px solid var(--color-accent);
+  margin: var(--space-4) 0;
+  padding: var(--space-3) var(--space-4);
+}
+
+.nachsorge-table-wrap { overflow-x: auto; }
+
+.nachsorge-table {
+  border-collapse: collapse;
+  min-width: 40rem;
+  width: 100%;
+}
+
+.nachsorge-table th,
+.nachsorge-table td {
+  border: 1px solid var(--color-border);
+  padding: 8px;
+  text-align: start;
+  vertical-align: top;
+}
+
+.nachsorge-table th:first-child,
+.nachsorge-table td:first-child {
+  background: var(--color-surface);
+  position: sticky;
+  left: 0;
+}
+
+.nachsorge-table .follow-up-note { display: block; margin-top: 4px; }
+
+.nachsorge-list { padding-inline-start: 1.2rem; }
+
+@media (max-width: 700px) {
+  .nachsorge-module .follow-up-controls { grid-template-columns: 1fr; }
+  .nachsorge-module .follow-up-controls label:last-child { grid-column: auto; }
+}

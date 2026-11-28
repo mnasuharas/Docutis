@@ -4,7 +4,7 @@ const { loadData, loadFollowUpData, validateFollowUpReview } = require("./clinic
 
 const allowedModalities = new Set(["clinical_examination", "lymph_node_ultrasound", "s100b", "cross_sectional_imaging"]);
 const allowedRecommendationStatuses = new Set(["scheduled", "conditional", "not_routinely_scheduled", "not_specified"]);
-const allowedRecommendationCharacters = new Set(["soll", "sollte", "sollte (EK)", "Schema 9.2"]);
+const allowedRecommendationCharacters = new Set(["soll", "sollte", "sollte (EK)", "kann", "Schema 9.2"]);
 const allowedConsensusStrengths = new Set(["Konsens", "Starker Konsens", "Konsensstärke 100 %"]);
 const allowedEvidenceScopes = new Set(["primary_guideline", "german_expert_context", "german_clinical_context", "international_context"]);
 

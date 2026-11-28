@@ -72,7 +72,7 @@ test("current BCC education assets reflect their scoped clinician review status"
   assert.equal(status.decisions.length, 5);
   assert.equal(status.assets.filter(item => item.status === "clinician reviewed").length, 4);
   const caseCount = status.assets.filter(item => item.assetType === "case").length;
-  assert.equal(status.assets.filter(item => item.status === "review required").length, 23 + caseCount);
+  assert.equal(status.assets.filter(item => item.status === "review required").length, 27 + caseCount);
   assert.ok(caseCount >= 3);
   assert.ok(status.assets.filter(item => item.assetType === "case").every(item => item.status === "review required"));
 });

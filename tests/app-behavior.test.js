@@ -152,13 +152,13 @@ test("initial rendering creates all cards and ten category sections", () => {
   assert.equal(elements.categoryFilters.querySelectorAll("button").length, 11);
   assert.ok(elements.categoryFilters.querySelectorAll("button").every(button => button.type === "button"));
   assert.match(elements.resultStatus.textContent, /62 conditions shown/);
-  assert.match(textOf(elements.libraryStats), /3\s+oncology follow-up protocols/);
+  assert.match(textOf(elements.libraryStats), /7\s+oncology follow-up protocols/);
   assert.match(textOf(elements.reviewDashboardCounts), /2\s+Clinician-reviewed records/);
   assert.match(textOf(elements.reviewDashboardCounts), /0\s+Partially reviewed records/);
   assert.match(textOf(elements.reviewDashboardCounts), /60\s+Records requiring clinician review/);
   assert.match(textOf(elements.reviewDashboardCounts), /0\/8\s+Reviewed quiz items/);
   assert.match(textOf(elements.reviewDashboardCounts), /1\/9\s+Reviewed visual items/);
-  assert.match(textOf(elements.reviewDashboardCounts), /1\/3\s+Reviewed follow-up protocols/);
+  assert.match(textOf(elements.reviewDashboardCounts), /1\/7\s+Reviewed follow-up protocols/);
   assert.match(textOf(elements.reviewDashboardCounts), /2026-09-23\s+Most recent valid human review/);
 });
 
@@ -515,7 +515,7 @@ test("actinic keratosis and basal cell carcinoma expose per-asset learning paths
   assert.match(ak, /does not review the schematic, quiz, follow-up protocol or case/);
   assert.match(ak, /No original schematic is published for this record/);
   assert.match(ak, /persistently thickened, tender or concerning for invasion/);
-  assert.match(ak, /No German follow-up protocol is published for this record/);
+  assert.match(ak, /Germany follow-up/);
   assert.match(ak, /Field change on the dorsum of the hand/);
   assert.match(ak, /Clinician reviewed/);
   assert.match(ak, /Clinical review pending/);
