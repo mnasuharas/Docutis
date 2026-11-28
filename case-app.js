@@ -887,7 +887,7 @@
     const rows = visiblePatternRows(caseItem);
     if (!rows.length) return;
     const intro = element("section", undefined, mode === "study" ? "case-pattern-study" : "case-kind-section");
-    const heading = element("h5", mode === "study" ? "Patterns in this case" : "Patterns");
+    const heading = element("h5", mode === "study" ? "Patterns in This Case" : "Patterns");
     if (mode === "study") heading.id = "patternsInThisCase";
     intro.appendChild(heading);
     intro.appendChild(element("p", mode === "study"

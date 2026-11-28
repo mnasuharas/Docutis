@@ -52,7 +52,7 @@ test("static page keeps load order, disclaimer and accessible controls", () => {
   assert.ok(html.indexOf('src="media-data.js"') < html.indexOf('src="app.js'));
   assert.ok(html.indexOf('src="followup-data.js') < html.indexOf('src="followup-app.js'));
   assert.ok(html.indexOf('src="quiz-data.js"') < html.indexOf('src="quiz-app.js'));
-  assert.ok(html.indexOf('src="case-data.js"') < html.indexOf('src="case-app.js"'));
+  assert.ok(html.indexOf('src="case-data.js"') < html.indexOf('src="case-app.js'));
   assert.match(html, /id="caseModule"/);
   assert.match(html, /href="#caseModule"/);
   assert.ok(html.indexOf('src="review-status.js"') < html.indexOf('src="oss-feedback.js"'));
@@ -62,7 +62,7 @@ test("static page keeps load order, disclaimer and accessible controls", () => {
   assert.match(html, /id="followUpDisease"/);
   assert.match(html, /id="followUpGroup"/);
   assert.match(html, /id="followUpPeriod"/);
-  assert.match(html, /<h2 id="followUpTitle">Dermato-oncology follow-up<\/h2>/);
+  assert.match(html, /<h2 id="followUpTitle">Dermato-Oncology Follow-Up<\/h2>/);
   assert.match(html, /<label for="followUpDisease">Disease/);
   assert.match(html, /<label for="followUpGroup">Stage \/ risk group/);
   assert.match(html, /<label for="followUpPeriod">Follow-up period or guidance/);
@@ -237,11 +237,11 @@ test("result status and footer meet WCAG AA normal-text contrast", () => {
 
 test("Turkish reference library labels use Tanı Rehberi", () => {
   assert.match(html, /data-en="Reference" data-tr="Tanı Rehberi"/);
-  assert.match(html, /data-en="Clinical reference" data-tr="Tanı Rehberi"/);
+  assert.match(html, /data-en="Clinical Reference" data-tr="Tanı Rehberi"/);
   assert.match(html, /href="#searchPanel" data-studio-nav="reference"/);
   assert.doesNotMatch(html, /data-tr="Başvuru"|data-tr="Klinik başvuru"/);
-  assert.match(fs.readFileSync(path.join(root, "locale.js"), "utf8"), /"Reference library": "Tanı Rehberi"/);
-  assert.match(fs.readFileSync(path.join(root, "studio.js"), "utf8"), /say\("Reference library", "Tanı Rehberi"\)/);
+  assert.match(fs.readFileSync(path.join(root, "locale.js"), "utf8"), /"Reference Library": "Tanı Rehberi"/);
+  assert.match(fs.readFileSync(path.join(root, "studio.js"), "utf8"), /say\("Reference Library", "Tanı Rehberi"\)/);
   assert.doesNotMatch(fs.readFileSync(path.join(root, "studio.js"), "utf8"), /Başvuru kütüphanesi/);
 });
 
@@ -287,4 +287,36 @@ test("Turkish navigation labels use title case", () => {
   assert.match(html, /data-tr="Klinik Vakalar"/);
   assert.match(html, /data-tr="Dermoskopi Paternleri"/);
   assert.match(html, /data-tr="Bugün Ne Çalışmak İstersin\?"/);
+});
+
+function isEnglishTitleCase(text) {
+  const small = new Set(["a", "an", "the", "and", "or", "of", "in", "to", "for", "vs", "vs.", "at", "by", "as", "but", "nor", "with", "from", "on"]);
+  const capPart = part => {
+    if (!part) return part;
+    if (/^[A-Z0-9]{2,}$/.test(part)) return part;
+    return part.charAt(0).toUpperCase() + part.slice(1);
+  };
+  const words = text.split(" ");
+  return words.every((word, index) => {
+    const prefix = word.match(/^[←→]+/) ? word.match(/^[←→]+/)[0] : "";
+    const suffix = (word.slice(prefix.length).match(/[?!:.,]+$/) || [""])[0];
+    const core = word.slice(prefix.length, word.length - suffix.length || undefined);
+    if (!core) return true;
+    if (index > 0 && index < words.length - 1 && small.has(core.toLowerCase())) {
+      return core === core.toLowerCase();
+    }
+    return core.split("-").every(capPart) === true && core.split("-").map(capPart).join("-") === core;
+  });
+}
+
+test("English navigation labels use title case", () => {
+  const nav = html.match(/<div class="primary-links">[\s\S]*?<\/div>/)[0];
+  const labels = [...nav.matchAll(/data-en="([^"]+)"/g)].map(item => item[1]);
+  assert.deepEqual(labels, ["Home", "Cases", "Patterns", "Follow-Up (Nachsorge)", "Reference"]);
+  for (const label of labels) assert.ok(isEnglishTitleCase(label), label);
+  assert.match(html, />Praxis<\/a>/);
+  assert.match(html, /data-en="What Would You Like to Study\?"/);
+  assert.match(html, /data-en="Clinical Cases"/);
+  assert.match(html, /data-en="Dermoscopy Patterns"/);
+  assert.match(html, /data-en="Clinical Reference"/);
 });

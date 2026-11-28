@@ -430,7 +430,7 @@
       const wrap = add(result, "div", null, "nachsorge-table-wrap");
       const table = add(wrap, "table", null, "nachsorge-table");
       const head = add(table, "tr");
-      add(head, "th", say("At each visit", "Her Ziyarette"));
+      add(head, "th", say("At Each Visit", "Her Ziyarette"));
       group.periods.forEach(period => add(head, "th", labelOf(PERIOD_LABELS, period.id, period.label)));
       const modalityIds = ["clinical_examination", "lymph_node_ultrasound", "s100b", "cross_sectional_imaging"];
       modalityIds.forEach(modality => {
@@ -462,11 +462,11 @@
         add(aside, "p", noteText(section.text, lang()));
       });
     }
-    add(result, "h3", say("What to do at each visit", "Her Ziyarette Ne Yapılır?"));
+    add(result, "h3", say("What to Do at Each Visit", "Her Ziyarette Ne Yapılır?"));
     const visitList = add(result, "ul", null, "nachsorge-list");
     visitsFor(entry, group?.id).forEach(item => add(visitList, "li", line(item, lang())));
     if (!visitList.children.length) add(result, "p", say("No visit checklist is stated beyond the paragraph above.", "Yukarıdaki paragrafın ötesinde bir ziyaret listesi belirtilmemiştir."));
-    add(result, "h3", say("Imaging and laboratory", "Görüntüleme ve Laboratuvar"));
+    add(result, "h3", say("Imaging and Laboratory", "Görüntüleme ve Laboratuvar"));
     if (!protocol || !group || lacksTimetable(group)) add(result, "p", say("No imaging or laboratory interval is stated.", "Görüntüleme veya laboratuvar aralığı belirtilmemiştir."));
     else {
       const imaging = add(result, "ul", null, "nachsorge-list");
@@ -479,9 +479,9 @@
         });
       });
     }
-    add(result, "h3", say("Red flags", "Kırmızı Bayraklar"));
+    add(result, "h3", say("Red Flags", "Kırmızı Bayraklar"));
     add(result, "p", line(redFlags[entry.id], lang()));
-    add(result, "h3", say("Patient education", "Hasta Eğitimi"));
+    add(result, "h3", say("Patient Education", "Hasta Eğitimi"));
     add(result, "p", line(education[entry.id], lang()));
     add(result, "h3", say("Source", "Kaynak"));
     const source = protocol ? protocol.guideline : null;

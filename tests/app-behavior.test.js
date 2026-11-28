@@ -574,7 +574,7 @@ test("actinic keratosis and basal cell carcinoma expose per-asset learning paths
   const melanomaPath = elements.details.querySelectorAll(".learning-path")[0];
   const melanomaText = textOf(melanomaPath);
   assert.match(melanomaText, /Start guided cases \(5\)/);
-  assert.match(melanomaText, /full case library stays under Clinical cases/);
+  assert.match(melanomaText, /full case library stays under Clinical Cases/);
   assert.match(melanomaText, /Every guided case remains clinician review required/);
   assert.doesNotMatch(melanomaText, /Large plantar pigmented macule/);
   assert.equal(melanomaPath.querySelectorAll(".learning-path-link").filter(link => link.getAttribute("data-learning-kind") === "case").length, 0);

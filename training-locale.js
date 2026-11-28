@@ -264,7 +264,7 @@
   "Total conditions": "Toplam tanı",
   "I've been diagnosed with melanoma. Now what?": "Melanom tanısı aldım. Şimdi ne olacak? (I've been diagnosed with melanoma. Now what?)",
   "Patient guideline: Melanoma follow-up and early detection": "Hasta kılavuzu: Melanom takibi ve erken tanı (Melanoma follow-up and early detection)",
-  "Subtle clues and close mimics": "Silik İpuçları ve Yakın Taklitçiler",
+  "Subtle Clues and Close Mimics": "Silik İpuçları ve Yakın Taklitçiler",
   "Choose what is visible in two source-linked cases, then reveal the recorded diagnoses and the limits of that comparison. Educational preview only; no individual lesion decision or score.": "Kaynağı belirtilen iki vakada neyin görüldüğünü seçin, ardından kayıtlı tanıları ve karşılaştırmanın sınırlarını açın. Yalnızca eğitim önizlemesidir; tekil lezyon kararı veya puanlama içermez.",
   "One clue: name it before weighing it": "Tek ipucu: ağırlığını tartmadan önce adlandırın",
   "A missing pigment network is not a negative network. A negative network is a visible pattern of widened pale interconnecting lines around pigmented structures. Shiny white lines are a separate polarized-light finding; they can occur in benign and malignant lesions. Neither sign alone establishes melanoma in situ.": "Pigment ağının görülmemesi, negatif ağ demek değildir. Negatif ağ, pigmentli yapıları çevreleyen genişlemiş açık renkli bağlantılı çizgilerin görüldüğü paterndir. Parlak beyaz çizgiler polarize ışıkta görülen ayrı bir bulgudur; benign ve malign lezyonlarda bulunabilir. İkisi de tek başına melanoma in situ tanısı koydurmaz.",

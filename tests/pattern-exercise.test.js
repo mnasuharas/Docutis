@@ -175,7 +175,7 @@ test("the public page loads the pattern exercise after the case and pattern data
   const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
   assert.match(html, /id="patternExercise"[^>]*hidden>/);
   assert.match(html, /href="pattern-exercise\.css\?v=paired-views"/);
-  assert.match(html, /src="case-data\.js"[\s\S]*src="pattern-data\.js"[\s\S]*src="pattern-exercise\.js\?v=tr-no-german-20261128b"/);
+  assert.match(html, /src="case-data\.js"[\s\S]*src="pattern-data\.js"[\s\S]*src="pattern-exercise\.js\?v=en-headings-1"/);
 });
 
 test("clinical-first practice records independent impressions before each dermoscopic view", () => {
