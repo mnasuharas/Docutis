@@ -1,5 +1,5 @@
-#contrastLabModule { scroll-margin-top: 6rem; margin-block: 2rem; }
-#contrastLabApp { border: 1px solid var(--border, #cbd5e1); border-radius: 1rem; padding: clamp(1rem, 3vw, 2rem); }
+#contrastLabModule, #patternContextModule { scroll-margin-top: 6rem; margin-block: 2rem; }
+#contrastLabApp, #patternContextApp { border: 1px solid var(--border, #cbd5e1); border-radius: 1rem; padding: clamp(1rem, 3vw, 2rem); }
 .contrast-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
 .contrast-side { min-width: 0; }
 .contrast-photo { margin: 0 0 1rem; }
@@ -11,7 +11,11 @@
 .contrast-photo figcaption { font-size: .85rem; overflow-wrap: anywhere; margin-top: .5rem; }
 .contrast-storage { display: flex; align-items: center; gap: .75rem; padding-block: .75rem; }
 .contrast-storage input { width: 1.25rem; height: 1.25rem; }
-#contrastLabApp select { width: 100%; min-width: 0; min-height: 44px; }
-#contrastLabApp button { min-height: 44px; white-space: normal; margin: .5rem .5rem .5rem 0; }
-#contrastLabApp :focus-visible { outline: 3px solid #0284c7; outline-offset: 3px; }
+#contrastLabApp select, #patternContextApp select { width: 100%; min-width: 0; min-height: 44px; }
+#contrastLabApp button, #patternContextApp button { min-height: 44px; white-space: normal; margin: .5rem .5rem .5rem 0; }
+#contrastLabApp :focus-visible, #patternContextApp :focus-visible { outline: 3px solid #0284c7; outline-offset: 3px; }
 @media (max-width: 700px) { .contrast-panels { grid-template-columns: minmax(0, 1fr); } }
+
+.context-image { max-width: min(100%, 27rem); }
+.context-image img { width: 100%; }
+.context-lessons { list-style: none; margin: 0; padding: 0; }
