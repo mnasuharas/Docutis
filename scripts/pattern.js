@@ -233,9 +233,8 @@ function teachingById(caseData = loadCaseData()) {
 
 function casePole(caseItem, diseases, teaching) {
   const disease = diseases.get(caseItem.diseaseId) || null;
-  if (disease) return lesionPole(disease);
   const record = teaching.get(caseItem.diseaseId);
-  return record && record.pole ? record.pole : "unknown";
+  return record?.pole || (disease ? lesionPole(disease) : "unknown");
 }
 
 function occurrenceShell(caseItem, diseases, extra) {

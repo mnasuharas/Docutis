@@ -5,6 +5,9 @@
   // Code numbers stay unchanged. These drafts are not clinician reviewed and do not
   // change review status, provenance or licensing.
   const entries = {
+  "ICD-10 WHO 2019: L82 — Seborrhoeic keratosis": "ICD-10 WHO 2019: L82 — Seboreik keratoz",
+  "ICD-10 WHO 2019: D23 — Other benign neoplasms of skin": "ICD-10 WHO 2019: D23 — Derinin diğer benign neoplazileri",
+  "ICD-10 WHO 2019: L81.4 — Other melanin hyperpigmentation": "ICD-10 WHO 2019: L81.4 — Melanine bağlı diğer hiperpigmentasyonlar",
   "ICD-10 WHO 2019: L57.0 — Actinic keratosis": "ICD-10 WHO 2019: L57.0 — Aktinik keratoz",
   "ICD-10-GM 2026: L57.0 — Aktinische Keratose": "ICD-10-GM 2026: L57.0 — Aktinik keratoz (Aktinische Keratose)",
   "German Modification code for German clinical documentation and billing; keep separate from ICD-10 WHO.": "Alman klinik belgelendirme ve faturalandırma için Alman Modifikasyonu kodu; ICD-10 WHO’dan ayrı tutun.",

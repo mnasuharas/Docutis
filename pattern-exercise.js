@@ -99,8 +99,11 @@
 
   function attribution(parent, image, revealed) {
     if (revealed) {
-      const source = add(parent, "a", image.attribution, "exercise-caption");
+      add(parent, "p", image.attribution, "exercise-caption");
+      const source = add(parent, "a", "Open image source", "exercise-caption");
       source.href = image.sourceUrl;
+      source.target = "_blank";
+      source.rel = "noopener noreferrer";
       return;
     }
     const credit = add(parent, "p", image.creator + (image.modificationStatus === "cropped" ? " · cropped image · " : " · "), "exercise-caption");

@@ -639,7 +639,12 @@
         if (event && typeof event.preventDefault === "function") event.preventDefault();
         if (step.kind === "quiz") window.DOCUTIS_QUIZ_APP?.openQuestion?.(step.assetId);
         if (step.kind === "follow-up") window.DOCUTIS_FOLLOW_UP_APP?.openProtocol?.(step.assetId);
-        if (step.kind === "case") window.DOCUTIS_CASE_APP?.openCase?.(step.assetId);
+        if (step.kind === "case") {
+          if (window.DOCUTIS_CASE_APP) window.DOCUTIS_CASE_APP.openCase?.(step.assetId);
+          else window.DOCUTIS_LOAD_CASES?.().then(() => {
+            if (window.location?.hash === "#caseModule") window.DOCUTIS_CASE_APP?.openCase?.(step.assetId);
+          }, () => {});
+        }
         const target = document.getElementById(step.targetId);
         if (target) {
           if (target.tabIndex < 0) target.tabIndex = -1;
@@ -669,6 +674,12 @@
       launch.href = "#caseModule";
       launch.addEventListener("click", event => {
         if (event && typeof event.preventDefault === "function") event.preventDefault();
+        if (!window.DOCUTIS_CASE_APP && window.DOCUTIS_LOAD_CASES) {
+          window.DOCUTIS_LOAD_CASES().then(() => {
+            if (window.location?.hash === "#caseModule") window.DOCUTIS_CASE_APP?.openPathway?.(disease.id);
+          }, () => {});
+          return;
+        }
         const opened = window.DOCUTIS_CASE_APP?.openPathway?.(disease.id);
         if (opened === false) return;
         const target = document.getElementById("caseModule");
@@ -860,6 +871,9 @@
     addReferencesSection(content, disease);
     detailsElement.appendChild(content);
     displayedCondition = id;
+    if (!window.DOCUTIS_CASES && window.DOCUTIS_LOAD_CASES) {
+      window.DOCUTIS_LOAD_CASES().catch(() => {});
+    }
     detailsElement.hidden = false;
     const hash = window.location ? new URL(window.location.href).hash : "";
     const linkedSection = hash.startsWith("#detail-") && document.getElementById(hash.slice(1));
@@ -940,7 +954,8 @@
       [partialRecords, "Partially reviewed records"],
       [requiredRecords, "Records requiring clinician review"],
       [changeRequestedRecords, "Records with changes requested"],
-      [invalidatedRecords, "Invalidated or outdated reviews"],
+      [invalidatedRecords, "Invalidated condition reviews"],
+      [publicAssets.filter(item => item.assetType !== "disease" && item.status === "review invalidated").length, "Invalidated reviews of learning materials"],
       [`${statusCount("quiz", "clinician reviewed")}/${publicAssets.filter(item => item.assetType === "quiz").length || 0}`, "Reviewed quiz items"],
       [`${statusCount("visual", "clinician reviewed")}/${mediaItems.length}`, "Reviewed visual items"],
       [`${statusCount("follow_up", "clinician reviewed")}/${followUps.length}`, "Reviewed follow-up protocols"],
@@ -991,7 +1006,7 @@
   syncConditionFromUrl({ initial: true });
   window.DOCUTIS_SEARCH = Object.freeze({ normalize: normalizeSearch });
   window.DOCUTIS_REFRESH_LEARNING_PATH = function () {
-    if (!displayedCondition || !guidedDiseaseIds.has(displayedCondition) || detailsElement.hidden) return;
+    if (!displayedCondition || detailsElement.hidden) return;
     showDisease(displayedCondition);
   };
 }());

@@ -215,6 +215,9 @@
     const stageResult = get("Result");
     const followUpButton = get("FollowUp");
     let groupToOpen = null;
+    let submitted = false;
+    const languageControl = document.getElementById("docutisLanguage");
+    const say = (en, tr) => languageControl?.value === "tr" ? tr : en;
 
     function readCategory() {
       if (method.value === "category") return { category: get("T").value };
@@ -222,6 +225,7 @@
     }
 
     function refreshFields() {
+      submitted = false;
       const manual = method.value === "category";
       get("TField").hidden = !manual;
       get("ThicknessField").hidden = manual;
@@ -236,14 +240,14 @@
 
     form.addEventListener("input", refreshFields);
     form.addEventListener("change", refreshFields);
-    form.addEventListener("submit", event => {
-      event.preventDefault();
+    function renderAssessment() {
       refreshFields();
+      submitted = true;
       const t = readCategory();
       if (!t?.category) {
         append(stageResult, "p", method.value === "category"
-          ? "Bitte eine T-Kategorie wählen."
-          : "Bitte die vollständig messbare Breslow-Dicke in mm als positive Zahl mit maximal zwei Nachkommastellen eingeben.");
+          ? say("Select a T category.", "T kategorisini seç.")
+          : say("Enter a fully measurable Breslow thickness in mm, as a positive number with up to two decimal places.", "Tam olarak ölçülebilen Breslow kalınlığını mm cinsinden, en çok iki ondalıklı pozitif sayı olarak gir."));
         return;
       }
 
@@ -253,31 +257,39 @@
         distant: get("M").value,
         resection: get("R").value
       });
-      const thickness = t.roundedThickness ? ` · Breslow für AJCC 8: ${t.roundedThickness.replace(".", ",")} mm` : "";
-      append(stageResult, "p", `T-Kategorie: ${t.category}${thickness}`, "melanoma-staging-category");
+      const thickness = t.roundedThickness ? ` · Breslow (AJCC 8): ${say(t.roundedThickness, t.roundedThickness.replace(".", ","))} mm` : "";
+      append(stageResult, "p", `${say("T category", "T kategorisi")} (T-Kategorie): ${t.category}${thickness}`, "melanoma-staging-category");
       if (assessment.kind === "outside-scope") {
-        append(stageResult, "p", "Regionäre oder Fernmetastasen liegen außerhalb dieser Stadienhilfe (0–IIC).");
+        append(stageResult, "p", say("Regional or distant metastases fall outside this tool’s stage range (0–IIC).", "Bölgesel veya uzak metastazlar aracın evre aralığı (0–IIC) dışındadır."));
       } else if (assessment.kind === "t-incomplete") {
-        append(stageResult, "p", "Gesamtstadium nicht ableitbar. Bitte die genaue T-Unterkategorie oder den vollständigen Histologiebefund prüfen.");
+        append(stageResult, "p", say("Stage cannot be assigned. Check the exact T subcategory or full pathology report.", "Evre belirlenemiyor. Tam T alt kategorisini veya histopatoloji raporunu kontrol et."));
       } else if (assessment.kind === "nm-incomplete") {
-        const missing = [!get("N").value && "N-Status", !get("M").value && "M-Status"].filter(Boolean).join(" und ");
-        append(stageResult, "p", `Gesamtstadium nicht ableitbar. Fehlende Angabe: ${missing}.`);
+        const missing = [!get("N").value && "N", !get("M").value && "M"].filter(Boolean).join(" / ");
+        append(stageResult, "p", say(`Stage cannot be assigned. Missing: ${missing}.`, `Evre belirlenemiyor. Eksik bilgi: ${missing}.`));
       } else {
-        append(stageResult, "p", `Klinische Stadiengruppe bei N0/cM0: ${assessment.clinicalStage}.`);
+        append(stageResult, "p", say(`Clinical stage (klinische Stadiengruppe), N0/cM0: ${assessment.clinicalStage}.`, `Klinik evre (klinische Stadiengruppe), N0/cM0: ${assessment.clinicalStage}.`));
         append(stageResult, "p", assessment.pathologicStage
-          ? `Pathologische Stadiengruppe: ${assessment.pathologicStage}.`
-          : "Pathologische Stadiengruppe nicht ableitbar. Für diese T-Kategorie ist pN0 erforderlich.");
+          ? say(`Pathological stage (pathologische Stadiengruppe): ${assessment.pathologicStage}.`, `Patolojik evre (pathologische Stadiengruppe): ${assessment.pathologicStage}.`)
+          : say("Pathological staging for this T category requires pN0.", "Bu T kategorisinde patolojik evreleme için pN0 gerekir."));
         if (assessment.pathologicStage && assessment.pathologicStage !== assessment.clinicalStage) {
-          append(stageResult, "p", "Bei T1b unterscheiden sich die klinische und die pathologische Stadiengruppe. Für die Nachsorge das ärztlich dokumentierte Stadium im Feld darunter auswählen.");
+          append(stageResult, "p", say("Clinical and pathological groups differ for T1b. Select the physician-documented stage in the follow-up field below.", "T1b için klinik ve patolojik evre grupları farklıdır. Aşağıdaki takip alanında hekimin belgelediği evreyi seç."));
         } else if (assessment.pathologicStage === "IIC" && !assessment.followUpGroup) {
-          append(stageResult, "p", "Die S3-Nachsorgegruppe für IIC setzt eine dokumentierte R0-Resektion voraus.");
+          append(stageResult, "p", say("The German S3 follow-up group for IIC requires documented R0 resection.", "Alman S3 kılavuzunda IIC takip grubu için belgelenmiş R0 rezeksiyonu gerekir."));
         }
         groupToOpen = selectedProtocol().groups.find(group => group.id === assessment.followUpGroup) || null;
         if (groupToOpen) {
-          followUpButton.textContent = `Nachsorgegruppe ansehen (${groupToOpen.label})`;
+          followUpButton.textContent = say("Open follow-up group (Nachsorgegruppe)", "Takip grubunu aç (Nachsorgegruppe)");
           followUpButton.hidden = false;
         }
       }
+    }
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      renderAssessment();
+    });
+    languageControl?.addEventListener("change", () => {
+      if (submitted && !draft.hidden) renderAssessment();
     });
 
     followUpButton.addEventListener("click", () => {

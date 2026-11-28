@@ -3,6 +3,31 @@
 
   // Educational translation drafts. The English source records remain authoritative.
   const paragraphs = {
+    "seborrheic-keratosis": {
+      description: "Benign epidermal keratinositik tümördür.",
+      clinical: "Keskin sınırlı, mumsu veya keratotik, deriye yapışık gibi duran papül ya da plak. İrritasyon tipik yüzey özelliklerini örtebilir.",
+      dermoscopy: "Komedon benzeri açıklıklar, milia benzeri kistler, oluklar ve kabarıklıklar tanıyı destekleyebilir. Atipik pigment ağı, mavi-beyaz örtü veya düzensiz periferik uzantılar açısından tüm lezyonu incele.",
+      differential: "Melanom, pigmente bazal hücreli karsinom, aktinik keratoz ve skuamöz hücreli karsinom.",
+      treatment: "Tanısı güvenilir ve asemptomatik lezyon genellikle tedavi gerektirmez. Belirsizlikte ileri değerlendirme gerekir. Ayırıcı tanıda malignite kaldığında histoloji düşünülür.",
+      followup: "Özellikle atipik veya uyumsuz bulgular varsa değişim ve açıklanamayan yeni belirtiler yeniden değerlendirilir."
+    },
+    "dermatofibroma": {
+      description: "Benign dermal fibrohistiyositik lezyondur.",
+      clinical: "Genellikle ekstremitede sert papül veya nodül şeklindedir. Yandan sıkıştırıldığında çökme görülebilir.",
+      dermoscopy: "Ortada skar benzeri beyaz alan ve çevrede ince pigment ağı klasik bir birlikteliktir. Farklı paternler sık görülür.",
+      differential: "Melanositik nevüs, melanom, skar ve özellikle büyüyen veya atipik lezyonda dermatofibrosarkoma protuberans.",
+      treatment: "Stabil, tanısı güvenilir ve asemptomatik lezyon genellikle tedavi gerektirmez. Büyüyen ya da tanısı belirsiz lezyon temsil edici histolojiyle değerlendirilir.",
+      followup: "İlerleyici büyüme, ülserasyon veya yeni klinik ve dermoskopik uyumsuzluk yeniden değerlendirilir."
+    },
+    "solar-lentigo": {
+      description: "Kümülatif UV maruziyetiyle ilişkili benign edinsel pigmente maküldür.",
+      clinical: "Güneş gören yüz, el sırtı ve üst gövdede açık kahverengiden kahverengiye uzanan düz maküller görülür. Değişen tek bir makülü komşu lezyonlarla karşılaştır.",
+      dermoscopy: "Keskin veya girintili sınır, parmak izi benzeri çizgiler ve görece homojen kahverengi pigmentasyon tanıyı destekleyebilir. Yüzde foliküllerin çevresindeki dağılımı ve odaksal gri yapıları bağlamıyla değerlendir.",
+      differential: "Lentigo maligna, pigmente aktinik keratoz, likenoid keratoz ve düz seboreik keratoz.",
+      treatment: "Güneşten korunma uygundur. Kozmetik tedavi öncesinde benign tanıyı doğrula. Malignite olasılığı sürüyorsa ileri değerlendirme ve temsil edici histoloji önceliklidir.",
+      followup: "Yeni asimetri, odaksal pigment değişikliği veya belgelenmiş değişim yeniden değerlendirilir."
+    },
+
     "actinic-keratosis": {
       description: "Kronik güneş gören deride UV ile ilişkili intraepidermal keratinositik neoplastik lezyondur. Bazı lezyonlar kutanöz skuamöz hücreli karsinoma ilerleyebilir. Tek bir lezyon için evrensel ve kesin bir ilerleme yüzdesi burada verilmez.",
       clinical: "Kronik güneş gören yüz, kulak, saçsız skalp, el sırtı veya ön kolda genellikle pürtüklü eritemli makül, papül ya da plak olarak görülür. Skuam veya hiperkeratoz değişken olabilir. Lezyonlar hassas ve alan kanserleşmesi içinde çok sayıda olabilir. Pigmente aktinik keratoz ayrı bir klinik varyanttır. Dudaktaki aktinik keilit ilişkili ancak ayrı bir hastalıktır.",
@@ -125,10 +150,10 @@
     },
     "dermatofibrosarcoma-protuberans": {
       description: "Lokal infiltratif büyüyen, yavaş ilerleyen dermal sarkomdur. Eksik çıkarılırsa lokal nüks eğilimi yüksektir. Metastaz riski genellikle düşüktür.",
-      clinical: "Sıklıkla gövdede veya ekstremitelerin proksimalinde yavaş büyüyen sert plak görülür. Üzerinde kabarık nodüller gelişebilir.",
+      clinical: "Yavaş genişleyen indüre plak, belirgin nodüllerden önce görülebilir. Skar, dermatofibrom veya morfeayı taklit edebilir. İlerleyici değişim ve derin dokuya fiksasyon, temsil edici örnek almayı destekler.",
       dermoscopy: "Bulgular özgül değildir ve dermoskopiyle kesin tanı konulamaz.",
       differential: "Dermatofibrom, skar, keloid, morfea, kist ve diğer yumuşak doku tümörleri.",
-      treatment: "Cerrahi sınır kontrolüyle tam eksizyon tedavinin temelidir. Kompleks, nükseden veya ileri hastalıkta multidisipliner uzman değerlendirmesi gerekir.",
+      treatment: "Tanıyı doğrulamak ve fibrosarkomatöz dönüşümü değerlendirmek için yeterince derin biyopsi ve uzman patoloji incelemesi gerekir. Tedavide histolojik olarak temiz sınırlarla tam eksizyon önceliklidir. Nükseden, yaygın veya dönüşüm gösteren tümörleri konseyde değerlendir.",
       followup: "Lokal nüks gelişebileceğinden tedavi edilen bölgenin uzun dönem klinik izlemi uygundur."
     },
     "atypical-fibroxanthoma": {
@@ -149,10 +174,10 @@
     },
     "cutaneous-angiosarcoma": {
       description: "Spontan olarak, radyoterapi sonrasında veya kronik lenfödem zemininde gelişebilen nadir ve agresif malign vasküler tümördür.",
-      clinical: "Genişleyen ekimoz benzeri veya morumsu yama, plak ya da nodül oluşabilir. Spontan tümörler sıklıkla yaşlılarda saçlı deri veya yüzü tutar.",
+      clinical: "Yaşlı bir hastanın saçlı derisinde veya yüzünde genişleyen mor ya da ekimoz benzeri yama ilk bulgu olabilir. İndürasyon, nodül, ödem veya kanama gelişebilir. Önceki radyoterapiyi ve kronik lenfödemi sorgula. Görünür yayılımı ve ek odakları kaydet.",
       dermoscopy: "Tanı koydurucu bir dermoskopik patern tanımlanmamıştır.",
       differential: "Ekimoz, selülit, rozasea, Kaposi sarkomu ve benign veya malign vasküler lezyonlar.",
-      treatment: "Gecikmeden biyopsi, evreleme ve multidisipliner sarkom veya onkoloji yönetimi gerekir.",
+      treatment: "Kalıcı veya genişleyen şüpheli lezyonda gecikmeden temsil edici biyopsi ve uzman patoloji değerlendirmesi gerekir. Evreleme ve lokal tedavi planı sarkom konseyinde ele alınır. Yayılım, tam cerrahinin uygulanabilirliği ve radyoterapi seçenekleri birlikte değerlendirilir.",
       followup: "Lokal nüks ve metastatik yayılım olabileceğinden yakın izlem gerekir."
     },
     "kaposi-sarcoma": {
@@ -173,18 +198,18 @@
     },
     "microcystic-adnexal-carcinoma": {
       description: "Derine infiltre olan, genellikle lokal agresif seyreden ve sıklıkla yüzün orta bölümünde gelişen nadir adneksiyal karsinomdur.",
-      clinical: "Sıklıkla yavaş büyüyen, sert, indüre ve deri renginde plak veya nodül görülür. Perinöral tutulum semptomlara yol açabilir.",
+      clinical: "Orta yüzde yavaş büyüyen, sert ve belirsiz sınırlı plak veya nodül skarı taklit edebilir. Komşu sinirlerin dağılımında duyu değişikliği ve ağrıyı değerlendir. Görünen sınır doku tutulumunu olduğundan az gösterebilir.",
       dermoscopy: "Tanı koydurucu bir dermoskopik patern tanımlanmamıştır.",
       differential: "Morfeaform bazal hücreli karsinom, skar, desmoplastik trikoepitelyom ve diğer adneksiyal tümörler.",
-      treatment: "Genellikle sınır kontrollü tam eksizyon ve uzman patoloji değerlendirmesi gerekir. Yaygınlık ve perinöral tutulum tedavi planını etkiler.",
+      treatment: "Şüpheli lezyonda infiltratif büyümeyi değerlendirmek için subkutisi içeren derin biyopsi gerekir. Kılavuz, rezeke edilebilen ve deriyle sınırlı hastalıkta periferik ve derin sınırların değerlendirildiği cerrahiyi tercih eder. Perinöral tutulum veya temiz sınır elde edilememesi multidisipliner planlama gerektirir.",
       followup: "Geç lokal nüks gelişebileceğinden uzun dönem izlem uygundur."
     },
     "eccrine-porocarcinoma": {
       description: "Ter kanalı diferansiyasyonu gösteren nadir malign adneksiyal tümördür.",
-      clinical: "Genellikle yavaş büyüyen papül, plak veya nodül görülür. Ülserasyon veya kanama olabilir. Uzun süredir var olan bir porom zemininde ya da de novo gelişebilir.",
+      clinical: "Papül, plak veya nodül ülserleşebilir ya da kanayabilir. Uzun süredir var olan poroma benzeri lezyonda hızlı büyüme, ülserasyon veya kanama yeniden değerlendirmeyi gerektirir. Klinik görünüm daha sık görülen çeşitli keratinositik ve vasküler tümörlerle örtüşür.",
       dermoscopy: "Bildirilen vasküler ve yapısız paternler özgül değildir. Tanı histopatolojiyle konur.",
       differential: "Porom, seboreik keratoz, piyojenik granülom, verruka ve kutanöz skuamöz hücreli karsinom.",
-      treatment: "Tam cerrahi çıkarım ve histopatolojik değerlendirme temeldir. Yüksek riskli veya ileri hastalık multidisipliner değerlendirme gerektirir.",
+      treatment: "Skuamöz hücreli karsinom veya poroma ayrımı güçse temsil edici histoloji ve uzman dermatopatoloji değerlendirmesi gerekir. Lokalize hastalık genellikle histolojik sınır değerlendirmesiyle cerrahi olarak tedavi edilir. Nodal evreleme ve adjuvan yaklaşımların kanıtı sınırlıdır. Yüksek riskli olguları bireysel olarak tartış.",
       followup: "Lokal nüks ve bölgesel veya uzak yayılım açısından izlem bireyselleştirilir."
     },
     "mycosis-fungoides": {

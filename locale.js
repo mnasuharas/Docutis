@@ -266,6 +266,9 @@
     "Source attachment and automated validation do not constitute physician endorsement.": "Kaynak bağlantısı ve otomatik doğrulama hekim onayı anlamına gelmez."
   });
   const variableTranslations = [
+    [/^Tap the image to place mark (\d+)$/, "$1. işaret için görüntüye dokun"],
+    [/^Dermoscopy of pink lesion (\d+)$/, "$1. pembe lezyonun dermoskopisi"],
+    [/^View (\d+) traceable sources?$/, "$1 izlenebilir kaynağı göster"],
     [/^Enlarge image: (.*)$/, "Görseli büyüt: $1"],
     [/^Every (\d+(?:–\d+)?) months$/, "$1 ayda bir"],
     [/^Once at (\d+) months$/, "$1. ayda bir kez"],
@@ -387,6 +390,7 @@
     return null;
   }
   const conditionNames = {
+    "Seborrheic Keratosis": "Seboreik keratoz", "Dermatofibroma": "Dermatofibrom", "Solar Lentigo": "Solar lentigo",
     "Actinic Keratosis": "Aktinik keratoz", "Actinic Cheilitis": "Aktinik keilit",
     "Porokeratosis": "Porokeratoz", "Basal Cell Carcinoma": "Bazal hücreli karsinom",
     "Cutaneous Squamous Cell Carcinoma": "Kutanöz skuamöz hücreli karsinom",
@@ -1063,6 +1067,67 @@
     "Educational dermatology reference. Not a diagnosis, not a treatment protocol, and not a substitute for clinical judgment.": "Dermatoloji eğitimi ve başvuru kaynağı. Tanı değildir, tedavi protokolü değildir ve klinik yargının yerine geçmez.",
     "Reviewer workspace for the Learn Melanoma teaching sequence. Diagnoses are visible here. This page is not a learner step and not clinician approval.": "Melanom eğitimi dizisinin inceleme alanı. Tanılar burada görünür. Bu sayfa bir öğrenen adımı değildir ve hekim onayı değildir."
   });
+  Object.assign(translations, {
+    "Open image source": "Görsel kaynağını aç",
+    "Dermoscopy image. Record any visible structures and their distribution.": "Dermoskopi görüntüsü. Gördüğün yapıları ve dağılımlarını kaydet.",
+    "Clinical photograph for the current case.": "Bu vakanın klinik fotoğrafı.",
+    "Select one or two findings. Use the image or the location menu to place each mark.": "Bir veya iki bulgu seç. İşaretlemek için görüntüyü veya konum menüsünü kullan.",
+    "Dermoscopy of a second heel lesion.": "İkinci topuk lezyonunun dermoskopisi.",
+    "Review the heel comparison": "Topuk karşılaştırmasını incele",
+    "Invalidated condition reviews": "Geçersiz hastalık kaydı incelemeleri",
+    "Invalidated reviews of learning materials": "Geçersiz eğitim materyali incelemeleri",
+    "A previous human decision exists, but clinically relevant content changed afterwards. The old decision remains in history and no active reviewed badge is shown.": "Önceki hekim kararından sonra klinik içerik değişti. Eski karar inceleme geçmişinde yer alır ve bu sürüm için geçerli onay yoktur.",
+    "Mark what you see in two cases, compare your reasoning with the teaching examples, then try an independent case.": "İki vakada gördüklerini işaretle, yorumunu eğitim örnekleriyle karşılaştır ve ardından bağımsız bir vaka çöz.",
+    "Compare vessels in two pink lesions": "İki pembe lezyondaki damarları karşılaştır",
+    "Which finding separates these cases?": "Bu vakaları hangi bulgu ayırıyor?",
+    "Teaching observations · clinician review required": "Eğitim gözlemleri · hekim incelemesi gerekli",
+    "Your marks are numbered. Teaching marks begin with E and identify example regions. Compare the reasoning as well as the locations.": "İşaretlerin numaralıdır. E ile başlayan işaretler örnek bölgeleri gösterir. Konumları ve gerekçelerini karşılaştır.",
+    "Return to independent case review": "Bağımsız vaka değerlendirmesine dön",
+    "Review the first two cases": "İlk iki vakayı gözden geçir",
+    "What you wanted to check again": "Tekrar incelemek istediğin bulgu",
+    "Seborrheic Keratosis": "Seboreik keratoz",
+    "Dermatofibroma": "Dermatofibrom",
+    "Solar Lentigo": "Solar lentigo",
+    "Benign pigmented lesion": "Benign pigmente lezyon",
+    "Benign epidermal tumour": "Benign epidermal tümör"
+  });
+  Object.assign(translations, {
+    "Calculate stage from the report (Stadium aus Befund ermitteln)": "Rapordan evreyi hesapla (Stadium aus Befund ermitteln)",
+    "Cutaneous melanoma · AJCC 8 · stages 0–IIC · clinician review required.": "Kutanöz melanom · AJCC 8 · evre 0–IIC · hekim incelemesi gerekli.",
+    "Report input (Angabe im Befund)": "Rapordaki bilgi (Angabe im Befund)",
+    "T category (T-Kategorie), e.g. pT1b": "T kategorisi (T-Kategorie), ör. pT1b",
+    "Breslow thickness and ulceration (Breslow-Dicke und Ulzeration)": "Breslow kalınlığı ve ülserasyon (Breslow-Dicke und Ulzeration)",
+    "T category (T-Kategorie)": "T kategorisi (T-Kategorie)",
+    "Select": "Seç",
+    "Breslow thickness (Breslow-Dicke), mm": "Breslow kalınlığı (Breslow-Dicke), mm",
+    "Histological ulceration (Histologische Ulzeration)": "Histolojik ülserasyon (Histologische Ulzeration)",
+    "Regional status (Regionärer Status, N)": "Bölgesel durum (Regionärer Status, N)",
+    "Distant metastases (Fernmetastasen, M)": "Uzak metastaz (Fernmetastasen, M)",
+    "Resection status (Resektionsstatus), for IIC follow-up": "Rezeksiyon durumu (Resektionsstatus), IIC takibi için",
+    "Unknown": "Bilinmiyor",
+    "Unknown or unclear": "Bilinmiyor veya belirsiz",
+    "No": "Hayır",
+    "Yes": "Evet",
+    "Unknown or not R0": "Bilinmiyor veya R0 yok",
+    "cN0 · clinically negative (klinisch negativ)": "cN0 · klinik olarak negatif (klinisch negativ)",
+    "pN0 · pathologically negative (pathologisch negativ)": "pN0 · patolojik olarak negatif (pathologisch negativ)",
+    "N+ · regional metastases (regionäre Metastasierung)": "N+ · bölgesel metastaz (regionäre Metastasierung)",
+    "cM0 · no evidence of distant metastases": "cM0 · uzak metastaz bulgusu yok",
+    "M1 · distant metastases documented": "M1 · uzak metastaz belgelenmiş",
+    "R0 documented": "R0 belgelenmiş",
+    "pTX (cannot assess)": "pTX (değerlendirilemez)",
+    "T0 (no detectable primary tumour)": "T0 (saptanabilir primer tümör yok)",
+    "Show stage": "Evreyi göster",
+    "Open follow-up group (Nachsorgegruppe)": "Takip grubunu aç (Nachsorgegruppe)",
+    "AJCC 8 · Tables 2, 5 and 6": "AJCC 8 · Tablo 2, 5 ve 6",
+    "German S3 melanoma guideline · v3.3": "Alman S3 melanom kılavuzu · v3.3",
+    "N+ includes satellite, microsatellite and in-transit metastases. Check the report separately if its TNM version differs or is unknown.": "N+ satelit, mikrosatelit ve in-transit metastazları da kapsar. TNM sürümü farklı veya bilinmiyorsa raporu ayrıca kontrol et.",
+    "pT1 without a/b": "pT1, a/b belirtilmemiş",
+    "pT2 without a/b": "pT2, a/b belirtilmemiş",
+    "pT3 without a/b": "pT3, a/b belirtilmemiş",
+    "pT4 without a/b": "pT4, a/b belirtilmemiş",
+    "e.g. 0.9": "ör. 0,9"
+});
   const caseProse = window.DOCUTIS_CASE_PROSE_LOCALE || {};
   Object.keys(caseProse).forEach(function (key) {
     if (!Object.prototype.hasOwnProperty.call(translations, key)) translations[key] = caseProse[key];

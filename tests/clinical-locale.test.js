@@ -38,7 +38,7 @@ test("every other condition overview has a separate Turkish draft for all six vi
   ]);
   const dictionary = context.window.DOCUTIS_CLINICAL_LOCALE;
   const diseases = context.window.DOCUTIS_DATA.diseases.filter(item => !oncologyIds.has(item.id));
-  assert.equal(diseases.length, 55);
+  assert.equal(diseases.length, 58);
   for (const disease of diseases) {
     for (const field of ["description", "clinical", "dermoscopy", "differential", "treatment", "followup"]) {
       assert.equal(typeof disease[field], "string", `${disease.id} ${field} source`);

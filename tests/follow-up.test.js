@@ -223,6 +223,7 @@ function uiHarness(transform, includeStaging = false) {
   const document = { elements: {}, createElement(tag) { return new Element(tag, document); }, getElementById(id) { return document.elements[id]; } };
   for (const id of ["followUpDisease", "followUpGroup", "followUpPeriod", "followUpResult", "followUpStatus"]) document.elements[id] = new Element(id.includes("followUp") && !id.match(/Result|Status/) ? "select" : "div", document);
   if (includeStaging) {
+    document.elements.docutisLanguage = new Element("select", document);
     const suffixes = ["", "Form", "Method", "Result", "FollowUp", "T", "Thickness", "Ulceration", "N", "M", "R", "TField", "ThicknessField", "UlcerationField", "RField"];
     for (const suffix of suffixes) document.elements[`melanomaStaging${suffix}`] = new Element("div", document);
     document.elements.melanomaStagingForm.reset = () => {
@@ -336,13 +337,13 @@ test("melanoma staging opens an eligible follow-up reference and clears stale re
   assert.equal(get("").hidden, false);
   get("T").value = "T1b";
   submit();
-  assert.match(text(), /N-Status und M-Status/);
+  assert.match(text(), /N \/ M/);
   assert.equal(next.hidden, true);
   get("N").value = "cN0";
   get("M").value = "cM0";
   submit();
-  assert.match(text(), /Klinische Stadiengruppe bei N0\/cM0: IB/);
-  assert.match(text(), /Pathologische Stadiengruppe: IA/);
+  assert.match(text(), /Clinical stage \(klinische Stadiengruppe\), N0\/cM0: IB/);
+  assert.match(text(), /Pathological stage \(pathologische Stadiengruppe\): IA/);
   assert.equal(next.hidden, true);
 
   get("Method").value = "breslow";
@@ -355,7 +356,7 @@ test("melanoma staging opens an eligible follow-up reference and clears stale re
   get("N").value = "pN0";
   submit();
   assert.match(text(), /T2b/);
-  assert.match(text(), /Pathologische Stadiengruppe: IIA/);
+  assert.match(text(), /Pathological stage \(pathologische Stadiengruppe\): IIA/);
   assert.equal(next.hidden, false);
   next.dispatch("click");
   assert.equal(elements.followUpGroup.value, "stage-ib-iib");
@@ -366,18 +367,32 @@ test("melanoma staging opens an eligible follow-up reference and clears stale re
   assert.equal(next.hidden, true);
   assert.equal(get("RField").hidden, false);
   submit();
-  assert.match(text(), /R0-Resektion/);
+  assert.match(text(), /R0 resection/);
   assert.equal(next.hidden, true);
   get("R").value = "r0";
   submit();
   assert.equal(next.hidden, false);
   get("N").value = "positive";
   submit();
-  assert.match(text(), /außerhalb/);
+  assert.match(text(), /outside/);
   assert.equal(next.hidden, true);
 
   elements.followUpDisease.value = "basal-cell-carcinoma-de";
   elements.followUpDisease.dispatch("change");
   assert.equal(get("").hidden, true);
   assert.equal(get("Thickness").value, "");
+});
+
+test("changing language also translates the calculated stage without clearing the inputs", () => {
+  const elements = uiHarness(null, true);
+  elements.melanomaStagingT.value = "T1b";
+  elements.melanomaStagingN.value = "cN0";
+  elements.melanomaStagingM.value = "cM0";
+  elements.melanomaStagingForm.dispatch("submit");
+  assert.match(textOf(elements.melanomaStagingResult), /Clinical stage/);
+  elements.docutisLanguage.value = "tr";
+  elements.docutisLanguage.dispatch("change");
+  assert.match(textOf(elements.melanomaStagingResult), /Klinik evre .*IB/);
+  assert.match(textOf(elements.melanomaStagingResult), /Patolojik evre .*IA/);
+  assert.equal(elements.melanomaStagingT.value, "T1b");
 });

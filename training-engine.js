@@ -189,9 +189,8 @@
 
   function casePole(context, caseItem) {
     const disease = context.diseases.get(caseItem.diseaseId);
-    if (disease) return lesionPole(disease);
     const record = context.teaching.get(caseItem.diseaseId);
-    return record && record.pole ? record.pole : "unknown";
+    return record?.pole || (disease ? lesionPole(disease) : "unknown");
   }
 
   function familyOf(context, caseItem) {
