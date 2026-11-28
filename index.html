@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="subtle-clue.css?v=2">
   <link rel="stylesheet" href="pink-case.css?v=1">
   <link rel="stylesheet" href="contrast-lab.css?v=1">
-  <link rel="stylesheet" href="studio.css?v=pattern-variety-20261128">
+  <link rel="stylesheet" href="studio.css?v=clinical-design-20261128">
   <link rel="stylesheet" href="mimic.css?v=2">
 
 </head>
@@ -35,7 +35,7 @@
       <a href="#searchPanel" data-studio-nav="reference" data-en="Reference" data-tr="Başvuru" data-no-translate>Reference</a>
       <a href="#about">About</a>
     </div>
-    <label class="language-switch" for="docutisLanguage">Language <select id="docutisLanguage" aria-label="Language"><option value="en" lang="en" data-no-translate>English</option><option value="tr" lang="tr" data-no-translate>Türkçe</option></select></label>
+    <label class="language-switch" for="docutisLanguage"><span class="language-label">Language</span> <select id="docutisLanguage" aria-label="Language"><option value="en" lang="en" data-no-translate>English</option><option value="tr" lang="tr" data-no-translate>Türkçe</option></select></label>
     <div class="nav-oss" aria-label="Open-source project links">
       <a href="https://github.com/mnasuharas/Docutis" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
@@ -47,23 +47,55 @@
   <section id="studioHome" class="hero studio-home" aria-labelledby="pageTitle" data-no-translate>
     <div class="studio-hero-grid">
       <div class="studio-hero-copy">
-        <p class="eyebrow" data-en="DOCUTIS / DERMATOLOGY EDUCATION" data-tr="DOCUTIS / DERMATOLOJİ EĞİTİMİ">DOCUTIS / DERMATOLOGY EDUCATION</p>
-<h1 data-en="A closer look.
-A clearer understanding." data-tr="Daha yakından bak.
-Daha iyi anla." id="pageTitle">A closer look.
-A clearer understanding.</h1><p data-en="Build your clinical eye, one lesion at a time. Choose a case, explore a pattern, or find the reference you need." data-tr="Klinik gözünü her lezyonda geliştir. Bir vaka seç, paternleri keşfet veya ihtiyacın olan bilgiye ulaş." class="studio-lead">Build your clinical eye, one lesion at a time. Choose a case, explore a pattern, or find the reference you need.</p>
+        <p class="eyebrow" data-en="DERMATOLOGY EDUCATION" data-tr="DERMATOLOJİ EĞİTİMİ">DERMATOLOGY EDUCATION</p>
+        <h1 id="pageTitle" data-en="Learn dermatology through real cases." data-tr="Dermatolojiyi gerçek vakalarla öğren.">Learn dermatology through real cases.</h1>
+        <p class="studio-lead" data-en="Practise recognising dermoscopic patterns and work through clinical cases with links to the original publications." data-tr="Dermoskopik paternleri tanımayı çalış ve klinik vakaları özgün yayınlarıyla birlikte incele.">Practise recognising dermoscopic patterns and work through clinical cases with links to the original publications.</p>
       </div>
-      <div class="studio-art" aria-hidden="true">
-        <svg viewBox="0 0 400 330" focusable="false"><defs><pattern id="studioGrid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#ffffff" stroke-opacity=".08"/></pattern></defs><rect width="400" height="330" fill="url(#studioGrid)"/><circle cx="195" cy="158" r="106" fill="#255d66"/><circle cx="195" cy="158" r="83" fill="#ceded7"/><circle cx="195" cy="158" r="59" fill="#f3f1e9"/><circle cx="195" cy="158" r="33" fill="#367b78"/><path d="m273 235 57 57" stroke="#ceded7" stroke-width="24" stroke-linecap="round"/><path d="M55 65h34M72 48v34M306 77h31M322 62v31" stroke="#ceded7" stroke-width="2"/><circle cx="77" cy="252" r="5" fill="#a5c7bd"/><circle cx="331" cy="172" r="4" fill="#a5c7bd"/></svg>
-        <span class="studio-art-label" data-en="OBSERVE / COMPARE / UNDERSTAND" data-tr="GÖZLEMLE / KARŞILAŞTIR / ANLA">OBSERVE / COMPARE / UNDERSTAND</span>
-      </div>
+      <figure class="studio-art">
+        <div class="studio-art-pair">
+          <div>
+            <img src="assets/media/cases/case-33-clinical.jpg" width="361" height="268" alt="Clinical photograph of a pigmented lesion" data-en-alt="Clinical photograph of a pigmented lesion" data-tr-alt="Pigmente lezyonun klinik fotoğrafı">
+            <span data-en="Clinical photograph" data-tr="Klinik fotoğraf">Clinical photograph</span>
+          </div>
+          <div>
+            <img src="assets/media/cases/case-33-dermoscopy.jpg" width="360" height="268" alt="Dermoscopic view of the same lesion" data-en-alt="Dermoscopic view of the same lesion" data-tr-alt="Aynı lezyonun dermoskopik görüntüsü">
+            <span data-en="Dermoscopy" data-tr="Dermoskopi">Dermoscopy</span>
+          </div>
+        </div>
+        <figcaption>
+          <a href="https://doi.org/10.3390/cancers18142183" target="_blank" rel="noopener noreferrer">De Giorgi et al. · Fig. 2A–B</a>
+          <span aria-hidden="true"> · </span><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>
+          <span data-en=" · Panels cropped by Docutis" data-tr=" · Paneller Docutis tarafından kırpıldı"> · Panels cropped by Docutis</span>
+        </figcaption>
+      </figure>
     </div>
-    <div class="studio-section-title"><h2 data-en="Where would you like to start?" data-tr="Bugün ne çalışmak istersin?" >Where would you like to start?</h2><p data-en="Your next step, at your pace." data-tr="Bir sonraki adımın, kendi hızında." >Your next step, at your pace.</p></div>
+    <div class="studio-section-title">
+      <h2 data-en="What would you like to study?" data-tr="Bugün ne çalışmak istersin?">What would you like to study?</h2>
+    </div>
     <div class="studio-paths">
-<a class="studio-path" href="#learn"><span class="studio-path-number" aria-hidden="true">01</span><span class="studio-path-copy"><strong data-en="Work through a case" data-tr="Vaka çöz" >Work through a case</strong><span data-en="Observe, choose, then compare your reasoning." data-tr="Gözlemle, seç ve akıl yürütmeni karşılaştır." >Observe, choose, then compare your reasoning.</span></span><span class="studio-arrow" aria-hidden="true">→</span></a><a class="studio-path" href="#patterns"><span class="studio-path-number" aria-hidden="true">02</span><span class="studio-path-copy"><strong data-en="Learn a pattern" data-tr="Patern öğren" >Learn a pattern</strong><span data-en="Explore subtle clues and their close mimics." data-tr="Silik ipuçlarını ve yakın taklitçilerini keşfet." >Explore subtle clues and their close mimics.</span></span><span class="studio-arrow" aria-hidden="true">→</span></a><a class="studio-path" href="#searchPanel"><span class="studio-path-number" aria-hidden="true">03</span><span class="studio-path-copy"><strong data-en="Find a condition" data-tr="Tanı ara" >Find a condition</strong><span data-en="Clinical features, differentials and sources." data-tr="Klinik bulgular, ayırıcı tanılar ve kaynaklar." >Clinical features, differentials and sources.</span></span><span class="studio-arrow" aria-hidden="true">→</span></a>
+      <a class="studio-path" href="#learn">
+        <span class="studio-path-copy">
+          <strong data-en="Clinical cases" data-tr="Klinik vakalar">Clinical cases</strong>
+          <span data-en="Work through a case, then review the source diagnosis." data-tr="Vakayı adım adım çöz, ardından kaynak tanısını incele.">Work through a case, then review the source diagnosis.</span>
+        </span><span class="studio-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="studio-path" href="#patterns">
+        <span class="studio-path-copy">
+          <strong data-en="Dermoscopy patterns" data-tr="Dermoskopi paternleri">Dermoscopy patterns</strong>
+          <span data-en="Find key structures and compare similar lesions." data-tr="Önemli yapıları bul ve benzer lezyonları karşılaştır.">Find key structures and compare similar lesions.</span>
+        </span><span class="studio-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="studio-path" href="#searchPanel">
+        <span class="studio-path-copy">
+          <strong data-en="Clinical reference" data-tr="Klinik başvuru">Clinical reference</strong>
+          <span data-en="Find clinical features, differentials and sources." data-tr="Klinik bulguları, ayırıcı tanıları ve kaynakları bul.">Find clinical features, differentials and sources.</span>
+        </span><span class="studio-arrow" aria-hidden="true">→</span>
+      </a>
     </div>
-    <div class="studio-home-bottom"><p class="hero-status"><span data-en="Educational preview · Check each item’s review status." data-tr="Eğitim önizlemesi · Her içeriğin inceleme durumunu kontrol et." >Educational preview · Check each item’s review status.</span></p><a href="#evidenceStatus"><span data-en="Clinical review &amp; evidence →" data-tr="Klinik inceleme ve kanıt →" >Clinical review &amp; evidence →</span></a></div>
-    <div id="libraryStats" class="library-stats js-only" aria-label="Current reference coverage"></div>
+    <div class="studio-home-bottom">
+      <div id="libraryStats" class="library-stats js-only" aria-label="Current reference coverage"></div>
+      <a href="#evidenceStatus"><span data-en="Clinical review &amp; evidence →" data-tr="Klinik inceleme ve kanıt →">Clinical review &amp; evidence →</span></a>
+    </div>
   </section>
 
   <section id="learn" class="studio-hub" tabindex="-1" data-no-translate><a href="#trainingModule">Mixed-case training / Karma vaka eğitimi</a> · <a href="#caseModule">Clinical cases / Klinik vakalar</a></section>
@@ -432,7 +464,7 @@ A clearer understanding.</h1><p data-en="Build your clinical eye, one lesion at 
 <script src="mimic-data.js?v=1"></script>
 <script src="mimic-app.js?v=1"></script>
 <script src="pattern-lessons.js?v=1"></script>
-<script src="studio.js?v=guided-patterns-20261128"></script>
+<script src="studio.js?v=clinical-design-20261128"></script>
 
 
 </body>
