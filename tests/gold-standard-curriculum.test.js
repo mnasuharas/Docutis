@@ -215,7 +215,7 @@ test("new content stays review required and earlier reviewed units are unchanged
   const data = loadCaseData();
   const status = buildPublicStatus();
   const published = JSON.parse(fs.readFileSync(path.join(root, "review-status.json"), "utf8"));
-  assert.equal(status.assets.filter(item => item.status === "clinician reviewed").length, 5);
+  assert.equal(status.assets.filter(item => item.status === "clinician reviewed").length, 4);
   assert.equal(status.assets.filter(item => item.status === "review required").length, status.assets.length - 5);
   for (const id of goal25) {
     const item = data.cases.find(entry => entry.id === id);

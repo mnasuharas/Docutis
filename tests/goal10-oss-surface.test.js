@@ -92,9 +92,9 @@ test("Goal 10 docs agree on public preview status and keep remaining review unit
   assert.match(roadmap, /Goal 10/);
   assert.match(changelog, /Goal 10/);
   const caseCount = reviewStatus.assets.filter(item => item.assetType === "case").length;
-  assert.equal(reviewStatus.assets.length, 23 + caseCount);
-  assert.equal(reviewStatus.assets.filter(item => item.status === "clinician reviewed").length, 5);
-  assert.equal(reviewStatus.assets.filter(item => item.status === "review required").length, 18 + caseCount);
+  assert.equal(reviewStatus.assets.length, 28 + caseCount);
+  assert.equal(reviewStatus.assets.filter(item => item.status === "clinician reviewed").length, 4);
+  assert.equal(reviewStatus.assets.filter(item => item.status === "review required").length, 23 + caseCount);
   assert.ok(caseCount >= 3);
   assert.equal(reviewStatus.latestValidHumanReviewDate, "2026-09-23");
   assert.equal((reviewStatus.reviewers || []).length, 1);

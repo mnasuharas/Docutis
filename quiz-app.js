@@ -32,10 +32,6 @@
     return data.diseases.find(item => item.id === question.diseaseId);
   }
 
-  function mediaItem(question) {
-    return media.items.find(item => item.id === question.mediaId);
-  }
-
   function sourceLinks(parent, question) {
     const record = condition(question);
     const list = element("ul", undefined, "quiz-source-list");
@@ -88,21 +84,37 @@
     bar.appendChild(fill);
     root.appendChild(bar);
 
-    const illustration = mediaItem(question);
-    if (illustration) {
-      const figure = element("figure", undefined, "quiz-media");
-      const image = document.createElement("img");
-      if (/-schematic\.svg$/.test(illustration.src)) image.setAttribute("data-schematic-src", illustration.src);
-      const turkishSchematic = /-schematic\.svg$/.test(illustration.src) && document.documentElement && document.documentElement.lang === "tr";
-      image.src = turkishSchematic ? illustration.src.replace(/\.svg$/, ".tr.svg") : illustration.src;
-      image.alt = illustration.alt;
-      image.width = illustration.dimensions.width;
-      image.height = illustration.dimensions.height;
-      image.loading = "lazy";
-      figure.appendChild(image);
-      const visualReview = reviewUi?.asset("visual", illustration.id);
-      figure.appendChild(element("figcaption", `${illustration.title} · Schematic · ${visualReview ? reviewUi.statusLabel(visualReview.status) : "Clinical review pending"}`));
-      root.appendChild(figure);
+    const attachedMedia = (question.mediaIds || (question.mediaId ? [question.mediaId] : []))
+      .map(id => media.items.find(item => item.id === id)).filter(Boolean);
+    if (attachedMedia.length) {
+      const gallery = element("div", undefined, "quiz-media-grid");
+      attachedMedia.forEach(item => {
+        const figure = element("figure", undefined, "quiz-media");
+        const image = document.createElement("img");
+        image.src = item.src;
+        image.alt = item.alt;
+        image.width = item.dimensions.width;
+        image.height = item.dimensions.height;
+        image.loading = "lazy";
+        figure.appendChild(image);
+        const caption = element("figcaption");
+        caption.appendChild(element("span", item.caption, "quiz-media-caption"));
+        const visualReview = reviewUi?.asset("visual", item.id);
+        const credit = element("a", item.attribution, "quiz-media-credit");
+        credit.href = item.sourceUrl;
+        credit.target = "_blank";
+        credit.rel = "noopener noreferrer";
+        caption.appendChild(credit);
+        const license = element("a", item.license, "quiz-media-license");
+        license.href = item.license === "CC BY 4.0" ? "https://creativecommons.org/licenses/by/4.0/" : "https://creativecommons.org/licenses/by-sa/4.0/";
+        license.target = "_blank";
+        license.rel = "noopener noreferrer";
+        caption.appendChild(license);
+        caption.appendChild(element("span", visualReview ? reviewUi.statusLabel(visualReview.status) : "Review required", "quiz-media-review"));
+        figure.appendChild(caption);
+        gallery.appendChild(figure);
+      });
+      root.appendChild(gallery);
     }
 
     const form = document.createElement("form");

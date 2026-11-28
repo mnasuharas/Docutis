@@ -197,9 +197,9 @@ test("Goal 8 exposes review transparency, quiz and deep-link architecture", () =
 
 test("Goal 9 exposes independent public review status without fabricated approval", () => {
   const caseCount = reviewStatus.assets.filter(item => item.assetType === "case").length;
-  assert.equal(reviewStatus.assets.length, 23 + caseCount);
-  assert.equal(reviewStatus.assets.filter(item => item.status === "clinician reviewed").length, 5);
-  assert.equal(reviewStatus.assets.filter(item => item.status === "review required").length, 18 + caseCount);
+  assert.equal(reviewStatus.assets.length, 28 + caseCount);
+  assert.equal(reviewStatus.assets.filter(item => item.status === "clinician reviewed").length, 4);
+  assert.equal(reviewStatus.assets.filter(item => item.status === "review required").length, 23 + caseCount);
   assert.ok(caseCount >= 3);
   assert.equal(reviewStatus.latestValidHumanReviewDate, "2026-09-23");
   assert.match(reviewUi, /No valid human approval is bound to this exact content version/);

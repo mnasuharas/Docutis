@@ -531,7 +531,7 @@ test("actinic keratosis and basal cell carcinoma expose per-asset learning paths
   const bccPath = elements.details.querySelectorAll(".learning-path")[0];
   const bcc = textOf(bccPath);
   assert.match(bcc, /Basal cell carcinoma morphology and dermoscopic clues/);
-  assert.match(bcc, /Which schematic vascular clue is classically associated with basal cell carcinoma/);
+  assert.match(bcc, /On this dermoscopic photograph, which vessel pattern is most clearly represented/);
   assert.match(bcc, /Germany follow-up/);
   const links = bccPath.querySelectorAll(".learning-path-link");
   const caseLinks = links.filter(link => link.getAttribute("data-learning-kind") === "case");

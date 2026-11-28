@@ -4,6 +4,13 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
+### Photographic images in the visual quiz
+
+- Replace the four quiz schematics with five credited clinical or dermoscopic photographs: paired clinical/dermoscopic views for histopathology-confirmed melanoma in situ, a BCC dermoscopy photo, a plaque psoriasis photo and a comedonal acne photo. Remove the melanoma concept drawing from its image-based question rather than implying that one photograph shows change over time.
+- Reframe the questions around observable morphology and patterns, retain selection-based answers, and show clickable source/license credits in English and Turkish. Keep images responsive and pair the melanoma views in a small-screen-safe grid.
+- Mark all five new photo assets for physician review. The existing BCC quiz approval is now visibly invalidated because the item changed; its old decision remains in public history. No new or changed item is represented as clinician reviewed.
+- Source permissions checked on Wikimedia Commons; the psoriasis and acne photographs are CC BY 4.0, and the BCC and MIS images keep their original source attribution and CC BY terms. No generated or synthetic clinical images are used.
+
 ### Learning home and focused workspaces
 
 - Replace the long all-modules landing page with three starting paths: work through a case, learn a pattern, or find a condition. Add English/Turkish course cards and dedicated case/pattern hubs, a calmer cream/navy/teal palette, clearer typography and responsive layouts. The lens illustration is decorative, not a clinical image.

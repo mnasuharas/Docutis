@@ -12,7 +12,6 @@ const root = path.join(__dirname, "..");
 const reviewedFingerprints = {
   "disease:actinic-keratosis": "sha256-v1:92302d680f4c645cc1a91c9a827a3e44b0d965fa21fa019144458bd81c27a1dd",
   "disease:basal-cell-carcinoma": "sha256-v1:fbc2b272331822060c656dd0680da07e9131ecd3f59f071a71273748f14ad65f",
-  "quiz:bcc-dermoscopy": "sha256-v1:f4b9487215a415cfbbc159b5b1de4a64e77b27d816559b119a32e111276db338",
   "visual:bcc-clues-schematic": "sha256-v1:0d45d6d602b890b47548da1e708be5d3f365540b0a2b49240763504bfd6e0471",
   "follow_up:basal-cell-carcinoma-de": "sha256-v1:25cbf04b711b308ca456ab8b67a29bd056d3ccb69c0f404e285adaf8ab92c02e"
 };

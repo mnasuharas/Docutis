@@ -30,11 +30,13 @@ function validateQuiz(quiz = load("quiz-data.js", "DOCUTIS_QUIZ"), diseases = lo
     if (!Array.isArray(question.sourceUrls) || !question.sourceUrls.length) throw new Error(`${question.id}: at least one source is required`);
     const attached = new Set(record.references.map(reference => reference.url));
     for (const url of question.sourceUrls) if (!attached.has(url)) throw new Error(`${question.id}: source must be attached to the linked condition`);
-    if (question.mediaId !== null) {
-      const item = mediaItems.get(question.mediaId);
+    const mediaIds = question.mediaIds || (question.mediaId ? [question.mediaId] : []);
+    if (new Set(mediaIds).size !== mediaIds.length) throw new Error(`${question.id}: media IDs must be unique`);
+    for (const mediaId of mediaIds) {
+      const item = mediaItems.get(mediaId);
       if (!item || item.diseaseId !== question.diseaseId) throw new Error(`${question.id}: media must resolve to the same condition`);
     }
-    if (question.reviewStatus !== "clinician review required" || question.clinicalReview !== null) throw new Error(`${question.id}: quiz content must remain clinician review required`);
+    if (!new Set(["clinician review required", "review invalidated"]).has(question.reviewStatus) || question.clinicalReview !== null) throw new Error(`${question.id}: quiz content must remain unapproved until current physician review`);
   }
   return true;
 }
