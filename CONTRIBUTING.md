@@ -150,7 +150,7 @@ The Goal 3 content snapshot in the tests protects the existing 50 records during
 
 Follow [FOLLOW_UP_PROTOCOLS.md](FOLLOW_UP_PROTOCOLS.md) when changing `followup-data.js`. Use the official guideline-publishing body as the primary source; do not infer intervals, combine jurisdictions or convert ambiguous wording into false precision. Keep guideline version/publication, source metadata check and physician review as separate facts.
 
-The follow-up interface language is English even when the guideline jurisdiction is Germany. Preserve official German guideline titles in provenance. Treat group and period labels as presentation-only, but keep clinical descriptions, conditions, notes and recommendation semantics inside the reviewed clinical content.
+The Nachsorge tab and the stage helper are bilingual (English and Turkish). The language toggle is stored in the browser. Turkish clinical text is an educational draft pending physician review. Preserve official guideline titles in their original language. Treat group and period labels as presentation-only, but keep clinical descriptions, conditions, notes and recommendation semantics inside the reviewed clinical content. Do not edit a clinician-reviewed protocol object to reword the page frame.
 
 Every group needs a stable ID, explicit risk/stage description, structured time ranges and structured modality frequencies. Use a conditional recommendation with its source condition when a modality depends on risk factors. If the guideline does not address a modality, omit it so the UI displays “not specified”; do not encode omission as “not recommended.”
 

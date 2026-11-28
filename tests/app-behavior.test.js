@@ -157,6 +157,7 @@ test("initial rendering creates all cards and ten category sections", () => {
   assert.match(textOf(elements.reviewDashboardCounts), /0\s+Partially reviewed records/);
   assert.match(textOf(elements.reviewDashboardCounts), /63\s+Records requiring clinician review/);
   assert.match(textOf(elements.reviewDashboardCounts), /1\s+Invalidated reviews of learning materials/);
+  assert.match(textOf(elements.reviewDashboardCounts), /bcc-dermoscopy quiz/);
   assert.match(textOf(elements.reviewDashboardCounts), /0\/8\s+Reviewed quiz items/);
   assert.match(textOf(elements.reviewDashboardCounts), /1\/9\s+Reviewed visual items/);
   assert.match(textOf(elements.reviewDashboardCounts), /1\/7\s+Reviewed follow-up protocols/);

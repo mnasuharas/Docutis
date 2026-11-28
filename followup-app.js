@@ -271,14 +271,18 @@
         append(stageResult, "p", assessment.pathologicStage
           ? say(`Pathological stage (pathologische Stadiengruppe): ${assessment.pathologicStage}.`, `Patolojik evre (pathologische Stadiengruppe): ${assessment.pathologicStage}.`)
           : say("Pathological staging for this T category requires pN0.", "Bu T kategorisinde patolojik evreleme için pN0 gerekir."));
-        if (assessment.pathologicStage && assessment.pathologicStage !== assessment.clinicalStage) {
-          append(stageResult, "p", say("Clinical and pathological groups differ for T1b. Select the physician-documented stage in the follow-up field below.", "T1b için klinik ve patolojik evre grupları farklıdır. Aşağıdaki takip alanında hekimin belgelediği evreyi seç."));
+        if (assessment.pathologicStage === "IA" && assessment.clinicalStage === "IB") {
+          append(stageResult, "p", say("Where these stage groups differ, the German S3 follow-up table is read from the pathologic stage. For this pT1b N0 result that is the stage IA row (S3-Leitlinie Melanom, version 3.3). This does not replace the stage written in the report.", "Bu evre grupları farklıysa Alman S3 takip tablosu patolojik evreden okunur. Bu pT1b N0 sonucu için bu, evre IA satırıdır (S3-Leitlinie Melanom, sürüm 3.3). Raporda yazılı evrenin yerine geçmez."));
+          groupToOpen = selectedProtocol().groups.find(group => group.id === "stage-ia") || null;
         } else if (assessment.pathologicStage === "IIC" && !assessment.followUpGroup) {
           append(stageResult, "p", say("The German S3 follow-up group for IIC requires documented R0 resection.", "Alman S3 kılavuzunda IIC takip grubu için belgelenmiş R0 rezeksiyonu gerekir."));
+        } else {
+          groupToOpen = selectedProtocol().groups.find(group => group.id === assessment.followUpGroup) || null;
         }
-        groupToOpen = selectedProtocol().groups.find(group => group.id === assessment.followUpGroup) || null;
         if (groupToOpen) {
-          followUpButton.textContent = say("Open follow-up group (Nachsorgegruppe)", "Takip grubunu aç (Nachsorgegruppe)");
+          followUpButton.textContent = groupToOpen.id === "stage-ia" && assessment.clinicalStage === "IB"
+            ? say("Open the stage IA follow-up row (Nachsorgegruppe IA)", "Evre IA takip satırını aç (Nachsorgegruppe IA)")
+            : say("Open follow-up group (Nachsorgegruppe)", "Takip grubunu aç (Nachsorgegruppe)");
           followUpButton.hidden = false;
         }
       }

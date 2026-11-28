@@ -61,7 +61,7 @@ Open Clinical cases and choose Melanoma and its mimics, Cutaneous SCC and kerati
 - URL-addressable condition details such as `?condition=acne-vulgaris`, including browser Back/Forward support
 - Dependency-free automated validation on pull requests and `main` pushes
 - No installation or account required
-- English-language dermato-oncology follow-up UI based on German guidelines for melanoma, BCC and cSCC
+- Bilingual Nachsorge (follow-up) tab for German guideline schedules. Turkish and English show the same intervals. Turkish clinical text is an educational draft pending physician review.
 - Mixed-case screening training with staged dermoscopy, reveal, post-reveal disposition teaching on core cases, an optional browser-local revisit list, and a qualitative debrief (no score; review required)
 
 ## Current Clinical Focus
@@ -161,7 +161,7 @@ The current application uses:
 - JavaScript
 - GitHub Pages
 
-The reference catalogue includes seborrheic keratosis, dermatofibroma and solar lentigo, with existing case links where present. The Cases hub also includes three simulated inflammatory and paediatric exercises with source links. The case scripts load the first time someone opens a case exercise or condition detail. Search and reference listings start independently. See [clinical review plan](CLINICAL_REVIEW.md#review-plan-for-eight-profiles-and-57-cases) for the eight profiles and 57 source cases. The German melanoma follow-up area provides an English/Turkish AJCC 8 stage helper (stages 0–IIC) with German report terms in parentheses.
+The reference catalogue includes seborrheic keratosis, dermatofibroma and solar lentigo, with existing case links where present. The Cases hub also includes three simulated inflammatory and paediatric exercises with source links. The case scripts load the first time someone opens a case exercise or condition detail. Search and reference listings start independently. See [clinical review plan](CLINICAL_REVIEW.md#review-plan-for-eight-profiles-and-57-cases) for the eight profiles and 57 source cases. The language toggle (English / Türkçe) is stored in this browser. Turkish interface text is a translation. Turkish clinical text remains an educational draft pending physician review and does not replace the current guideline. The Nachsorge tab (`?nachsorge=cutaneous-melanoma`, labels “Follow-up (Nachsorge)” and “Nachsorge (Takip)”) opens the German follow-up schedules. The melanoma stage helper is English/Turkish for AJCC 8 stages 0–IIC, with German report terms in parentheses.
 
 Medical records live in `data.js`; `app.js` contains filtering, rendering and interaction behavior. Records include a broad category, a structured subcategory, coding-system metadata, source metadata, and review status. This separation keeps content review focused and preserves the dependency-free static architecture.
 

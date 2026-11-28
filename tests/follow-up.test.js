@@ -345,7 +345,10 @@ test("melanoma staging opens an eligible follow-up reference and clears stale re
   submit();
   assert.match(text(), /Clinical stage \(klinische Stadiengruppe\), N0\/cM0: IB/);
   assert.match(text(), /Pathological stage \(pathologische Stadiengruppe\): IA/);
-  assert.equal(next.hidden, true);
+  assert.match(text(), /stage IA row \(S3-Leitlinie Melanom, version 3\.3\)/);
+  assert.equal(next.hidden, false);
+  next.dispatch("click");
+  assert.equal(elements.followUpGroup.value, "stage-ia");
 
   get("Method").value = "breslow";
   form.dispatch("change");

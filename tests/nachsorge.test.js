@@ -66,9 +66,12 @@ function load(url) {
   }
   elements.followUpModule.appendChild(elements.melanomaStaging);
   elements.followUpModule.appendChild(elements.melanomaStagingHome);
+  const listeners = {};
   const win = {
     location: { href: url },
     history: { state: null, replaceState(state, title, href) { win.location.href = href; } },
+    addEventListener(type, listener) { (listeners[type] ||= []).push(listener); },
+    dispatch(type) { (listeners[type] || []).forEach(listener => listener()); },
     DOCUTIS_FOLLOW_UP_DATA: null,
     DOCUTIS_REVIEW_STATUS: null,
     DOCUTIS_REVIEW_UI: null
@@ -135,6 +138,34 @@ test("deep link selects the diagnosis and language switch re-renders the same in
   assert.match(textOf(elements.nachsorgeResult), /Cutaneous melanoma/);
 });
 
+test("browser back and forward resync the diagnosis from the nachsorge query", () => {
+  const { elements, win } = load("https://example.org/Docutis/?nachsorge=cutaneous-melanoma");
+  elements.nachsorgeDisease.value = "actinic-keratosis";
+  elements.nachsorgeDisease.dispatch("change");
+  assert.equal(elements.nachsorgeDisease.value, "actinic-keratosis");
+  win.location.href = "https://example.org/Docutis/?nachsorge=merkel-cell-carcinoma#nachsorgeModule";
+  win.dispatch("popstate");
+  assert.equal(elements.nachsorgeDisease.value, "merkel-cell-carcinoma");
+  assert.match(textOf(elements.nachsorgeResult), /Merkel cell carcinoma/);
+  assert.doesNotMatch(textOf(elements.nachsorgeResult), /Actinic keratosis and field/);
+});
+
+test("entries without a guideline timetable show one notice, and reviewed BCC states both facts", () => {
+  const { elements, document, api } = load("https://example.org/Docutis/?nachsorge=dermatofibrosarcoma-protuberans");
+  document.documentElement.lang = "tr";
+  elements.docutisLanguage.dispatch("change");
+  const dfsp = textOf(elements.nachsorgeResult);
+  assert.ok(dfsp.includes(api.NO_TIMETABLE_TR));
+  assert.equal(dfsp.split("Belirtilmemiş").length - 1, 0);
+  assert.match(dfsp, /22 Ağustos 2023/);
+  assert.doesNotMatch(dfsp, /This S1 is in revision/);
+  elements.nachsorgeDisease.value = "basal-cell-carcinoma";
+  elements.nachsorgeDisease.dispatch("change");
+  const bcc = textOf(elements.nachsorgeResult);
+  assert.match(bcc, /BHK takip çizelgesi kaydı hekim tarafından incelendi/);
+  assert.ok(bcc.includes(api.DISCLAIMER_TR));
+});
+
 test("search ignores Turkish diacritics and every catalog entry has a source", () => {
   const data = loadFollowUpData();
   const { elements, api } = load("https://example.org/Docutis/?nachsorge=high-risk-nevus");
@@ -168,7 +199,7 @@ test("new protocols are sourced drafts and interval tokens match in Turkish and 
     assert.equal(protocol.clinicalReview, null);
   }
   for (const protocol of data.protocols) {
-    for (const note of notesOf(protocol)) {
+    for (const note of [protocol.guideline.recommendationLocation, ...notesOf(protocol)]) {
       const turkish = api.noteText(note, "tr");
       assert.notEqual(turkish, note, note.slice(0, 90));
       assert.deepEqual(api.numericTokens(note), api.numericTokens(turkish), note.slice(0, 90));
