@@ -105,7 +105,7 @@
 
   function render() {
     root.replaceChildren();
-    const title = add(root, "h3", lesson ? local(lesson.topic) : t("Mimics and diagnostic traps", "Taklitçiler ve tanısal tuzaklar"));
+    const title = add(root, "h3", lesson ? local(lesson.topic) : t("Mimics and diagnostic traps", "Taklitçiler ve Tanısal Tuzaklar"));
     title.tabIndex = -1;
     focusTarget = title;
     add(root, "p", t("Educational draft · clinician review required", "Eğitim taslağı · hekim incelemesi gerekli"), "mimic-note");
@@ -162,9 +162,9 @@
       });
     } else {
       const review = add(root, "div", null, "mimic-review");
-      add(review, "h4", t("Diagnostic trap", "Tanısal tuzak"));
+      add(review, "h4", t("Diagnostic trap", "Tanısal Tuzak"));
       add(review, "p", local(lesson.trap));
-      add(review, "h4", t("What to compare and how the source verified it", "Neyi karşılaştırmalı ve kaynak sonucu nasıl doğruladı?"));
+      add(review, "h4", t("What to compare and how the source verified it", "Neyi Karşılaştırmalı? Kaynak Sonucu Nasıl Doğruladı?"));
       add(review, "p", local(lesson.review));
       if (["network", "face", "acral", "blood"].includes(lesson.id)) {
         add(review, "h4", t("Pattern analysis and Chaos and Clues", "Patern analizi ve Chaos and Clues"));

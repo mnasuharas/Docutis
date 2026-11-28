@@ -5,7 +5,7 @@
   window.DOCUTIS_SUBTLE_CLUES = Object.freeze([
     Object.freeze({
       id: "network", cases: ["case-g25-01", "case-g25-02"],
-      title: dual("An uneven network can occur on both sides", "Düzensiz ağ her iki tarafta da görülebilir"),
+      title: dual("An uneven network can occur on both sides", "Düzensiz Ağ Her İki Tarafta da Görülebilir"),
       question: dual("Choose the most useful visible observation for each image.", "Her görsel için en yararlı görülebilir bulguyu seçin."),
       options: Object.freeze([
         dual("Network varies across the lesion", "Ağ lezyon içinde değişken"),
@@ -24,7 +24,7 @@
     }),
     Object.freeze({
       id: "acral", cases: ["case-g27-01", "case-g27-04"],
-      title: dual("A reassuring pattern with an eccentric clue", "İyi huylu izlenim veren paternde eksantrik ipucu"),
+      title: dual("A reassuring pattern with an eccentric clue", "İyi Huylu İzlenim Veren Paternde Eksantrik İpucu"),
       question: dual("Which observation should you carry into the comparison?", "Karşılaştırmaya hangi gözlemi taşımalısınız?"),
       options: Object.freeze([
         dual("Thin furrow lines without a visible blotch", "Görülen koyu odak olmadan ince oluk çizgileri"),
@@ -43,7 +43,7 @@
     }),
     Object.freeze({
       id: "acral-ridges", cases: ["case-g27-01", "case-g27-03"],
-      title: dual("Where is the pigment on the sole?", "Ayak tabanında pigment nerede?"),
+      title: dual("Where is the pigment on the sole?", "Ayak Tabanında Pigment Nerede?"),
       question: dual("Choose the relationship between brown lines and pale bands.", "Kahverengi çizgilerle açık renkli bantların ilişkisini seçin."),
       options: Object.freeze([
         dual("Thin brown lines with broader pale bands", "Geniş açık bantlarla birlikte ince kahverengi çizgiler"),
@@ -62,7 +62,7 @@
     }),
     Object.freeze({
       id: "face", cases: ["case-g25-06", "case-g25-05"],
-      title: dual("Look around the facial follicles", "Yüzde folikül çevresini inceleyin"),
+      title: dual("Look around the facial follicles", "Yüzde Folikül Çevresini İnceleyin"),
       question: dual("What appears around the follicular openings?", "Folikül açıklıklarının çevresinde ne görülüyor?"),
       options: Object.freeze([
         dual("Orange-brown pigment without visible gray dots", "Gri noktalar görülmeden turuncu kahverengi pigment"),
@@ -81,7 +81,7 @@
     }),
     Object.freeze({
       id: "papules", cases: ["case-g21-08", "case-g18-15"],
-      title: dual("Sebaceous hyperplasia and a BCC look-alike", "Sebase hiperplazi ve bazal hücreli karsinom benzeri"),
+      title: dual("Sebaceous hyperplasia and a BCC look-alike", "Sebase Hiperplazi ve Bazal Hücreli Karsinom Benzeri"),
       question: dual("What is actually available in each stored image?", "Kayıtlı görsellerde gerçekten ne değerlendirilebilir?"),
       options: Object.freeze([
         dual("Grouped papules with yellow-white dermoscopic lobules", "Dermoskopide sarı beyaz lobüllü papül kümesi"),

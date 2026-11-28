@@ -8,31 +8,31 @@
   const lessons = [
     {
       id: "contrast-03",
-      title: ["Uneven pigment network", "Düzensiz pigment ağı"],
+      title: ["Uneven pigment network", "Düzensiz Pigment Ağı"],
       look: ["Follow the brown lines across the lesion. Compare their thickness and colour, the spaces they enclose, and the distribution of darker areas.", "Kahverengi çizgileri lezyon boyunca takip et. Çizgilerin kalınlığını, rengini, çevreledikleri boşlukları ve koyu alanların dağılımını karşılaştır."],
       choices: [["Both images show an uneven brown network", "İki görüntüde de düzensiz kahverengi ağ var"], ["Both images show only a uniform network", "İki görüntüde de yalnız düzenli ağ var"], ["The brown network is absent from both images", "İki görüntüde de kahverengi ağ yok"]]
     },
     {
       id: "contrast-02",
-      title: ["Negative network", "Negatif ağ"],
+      title: ["Negative network", "Negatif Ağ"],
       look: ["Look for pale connecting lines that enclose darker areas. Compare them with the spaces between brown lines in a conventional pigment network.", "Koyu alanları çevreleyen ve birbirine bağlanan açık renkli çizgileri ara. Bunları klasik pigment ağındaki kahverengi çizgilerin arasındaki boşluklarla karşılaştır."],
       choices: [["A: pale connected lines · B: uneven brown network", "A: birbirine bağlanan açık çizgiler · B: düzensiz kahverengi ağ"], ["A: uneven brown network · B: pale connected lines", "A: düzensiz kahverengi ağ · B: birbirine bağlanan açık çizgiler"], ["Both images show a uniform brown network", "İki görüntüde de düzenli kahverengi ağ var"]]
     },
     {
       id: "contrast-04",
-      title: ["Shiny white structures and scale", "Parlak beyaz yapılar ve skuam"],
+      title: ["Shiny white structures and scale", "Parlak Beyaz Yapılar ve Skuam"],
       look: ["Trace the shape of the white structures. Compare narrow or shiny elements with the broader white scale and the surrounding surface.", "Beyaz yapıların şeklini takip et. İnce veya parlak öğeleri daha geniş beyaz skuamla ve çevresindeki yüzeyle karşılaştır."],
       choices: [["White structures are visible in both images", "İki görüntüde de beyaz yapılar seçiliyor"], ["White structures are visible only in A", "Beyaz yapılar yalnız A’da seçiliyor"], ["White structures are visible only in B", "Beyaz yapılar yalnız B’de seçiliyor"]]
     },
     {
       id: "contrast-05",
-      title: ["Pigment around facial follicles", "Yüzde folikül çevresinde pigment"],
+      title: ["Pigment around facial follicles", "Yüzde Folikül Çevresinde Pigment"],
       look: ["Find several follicular openings and compare the colour and arrangement of pigment immediately around them.", "Birkaç foliküler açıklık bul. Hemen çevrelerindeki pigmentin rengini ve dizilimini karşılaştır."],
       choices: [["A: irregular grey-brown dots · B: orange-brown pigment", "A: düzensiz gri-kahverengi noktalar · B: turuncu-kahverengi pigment"], ["A: orange-brown pigment · B: irregular grey-brown dots", "A: turuncu-kahverengi pigment · B: düzensiz gri-kahverengi noktalar"], ["Both images show identical grey dots", "İki görüntüde de aynı gri noktalar var"]]
     },
     {
       id: "contrast-06",
-      title: ["Acral bands and fibrillar lines", "Akral bantlar ve fibriler çizgiler"],
+      title: ["Acral bands and fibrillar lines", "Akral Bantlar ve Fibriler Çizgiler"],
       look: ["Follow the direction of the skin markings. Compare wide pigmented bands with fine oblique strokes. Use the full frame to check for scale and printed marks.", "Deri çizgilerinin yönünü takip et. Geniş pigmente bantlarla ince oblik çizgileri karşılaştır. Skuamı ve basılı işaretleri ayırt etmek için görüntünün tamamına bak."],
       choices: [["A: broad pigmented bands · B: fine oblique strokes", "A: geniş pigmente bantlar · B: ince oblik çizgiler"], ["A: fine oblique strokes · B: broad pigmented bands", "A: ince oblik çizgiler · B: geniş pigmente bantlar"], ["Both images show the same band width and direction", "İki görüntüde de bant genişliği ve yönü aynı"]]
     }
@@ -99,7 +99,7 @@
   }
   function render() {
     root.replaceChildren();
-    heading = add(root, "h3", active ? localized(active.title) : t("Key patterns in real images", "Gerçek görüntülerde önemli paternler"));
+    heading = add(root, "h3", active ? localized(active.title) : t("Key patterns in real images", "Gerçek Görüntülerde Önemli Paternler"));
     heading.tabIndex = -1;
     add(root, "p", t("Teaching draft · clinician review required", "Eğitim taslağı · hekim incelemesi gerekli"), "mimic-note");
     if (!active) {

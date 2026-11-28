@@ -34,7 +34,7 @@
   window.DOCUTIS_PATTERN_CONTEXT = [
     {
       id: "globules",
-      title: ["Globular pattern and peripheral globules", "Globüler patern ve periferik globüller"],
+      title: ["Globular pattern and peripheral globules", "Globüler Patern ve Periferik Globüller"],
       observation: ["How are the globules distributed?", "Globüller nasıl dağılıyor?"],
       findings: [
         ["Mainly across the lesion", "Ağırlıklı olarak lezyon geneline yayılmış"],
@@ -89,7 +89,7 @@
     },
     {
       id: "network",
-      title: ["Abrupt ending of the peripheral pigment network", "Periferde pigment ağının aniden sonlanması"],
+      title: ["Abrupt ending of the peripheral pigment network", "Periferde Pigment Ağının Aniden Sonlanması"],
       observation: ["What happens to the network as you follow it toward the edge?", "Ağı kenara doğru takip ettiğinde nasıl sonlanıyor?"],
       findings: [
         ["Abrupt ending in a local sector", "Bir sektörde aniden sonlanıyor"],
@@ -124,7 +124,7 @@
     },
     {
       id: "facial-gray",
-      title: ["Gray structures around facial follicles", "Yüzde gri perifoliküler yapılar"],
+      title: ["Gray structures around facial follicles", "Yüzde Gri Perifoliküler Yapılar"],
       observation: ["What do you see around the follicular openings?", "Folikül açıklıklarının çevresinde ne görüyorsun?"],
       findings: [
         ["Uneven gray or gray-brown dots", "Dengesiz gri veya gri-kahverengi noktalar"],
@@ -160,7 +160,7 @@
     },
     {
       id: "pink-vessels",
-      title: ["Vessel distribution in pink lesions", "Pembe lezyonlarda damar dağılımı"],
+      title: ["Vessel distribution in pink lesions", "Pembe Lezyonlarda Damar Dağılımı"],
       observation: ["What can you resolve on the pink background?", "Pembe zeminde hangi yapıları seçebiliyorsun?"],
       findings: [
         ["Uneven dots and short lines", "Dengesiz dağılmış noktalar ve kısa çizgiler"],

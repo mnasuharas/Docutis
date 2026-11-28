@@ -93,9 +93,9 @@ test("location selection marks the dermoscopic image and language changes keep a
   h.choose("visibility", "possible"); assert.equal(h.button("Save observations").disabled, true);
   h.choose("location", "9"); assert.equal(h.app.querySelector(".pink-marker").hidden, false); assert.ok(parseFloat(h.app.querySelector(".pink-marker").style.left) > 80);
   h.context.document.documentElement.lang = "tr"; h.language.dispatch("change");
-  assert.ok(h.app.textContent.includes("Nesnel yapılar"));
+  assert.ok(h.app.textContent.includes("Nesnel Yapılar"));
   assert.equal(h.app.querySelectorAll("select").find(item => item.dataset.answer === "location").value, "9");
-  h.click("Gözlemleri kaydet"); assert.ok(h.app.textContent.includes("Öykü öncesi"));
+  h.click("Gözlemleri kaydet"); assert.ok(h.app.textContent.includes("Öykü Öncesi"));
 });
 
 test("initialization waits for locale startup and registers its change listener afterwards", () => {
@@ -104,7 +104,7 @@ test("initialization waits for locale startup and registers its change listener 
   assert.equal(h.language.listeners.change, undefined);
   h.context.document.documentElement.lang = "tr";
   h.context.document.readyCallbacks.forEach(callback => callback());
-  assert.ok(h.app.textContent.includes("Pembe lezyonlar"));
+  assert.ok(h.app.textContent.includes("Pembe Lezyonlar"));
   h.language.listeners.change.unshift(() => { h.context.document.documentElement.lang = "en"; });
   h.language.dispatch("change");
   assert.ok(h.app.textContent.includes("Pink lesions"));

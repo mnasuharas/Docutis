@@ -42,15 +42,15 @@
   function showDirectory() {
     const entries = handoutList ? Object.entries(handouts).sort((a, b) =>
       parseInt(a[1].page, 10) - parseInt(b[1].page, 10)) : Object.entries(chapters);
-    add(root, "h1", handoutList ? say("Turkish patient information", "Türkçe hasta bilgilendirme")
-      : say("Praxis catalogue", "Praxis rehberi"));
+    add(root, "h1", handoutList ? say("Turkish patient information", "Türkçe Hasta Bilgilendirme")
+      : say("Praxis catalogue", "Praxis Rehberi"));
     add(root, "p", handoutList
       ? say("Clinician previews. Distribution awaits physician review.", "Hekim önizlemeleri. Hasta dağıtımı için hekim onayı bekleniyor.")
       : say("Treatment considerations, red flags and sources for German dermatology practice.", "Almanya dermatoloji pratiği için tedavi değerlendirmeleri, kırmızı bayraklar ve kaynaklar."));
     const tabs = add(root, "nav", "", "praxis-catalog-tabs");
     tabs.setAttribute("aria-label", "Praxis");
     const chapterTab = link(tabs, say("Chapters", "Hastalıklar") + " · " + Object.keys(chapters).length, "praxis.html");
-    const handoutTab = link(tabs, say("Patient information", "Hasta bilgilendirme") + " · " + Object.keys(handouts).length, "praxis.html?view=handouts");
+    const handoutTab = link(tabs, say("Patient information", "Hasta Bilgilendirme") + " · " + Object.keys(handouts).length, "praxis.html?view=handouts");
     (handoutList ? handoutTab : chapterTab).setAttribute("aria-current", "page");
 
     const label = add(root, "label", say("Search in German or Turkish", "Almanca veya Türkçe ara"), "praxis-search");

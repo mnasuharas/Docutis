@@ -31,7 +31,7 @@
   function start() { queue = shuffle(cases); index = 0; selected = {}; revealed = false; render(); }
   function render() {
     root.replaceChildren();
-    const title = node("h3", say("Mixed practice: describe before diagnosis", "Karma çalışma: tanıdan önce tarif edin"), root); title.tabIndex = -1;
+    const title = node("h3", say("Mixed practice: describe before diagnosis", "Karma Çalışma: Tanıdan Önce Tarif Edin"), root); title.tabIndex = -1;
     node("p", say("Eight benign counterexamples and eight melanoma cases from the existing library, shuffled. Histopathology is reported by the sources with different verification scopes. This curated mix does not represent screening prevalence. Teaching remains clinician review required.", "Mevcut arşivden sekiz benign karşı örnek ve sekiz melanom olgusu, karışık sırayla. Kaynaklar histopatolojiyi farklı doğrulama düzeylerinde bildiriyor. Bu seçilmiş karışım taramadaki sıklıkları temsil etmez. Eğitim hekim incelemesi gerektirir."), root);
     if (!queue.length) { button(say("Start mixed practice", "Karma çalışmaya başla"), root, start); return; }
     if (index === queue.length) {
@@ -76,9 +76,9 @@
       const panel = node("section", "", root); panel.className = "subtle-comparison balanced-reveal"; panel.tabIndex = -1;
       node("h4", item.diagnosticGroundTruth.confirmedDiagnosis, panel);
       node("p", item.diagnosticGroundTruth.confirmationNotes, panel);
-      node("h4", say("Recorded visible findings", "Kayıtlı görülebilir bulgular"), panel);
+      node("h4", say("Recorded visible findings", "Kayıtlı Görülebilir Bulgular"), panel);
       (item.observations || []).filter(observation => observation.modality === "dermoscopy").forEach(observation => node("p", observation.text, panel));
-      node("h4", say("Why the clue does not decide alone", "İpucu neden tek başına karar verdirmez?"), panel);
+      node("h4", say("Why the clue does not decide alone", "İpucu Neden Tek Başına Karar Verdirmez?"), panel);
       node("p", item.diagnosticTrap, panel);
       node("p", item.takeHomeRule, panel);
       const source = node("a", say("Open original source", "Özgün kaynağı aç"), panel); source.href = asset.sourceUrl; source.target = "_blank"; source.rel = "noopener noreferrer";
