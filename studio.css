@@ -8,7 +8,7 @@ body { background: var(--color-canvas); color: var(--color-text); font-family: -
 .primary-links { gap: 26px; }
 .primary-links a { padding-block: 10px; font-weight: 500; }
 .primary-links a[aria-current="page"] { color: #14544f; box-shadow: 0 2px 0 #14544f; }
-html { scroll-padding-top: 104px; }
+html { scroll-padding-top: 104px; scroll-behavior: auto; }
 main { padding-top: 46px; }
 .studio-home { max-width: none; margin: 0; }
 .studio-hero-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 50px; align-items: center; margin: 12px 0 64px; }
