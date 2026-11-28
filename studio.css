@@ -1,0 +1,87 @@
+/* Presentation layer. Original medical content and review badges remain intact. */
+:root { --color-canvas: #f6f5f0; --color-text: #172d39; --color-text-secondary: #465761; --color-text-muted: #596b70; --color-accent: #216c67; --color-accent-strong: #14544f; --color-border: #dce2df; --content-width: 1280px; }
+body { background: var(--color-canvas); color: var(--color-text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+[hidden] { display: none !important; }
+.site-header { background: rgba(246,245,240,.97); }
+.nav { min-height: 80px; gap: 24px; }
+.brand-mark { border-radius: 50%; width: 36px; height: 36px; background: #173f47; }
+.primary-links { gap: 26px; }
+.primary-links a { padding-block: 10px; font-weight: 500; }
+.primary-links a[aria-current="page"] { color: #14544f; box-shadow: 0 2px 0 #14544f; }
+html { scroll-padding-top: 104px; }
+main { padding-top: 46px; }
+.studio-home { max-width: none; margin: 0; }
+.studio-hero-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 50px; align-items: center; margin: 12px 0 64px; }
+.studio-home h1 { max-width: 760px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.75rem, 5.2vw, 4.8rem); font-weight: 400; line-height: 1.08; letter-spacing: -.045em; white-space: pre-line; margin: 22px 0; }
+.studio-lead { max-width: 550px; color: #465761; line-height: 1.8; font-size: 18px; }
+.studio-art { overflow: hidden; border-radius: 140px 140px 22px 22px; background: #173f47; position: relative; max-width: 430px; justify-self: end; width: 100%; }
+.studio-art svg { width: 100%; height: auto; display: block; }
+.studio-art-label { display: block; color: #e2eeea; text-align: center; font-size: 10px; letter-spacing: .15em; padding: 0 14px 28px; }
+.studio-section-title { display: flex; gap: 20px; align-items: baseline; justify-content: space-between; margin-bottom: 20px; }
+.studio-section-title h2 { font-size: 24px; letter-spacing: -.03em; margin: 0; }
+.studio-section-title p { margin: 0; color: #596b70; font-size: 14px; }
+.studio-paths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.studio-path { display: flex; gap: 18px; padding: 28px 22px; border: 1px solid #dce2df; border-radius: 14px; background: #fff; color: #172d39; text-decoration: none; align-items: flex-start; transition: border-color .15s, box-shadow .15s; }
+.studio-path:hover { border-color: #216c67; box-shadow: 0 8px 24px #173f470c; }
+.studio-path-number { font-family: Georgia, serif; font-size: 24px; color: #216c67; line-height: 1.25; }
+.studio-path-copy { display: grid; gap: 10px; }
+.studio-path-copy strong { font-size: 19px; letter-spacing: -.025em; }
+.studio-path-copy > span { font-size: 14px; color: #465761; line-height: 1.6; }
+.studio-arrow { margin-left: auto; color: #216c67; font-size: 23px; }
+.studio-home-bottom { display: flex; justify-content: space-between; gap: 24px; margin-top: 24px; font-size: 13px; color: #596b70; }
+.studio-home .hero-status { font-size: 13px !important; line-height: 1.65; }
+.studio-home .library-stats { padding-top: 18px; border-top: 1px solid #dce2df; margin-top: 26px; }
+.studio-home .stat-item { border: 0; background: transparent; padding-left: 0; margin-right: 20px; font-size: 13px; }
+.studio-hub { margin: 12px 0 48px; }
+.studio-hub > h2 { font-family: Georgia, serif; font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.3rem); letter-spacing: -.04em; margin: 16px 0; line-height: 1.15; }
+.studio-hub-intro { max-width: 720px; color: #465761; margin-bottom: 36px; }
+.studio-course-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+#patterns .studio-course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.studio-course { display: flex; flex-direction: column; overflow: hidden; border: 1px solid #dce2df; border-radius: 18px; text-decoration: none; background: #fff; color: #172d39; }
+.studio-course:hover { border-color: #216c67; box-shadow: 0 12px 32px #173f470d; }
+.studio-course-art { height: 148px; position: relative; overflow: hidden; background-color: #dce9e3; background-image: radial-gradient(circle at 75% 60%, #216c6740 0 24px, transparent 25px), radial-gradient(circle at 75% 60%, transparent 0 50px, #216c6733 51px 52px, transparent 53px), linear-gradient(125deg, transparent 45%, #fff5 45% 46%, transparent 46%); }
+.art-compare, .art-library { background-color: #dce4eb; background-image: radial-gradient(circle at 60% 50%, #173f4740 0 24px, transparent 25px), radial-gradient(circle at 82% 50%, #173f4740 0 24px, transparent 25px); }
+.art-vessels, .art-quiz { background-color: #ece3dc; }
+.art-clues { background-color: #e6e6d8; }
+.studio-course-number { position: absolute; left: 24px; top: 22px; font-family: Georgia, serif; font-size: 30px; color: #173f47; }
+.studio-course-copy { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+.studio-course-tag { color: #216c67; font-size: 12px; font-weight: 650; margin: 0 0 10px; }
+.studio-course h3 { font-size: 21px; letter-spacing: -.03em; line-height: 1.25; margin: 0 0 12px; }
+.studio-course-copy > p:not(.studio-course-tag) { color: #465761; font-size: 15px; margin: 0 0 28px; }
+.studio-course-action { margin-top: auto; color: #14544f; font-weight: 650; font-size: 14px; }
+.studio-utility-links { display: flex; flex-wrap: wrap; gap: 24px; border-top: 1px solid #dce2df; margin-top: 36px; padding-top: 22px; font-size: 14px; }
+.studio-toolbar { display: flex; justify-content: space-between; gap: 20px; align-items: center; margin: 0 0 28px; font-size: 14px; }
+.studio-toolbar > span { color: #596b70; }
+.studio-toolbar a { text-decoration: none; padding-block: 10px; }
+body[data-studio-view] main > section { scroll-margin-top: 24px; }
+body[data-studio-view] main > section:not(.studio-home):not(.studio-hub) { margin-top: 0; }
+body[data-studio-view] .training-module, body[data-studio-view] .case-module, body[data-studio-view] .subtle-clue-module, #contrastLabApp, #pinkCaseApp { background: #fff; border-color: #dce2df; border-radius: 20px; box-shadow: none; }
+body[data-studio-view] .case-image, body[data-studio-view] .case-pair-stage img { background: #f2f4f2; border-radius: 12px; }
+body[data-studio-view] .case-step-tab { border-radius: 999px; }
+.studio-exercise-screen .pattern-exercise { margin: 0; background: #fff; border-radius: 20px; }
+.studio-path:focus-visible, .studio-course:focus-visible, .studio-toolbar a:focus-visible { outline: 3px solid #14544f; outline-offset: 4px; }
+body[data-studio-view] .notice { margin-top: 48px; font-size: 12px; color: #596b70; background: transparent; border: 0; padding: 20px 0 0; border-top: 1px solid #dce2df; }
+@media (max-width: 1000px) { .studio-hero-grid { gap: 28px; } .studio-course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .studio-path { padding: 22px 18px; gap: 12px; } .nav { gap: 16px; } .primary-links { gap: 18px; } }
+@media (max-width: 700px) {
+  main { padding-top: 28px; padding-inline: 20px; }
+  .studio-hero-grid { grid-template-columns: 1fr; margin: 0 0 36px; gap: 24px; }
+  html { scroll-padding-top: 150px; }
+  .studio-art { display: none; }
+  #patterns .studio-course-grid { grid-template-columns: minmax(0, 1fr); }
+  .studio-home h1 { font-size: clamp(2.65rem, 10.5vw, 3.6rem); margin-top: 14px; }
+  .studio-lead { font-size: 16px; line-height: 1.7; }
+  .studio-section-title { display: block; } .studio-section-title h2 { font-size: 22px; } .studio-section-title p { margin-top: 8px; }
+  .studio-paths, .studio-course-grid { grid-template-columns: minmax(0, 1fr); }
+  .studio-path { padding: 22px; }
+  .studio-home-bottom { display: block; } .studio-home-bottom > a { display: inline-block; margin-top: 12px; }
+  .studio-course-art { height: 112px; }
+  .studio-course-copy { padding: 22px; }
+  .studio-toolbar > span { display: none; }
+  .studio-hub-intro { font-size: 15px; }
+  .studio-home .library-stats { gap: 8px; } .studio-home .stat-item { margin-right: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { .studio-path { transition: none; } }
+
+.studio-context { margin: 12px 0 24px; border-bottom: 1px solid #dce2df; font-size: 14px; color: #465761; }
+.studio-context summary { padding: 12px 0; min-height: 44px; cursor: pointer; font-weight: 600; }
+.studio-context summary:focus-visible { outline: 3px solid #14544f; outline-offset: 3px; }
