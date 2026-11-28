@@ -1,0 +1,101 @@
+.praxis-pilot {
+  scroll-margin-top: 6rem;
+  min-inline-size: 0;
+}
+
+.praxis-status {
+  width: fit-content;
+  margin-block: .4rem 1rem;
+  padding: .3rem .65rem;
+  border: 1px solid var(--color-border);
+  border-radius: .35rem;
+  color: var(--color-text-secondary);
+  background: var(--color-surface-accent);
+  font-size: .875rem;
+}
+
+.praxis-german,
+.praxis-source-note {
+  margin-block: .25rem .75rem;
+  color: var(--color-text-secondary);
+}
+
+.praxis-source-note {
+  font-size: .85rem;
+}
+
+.praxis-overview {
+  display: grid;
+  grid-template-columns: minmax(9rem, .25fr) minmax(0, 1fr);
+  margin-block: 1rem;
+  column-gap: 1rem;
+  row-gap: .65rem;
+}
+
+.praxis-overview dt {
+  font-weight: 650;
+}
+
+.praxis-overview dd {
+  margin: 0;
+}
+
+.praxis-disclosure summary {
+  cursor: pointer;
+  padding-block: .75rem;
+  color: var(--color-focus);
+  font-weight: 650;
+}
+
+.praxis-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem 1.65rem;
+}
+
+.praxis-handout {
+  max-width: 47rem;
+  padding: clamp(.85rem, 2.5vw, 1.5rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.praxis-handout-header {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .5rem 1rem;
+}
+
+.praxis-stamp {
+  max-width: 100%;
+  min-height: 3.5rem;
+  padding: .4rem .6rem;
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-secondary);
+  font-size: .8rem;
+}
+
+.praxis-handout h5 {
+  margin-block: .85rem .15rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .praxis-overview {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: .3rem;
+  }
+
+  .praxis-overview dd {
+    margin-block-end: .65rem;
+  }
+}
+
+@media print {
+  #detail-patient-info,
+  .detail-jump-nav a[href="#detail-patient-info"] {
+    display: none !important;
+  }
+}

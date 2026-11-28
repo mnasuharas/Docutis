@@ -447,6 +447,7 @@
     "Oncology context": "Onkolojik bağlam", "Sources": "Kaynaklar",
     "Educational media": "Eğitici görseller", "Learning path": "Öğrenme yolu",
     "Red flags": "Uyarıcı bulgular", "Referral / escalation": "Sevk / ileri değerlendirme",
+    "Patient information": "Hasta bilgilendirme",
     "Patient counseling": "Hasta bilgilendirmesi",
     "Non-pharmacological care": "İlaç dışı yaklaşım",
     "Close details": "Ayrıntıları kapat", "Alternative name": "Diğer ad",

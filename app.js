@@ -13,6 +13,7 @@
   const searchInput = document.getElementById("searchInput");
   const reviewDashboardCounts = document.getElementById("reviewDashboardCounts");
   const reviewUi = window.DOCUTIS_REVIEW_UI || null;
+  const praxis = window.DOCUTIS_PRAXIS;
   let activeCategory = "all";
   let lastOpenedCard = null;
   let displayedCondition = null;
@@ -114,7 +115,7 @@
   const searchIndex = data.diseases.map(disease => ({
     disease,
     fields: [disease.name, window.DOCUTIS_LOCALE?.conditionName(disease.name), disease.alternative, disease.description, categoryTitle(disease.category),
-      subcategoryTitle(disease.subcategory), ...codingSearchText(disease.coding), ...clinicalProfileSearchText(disease.clinicalProfile)]
+      subcategoryTitle(disease.subcategory), ...(praxis?.aliases(disease.id) || []), ...codingSearchText(disease.coding), ...clinicalProfileSearchText(disease.clinicalProfile)]
       .flatMap(searchValues).filter(Boolean).map(normalizeSearch)
   }));
 
@@ -794,7 +795,7 @@
     return true;
   }
 
-  function addDetailNavigation(hasMedia, hasOncology, hasLearningPath) {
+  function addDetailNavigation(hasMedia, hasOncology, hasLearningPath, hasPraxis) {
     const navigation = document.createElement("nav");
     navigation.className = "detail-jump-nav";
     navigation.setAttribute("aria-label", "Condition detail sections");
@@ -807,6 +808,7 @@
       ["detail-follow-up", "Follow-up"],
       ["detail-coding", "Coding"]
     ];
+    if (hasPraxis) links.unshift(["detail-praxis", "Praxis"], ["detail-patient-info", "Patient information"]);
     if (hasLearningPath) links.unshift(["detail-learning-path", "Learning path"]);
     if (hasMedia) links.push(["detail-media", "Media"]);
     if (hasOncology) links.push(["detail-oncology", "Oncology"]);
@@ -889,13 +891,14 @@
     const hasLearningPath = addLearningPath(detailsElement, disease);
     const hasMedia = (mediaData.items || []).some(item => item.diseaseId === disease.id);
     const hasOncology = Boolean(disease.clinicalProfile?.oncology);
-    addDetailNavigation(hasMedia, hasOncology, hasLearningPath);
+    addDetailNavigation(hasMedia, hasOncology, hasLearningPath, praxis?.has(disease.id));
     const content = document.createElement("div");
     content.className = "detail-content";
     addDetailSection(content, "Overview", disease.description, "detail-overview", "detail-section--wide");
     addClinicalPresentationSection(content, disease);
     addDiagnosisSection(content, disease);
     addDifferentialSection(content, disease);
+    praxis?.mount(content, disease.id);
     addTreatmentSection(content, disease);
     addFollowUpSection(content, disease);
     addCodingSection(content, disease);
@@ -1043,6 +1046,15 @@
   window.DOCUTIS_SEARCH = Object.freeze({ normalize: normalizeSearch });
   window.DOCUTIS_REFRESH_LEARNING_PATH = function () {
     if (!displayedCondition || detailsElement.hidden) return;
+    const path = document.getElementById("detail-learning-path");
+    if (praxis?.has(displayedCondition) && !path?.contains(document.activeElement)) {
+      if (path) {
+        const updated = document.createDocumentFragment();
+        const disease = data.diseases.find(item => item.id === displayedCondition);
+        if (addLearningPath(updated, disease)) path.replaceWith(updated);
+      }
+      return;
+    }
     showDisease(displayedCondition);
   };
 }());
