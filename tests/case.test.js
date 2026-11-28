@@ -67,7 +67,7 @@ test("case UI shell and progressive disclosure controls exist", () => {
   assert.match(html, /id="caseModule"/);
   assert.match(html, /href="#caseModule"/);
   assert.match(html, /src="case-data\.js"/);
-  assert.match(html, /src="case-app\.js"/);
+  assert.match(html, /src="case-app\.js/);
   assert.match(app, /Reveal diagnosis/);
   assert.match(app, /aria-expanded/);
   assert.match(app, /aria-live/);

@@ -154,7 +154,7 @@ test("diagnostic weighting and pattern teaching stay hidden before reveal", () =
   assert.doesNotMatch(observe, /Feature weights/);
   assert.doesNotMatch(observe, /Major clue/);
   assert.doesNotMatch(observe, /Open pattern teaching/);
-  assert.doesNotMatch(observe, /Patterns in this case/);
+  assert.doesNotMatch(observe, /Patterns in This Case/);
   assert.doesNotMatch(observe, /One half of a lesion looks thicker/);
   assert.doesNotMatch(observe, new RegExp(item.diagnosisLabel, "i"));
   const bcc = loadCaseData().cases.find(entry => entry.id === "case-bcc-nodular-dermoscopy");
@@ -175,7 +175,7 @@ test("post-reveal pattern teaching is interactive and does not overwrite the cas
   ui.find(node => node.tagName === "BUTTON" && node.textContent === "Reveal diagnosis")[0].dispatch("click");
   ui.step(5, "Review");
   const review = ui.text(ui.document.root);
-  assert.match(review, /Patterns in this case/);
+  assert.match(review, /Patterns in This Case/);
   assert.match(review, /Feature weights/);
   const button = ui.find(node => node.tagName === "BUTTON" && node.textContent === "Open pattern teaching" && node.getAttribute("data-pattern-key") === "case-g18-01:pat-g18-01")[0];
   assert.equal(button.getAttribute("aria-expanded"), "false");

@@ -197,7 +197,7 @@
   "Pilot case": "Pilot vaka",
   "Start guided cases": "Yönlendirmeli vakalara başla",
   "These links open material already published for this record. Each item keeps its own review status. A reviewed record does not review the schematic, quiz, follow-up protocol or case. Cases keep the diagnosis hidden until you reveal it. This path is not a diagnostic or treatment sequence.": "Bu bağlantılar bu kayıt için önceden yayımlanmış materyali açar. Her öğe kendi inceleme durumunu korur. İncelenmiş bir kayıt şemayı, testi, takip protokolünü veya vakayı incelemez. Vakalar, siz tanıyı açana kadar tanıyı gizli tutar. Bu yol bir tanı veya tedavi dizisi değildir.",
-  "The guided series is the case path for this record. The full case library stays under Clinical cases. Notes stay in this tab. Every guided case remains clinician review required.": "Yönlendirmeli dizi bu kaydın vaka yoludur. Vaka kütüphanesinin tamamı Klinik Vakalar altında kalır. Notlar bu sekmede kalır. Her yönlendirmeli vaka hekim incelemesi gerekli durumunda kalır.",
+  "The guided series is the case path for this record. The full case library stays under Clinical Cases. Notes stay in this tab. Every guided case remains clinician review required.": "Yönlendirmeli dizi bu kaydın vaka yoludur. Vaka kütüphanesinin tamamı Klinik Vakalar altında kalır. Notlar bu sekmede kalır. Her yönlendirmeli vaka hekim incelemesi gerekli durumunda kalır.",
   "No original schematic is published for this record.": "Bu kayıt için özgün bir şema yayımlanmamıştır.",
   "No quiz item is published for this record.": "Bu kayıt için bir test öğesi yayımlanmamıştır.",
   "No German follow-up protocol is published for this record.": "Bu kayıt için bir Alman takip protokolü yayımlanmamıştır.",

@@ -109,7 +109,7 @@ test("navigation exposes the bilingual Nachsorge tab and the draft disclaimer", 
   const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
   assert.match(html, /id="nachsorgeModule"/);
   assert.match(html, /data-studio-nav="nachsorgeModule"/);
-  assert.match(html, /data-en="Follow-up \(Nachsorge\)"/);
+  assert.match(html, /data-en="Follow-Up \(Nachsorge\)"/);
   assert.match(html, /data-tr="Tümör Takibi"/);
   assert.match(html, /Kılavuza göre tedavi sonrası takip</);
   assert.doesNotMatch(html, /data-tr="[^"]*Nachsorge|nachsorge-subtitle[^>]*>[^<]*Nachsorge/);

@@ -722,7 +722,7 @@
         focusWithoutScrolling(target);
         scrollElementIntoView(target);
       });
-      appendTextElement(section, "p", "The guided series is the case path for this record. The full case library stays under Clinical cases. Notes stay in this tab. Every guided case remains clinician review required.", "learning-path-note");
+      appendTextElement(section, "p", "The guided series is the case path for this record. The full case library stays under Clinical Cases. Notes stay in this tab. Every guided case remains clinician review required.", "learning-path-note");
     }
     const list = document.createElement("ol");
     list.className = "learning-path-list";

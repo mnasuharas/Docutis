@@ -332,14 +332,14 @@
       add(card, "p", lesson.record.pairedModality.addedValue);
       add(card, "p", lesson.record.pairedModality.limits, "exercise-caption");
     }
-    add(card, "h5", "Your findings");
+    add(card, "h5", "Your Findings");
     const findings = add(card, "ol");
     responses[index].findings.forEach(function (finding) {
       add(findings, "li", finding.description + " · " + finding.certainty +
         (finding.position ? " · " + positionText(finding.position) : ""));
     });
     const reasoning = add(card, "details");
-    add(reasoning, "summary", "Your reasoning");
+    add(reasoning, "summary", "Your Reasoning");
     const answers = add(reasoning, "dl");
     if (responses[index].impression) {
       add(answers, "dt", "Before dermoscopy");
@@ -514,7 +514,7 @@
   }
 
   function renderIntro() {
-    const title = heading("Dermoscopy pattern exercise");
+    const title = heading("Dermoscopy Pattern Exercise");
     add(root, "p", "Mark what you see in two cases, compare your reasoning with the teaching examples, then try an independent case.");
     const actions = add(root, "div", "", "exercise-actions");
     button(actions, "Start with clinical impression", function () {

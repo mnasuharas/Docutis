@@ -42,15 +42,15 @@
   function showDirectory() {
     const entries = handoutList ? Object.entries(handouts).sort((a, b) =>
       parseInt(a[1].page, 10) - parseInt(b[1].page, 10)) : Object.entries(chapters);
-    add(root, "h1", handoutList ? say("Turkish patient information", "Türkçe Hasta Bilgilendirme")
-      : say("Praxis catalogue", "Praxis Rehberi"));
+    add(root, "h1", handoutList ? say("Turkish Patient Information", "Türkçe Hasta Bilgilendirme")
+      : say("Praxis Catalogue", "Praxis Rehberi"));
     add(root, "p", handoutList
       ? say("Clinician previews. Distribution awaits physician review.", "Hekim önizlemeleri. Hasta dağıtımı için hekim onayı bekleniyor.")
       : say("Treatment considerations, red flags and sources for German dermatology practice.", "Almanya dermatoloji pratiği için tedavi değerlendirmeleri, kırmızı bayraklar ve kaynaklar."));
     const tabs = add(root, "nav", "", "praxis-catalog-tabs");
     tabs.setAttribute("aria-label", "Praxis");
     const chapterTab = link(tabs, say("Chapters", "Hastalıklar") + " · " + Object.keys(chapters).length, "praxis.html");
-    const handoutTab = link(tabs, say("Patient information", "Hasta Bilgilendirme") + " · " + Object.keys(handouts).length, "praxis.html?view=handouts");
+    const handoutTab = link(tabs, say("Patient Information", "Hasta Bilgilendirme") + " · " + Object.keys(handouts).length, "praxis.html?view=handouts");
     (handoutList ? handoutTab : chapterTab).setAttribute("aria-current", "page");
 
     const label = add(root, "label", say("Search in German or Turkish", "Almanca veya Türkçe ara"), "praxis-search");
@@ -94,18 +94,18 @@
     root.replaceChildren();
     if (chapterId && Object.hasOwn(chapters, chapterId)) {
       const chapter = chapters[chapterId];
-      link(root, say("← All Praxis chapters", "← Tüm Praxis Başlıkları"), "praxis.html");
+      link(root, say("← All Praxis Chapters", "← Tüm Praxis Başlıkları"), "praxis.html");
       add(root, "h1", say(chapter.germanName, chapter.turkishName)).lang = say("de", "tr");
       if (chapter.conditions.length) {
         const links = add(root, "ul", "", "praxis-sources");
-        links.setAttribute("aria-label", say("Related Docutis reference pages", "İlgili Docutis Tanı Sayfaları"));
+        links.setAttribute("aria-label", say("Related Docutis Reference Pages", "İlgili Docutis Tanı Sayfaları"));
         for (const id of chapter.conditions) {
           link(add(links, "li"), diseases.get(id).name, "index.html?condition=" + encodeURIComponent(id) + "#detail-praxis", "en");
         }
       }
       mountChapter(root, chapterId);
     } else if (handoutId && Object.hasOwn(handouts, handoutId)) {
-      link(root, say("← All patient notes", "← Tüm Hasta Notları"), "praxis.html?view=handouts");
+      link(root, say("← All Patient Notes", "← Tüm Hasta Notları"), "praxis.html?view=handouts");
       add(root, "h1", handouts[handoutId].title).lang = "tr";
       mountOnlyHandout(root, handoutId);
     } else {

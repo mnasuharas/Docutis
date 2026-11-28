@@ -34,7 +34,7 @@ function harness(url = "https://example.org/Docutis/", loading = false) {
 }
 test("home shows only the landing screen; module routing preserves existing DOM state",()=>{
  const h=harness();assert.equal(h.elements.studioHome.hidden,false);assert.equal(h.elements.caseModule.hidden,true);assert.equal(h.library.hidden,true);
- h.click("#learn");assert.equal(h.elements.learn.hidden,false);assert.ok(h.elements.learn.textContent.includes("One lesion"));
+ h.click("#learn");assert.equal(h.elements.learn.hidden,false);assert.ok(h.elements.learn.textContent.includes("One Lesion"));
  h.elements.trainingModule.session="retained";h.click("#trainingModule");assert.equal(h.elements.trainingModule.hidden,false);assert.equal(h.elements.learn.hidden,true);
  h.click("#patterns");h.click("#trainingModule");assert.equal(h.elements.trainingModule.session,"retained");h.click("#mainContent",{skip:true});assert.equal(h.elements.trainingModule.hidden,false);
  h.click("#patternExercise");assert.equal(h.elements.patternModule.hidden,false);assert.equal(h.elements.caseModule.hidden,true);

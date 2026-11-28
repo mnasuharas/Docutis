@@ -95,7 +95,7 @@
     root.replaceChildren();
     const module = document.getElementById("subtleClueModule");
     module.querySelector(".eyebrow").textContent = say("Contrastive image practice", "Karşılaştırmalı görsel çalışması");
-    module.querySelector("#subtleClueTitle").textContent = say("Subtle clues and close mimics", "Silik İpuçları ve Yakın Taklitçiler");
+    module.querySelector("#subtleClueTitle").textContent = say("Subtle Clues and Close Mimics", "Silik İpuçları ve Yakın Taklitçiler");
     module.querySelector(".module-badge").textContent = say("Clinician review required", "Hekim incelemesi gerekli");
     module.querySelector(":scope > p").textContent = say(
       "Choose what is visible in two source-linked cases, then reveal the recorded diagnoses and the limits of that comparison. Educational preview only; no individual lesion decision or score.",

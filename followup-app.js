@@ -165,7 +165,7 @@
     ]);
     const supportingSources = (protocol.supplementalSources || []).filter(source => sourceIds.has(source.id));
     if (supportingSources.length) {
-      append(provenance, "h4", "Supporting context sources");
+      append(provenance, "h4", "Supporting Context Sources");
       const sourceList = append(provenance, "ul", null, "follow-up-source-list");
       supportingSources.forEach(source => {
         const item = append(sourceList, "li");
