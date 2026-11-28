@@ -35,7 +35,7 @@ test("templated interface strings translate and leave the stored value intact", 
   assert.equal(translate("Alternative name: AK; solar keratosis"), "Diğer ad: AK; solar keratosis");
   assert.equal(translate("Close details for Actinic Keratosis"), "Aktinik keratoz ayrıntılarını kapat");
   assert.equal(translate("Open details for Basal Cell Carcinoma"), "Bazal hücreli karsinom ayrıntılarını aç");
-  assert.equal(translate("Clinical review status: Clinical review pending"), "Klinik inceleme durumu: Klinik inceleme bekleniyor");
+  assert.equal(translate("Clinical review status: Clinical review pending"), "Klinik inceleme durumu: Hekim incelemesi bekleniyor");
   assert.equal(translate("3 linked source(s)"), "3 bağlantılı kaynak");
   assert.equal(translate("This article has not yet completed human physician review."), "Bu kayıt henüz hekim incelemesini tamamlamamıştır.");
   assert.equal(translate("Review details"), "İnceleme ayrıntıları");

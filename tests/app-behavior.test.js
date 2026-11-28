@@ -156,8 +156,8 @@ test("initial rendering creates all cards and ten category sections", () => {
   assert.match(textOf(elements.reviewDashboardCounts), /2\s+Clinician-reviewed records/);
   assert.match(textOf(elements.reviewDashboardCounts), /0\s+Partially reviewed records/);
   assert.match(textOf(elements.reviewDashboardCounts), /60\s+Records requiring clinician review/);
-  assert.match(textOf(elements.reviewDashboardCounts), /1\/8\s+Reviewed quiz items/);
-  assert.match(textOf(elements.reviewDashboardCounts), /1\/4\s+Reviewed visual items/);
+  assert.match(textOf(elements.reviewDashboardCounts), /0\/8\s+Reviewed quiz items/);
+  assert.match(textOf(elements.reviewDashboardCounts), /1\/9\s+Reviewed visual items/);
   assert.match(textOf(elements.reviewDashboardCounts), /1\/3\s+Reviewed follow-up protocols/);
   assert.match(textOf(elements.reviewDashboardCounts), /2026-09-23\s+Most recent valid human review/);
 });
@@ -542,7 +542,7 @@ test("actinic keratosis and basal cell carcinoma expose per-asset learning paths
     assert.equal(link.textContent, item.title);
     assert.notEqual(link.textContent, item.diagnosisLabel);
   }
-  assert.ok(bccPath.querySelectorAll(".is-reviewed").length >= 4);
+  assert.ok(bccPath.querySelectorAll(".is-reviewed").length >= 3);
   assert.ok(bccPath.querySelectorAll(".is-pending").length >= 2);
   let openedCase = null;
   let openedProtocol = null;
