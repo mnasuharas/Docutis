@@ -3042,6 +3042,39 @@ html:not([lang="tr"]) .nachsorge-subtitle { display: none; }
 
 .nachsorge-table .follow-up-note { display: block; margin-top: 4px; }
 
+@media (max-width: 600px) {
+  .nachsorge-table-wrap { overflow-x: visible; }
+  .nachsorge-table { min-width: 0; }
+  .nachsorge-table tr:first-child { display: none; }
+  .nachsorge-table,
+  .nachsorge-table tr,
+  .nachsorge-table th,
+  .nachsorge-table td {
+    display: block;
+    min-width: 0;
+    width: auto;
+  }
+  .nachsorge-table tr {
+    border: 1px solid var(--color-border);
+    margin: 0 0 0.75rem;
+    padding: 0.35rem 0.6rem 0.55rem;
+  }
+  .nachsorge-table th,
+  .nachsorge-table td { border: 0; padding: 0.35rem 0; }
+  .nachsorge-table th:first-child {
+    background: transparent;
+    font-size: 1rem;
+    padding-bottom: 0.15rem;
+    position: static;
+  }
+  .nachsorge-table td::before {
+    content: attr(data-period);
+    display: block;
+    font-weight: 700;
+    margin-top: 0.35rem;
+  }
+}
+
 .nachsorge-list { padding-inline-start: 1.2rem; }
 
 .nachsorge-no-timetable {

@@ -53,7 +53,7 @@
     add(prescribing, "p", record.care[lang]);
 
     const sources = add(card, "ul", "", "praxis-sources");
-    sources.setAttribute("aria-label", say("Guideline and product information", "Leitlinie ve Fachinformation"));
+    sources.setAttribute("aria-label", say("Guideline and product information", "Kılavuz ve ürün bilgisi"));
     for (const [label, url] of record.sources) {
       const link = add(add(sources, "li"), "a", label);
       link.href = url;
