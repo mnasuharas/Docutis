@@ -60,23 +60,6 @@
   background: var(--color-surface);
 }
 
-.praxis-handout-header {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: .5rem 1rem;
-}
-
-.praxis-stamp {
-  max-width: 100%;
-  min-height: 3.5rem;
-  padding: .4rem .6rem;
-  border: 1px solid var(--color-border-strong);
-  color: var(--color-text-secondary);
-  font-size: .8rem;
-}
-
 .praxis-handout h5 {
   margin-block: .85rem .15rem;
   font-size: 1rem;
