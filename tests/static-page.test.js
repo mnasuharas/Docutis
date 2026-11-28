@@ -235,6 +235,16 @@ test("result status and footer meet WCAG AA normal-text contrast", () => {
   }
 });
 
+test("Turkish reference library labels use Tanı rehberi", () => {
+  assert.match(html, /data-en="Reference" data-tr="Tanı rehberi"/);
+  assert.match(html, /data-en="Clinical reference" data-tr="Tanı rehberi"/);
+  assert.match(html, /href="#searchPanel" data-studio-nav="reference"/);
+  assert.doesNotMatch(html, /data-tr="Başvuru"|data-tr="Klinik başvuru"/);
+  assert.match(fs.readFileSync(path.join(root, "locale.js"), "utf8"), /"Reference library": "Tanı rehberi"/);
+  assert.match(fs.readFileSync(path.join(root, "studio.js"), "utf8"), /say\("Reference library", "Tanı rehberi"\)/);
+  assert.doesNotMatch(fs.readFileSync(path.join(root, "studio.js"), "utf8"), /Başvuru kütüphanesi/);
+});
+
 test("CI includes case validation beside quiz and media checks", () => {
   const governance = fs.readFileSync(path.join(root, "scripts", "review-governance.js"), "utf8");
   const directWorkflow = /node scripts\/case\.js/.test(workflow) && /node --check case-data\.js/.test(workflow);

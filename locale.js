@@ -37,7 +37,7 @@
     "Work through lesion images step by step or find a condition in the reference library.": "Lezyon görsellerini adım adım inceleyin veya başvuru kütüphanesinde bir tanı arayın.",
     "Start mixed-case training": "Karma vaka eğitimine başla",
     "Browse clinical cases": "Klinik vakaları incele", "Find a condition": "Tanı ara",
-    "Reference library": "Başvuru kütüphanesi",
+    "Reference library": "Tanı rehberi",
     "Search conditions": "Tanılarda ara", "Search by condition, alias, category or code": "Tanı, eş ad, kategori veya kod ile ara",
     "Clear": "Temizle", "Current reference coverage": "Güncel kapsam",
     "Case-based learning": "Vaka temelli öğrenme", "Clinical cases": "Klinik vakalar",
