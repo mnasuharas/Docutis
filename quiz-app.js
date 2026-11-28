@@ -11,6 +11,40 @@
   let index = 0;
   let score = 0;
   let answered = false;
+  let imageDialog;
+  let dialogImage;
+  let dialogCaption;
+
+  function ensureImageDialog() {
+    if (imageDialog) return;
+    imageDialog = element("dialog", undefined, "quiz-image-dialog");
+    imageDialog.setAttribute("aria-labelledby", "quizImageDialogTitle");
+    const header = element("div", undefined, "quiz-image-dialog-header");
+    header.appendChild(element("h2", "Image preview", undefined));
+    header.lastChild.id = "quizImageDialogTitle";
+    const close = element("button", "Close image", "quiz-image-dialog-close");
+    close.type = "button";
+    close.addEventListener("click", () => imageDialog.close());
+    header.appendChild(close);
+    imageDialog.appendChild(header);
+    dialogImage = document.createElement("img");
+    imageDialog.appendChild(dialogImage);
+    dialogCaption = element("p", undefined, "quiz-image-dialog-caption");
+    imageDialog.appendChild(dialogCaption);
+    imageDialog.addEventListener("click", event => {
+      if (event.target === imageDialog) imageDialog.close();
+    });
+    document.body.appendChild(imageDialog);
+  }
+
+  function openImage(item, trigger) {
+    ensureImageDialog();
+    dialogImage.src = item.src;
+    dialogImage.alt = item.alt;
+    dialogCaption.textContent = item.caption;
+    imageDialog.showModal();
+    imageDialog.addEventListener("close", () => focusWithoutScrolling(trigger), { once: true });
+  }
 
   function focusWithoutScrolling(element) {
     if (!element || typeof element.focus !== "function") return;
@@ -96,7 +130,12 @@
         image.width = item.dimensions.width;
         image.height = item.dimensions.height;
         image.loading = "lazy";
-        figure.appendChild(image);
+        const imageButton = element("button", undefined, "quiz-image-open");
+        imageButton.type = "button";
+        imageButton.setAttribute("aria-label", `Enlarge image: ${item.alt}`);
+        imageButton.appendChild(image);
+        imageButton.addEventListener("click", () => openImage(item, imageButton));
+        figure.appendChild(imageButton);
         const caption = element("figcaption");
         caption.appendChild(element("span", item.caption, "quiz-media-caption"));
         const visualReview = reviewUi?.asset("visual", item.id);
