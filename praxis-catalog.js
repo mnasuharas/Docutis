@@ -94,18 +94,18 @@
     root.replaceChildren();
     if (chapterId && Object.hasOwn(chapters, chapterId)) {
       const chapter = chapters[chapterId];
-      link(root, say("← All Praxis chapters", "← Tüm Praxis başlıkları"), "praxis.html");
+      link(root, say("← All Praxis chapters", "← Tüm Praxis Başlıkları"), "praxis.html");
       add(root, "h1", say(chapter.germanName, chapter.turkishName)).lang = say("de", "tr");
       if (chapter.conditions.length) {
         const links = add(root, "ul", "", "praxis-sources");
-        links.setAttribute("aria-label", say("Related Docutis reference pages", "İlgili Docutis tanı sayfaları"));
+        links.setAttribute("aria-label", say("Related Docutis reference pages", "İlgili Docutis Tanı Sayfaları"));
         for (const id of chapter.conditions) {
           link(add(links, "li"), diseases.get(id).name, "index.html?condition=" + encodeURIComponent(id) + "#detail-praxis", "en");
         }
       }
       mountChapter(root, chapterId);
     } else if (handoutId && Object.hasOwn(handouts, handoutId)) {
-      link(root, say("← All patient notes", "← Tüm hasta notları"), "praxis.html?view=handouts");
+      link(root, say("← All patient notes", "← Tüm Hasta Notları"), "praxis.html?view=handouts");
       add(root, "h1", handouts[handoutId].title).lang = "tr";
       mountOnlyHandout(root, handoutId);
     } else {
