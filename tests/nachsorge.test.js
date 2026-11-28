@@ -110,7 +110,10 @@ test("navigation exposes the bilingual Nachsorge tab and the draft disclaimer", 
   assert.match(html, /id="nachsorgeModule"/);
   assert.match(html, /data-studio-nav="nachsorgeModule"/);
   assert.match(html, /data-en="Follow-up \(Nachsorge\)"/);
-  assert.match(html, /data-tr="Nachsorge \(Takip\)"/);
+  assert.match(html, /data-tr="Kontrol takibi"/);
+  assert.doesNotMatch(html, /Nachsorge \(Takip\)/);
+  assert.match(fs.readFileSync(path.join(root, "studio.js"), "utf8"), /Kontrol takibi/);
+  assert.doesNotMatch(fs.readFileSync(path.join(root, "nachsorge-app.js"), "utf8"), /Nachsorge \(Takip\)/);
   assert.match(html, /Eğitim amaçlı taslak, hekim onayı bekliyor\. Güncel kılavuzu esas alın\./);
   assert.match(html, /src="nachsorge-app\.js/);
   assert.match(fs.readFileSync(path.join(root, "studio.js"), "utf8"), /searchParams\.has\("nachsorge"\)/);

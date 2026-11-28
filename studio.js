@@ -71,7 +71,9 @@
     const item = catalog.find(item => item.id === current), group = item ? item.group : "home";
     back.href = group === "home" ? "#mainContent" : "#" + group;
     back.textContent = group === "home" ? say("← Home", "← Ana sayfa") : group === "learn" ? say("← Case studio", "← Vaka eğitimleri") : say("← Pattern studio", "← Patern eğitimleri");
-    label.textContent = item ? say(...item.tag) : current === "reference" ? say("Reference library", "Başvuru kütüphanesi") : current === "nachsorgeModule" ? say("Follow-up (Nachsorge)", "Nachsorge (Takip)") : current === "followUpModule" ? say("Oncology follow-up", "Onkolojik takip") : say("About & evidence", "Proje ve kanıtlar");
+    label.textContent = item ? say(...item.tag) : current === "reference" ? say("Reference library", "Başvuru kütüphanesi") : current === "nachsorgeModule" ? say("Follow-up (Nachsorge)", "Kontrol takibi") : current === "followUpModule" ? say("Oncology follow-up", "Onkolojik takip") : say("About & evidence", "Proje ve kanıtlar");
+    if (current === "nachsorgeModule") document.title = say("Follow-up (Nachsorge) | Docutis", "Kontrol takibi | Docutis");
+    else if (/^(?:Follow-up \(Nachsorge\)|Kontrol takibi) \| Docutis$/.test(document.title)) document.title = say("Docutis | Dermatology Reference Toolkit", "Docutis | Dermatoloji Eğitim ve Başvuru Kaynağı");
   }
   const caseViews = new Set(["patternContextModule", "caseModule", "trainingModule", "guidedPatternModule", "mimicModule", "contrastLabModule", "pinkCaseModule", "subtleClueModule", "patternModule"]);
   let loadedCaseViews = false;
