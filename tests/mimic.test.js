@@ -9,7 +9,7 @@ const base = path.join(__dirname, "..");
 function read(name) { return fs.readFileSync(path.join(base, name), "utf8"); }
 
 class Element {
-  constructor(tag) { this.tag = tag; this.children = []; this.events = {}; }
+  constructor(tag) { this.tag = tag; this.children = []; this.events = {}; this.style = {}; }
   appendChild(child) { this.children.push(child); }
   replaceChildren() { this.children = []; }
   setAttribute() {}
@@ -82,5 +82,45 @@ test("every pair gates context and sources, allows uncertainty and retains choic
     document.documentElement.lang = "en";
     language.dispatch("change");
     root.findAll("button").find(node => node.textContent === "Choose another topic").dispatch("click");
+  }
+});
+
+test("guided pattern lessons separate visual feedback from source diagnoses in both languages", () => {
+  const root = new Element("div"), language = new Element("select");
+  const document = {
+    readyState: "complete",
+    documentElement: { lang: "en" },
+    createElement: tag => new Element(tag),
+    getElementById: id => ({ guidedPatternApp: root, docutisLanguage: language })[id]
+  };
+  const context = vm.createContext({ window: {}, document });
+  for (const name of ["case-data.js", "early-clue-data.js", "contrast-lab-media.js", "contrast-lab-data.js", "pattern-lessons.js"]) {
+    vm.runInContext(read(name), context, { filename: name });
+  }
+  const button = label => root.findAll("button").find(node => node.textContent === label);
+  const markers = () => root.findAll("span").filter(node => node.className === "contrast-marker");
+  const sources = () => root.findAll("a").filter(node => node.textContent === "Yayını aç");
+  const topics = root.findAll("button").map(node => node.textContent);
+  assert.equal(topics.length, 5);
+  for (const topic of topics) {
+    button(topic).dispatch("click");
+    assert.equal(markers().length, 0);
+    const select = root.findAll("select")[0];
+    const form = root.findAll("form")[0];
+    form.dispatch("submit");
+    assert.equal(markers().length, 0);
+    select.value = "3";
+    select.dispatch("change");
+    document.documentElement.lang = "tr";
+    language.dispatch("change");
+    assert.equal(root.findAll("select")[0].value, "3");
+    root.findAll("form")[0].dispatch("submit");
+    assert.equal(markers().length, 2);
+    assert.equal(sources().length, 0);
+    button("Kaynak tanılarını aç").dispatch("click");
+    assert.equal(sources().length, 2);
+    document.documentElement.lang = "en";
+    language.dispatch("change");
+    button("Choose another pattern").dispatch("click");
   }
 });
