@@ -24,6 +24,9 @@
   }
   function translate() {
     document.querySelectorAll("[data-en][data-tr]").forEach(el => { el.textContent = el.getAttribute(tr() ? "data-tr" : "data-en"); });
+    const statLabels = [[" condition records", " tanı kaydı"], [" clinical categories", " klinik kategori"], [" oncology follow-up protocols", " onkolojik takip protokolü"]];
+    document.querySelectorAll("#libraryStats .stat-item > span").forEach((el, i) => { if (statLabels[i]) el.textContent = say(...statLabels[i]); });
+    const stats = document.getElementById("libraryStats"); if (stats) stats.setAttribute("aria-label", say("Current reference coverage", "Güncel kapsam"));
     renderHubs(); toolbar();
   }
   function renderHubs() {
@@ -42,7 +45,7 @@
         node("span", say("Open practice →", "Eğitimi aç →"), copy, "studio-course-action");
       });
       const utility = node("div", "", hub, "studio-utility-links");
-      [["followUpModule", "Oncology follow-up", "Onkolojik takip"], ["evidenceStatus", "Review status & sources", "İnceleme durumu ve kaynaklar"]].forEach(([id, en, turkish]) => { const a = node("a", say(en, turkish) + " ↗", utility); a.href = "#" + id; });
+      [["followUpModule", "Oncology follow-up", "Onkolojik takip"], ["evidenceStatus", "Review status & sources", "İnceleme durumu ve kaynaklar"]].forEach(([id, en, turkish]) => { const a = node("a", say(en, turkish) + " →", utility); a.href = "#" + id; });
     });
   }
   function route(hash) {
