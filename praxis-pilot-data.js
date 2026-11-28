@@ -79,6 +79,35 @@
         contact: "Tırnak çevresinde artan kızarıklık, ağrı veya şişlik varsa başvurun. Tablet kullanırken gözlerde veya ciltte sararma ya da koyu idrar olursa hemen tıbbi yardım alın."
       }
     },
+    rosacea: {
+      germanName: "Rosazea",
+      aliases: ["Rosazea", "Rozasea", "Rosacea"],
+      guidePage: 153,
+      approach: [
+        "Select treatment by phenotype. Papulopustular inflammation, persistent erythema and ocular disease require different assessments.",
+        "Tedaviyi fenotipe göre seç. Papülopüstüler inflamasyon, persistan eritem ve göz tutulumu ayrı değerlendirilir."
+      ],
+      followUp: [
+        "Check response and tolerance and ask about eye symptoms. Eye pain, photophobia or a change in vision needs prompt assessment.",
+        "Yanıtı ve toleransı kontrol et, göz yakınmalarını sor. Göz ağrısı, fotofobi veya görme değişikliği gecikmeden değerlendirilir."
+      ],
+      example: [
+        "Soolantra 10 mg/g cream for inflammatory papulopustular rosacea lesions in adults. Apply once daily for up to 4 months. The product information advises stopping if there is no improvement after 3 months.",
+        "Soolantra 10 mg/g krem, erişkinde papülopüstüler rozaseanın inflamatuvar lezyonları için. En fazla 4 ay, günde bir kez. Fachinformation, 3 ayda düzelme olmazsa tedavinin sonlandırılmasını önerir."
+      ],
+      scope: [
+        "This product indication covers inflammatory lesions in adults. Consult the product information for pregnancy and severe liver impairment. Ocular symptoms require their own assessment.",
+        "Bu preparat erişkindeki inflamatuvar lezyonlar için ruhsatlıdır. Gebelik ve ağır karaciğer fonksiyon bozukluğunda Fachinformation’ı kontrol et. Oküler semptomları ayrıca değerlendir."
+      ],
+      care: [
+        "Gentle skin care and tolerated sun protection. Ask about individual triggers and topical steroid exposure.",
+        "Nazik cilt bakımı ve tolere edilebilen güneş koruması. Kişisel tetikleyicileri ve topikal steroid kullanımını sorgula."
+      ],
+      sources: [
+        ["AWMF 013-065 · S2k Rosazea v3.0", "https://www.awmf.org/aktuelles/awmf-aktuell/rosazea"],
+        ["Fachinformation · Soolantra 10 mg/g", "https://www.fachinfo.de/fi/pdf/020649"]
+      ]
+    },
     "actinic-keratosis": {
       germanName: "Aktinische Keratose",
       aliases: ["Aktinische Keratose", "Aktinische Keratosen", "aktinik keratoz"],

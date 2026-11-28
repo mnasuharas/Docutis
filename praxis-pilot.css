@@ -99,3 +99,72 @@
     display: none !important;
   }
 }
+
+.praxis-catalog {
+  max-width: 58rem;
+  margin-inline: auto;
+  padding: clamp(.9rem, 3vw, 2rem);
+}
+
+.praxis-catalog-header,
+.praxis-catalog-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem 1.2rem;
+  margin-block-end: 1rem;
+}
+
+.praxis-catalog-header {
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border);
+  padding-block-end: .75rem;
+}
+
+.praxis-catalog-header select { margin-inline-start: .4rem; }
+
+.praxis-catalog-tabs a,
+.praxis-catalog-list a {
+  display: block;
+  padding: .65rem .8rem;
+}
+
+.praxis-catalog-tabs a[aria-current="page"] {
+  background: var(--color-surface-accent);
+  border-radius: .35rem;
+  font-weight: 650;
+}
+
+.praxis-search {
+  display: grid;
+  gap: .3rem;
+  width: min(100%, 33rem);
+}
+
+.praxis-search input {
+  min-width: 0;
+  padding: .6rem;
+}
+
+.praxis-catalog-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: .6rem;
+  padding: 0;
+  list-style: none;
+}
+
+.praxis-catalog-list li {
+  border: 1px solid var(--color-border);
+  border-radius: .45rem;
+  overflow-wrap: anywhere;
+}
+
+.praxis-catalog-list span {
+  color: var(--color-text-secondary);
+  display: block;
+  font-size: .9rem;
+  text-decoration: none;
+}
+
+.praxis-catalog-list li > span { padding: 0 .8rem .65rem; }
