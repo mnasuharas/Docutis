@@ -129,8 +129,8 @@ test("CI validates pull requests, main pushes and manual runs with read-only per
   }
 });
 
-test("documentation reports CI, 62 records and the unfinished broader-coverage target", () => {
-  assert.match(readme, /62 condition records/i);
+test("documentation reports CI, 65 records and the unfinished broader-coverage target", () => {
+  assert.match(readme, /65 condition records/i);
   assert.match(readme, /v0\.2\.0-preview\.1[\s\S]*50 condition records/i);
   assert.match(readme, /GitHub Actions/i);
   assert.match(readme, /broader dermatology coverage[^.]*not yet complete/i);
@@ -211,7 +211,7 @@ test("Goal 9 exposes independent public review status without fabricated approva
   assert.match(reviewUi, /No physician review has been recorded yet/);
   assert.doesNotMatch(reviewUi, /Awaiting review/);
   assert.match(app, /Partially reviewed records/);
-  assert.match(app, /Invalidated or outdated reviews/);
+  assert.match(app, /Invalidated reviews of learning materials/);
   assert.match(goal9Review, /Required attestation/);
   assert.match(goal9Review, /No clinical wording change has been applied/);
   assert.match(css, /\.public-review-panel\s*{/);

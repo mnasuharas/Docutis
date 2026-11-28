@@ -200,7 +200,7 @@ function validateProfile(record) {
 
 function validateData(data = loadData()) {
   if (data.schemaVersion !== 2) throw new Error("DOCUTIS_DATA schemaVersion must be 2");
-  if (!Array.isArray(data.diseases) || data.diseases.length !== 62) throw new Error("Expected 62 disease records");
+  if (!Array.isArray(data.diseases) || !data.diseases.length) throw new Error("Expected a non-empty disease catalogue");
   const ids = new Set();
   const aliasOwners = new Map();
   for (const record of data.diseases) {

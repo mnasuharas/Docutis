@@ -31,7 +31,7 @@ Goal 28 adds mixed-case screening training: unknown lesions from the existing li
 
 Goal 18 adds a Learn Melanoma pathway on top of that flow. It is a teaching sequence, not a certificate and not evidence that the cases improve diagnostic skill. No case is clinician reviewed. Goal 19 adds teaching types, observation prompts, qualitative feature weights, and a closest mimic on the academy cases only. It does not add cases, does not claim that learners improve, and does not review any case. The five pilot payloads were not edited. Pull request #21 was not the base, and Goal 18 pull request #24 was not merged. Goal 10 adds a public OSS surface: About/project-status copy, repository and roadmap/changelog links, and “Suggest a correction” / “Report outdated evidence” CTAs that open the clinical content issue form. Docutis remains a public preview and is not validated clinical decision support.
 
-The current site contains 62 condition records. It retains the malignant and precancerous collection, the common-dermatology and infectious packages, an autoimmune/connective-tissue/immunobullous package, and a first hair-and-nail package. It is intended for physicians, medical trainees and other healthcare professionals seeking a concise educational reference.
+The current site contains 65 condition records. It retains the malignant and precancerous collection, the common-dermatology and infectious packages, an autoimmune/connective-tissue/immunobullous package, and a first hair-and-nail package. It is intended for physicians, medical trainees and other healthcare professionals seeking a concise educational reference.
 
 Docutis is currently in active early development. Its content, structure and technical foundations are being expanded progressively.
 
@@ -100,7 +100,7 @@ Medical content contributions should include appropriate references. Legacy embe
 
 ## Clinical governance
 
-Clinical review governance distinguishes automated source/schema validation from a physician's personal review of a specific content version. Legacy embedded `reviewStatus` fields on disease records remain `clinician review required` for all 62 records. The authoritative public Goal 9 layer (`review-status.json`) currently marks **5** pilot assets as `clinician reviewed` (actinic keratosis and basal cell carcinoma disease records, BCC follow-up, BCC quiz item, BCC schematic) and the remaining Goal 9 units as `review required`.
+Clinical review governance distinguishes automated source/schema validation from a physician's personal review of a specific content version. Legacy embedded `reviewStatus` fields on disease records remain `clinician review required` for all 65 records. The authoritative public Goal 9 layer (`review-status.json`) currently marks **4** assets as `clinician reviewed` (actinic keratosis and basal cell carcinoma records, BCC follow-up and BCC schematic). The revised BCC quiz is invalidated. The other 84 units require review.
 
 `clinicalReview` is null until a physician review is documented. A reviewed record stores the date, physician role, specialty and a deterministic content fingerprint. Local validation and CI reject stale fingerprints after clinical changes; contributors must obtain re-review or reset the record to review-required. A matching hash does not establish reviewer credentials or guarantee correctness. See [CLINICAL_REVIEW.md](CLINICAL_REVIEW.md) for the human procedure and the read-only `node scripts/clinical-review.js "Acne Vulgaris"` utility.
 
@@ -118,7 +118,7 @@ Protocols live in `followup-data.js`, separate from disease records and renderin
 
 Docutis is an early-stage public prototype and should not yet be considered a comprehensive dermatology database.
 
-The project currently has 62 records. The initial numeric milestone is complete, but broader dermatology coverage and documented clinician review of every record are not yet complete.
+The project currently has 65 records. The initial numeric milestone is complete, but broader dermatology coverage and documented clinician review of every record are not yet complete.
 
 Current development priorities include:
 
@@ -140,7 +140,7 @@ See [ROADMAP.md](ROADMAP.md) for completed foundations, known gaps, the medical 
 The live site is static HTML, CSS and JavaScript. No build step and no package install.
 
 - `index.html`, `style.css`, `app.js` — condition library
-- `data.js` — 62 condition records
+- `data.js` — 65 condition records
 - `followup-data.js`, `followup-app.js` — German dermato-oncology follow-up UI
 - `quiz-data.js`, `quiz-app.js` — eight-question educational quiz
 - `case-data.js`, `case-app.js` — 57 cases: five pilots, 16 Goal 18 cases, 8 Goal 21 cases, 1 Goal 22 case, 2 Goal 24 cases, 6 Goal 25 cases, 7 Goal 26 cases, 6 Goal 27 cases, 1 Goal 29 case, 2 Goal 30 cases, 1 Goal 31 case, 1 Goal 32 case and 1 Goal 33 case (diagnosis stays hidden until reveal). `academy-review.html` is the generated reviewer workspace, not a learner step.
@@ -161,9 +161,11 @@ The current application uses:
 - JavaScript
 - GitHub Pages
 
+The reference catalogue includes seborrheic keratosis, dermatofibroma and solar lentigo, with existing case links where present. The Cases hub also includes three simulated inflammatory and paediatric exercises with source links. The case scripts load the first time someone opens a case exercise or condition detail. Search and reference listings start independently. See [clinical review plan](CLINICAL_REVIEW.md#review-plan-for-eight-profiles-and-57-cases) for the eight profiles and 57 source cases. The German melanoma follow-up area provides an English/Turkish AJCC 8 stage helper (stages 0–IIC) with German report terms in parentheses.
+
 Medical records live in `data.js`; `app.js` contains filtering, rendering and interaction behavior. Records include a broad category, a structured subcategory, coding-system metadata, source metadata, and review status. This separation keeps content review focused and preserves the dependency-free static architecture.
 
-Goal 7 adds an optional versioned `clinicalProfile` for structured morphology, localization, symptoms, diagnostic workflow, concise differential clues, treatment hierarchy, medication-regimen metadata, follow-up strategy, red flags, referral and oncology context. Eight representative records use the profile; the remaining 42 continue through the legacy-compatible renderer. See [CLINICAL_SCHEMA.md](CLINICAL_SCHEMA.md) and [CONTENT_QUALITY_AUDIT.md](CONTENT_QUALITY_AUDIT.md). Structured clinical fields are still drafts requiring physician review.
+Goal 7 adds an optional versioned `clinicalProfile` for structured morphology, localization, symptoms, diagnostic workflow, concise differential clues, treatment hierarchy, medication-regimen metadata, follow-up strategy, red flags, referral and oncology context. Eight representative records use the profile; the remaining 57 continue through the legacy-compatible renderer. See [CLINICAL_SCHEMA.md](CLINICAL_SCHEMA.md) and [CONTENT_QUALITY_AUDIT.md](CONTENT_QUALITY_AUDIT.md). Structured clinical fields are still drafts requiring physician review.
 
 Optional educational media lives separately in `media-data.js`. The four original SVG schematics remain in reference material. The visual quiz now uses five attributed clinical or dermoscopic photographs from CC BY sources, including a paired histopathology-confirmed melanoma in situ example. Each photo has its own license, source and review status; all five await physician review. The BCC schematic remains independently clinician reviewed, but that approval does not cover the changed quiz item. See [MEDIA_GOVERNANCE.md](MEDIA_GOVERNANCE.md).
 
@@ -178,6 +180,9 @@ Coding data is educational metadata, not billing guidance. ICD-10 WHO is kept di
 The project intentionally begins with a lightweight architecture so that it remains easy to inspect, maintain and contribute to.
 
 ## Running Locally
+
+Use a local HTTP server from the repository root, for example `python3 -m http.server 8080`. Open the home page first, then select a case exercise to check on-demand loading. The GitHub Pages deployment remains a static, dependency-free site.
+
 
 No build process is currently required.
 

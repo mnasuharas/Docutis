@@ -209,14 +209,15 @@
     const draft = document.getElementById("melanomaStaging");
     const staging = window.DOCUTIS_MELANOMA_STAGING;
     if (!draft || !staging) return;
-    const say = (en, tr) => document.documentElement && document.documentElement.lang === "tr" ? tr : en;
-
     const get = suffix => document.getElementById(`melanomaStaging${suffix}`);
     const form = get("Form");
     const method = get("Method");
     const stageResult = get("Result");
     const followUpButton = get("FollowUp");
     let groupToOpen = null;
+    let submitted = false;
+    const languageControl = document.getElementById("docutisLanguage");
+    const say = (en, tr) => languageControl?.value === "tr" ? tr : en;
 
     function readCategory() {
       if (method.value === "category") return { category: get("T").value };
@@ -224,6 +225,7 @@
     }
 
     function refreshFields() {
+      submitted = false;
       const manual = method.value === "category";
       get("TField").hidden = !manual;
       get("ThicknessField").hidden = manual;
@@ -238,14 +240,14 @@
 
     form.addEventListener("input", refreshFields);
     form.addEventListener("change", refreshFields);
-    form.addEventListener("submit", event => {
-      event.preventDefault();
+    function renderAssessment() {
       refreshFields();
+      submitted = true;
       const t = readCategory();
       if (!t?.category) {
         append(stageResult, "p", method.value === "category"
-          ? say("Choose a T category (Bitte eine T-Kategorie wählen).", "Bir T kategorisi seçin (Bitte eine T-Kategorie wählen).")
-          : say("Enter the fully measurable Breslow thickness in mm as a positive number with at most two decimal places (Breslow-Dicke).", "Tam ölçülebilir Breslow kalınlığını mm olarak, en fazla iki ondalıkla pozitif bir sayı olarak girin (Breslow-Dicke)."));
+          ? say("Select a T category.", "T kategorisini seç.")
+          : say("Enter a fully measurable Breslow thickness in mm, as a positive number with up to two decimal places.", "Tam olarak ölçülebilen Breslow kalınlığını mm cinsinden, en çok iki ondalıklı pozitif sayı olarak gir."));
         return;
       }
 
@@ -255,31 +257,39 @@
         distant: get("M").value,
         resection: get("R").value
       });
-      const thickness = t.roundedThickness ? ` · Breslow ${t.roundedThickness} mm` : "";
-      append(stageResult, "p", say(`T category (T-Kategorie): ${t.category}${thickness}`, `T kategorisi (T-Kategorie): ${t.category}${thickness}`), "melanoma-staging-category");
+      const thickness = t.roundedThickness ? ` · Breslow (AJCC 8): ${say(t.roundedThickness, t.roundedThickness.replace(".", ","))} mm` : "";
+      append(stageResult, "p", `${say("T category", "T kategorisi")} (T-Kategorie): ${t.category}${thickness}`, "melanoma-staging-category");
       if (assessment.kind === "outside-scope") {
-        append(stageResult, "p", say("Regional or distant metastasis is outside this staging helper (außerhalb dieser Stadienhilfe), stages 0–IIC.", "Bölgesel veya uzak metastaz bu evre yardımcısının dışındadır (außerhalb dieser Stadienhilfe), evre 0–IIC."));
+        append(stageResult, "p", say("Regional or distant metastases fall outside this tool’s stage range (0–IIC).", "Bölgesel veya uzak metastazlar aracın evre aralığı (0–IIC) dışındadır."));
       } else if (assessment.kind === "t-incomplete") {
-        append(stageResult, "p", say("Stage group cannot be derived (Gesamtstadium nicht ableitbar). Check the exact T subcategory or the full histology report.", "Evre grubu çıkarılamıyor (Gesamtstadium nicht ableitbar). Tam T alt kategorisini veya histoloji raporunu kontrol edin."));
+        append(stageResult, "p", say("Stage cannot be assigned. Check the exact T subcategory or full pathology report.", "Evre belirlenemiyor. Tam T alt kategorisini veya histopatoloji raporunu kontrol et."));
       } else if (assessment.kind === "nm-incomplete") {
-        const missing = [!get("N").value && "N-Status", !get("M").value && "M-Status"].filter(Boolean).join(" und ");
-        append(stageResult, "p", say(`Stage group cannot be derived. Missing (Fehlende Angabe): ${missing}.`, `Evre grubu çıkarılamıyor. Eksik (Fehlende Angabe): ${missing}.`));
+        const missing = [!get("N").value && "N", !get("M").value && "M"].filter(Boolean).join(" / ");
+        append(stageResult, "p", say(`Stage cannot be assigned. Missing: ${missing}.`, `Evre belirlenemiyor. Eksik bilgi: ${missing}.`));
       } else {
-        append(stageResult, "p", say(`Clinical stage group when N0/cM0 (Klinische Stadiengruppe bei N0/cM0: ${assessment.clinicalStage}).`, `N0/cM0 klinik evre grubu (Klinische Stadiengruppe bei N0/cM0: ${assessment.clinicalStage}).`));
+        append(stageResult, "p", say(`Clinical stage (klinische Stadiengruppe), N0/cM0: ${assessment.clinicalStage}.`, `Klinik evre (klinische Stadiengruppe), N0/cM0: ${assessment.clinicalStage}.`));
         append(stageResult, "p", assessment.pathologicStage
-          ? say(`Pathologic stage group (Pathologische Stadiengruppe: ${assessment.pathologicStage}).`, `Patolojik evre grubu (Pathologische Stadiengruppe: ${assessment.pathologicStage}).`)
-          : say("Pathologic stage group cannot be derived (Pathologische Stadiengruppe nicht ableitbar). This T category needs pN0.", "Patolojik evre grubu çıkarılamıyor (Pathologische Stadiengruppe nicht ableitbar). Bu T kategorisi için pN0 gerekir."));
+          ? say(`Pathological stage (pathologische Stadiengruppe): ${assessment.pathologicStage}.`, `Patolojik evre (pathologische Stadiengruppe): ${assessment.pathologicStage}.`)
+          : say("Pathological staging for this T category requires pN0.", "Bu T kategorisinde patolojik evreleme için pN0 gerekir."));
         if (assessment.pathologicStage && assessment.pathologicStage !== assessment.clinicalStage) {
-          append(stageResult, "p", say("For T1b the clinical and pathologic stage groups differ. For follow-up, use the stage the physician documented (Nachsorge).", "T1b için klinik ve patolojik evre grupları farklıdır. Takip için hekimin belgelediği evreyi kullanın (Nachsorge)."));
+          append(stageResult, "p", say("Clinical and pathological groups differ for T1b. Select the physician-documented stage in the follow-up field below.", "T1b için klinik ve patolojik evre grupları farklıdır. Aşağıdaki takip alanında hekimin belgelediği evreyi seç."));
         } else if (assessment.pathologicStage === "IIC" && !assessment.followUpGroup) {
-          append(stageResult, "p", say("The S3 follow-up group for IIC requires a documented R0 resection (R0-Resektion).", "IIC için S3 takip grubu belgelenmiş bir R0 rezeksiyon gerektirir (R0-Resektion)."));
+          append(stageResult, "p", say("The German S3 follow-up group for IIC requires documented R0 resection.", "Alman S3 kılavuzunda IIC takip grubu için belgelenmiş R0 rezeksiyonu gerekir."));
         }
         groupToOpen = selectedProtocol().groups.find(group => group.id === assessment.followUpGroup) || null;
         if (groupToOpen) {
-          followUpButton.textContent = say(`Open follow-up group (Nachsorgegruppe ansehen) (${groupToOpen.label})`, `Takip grubunu aç (Nachsorgegruppe ansehen) (${groupToOpen.label})`);
+          followUpButton.textContent = say("Open follow-up group (Nachsorgegruppe)", "Takip grubunu aç (Nachsorgegruppe)");
           followUpButton.hidden = false;
         }
       }
+    }
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      renderAssessment();
+    });
+    languageControl?.addEventListener("change", () => {
+      if (submitted && !draft.hidden) renderAssessment();
     });
 
     followUpButton.addEventListener("click", () => {
@@ -306,10 +316,6 @@
 
     diseaseSelect.addEventListener("change", syncVisibility);
     syncVisibility();
-    const language = document.getElementById("docutisLanguage");
-    if (language && stageResult) language.addEventListener("change", () => {
-      if (stageResult.textContent || (stageResult.children && stageResult.children.length)) form.dispatchEvent(new Event("submit", { cancelable: true }));
-    });
   }
 
   populate(diseaseSelect, data.protocols);

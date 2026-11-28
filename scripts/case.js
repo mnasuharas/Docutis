@@ -486,7 +486,14 @@ function validateCaseData(caseData = loadCaseData(), diseaseData = loadDiseaseDa
   const teachingIds = validateTeachingDiagnoses(caseData);
   const diseaseIds = new Set(diseaseData.diseases.map(item => item.id));
   for (const id of teachingIds) {
-    if (diseaseIds.has(id)) throw new Error(`${id}: teaching diagnosis collides with a condition id`);
+    if (diseaseIds.has(id)) {
+      const record = diseaseData.diseases.find(item => item.id === id);
+      const teaching = caseData.teachingDiagnoses.find(item => item.id === id);
+      if (teaching.pole !== "benign" || record.name.toLowerCase() !== teaching.name.toLowerCase()
+          || !["benign-pigmented-lesion", "benign-epidermal-tumour", "fibrohistiocytic-tumor"].includes(record.subcategory)) {
+        throw new Error(`${id}: teaching diagnosis collides with a condition id`);
+      }
+    }
     diseaseIds.add(id);
   }
   const ids = new Set();
