@@ -1794,9 +1794,22 @@ footer {
 
   .primary-links {
     flex: 1 0 100%;
+    flex-wrap: wrap;
     order: 1;
     margin-left: 0;
     max-width: 100%;
+    overflow: visible;
+    column-gap: 4px;
+    row-gap: 2px;
+  }
+
+  .primary-links a {
+    flex: 0 1 auto;
+    justify-content: center;
+    max-width: 100%;
+    padding-inline: 8px;
+    text-align: center;
+    white-space: normal;
   }
 
   .primary-links a,
@@ -2982,6 +2995,18 @@ footer {
   border-inline-start: 4px solid var(--color-accent);
   margin: var(--space-4) 0;
   padding: var(--space-3) var(--space-4);
+}
+
+.nachsorge-module,
+.nachsorge-table-wrap,
+.follow-up-result {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.nachsorge-module a,
+.follow-up-note {
+  overflow-wrap: anywhere;
 }
 
 .nachsorge-table-wrap { overflow-x: auto; }
