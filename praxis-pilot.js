@@ -94,9 +94,7 @@
       if (noteIds.length > 1) summary.lang = "tr";
       const sheet = add(preview, "article", "", "praxis-handout");
       sheet.lang = "tr";
-      const top = add(sheet, "div", "", "praxis-handout-header");
-      add(top, "h4", note.title);
-      add(top, "div", "Muayenehane kaşesi / adı", "praxis-stamp");
+      add(sheet, "h4", note.title);
       add(sheet, "p", note.germanName, "praxis-german").lang = "de";
       for (const [title, name] of [["Bu nedir?", "about"], ["Tedavi ve öneriler", "treatment"], ["Evde neler yapabilirsiniz?", "daily"], ["Ne zaman başvurmalısınız?", "contact"]]) {
         add(sheet, "h5", title);
