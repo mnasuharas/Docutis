@@ -4,6 +4,11 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
+### Mimics and diagnostic traps
+
+- Add eight bilingual, staged comparisons using previously sourced clinical and dermoscopic photographs. Learners record structures and distribution, then view clinical photographs, select a differential and review the diagnoses and limitations reported by the sources.
+- Include a searchable Turkish, English and German vocabulary list. Preserve source attribution and show the review requirement for all new teaching.
+
 ### Broader pattern-learning routes
 
 - Surface mixed-case practice, the wider case collection and the cross-condition quiz in the Pattern Studio alongside melanoma comparisons, pink-lesion practice, subtle-clue work and pattern foundations. Reuse existing modules and preserve their independent review states.
