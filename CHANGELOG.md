@@ -4,6 +4,13 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
+### Learning home and focused workspaces
+
+- Replace the long all-modules landing page with three starting paths: work through a case, learn a pattern, or find a condition. Add English/Turkish course cards and dedicated case/pattern hubs, a calmer cream/navy/teal palette, clearer typography and responsive layouts. The lens illustration is decorative, not a clinical image.
+- Open each existing module in its own screen while retaining its DOM/session state. Preserve legacy fragment links, condition deep links, browser history, learning-path launches and the search shortcut. Move the existing pattern exercise into its own screen. Source/review notes remain available in disclosures and the medical disclaimer remains visible.
+- No clinical records, source labels or physician review decisions are changed. No framework, external fonts or dependencies added.
+
+
 ### Early melanoma contrast lab
 
 - Add six bilingual, selection-only comparisons with five in-situ and one thin invasive melanoma and non-melanoma controls. Import two distinct back MIS panels from Colmant et al. (same patient; original article CC BY notice); retain source arrows and clinical insets. Reuse existing source-verified cases without changing their review status.

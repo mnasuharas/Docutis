@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="subtle-clue.css?v=2">
   <link rel="stylesheet" href="pink-case.css?v=1">
   <link rel="stylesheet" href="contrast-lab.css?v=1">
+  <link rel="stylesheet" href="studio.css?v=1">
 
 </head>
 
@@ -27,12 +28,10 @@
       <span class="logo">Docutis</span>
     </a>
     <div class="primary-links">
-      <a href="#trainingModule">Training</a>
-      <a href="#caseModule">Cases</a>
-      <a href="#searchPanel">Conditions</a>
-      <a href="#followUpModule">Follow-up</a>
-      <a href="#quizModule">Quiz</a>
-      <a href="#evidenceStatus">Clinical review</a>
+      <a href="#mainContent" data-studio-nav="home" data-en="Home" data-tr="Ana sayfa" data-no-translate>Home</a>
+      <a href="#learn" data-studio-nav="learn" data-en="Cases" data-tr="Vakalar" data-no-translate>Cases</a>
+      <a href="#patterns" data-studio-nav="patterns" data-en="Patterns" data-tr="Paternler" data-no-translate>Patterns</a>
+      <a href="#searchPanel" data-studio-nav="reference" data-en="Reference" data-tr="Başvuru" data-no-translate>Reference</a>
       <a href="#about">About</a>
     </div>
     <label class="language-switch" for="docutisLanguage">Language <select id="docutisLanguage" aria-label="Language"><option value="en" lang="en" data-no-translate>English</option><option value="tr" lang="tr" data-no-translate>Türkçe</option></select></label>
@@ -44,28 +43,33 @@
 
 <main id="mainContent" tabindex="-1">
 
-  <section class="hero" aria-labelledby="pageTitle">
-    <p class="eyebrow">Dermatology education and reference</p>
-    <h1 id="pageTitle">Learn dermatology through cases.</h1>
-
-    <p>
-      Work through lesion images step by step or find a condition in the reference library.
-    </p>
-    <div class="hero-actions">
-      <a href="#trainingModule" class="hero-action hero-action-primary">Start mixed-case training</a>
-      <a href="#subtleClueModule" class="hero-action">Practise subtle clues</a>
-      <a href="#contrastLabModule" id="contrastLabLink" class="hero-action" data-no-translate>Early melanoma comparisons / Erken melanom karşılaştırmaları</a>
-      <a href="#pinkCaseModule" id="pinkCaseLink" class="hero-action" data-no-translate>Pink lesions / Pembe lezyonlar</a>
-      <a href="#caseModule" class="hero-action">Browse clinical cases</a>
-      <a href="#searchPanel" class="hero-action">Find a condition</a>
+  <section id="studioHome" class="hero studio-home" aria-labelledby="pageTitle" data-no-translate>
+    <div class="studio-hero-grid">
+      <div class="studio-hero-copy">
+        <p class="eyebrow" data-en="DOCUTIS / DERMATOLOGY EDUCATION" data-tr="DOCUTIS / DERMATOLOJİ EĞİTİMİ">DOCUTIS / DERMATOLOGY EDUCATION</p>
+<h1 data-en="A closer look.
+A clearer understanding." data-tr="Daha yakından bak.
+Daha iyi anla." id="pageTitle">A closer look.
+A clearer understanding.</h1><p data-en="Build your clinical eye, one lesion at a time. Choose a case, explore a pattern, or find the reference you need." data-tr="Klinik gözünü her lezyonda geliştir. Bir vaka seç, paternleri keşfet veya ihtiyacın olan bilgiye ulaş." class="studio-lead">Build your clinical eye, one lesion at a time. Choose a case, explore a pattern, or find the reference you need.</p>
+      </div>
+      <div class="studio-art" aria-hidden="true">
+        <svg viewBox="0 0 400 330" focusable="false"><defs><pattern id="studioGrid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#ffffff" stroke-opacity=".08"/></pattern></defs><rect width="400" height="330" fill="url(#studioGrid)"/><circle cx="195" cy="158" r="106" fill="#255d66"/><circle cx="195" cy="158" r="83" fill="#ceded7"/><circle cx="195" cy="158" r="59" fill="#f3f1e9"/><circle cx="195" cy="158" r="33" fill="#367b78"/><path d="m273 235 57 57" stroke="#ceded7" stroke-width="24" stroke-linecap="round"/><path d="M55 65h34M72 48v34M306 77h31M322 62v31" stroke="#ceded7" stroke-width="2"/><circle cx="77" cy="252" r="5" fill="#a5c7bd"/><circle cx="331" cy="172" r="4" fill="#a5c7bd"/></svg>
+        <span class="studio-art-label" data-en="OBSERVE / COMPARE / UNDERSTAND" data-tr="GÖZLEMLE / KARŞILAŞTIR / ANLA">OBSERVE / COMPARE / UNDERSTAND</span>
+      </div>
     </div>
-    <p class="hero-status">
-      Public preview · Educational use only. Check the review status on each item.
-      Docutis is not validated clinical decision support.
-    </p>
-
+    <div class="studio-section-title"><h2 data-en="Where would you like to start?" data-tr="Bugün ne çalışmak istersin?" >Where would you like to start?</h2><p data-en="Your next step, at your pace." data-tr="Bir sonraki adımın, kendi hızında." >Your next step, at your pace.</p></div>
+    <div class="studio-paths">
+<a class="studio-path" href="#learn"><span class="studio-path-number" aria-hidden="true">01</span><span class="studio-path-copy"><strong data-en="Work through a case" data-tr="Vaka çöz" >Work through a case</strong><span data-en="Observe, choose, then compare your reasoning." data-tr="Gözlemle, seç ve akıl yürütmeni karşılaştır." >Observe, choose, then compare your reasoning.</span></span><span class="studio-arrow" aria-hidden="true">↗</span></a><a class="studio-path" href="#patterns"><span class="studio-path-number" aria-hidden="true">02</span><span class="studio-path-copy"><strong data-en="Learn a pattern" data-tr="Patern öğren" >Learn a pattern</strong><span data-en="Explore subtle clues and their close mimics." data-tr="Silik ipuçlarını ve yakın taklitçilerini keşfet." >Explore subtle clues and their close mimics.</span></span><span class="studio-arrow" aria-hidden="true">↗</span></a><a class="studio-path" href="#searchPanel"><span class="studio-path-number" aria-hidden="true">03</span><span class="studio-path-copy"><strong data-en="Find a condition" data-tr="Tanı ara" >Find a condition</strong><span data-en="Clinical features, differentials and sources." data-tr="Klinik bulgular, ayırıcı tanılar ve kaynaklar." >Clinical features, differentials and sources.</span></span><span class="studio-arrow" aria-hidden="true">↗</span></a>
+    </div>
+    <div class="studio-home-bottom"><p class="hero-status"><span data-en="Educational preview · Check each item’s review status." data-tr="Eğitim önizlemesi · Her içeriğin inceleme durumunu kontrol et." >Educational preview · Check each item’s review status.</span></p><a href="#evidenceStatus"><span data-en="Clinical review &amp; evidence →" data-tr="Klinik inceleme ve kanıt →" >Clinical review &amp; evidence →</span></a></div>
     <div id="libraryStats" class="library-stats js-only" aria-label="Current reference coverage"></div>
   </section>
+
+  <section id="learn" class="studio-hub" tabindex="-1" data-no-translate><a href="#trainingModule">Mixed-case training / Karma vaka eğitimi</a> · <a href="#caseModule">Clinical cases / Klinik vakalar</a></section>
+  <section id="patterns" class="studio-hub" tabindex="-1" data-no-translate><a href="#subtleClueModule">Subtle clues / Silik ipuçları</a> · <a href="#contrastLabModule">Comparisons / Karşılaştırmalar</a> · <a href="#pinkCaseModule">Pink lesions / Pembe lezyonlar</a></section>
+  <div id="studioToolbar" class="studio-toolbar js-only" data-no-translate hidden>
+    <a id="studioBack" href="#learn"></a><span id="studioScreenLabel"></span>
+  </div>
 
   <section id="searchPanel" tabindex="-1" class="search-panel" aria-labelledby="searchTitle">
     <div class="section-heading compact-heading">
@@ -111,7 +115,7 @@
       </div>
       <span class="module-badge">Clinician review required</span>
     </div>
-    <p class="case-disclaimer">Unknown lesions from the case library, one at a time: look, commit to a working impression, open dermoscopy where it is stored, then reveal the source diagnosis and its verification. Training only. It is not a diagnostic device, an exam, or a certificate, and it gives no score. Sessions are curated for teaching coverage and do not reflect how often lesions occur.</p>
+    <details class="studio-context"><summary data-no-translate data-en="Education &amp; source notes" data-tr="Eğitim ve kaynak notları">Education &amp; source notes</summary><p class="case-disclaimer">Unknown lesions from the case library, one at a time: look, commit to a working impression, open dermoscopy where it is stored, then reveal the source diagnosis and its verification. Training only. It is not a diagnostic device, an exam, or a certificate, and it gives no score. Sessions are curated for teaching coverage and do not reflect how often lesions occur.</p></details>
     <noscript>
       <p class="case-empty">Training cannot run because JavaScript is unavailable. No diagnosis or teaching text is substituted. Eğitim, JavaScript olmadığı için çalışamaz. Tanı veya öğretim metni yerine konmaz.</p>
     </noscript>
@@ -142,6 +146,10 @@
     <div id="pinkCaseApp" class="js-only" tabindex="-1" data-no-translate></div>
   </section>
 
+  <section id="patternModule" class="studio-exercise-screen" tabindex="-1" aria-label="Pattern practice / Patern çalışması">
+    <section id="patternExercise" class="pattern-exercise js-only" aria-labelledby="patternExerciseTitle" hidden></section>
+  </section>
+
   <section id="caseModule" tabindex="-1" class="case-module" aria-labelledby="caseTitle">
     <div class="section-heading">
       <div>
@@ -150,11 +158,10 @@
       </div>
       <span class="module-badge">Clinician review required</span>
     </div>
-    <p class="case-disclaimer">Educational steps only: inspect, observe, differential, reveal, then review. Learn Melanoma is an optional sequence, not a certificate and not a device. Cases are not clinical decision support. Image interpretation here is not physician attestation. The <a href="academy-review.html">reviewer workspace</a> contains answers and source diagnoses.</p>
+    <details class="studio-context"><summary data-no-translate data-en="Education &amp; source notes" data-tr="Eğitim ve kaynak notları">Education &amp; source notes</summary><p class="case-disclaimer">Educational steps only: inspect, observe, differential, reveal, then review. Learn Melanoma is an optional sequence, not a certificate and not a device. Cases are not clinical decision support. Image interpretation here is not physician attestation. The <a href="academy-review.html">reviewer workspace</a> contains answers and source diagnoses.</p></details>
     <noscript>
       <p class="case-empty">Cases cannot be shown because JavaScript is unavailable. No diagnosis, observation or teaching text is substituted. The published pilot cases remain clinician review required. Vakalar JavaScript olmadığı için gösterilemez. Tanı, gözlem veya öğretim metni yerine konmaz. Yayımlanmış pilot vakalar hekim incelemesi gerekli durumunda kalır.</p>
     </noscript>
-    <section id="patternExercise" class="pattern-exercise js-only" aria-labelledby="patternExerciseTitle" hidden></section>
     <div id="caseApp" class="case-app js-only" tabindex="-1"></div>
   </section>
 
@@ -412,6 +419,7 @@
 <script src="pink-media.js?v=1"></script>
 <script src="pink-case-data.js?v=1"></script>
 <script src="pink-case-app.js?v=2"></script>
+<script src="studio.js?v=1"></script>
 
 
 </body>
