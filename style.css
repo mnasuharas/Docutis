@@ -3011,7 +3011,23 @@ footer {
 
 .nachsorge-list { padding-inline-start: 1.2rem; }
 
+.nachsorge-no-timetable {
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-inline-start: 4px solid var(--color-accent);
+  margin: var(--space-4) 0;
+  max-width: 40rem;
+  overflow-wrap: anywhere;
+  padding: var(--space-4);
+}
+
+.nachsorge-no-timetable strong,
+.nachsorge-no-timetable p { display: block; margin: 0; }
+
+.nachsorge-no-timetable p { margin-top: 0.5rem; }
+
 @media (max-width: 700px) {
   .nachsorge-module .follow-up-controls { grid-template-columns: 1fr; }
+  .nachsorge-no-timetable { max-width: none; }
   .nachsorge-module .follow-up-controls label:last-child { grid-column: auto; }
 }

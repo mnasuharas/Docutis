@@ -945,6 +945,8 @@
     const partialRecords = statusCount("disease", "partially reviewed");
     const changeRequestedRecords = statusCount("disease", "changes requested");
     const invalidatedRecords = statusCount("disease", "review invalidated");
+    const invalidatedLearning = publicAssets.filter(item => item.assetType !== "disease" && item.status === "review invalidated");
+    const invalidatedLearningNames = invalidatedLearning.map(item => item.assetType === "quiz" ? `${item.id} quiz` : `${item.assetType} ${item.id}`).join(", ");
     const legacyRequired = data.diseases.filter(item => !item.clinicalProfile && item.reviewStatus !== "clinician reviewed").length;
     const requiredRecords = legacyRequired + statusCount("disease", "review required");
     const stats = [
@@ -955,7 +957,7 @@
       [requiredRecords, "Records requiring clinician review"],
       [changeRequestedRecords, "Records with changes requested"],
       [invalidatedRecords, "Invalidated condition reviews"],
-      [publicAssets.filter(item => item.assetType !== "disease" && item.status === "review invalidated").length, "Invalidated reviews of learning materials"],
+      [invalidatedLearning.length, "Invalidated reviews of learning materials"],
       [`${statusCount("quiz", "clinician reviewed")}/${publicAssets.filter(item => item.assetType === "quiz").length || 0}`, "Reviewed quiz items"],
       [`${statusCount("visual", "clinician reviewed")}/${mediaItems.length}`, "Reviewed visual items"],
       [`${statusCount("follow_up", "clinician reviewed")}/${followUps.length}`, "Reviewed follow-up protocols"],
@@ -967,6 +969,7 @@
       item.className = "review-stat";
       appendTextElement(item, "strong", String(value));
       appendTextElement(item, "span", label);
+      if (label === "Invalidated reviews of learning materials" && invalidatedLearningNames) appendTextElement(item, "span", ` ${invalidatedLearningNames}`);
       reviewDashboardCounts.appendChild(item);
     });
   }

@@ -1,6 +1,6 @@
 # German guideline-based dermato-oncology follow-up protocols
 
-The follow-up module is a structured clinical reference for physicians. Its interface language is English and its first guideline jurisdiction is Germany (`DE`); those are independent concerns. Official German guideline titles remain in their original language for accurate provenance. The module does not calculate stage, replace the source guideline or provide patient-specific advice. Every protocol is currently `clinician review required`.
+The follow-up module is a structured clinical reference for physicians. The Nachsorge tab is bilingual; official German guideline titles stay in their original language. The first guideline jurisdiction is Germany (`DE`). Official German guideline titles remain in their original language for accurate provenance. The module does not calculate stage, replace the source guideline or provide patient-specific advice. Every protocol is currently `clinician review required`.
 
 ## Implementation matrix
 

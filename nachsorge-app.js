@@ -4,6 +4,8 @@
 
   const DISCLAIMER_TR = "Eğitim amaçlı taslak, hekim onayı bekliyor. Güncel kılavuzu esas alın.";
   const DISCLAIMER_EN = "Educational draft pending physician review. Use the current guideline.";
+  const NO_TIMETABLE_TR = "Kılavuzda yıllara göre takip takvimi yok; bu nedenle aralık gösterilmiyor.";
+  const NO_TIMETABLE_EN = "The guideline has no year-by-year follow-up timetable, so no interval is shown.";
 
   function pair(en, tr) { return { en, tr }; }
   function line(item, lang) { return lang === "tr" ? item.tr : item.en; }
@@ -28,8 +30,8 @@
       sourceVersion: "3.3",
       sourcePublished: "2020-07",
       sourceRegister: "032/024OL",
-      sourceLocation: "Recommendation 8.1 and the explanatory text on dysplastic nevus syndrome and familial melanoma",
-      body: pair("No year-by-year table is stated for people who have not had a melanoma. Recommendation 8.1 is for someone who has had a melanoma: risk-adapted follow-up should last 10 years, then regular self-examination and an annual whole-body examination for a second melanoma. Explanatory text, not table 23: permanent half-yearly examinations (every 6 months) sollte übernommen werden at least for dysplastic nevus syndrome and familial melanoma. No imaging interval is stated.", "Melanom geçirmemiş kişiler için yıl yıl bir tablo belirtilmemiştir. Öneri 8.1 melanom geçirmiş kişi içindir: riske uyarlanmış takip 10 yıl sürmelidir; ardından ikinci bir melanom için düzenli kendi kendine muayene ve yılda bir tüm vücut muayenesi. Açıklayıcı metin, tablo 23 değil: displastik nevüs sendromu ve ailesel melanom için kalıcı olarak 6 ayda bir muayene (half-yearly) sollte übernommen werden. Görüntüleme aralığı belirtilmemiştir.")
+      sourceLocation: pair("Recommendation 8.1 and the explanatory text on dysplastic nevus syndrome and familial melanoma", "Öneri 8.1 ve displastik nevüs sendromu ile ailesel melanom hakkındaki açıklayıcı metin"),
+      body: pair("No year-by-year table is stated for people who have not had a melanoma. Recommendation 8.1 is for someone who has had a melanoma: risk-adapted follow-up should last 10 years, then regular self-examination and an annual whole-body examination for a second melanoma. Explanatory text, not table 23: permanent examinations every 6 months (half-yearly) should be adopted (sollte übernommen werden) at least for dysplastic nevus syndrome and familial melanoma. No imaging interval is stated.", "Melanom geçirmemiş kişiler için yıl yıl bir tablo belirtilmemiştir. Öneri 8.1 melanom geçirmiş kişi içindir: riske uyarlanmış takip 10 yıl sürmelidir; ardından ikinci bir melanom için düzenli kendi kendine muayene ve yılda bir tüm vücut muayenesi. Açıklayıcı metin, tablo 23 değil: displastik nevüs sendromu ve ailesel melanom için kalıcı olarak 6 ayda bir (half-yearly) muayene devralınmalıdır (sollte übernommen werden). Görüntüleme aralığı belirtilmemiştir.")
     }
   ]);
 
@@ -142,7 +144,7 @@
     "squamous-cell-carcinoma-in-situ": pair("A separate patient-education script with an interval is not stated.", "Aralık içeren ayrı bir hasta eğitimi metni belirtilmemiştir."),
     "merkel-cell-carcinoma": pair("Teach self-examination of the locoregional skin and lymph drainage pathways (soll). A separate sun-protection interval is not stated.", "Lokorejyonel deri ve lenf drenaj yollarının kendi kendine muayenesi öğretilir (soll). Ayrı bir güneşten korunma aralığı belirtilmemiştir."),
     "dermatofibrosarcoma-protuberans": pair("No current S3 or S2k patient-education interval is stated.", "Güncel bir S3 veya S2k hasta eğitimi aralığı belirtilmemiştir."),
-    "high-risk-nevus": pair("Self-examination is part of recommendation 8.1 after a melanoma, and of the explanatory half-yearly sentence for dysplastic nevus syndrome and familial melanoma. No separate sun-protection interval is stated.", "Kendi kendine muayene, melanom sonrası öneri 8.1'in ve displastik nevüs sendromu ile ailesel melanom için açıklayıcı half-yearly cümlenin parçasıdır. Ayrı bir güneşten korunma aralığı belirtilmemiştir.")
+    "high-risk-nevus": pair("Self-examination is part of recommendation 8.1 after a melanoma, and of the explanatory every-6-months (half-yearly) sentence for dysplastic nevus syndrome and familial melanoma. No separate sun-protection interval is stated.", "Kendi kendine muayene, melanom sonrası öneri 8.1'in ve displastik nevüs sendromu ile ailesel melanom için açıklayıcı 6 ayda bir (half-yearly) cümlenin parçasıdır. Ayrı bir güneşten korunma aralığı belirtilmemiştir.")
   });
 
   const NOTE_TR = Object.freeze({
@@ -212,7 +214,14 @@
     "No current AWMF S3 or S2k states a DFSP follow-up interval.": "Güncel bir AWMF S3 veya S2k, DFSP için bir takip aralığı belirtmez.",
     "German clinical-practice context": "Alman klinik uygulama bağlamı",
     "Self-examination": "Kendi kendine muayene",
-    "International context": "Uluslararası bağlam"
+    "International context": "Uluslararası bağlam",
+    "Chapters 8.3 and 8.4.8, pages 171–182": "Bölüm 8.3 ve 8.4.8, sayfa 171–182",
+    "Chapter 12, pages 59–61": "Bölüm 12, sayfa 59–61",
+    "Chapter 9.1.5, statement/recommendations 9.2–9.6, pages 240–243": "Bölüm 9.1.5, ifade/öneri 9.2–9.6, sayfa 240–243",
+    "Chapter 4.5 field cancerization; chapter 9 numeric Nachsorge schema applies to invasive cutaneous SCC, not to uncomplicated actinic keratosis": "Bölüm 4.5 alan kanserizasyonu; bölüm 9 sayısal Nachsorge şeması invaziv kutanöz SHK için geçerlidir, komplike olmayan aktinik keratoz için değil",
+    "Chapter 9. No separate year-by-year table for Bowen disease or SCC in situ was identified in version 2.0": "Bölüm 9. Bowen hastalığı veya in situ SHK için ayrı bir yıl yıl tablo sürüm 2.0 içinde bulunmadı.",
+    "Chapter 8, Nachsorge": "Bölüm 8, Nachsorge",
+    "No current S3 or S2k Nachsorge table. This S1 is in revision and its validity ended on 22 August 2023. Intervals from that S1 are not copied.": "Güncel bir S3 veya S2k Nachsorge tablosu yok. Bu S1 revizyondadır ve geçerliliği 22 Ağustos 2023'te bitmiştir. Bu S1'in aralıkları kopyalanmaz."
   });
 
   function lang() { return document.documentElement && document.documentElement.lang === "tr" ? "tr" : "en"; }
@@ -264,7 +273,7 @@
   }
   function pairedCopy() {
     const items = [...inSituVisits, ...melanomaVisits, ...bccVisits, ...csccVisits, ...mccVisits, ...akVisits, ...bowenVisits, ...dfspVisits];
-    catalog.forEach(entry => { if (entry.banner) items.push(entry.banner); if (entry.body) items.push(entry.body); });
+    catalog.forEach(entry => { if (entry.banner) items.push(entry.banner); if (entry.body) items.push(entry.body); if (entry.sourceLocation?.en) items.push(entry.sourceLocation); });
     Object.values(redFlags).forEach(item => items.push(item));
     Object.values(education).forEach(item => items.push(item));
     Object.values(GROUP_LABELS).forEach(item => items.push(item));
@@ -336,7 +345,13 @@
     try { return entryById(new URL(window.location.href).searchParams.get("nachsorge")); } catch (error) { return null; }
   }
 
-  function render() {
+  function lacksTimetable(group) {
+    if (!group?.periods?.length) return false;
+    return group.periods.every(period => period.timingStatus === "not_specified" || (period.recommendations || []).every(item => item.status === "not_specified"));
+  }
+
+  function render(options = {}) {
+    const fromHistory = options.fromHistory === true;
     const disease = document.getElementById("nachsorgeDisease");
     const groupSelect = document.getElementById("nachsorgeGroup");
     const result = document.getElementById("nachsorgeResult");
@@ -344,7 +359,8 @@
     if (!disease || !groupSelect || !result) return;
     if (search) search.placeholder = say("Melanoma, Merkel, Bowen…", "Melanom, Merkel, Bowen…");
     const query = normalize(search ? search.value : "");
-    const previous = entryById(disease.value) || selectedFromUrl();
+    const fromUrl = selectedFromUrl();
+    const previous = (options.preferUrl && fromUrl) || entryById(disease.value) || fromUrl;
     const visible = catalog.filter(entry => matches(entry, query));
     disease.replaceChildren();
     visible.forEach(entry => {
@@ -388,13 +404,25 @@
     }
     const review = window.DOCUTIS_REVIEW_UI?.asset?.("follow_up", protocol?.id || "");
     add(result, "p", review ? badgeText(review.status) : badgeText("review required"), "module-badge");
+    if (review?.status === "clinician reviewed" && protocol?.id === "basal-cell-carcinoma-de") {
+      add(result, "p", say("The BCC follow-up schedule record is clinician reviewed. The framing text on this page is an educational draft pending physician review.", "BHK takip çizelgesi kaydı hekim tarafından incelendi. Bu sayfadaki çerçeve metni eğitim taslağıdır ve hekim onayı bekler."), "follow-up-note");
+    }
     add(result, "h3", line(entry, lang()));
     if (entry.banner) add(result, "p", line(entry.banner, lang()), "follow-up-note");
     if (entry.body) {
-      add(result, "h3", say("What the guideline states", "Kılavuzun söylediği"));
-      add(result, "p", line(entry.body, lang()));
       add(result, "h3", say("Schedule", "Çizelge"));
-      add(result, "p", say("No year-by-year table is stated. None is shown.", "Yıl yıl bir tablo belirtilmemiştir. Gösterilmez."));
+      const highRiskNotice = add(result, "div", null, "nachsorge-no-timetable");
+      add(highRiskNotice, "strong", lang() === "tr" ? NO_TIMETABLE_TR : NO_TIMETABLE_EN);
+      add(highRiskNotice, "p", line(entry.body, lang()));
+    } else if (protocol && group && lacksTimetable(group)) {
+      add(result, "p", noteText(group.description, lang()));
+      add(result, "h3", say("Schedule", "Çizelge"));
+      const notice = add(result, "div", null, "nachsorge-no-timetable");
+      notice.setAttribute?.("role", "note");
+      add(notice, "strong", lang() === "tr" ? NO_TIMETABLE_TR : NO_TIMETABLE_EN);
+      const reason = group.notes?.[0] || group.periods?.[0]?.recommendations?.[0]?.note;
+      if (reason) add(notice, "p", noteText(reason, lang()));
+      (protocol.notes || []).filter(note => note !== reason).forEach(note => add(result, "p", noteText(note, lang()), "follow-up-note"));
     } else if (protocol && group) {
       add(result, "p", noteText(group.description, lang()));
       add(result, "h3", say("Schedule", "Çizelge"));
@@ -438,7 +466,7 @@
     visitsFor(entry, group?.id).forEach(item => add(visitList, "li", line(item, lang())));
     if (!visitList.children.length) add(result, "p", say("No visit checklist is stated beyond the paragraph above.", "Yukarıdaki paragrafın ötesinde bir ziyaret listesi belirtilmemiştir."));
     add(result, "h3", say("Imaging and laboratory", "Görüntüleme ve laboratuvar"));
-    if (!protocol || !group) add(result, "p", say("No imaging or laboratory interval is stated.", "Görüntüleme veya laboratuvar aralığı belirtilmemiştir."));
+    if (!protocol || !group || lacksTimetable(group)) add(result, "p", say("No imaging or laboratory interval is stated.", "Görüntüleme veya laboratuvar aralığı belirtilmemiştir."));
     else {
       const imaging = add(result, "ul", null, "nachsorge-list");
       ["lymph_node_ultrasound", "s100b", "cross_sectional_imaging"].forEach(modality => {
@@ -466,14 +494,15 @@
       link.target = "_blank";
       link.rel = "noopener noreferrer";
     }
-    add(result, "p", source?.recommendationLocation || entry.sourceLocation || "", "follow-up-note");
+    const locationText = source?.recommendationLocation ? noteText(source.recommendationLocation, lang()) : (entry.sourceLocation?.en ? line(entry.sourceLocation, lang()) : (entry.sourceLocation || ""));
+    add(result, "p", locationText, "follow-up-note");
     (protocol?.supplementalSources || []).forEach(item => {
       const link = add(result, "a", item.title, "follow-up-note");
       link.href = item.sourceUrl;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
     });
-    writeUrl(entry);
+    if (!fromHistory) writeUrl(entry);
   }
 
   function badgeText(status) {
@@ -515,6 +544,10 @@
     if (groupSelect) groupSelect.addEventListener("change", render);
     const language = document.getElementById("docutisLanguage");
     if (language) language.addEventListener("change", render);
+    window.addEventListener("popstate", () => {
+      if (search) search.value = "";
+      render({ fromHistory: true, preferUrl: true });
+    });
     document.addEventListener("docutis-nachsorge-group", event => {
       const current = entryById(disease?.value);
       if (!current || current.id !== "cutaneous-melanoma" || !event.detail?.groupId || !groupSelect) return;
@@ -526,6 +559,6 @@
     render();
   }
 
-  window.DOCUTIS_NACHSORGE = Object.freeze({ catalog, frequencyText, noteText, numericTokens, normalize, pairedCopy, visitsFor, render, DISCLAIMER_TR });
+  window.DOCUTIS_NACHSORGE = Object.freeze({ catalog, frequencyText, noteText, numericTokens, normalize, pairedCopy, visitsFor, render, DISCLAIMER_TR, NO_TIMETABLE_TR });
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 }());
