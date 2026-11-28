@@ -3130,9 +3130,9 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 - Required corrections / rejected claims:
 - Public reviewer notes:
 
-## quiz: Which ABCDE feature explicitly describes change over time? (`melanoma-evolution`)
+## quiz: Comparing the clinical and dermoscopic views, which description best matches the dermoscopic pattern? (`melanoma-evolution`)
 
-- **Exact fingerprint:** `sha256-v1:90116bee492bf05294115bb3d557bbf6546b27193f7a27c71d96784fe02c4212`
+- **Exact fingerprint:** `sha256-v1:ba9844dfeaded413df7ac67a16c7f56099eaea15016b8d551964958838d5a1da`
 - **Schema version:** 1
 - **Reviewable sections:** `prompt`, `options`, `best-answer`, `explanation`, `safety-notice`, `references`
 - **Mapped evidence sources:**
@@ -3149,17 +3149,20 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 {
   "id": "melanoma-evolution",
   "diseaseId": "cutaneous-melanoma",
-  "mediaId": "melanoma-abcde-schematic",
-  "domain": "morphology",
-  "prompt": "Which ABCDE feature explicitly describes change over time?",
-  "options": [
-    "Asymmetry",
-    "Border irregularity",
-    "Evolution",
-    "Color variation"
+  "mediaIds": [
+    "mis-thigh-clinical",
+    "mis-thigh-dermoscopy"
   ],
-  "correctIndex": 2,
-  "explanation": "Evolution means a lesion is changing over time. It is assessed with the overall clinical and dermoscopic pattern, not in isolation.",
+  "domain": "morphology",
+  "prompt": "Comparing the clinical and dermoscopic views, which description best matches the dermoscopic pattern?",
+  "options": [
+    "A uniform network with identical lines throughout",
+    "A darker, thicker central network with a few dark dots",
+    "Only regular dotted vessels on a red background",
+    "Only branching vessels on a translucent background"
+  ],
+  "correctIndex": 1,
+  "explanation": "Describe the central network and compare it with the periphery before naming a diagnosis. The source identifies this lesion as histopathology-confirmed melanoma in situ; no single visual clue establishes a diagnosis on its own.",
   "sourceUrls": [
     "https://pubmed.ncbi.nlm.nih.gov/39700658/"
   ],
@@ -3177,9 +3180,9 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 - Required corrections / rejected claims:
 - Public reviewer notes:
 
-## quiz: Which schematic vascular clue is classically associated with basal cell carcinoma? (`bcc-dermoscopy`)
+## quiz: On this dermoscopic photograph, which vessel pattern is most clearly represented? (`bcc-dermoscopy`)
 
-- **Exact fingerprint:** `sha256-v1:f4b9487215a415cfbbc159b5b1de4a64e77b27d816559b119a32e111276db338`
+- **Exact fingerprint:** `sha256-v1:0d791313d5dd33289e32a75307d8d109a4c4ff31ca1d81142df1682fc1ad7608`
 - **Schema version:** 1
 - **Reviewable sections:** `prompt`, `options`, `best-answer`, `explanation`, `safety-notice`, `references`
 - **Mapped evidence sources:**
@@ -3197,9 +3200,9 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 {
   "id": "bcc-dermoscopy",
   "diseaseId": "basal-cell-carcinoma",
-  "mediaId": "bcc-clues-schematic",
+  "mediaId": "bcc-nodular-real-dermoscopy",
   "domain": "dermoscopy",
-  "prompt": "Which schematic vascular clue is classically associated with basal cell carcinoma?",
+  "prompt": "On this dermoscopic photograph, which vessel pattern is most clearly represented?",
   "options": [
     "Arborising vessels",
     "Regular dotted vessels",
@@ -3207,12 +3210,12 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
     "Glomerular vessels"
   ],
   "correctIndex": 0,
-  "explanation": "Arborising vessels are a classically associated high-yield schematic dermoscopic clue for basal cell carcinoma, although diagnosis and subtype assessment still require the full clinical-pathologic context.",
+  "explanation": "The source describes a clinician-authored dermoscopic image of nodular basal cell carcinoma with branching vessels. Pink lesions can have other causes, including amelanotic melanoma; the image alone is not a diagnosis.",
   "sourceUrls": [
     "https://dermnetnz.org/topics/basal-cell-carcinoma",
     "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"
   ],
-  "reviewStatus": "clinician review required",
+  "reviewStatus": "review invalidated",
   "clinicalReview": null
 }
 ```
@@ -3226,9 +3229,9 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 - Required corrections / rejected claims:
 - Public reviewer notes:
 
-## quiz: Which distribution best fits the common plaque psoriasis pattern shown in the schematic? (`psoriasis-distribution`)
+## quiz: Which lesion morphology is most evident in this clinical photograph? (`psoriasis-distribution`)
 
-- **Exact fingerprint:** `sha256-v1:c14b5fd12435cf55496cf03dac6dd9fa86ef8096f2293545abdf228f211d607e`
+- **Exact fingerprint:** `sha256-v1:6fefb7df14cdf63e7521a4a57d08caa0d64fb4798df706dfbc4afe563ed09736`
 - **Schema version:** 1
 - **Reviewable sections:** `prompt`, `options`, `best-answer`, `explanation`, `safety-notice`, `references`
 - **Mapped evidence sources:**
@@ -3245,17 +3248,17 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 {
   "id": "psoriasis-distribution",
   "diseaseId": "plaque-psoriasis",
-  "mediaId": "psoriasis-distribution-schematic",
-  "domain": "localization",
-  "prompt": "Which distribution best fits the common plaque psoriasis pattern shown in the schematic?",
+  "mediaId": "psoriasis-extensor-photo",
+  "domain": "morphology",
+  "prompt": "Which lesion morphology is most evident in this clinical photograph?",
   "options": [
-    "Dermatomal trunk only",
-    "Scalp and extensor surfaces",
-    "Finger webs only",
-    "Unilateral eyelid only"
+    "Well-demarcated plaques with adherent white scale",
+    "An annular plaque with central clearing",
+    "Grouped vesicles on an erythematous base",
+    "A flaccid superficial blister"
   ],
-  "correctIndex": 1,
-  "explanation": "Plaque psoriasis commonly involves the scalp and extensor surfaces; site-specific variants can look different.",
+  "correctIndex": 0,
+  "explanation": "The photograph shows sharply demarcated plaques with prominent white scale. Clinical morphology, site and history should be assessed together; this image is an educational example, not a stand-alone diagnosis.",
   "sourceUrls": [
     "https://dermnetnz.org/topics/psoriasis"
   ],
@@ -3273,9 +3276,9 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 - Required corrections / rejected claims:
 - Public reviewer notes:
 
-## quiz: Which finding most strongly supports acne vulgaris over rosacea in this learning set? (`acne-comedones`)
+## quiz: Which visible lesion supports acne vulgaris over rosacea in this clinical photograph? (`acne-comedones`)
 
-- **Exact fingerprint:** `sha256-v1:2c319607ba93366f090b14f983f558eeb1e8fb4256cf31290b55e6ff9eea8761`
+- **Exact fingerprint:** `sha256-v1:319f8c87f78f6044d960d6627c21b89bc60965b590ebe828a6ca8af7ed1ec086`
 - **Schema version:** 1
 - **Reviewable sections:** `prompt`, `options`, `best-answer`, `explanation`, `safety-notice`, `references`
 - **Mapped evidence sources:**
@@ -3293,17 +3296,17 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
 {
   "id": "acne-comedones",
   "diseaseId": "acne-vulgaris",
-  "mediaId": "acne-lesions-schematic",
+  "mediaId": "acne-comedonal-photo",
   "domain": "differential",
-  "prompt": "Which finding most strongly supports acne vulgaris over rosacea in this learning set?",
+  "prompt": "Which visible lesion supports acne vulgaris over rosacea in this clinical photograph?",
   "options": [
-    "Open and closed comedones",
+    "Comedones",
     "Persistent centrofacial erythema",
     "Ocular irritation",
     "Telangiectasia"
   ],
   "correctIndex": 0,
-  "explanation": "Comedones are characteristic acne lesions and are not a typical rosacea feature.",
+  "explanation": "The clinical photograph shows comedonal acne. Comedones are characteristic of acne and are not a typical rosacea feature; the whole clinical context still matters.",
   "sourceUrls": [
     "https://pubmed.ncbi.nlm.nih.gov/38300170/",
     "https://dermnetnz.org/topics/acne-vulgaris"
@@ -3704,6 +3707,266 @@ For every review unit, select exactly one verdict: `approved`, `approved_with_mi
   "patientIdentifiable": false,
   "consentBasis": "Not applicable — original schematic with no patient content",
   "metadataCheckedAt": "2026-09-20",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}
+```
+
+</details>
+
+- Verdict:
+- Reviewed sections:
+- Evidence sources actually checked:
+- Approved exact replacement wording (if any):
+- Required corrections / rejected claims:
+- Public reviewer notes:
+
+## visual: Clinical view of a small pigmented macule (`mis-thigh-clinical`)
+
+- **Exact fingerprint:** `sha256-v1:771883304b5ef73c43103468316061bc3a7ab612b377dba46a608c7dce7321d3`
+- **Schema version:** 1
+- **Reviewable sections:** `image`, `title`, `caption`, `alternative-text`, `educational-description`, `legend`, `safety-notice`, `provenance`
+- **Mapped evidence sources:**
+  - https://doi.org/10.3390/cancers18142183
+- **Automated warnings:**
+  - Confirm every label, spatial relationship, caption, alternative text, legend, and non-diagnostic framing independently.
+  - Automated source attachment and schema validation are not evidence of clinical approval.
+- **AI-generated proposal:** No clinical wording change has been applied. Review the current text below and either approve it unchanged, approve exact replacement wording, request changes, reject an unsupported claim, or defer.
+
+<details>
+<summary>Current exact content</summary>
+
+```json
+{
+  "id": "mis-thigh-clinical",
+  "diseaseId": "cutaneous-melanoma",
+  "type": "clinical-photo",
+  "src": "assets/media/cases/case-33-clinical.jpg",
+  "dimensions": {
+    "width": 361,
+    "height": 268
+  },
+  "title": "Clinical view of a small pigmented macule",
+  "caption": "Clinical view · Figure 2A",
+  "alt": "Clinical close-up of a small brown macule with a darker center and a lighter rim beside a blue ruler.",
+  "diagnosis": "Melanoma in situ",
+  "anatomicalSite": "Thigh",
+  "educationalDescription": "One view from a published clinical and dermoscopic pair. The case diagnosis remains hidden until the learner reveals the answer.",
+  "source": "De Giorgi and coauthors, Cancers (2026), Figure 2, via PubMed Central",
+  "sourceUrl": "https://doi.org/10.3390/cancers18142183",
+  "license": "CC BY 4.0",
+  "attribution": "De Giorgi et al., Cancers 2026, Figure 2A. CC BY 4.0. Cropped from the composite figure by Docutis.",
+  "patientIdentifiable": false,
+  "consentBasis": "The source article reports written informed consent for publication and uses CC BY 4.0. The image shows thigh skin without a face.",
+  "metadataCheckedAt": "2026-11-28",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}
+```
+
+</details>
+
+- Verdict:
+- Reviewed sections:
+- Evidence sources actually checked:
+- Approved exact replacement wording (if any):
+- Required corrections / rejected claims:
+- Public reviewer notes:
+
+## visual: Dermoscopy of the same pigmented macule (`mis-thigh-dermoscopy`)
+
+- **Exact fingerprint:** `sha256-v1:460dbd0092266f195af82d9b82b514a6875185e8603fbe8b50a86d5a8a06548e`
+- **Schema version:** 1
+- **Reviewable sections:** `image`, `title`, `caption`, `alternative-text`, `educational-description`, `legend`, `safety-notice`, `provenance`
+- **Mapped evidence sources:**
+  - https://doi.org/10.3390/cancers18142183
+- **Automated warnings:**
+  - Confirm every label, spatial relationship, caption, alternative text, legend, and non-diagnostic framing independently.
+  - Automated source attachment and schema validation are not evidence of clinical approval.
+- **AI-generated proposal:** No clinical wording change has been applied. Review the current text below and either approve it unchanged, approve exact replacement wording, request changes, reject an unsupported claim, or defer.
+
+<details>
+<summary>Current exact content</summary>
+
+```json
+{
+  "id": "mis-thigh-dermoscopy",
+  "diseaseId": "cutaneous-melanoma",
+  "type": "dermoscopy",
+  "src": "assets/media/cases/case-33-dermoscopy.jpg",
+  "dimensions": {
+    "width": 360,
+    "height": 268
+  },
+  "title": "Dermoscopy of the same pigmented macule",
+  "caption": "Dermoscopy · Figure 2B",
+  "alt": "Dermoscopy of the matching brown lesion showing a darker central network, several dark dots and a small peripheral lobe.",
+  "diagnosis": "Melanoma in situ",
+  "anatomicalSite": "Thigh",
+  "educationalDescription": "The source caption pairs this dermoscopic view with the clinical view as one histopathology-confirmed case. The pair supports visual comparison, not image-only diagnosis.",
+  "source": "De Giorgi and coauthors, Cancers (2026), Figure 2, via PubMed Central",
+  "sourceUrl": "https://doi.org/10.3390/cancers18142183",
+  "license": "CC BY 4.0",
+  "attribution": "De Giorgi et al., Cancers 2026, Figure 2B. CC BY 4.0. Cropped from the composite figure by Docutis.",
+  "patientIdentifiable": false,
+  "consentBasis": "The source article reports written informed consent for publication and uses CC BY 4.0. The image shows skin only.",
+  "metadataCheckedAt": "2026-11-28",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}
+```
+
+</details>
+
+- Verdict:
+- Reviewed sections:
+- Evidence sources actually checked:
+- Approved exact replacement wording (if any):
+- Required corrections / rejected claims:
+- Public reviewer notes:
+
+## visual: Dermoscopy of a nodular lesion (`bcc-nodular-real-dermoscopy`)
+
+- **Exact fingerprint:** `sha256-v1:d0d8cd94fe02dff1a5df3ae881a616be28bd9033907e867954479155850455ed`
+- **Schema version:** 1
+- **Reviewable sections:** `image`, `title`, `caption`, `alternative-text`, `educational-description`, `legend`, `safety-notice`, `provenance`
+- **Mapped evidence sources:**
+  - https://commons.wikimedia.org/wiki/File:Dermatoskopie_eines_nodul%C3%A4ren_Basalzellkarzinoms,_WIKIDERM%C2%AE.jpg
+- **Automated warnings:**
+  - Confirm every label, spatial relationship, caption, alternative text, legend, and non-diagnostic framing independently.
+  - Automated source attachment and schema validation are not evidence of clinical approval.
+- **AI-generated proposal:** No clinical wording change has been applied. Review the current text below and either approve it unchanged, approve exact replacement wording, request changes, reject an unsupported claim, or defer.
+
+<details>
+<summary>Current exact content</summary>
+
+```json
+{
+  "id": "bcc-nodular-real-dermoscopy",
+  "diseaseId": "basal-cell-carcinoma",
+  "type": "dermoscopy",
+  "src": "assets/media/cases/bcc-nodular-wikiderm-dermoscopy.jpg",
+  "dimensions": {
+    "width": 1600,
+    "height": 1200
+  },
+  "title": "Dermoscopy of a nodular lesion",
+  "caption": "Dermoscopy · WIKIDERM",
+  "alt": "Dermoscopic close-up of a nodular lesion with branching vessels on a translucent pink background.",
+  "diagnosis": "Nodular basal cell carcinoma",
+  "anatomicalSite": null,
+  "educationalDescription": "An original clinician-authored dermoscopic photograph with branching vessels. The source labels it as nodular basal cell carcinoma; this clue is not specific enough to diagnose a new lesion alone.",
+  "source": "Dr. Thomas Brinkmeier / WIKIDERM, via Wikimedia Commons",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dermatoskopie_eines_nodul%C3%A4ren_Basalzellkarzinoms,_WIKIDERM%C2%AE.jpg",
+  "license": "CC BY 4.0",
+  "attribution": "Dr. Thomas Brinkmeier, WIKIDERM. CC BY 4.0. Resized by Docutis; no clinical crop or annotation.",
+  "patientIdentifiable": false,
+  "consentBasis": "Clinician-authored educational dermoscopy published under CC BY 4.0. No facial identifiers are present.",
+  "metadataCheckedAt": "2026-11-28",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}
+```
+
+</details>
+
+- Verdict:
+- Reviewed sections:
+- Evidence sources actually checked:
+- Approved exact replacement wording (if any):
+- Required corrections / rejected claims:
+- Public reviewer notes:
+
+## visual: Clinical photograph of extensor plaques (`psoriasis-extensor-photo`)
+
+- **Exact fingerprint:** `sha256-v1:4ee803aacc86d56d978eda3a7b935ed29fc185a27e7c0b2a4e55f125f3758ce6`
+- **Schema version:** 1
+- **Reviewable sections:** `image`, `title`, `caption`, `alternative-text`, `educational-description`, `legend`, `safety-notice`, `provenance`
+- **Mapped evidence sources:**
+  - https://commons.wikimedia.org/wiki/File:2702_Psoriasis.jpg
+- **Automated warnings:**
+  - Confirm every label, spatial relationship, caption, alternative text, legend, and non-diagnostic framing independently.
+  - Automated source attachment and schema validation are not evidence of clinical approval.
+- **AI-generated proposal:** No clinical wording change has been applied. Review the current text below and either approve it unchanged, approve exact replacement wording, request changes, reject an unsupported claim, or defer.
+
+<details>
+<summary>Current exact content</summary>
+
+```json
+{
+  "id": "psoriasis-extensor-photo",
+  "diseaseId": "plaque-psoriasis",
+  "type": "clinical-photo",
+  "src": "assets/media/quiz/psoriasis-extensor-plaques.jpg",
+  "dimensions": {
+    "width": 609,
+    "height": 705
+  },
+  "title": "Clinical photograph of extensor plaques",
+  "caption": "Clinical photograph · Wikimedia Commons",
+  "alt": "Clinical photograph showing sharply bordered, thickly scaly plaques over paired extensor skin; the source does not specify the exact site.",
+  "diagnosis": "Plaque psoriasis",
+  "anatomicalSite": null,
+  "educationalDescription": "A real clinical photograph of scaly plaques replaces the previous body-distribution drawing. It illustrates one clinical morphology, not every psoriasis presentation.",
+  "source": "Dr. Gandikota Raghurama Rao, via Wikimedia Commons",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:2702_Psoriasis.jpg",
+  "license": "CC BY 4.0",
+  "attribution": "Dr. Gandikota Raghurama Rao, 2702 Psoriasis.jpg. CC BY 4.0. Orientation normalized and recompressed by Docutis.",
+  "patientIdentifiable": false,
+  "consentBasis": "Contributor states own work and published the photograph under CC BY 4.0. The image does not show a face; separate patient consent details are not provided on the file page.",
+  "metadataCheckedAt": "2026-11-28",
+  "reviewStatus": "clinician review required",
+  "clinicalReview": null
+}
+```
+
+</details>
+
+- Verdict:
+- Reviewed sections:
+- Evidence sources actually checked:
+- Approved exact replacement wording (if any):
+- Required corrections / rejected claims:
+- Public reviewer notes:
+
+## visual: Clinical photograph of comedonal acne (`acne-comedonal-photo`)
+
+- **Exact fingerprint:** `sha256-v1:8cdd413cadb18c255a7aa6c315cf4aa9a6f0ecd6deda0631a501fd08027b1931`
+- **Schema version:** 1
+- **Reviewable sections:** `image`, `title`, `caption`, `alternative-text`, `educational-description`, `legend`, `safety-notice`, `provenance`
+- **Mapped evidence sources:**
+  - https://commons.wikimedia.org/wiki/File:Acne_comedonica,_Stirn,_%C2%A9WIKIDERM.jpg
+- **Automated warnings:**
+  - Confirm every label, spatial relationship, caption, alternative text, legend, and non-diagnostic framing independently.
+  - Automated source attachment and schema validation are not evidence of clinical approval.
+- **AI-generated proposal:** No clinical wording change has been applied. Review the current text below and either approve it unchanged, approve exact replacement wording, request changes, reject an unsupported claim, or defer.
+
+<details>
+<summary>Current exact content</summary>
+
+```json
+{
+  "id": "acne-comedonal-photo",
+  "diseaseId": "acne-vulgaris",
+  "type": "clinical-photo",
+  "src": "assets/media/quiz/acne-comedonal-forehead.jpg",
+  "dimensions": {
+    "width": 1600,
+    "height": 1200
+  },
+  "title": "Clinical photograph of comedonal acne",
+  "caption": "Clinical photograph · WIKIDERM",
+  "alt": "Close-up clinical photograph of forehead skin with many small, skin-coloured follicular papules and a comedonal texture.",
+  "diagnosis": "Comedonal acne",
+  "anatomicalSite": "Forehead",
+  "educationalDescription": "An original clinician-authored clinical photograph emphasizing comedones as a visible acne lesion. It does not represent every acne phenotype.",
+  "source": "Dr. Thomas Brinkmeier / WIKIDERM, via Wikimedia Commons",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acne_comedonica,_Stirn,_%C2%A9WIKIDERM.jpg",
+  "license": "CC BY 4.0",
+  "attribution": "Dr. Thomas Brinkmeier, WIKIDERM. CC BY 4.0. Resized by Docutis; no clinical crop or annotation.",
+  "patientIdentifiable": false,
+  "consentBasis": "Clinician-authored educational clinical photograph published under CC BY 4.0. The frame is a close-up without facial identifiers.",
+  "metadataCheckedAt": "2026-11-28",
   "reviewStatus": "clinician review required",
   "clinicalReview": null
 }

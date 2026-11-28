@@ -34,9 +34,9 @@ function reviewData(decisions = [], reviewers = [reviewer]) {
 test("public manifest covers Goal 9 review units plus case assets with no implied case approval", () => {
   const status = buildPublicStatus();
   const caseCount = status.assets.filter(item => item.assetType === "case").length;
-  assert.equal(status.assets.length, 23 + caseCount);
+  assert.equal(status.assets.length, 28 + caseCount);
   assert.ok(caseCount >= 3);
-  assert.deepEqual(Object.fromEntries(["disease", "quiz", "visual", "follow_up"].map(type => [type, status.assets.filter(item => item.assetType === type).length])), { disease: 8, quiz: 8, visual: 4, follow_up: 3 });
+  assert.deepEqual(Object.fromEntries(["disease", "quiz", "visual", "follow_up"].map(type => [type, status.assets.filter(item => item.assetType === type).length])), { disease: 8, quiz: 8, visual: 9, follow_up: 3 });
   assert.ok(status.assets.filter(item => item.assetType === "case").every(item => item.status === "review required"));
   const ak = status.assets.find(item => item.id === "actinic-keratosis");
   const bcc = status.assets.find(item => item.id === "basal-cell-carcinoma");
@@ -48,10 +48,10 @@ test("public manifest covers Goal 9 review units plus case assets with no implie
     "actinic-keratosis",
     "basal-cell-carcinoma",
     "basal-cell-carcinoma-de",
-    "bcc-dermoscopy",
     "bcc-clues-schematic"
   ]);
-  assert.ok(status.assets.filter(item => !reviewedIds.has(item.id)).every(item => item.status === "review required"));
+  assert.equal(status.assets.find(item => item.id === "bcc-dermoscopy").status, "review invalidated");
+  assert.ok(status.assets.filter(item => !reviewedIds.has(item.id) && item.id !== "bcc-dermoscopy").every(item => item.status === "review required"));
   assert.ok(status.assets.every(item => /^sha256-v1:[0-9a-f]{64}$/.test(item.currentFingerprint)), "machine-readable data preserves every full fingerprint");
   assert.equal(status.latestValidHumanReviewDate, "2026-09-23");
   assert.equal(status.reviewers.length, 1);
@@ -137,7 +137,7 @@ test("malformed records, broken review references and stale source metadata fail
   const asset = buildAssets()[0];
   assert.throws(() => buildPublicStatus(reviewData([decision(asset, { reviewerId: "missing" })])), /resolve/);
   assert.throws(() => buildPublicStatus({ ...reviewData(), schemaVersion: 99 }), /Unsupported/);
-  assert.deepEqual(sourceMetadataWarnings(buildAssets(), "2026-11-25"), []);
+  assert.deepEqual(sourceMetadataWarnings(buildAssets(), "2026-11-28"), []);
   const stale = clone(asset); stale.evidenceMetadata[0].metadataCheckedAt = "2020-01-01";
   assert.match(sourceMetadataWarnings([stale], "2026-09-28")[0], /stale source metadata/);
 });

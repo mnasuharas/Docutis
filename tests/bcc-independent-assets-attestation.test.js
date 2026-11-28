@@ -8,11 +8,6 @@ const EXPECTED = {
     fingerprint: "sha256-v1:25cbf04b711b308ca456ab8b67a29bd056d3ccb69c0f404e285adaf8ab92c02e",
     decisionId: "decision-bcc-de-2026-09-23-001"
   },
-  "bcc-dermoscopy": {
-    assetType: "quiz",
-    fingerprint: "sha256-v1:f4b9487215a415cfbbc159b5b1de4a64e77b27d816559b119a32e111276db338",
-    decisionId: "decision-bcc-quiz-2026-09-23-001"
-  },
   "bcc-clues-schematic": {
     assetType: "visual",
     fingerprint: "sha256-v1:0d45d6d602b890b47548da1e708be5d3f365540b0a2b49240763504bfd6e0471",
@@ -22,7 +17,7 @@ const EXPECTED = {
 
 const ROLE_BAN = /Facharzt|board-certified|specialist dermatologist|consultant|attending/i;
 
-test("BCC independent assets are clinician reviewed at exact fingerprints with training-role reviewer", () => {
+test("current BCC education assets reflect their scoped clinician review status", () => {
   const status = buildPublicStatus();
 
   for (const [id, expected] of Object.entries(EXPECTED)) {
@@ -45,6 +40,11 @@ test("BCC independent assets are clinician reviewed at exact fingerprints with t
     assert.equal(decision.reviewDate, "2026-09-23");
     assert.doesNotMatch(JSON.stringify(decision), ROLE_BAN);
   }
+
+  const quiz = status.assets.find(item => item.assetType === "quiz" && item.id === "bcc-dermoscopy");
+  assert.equal(quiz.status, "review invalidated");
+  assert.equal(quiz.activeDecisionId, null);
+  assert.ok(quiz.history.some(item => item.id === "decision-bcc-quiz-2026-09-23-001"));
 
   assert.equal(status.reviewers[0].displayName, "Murat Nasuh Aras");
   assert.equal(status.reviewers[0].professionalRole, "Physician in dermatology specialty training");
@@ -70,9 +70,9 @@ test("BCC independent assets are clinician reviewed at exact fingerprints with t
   assert.equal(ak.activeDecisionId, "decision-ak-2026-09-23-001");
 
   assert.equal(status.decisions.length, 5);
-  assert.equal(status.assets.filter(item => item.status === "clinician reviewed").length, 5);
+  assert.equal(status.assets.filter(item => item.status === "clinician reviewed").length, 4);
   const caseCount = status.assets.filter(item => item.assetType === "case").length;
-  assert.equal(status.assets.filter(item => item.status === "review required").length, 18 + caseCount);
+  assert.equal(status.assets.filter(item => item.status === "review required").length, 23 + caseCount);
   assert.ok(caseCount >= 3);
   assert.ok(status.assets.filter(item => item.assetType === "case").every(item => item.status === "review required"));
 });

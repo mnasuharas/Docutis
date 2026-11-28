@@ -57,9 +57,9 @@ test("AK is clinician reviewed with matching fingerprint and training-role revie
     "actinic-keratosis",
     "basal-cell-carcinoma",
     "basal-cell-carcinoma-de",
-    "bcc-dermoscopy",
     "bcc-clues-schematic"
   ]);
-  assert.ok(status.assets.filter(item => !reviewedIds.has(item.id)).every(item => item.status === "review required"));
+  assert.equal(status.assets.find(item => item.id === "bcc-dermoscopy").status, "review invalidated");
+  assert.ok(status.assets.filter(item => !reviewedIds.has(item.id) && item.id !== "bcc-dermoscopy").every(item => item.status === "review required"));
   assert.equal(status.assets.find(item => item.id === "basal-cell-carcinoma").status, "clinician reviewed");
 });

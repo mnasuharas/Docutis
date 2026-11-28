@@ -1104,9 +1104,9 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
     {
       "id": "melanoma-evolution",
       "assetType": "quiz",
-      "title": "Which ABCDE feature explicitly describes change over time?",
+      "title": "Comparing the clinical and dermoscopic views, which description best matches the dermoscopic pattern?",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:90116bee492bf05294115bb3d557bbf6546b27193f7a27c71d96784fe02c4212",
+      "currentFingerprint": "sha256-v1:ba9844dfeaded413df7ac67a16c7f56099eaea15016b8d551964958838d5a1da",
       "sections": [
         "prompt",
         "options",
@@ -1145,9 +1145,9 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
     {
       "id": "bcc-dermoscopy",
       "assetType": "quiz",
-      "title": "Which schematic vascular clue is classically associated with basal cell carcinoma?",
+      "title": "On this dermoscopic photograph, which vessel pattern is most clearly represented?",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:f4b9487215a415cfbbc159b5b1de4a64e77b27d816559b119a32e111276db338",
+      "currentFingerprint": "sha256-v1:0d791313d5dd33289e32a75307d8d109a4c4ff31ca1d81142df1682fc1ad7608",
       "sections": [
         "prompt",
         "options",
@@ -1182,8 +1182,8 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
           "metadataCheckedAt": "2026-09-23"
         }
       ],
-      "status": "clinician reviewed",
-      "activeDecisionId": "decision-bcc-quiz-2026-09-23-001",
+      "status": "review invalidated",
+      "activeDecisionId": null,
       "history": [
         {
           "id": "decision-bcc-quiz-2026-09-23-001",
@@ -1215,14 +1215,21 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
           "supersededBy": null
         }
       ],
-      "awaitingSections": []
+      "awaitingSections": [
+        "prompt",
+        "options",
+        "best-answer",
+        "explanation",
+        "safety-notice",
+        "references"
+      ]
     },
     {
       "id": "psoriasis-distribution",
       "assetType": "quiz",
-      "title": "Which distribution best fits the common plaque psoriasis pattern shown in the schematic?",
+      "title": "Which lesion morphology is most evident in this clinical photograph?",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:c14b5fd12435cf55496cf03dac6dd9fa86ef8096f2293545abdf228f211d607e",
+      "currentFingerprint": "sha256-v1:6fefb7df14cdf63e7521a4a57d08caa0d64fb4798df706dfbc4afe563ed09736",
       "sections": [
         "prompt",
         "options",
@@ -1261,9 +1268,9 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
     {
       "id": "acne-comedones",
       "assetType": "quiz",
-      "title": "Which finding most strongly supports acne vulgaris over rosacea in this learning set?",
+      "title": "Which visible lesion supports acne vulgaris over rosacea in this clinical photograph?",
       "schemaVersion": 1,
-      "currentFingerprint": "sha256-v1:2c319607ba93366f090b14f983f558eeb1e8fb4256cf31290b55e6ff9eea8761",
+      "currentFingerprint": "sha256-v1:319f8c87f78f6044d960d6627c21b89bc60965b590ebe828a6ca8af7ed1ec086",
       "sections": [
         "prompt",
         "options",
@@ -1660,6 +1667,231 @@ window.DOCUTIS_REVIEW_STATUS = Object.freeze({
           "doi": null,
           "url": "https://github.com/mnasuharas/Docutis/blob/main/assets/media/acne-lesions-schematic.svg",
           "metadataCheckedAt": "2026-09-20"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "mis-thigh-clinical",
+      "assetType": "visual",
+      "title": "Clinical view of a small pigmented macule",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:771883304b5ef73c43103468316061bc3a7ab612b377dba46a608c7dce7321d3",
+      "sections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/cancers18142183"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "De Giorgi and coauthors, Cancers (2026), Figure 2, via PubMed Central",
+          "organization": "De Giorgi et al., Cancers 2026, Figure 2A. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "clinical-photo",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/cancers18142183",
+          "metadataCheckedAt": "2026-11-28"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "mis-thigh-dermoscopy",
+      "assetType": "visual",
+      "title": "Dermoscopy of the same pigmented macule",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:460dbd0092266f195af82d9b82b514a6875185e8603fbe8b50a86d5a8a06548e",
+      "sections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://doi.org/10.3390/cancers18142183"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "De Giorgi and coauthors, Cancers (2026), Figure 2, via PubMed Central",
+          "organization": "De Giorgi et al., Cancers 2026, Figure 2B. CC BY 4.0. Cropped from the composite figure by Docutis.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://doi.org/10.3390/cancers18142183",
+          "metadataCheckedAt": "2026-11-28"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "bcc-nodular-real-dermoscopy",
+      "assetType": "visual",
+      "title": "Dermoscopy of a nodular lesion",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:d0d8cd94fe02dff1a5df3ae881a616be28bd9033907e867954479155850455ed",
+      "sections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Dermatoskopie_eines_nodul%C3%A4ren_Basalzellkarzinoms,_WIKIDERM%C2%AE.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dr. Thomas Brinkmeier / WIKIDERM, via Wikimedia Commons",
+          "organization": "Dr. Thomas Brinkmeier, WIKIDERM. CC BY 4.0. Resized by Docutis; no clinical crop or annotation.",
+          "type": "dermoscopy",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Dermatoskopie_eines_nodul%C3%A4ren_Basalzellkarzinoms,_WIKIDERM%C2%AE.jpg",
+          "metadataCheckedAt": "2026-11-28"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "psoriasis-extensor-photo",
+      "assetType": "visual",
+      "title": "Clinical photograph of extensor plaques",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:4ee803aacc86d56d978eda3a7b935ed29fc185a27e7c0b2a4e55f125f3758ce6",
+      "sections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:2702_Psoriasis.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dr. Gandikota Raghurama Rao, via Wikimedia Commons",
+          "organization": "Dr. Gandikota Raghurama Rao, 2702 Psoriasis.jpg. CC BY 4.0. Orientation normalized and recompressed by Docutis.",
+          "type": "clinical-photo",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:2702_Psoriasis.jpg",
+          "metadataCheckedAt": "2026-11-28"
+        }
+      ],
+      "status": "review required",
+      "activeDecisionId": null,
+      "history": [],
+      "awaitingSections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ]
+    },
+    {
+      "id": "acne-comedonal-photo",
+      "assetType": "visual",
+      "title": "Clinical photograph of comedonal acne",
+      "schemaVersion": 1,
+      "currentFingerprint": "sha256-v1:8cdd413cadb18c255a7aa6c315cf4aa9a6f0ecd6deda0631a501fd08027b1931",
+      "sections": [
+        "image",
+        "title",
+        "caption",
+        "alternative-text",
+        "educational-description",
+        "legend",
+        "safety-notice",
+        "provenance"
+      ],
+      "evidenceSources": [
+        "https://commons.wikimedia.org/wiki/File:Acne_comedonica,_Stirn,_%C2%A9WIKIDERM.jpg"
+      ],
+      "evidenceMetadata": [
+        {
+          "title": "Dr. Thomas Brinkmeier / WIKIDERM, via Wikimedia Commons",
+          "organization": "Dr. Thomas Brinkmeier, WIKIDERM. CC BY 4.0. Resized by Docutis; no clinical crop or annotation.",
+          "type": "clinical-photo",
+          "year": null,
+          "version": null,
+          "doi": null,
+          "url": "https://commons.wikimedia.org/wiki/File:Acne_comedonica,_Stirn,_%C2%A9WIKIDERM.jpg",
+          "metadataCheckedAt": "2026-11-28"
         }
       ],
       "status": "review required",

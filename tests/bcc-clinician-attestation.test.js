@@ -2,7 +2,7 @@ const assert = require("node:assert/strict");
 const test = require("node:test");
 const { buildPublicStatus } = require("../scripts/review-governance");
 
-test("BCC is clinician reviewed with matching fingerprint and training-role reviewer", () => {
+test("BCC reference is clinician reviewed while changed quiz content is correctly invalidated", () => {
   const status = buildPublicStatus();
   const bcc = status.assets.find(item => item.id === "basal-cell-carcinoma");
   assert.equal(bcc.status, "clinician reviewed");
@@ -24,7 +24,6 @@ test("BCC is clinician reviewed with matching fingerprint and training-role revi
 
   const independent = {
     "basal-cell-carcinoma-de": "decision-bcc-de-2026-09-23-001",
-    "bcc-dermoscopy": "decision-bcc-quiz-2026-09-23-001",
     "bcc-clues-schematic": "decision-bcc-visual-2026-09-23-001"
   };
   for (const [id, decisionId] of Object.entries(independent)) {
@@ -33,6 +32,9 @@ test("BCC is clinician reviewed with matching fingerprint and training-role revi
     assert.equal(asset.status, "clinician reviewed");
     assert.equal(asset.activeDecisionId, decisionId);
   }
+  const quiz = status.assets.find(item => item.id === "bcc-dermoscopy");
+  assert.equal(quiz.status, "review invalidated");
+  assert.equal(quiz.activeDecisionId, null);
 
   const ak = status.assets.find(item => item.id === "actinic-keratosis");
   assert.equal(ak.status, "clinician reviewed");
@@ -42,8 +44,7 @@ test("BCC is clinician reviewed with matching fingerprint and training-role revi
     "actinic-keratosis",
     "basal-cell-carcinoma",
     "basal-cell-carcinoma-de",
-    "bcc-dermoscopy",
     "bcc-clues-schematic"
   ]);
-  assert.ok(status.assets.filter(item => !reviewedIds.has(item.id)).every(item => item.status === "review required"));
+  assert.ok(status.assets.filter(item => !reviewedIds.has(item.id) && item.id !== "bcc-dermoscopy").every(item => item.status === "review required"));
 });

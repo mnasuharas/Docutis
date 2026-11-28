@@ -25,7 +25,7 @@ test("quiz validation rejects unknown evidence, ambiguous answers, mismatched me
     item => { item.questions[0].sourceUrls = ["https://example.org/unknown"]; },
     item => { item.questions[0].correctIndex = -1; },
     item => { item.questions[0].options[1] = item.questions[0].options[0]; },
-    item => { item.questions[0].mediaId = "bcc-clues-schematic"; },
+    item => { item.questions[0].mediaIds = ["bcc-clues-schematic"]; },
     item => { item.questions[0].reviewStatus = "clinician reviewed"; }
   ];
   for (const mutate of mutations) {
@@ -80,11 +80,14 @@ test("quiz UI announces feedback, exposes secure evidence links, scores and rest
   const harness = quizHarness();
   for (let index = 0; index < harness.quiz.questions.length; index += 1) {
     const question = harness.quiz.questions[index];
-    const reviewed = question.id === "bcc-dermoscopy";
+    const reviewed = false;
+    const invalidated = question.id === "bcc-dermoscopy";
     assert.match(textOf(harness.root), new RegExp(`Question ${index + 1} of 8`));
     if (reviewed) {
       assert.match(textOf(harness.root), /Quiz-item review status[\s\S]*Clinician reviewed/);
       assert.doesNotMatch(textOf(harness.root), /Quiz-item review status[\s\S]*Clinical review pending/);
+    } else if (invalidated) {
+      assert.match(textOf(harness.root), /Quiz-item review status[\s\S]*Review invalidated after content change/);
     } else {
       assert.match(textOf(harness.root), /Quiz-item review status[\s\S]*Clinical review pending/);
     }
@@ -95,6 +98,8 @@ test("quiz UI announces feedback, exposes secure evidence links, scores and rest
     assert.match(textOf(harness.root), /Correct\./);
     if (reviewed) {
       assert.match(textOf(harness.root), /Clinician reviewed · Source attachment and automated validation do not constitute physician endorsement/);
+    } else if (invalidated) {
+      assert.match(textOf(harness.root), /Review invalidated after content change/);
     } else {
       assert.match(textOf(harness.root), /Clinical review pending/);
     }

@@ -34,11 +34,12 @@ function validItem() {
   };
 }
 
-test("production media registry contains four governed original schematics", () => {
+test("production media registry contains four original schematics and five sourced photographs", () => {
   const media = loadMediaData();
   assert.equal(media.schemaVersion, 1);
-  assert.equal(media.items.length, 4);
-  assert.ok(media.items.every(item => item.src.endsWith(".svg") && item.license === "Project-owned"));
+  assert.equal(media.items.length, 9);
+  assert.equal(media.items.filter(item => item.src.endsWith(".svg") && item.license === "Project-owned").length, 4);
+  assert.equal(media.items.filter(item => ["clinical-photo", "dermoscopy"].includes(item.type)).length, 5);
   assert.ok(media.items.every(item => item.patientIdentifiable === false && item.reviewStatus === "clinician review required" && item.clinicalReview === null));
   assert.doesNotThrow(() => validateMediaData(media, loadDiseaseData()));
   assert.deepEqual([...allowedTypes].sort(), ["clinical-photo", "dermoscopy", "diagram", "histopathology", "illustration", "procedure"].sort());
@@ -46,7 +47,7 @@ test("production media registry contains four governed original schematics", () 
 });
 
 test("production SVGs contain native accessible titles, descriptions and schematic labels", () => {
-  for (const item of loadMediaData().items) {
+  for (const item of loadMediaData().items.filter(entry => entry.src.endsWith(".svg"))) {
     const svg = fs.readFileSync(path.join(root, item.src), "utf8");
     assert.match(svg, /role="img"/);
     assert.match(svg, /aria-labelledby="title desc"/);

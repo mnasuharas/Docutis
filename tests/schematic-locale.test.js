@@ -31,5 +31,6 @@ test("every schematic has a Turkish variant with the same geometry", () => {
   const app = fs.readFileSync(path.join(root, "app.js"), "utf8");
   const quiz = fs.readFileSync(path.join(root, "quiz-app.js"), "utf8");
   assert.match(app, /data-schematic-src/);
-  assert.match(quiz, /data-schematic-src/);
+  assert.match(quiz, /quiz-media-grid/);
+  assert.doesNotMatch(quiz, /data-schematic-src/);
 });

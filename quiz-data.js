@@ -4,7 +4,8 @@
   const freezeQuestion = question => Object.freeze({
     ...question,
     options: Object.freeze([...question.options]),
-    sourceUrls: Object.freeze([...question.sourceUrls])
+    sourceUrls: Object.freeze([...question.sourceUrls]),
+    ...(question.mediaIds ? { mediaIds: Object.freeze([...question.mediaIds]) } : {})
   });
 
   window.DOCUTIS_QUIZ = Object.freeze({
@@ -13,31 +14,31 @@
     disclaimer: "Educational pattern recognition only. This quiz is not clinical decision support and does not replace professional judgment.",
     questions: Object.freeze([
       freezeQuestion({
-        id: "melanoma-evolution", diseaseId: "cutaneous-melanoma", mediaId: "melanoma-abcde-schematic",
-        domain: "morphology", prompt: "Which ABCDE feature explicitly describes change over time?",
-        options: ["Asymmetry", "Border irregularity", "Evolution", "Color variation"], correctIndex: 2,
-        explanation: "Evolution means a lesion is changing over time. It is assessed with the overall clinical and dermoscopic pattern, not in isolation.",
+        id: "melanoma-evolution", diseaseId: "cutaneous-melanoma", mediaIds: ["mis-thigh-clinical", "mis-thigh-dermoscopy"],
+        domain: "morphology", prompt: "Comparing the clinical and dermoscopic views, which description best matches the dermoscopic pattern?",
+        options: ["A uniform network with identical lines throughout", "A darker, thicker central network with a few dark dots", "Only regular dotted vessels on a red background", "Only branching vessels on a translucent background"], correctIndex: 1,
+        explanation: "Describe the central network and compare it with the periphery before naming a diagnosis. The source identifies this lesion as histopathology-confirmed melanoma in situ; no single visual clue establishes a diagnosis on its own.",
         sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/39700658/"], reviewStatus: "clinician review required", clinicalReview: null
       }),
       freezeQuestion({
-        id: "bcc-dermoscopy", diseaseId: "basal-cell-carcinoma", mediaId: "bcc-clues-schematic",
-        domain: "dermoscopy", prompt: "Which schematic vascular clue is classically associated with basal cell carcinoma?",
+        id: "bcc-dermoscopy", diseaseId: "basal-cell-carcinoma", mediaId: "bcc-nodular-real-dermoscopy",
+        domain: "dermoscopy", prompt: "On this dermoscopic photograph, which vessel pattern is most clearly represented?",
         options: ["Arborising vessels", "Regular dotted vessels", "Comma vessels", "Glomerular vessels"], correctIndex: 0,
-        explanation: "Arborising vessels are a classically associated high-yield schematic dermoscopic clue for basal cell carcinoma, although diagnosis and subtype assessment still require the full clinical-pathologic context.",
-        sourceUrls: ["https://dermnetnz.org/topics/basal-cell-carcinoma", "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"], reviewStatus: "clinician review required", clinicalReview: null
+        explanation: "The source describes a clinician-authored dermoscopic image of nodular basal cell carcinoma with branching vessels. Pink lesions can have other causes, including amelanotic melanoma; the image alone is not a diagnosis.",
+        sourceUrls: ["https://dermnetnz.org/topics/basal-cell-carcinoma", "https://register.awmf.org/assets/guidelines/032-021l_S2k_Basalzellkarzinom-der-Haut_2024-07.pdf"], reviewStatus: "review invalidated", clinicalReview: null
       }),
       freezeQuestion({
-        id: "psoriasis-distribution", diseaseId: "plaque-psoriasis", mediaId: "psoriasis-distribution-schematic",
-        domain: "localization", prompt: "Which distribution best fits the common plaque psoriasis pattern shown in the schematic?",
-        options: ["Dermatomal trunk only", "Scalp and extensor surfaces", "Finger webs only", "Unilateral eyelid only"], correctIndex: 1,
-        explanation: "Plaque psoriasis commonly involves the scalp and extensor surfaces; site-specific variants can look different.",
+        id: "psoriasis-distribution", diseaseId: "plaque-psoriasis", mediaId: "psoriasis-extensor-photo",
+        domain: "morphology", prompt: "Which lesion morphology is most evident in this clinical photograph?",
+        options: ["Well-demarcated plaques with adherent white scale", "An annular plaque with central clearing", "Grouped vesicles on an erythematous base", "A flaccid superficial blister"], correctIndex: 0,
+        explanation: "The photograph shows sharply demarcated plaques with prominent white scale. Clinical morphology, site and history should be assessed together; this image is an educational example, not a stand-alone diagnosis.",
         sourceUrls: ["https://dermnetnz.org/topics/psoriasis"], reviewStatus: "clinician review required", clinicalReview: null
       }),
       freezeQuestion({
-        id: "acne-comedones", diseaseId: "acne-vulgaris", mediaId: "acne-lesions-schematic",
-        domain: "differential", prompt: "Which finding most strongly supports acne vulgaris over rosacea in this learning set?",
-        options: ["Open and closed comedones", "Persistent centrofacial erythema", "Ocular irritation", "Telangiectasia"], correctIndex: 0,
-        explanation: "Comedones are characteristic acne lesions and are not a typical rosacea feature.",
+        id: "acne-comedones", diseaseId: "acne-vulgaris", mediaId: "acne-comedonal-photo",
+        domain: "differential", prompt: "Which visible lesion supports acne vulgaris over rosacea in this clinical photograph?",
+        options: ["Comedones", "Persistent centrofacial erythema", "Ocular irritation", "Telangiectasia"], correctIndex: 0,
+        explanation: "The clinical photograph shows comedonal acne. Comedones are characteristic of acne and are not a typical rosacea feature; the whole clinical context still matters.",
         sourceUrls: ["https://pubmed.ncbi.nlm.nih.gov/38300170/", "https://dermnetnz.org/topics/acne-vulgaris"], reviewStatus: "clinician review required", clinicalReview: null
       }),
       freezeQuestion({
