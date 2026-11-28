@@ -659,7 +659,40 @@
     parent.appendChild(item);
   }
 
+  const recordComparisons = {
+    "atypical-fibroxanthoma": "pleomorphic-dermal-sarcoma",
+    "pleomorphic-dermal-sarcoma": "atypical-fibroxanthoma",
+    "seborrheic-keratosis": "cutaneous-melanoma",
+    "dermatofibroma": "dermatofibrosarcoma-protuberans",
+    "solar-lentigo": "lentigo-maligna"
+  };
+
+  function addFocusedLearningPath(parent, disease, comparisonId) {
+    const comparison = data.diseases.find(item => item.id === comparisonId);
+    const section = document.createElement("section");
+    section.className = "learning-path";
+    section.id = "detail-learning-path";
+    appendTextElement(section, "h3", "Learning path");
+    const related = appendTextElement(section, "p");
+    appendTextElement(related, "span", "Compare with ");
+    const link = appendTextElement(related, "a", comparison.name);
+    link.href = "?condition=" + encodeURIComponent(comparison.id);
+    const cases = (window.DOCUTIS_CASES?.cases || []).filter(item => item.diseaseId === disease.id);
+    if (cases.length) {
+      const list = document.createElement("ol");
+      list.className = "learning-path-list";
+      cases.forEach(item => learningStep(list, {
+        kind: "case", label: item.title, href: "#caseModule", targetId: "caseModule", assetType: "case", assetId: item.id
+      }));
+      section.appendChild(list);
+    }
+    parent.appendChild(section);
+    return true;
+  }
+
   function addLearningPath(parent, disease) {
+    const comparisonId = Object.hasOwn(recordComparisons, disease.id) && recordComparisons[disease.id];
+    if (comparisonId) return addFocusedLearningPath(parent, disease, comparisonId);
     if (!learningPathDiseaseIds.has(disease.id)) return false;
     const section = document.createElement("section");
     section.className = "learning-path";

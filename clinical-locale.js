@@ -6,25 +6,25 @@
     "seborrheic-keratosis": {
       description: "Benign epidermal keratinositik tümördür.",
       clinical: "Keskin sınırlı, mumsu veya keratotik, deriye yapışık gibi duran papül ya da plak. İrritasyon tipik yüzey özelliklerini örtebilir.",
-      dermoscopy: "Komedon benzeri açıklıklar, milia benzeri kistler, oluklar ve kabarıklıklar tanıyı destekleyebilir. Atipik pigment ağı, mavi-beyaz örtü veya düzensiz periferik uzantılar açısından tüm lezyonu incele.",
-      differential: "Melanom, pigmente bazal hücreli karsinom, aktinik keratoz ve skuamöz hücreli karsinom.",
-      treatment: "Tanısı güvenilir ve asemptomatik lezyon genellikle tedavi gerektirmez. Belirsizlikte ileri değerlendirme gerekir. Ayırıcı tanıda malignite kaldığında histoloji düşünülür.",
+      dermoscopy: "Komedon benzeri açıklıkları, milia benzeri kistleri, olukları ve kabarıklıkları tanımla. Ardından perifer dahil tüm lezyonda uyumsuz bulguları ara: atipik pigment ağı, düzensiz nokta veya globüller, çizgisel uzantılar veya psödopodlar ve odaksal mavi-siyah ya da mavi-beyaz alanlar. Keratotik yüzey veya tek bir keratin bulgusu melanomda da görülebilir.",
+      differential: "Pigmentasyon, yapı veya seyir beklenen görünümle uyumsuzsa melanomu önceliklendir. Özellikle skuam veya krut mimariyi örtüyorsa pigmente bazal hücreli karsinomu, pigmente aktinik keratozu ve skuamöz hücreli karsinomu ayırıcı tanıda değerlendir.",
+      treatment: "Tanısı güvenilir ve asemptomatik lezyon genellikle tedavi gerektirmez. Melanom veya başka bir malignite olasılığı sürüyorsa kozmetik ya da destrüktif işlemden önce tanısal değerlendirme yap ve temsil edici örnek al.",
       followup: "Özellikle atipik veya uyumsuz bulgular varsa değişim ve açıklanamayan yeni belirtiler yeniden değerlendirilir."
     },
     "dermatofibroma": {
       description: "Benign dermal fibrohistiyositik lezyondur.",
-      clinical: "Genellikle ekstremitede sert papül veya nodül şeklindedir. Yandan sıkıştırıldığında çökme görülebilir.",
-      dermoscopy: "Ortada skar benzeri beyaz alan ve çevrede ince pigment ağı klasik bir birlikteliktir. Farklı paternler sık görülür.",
-      differential: "Melanositik nevüs, melanom, skar ve özellikle büyüyen veya atipik lezyonda dermatofibrosarkoma protuberans.",
+      clinical: "Genellikle ekstremitede sert dermal papül veya nodül. Yandan sıkıştırınca çökme görülebilir. Sertliği, boyutu ve seyri kaydet. Fotoğraftan çökme bulgusu veya lezyonun stabil olduğu anlaşılamaz.",
+      dermoscopy: "Ortada skar benzeri beyaz alan ve periferde ince pigment ağı ara. Dermatofibromda tek başına ağ veya yapısız pigmentasyon gibi farklı paternler de görülebilir. Bulguyu palpasyon ve öyküyle birlikte yorumla.",
+      differential: "Melanositik nevüs, melanom ve skarı değerlendir. Asimetrik ya da atipik yapılar, ilerleyici büyüme veya nodül içeren geniş indüre plak benign ön tanıyı yeniden düşündürür. Bağlama göre melanom ya da dermatofibrosarkoma protuberansı ayırıcı tanıya al.",
       treatment: "Stabil, tanısı güvenilir ve asemptomatik lezyon genellikle tedavi gerektirmez. Büyüyen ya da tanısı belirsiz lezyon temsil edici histolojiyle değerlendirilir.",
       followup: "İlerleyici büyüme, ülserasyon veya yeni klinik ve dermoskopik uyumsuzluk yeniden değerlendirilir."
     },
     "solar-lentigo": {
       description: "Kümülatif UV maruziyetiyle ilişkili benign edinsel pigmente maküldür.",
       clinical: "Güneş gören yüz, el sırtı ve üst gövdede açık kahverengiden kahverengiye uzanan düz maküller görülür. Değişen tek bir makülü komşu lezyonlarla karşılaştır.",
-      dermoscopy: "Keskin veya girintili sınır, parmak izi benzeri çizgiler ve görece homojen kahverengi pigmentasyon tanıyı destekleyebilir. Yüzde foliküllerin çevresindeki dağılımı ve odaksal gri yapıları bağlamıyla değerlendir.",
-      differential: "Lentigo maligna, pigmente aktinik keratoz, likenoid keratoz ve düz seboreik keratoz.",
-      treatment: "Güneşten korunma uygundur. Kozmetik tedavi öncesinde benign tanıyı doğrula. Malignite olasılığı sürüyorsa ileri değerlendirme ve temsil edici histoloji önceliklidir.",
+      dermoscopy: "Görece homojen açık kahverengi pigmentasyon, parmak izi benzeri kıvrımlı çizgiler ve keskin veya girintili kenar solar lentigoyu destekleyebilir. Yüzde foliküler açıklıkları tek tek incele. Odaksal gri noktaları, asimetrik perifoliküler pigmenti ve mimari bozulmayı çevredeki fotohasarla karşılaştır.",
+      differential: "Lentigo maligna, pigmente aktinik keratoz, likenoid keratoz ve düz seboreik keratozla karşılaştır. Gri ve foliküler değişiklikler özellikle lentigo maligna ile pigmente aktinik keratozda örtüşebilir. Değişen veya asimetrik makülde odaksal gri bileşen daha yakından değerlendirilmelidir.",
+      treatment: "Güneşten korunmayı öner. Kozmetik işlem öncesinde benign tanıyı doğrula. Heterojen yüz lezyonunda belirsizlik sürüyorsa uzman değerlendirmesi ve histoloji için temsil edici bölgenin seçimi önceliklidir.",
       followup: "Yeni asimetri, odaksal pigment değişikliği veya belgelenmiş değişim yeniden değerlendirilir."
     },
 
@@ -158,18 +158,18 @@
     },
     "atypical-fibroxanthoma": {
       description: "Genellikle yaşlı erişkinlerde baş ve boynun kronik güneş hasarlı derisinde gelişen yüzeyel, pleomorfik, iğsi hücreli tümördür. Pleomorfik dermal sarkom lehine bulguları dışlamak için yeterli örnekleme gerekir.",
-      clinical: "Genellikle hızla büyüyen, kırmızı veya deri renginde, kubbe biçimli bir papül ya da nodüldür. Ülserleşebilir veya kanayabilir.",
-      dermoscopy: "Bildirilen bulgular özgül değildir. Bazal veya skuamöz hücreli karsinomla örtüşebilir.",
-      differential: "Kutanöz skuamöz hücreli karsinom, amelanotik melanom, pleomorfik dermal sarkom ve piyojenik granülom.",
-      treatment: "Tam eksizyon ve uzman histopatolojik değerlendirmesi gerekir. Tanı için belirli hücre kökenine ait benzer tümörler ile daha derin veya daha yüksek riskli pleomorfik dermal sarkom dışlanır.",
+      clinical: "Genellikle ileri yaşta, kronik güneş hasarlı saçlı deri, yüz veya kulakta hızla büyüyen, bazen ülserleşen ya da kanayan nodül. Klinik görünüm PDS ve iğsi hücreli kutanöz skuamöz hücreli karsinomla örtüşür.",
+      dermoscopy: "Pigmentsiz nodülde damarlar, kan veya ülserasyon görülebilir. Bu bulgular incelemeyi yönlendirir ancak tümörün kökenini ya da derinliğini belirlemez.",
+      differential: "PDS, iğsi hücreli kutanöz skuamöz hücreli karsinom, amelanotik veya dediferansiye melanom ve diğer sarkomlar ayırıcı tanıdadır. AFX bir dışlama tanısıdır. CD10 gibi tek bir pozitif belirteç yetersizdir. Hücre kökenlerini dışlamaya yönelik paneli morfoloji ve klinik bağlamla birlikte yorumla.",
+      treatment: "2026 Alman S1 kılavuzu, dermis ve subkutisin değerlendirilmesine olanak veren derin insizyonel biyopsiyi önerir. Yüzeyel veya tabanı kesilmiş örnek PDS’yi dışlayamaz. AFX dermisle sınırlıdır; tümör nekrozu, perinöral veya lenfovasküler invazyon bulunmaz. Amaç histolojik sınır değerlendirmesiyle tam eksizyondur.",
       followup: "İzlem patolojik özelliklere, cerrahi sınır durumuna ve klinik bağlama bağlıdır."
     },
     "pleomorphic-dermal-sarcoma": {
       description: "Atipik fibroksantomla ilişkili nadir bir malign dermal iğsi hücreli tümördür. Subkutan invazyon, tümör nekrozu veya lenfovasküler ya da perinöral invazyon gibi olumsuz özelliklerle ayrılır.",
-      clinical: "Genellikle baş ve boynun kronik güneş hasarlı derisinde büyüyen pigmentsiz nodül veya plak görülür. Ülserasyon eşlik edebilir.",
-      dermoscopy: "Dermoskopik bulgular özgül değildir ve benzer klinik lezyonlardan ayrım sağlamaz.",
-      differential: "Atipik fibroksantom, kutanöz skuamöz hücreli karsinom, bazal hücreli karsinom, amelanotik melanom ve Merkel hücreli karsinom.",
-      treatment: "Genellikle tam eksizyon, uzman dermatopatoloji incelemesi ve multidisipliner değerlendirme gerekir.",
+      clinical: "İleri yaşta kronik güneş hasarlı saçlı deri veya yüzde büyüyen, sert ya da ülserleşen papül, nodül veya plakta PDS’yi düşün. Yüzeyde AFX benzer görünebilir. Örnekleme öncesi boyutu, yerleşimi ve derin dokuyla klinik ilişkisini kaydet.",
+      dermoscopy: "Damar yapılarını ve ülserasyonu incele, ardından klinik seyirle ilişkilendir. Yüzey morfolojisi invazyon derinliğini belirleyemez veya PDS’yi AFX’ten ayıramaz.",
+      differential: "AFX, iğsi hücreli kutanöz skuamöz hücreli karsinom, amelanotik veya dediferansiye melanom ve diğer sarkomlarla karşılaştır. Dermisten gelişen PDS’yi, merkezi derin yumuşak dokuda bulunan andiferansiye pleomorfik sarkomdan ayır. İmmünohistokimyayı hücre kökenlerini dışlamaya yönelik panel olarak yorumla.",
+      treatment: "İnvazyon cephesini değerlendirmek için temsil edici derin doku gerekir. 2026 Alman S1 güncellemesinde sınırlı gerçek subkutan infiltrasyon dahi PDS lehinedir. Uygun örnekte tümör derinliğini ve tutulan doku katmanlarını, nekrozu, lenfovasküler veya perinöral invazyonu ve cerrahi sınırları raporla. Tam eksizyonu planla; yayılımı, nüks riskini ve ek inceleme gereksinimini uzman konseyinde değerlendir.",
       followup: "Lokal nüks ve metastaz görülebildiğinden klinik izlem ve endikasyon varsa görüntüleme bireyselleştirilir."
     },
     "cutaneous-angiosarcoma": {
