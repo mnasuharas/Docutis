@@ -55,26 +55,26 @@
   function verifiedContent(card, record, wasOpen) {
     const lang = current();
     const overview = add(card, "dl", "", "praxis-overview");
-    pair(overview, say("Initial approach", "İlk yaklaşım"), record.approach[lang]);
-    pair(overview, say("Follow-up and red flags", "Kontrol ve kırmızı bayraklar"), record.followUp[lang]);
+    pair(overview, say("Initial approach", "İlk Yaklaşım"), record.approach[lang]);
+    pair(overview, say("Follow-up and red flags", "Kontrol ve Kırmızı Bayraklar"), record.followUp[lang]);
     const prescribing = add(card, "details", "", "praxis-disclosure");
     prescribing.open = wasOpen;
     add(prescribing, "summary", say("Prescription example, authorisation and skin care", "Reçete örneği, ruhsat ve bakım"));
-    add(prescribing, "h4", say("Product-specific example", "Preparata özgü örnek"));
+    add(prescribing, "h4", say("Product-specific example", "Preparata Özgü Örnek"));
     add(prescribing, "p", record.example[lang]);
-    add(prescribing, "h4", say("Authorisation and off-label checks", "Ruhsat ve off-label kontrolü"));
+    add(prescribing, "h4", say("Authorisation and off-label checks", "Ruhsat ve Off-label Kontrolü"));
     add(prescribing, "p", record.scope[lang]);
-    add(prescribing, "h4", say("Supportive care", "Destekleyici bakım"));
+    add(prescribing, "h4", say("Supportive care", "Destekleyici Bakım"));
     add(prescribing, "p", record.care[lang]);
   }
 
   function adaptedContent(card, record) {
     if (!current()) add(card, "p", "Source-based clinical text in Turkish.", "praxis-source-note");
     const overview = add(card, "dl", "", "praxis-overview");
-    pair(overview, say("Typical appearance", "Tipik görünüm"), record.appearance, "tr");
-    pair(overview, say("First assessment", "İlk değerlendirme"), record.diagnosis, "tr");
-    pair(overview, say("Treatment considerations", "Tedavi değerlendirmesi"), record.approach, "tr");
-    if (record.alerts) pair(overview, say("Red flags and pitfalls", "Kırmızı bayraklar ve tuzaklar"), record.alerts, "tr");
+    pair(overview, say("Typical appearance", "Tipik Görünüm"), record.appearance, "tr");
+    pair(overview, say("First assessment", "İlk Değerlendirme"), record.diagnosis, "tr");
+    pair(overview, say("Treatment considerations", "Tedavi Değerlendirmesi"), record.approach, "tr");
+    if (record.alerts) pair(overview, say("Red flags and pitfalls", "Kırmızı Bayraklar ve Tuzaklar"), record.alerts, "tr");
     add(card, "p", say(
       "Product-specific prescriptions, doses and authorisation statements await individual verification.",
       "Preparata özgü reçete, doz ve ruhsat bilgileri ayrı doğrulama bekliyor."
@@ -83,7 +83,7 @@
 
   function renderPatient(parent, noteIds, openById) {
     parent.replaceChildren();
-    add(parent, "h3", say("Turkish patient information", "Türkçe hasta bilgilendirme")).id = parent.id + "-title";
+    add(parent, "h3", say("Turkish patient information", "Türkçe Hasta Bilgilendirme")).id = parent.id + "-title";
     add(parent, "p", say("Clinician preview · Patient distribution awaits approval.", "Hekim önizlemesi · Hasta dağıtımı için onay bekleniyor."), "praxis-status");
     for (const id of noteIds) {
       const note = handouts[id];
@@ -96,7 +96,7 @@
       sheet.lang = "tr";
       add(sheet, "h4", note.title);
       add(sheet, "p", note.germanName, "praxis-german").lang = "de";
-      for (const [title, name] of [["Bu nedir?", "about"], ["Tedavi ve öneriler", "treatment"], ["Evde neler yapabilirsiniz?", "daily"], ["Ne zaman başvurmalısınız?", "contact"]]) {
+      for (const [title, name] of [["Bu Nedir?", "about"], ["Tedavi ve Öneriler", "treatment"], ["Evde Neler Yapabilirsiniz?", "daily"], ["Ne Zaman Başvurmalısınız?", "contact"]]) {
         add(sheet, "h5", title);
         add(sheet, "p", note[name]);
       }
@@ -116,7 +116,7 @@
       const record = detailed[chapter.verifiedCard];
       const wasOpen = card.querySelector("details")?.open || false;
       card.replaceChildren();
-      add(card, "h3", say("Praxis quick card", "Praxis kısa kartı")).id = card.id + "-title";
+      add(card, "h3", say("Praxis quick card", "Praxis Kısa Kartı")).id = card.id + "-title";
       add(card, "p", chapter.germanName, "praxis-german").lang = "de";
       add(card, "p", say("Germany · Educational draft awaiting clinician review", "Almanya · Hekim incelemesi bekleyen eğitim taslağı"), "praxis-status");
       if (record) verifiedContent(card, record, wasOpen);

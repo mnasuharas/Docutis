@@ -104,7 +104,7 @@
     const heroLink = document.querySelector('a[href="#subtleClueModule"]');
     if (heroLink) heroLink.textContent = say("Practise subtle clues", "Silik ipuçlarını çalış");
     const concept = node("aside", undefined, "subtle-concept");
-    concept.appendChild(node("h3", say("One clue: name it before weighing it", "Tek ipucu: ağırlığını tartmadan önce adlandırın")));
+    concept.appendChild(node("h3", say("One clue: name it before weighing it", "Tek İpucu: Ağırlığını Tartmadan Önce Adlandırın")));
     concept.appendChild(node("p", say(
       "A missing pigment network is not a negative network. A negative network is a visible pattern of widened pale interconnecting lines around pigmented structures. Shiny white lines are a separate polarized-light finding; they can occur in benign and malignant lesions. Neither sign alone establishes melanoma in situ.",
       "Pigment ağının görülmemesi, negatif ağ demek değildir. Negatif ağ, pigmentli yapıları çevreleyen genişlemiş açık renkli bağlantılı çizgilerin görüldüğü paterndir. Parlak beyaz çizgiler ise polarize ışıkta görülen ayrı bir bulgudur; benign ve malign lezyonlarda bulunabilir. İkisi de tek başına melanoma in situ tanısı koydurmaz."
@@ -166,7 +166,7 @@
     });
     root.appendChild(nav);
     const repeat = node("section", undefined, "subtle-concept");
-    repeat.appendChild(node("h4", say("Your revisit list", "Tekrar listeniz")));
+    repeat.appendChild(node("h4", say("Your revisit list", "Tekrar Listeniz")));
     repeat.appendChild(node("p", say(
       "Choose the comparisons you want to practise again. This list stays in this browser; it is not a competence score.",
       "Yeniden çalışmak istediğiniz karşılaştırmaları seçin. Liste bu tarayıcıda tutulur; yetkinlik puanı değildir."
@@ -197,7 +197,7 @@
       repeat.appendChild(clear);
     }
     root.appendChild(repeat);
-    const heading = node("h3", comparisonOpen ? label(lesson.title) : say("Independent observation", "Bağımsız gözlem"));
+    const heading = node("h3", comparisonOpen ? label(lesson.title) : say("Independent observation", "Bağımsız Gözlem"));
     heading.tabIndex = -1;
     root.appendChild(heading);
     if (entries.some(entry => entry.record.provenance)) {
@@ -361,7 +361,7 @@
     } else {
       const result = node("section", undefined, "subtle-comparison");
       result.tabIndex = -1;
-      result.appendChild(node("h4", say("What the pair teaches", "Bu ikilinin öğrettiği")));
+      result.appendChild(node("h4", say("What the pair teaches", "Bu İkilinin Öğrettiği")));
       result.appendChild(node("p", label(lesson.comparison)));
       result.appendChild(node("p", label(lesson.limit), "subtle-limit"));
       const reflectionLabel = node("label", say("What needs more practice?", "Hangi konuda daha çok çalışmalısınız?"), "subtle-field");

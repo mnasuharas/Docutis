@@ -67,7 +67,7 @@
   function render() {
     root.replaceChildren();
     const shortcut = document.getElementById("contrastLabLink"); if (shortcut) shortcut.textContent = say("Compare early melanomas", "Erken melanomları karşılaştır");
-    const heading = node("h3", say("Close mimics: weigh the clue", "Yakın taklitçiler: ipucunun ağırlığını değerlendir"), root); heading.tabIndex = -1;
+    const heading = node("h3", say("Close mimics: weigh the clue", "Yakın Taklitçiler: İpucunun Ağırlığını Değerlendir"), root); heading.tabIndex = -1;
     node("p", say("Teaching draft · clinician review required. Six curated comparisons include five in-situ and one 0.75 mm invasive melanoma, with non-melanoma controls. Two newly imported lesions belong to the same patient; some controls repeat. This is not an independent test set, screening prevalence or a diagnostic score.", "Eğitim taslağı · hekim incelemesi gerekir. Altı seçilmiş karşılaştırma, melanom dışı karşı örneklerle birlikte beş in situ ve bir 0,75 mm invaziv melanom içerir. Yeni aktarılan iki lezyon aynı hastaya aittir; bazı karşı örnekler tekrarlanır. Bu bağımsız test seti, tarama sıklığı veya tanısal puanlama değildir."), root);
     if (!queue.length) {
       node("p", say("Compare two unknown lesions, select structures and a region on each, then decide which needs closer assessment. Both and Cannot assess are valid options. Source arrows may remain. Diagnoses and suggested review regions open only after your choices.", "Tanısı gizli iki lezyonu karşılaştırın, her birinde yapı ve bölge seçin; ardından hangisinin daha yakından değerlendirilmesi gerektiğini belirtin. İkisi de ve Değerlendirilemiyor seçenekleri vardır. Kaynak okları bulunabilir. Tanılar ve önerilen inceleme bölgeleri seçimlerden sonra açılır."), root);
@@ -83,7 +83,7 @@
       button("Start six comparisons", "Altı karşılaştırmaya başla", root, () => start(lessons));
       if (saved.length) button("Practise my revisit list", "Tekrar listemi çalış", root, () => start(lessons.filter(lesson => saved.includes(lesson.id))));
     } else if (index >= queue.length) {
-      node("h4", say("Session reflection", "Oturum değerlendirmesi"), root);
+      node("h4", say("Session reflection", "Oturum Değerlendirmesi"), root);
       node("p", say("No accuracy or competence score is calculated. Choosing Both may be appropriate; it is recorded for reflection, not graded wrong.", "Doğruluk veya yetkinlik puanı hesaplanmaz. İkisi de seçimi uygun olabilir; yanlış sayılmaz, değerlendirme için kaydedilir."), root);
       completed.forEach((result, i) => node("p", say("Comparison ", "Karşılaştırma ") + (i + 1) + " · " + (result.revisit ? say("Revisit", "Yeniden çalış") : say("Reviewed", "Çalışıldı")), root));
       const revisit = lessons.filter(lesson => saved.includes(lesson.id));
@@ -128,7 +128,7 @@
       reveal.disabled = revealed || !ready();
       if (revealed) {
         const feedback = node("section", "", root, "contrast-feedback subtle-comparison"); feedback.tabIndex = -1;
-        node("h4", say("Why the clue does not decide alone", "İpucu neden tek başına tanı koydurmaz?"), feedback);
+        node("h4", say("Why the clue does not decide alone", "İpucu Neden Tek Başına Tanı Koydurmaz?"), feedback);
         node("p", text(lesson.lesson), feedback);
         const chosen = selected.find(option => option[0] === decision);
         node("p", say("Your assessment: ", "Değerlendirmeniz: ") + say(chosen[1], chosen[2]), feedback);

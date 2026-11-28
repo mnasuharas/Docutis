@@ -90,14 +90,14 @@
     root.replaceChildren(); root._pinkPlace = null;
     const shortcut = document.getElementById("pinkCaseLink");
     if (shortcut) shortcut.textContent = say("Practise pink lesions", "Pembe lezyonları çalış");
-    const title = node("h3", say("Pink lesions: vessels before labels", "Pembe lezyonlar: tanıdan önce damarlar"), root); title.tabIndex = -1;
+    const title = node("h3", say("Pink lesions: vessels before labels", "Pembe Lezyonlar: Tanıdan Önce Damarlar"), root); title.tabIndex = -1;
     node("p", say("Educational draft · clinician review required. Twelve selected cases: six melanomas and six mimics, including other cancers. Not screening prevalence, a diagnostic device or a competence test. Source image annotations may remain. Answers stay in this tab and reset on reload.", "Eğitim taslağı · hekim incelemesi gerekir. Seçilmiş 12 vaka: altı melanom ve diğer kanserleri de içeren altı taklitçi. Tarama sıklığını temsil etmez; tanı cihazı veya yetkinlik sınavı değildir. Kaynak görsel işaretleri bulunabilir. Yanıtlar bu sekmede kalır ve yenilemede sıfırlanır."), root);
     if (phase === "intro") {
       node("p", say("Observe the matched clinical and dermoscopic views, choose visible structures, commit to an impression, then open history. Compare with the source only afterwards. Some melanomas here are thick; this set is not a collection of early or in-situ melanoma.", "Eşleşmiş klinik ve dermoskopik görüntüleri inceleyin, görülen yapıları seçin, ilk izlenimi kaydedin; ardından öyküyü açın. Kaynakla sonra karşılaştırın. Buradaki bazı melanomlar kalındır; bu set erken veya in situ melanom dizisi değildir."), root);
       button("Start shuffled cases", "Karışık vakalara başla", root, () => start()); return;
     }
     if (index >= queue.length) {
-      node("h4", say("Session reflection", "Oturum değerlendirmesi"), root);
+      node("h4", say("Session reflection", "Oturum Değerlendirmesi"), root);
       node("p", say("No score or sensitivity estimate is calculated. This small selected set cannot show whether you will miss melanoma in practice.", "Puan veya duyarlılık hesabı yapılmaz. Bu küçük seçilmiş set, pratikte melanom kaçırıp kaçırmayacağınızı göstermez."), root);
       results.forEach((result, i) => node("p", say("Case ", "Vaka ") + (i + 1) + " · " + text(result.item.label) + " · " + (result.revisit ? say("Revisit uncertainty or disagreement", "Belirsizlik veya uyuşmazlığı yeniden çalışın") : say("Reviewed", "Çalışıldı")), root));
       const revisit = results.filter(result => result.revisit).map(result => result.item);
@@ -110,7 +110,7 @@
     item.images.forEach(asset => image(asset, panels));
     node("p", say("Images are cropped source panels. Original arrows/boxes may point to findings; they are not your marks. Choose Cannot assess when detail is not resolved. Clinical inset size and other source limits appear at reveal.", "Görseller kaynak panellerinden kırpılmıştır. Özgün oklar/kutular bulguları gösterebilir; sizin işaretleriniz değildir. Ayrıntı seçilemiyorsa Değerlendirilemiyor seçin. Klinik ek görsel boyutu ve diğer kaynak sınırları sonuçta gösterilir."), root);
     if (phase === "observe") {
-      node("h4", say("1 · Objective structures", "1 · Nesnel yapılar"), root);
+      node("h4", say("1 · Objective structures", "1 · Nesnel Yapılar"), root);
       const grid = node("div", "", root); grid.className = "pink-fields";
       let next;
       const update = () => { if (root._pinkPlace) root._pinkPlace(); next.disabled = !ready(["vessels", "white", "pink", "pigment", "visibility"]) || (answers.visibility !== "unassessable" && !answers.location); };
@@ -123,14 +123,14 @@
       node("p", say("The ring marks your selected grid region only; it is not a validated annotation or grading target.", "Halka yalnızca seçtiğiniz ızgara bölgesini gösterir; doğrulanmış anotasyon veya puanlama hedefi değildir."), root);
       next = button("Save observations", "Gözlemleri kaydet", root, () => advance("impression")); update();
     } else if (phase === "impression") {
-      node("h4", say("2 · First impression, before history", "2 · Öykü öncesi ilk izlenim"), root);
+      node("h4", say("2 · First impression, before history", "2 · Öykü Öncesi İlk İzlenim"), root);
       let next;
       const update = () => { next.disabled = !ready(["before", "confidenceBefore"]); };
       pick("before", "Working impression", "İlk ön tanı", dx, root, update);
       pick("confidenceBefore", "Confidence", "Güven düzeyi", confidence, root, update);
       next = button("Save impression and open history", "İzlenimi kaydet ve öyküyü aç", root, () => advance("history")); update();
     } else if (phase === "history") {
-      node("h4", say("3 · Add the published clinical context", "3 · Yayımlanmış klinik bağlamı ekleyin"), root);
+      node("h4", say("3 · Add the published clinical context", "3 · Yayımlanmış Klinik Bağlamı Ekleyin"), root);
       node("p", text(item.history), root);
       summary(root, [[say("Before history", "Öykü öncesi"), "before", dx], [say("Initial confidence", "İlk güven düzeyi"), "confidenceBefore", confidence]]);
       let reveal;
@@ -144,9 +144,9 @@
       const panel = node("section", "", root); panel.className = "subtle-comparison";
       node("h4", text(item.label), panel);
       node("p", text(item.evidence), panel);
-      node("h4", say("Recorded findings and limits", "Kayıtlı bulgular ve sınırlar"), panel);
+      node("h4", say("Recorded findings and limits", "Kayıtlı Bulgular ve Sınırlar"), panel);
       node("p", text(item.findings), panel); node("p", text(item.limit), panel);
-      node("h4", say("Your recorded observations", "Kaydettiğiniz gözlemler"), panel);
+      node("h4", say("Your recorded observations", "Kaydettiğiniz Gözlemler"), panel);
       summary(panel, [
         [say("Vessels", "Damarlar"), "vessels", observationOptions.vessels],
         [say("White structures", "Beyaz yapılar"), "white", observationOptions.white],

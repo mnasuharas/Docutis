@@ -78,7 +78,7 @@ test("every pair gates context and sources, allows uncertainty and retains choic
     assert.ok(choices().every(select => select.value === "2"));
     submit();
     assert.equal(sources().filter(link => link.textContent === "Yayını aç").length, 2);
-    assert.ok(root.findAll("h4").some(heading => heading.textContent === "Tanısal tuzak"));
+    assert.ok(root.findAll("h4").some(heading => heading.textContent === "Tanısal Tuzak"));
     document.documentElement.lang = "en";
     language.dispatch("change");
     root.findAll("button").find(node => node.textContent === "Choose another topic").dispatch("click");

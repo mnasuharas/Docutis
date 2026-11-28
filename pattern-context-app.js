@@ -128,7 +128,7 @@
     }
 
     if (index >= cases.length) {
-      node("h4", root, say("Compare the cases", "Vakaları karşılaştır"));
+      node("h4", root, say("Compare the cases", "Vakaları Karşılaştır"));
       node("p", root, copy(lesson.takeaway));
       const grid = node("div", root, "", "contrast-panels");
       cases.forEach(item => {

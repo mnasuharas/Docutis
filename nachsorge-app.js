@@ -462,11 +462,11 @@
         add(aside, "p", noteText(section.text, lang()));
       });
     }
-    add(result, "h3", say("What to do at each visit", "Her ziyarette ne yapılır"));
+    add(result, "h3", say("What to do at each visit", "Her Ziyarette Ne Yapılır?"));
     const visitList = add(result, "ul", null, "nachsorge-list");
     visitsFor(entry, group?.id).forEach(item => add(visitList, "li", line(item, lang())));
     if (!visitList.children.length) add(result, "p", say("No visit checklist is stated beyond the paragraph above.", "Yukarıdaki paragrafın ötesinde bir ziyaret listesi belirtilmemiştir."));
-    add(result, "h3", say("Imaging and laboratory", "Görüntüleme ve laboratuvar"));
+    add(result, "h3", say("Imaging and laboratory", "Görüntüleme ve Laboratuvar"));
     if (!protocol || !group || lacksTimetable(group)) add(result, "p", say("No imaging or laboratory interval is stated.", "Görüntüleme veya laboratuvar aralığı belirtilmemiştir."));
     else {
       const imaging = add(result, "ul", null, "nachsorge-list");
@@ -479,9 +479,9 @@
         });
       });
     }
-    add(result, "h3", say("Red flags", "Kırmızı bayraklar"));
+    add(result, "h3", say("Red flags", "Kırmızı Bayraklar"));
     add(result, "p", line(redFlags[entry.id], lang()));
-    add(result, "h3", say("Patient education", "Hasta eğitimi"));
+    add(result, "h3", say("Patient education", "Hasta Eğitimi"));
     add(result, "p", line(education[entry.id], lang()));
     add(result, "h3", say("Source", "Kaynak"));
     const source = protocol ? protocol.guideline : null;

@@ -224,3 +224,13 @@ test("new protocols are sourced drafts and interval tokens match in Turkish and 
   }
   for (const item of api.pairedCopy()) assert.deepEqual(api.numericTokens(item.en), api.numericTokens(item.tr), item.en.slice(0, 90));
 });
+
+test("Turkish follow-up headings use title case and question punctuation", () => {
+  const { document, elements } = load("https://docutis.test/?nachsorge=cutaneous-melanoma");
+  document.documentElement.lang = "tr";
+  elements.docutisLanguage.dispatch("change");
+  const headings = elements.nachsorgeResult.children.filter(item => item.tagName === "H3").map(item => item.textContent);
+  for (const title of ["Her Ziyarette Ne Yapılır?", "Görüntüleme ve Laboratuvar", "Kırmızı Bayraklar", "Hasta Eğitimi"]) {
+    assert.ok(headings.includes(title), title);
+  }
+});
