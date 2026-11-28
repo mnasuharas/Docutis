@@ -258,7 +258,7 @@
         resection: get("R").value
       });
       const thickness = t.roundedThickness ? ` · Breslow (AJCC 8): ${say(t.roundedThickness, t.roundedThickness.replace(".", ","))} mm` : "";
-      append(stageResult, "p", `${say("T category", "T kategorisi")} (T-Kategorie): ${t.category}${thickness}`, "melanoma-staging-category");
+      append(stageResult, "p", `${say("T category (T-Kategorie)", "T kategorisi")}: ${t.category}${thickness}`, "melanoma-staging-category");
       if (assessment.kind === "outside-scope") {
         append(stageResult, "p", say("Regional or distant metastases fall outside this tool’s stage range (0–IIC).", "Bölgesel veya uzak metastazlar aracın evre aralığı (0–IIC) dışındadır."));
       } else if (assessment.kind === "t-incomplete") {
@@ -267,12 +267,12 @@
         const missing = [!get("N").value && "N", !get("M").value && "M"].filter(Boolean).join(" / ");
         append(stageResult, "p", say(`Stage cannot be assigned. Missing: ${missing}.`, `Evre belirlenemiyor. Eksik bilgi: ${missing}.`));
       } else {
-        append(stageResult, "p", say(`Clinical stage (klinische Stadiengruppe), N0/cM0: ${assessment.clinicalStage}.`, `Klinik evre (klinische Stadiengruppe), N0/cM0: ${assessment.clinicalStage}.`));
+        append(stageResult, "p", say(`Clinical stage (klinische Stadiengruppe), N0/cM0: ${assessment.clinicalStage}.`, `Klinik evre N0/cM0: ${assessment.clinicalStage}.`));
         append(stageResult, "p", assessment.pathologicStage
-          ? say(`Pathological stage (pathologische Stadiengruppe): ${assessment.pathologicStage}.`, `Patolojik evre (pathologische Stadiengruppe): ${assessment.pathologicStage}.`)
+          ? say(`Pathological stage (pathologische Stadiengruppe): ${assessment.pathologicStage}.`, `Patolojik evre ${assessment.pathologicStage}.`)
           : say("Pathological staging for this T category requires pN0.", "Bu T kategorisinde patolojik evreleme için pN0 gerekir."));
         if (assessment.pathologicStage === "IA" && assessment.clinicalStage === "IB") {
-          append(stageResult, "p", say("Where these stage groups differ, the German S3 follow-up table is read from the pathologic stage. For this pT1b N0 result that is the stage IA row (S3-Leitlinie Melanom, version 3.3). This does not replace the stage written in the report.", "Bu evre grupları farklıysa Alman S3 takip tablosu patolojik evreden okunur. Bu pT1b N0 sonucu için bu, evre IA satırıdır (S3-Leitlinie Melanom, sürüm 3.3). Raporda yazılı evrenin yerine geçmez."));
+          append(stageResult, "p", say("Where these stage groups differ, the German S3 follow-up table is read from the pathologic stage. For this pT1b N0 result that is the stage IA row (S3-Leitlinie Melanom, version 3.3). This does not replace the stage written in the report.", "Bu evre grupları farklıysa Alman S3 takip tablosu patolojik evreden okunur. Bu pT1b N0 sonucu için bu, evre IA satırıdır (S3 melanom kılavuzu, sürüm 3.3). Raporda yazılı evrenin yerine geçmez."));
           groupToOpen = selectedProtocol().groups.find(group => group.id === "stage-ia") || null;
         } else if (assessment.pathologicStage === "IIC" && !assessment.followUpGroup) {
           append(stageResult, "p", say("The German S3 follow-up group for IIC requires documented R0 resection.", "Alman S3 kılavuzunda IIC takip grubu için belgelenmiş R0 rezeksiyonu gerekir."));
@@ -281,8 +281,8 @@
         }
         if (groupToOpen) {
           followUpButton.textContent = groupToOpen.id === "stage-ia" && assessment.clinicalStage === "IB"
-            ? say("Open the stage IA follow-up row (Nachsorgegruppe IA)", "Evre IA takip satırını aç (Nachsorgegruppe IA)")
-            : say("Open follow-up group (Nachsorgegruppe)", "Takip grubunu aç (Nachsorgegruppe)");
+            ? say("Open the stage IA follow-up row (Nachsorgegruppe IA)", "Evre IA takip satırını aç")
+            : say("Open follow-up group (Nachsorgegruppe)", "Takip grubunu aç");
           followUpButton.hidden = false;
         }
       }
@@ -292,7 +292,13 @@
       event.preventDefault();
       renderAssessment();
     });
+    function syncPlaceholder() {
+      const thickness = get("Thickness");
+      if (thickness) thickness.placeholder = say("z. B. 0,9", "ör. 0,9");
+    }
+    syncPlaceholder();
     languageControl?.addEventListener("change", () => {
+      syncPlaceholder();
       if (submitted && !draft.hidden) renderAssessment();
     });
 

@@ -432,7 +432,8 @@
     if (!independent && comparison) renderContrast(root);
     if (!independent && pattern) {
       const detail = add(root, "details", "", "exercise-pattern");
-      add(detail, "summary", pattern.displayName + " · " + pattern.displayNameDe);
+      const patternSummary = add(detail, "summary", pattern.displayName);
+      add(patternSummary, "span", " · " + pattern.displayNameDe, "de-gloss").setAttribute("data-de-gloss", "");
       add(detail, "p", pattern.definition);
       add(detail, "p", pattern.lookFor);
     }

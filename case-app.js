@@ -1315,7 +1315,11 @@
     if (canonical.displayName && canonical.displayName !== (row.kind === "case-pattern" ? row.pattern.label : row.feature.label)) {
       panel.appendChild(element("p", `Canonical name: ${canonical.displayName}.`, "case-kind-note"));
     }
-    if (canonical.displayNameDe) panel.appendChild(element("p", `German term: ${canonical.displayNameDe}.`));
+    if (canonical.displayNameDe) {
+      const germanTerm = element("p", `German term: ${canonical.displayNameDe}.`);
+      germanTerm.setAttribute("data-de-gloss", "");
+      panel.appendChild(germanTerm);
+    }
     if (canonical.internationalTerm) panel.appendChild(element("p", `International term: ${canonical.internationalTerm}.`));
     panel.appendChild(element("h6", "What should I look for?"));
     panel.appendChild(element("p", canonical.lookFor));

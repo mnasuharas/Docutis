@@ -31,7 +31,7 @@
       sourcePublished: "2020-07",
       sourceRegister: "032/024OL",
       sourceLocation: pair("Recommendation 8.1 and the explanatory text on dysplastic nevus syndrome and familial melanoma", "Öneri 8.1 ve displastik nevüs sendromu ile ailesel melanom hakkındaki açıklayıcı metin"),
-      body: pair("No year-by-year table is stated for people who have not had a melanoma. Recommendation 8.1 is for someone who has had a melanoma: risk-adapted follow-up should last 10 years, then regular self-examination and an annual whole-body examination for a second melanoma. Explanatory text, not table 23: permanent examinations every 6 months (half-yearly) should be adopted (sollte übernommen werden) at least for dysplastic nevus syndrome and familial melanoma. No imaging interval is stated.", "Melanom geçirmemiş kişiler için yıl yıl bir tablo belirtilmemiştir. Öneri 8.1 melanom geçirmiş kişi içindir: riske uyarlanmış takip 10 yıl sürmelidir; ardından ikinci bir melanom için düzenli kendi kendine muayene ve yılda bir tüm vücut muayenesi. Açıklayıcı metin, tablo 23 değil: displastik nevüs sendromu ve ailesel melanom için kalıcı olarak 6 ayda bir (half-yearly) muayene devralınmalıdır (sollte übernommen werden). Görüntüleme aralığı belirtilmemiştir.")
+      body: pair("No year-by-year table is stated for people who have not had a melanoma. Recommendation 8.1 is for someone who has had a melanoma: risk-adapted follow-up should last 10 years, then regular self-examination and an annual whole-body examination for a second melanoma. Explanatory text, not table 23: permanent examinations every 6 months (half-yearly) should be adopted (sollte übernommen werden) at least for dysplastic nevus syndrome and familial melanoma. No imaging interval is stated.", "Melanom geçirmemiş kişiler için yıl yıl bir tablo belirtilmemiştir. Öneri 8.1 melanom geçirmiş kişi içindir: riske uyarlanmış takip 10 yıl sürmelidir; ardından ikinci bir melanom için düzenli kendi kendine muayene ve yılda bir tüm vücut muayenesi. Açıklayıcı metin, tablo 23 değil: displastik nevüs sendromu ve ailesel melanom için kalıcı olarak 6 ayda bir muayene öneri olarak devralınmalıdır. Görüntüleme aralığı belirtilmemiştir.")
     }
   ]);
 
@@ -80,14 +80,14 @@
     pair("Full-skin examination: German expert context, at least 1× per year. This is not an S3 stage-table row.", "Tam deri muayenesi: Alman uzman bağlamı, yılda en az 1 kez. Bu bir S3 evre tablosu satırı değildir."),
     pair("Scar and locoregional inspection: not specified as a separate Stage 0 table row.", "Skar ve lokorejyonel inspeksiyon: evre 0 tablosunda ayrı bir satır olarak belirtilmemiştir."),
     pair("Lymph-node palpation: not specified as a Stage 0 table row.", "Lenf düğümü palpasyonu: evre 0 tablosunda belirtilmemiştir."),
-    pair("Dermoscopy of nevi: not specified in the S3 Nachsorge table.", "Nevüslerin dermatoskopisi: S3 Nachsorge tablosunda belirtilmemiştir."),
+    pair("Dermoscopy of nevi: not specified in the S3 Nachsorge table.", "Nevüslerin dermatoskopisi: S3 takip tablosunda belirtilmemiştir."),
     pair("Self-examination: monthly skin self-examination is German expert context, not an S3 table row.", "Kendi kendine muayene: aylık deri muayenesi Alman uzman bağlamıdır, S3 tablo satırı değildir.")
   ];
   const melanomaVisits = [
-    pair("Full-skin examination: inspection of the entire skin is part of the physical examination described for Nachsorge.", "Tam deri muayenesi: tüm derinin inspeksiyonu Nachsorge için tarif edilen fizik muayenenin parçasıdır."),
+    pair("Full-skin examination: inspection of the entire skin is part of the physical examination described for Nachsorge.", "Tam deri muayenesi: tüm derinin inspeksiyonu tedavi sonrası takip için tarif edilen fizik muayenenin parçasıdır."),
     pair("Scar and locoregional inspection: palpation of the primary scar, the in-transit path and the lymph-drainage region.", "Skar ve lokorejyonel inspeksiyon: primer skar, in-transit yol ve lenf drenaj bölgesinin palpasyonu."),
     pair("Lymph-node palpation: regional nodal basins are part of that examination.", "Lenf düğümü palpasyonu: bölgesel lenf istasyonları bu muayenenin parçasıdır."),
-    pair("Dermoscopy of nevi: not specified in the S3 Nachsorge chapter.", "Nevüslerin dermatoskopisi: S3 Nachsorge bölümünde belirtilmemiştir."),
+    pair("Dermoscopy of nevi: not specified in the S3 Nachsorge chapter.", "Nevüslerin dermatoskopisi: S3 takip bölümünde belirtilmemiştir."),
     pair("Self-examination: lifelong self-examination is stated, together with 10 years of follow-up for invasive melanoma.", "Kendi kendine muayene: yaşam boyu kendi kendine muayene belirtilmiştir; invaziv melanom için takip 10 yıldır.")
   ];
   const bccVisits = [
@@ -101,7 +101,7 @@
     pair("Full-skin examination: clinical examination includes full-skin inspection.", "Tam deri muayenesi: klinik muayene tüm derinin inspeksiyonunu içerir."),
     pair("Scar and locoregional inspection: inspection and palpation of the primary scar and the in-transit pathway.", "Skar ve lokorejyonel inspeksiyon: primer skar ve in-transit yolun inspeksiyon ve palpasyonu."),
     pair("Lymph-node palpation: regional lymph nodes are included in that examination.", "Lenf düğümü palpasyonu: bölgesel lenf düğümleri bu muayeneye dahildir."),
-    pair("Dermoscopy of nevi: not specified in the numeric Nachsorge schema.", "Nevüslerin dermatoskopisi: sayısal Nachsorge şemasında belirtilmemiştir."),
+    pair("Dermoscopy of nevi: not specified in the numeric Nachsorge schema.", "Nevüslerin dermatoskopisi: sayısal takip şemasında belirtilmemiştir."),
     pair("Self-examination: not specified as a separate sentence in the numeric schema.", "Kendi kendine muayene: sayısal şemada ayrı bir cümle olarak belirtilmemiştir.")
   ];
   const mccVisits = [
@@ -110,7 +110,7 @@
     pair("Lymph-node palpation: included in the clinical examination.", "Lenf düğümü palpasyonu: klinik muayeneye dahildir."),
     pair("Regional lymph-node ultrasound: included for stage I–II visits. Stage III ultrasound has no separate month number.", "Bölgesel lenf düğümü ultrasonu: evre I–II ziyaretlerine dahildir. Evre III ultrasonu için ayrı bir ay sayısı yoktur."),
     pair("Dermoscopy of nevi: not specified.", "Nevüslerin dermatoskopisi: belirtilmemiştir."),
-    pair("Self-examination: patients shall be taught self-examination of the locoregional skin and lymph drainage pathways (soll).", "Kendi kendine muayene: hastalara lokorejyonel deri ve lenf drenaj yollarının kendi kendine muayenesi öğretilmelidir (soll).")
+    pair("Self-examination: patients shall be taught self-examination of the locoregional skin and lymph drainage pathways (soll).", "Kendi kendine muayene: hastalara lokorejyonel deri ve lenf drenaj yollarının kendi kendine muayenesi öğretilmelidir (güçlü öneri).")
   ];
   const akVisits = [
     pair("Full-body, scar, lymph-node and dermoscopy steps: not specified, because no year-by-year visit table is stated.", "Tüm vücut, skar, lenf düğümü ve dermatoskopi adımları: belirtilmemiştir, çünkü yıl yıl bir ziyaret tablosu yoktur."),
@@ -124,27 +124,27 @@
   ];
 
   const redFlags = Object.freeze({
-    "cutaneous-melanoma": pair("No separate red-flag catalogue is stated in the cited Nachsorge section. This page does not add one.", "Anılan Nachsorge bölümünde ayrı bir kırmızı bayrak listesi belirtilmemiştir. Bu sayfa liste eklemez."),
+    "cutaneous-melanoma": pair("No separate red-flag catalogue is stated in the cited Nachsorge section. This page does not add one.", "Anılan takip bölümünde ayrı bir kırmızı bayrak listesi belirtilmemiştir. Bu sayfa liste eklemez."),
     "lentigo-maligna": pair("No separate red-flag catalogue is stated for melanoma in situ. This page does not add one.", "Melanom in situ için ayrı bir kırmızı bayrak listesi belirtilmemiştir. Bu sayfa liste eklemez."),
     "basal-cell-carcinoma": pair("A new BCC or recurrence does not automatically qualify for the reduced annual frequency. Continue every 3 months until more than 2 years without a new BCC or recurrence.", "Yeni bir BHK veya nüks, kendiliğinden azaltılmış yıllık sıklığa hak kazandırmaz. Her 3 ayda bir sürdürün, yeni BHK veya nüks olmadan 2 yıldan uzun süreye kadar."),
     "cutaneous-squamous-cell-carcinoma": pair("No separate red-flag catalogue is stated. Findings suspicious for metastasis are diagnostic work-up, not a fixed surveillance interval.", "Ayrı bir kırmızı bayrak listesi belirtilmemiştir. Metastaz kuşkusu veren bulgular tanısal incelemedir, sabit bir izlem aralığı değildir."),
     "actinic-keratosis": pair("No red-flag interval is stated. Do not borrow the invasive SCC timetable.", "Bir kırmızı bayrak aralığı belirtilmemiştir. İnvaziv SHK çizelgesi ödünç alınmaz."),
     "squamous-cell-carcinoma-in-situ": pair("No separate red-flag list is stated for Bowen disease or SCC in situ.", "Bowen hastalığı veya in situ SHK için ayrı bir kırmızı bayrak listesi belirtilmemiştir."),
-    "merkel-cell-carcinoma": pair("The 2022 Nachsorge chapter does not publish a separate red-flag catalogue. If a recurrence has occurred, the text does not authorize stepping down to the longer interval.", "2022 Nachsorge bölümü ayrı bir kırmızı bayrak listesi yayımlamaz. Nüks olduysa metin, daha uzun aralığa geçmeye izin vermez."),
+    "merkel-cell-carcinoma": pair("The 2022 Nachsorge chapter does not publish a separate red-flag catalogue. If a recurrence has occurred, the text does not authorize stepping down to the longer interval.", "2022 takip bölümü ayrı bir kırmızı bayrak listesi yayımlamaz. Nüks olduysa metin, daha uzun aralığa geçmeye izin vermez."),
     "dermatofibrosarcoma-protuberans": pair("No current S3 or S2k red-flag interval is stated.", "Güncel bir S3 veya S2k kırmızı bayrak aralığı belirtilmemiştir."),
     "high-risk-nevus": pair("No red-flag catalogue is stated for this explanatory note.", "Bu açıklayıcı not için bir kırmızı bayrak listesi belirtilmemiştir.")
   });
 
   const education = Object.freeze({
-    "cutaneous-melanoma": pair("Lifelong self-examination is stated for invasive melanoma. A separate sun-protection script is not in the structured Nachsorge table.", "İnvaziv melanom için yaşam boyu kendi kendine muayene belirtilmiştir. Yapılandırılmış Nachsorge tablosunda ayrı bir güneşten korunma metni yoktur."),
+    "cutaneous-melanoma": pair("Lifelong self-examination is stated for invasive melanoma. A separate sun-protection script is not in the structured Nachsorge table.", "İnvaziv melanom için yaşam boyu kendi kendine muayene belirtilmiştir. Yapılandırılmış takip tablosunda ayrı bir güneşten korunma metni yoktur."),
     "lentigo-maligna": pair("Monthly skin self-examination is German expert context for melanoma in situ. A separate sun-protection script is not an S3 stage-table row.", "Aylık deri kendi kendine muayenesi melanom in situ için Alman uzman bağlamıdır. Ayrı bir güneşten korunma metni bir S3 evre tablosu satırı değildir."),
     "basal-cell-carcinoma": pair("Regular self-examination is stated. UV protection should be discussed, with particular emphasis on BCC syndromes or chronic immunosuppression.", "Düzenli kendi kendine muayene belirtilmiştir. UV korunması konuşulmalıdır; BHK sendromları veya kronik immünsüpresyon özellikle vurgulanır."),
     "cutaneous-squamous-cell-carcinoma": pair("A separate sun-protection or self-examination script is not in the numeric schema. Chest radiography and abdominal ultrasound are not routine follow-up.", "Sayısal şemada ayrı bir güneşten korunma veya kendi kendine muayene metni yoktur. Akciğer grafisi ve batın ultrasonu rutin takip değildir."),
     "actinic-keratosis": pair("If a clinical field is present without actinic keratoses: education, preventive measures and patient self-monitoring of the field. No interval number is attached.", "Aktinik keratoz olmadan klinik bir alan varsa: eğitim, önleyici önlemler ve alanın hasta tarafından izlenmesi. Bir aralık sayısı bağlanmamıştır."),
     "squamous-cell-carcinoma-in-situ": pair("A separate patient-education script with an interval is not stated.", "Aralık içeren ayrı bir hasta eğitimi metni belirtilmemiştir."),
-    "merkel-cell-carcinoma": pair("Teach self-examination of the locoregional skin and lymph drainage pathways (soll). A separate sun-protection interval is not stated.", "Lokorejyonel deri ve lenf drenaj yollarının kendi kendine muayenesi öğretilir (soll). Ayrı bir güneşten korunma aralığı belirtilmemiştir."),
+    "merkel-cell-carcinoma": pair("Teach self-examination of the locoregional skin and lymph drainage pathways (soll). A separate sun-protection interval is not stated.", "Lokorejyonel deri ve lenf drenaj yollarının kendi kendine muayenesi öğretilir (güçlü öneri). Ayrı bir güneşten korunma aralığı belirtilmemiştir."),
     "dermatofibrosarcoma-protuberans": pair("No current S3 or S2k patient-education interval is stated.", "Güncel bir S3 veya S2k hasta eğitimi aralığı belirtilmemiştir."),
-    "high-risk-nevus": pair("Self-examination is part of recommendation 8.1 after a melanoma, and of the explanatory every-6-months (half-yearly) sentence for dysplastic nevus syndrome and familial melanoma. No separate sun-protection interval is stated.", "Kendi kendine muayene, melanom sonrası öneri 8.1'in ve displastik nevüs sendromu ile ailesel melanom için açıklayıcı 6 ayda bir (half-yearly) cümlenin parçasıdır. Ayrı bir güneşten korunma aralığı belirtilmemiştir.")
+    "high-risk-nevus": pair("Self-examination is part of recommendation 8.1 after a melanoma, and of the explanatory every-6-months (half-yearly) sentence for dysplastic nevus syndrome and familial melanoma. No separate sun-protection interval is stated.", "Kendi kendine muayene, melanom sonrası öneri 8.1'in ve displastik nevüs sendromu ile ailesel melanom için açıklayıcı 6 ayda bir cümlenin parçasıdır. Ayrı bir güneşten korunma aralığı belirtilmemiştir.")
   });
 
   const NOTE_TR = Object.freeze({
@@ -176,23 +176,23 @@
     "The schedule does not specify routine imaging from year 4 onward.": "Çizelge 4. yıldan itibaren rutin görüntüleme belirtmez.",
     "According to the individual risk profile.": "Bireysel risk profiline göre.",
     "After locally advanced or metastatic cSCC; also for diagnostic work-up of findings suspicious for metastasis.": "Lokal ileri veya metastatik kSHK sonrası; ayrıca metastaz kuşkusu veren bulguların tanısal incelemesi için.",
-    "Patients shall be taught self-examination of the locoregional skin and lymph drainage pathways (soll).": "Hastalara lokorejyonel deri ve lenf drenaj yollarının kendi kendine muayenesi öğretilmelidir (soll).",
-    "The 2022 Nachsorge chapter does not publish a separate red-flag catalogue. If a recurrence has occurred, the text does not authorize stepping down to the longer interval.": "2022 Nachsorge bölümü ayrı bir kırmızı bayrak listesi yayımlamaz. Nüks olduysa metin, daha uzun aralığa geçmeye izin vermez.",
+    "Patients shall be taught self-examination of the locoregional skin and lymph drainage pathways (soll).": "Hastalara lokorejyonel deri ve lenf drenaj yollarının kendi kendine muayenesi öğretilmelidir (güçlü öneri).",
+    "The 2022 Nachsorge chapter does not publish a separate red-flag catalogue. If a recurrence has occurred, the text does not authorize stepping down to the longer interval.": "2022 takip bölümü ayrı bir kırmızı bayrak listesi yayımlamaz. Nüks olduysa metin, daha uzun aralığa geçmeye izin vermez.",
     "Immunosuppression may require the interval to be adjusted. No alternate number is stated.": "İmmünsüpresyon aralığın ayarlanmasını gerektirebilir. Alternatif bir sayı belirtilmemiştir.",
     "No published scientifically secured studies on Merkel-cell follow-up are cited. Intervals follow the 2022 recommendation sentences and are not taken from the expired 2018 text.": "Merkel hücresi takibi için yayımlanmış, bilimsel olarak güvenceye alınmış bir çalışma anılmaz. Aralıklar 2022 öneri cümlelerini izler ve süresi dolmuş 2018 metninden alınmaz.",
     "Stage I–II visits include clinical examination with lymph-node palpation and regional lymph-node ultrasound.": "Evre I–II ziyaretleri, lenf düğümü palpasyonu ve bölgesel lenf düğümü ultrasonu ile klinik muayeneyi içerir.",
-    "Every 3 months for the first 2 years (soll).": "Her 3 ayda bir, ilk 2 yıl (soll).",
-    "Included in the stage I–II visit description (sollte).": "Evre I–II ziyaret tarifine dahildir (sollte).",
-    "S100B is not assigned in the 2022 Nachsorge section.": "S100B, 2022 Nachsorge bölümünde atanmamıştır.",
-    "Negative sentinel node: cross-sectional imaging may be used once a year (kann).": "Negatif sentinel düğüm: kesitsel görüntüleme yılda bir kez kullanılabilir (kann).",
-    "From year 3, every 6 months for a further 3 years is kann, and only if no recurrence has occurred.": "3. yıldan itibaren her 6 ayda bir, ek 3 yıl, yalnızca nüks yoksa kann'dır.",
-    "After year 5 the 2022 text says controls may be needs-based (kann, bedarfsorientiert). No fixed interval is stated.": "5. yıldan sonra 2022 metni kontrollerin gereksinime göre olabileceğini söyler (kann, bedarfsorientiert). Sabit bir aralık belirtilmemiştir.",
+    "Every 3 months for the first 2 years (soll).": "Her 3 ayda bir, ilk 2 yıl (güçlü öneri).",
+    "Included in the stage I–II visit description (sollte).": "Evre I–II ziyaret tarifine dahildir (öneri).",
+    "S100B is not assigned in the 2022 Nachsorge section.": "S100B, 2022 takip bölümünde atanmamıştır.",
+    "Negative sentinel node: cross-sectional imaging may be used once a year (kann).": "Negatif sentinel düğüm: kesitsel görüntüleme yılda bir kez kullanılabilir (yapılabilir).",
+    "From year 3, every 6 months for a further 3 years is kann, and only if no recurrence has occurred.": "3. yıldan itibaren her 6 ayda bir, ek 3 yıl, yalnızca nüks yoksa yapılabilir.",
+    "After year 5 the 2022 text says controls may be needs-based (kann, bedarfsorientiert). No fixed interval is stated.": "5. yıldan sonra 2022 metni kontrollerin gereksinime göre olabileceğini söyler (yapılabilir, gereksinime göre). Sabit bir aralık belirtilmemiştir.",
     "Stage III, or sentinel-node status unclear. Optional cross-sectional imaging in the first 2 years has no month number in the 2022 recommendation sentence.": "Evre III veya sentinel düğüm durumu belirsiz. İlk 2 yıldaki isteğe bağlı kesitsel görüntülemenin 2022 öneri cümlesinde ay sayısı yoktur.",
     "The visit sentence that pairs palpation with regional ultrasound is written for stage I–II. No separate month interval is stated for stage III ultrasound.": "Palpasyonu bölgesel ultrasonla eşleyen ziyaret cümlesi evre I–II için yazılmıştır. Evre III ultrasonu için ayrı bir ay aralığı belirtilmemiştir.",
-    "Optional close cross-sectional imaging in the first 2 years (kann): 18-FDG-PET/CT, or ultrasound plus CT and MRI. No month interval is stated.": "İlk 2 yılda isteğe bağlı yakın kesitsel görüntüleme (kann): 18-FDG-PET/CT veya ultrason artı BT ve MR. Ay aralığı belirtilmemiştir.",
+    "Optional close cross-sectional imaging in the first 2 years (kann): 18-FDG-PET/CT, or ultrasound plus CT and MRI. No month interval is stated.": "İlk 2 yılda isteğe bağlı yakın kesitsel görüntüleme (yapılabilir): 18-FDG-PET/CT veya ultrason artı BT ve MR. Ay aralığı belirtilmemiştir.",
     "No cross-sectional interval is stated for this later period.": "Bu sonraki dönem için kesitsel bir aralık belirtilmemiştir.",
     "The invasive cutaneous SCC rows are not copied onto actinic keratosis.": "İnvaziv kutanöz SHK satırları aktinik keratoza kopyalanmaz.",
-    "The S3 numeric Nachsorge schema is defined for invasive cutaneous squamous cell carcinoma. It is not a schedule for uncomplicated actinic keratosis or for field cancerization. Statement 4.10: there is no generally accepted definition of field cancerization. If a clinical field is present without actinic keratoses, the text recommends education, preventive measures and patient self-monitoring of the field. No year-by-year interval is stated.": "S3 sayısal Nachsorge şeması invaziv kutanöz skuamöz hücreli karsinom için tanımlanmıştır. Komplike olmayan aktinik keratoz veya alan kanserizasyonu için bir çizelge değildir. İfade 4.10: alan kanserizasyonunun genel kabul gören bir tanımı yoktur. Aktinik keratoz olmadan klinik bir alan varsa metin eğitim, önleyici önlemler ve alanın hasta tarafından izlenmesini önerir. Yıl yıl bir aralık belirtilmemiştir.",
+    "The S3 numeric Nachsorge schema is defined for invasive cutaneous squamous cell carcinoma. It is not a schedule for uncomplicated actinic keratosis or for field cancerization. Statement 4.10: there is no generally accepted definition of field cancerization. If a clinical field is present without actinic keratoses, the text recommends education, preventive measures and patient self-monitoring of the field. No year-by-year interval is stated.": "S3 sayısal takip şeması invaziv kutanöz skuamöz hücreli karsinom için tanımlanmıştır. Komplike olmayan aktinik keratoz veya alan kanserizasyonu için bir çizelge değildir. İfade 4.10: alan kanserizasyonunun genel kabul gören bir tanımı yoktur. Aktinik keratoz olmadan klinik bir alan varsa metin eğitim, önleyici önlemler ve alanın hasta tarafından izlenmesini önerir. Yıl yıl bir aralık belirtilmemiştir.",
     "Invasive cSCC intervals are not extrapolated to SCC in situ.": "İnvaziv kSHK aralıkları in situ SHK için genişletilmez.",
     "No separate year-by-year table for Bowen disease or squamous-cell carcinoma in situ was identified in S3 version 2.0. The numeric schema uses invasive features such as thickness, grade, desmoplasia and perineural growth. Those invasive rows are not copied here.": "S3 sürüm 2.0 içinde Bowen hastalığı veya in situ skuamöz hücreli karsinom için ayrı bir yıl yıl tablo bulunmadı. Sayısal şema kalınlık, derece, desmoplazi ve perinöral büyüme gibi invaziv özellikleri kullanır. Bu invaziv satırlar buraya kopyalanmaz.",
     "Expired S1 intervals are intentionally absent.": "Süresi dolmuş S1 aralıkları bilerek yoktur.",
@@ -207,9 +207,9 @@
     "R0-resected primary tumor with tumor thickness > 6 mm, > 4 mm with desmoplasia, differentiation grade G3–4 or perineural tumor growth; the guideline also lists immunosuppression and secondary tumors as high-risk factors.": "R0 rezeke primer tümör, tümör kalınlığı > 6 mm, desmoplazi ile > 4 mm, diferansiyasyon derecesi G3–4 veya perinöral tümör büyümesi; kılavuz immünsüpresyonu ve ikincil tümörleri de yüksek risk faktörü sayar.",
     "Patients receiving immunosuppression; the individual risk profile determines the frequency range.": "İmmünsüpresyon alan hastalar; sıklık aralığını bireysel risk profili belirler.",
     "Locally advanced or metastatic disease; interdisciplinary individualization remains necessary.": "Lokal ileri veya metastatik hastalık; disiplinler arası bireyselleştirme gerekli kalır.",
-    "Locoregional follow-up for stage I–II. The 3-month interval is soll for the first 2 years.": "Evre I–II için lokorejyonel takip. 3 aylık aralık ilk 2 yıl için soll'dur.",
+    "Locoregional follow-up for stage I–II. The 3-month interval is soll for the first 2 years.": "Evre I–II için lokorejyonel takip. 3 aylık aralık ilk 2 yıl için güçlü öneridir.",
     "The general 3-month then 6-month clinical interval still applies. Imaging in the first 2 years is optional and has no month number.": "Genel 3 aylık, sonra 6 aylık klinik aralık geçerlidir. İlk 2 yıldaki görüntüleme isteğe bağlıdır ve ay sayısı yoktur.",
-    "Uncomplicated actinic keratosis and field cancerization have no year-by-year Nachsorge table in this S3.": "Komplike olmayan aktinik keratoz ve alan kanserizasyonunun bu S3 içinde yıl yıl bir Nachsorge tablosu yoktur.",
+    "Uncomplicated actinic keratosis and field cancerization have no year-by-year Nachsorge table in this S3.": "Komplike olmayan aktinik keratoz ve alan kanserizasyonunun bu S3 içinde yıl yıl bir takip tablosu yoktur.",
     "Bowen disease and squamous-cell carcinoma in situ have no separate year-by-year table in S3 version 2.0.": "Bowen hastalığı ve in situ skuamöz hücreli karsinomun S3 sürüm 2.0 içinde ayrı bir yıl yıl tablosu yoktur.",
     "No current AWMF S3 or S2k states a DFSP follow-up interval.": "Güncel bir AWMF S3 veya S2k, DFSP için bir takip aralığı belirtmez.",
     "German clinical-practice context": "Alman klinik uygulama bağlamı",
@@ -218,10 +218,10 @@
     "Chapters 8.3 and 8.4.8, pages 171–182": "Bölüm 8.3 ve 8.4.8, sayfa 171–182",
     "Chapter 12, pages 59–61": "Bölüm 12, sayfa 59–61",
     "Chapter 9.1.5, statement/recommendations 9.2–9.6, pages 240–243": "Bölüm 9.1.5, ifade/öneri 9.2–9.6, sayfa 240–243",
-    "Chapter 4.5 field cancerization; chapter 9 numeric Nachsorge schema applies to invasive cutaneous SCC, not to uncomplicated actinic keratosis": "Bölüm 4.5 alan kanserizasyonu; bölüm 9 sayısal Nachsorge şeması invaziv kutanöz SHK için geçerlidir, komplike olmayan aktinik keratoz için değil",
+    "Chapter 4.5 field cancerization; chapter 9 numeric Nachsorge schema applies to invasive cutaneous SCC, not to uncomplicated actinic keratosis": "Bölüm 4.5 alan kanserizasyonu; bölüm 9 sayısal takip şeması invaziv kutanöz SHK için geçerlidir, komplike olmayan aktinik keratoz için değil",
     "Chapter 9. No separate year-by-year table for Bowen disease or SCC in situ was identified in version 2.0": "Bölüm 9. Bowen hastalığı veya in situ SHK için ayrı bir yıl yıl tablo sürüm 2.0 içinde bulunmadı.",
-    "Chapter 8, Nachsorge": "Bölüm 8, Nachsorge",
-    "No current S3 or S2k Nachsorge table. This S1 is in revision and its validity ended on 22 August 2023. Intervals from that S1 are not copied.": "Güncel bir S3 veya S2k Nachsorge tablosu yok. Bu S1 revizyondadır ve geçerliliği 22 Ağustos 2023'te bitmiştir. Bu S1'in aralıkları kopyalanmaz."
+    "Chapter 8, Nachsorge": "Bölüm 8, tedavi sonrası takip",
+    "No current S3 or S2k Nachsorge table. This S1 is in revision and its validity ended on 22 August 2023. Intervals from that S1 are not copied.": "Güncel bir S3 veya S2k takip tablosu yok. Bu S1 revizyondadır ve geçerliliği 22 Ağustos 2023'te bitmiştir. Bu S1'in aralıkları kopyalanmaz."
   });
 
   function lang() { return document.documentElement && document.documentElement.lang === "tr" ? "tr" : "en"; }
@@ -439,6 +439,7 @@
         group.periods.forEach(period => {
           const recommendation = period.recommendations.find(item => item.modality === modality);
           const cell = add(row, "td");
+          cell.setAttribute?.("data-period", labelOf(PERIOD_LABELS, period.id, period.label));
           if (!recommendation) {
             cell.textContent = say("Not specified", "Belirtilmemiş");
             return;
@@ -525,11 +526,11 @@
   }
   function basisText(basis) {
     const characters = {
-      soll: pair("strong recommendation (soll)", "güçlü öneri (soll)"),
-      sollte: pair("recommendation (sollte)", "öneri (sollte)"),
-      "sollte (EK)": pair("expert consensus (sollte (EK))", "uzman uzlaşısı (sollte (EK))"),
-      kann: pair("may (kann)", "yapılabilir (kann)"),
-      "Schema 9.2": pair("schedule 9.2 (Schema 9.2)", "çizelge 9.2 (Schema 9.2)")
+      soll: pair("strong recommendation (soll)", "güçlü öneri"),
+      sollte: pair("recommendation (sollte)", "öneri"),
+      "sollte (EK)": pair("expert consensus (sollte (EK))", "öneri · uzman uzlaşısı"),
+      kann: pair("may (kann)", "yapılabilir"),
+      "Schema 9.2": pair("schedule 9.2 (Schema 9.2)", "çizelge 9.2")
     };
     return line(characters[basis.character] || pair(basis.character, basis.character), lang());
   }

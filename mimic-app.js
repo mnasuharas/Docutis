@@ -90,13 +90,13 @@
 
   function glossary() {
     const details = add(root, "details", null, "mimic-glossary");
-    add(details, "summary", t("Pattern terminology · TR / EN / DE", "Patern terminolojisi · TR / EN / DE"));
+    add(details, "summary", t("Pattern terminology · TR / EN / DE", "Patern terminolojisi · TR / EN"));
     const search = add(details, "input");
     search.type = "search";
     search.setAttribute("aria-label", t("Filter terms", "Terimleri filtrele"));
     search.placeholder = t("Filter terms", "Terimleri filtrele");
     const list = add(details, "ul");
-    const rows = terms.slice(0, -1).map(term => add(list, "li", [term[1], term[0], term[2]].join(" · ")));
+    const rows = terms.slice(0, -1).map(term => add(list, "li", (document.documentElement.lang === "tr" ? [term[1], term[0]] : [term[1], term[0], term[2]]).join(" · ")));
     search.addEventListener("input", () => {
       const needle = search.value.trim().toLocaleLowerCase();
       rows.forEach(row => { row.hidden = !row.textContent.toLocaleLowerCase().includes(needle); });
