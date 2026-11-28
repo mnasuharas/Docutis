@@ -192,6 +192,7 @@
   });
   Object.assign(translations, {
     "Quiz complete": "Test tamamlandı", "Restart quiz": "Testi yeniden başlat",
+    "Image preview": "Görsel önizleme", "Close image": "Görseli kapat",
     "Check answer": "Yanıtı kontrol et", "Select an answer before checking.": "Kontrol etmeden önce bir yanıt seçin.",
     "Supporting sources": "Destekleyici kaynaklar", "Clinical review pending": "Klinik inceleme bekleniyor",
     "View score": "Sonucu gör", "Next question": "Sonraki soru",
@@ -265,6 +266,7 @@
     "Source attachment and automated validation do not constitute physician endorsement.": "Kaynak bağlantısı ve otomatik doğrulama hekim onayı anlamına gelmez."
   });
   const variableTranslations = [
+    [/^Enlarge image: (.*)$/, "Görseli büyüt: $1"],
     [/^Every (\d+(?:–\d+)?) months$/, "$1 ayda bir"],
     [/^Once at (\d+) months$/, "$1. ayda bir kez"],
     [/^At least (\d+)× per year$/, "Yılda en az $1 kez"],
