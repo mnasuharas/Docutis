@@ -24,7 +24,7 @@
       ],
       scope: [
         "The product information applies to this strength. Check the chosen product separately when changing strength, formulation or age group.",
-        "Bu Fachinformation belirtilen konsantrasyona aittir. Konsantrasyon, formülasyon veya yaş grubu değiştiğinde seçilen preparatı ayrıca kontrol et."
+        "Bu ürün bilgisi belirtilen konsantrasyona aittir. Konsantrasyon, formülasyon veya yaş grubu değiştiğinde seçilen preparatı ayrıca kontrol et."
       ],
       care: [
         "Gentle cleansing, non-comedogenic moisturiser and sun protection as needed.",
@@ -57,11 +57,11 @@
       ],
       example: [
         "Terbinafin AbZ 250 mg tablets for susceptible dermatophyte nail infection. Adult example: 250 mg orally once daily. The product information gives 6 weeks to 3 months for most patients and typically 3 months for toenails. Some patients require 6 months or longer. It recommends liver function tests before treatment and again after 4–6 treatment weeks.",
-        "Terbinafin AbZ 250 mg tablet, terbinafine duyarlı dermatofitlerin yol açtığı tırnak enfeksiyonunda. Erişkin örneği günde bir kez 250 mg oral. Fachinformation çoğu hasta için 6 hafta–3 ay, ayak tırnağında genellikle 3 ay belirtir. Bazı hastalarda 6 ay veya daha uzun süre gerekebilir. Karaciğer fonksiyon testleri tedavi öncesinde ve 4–6. tedavi haftasında önerilir."
+        "Terbinafin AbZ 250 mg tablet, terbinafine duyarlı dermatofitlerin yol açtığı tırnak enfeksiyonunda. Erişkin örneği günde bir kez 250 mg oral. Ürün bilgisi çoğu hasta için 6 hafta–3 ay, ayak tırnağında genellikle 3 ay belirtir. Bazı hastalarda 6 ay veya daha uzun süre gerekebilir. Karaciğer fonksiyon testleri tedavi öncesinde ve 4–6. tedavi haftasında önerilir."
       ],
       scope: [
         "The 3-month figure is a typical duration for this product. When considering longer treatment or an intermittent regimen, check the exact product instructions, diagnosis and response.",
-        "Üç ay bu preparatın tipik süresidir. Daha uzun tedavi veya aralıklı şema düşünülüyorsa seçilen preparatın Fachinformation’ını, tanıyı ve yanıtı birlikte değerlendir."
+        "Üç ay bu preparatın tipik süresidir. Daha uzun tedavi veya aralıklı şema düşünülüyorsa seçilen preparatın ürün bilgisini, tanıyı ve yanıtı birlikte değerlendir."
       ],
       care: [
         "Keep feet dry and assess coexisting athlete's foot. Avoid sharing nail-care tools.",
@@ -93,11 +93,11 @@
       ],
       example: [
         "Soolantra 10 mg/g cream for inflammatory papulopustular rosacea lesions in adults. Apply once daily for up to 4 months. The product information advises stopping if there is no improvement after 3 months.",
-        "Soolantra 10 mg/g krem, erişkinde papülopüstüler rozaseanın inflamatuvar lezyonları için. En fazla 4 ay, günde bir kez. Fachinformation, 3 ayda düzelme olmazsa tedavinin sonlandırılmasını önerir."
+        "Soolantra 10 mg/g krem, erişkinde papülopüstüler rozaseanın inflamatuvar lezyonları için. En fazla 4 ay, günde bir kez. Ürün bilgisi, 3 ayda düzelme olmazsa tedavinin sonlandırılmasını önerir."
       ],
       scope: [
         "This product indication covers inflammatory lesions in adults. Consult the product information for pregnancy and severe liver impairment. Ocular symptoms require their own assessment.",
-        "Bu preparat erişkindeki inflamatuvar lezyonlar için ruhsatlıdır. Gebelik ve ağır karaciğer fonksiyon bozukluğunda Fachinformation’ı kontrol et. Oküler semptomları ayrıca değerlendir."
+        "Bu preparat erişkindeki inflamatuvar lezyonlar için ruhsatlıdır. Gebelik ve ağır karaciğer fonksiyon bozukluğunda ürün bilgisini kontrol et. Oküler semptomları ayrıca değerlendir."
       ],
       care: [
         "Gentle skin care and tolerated sun protection. Ask about individual triggers and topical steroid exposure.",
@@ -119,11 +119,11 @@
       ],
       followUp: [
         "Check response after the local reaction settles. Reassess persistent or changing lesions. For the tirbanibulin example, product information gives about 8 weeks from treatment start for response assessment.",
-        "Lokal reaksiyon yatışınca yanıtı değerlendir. Kalıcı veya değişen lezyonu yeniden incele. Tirbanibulin örneğinde Fachinformation, tedavi başlangıcından yaklaşık 8 hafta sonra yanıt değerlendirmesini belirtir."
+        "Lokal reaksiyon yatışınca yanıtı değerlendir. Kalıcı veya değişen lezyonu yeniden incele. Tirbanibulin örneğinde ürün bilgisi, tedavi başlangıcından yaklaşık 8 hafta sonra yanıt değerlendirmesini belirtir."
       ],
       example: [
         "Klisyri 10 mg/g ointment. Field therapy for Olsen grade 1 lesions of the face or scalp in adults, non-hyperkeratotic and non-hypertrophic. Apply once daily for 5 consecutive days to a field of up to 25 cm² under this EU product information.",
-        "Klisyri 10 mg/g merhem. Erişkinde yüz veya saçlı deride hiperkeratotik ve hipertrofik olmayan Olsen derece 1 lezyonlar için alan tedavisi. Bu AB Fachinformation’ına göre en fazla 25 cm² alana, art arda 5 gün boyunca günde bir kez."
+        "Klisyri 10 mg/g merhem. Erişkinde yüz veya saçlı deride hiperkeratotik ve hipertrofik olmayan Olsen derece 1 lezyonlar için alan tedavisi. Bu AB ürün bilgisine göre en fazla 25 cm² alana, art arda 5 gün boyunca günde bir kez."
       ],
       scope: [
         "Verify the licensed site, lesion grade and treatment area before using a field product. Reassess suspicion of malignancy before field therapy.",

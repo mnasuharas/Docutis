@@ -3097,3 +3097,6 @@ html:not([lang="tr"]) .nachsorge-subtitle { display: none; }
   .nachsorge-no-timetable { max-width: none; }
   .nachsorge-module .follow-up-controls label:last-child { grid-column: auto; }
 }
+
+/* Turkish mode never shows German glosses beside the translation. */
+html[lang="tr"] [data-de-gloss] { display: none; }
