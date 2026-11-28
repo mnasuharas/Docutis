@@ -143,6 +143,8 @@ html.no-js .js-only {
   font-weight: 800;
 }
 
+.brand-mark::before { content: "D"; }
+
 .logo {
   font-size: 23px;
   font-weight: 750;

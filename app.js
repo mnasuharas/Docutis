@@ -171,7 +171,7 @@
     const card = document.createElement("button");
     card.type = "button";
     card.className = "card";
-    card.setAttribute("aria-label", `Open details for ${disease.name}`);
+    // No aria-label: the visible card text is the accessible name (WCAG 2.5.3 label in name).
     appendTextElement(card, "span", disease.name, "card-title");
     appendTextElement(card, "span", subcategoryTitle(disease.subcategory), "subcategory-label");
     appendTextElement(card, "span", disease.description, "card-description");
@@ -639,7 +639,7 @@
       link.addEventListener("click", event => {
         if (event && typeof event.preventDefault === "function") event.preventDefault();
         if (step.kind === "quiz") window.DOCUTIS_QUIZ_APP?.openQuestion?.(step.assetId);
-        if (step.kind === "follow-up") window.DOCUTIS_FOLLOW_UP_APP?.openProtocol?.(step.assetId);
+        if (step.kind === "follow-up") window.DOCUTIS_NACHSORGE_APP?.openProtocol?.(step.assetId);
         if (step.kind === "case") {
           if (window.DOCUTIS_CASE_APP) window.DOCUTIS_CASE_APP.openCase?.(step.assetId);
           else window.DOCUTIS_LOAD_CASES?.().then(() => {
@@ -767,8 +767,8 @@
       protocols.forEach(protocol => learningStep(list, {
         kind: "follow-up",
         label: `${protocol.jurisdictionLabel} follow-up`,
-        href: "#followUpModule",
-        targetId: "followUpModule",
+        href: "#nachsorgeModule",
+        targetId: "nachsorgeModule",
         assetType: "follow_up",
         assetId: protocol.id
       }));
@@ -947,8 +947,9 @@
         ? data.diseases.length
         : data.diseases.filter(disease => disease.category === category.id).length;
       appendTextElement(button, "span", category.title, "filter-label");
+      if (typeof document.createTextNode === "function") button.appendChild(document.createTextNode(" "));
       appendTextElement(button, "span", String(count), "filter-count");
-      button.setAttribute("aria-label", `${category.title}, ${count} condition${count === 1 ? "" : "s"}`);
+      button.setAttribute("aria-label", `${category.title} ${count} condition${count === 1 ? "" : "s"}`);
       button.addEventListener("click", () => setActiveCategory(category.id));
       filtersElement.appendChild(button);
     });
@@ -982,8 +983,9 @@
     const partialRecords = statusCount("disease", "partially reviewed");
     const changeRequestedRecords = statusCount("disease", "changes requested");
     const invalidatedRecords = statusCount("disease", "review invalidated");
+    const quizLabels = { "bcc-dermoscopy": "BCC dermoscopy quiz" };
     const invalidatedLearning = publicAssets.filter(item => item.assetType !== "disease" && item.status === "review invalidated");
-    const invalidatedLearningNames = invalidatedLearning.map(item => item.assetType === "quiz" ? `${item.id} quiz` : `${item.assetType} ${item.id}`).join(", ");
+    const invalidatedLearningNames = invalidatedLearning.map(item => item.assetType === "quiz" ? (quizLabels[item.id] || `${humanize(item.id)} quiz`) : `${item.assetType} ${item.id}`).join(", ");
     const legacyRequired = data.diseases.filter(item => !item.clinicalProfile && item.reviewStatus !== "clinician reviewed").length;
     const requiredRecords = legacyRequired + statusCount("disease", "review required");
     const stats = [

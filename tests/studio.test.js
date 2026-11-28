@@ -75,3 +75,9 @@ test("nachsorge query and hash open the follow-up screen and other tabs clear th
   h.history("https://example.org/Docutis/?nachsorge=merkel-cell-carcinoma#nachsorgeModule");
   assert.equal(h.elements.nachsorgeModule.hidden, false);
 });
+test("the retired Dermato-Oncology Follow-Up address opens Follow-Up (Tümör Takibi)",()=>{
+ const h=harness("https://example.org/Docutis/#followUpModule");
+ assert.equal(h.elements.nachsorgeModule.hidden,false);
+ const studio=fs.readFileSync(path.join(root,"studio.js"),"utf8");
+ assert.doesNotMatch(studio,/Oncology Follow-Up|Onkolojik Takip/);
+});

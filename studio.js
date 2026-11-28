@@ -20,7 +20,7 @@
   ];
   const reference = document.querySelector(".reference-library");
   const screens = { home: [home], learn: [document.getElementById("learn")], patterns: [document.getElementById("patterns")], reference: [document.getElementById("searchPanel"), reference] };
-  [...catalog.map(item => item.id), "followUpModule", "evidenceStatus", "about", "nachsorgeModule"].forEach(id => { screens[id] = [document.getElementById(id)]; });
+  [...catalog.map(item => item.id), "evidenceStatus", "about", "nachsorgeModule"].forEach(id => { screens[id] = [document.getElementById(id)]; });
   let current = "home";
   function node(tag, content, parent, className) {
     const el = document.createElement(tag); if (content) el.textContent = content; if (className) el.className = className;
@@ -51,11 +51,22 @@
         node("span", say("Open practice →", "Eğitimi aç →"), copy, "studio-course-action");
       });
       const utility = node("div", "", hub, "studio-utility-links");
-      [["followUpModule", "Oncology Follow-Up", "Onkolojik Takip"], ["evidenceStatus", "Review Status & Sources", "İnceleme Durumu ve Kaynaklar"]].forEach(([id, en, turkish]) => { const a = node("a", say(en, turkish) + " →", utility); a.href = "#" + id; });
+      [["evidenceStatus", "Review Status & Sources", "İnceleme Durumu ve Kaynaklar"]].forEach(([id, en, turkish]) => { const a = node("a", say(en, turkish) + " →", utility); a.href = "#" + id; });
     });
+  }
+  function redirectLegacyFollowUp() {
+    try {
+      const url = new URL(window.location.href);
+      if (!url.searchParams.has("nachsorge")) url.searchParams.set("nachsorge", "cutaneous-melanoma");
+      url.hash = "#nachsorgeModule";
+      if (window.history && typeof window.history.replaceState === "function") window.history.replaceState(window.history.state, "", url.href);
+    } catch (error) { /* Keep the current address. */ }
+    return "nachsorgeModule";
   }
   function route(hash) {
     const id = String(hash || "").replace(/^#/, "");
+    // The retired follow-up page address now lives in Follow-Up (Tümör Takibi).
+    if (id === "followUpModule") return redirectLegacyFollowUp();
     if ((id === "" || id === "nachsorgeModule") && new URL(window.location.href).searchParams.has("nachsorge")) return "nachsorgeModule";
     if (["mainContent", "studioHome", "pageTitle"].includes(id)) return "home";
     if (id === "patternExercise") return "patternModule";
@@ -71,7 +82,7 @@
     const item = catalog.find(item => item.id === current), group = item ? item.group : "home";
     back.href = group === "home" ? "#mainContent" : "#" + group;
     back.textContent = group === "home" ? say("← Home", "← Ana Sayfa") : group === "learn" ? say("← Case Studio", "← Vaka Eğitimleri") : say("← Pattern Studio", "← Patern Eğitimleri");
-    label.textContent = item ? say(...item.tag) : current === "reference" ? say("Reference Library", "Tanı Rehberi") : current === "nachsorgeModule" ? say("Follow-Up (Nachsorge)", "Tümör Takibi") : current === "followUpModule" ? say("Oncology Follow-Up", "Onkolojik Takip") : say("About & Evidence", "Proje ve Kanıtlar");
+    label.textContent = item ? say(...item.tag) : current === "reference" ? say("Reference Library", "Tanı Rehberi") : current === "nachsorgeModule" ? say("Follow-Up (Nachsorge)", "Tümör Takibi") : say("About & Evidence", "Proje ve Kanıtlar");
     if (current === "nachsorgeModule") document.title = say("Follow-Up (Nachsorge) | Docutis", "Tümör Takibi | Docutis");
     else if (/^(?:Follow-Up \(Nachsorge\)|Tümör Takibi) \| Docutis$/.test(document.title)) document.title = say("Docutis | Dermatology Reference Toolkit", "Docutis | Dermatoloji Eğitim ve Başvuru Kaynağı");
   }

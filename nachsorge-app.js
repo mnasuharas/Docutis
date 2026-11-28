@@ -385,7 +385,7 @@
     const result = document.getElementById("nachsorgeResult");
     const search = document.getElementById("nachsorgeSearch");
     if (!disease || !groupSelect || !result) return;
-    if (search) search.placeholder = say("Melanoma, Merkel, Bowen…", "Tümör Takibi: melanom, Merkel, Bowen…");
+    if (search) search.placeholder = say("Search a diagnosis: melanoma, Merkel, Bowen…", "Tanı ara: melanom, Merkel, Bowen…");
     const query = normalize(search ? search.value : "");
     const fromUrl = selectedFromUrl();
     const previous = (options.preferUrl && fromUrl) || entryById(disease.value) || fromUrl;
@@ -424,7 +424,7 @@
     const group = groups.find(item => item.id === groupSelect.value) || null;
     placeStaging(entry);
     result.replaceChildren();
-    const banner = add(result, "p", lang() === "tr" ? DISCLAIMER_TR : `${DISCLAIMER_EN} ${DISCLAIMER_TR}`, "nachsorge-disclaimer");
+    const banner = add(result, "p", lang() === "tr" ? DISCLAIMER_TR : DISCLAIMER_EN, "nachsorge-disclaimer");
     banner.setAttribute?.("role", "note");
     if (!entry) {
       add(result, "p", say("Search for a diagnosis.", "Bir tanı arayın."), "follow-up-note");
@@ -531,7 +531,37 @@
       link.target = "_blank";
       link.rel = "noopener noreferrer";
     });
+    appendFeedback(result, entry);
     if (!fromHistory) writeUrl(entry);
+  }
+
+  // Replaces the correction links and the review-details pointer of the retired
+  // Dermato-Oncology Follow-Up page.
+  function appendFeedback(parent, entry) {
+    const oss = window.DOCUTIS_OSS_FEEDBACK;
+    if (!oss) return;
+    const context = { id: entry.protocolId || entry.id, title: line(entry, "en"), assetType: "follow_up" };
+    const box = add(parent, "div", null, "clinical-feedback");
+    box.setAttribute?.("aria-label", say("Clinical content feedback", "Klinik içerik geri bildirimi"));
+    add(box, "p", say(
+      "Suggest improvements to this educational material. Feedback opens a GitHub issue form and is not clinical advice.",
+      "Bu eğitim materyali için düzeltme önerebilirsiniz. Geri bildirim bir GitHub sorun formu açar ve klinik öneri değildir."
+    ), "clinical-feedback-lede");
+    const actions = add(box, "div", null, "clinical-feedback-actions");
+    [
+      [say("Suggest a correction", "Düzeltme öner"), oss.buildCorrectionIssueUrl(context)],
+      [say("Report outdated evidence", "Güncelliğini yitirmiş kanıtı bildir"), oss.buildOutdatedEvidenceIssueUrl(context)]
+    ].forEach(([label, href]) => {
+      const link = add(actions, "a", label, "clinical-feedback-link");
+      link.href = href;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+    });
+    const prompt = lang() === "tr" ? window.DOCUTIS_LOCALE?.translate?.(oss.FEEDBACK_PROMPT) : oss.FEEDBACK_PROMPT;
+    add(box, "p", prompt || oss.FEEDBACK_PROMPT, "clinical-feedback-help");
+    const details = add(parent, "p", null, "follow-up-note");
+    const link = add(details, "a", say("Review status and sources", "İnceleme durumu ve kaynaklar"));
+    link.href = "#evidenceStatus";
   }
 
   function badgeText(status) {
@@ -588,6 +618,21 @@
     render();
   }
 
+  // Lets a record's learning path open the matching follow-up diagnosis.
+  window.DOCUTIS_NACHSORGE_APP = Object.freeze({
+    openProtocol(protocolId) {
+      const entry = catalog.find(item => item.protocolId === protocolId);
+      const disease = document.getElementById("nachsorgeDisease");
+      if (!entry || !disease) return false;
+      const search = document.getElementById("nachsorgeSearch");
+      const groupSelect = document.getElementById("nachsorgeGroup");
+      if (search) search.value = "";
+      if (groupSelect) groupSelect.value = "";
+      disease.value = entry.id;
+      render();
+      return true;
+    }
+  });
   window.DOCUTIS_NACHSORGE = Object.freeze({ catalog, frequencyText, noteText, numericTokens, normalize, pairedCopy, visitsFor, render, DISCLAIMER_TR, NO_TIMETABLE_TR });
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 }());

@@ -364,7 +364,7 @@
       return "Kapsam: " + names + ". İçerik bütünlüğü kimliği: " + fingerprint + ".";
     }],
     [/^Start case: (.+)$/, function (title) { return "Vakayı başlat: " + (translated(title) || title); }],
-    [/^(.+), (\d+) conditions?$/, function (label, count) { return piece(label) + ", " + count + " tanı"; }],
+    [/^(.+?),? (\d+) conditions?$/, function (label, count) { return piece(label) + " " + count + " tanı"; }],
     [/^([^:]+): (.+)$/, function (label, rest) { return (translated(label) || label) + ": " + (translated(rest) || rest); }]
   ];
   function piece(value) {
@@ -441,6 +441,7 @@
   };
   Object.assign(translations, conditionNames, {
     "All conditions": "Tüm tanılar",
+    "BCC dermoscopy quiz": "BHK dermoskopi testi",
     "Level": "Seviye", "Spectrum": "Spektrum", "Skill": "Beceri",
     "e.g. hand, back": "ör. el, sırt",
     "Overview": "Genel Bakış", "Clinical features": "Klinik Bulgular",
@@ -1191,9 +1192,21 @@
     originalAttributes.set(node, previous);
   }
 
+  function isRecordHeading(element) {
+    if (!element) return false;
+    if (/^H[34]$/.test(element.tagName)) return Boolean(element.closest("#details")) && !element.closest("[data-no-translate]");
+    return element.tagName === "A" && Boolean(element.closest(".detail-jump-nav"));
+  }
+
   function translate(node) {
     if (node.nodeType === 3) {
       const next = displayValue(node.nodeValue, originalText.get(node));
+      const headingCase = window.DOCUTIS_HEADING_CASE;
+      if (headingCase && isRecordHeading(node.parentElement)) {
+        const text = next.rendered.trim();
+        const cased = language === "tr" && text !== next.english.trim() ? headingCase.tr(text) : headingCase.en(text);
+        next.rendered = next.rendered.replace(text, function () { return cased; });
+      }
       originalText.set(node, next);
       if (node.nodeValue !== next.rendered) node.nodeValue = next.rendered;
       return;

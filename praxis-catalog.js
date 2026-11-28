@@ -4,6 +4,7 @@
   const root = document.getElementById("praxisCatalogApp");
   const language = document.getElementById("praxisLanguage");
   const { chapters, handouts, mountChapter, mountOnlyHandout } = window.DOCUTIS_PRAXIS;
+  const titlesTr = window.DOCUTIS_PRAXIS_TITLES_TR || { chapters: {}, conditions: {} };
   const diseases = new Map(window.DOCUTIS_DATA.diseases.map(disease => [disease.id, disease]));
   const params = new URLSearchParams(window.location.search);
   const chapterId = params.get("chapter");
@@ -54,7 +55,7 @@
     const handoutTab = link(tabs, say("Patient Information", "Hasta Bilgilendirme") + " · " + Object.keys(handouts).length, "praxis.html?view=handouts");
     (handoutList ? handoutTab : chapterTab).setAttribute("aria-current", "page");
 
-    const label = add(root, "label", say("Search in German or Turkish", "Almanca veya Türkçe ara"), "praxis-search");
+    const label = add(root, "label", say("Search in German or Turkish", "Tanı veya konu ara"), "praxis-search");
     const input = add(label, "input");
     input.type = "search";
     input.value = query;
@@ -66,7 +67,7 @@
       query = input.value;
       const terms = normalize(query).trim().split(/\s+/);
       const matches = entries.filter(([id, entry]) => {
-        const text = normalize([id, entry.germanName, entry.turkishName || entry.title, entry.group || ""].join(" "));
+        const text = normalize([id, entry.germanName, titlesTr.chapters[id] || "", entry.turkishName || entry.title, entry.group || ""].join(" "));
         return terms.every(term => text.includes(term));
       });
       status.textContent = matches.length + say(" results", " sonuç");
@@ -75,7 +76,9 @@
         const item = add(list, "li");
         if (handoutList) {
           link(item, entry.title, "?handout=" + encodeURIComponent(id), "tr");
-          add(item, "span", entry.germanName).lang = "de";
+          if (language.value !== "tr") add(item, "span", entry.germanName).lang = "de";
+        } else if (language.value === "tr") {
+          link(item, titlesTr.chapters[id] || entry.turkishName, "?chapter=" + encodeURIComponent(id), "tr");
         } else {
           const a = link(item, entry.germanName, "?chapter=" + encodeURIComponent(id), "de");
           add(a, "span", entry.turkishName).lang = "tr";
@@ -96,12 +99,12 @@
     if (chapterId && Object.hasOwn(chapters, chapterId)) {
       const chapter = chapters[chapterId];
       link(root, say("← All Praxis Chapters", "← Tüm Praxis Başlıkları"), "praxis.html");
-      add(root, "h1", say(chapter.germanName, chapter.turkishName)).lang = say("de", "tr");
+      add(root, "h1", say(chapter.germanName, titlesTr.chapters[chapterId] || chapter.turkishName)).lang = say("de", "tr");
       if (chapter.conditions.length) {
         const links = add(root, "ul", "", "praxis-sources");
         links.setAttribute("aria-label", say("Related Docutis Reference Pages", "İlgili Docutis Tanı Sayfaları"));
         for (const id of chapter.conditions) {
-          link(add(links, "li"), diseases.get(id).name, "index.html?condition=" + encodeURIComponent(id) + "#detail-praxis", "en");
+          link(add(links, "li"), say(diseases.get(id).name, titlesTr.conditions[id] || diseases.get(id).name), "index.html?condition=" + encodeURIComponent(id) + "#detail-praxis", say("en", "tr"));
         }
       }
       mountChapter(root, chapterId);
