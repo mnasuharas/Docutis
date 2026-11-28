@@ -4,6 +4,11 @@ All notable project changes are documented here. Docutis is in active pre-1.0 de
 
 ## [Unreleased]
 
+### Broader pattern-learning routes
+
+- Surface mixed-case practice, the wider case collection and the cross-condition quiz in the Pattern Studio alongside melanoma comparisons, pink-lesion practice, subtle-clue work and pattern foundations. Reuse existing modules and preserve their independent review states.
+- Clarify the range of learning formats in the hub introduction and give mixed-case, case-library and quiz cards distinct decorative treatments. No new clinical content, cases, images or review decisions.
+
 ### Photographic images in the visual quiz
 
 - Replace the four quiz schematics with five credited clinical or dermoscopic photographs: paired clinical/dermoscopic views for histopathology-confirmed melanoma in situ, a BCC dermoscopy photo, a plaque psoriasis photo and a comedonal acne photo. Remove the melanoma concept drawing from its image-based question rather than implying that one photograph shows change over time.
