@@ -151,3 +151,8 @@
 }
 
 .praxis-catalog-list li > span { padding: 0 .8rem .65rem; }
+
+/* Long compound German chapter names must wrap on a 390px screen. */
+.praxis-catalog h1,
+.praxis-catalog h2,
+.praxis-catalog h3 { overflow-wrap: anywhere; }
