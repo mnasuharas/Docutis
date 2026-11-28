@@ -26,6 +26,9 @@
   }
   function translate() {
     document.querySelectorAll("[data-en][data-tr]").forEach(el => { el.textContent = el.getAttribute(tr() ? "data-tr" : "data-en"); });
+    document.querySelectorAll("[data-en-alt][data-tr-alt]").forEach(el => {
+      el.setAttribute("alt", el.getAttribute(tr() ? "data-tr-alt" : "data-en-alt"));
+    });
     const statLabels = [[" condition records", " tanı kaydı"], [" clinical categories", " klinik kategori"], [" oncology follow-up protocols", " onkolojik takip protokolü"]];
     document.querySelectorAll("#libraryStats .stat-item > span").forEach((el, i) => { if (statLabels[i]) el.textContent = say(...statLabels[i]); });
     const stats = document.getElementById("libraryStats"); if (stats) stats.setAttribute("aria-label", say("Current reference coverage", "Güncel kapsam"));
@@ -34,14 +37,13 @@
   function renderHubs() {
     ["learn", "patterns"].forEach(group => {
       const hub = document.getElementById(group); hub.replaceChildren();
-      node("p", "DOCUTIS / " + (group === "learn" ? say("CASE STUDIO", "VAKA EĞİTİMLERİ") : say("PATTERN STUDIO", "PATERN EĞİTİMLERİ")), hub, "eyebrow");
-      const title = node("h2", group === "learn" ? say("Learn by working through cases.", "Vakaları çalışarak öğren.") : say("Small clues. A closer look.", "Küçük ipuçlarına yakından bak."), hub); title.tabIndex = -1;
-      node("p", group === "learn" ? say("Choose your starting point. Each exercise opens in its own workspace, and your current session stays in this tab when you move between screens.", "Başlangıç noktanı seç. Her eğitim kendi ekranında açılır; ekranlar arasında geçerken mevcut oturumun bu sekmede kalır.") : say("Compare lesions, spot subtle structures, explore pink lesions, practise mixed cases or take a cross-condition quiz. Each item keeps its own clinical review status.", "Lezyonları karşılaştır, ince yapıları fark et, pembe lezyonları incele, karma vakalar çalış veya farklı tanılardan kısa bir test çöz. Her içeriğin kendi klinik inceleme durumu korunur."), hub, "studio-hub-intro");
+      node("p", "DOCUTIS / " + (group === "learn" ? say("PRACTICE", "PRATİK") : say("DERMOSCOPY", "DERMOSKOPİ")), hub, "eyebrow");
+      const title = node("h2", group === "learn" ? say("Clinical cases", "Klinik vakalar") : say("Dermoscopy patterns", "Dermoskopi paternleri"), hub); title.tabIndex = -1;
+      node("p", group === "learn" ? say("Choose an exercise to practise clinical reasoning.", "Klinik akıl yürütmeyi çalışmak için bir egzersiz seç.") : say("Identify structures in real images and compare lesions that look alike.", "Gerçek görüntülerde yapıları tanı ve birbirine benzeyen lezyonları karşılaştır."), hub, "studio-hub-intro");
       const grid = node("div", "", hub, "studio-course-grid");
-      catalog.filter(item => item.group === group).concat(catalog.filter(item => item.alsoIn?.includes(group))).forEach((item, i) => {
+      catalog.filter(item => item.group === group).concat(catalog.filter(item => item.alsoIn?.includes(group))).forEach(item => {
         const card = node("a", "", grid, "studio-course"); card.href = "#" + (item.target || item.id);
-        const art = node("div", "", card, "studio-course-art art-" + item.art); art.setAttribute("aria-hidden", "true");
-        node("span", String(i + 1).padStart(2, "0"), art, "studio-course-number");
+        card.className += " art-" + item.art;
         const copy = node("div", "", card, "studio-course-copy");
         node("p", say(...item.tag), copy, "studio-course-tag"); node("h3", say(...item.title), copy); node("p", say(...item.description), copy);
         node("span", say("Open practice →", "Eğitimi aç →"), copy, "studio-course-action");
